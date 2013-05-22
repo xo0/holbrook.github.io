@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>markdown的主要语法</title>
+    <meta name="description" content="">
+    <meta name="author" content="Holbrook Wong">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">心内求法</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>markdown的主要语法 <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <h1 id='id1'>标题</h1>
+
+<h1 id='id2'>一级标题</h1>
+
+<h2 id='id3'>二级标题</h2>
+
+<h3 id='id4'>三级标题</h3>
+
+<h4 id='id5'>四级标题</h4>
+
+<h5 id='id6'>五级标题</h5>
+
+<h6 id='id7'>六级标题</h6>
+
+<p>注解 标题后面可接匹配的井号。 Markdown的前两级标题还可以使用reST风格，即在标题下衬以等号或减号组成的下划线。</p>
+
+<h1 id='id8'>一级标题</h1>
+
+<h2 id='id9'>二级标题</h2>
+
+<h1 id='id10'>段落</h1>
+
+<h2 id='id11'>空行分段</h2>
+
+<p>第一段内容。</p>
+
+<p>第二段和第一段间有一空行。</p>
+
+<h2 id='id12'>自动续行</h2>
+
+<p>一个回车不分段， 本行续上行。</p>
+
+<h2 id='id13'>插入换行</h2>
+
+<p>行尾两空格°° 保持换行。</p>
+
+<p>GFM、Textile等 保持段落内换行符。</p>
+
+<h2 id='id14'>段落缩进</h2>
+
+<p>邮件体段落缩进：</p>
+
+<blockquote>
+<p>第一级段落缩进。</p>
+
+<blockquote>
+<p>第二级段落缩进。</p>
+</blockquote>
+
+<p>返回一级段落缩进。</p>
+</blockquote>
+
+<h1 id='id15'>代码块</h1>
+
+<p>四个空格缩进是代码块：</p>
+
+<pre><code>$ printf &quot;Hello, world.\n&quot;</code></pre>
+
+<p>gfm：</p>
+
+<p>三个连续的<code>或~等符号界定代码块。</code></p>
+
+<p><code>ruby
+require &#39;redcarpet&#39;
+md = Redcarpet.new(&quot;Hello, world.&quot;)
+puts md.to_html
+</code></p>
+
+<h1 id='id16'>列表</h1>
+
+<h2 id='id17'>无序列表</h2>
+
+<p>* 星号、减号、加号开始列表。</p>
+
+<p>- 列表层级和缩进有关。</p>
+
+<pre><code>+ 和具体符号无关。</code></pre>
+
+<p>* 返回一级列表。</p>
+
+<h2 id='id18'>有序列表</h2>
+
+<p>1. 数字和点开始有序列表。</p>
+
+<p>1. 注意子列表的缩进位置。</p>
+
+<pre><code>  1. 三级列表。
+  1. 编号会自动更正。</code></pre>
+
+<p>1. 二级列表，编号自动更正为2。</p>
+
+<p>2. 返回一级列表。</p>
+
+<h2 id='id19'>列表续行、段落和代码块</h2>
+
+<p>1. 列表项可以折行， 对齐则自动续行。</p>
+
+<p>2. 列表项可包含多个段落。</p>
+
+<pre><code>空行开始的新段落必须缩进四个空格，
+段落才属于列表项。</code></pre>
+
+<ol>
+<li>
+<p>列表中的代码块要缩进8个空格。</p>
+
+<pre><code> $ printf &quot;Hello, world.\n&quot;</code></pre>
+</li>
+</ol>
+
+<h1 id='id20'>分隔线</h1>
+
+<p>三条或更多短线（或星号、下划线）\ 显示为分隔线。</p>
+<hr />
+<h1 id='id21'>字体</h1>
+
+<p>这些都是 <strong>粗体</strong> 或 <strong>粗体</strong> ， 这写都是 <em>斜体</em> 或 <em>斜体</em> 。</p>
+
+<p>~~删除线~~ 效果</p>
+<u>下划线</u>
+<p>上标下标：</p>
+
+<ul>
+<li>Water: H<sub>2</sub>O</li>
+
+<li>E = mc<sup>2</sup></li>
+</ul>
+
+<p>等宽字体： 行内反引号嵌入代码，如: <code>git status</code> 。</p>
+
+<p>引言：</p>
+
+<p><code>Got GitHub</code> by Jiang Xin.</p>
+
+<p>清除标记空白：</p>
+
+<p>标记符号前后空白\ 用\ <strong>反斜线</strong>\ 消除</p>
+
+<h1 id='id22'>链接</h1>
+
+<p>URL自动链接 gfm</p>
+
+<ul>
+<li>网址 http://github.com/</li>
+
+<li>邮件 me@foo.bar</li>
+</ul>
+
+<p>文字链接</p>
+
+<ul>
+<li>访问 <a title='Search' href='http://google.com'>Google</a></li>
+
+<li>访问 <a title='Git host' href='http://github.com'>GitHub</a></li>
+
+<li>访问 <a href='http://www.worldhello.net'>WorldHello</a></li>
+</ul>
+
+<p>内部跳转</p>
+<a name='md-anchor' id='md-anchor' />
+<p>跳转至 <a href='#md-anchor'>文内链接</a> 。</p>
+
+<p>GitHub提交和问题链接 gfm</p>
+
+<p>指向同一提交的链接：</p>
+
+<ul>
+<li>提交ID（SHA）: cea00609ca8&#8230;</li>
+
+<li>用户@提交ID: mojombo@cea00609ca8&#8230;</li>
+
+<li>用户名/项目名@提交ID: mojombo/god@cea00609ca8&#8230;</li>
+</ul>
+
+<p>指向同一Issue的链接：</p>
+
+<ul>
+<li>Issue编号: #1</li>
+
+<li>用户名及Issue编号: mojombo#1</li>
+
+<li>用户名/项目名及Issue编号: mojombo/god#1</li>
+</ul>
+
+<h1 id='id23'>图片</h1>
+
+<p><img alt='GitHub' src='/images/github.png' /></p>
+
+<p>GitHub Logo: <img alt='GitHub' src='/images/github.png' /></p>
+
+<h1 id='id24'>表格</h1>
+
+<p>gfm</p>
+<table><thead><tr><th>head1</th><th>head2</th><th>head2</th></tr></thead><tbody><tr><td style='text-align: left;'>left</td><td style='text-align: center;'>center</td><td style='text-align: right;'>right</td>
+</tr><tr><td style='text-align: left;'>left</td><td style='text-align: center;'>center</td><td style='text-align: right;'>right</td>
+</tr></tbody></table>
+<h1 id='html'>混用HTML</h1>
+<div style='background:#bbb;'>
+  HTML块中不能混用 **标记语法**
+</div>
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/2012/12/21/new-post" title="new post">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next disabled"><a>Next &rarr;</a>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async=""></script>
+<!-- UY END -->
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>22 May 2013</span></div>
+
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Holbrook Wong 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+      <!--script type="text/javascript" src="http://jc.revolvermaps.com/2/1.js?i=219e9clhf8a&amp;s=220&amp;m=6&amp;v=true&amp;r=true&amp;b=eeeeee&amp;n=false&amp;c=ff0000" async="async"></script-->
+
+      <script type="text/javascript" src="http://ji.revolvermaps.com/2/1.js?i=8c16t8rp6ct&amp;s=220&amp;m=6&amp;v=true&amp;r=true&amp;b=eeeeee&amp;n=false&amp;c=ff0000" async="async"></script>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+
