@@ -4,7 +4,7 @@
  <title>心内求法</title>
  <link href="http://holbrook.github.io/" rel="self"/>
  <link href="http://holbrook.github.io"/>
- <updated>2013-05-23T13:46:41+08:00</updated>
+ <updated>2013-05-23T13:48:37+08:00</updated>
  <id>http://holbrook.github.io</id>
  <author>
    <name>Holbrook Wong</name>
@@ -114,7 +114,7 @@ filetype plugin indent on     &amp;quot; required!
 #或者
 :BundleClean markdown&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id='id26'&gt;&lt;em&gt;必备插件&lt;/em&gt;&lt;/h2&gt;
+&lt;h2 id='id52'&gt;&lt;em&gt;必备插件&lt;/em&gt;&lt;/h2&gt;
 
 &lt;p&gt;下面是我使用的一些vim插件，直接在.vimrc中配置：&lt;/p&gt;</content>
  </entry>
@@ -124,45 +124,45 @@ filetype plugin indent on     &amp;quot; required!
    <link href="http://holbrook.github.io/2013/05/22/markdown"/>
    <updated>2013-05-22T00:00:00+08:00</updated>
    <id>http://holbrook.github.io/2013/05/22/markdown</id>
-   <content type="html">&lt;h1 id='id1'&gt;标题&lt;/h1&gt;
+   <content type="html">&lt;h1 id='id27'&gt;标题&lt;/h1&gt;
 
-&lt;h1 id='id2'&gt;一级标题&lt;/h1&gt;
+&lt;h1 id='id28'&gt;一级标题&lt;/h1&gt;
 
-&lt;h2 id='id3'&gt;二级标题&lt;/h2&gt;
+&lt;h2 id='id29'&gt;二级标题&lt;/h2&gt;
 
-&lt;h3 id='id4'&gt;三级标题&lt;/h3&gt;
+&lt;h3 id='id30'&gt;三级标题&lt;/h3&gt;
 
-&lt;h4 id='id5'&gt;四级标题&lt;/h4&gt;
+&lt;h4 id='id31'&gt;四级标题&lt;/h4&gt;
 
-&lt;h5 id='id6'&gt;五级标题&lt;/h5&gt;
+&lt;h5 id='id32'&gt;五级标题&lt;/h5&gt;
 
-&lt;h6 id='id7'&gt;六级标题&lt;/h6&gt;
+&lt;h6 id='id33'&gt;六级标题&lt;/h6&gt;
 
 &lt;p&gt;注解 标题后面可接匹配的井号。 Markdown的前两级标题还可以使用reST风格，即在标题下衬以等号或减号组成的下划线。&lt;/p&gt;
 
-&lt;h1 id='id8'&gt;一级标题&lt;/h1&gt;
+&lt;h1 id='id34'&gt;一级标题&lt;/h1&gt;
 
-&lt;h2 id='id9'&gt;二级标题&lt;/h2&gt;
+&lt;h2 id='id35'&gt;二级标题&lt;/h2&gt;
 
-&lt;h1 id='id10'&gt;段落&lt;/h1&gt;
+&lt;h1 id='id36'&gt;段落&lt;/h1&gt;
 
-&lt;h2 id='id11'&gt;空行分段&lt;/h2&gt;
+&lt;h2 id='id37'&gt;空行分段&lt;/h2&gt;
 
 &lt;p&gt;第一段内容。&lt;/p&gt;
 
 &lt;p&gt;第二段和第一段间有一空行。&lt;/p&gt;
 
-&lt;h2 id='id12'&gt;自动续行&lt;/h2&gt;
+&lt;h2 id='id38'&gt;自动续行&lt;/h2&gt;
 
 &lt;p&gt;一个回车不分段， 本行续上行。&lt;/p&gt;
 
-&lt;h2 id='id13'&gt;插入换行&lt;/h2&gt;
+&lt;h2 id='id39'&gt;插入换行&lt;/h2&gt;
 
 &lt;p&gt;行尾两空格°° 保持换行。&lt;/p&gt;
 
 &lt;p&gt;GFM、Textile等 保持段落内换行符。&lt;/p&gt;
 
-&lt;h2 id='id14'&gt;段落缩进&lt;/h2&gt;
+&lt;h2 id='id40'&gt;段落缩进&lt;/h2&gt;
 
 &lt;p&gt;邮件体段落缩进：&lt;/p&gt;
 
@@ -176,7 +176,7 @@ filetype plugin indent on     &amp;quot; required!
 &lt;p&gt;返回一级段落缩进。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h1 id='id15'&gt;代码块&lt;/h1&gt;
+&lt;h1 id='id41'&gt;代码块&lt;/h1&gt;
 
 &lt;p&gt;四个空格缩进是代码块：&lt;/p&gt;
 
@@ -192,9 +192,9 @@ md = Redcarpet.new(&amp;quot;Hello, world.&amp;quot;)
 puts md.to_html
 &lt;/code&gt;&lt;/p&gt;
 
-&lt;h1 id='id16'&gt;列表&lt;/h1&gt;
+&lt;h1 id='id42'&gt;列表&lt;/h1&gt;
 
-&lt;h2 id='id17'&gt;无序列表&lt;/h2&gt;
+&lt;h2 id='id43'&gt;无序列表&lt;/h2&gt;
 
 &lt;p&gt;* 星号、减号、加号开始列表。&lt;/p&gt;
 
@@ -204,7 +204,7 @@ puts md.to_html
 
 &lt;p&gt;* 返回一级列表。&lt;/p&gt;
 
-&lt;h2 id='id18'&gt;有序列表&lt;/h2&gt;
+&lt;h2 id='id44'&gt;有序列表&lt;/h2&gt;
 
 &lt;p&gt;1. 数字和点开始有序列表。&lt;/p&gt;
 
@@ -217,7 +217,7 @@ puts md.to_html
 
 &lt;p&gt;2. 返回一级列表。&lt;/p&gt;
 
-&lt;h2 id='id19'&gt;列表续行、段落和代码块&lt;/h2&gt;
+&lt;h2 id='id45'&gt;列表续行、段落和代码块&lt;/h2&gt;
 
 &lt;p&gt;1. 列表项可以折行， 对齐则自动续行。&lt;/p&gt;
 
@@ -234,11 +234,11 @@ puts md.to_html
 &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h1 id='id20'&gt;分隔线&lt;/h1&gt;
+&lt;h1 id='id46'&gt;分隔线&lt;/h1&gt;
 
 &lt;p&gt;三条或更多短线（或星号、下划线）\ 显示为分隔线。&lt;/p&gt;
 &lt;hr /&gt;
-&lt;h1 id='id21'&gt;字体&lt;/h1&gt;
+&lt;h1 id='id47'&gt;字体&lt;/h1&gt;
 
 &lt;p&gt;这些都是 &lt;strong&gt;粗体&lt;/strong&gt; 或 &lt;strong&gt;粗体&lt;/strong&gt; ， 这写都是 &lt;em&gt;斜体&lt;/em&gt; 或 &lt;em&gt;斜体&lt;/em&gt; 。&lt;/p&gt;
 
@@ -262,7 +262,7 @@ puts md.to_html
 
 &lt;p&gt;标记符号前后空白\ 用\ &lt;strong&gt;反斜线&lt;/strong&gt;\ 消除&lt;/p&gt;
 
-&lt;h1 id='id22'&gt;链接&lt;/h1&gt;
+&lt;h1 id='id48'&gt;链接&lt;/h1&gt;
 
 &lt;p&gt;文字链接&lt;/p&gt;
 
@@ -300,13 +300,13 @@ puts md.to_html
 &lt;li&gt;用户名/项目名及Issue编号: mojombo/god#1&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id='id23'&gt;图片&lt;/h1&gt;
+&lt;h1 id='id49'&gt;图片&lt;/h1&gt;
 
 &lt;p&gt;&lt;img alt='GitHub' src='/images/github.png' /&gt;&lt;/p&gt;
 
 &lt;p&gt;GitHub Logo: &lt;img alt='GitHub' src='/images/github.png' /&gt;&lt;/p&gt;
 
-&lt;h1 id='id24'&gt;表格&lt;/h1&gt;
+&lt;h1 id='id50'&gt;表格&lt;/h1&gt;
 
 &lt;p&gt;gfm&lt;/p&gt;
 &lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;head1&lt;/th&gt;&lt;th&gt;head2&lt;/th&gt;&lt;th&gt;head2&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style='text-align: left;'&gt;left&lt;/td&gt;&lt;td style='text-align: center;'&gt;center&lt;/td&gt;&lt;td style='text-align: right;'&gt;right&lt;/td&gt;
