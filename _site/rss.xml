@@ -3,10 +3,10 @@
 <channel>
         <title>心内求法</title>
         <description>心内求法 - Holbrook Wong</description>
-        <link>http://holbrook.github.io</link>
-        <link>http://holbrook.github.io</link>
-        <lastBuildDate>2013-05-23T13:53:45+08:00</lastBuildDate>
-        <pubDate>2013-05-23T13:53:45+08:00</pubDate>
+        <link>http://thinkinside.tk</link>
+        <link>http://thinkinside.tk</link>
+        <lastBuildDate>2013-05-23T14:34:58+08:00</lastBuildDate>
+        <pubDate>2013-05-23T14:34:58+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -112,8 +112,8 @@ filetype plugin indent on     &amp;quot; required!
 &lt;h2 id='id26'&gt;&lt;em&gt;必备插件&lt;/em&gt;&lt;/h2&gt;
 
 &lt;p&gt;下面是我使用的一些vim插件，直接在.vimrc中配置：&lt;/p&gt;</description>
-                <link>http://holbrook.github.io/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager</link>
-                <guid>http://holbrook.github.io/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager</guid>
+                <link>http://thinkinside.tk/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager</link>
+                <guid>http://thinkinside.tk/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager</guid>
                 <pubDate>2013-05-23T00:00:00+08:00</pubDate>
         </item>
 
@@ -270,7 +270,7 @@ puts md.to_html
 &lt;/ul&gt;
 
 &lt;p&gt;内部跳转&lt;/p&gt;
-&lt;a name='md-anchor' id='md-anchor' /&gt;
+&lt;a id='md-anchor' name='md-anchor' /&gt;
 &lt;p&gt;跳转至 &lt;a href='#md-anchor'&gt;文内链接&lt;/a&gt; 。&lt;/p&gt;
 
 &lt;p&gt;GitHub提交和问题链接 gfm&lt;/p&gt;
@@ -297,9 +297,9 @@ puts md.to_html
 
 &lt;h1 id='id23'&gt;图片&lt;/h1&gt;
 
-&lt;p&gt;&lt;img alt='GitHub' src='/images/github.png' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src='/images/github.png' alt='GitHub' /&gt;&lt;/p&gt;
 
-&lt;p&gt;GitHub Logo: &lt;img alt='GitHub' src='/images/github.png' /&gt;&lt;/p&gt;
+&lt;p&gt;GitHub Logo: &lt;img src='/images/github.png' alt='GitHub' /&gt;&lt;/p&gt;
 
 &lt;h1 id='id24'&gt;表格&lt;/h1&gt;
 
@@ -311,8 +311,8 @@ puts md.to_html
 &lt;div style='background:#bbb;'&gt;
   HTML块中不能混用 **标记语法**
 &lt;/div&gt;</description>
-                <link>http://holbrook.github.io/2013/05/22/markdown</link>
-                <guid>http://holbrook.github.io/2013/05/22/markdown</guid>
+                <link>http://thinkinside.tk/2013/05/22/markdown</link>
+                <guid>http://thinkinside.tk/2013/05/22/markdown</guid>
                 <pubDate>2013-05-22T00:00:00+08:00</pubDate>
         </item>
 
@@ -321,8 +321,8 @@ puts md.to_html
                 <description>&lt;p&gt;layout: post title: &amp;#8220;new post&amp;#8221; description: &amp;#8221;&amp;#8221; category:&lt;/p&gt;
 
 &lt;h2 id='tags_'&gt;tags: &lt;span /&gt;&lt;/h2&gt;</description>
-                <link>http://holbrook.github.io/2012/12/21/new-post</link>
-                <guid>http://holbrook.github.io/2012/12/21/new-post</guid>
+                <link>http://thinkinside.tk/2012/12/21/new-post</link>
+                <guid>http://thinkinside.tk/2012/12/21/new-post</guid>
                 <pubDate>2012-12-21T00:00:00+08:00</pubDate>
         </item>
 

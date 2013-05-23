@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
  
  <title>心内求法</title>
- <link href="http://holbrook.github.io/" rel="self"/>
- <link href="http://holbrook.github.io"/>
- <updated>2013-05-23T13:53:45+08:00</updated>
- <id>http://holbrook.github.io</id>
+ <link href="http://thinkinside.tk/" rel="self"/>
+ <link href="http://thinkinside.tk"/>
+ <updated>2013-05-23T14:34:58+08:00</updated>
+ <id>http://thinkinside.tk</id>
  <author>
    <name>Holbrook Wong</name>
    <email>wanghaikuo@gmail.com</email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>重拾vim</title>
-   <link href="http://holbrook.github.io/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager"/>
+   <link href="http://thinkinside.tk/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager"/>
    <updated>2013-05-23T00:00:00+08:00</updated>
-   <id>http://holbrook.github.io/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager</id>
+   <id>http://thinkinside.tk/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager</id>
    <content type="html">&lt;p&gt;以前在&lt;a title='心内求法' href='http://www.cnblogs.com/holbrook/'&gt;博客园&lt;/a&gt;时，用&lt;a title='Emacs学习笔记(9' href='http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html'&gt;emacs org-mode&lt;/a&gt; 写博客，并且写了一系列&lt;a title='emacs 学习笔记' href='http://www.cnblogs.com/holbrook/tag/emacs/'&gt;《emacs 学习笔记》&lt;/a&gt;。 emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是有些不适应： 1. 小手指很受伤。 2. 过于依赖配置。 由于我的工作要经常登录到linux服务器进行操作，这就带来了一个问题： 服务器上的emacs在不配置的情况下几乎无法使用，但是在服务器上使用vim，又不符合手指中记忆的快捷键。&lt;/p&gt;
 
 &lt;p&gt;经过艰难的取舍，还是决定在个人工作领域也回到vim。保护手指，保护大脑。&lt;/p&gt;
@@ -121,9 +121,9 @@ filetype plugin indent on     &amp;quot; required!
  
  <entry>
    <title>markdown的主要语法</title>
-   <link href="http://holbrook.github.io/2013/05/22/markdown"/>
+   <link href="http://thinkinside.tk/2013/05/22/markdown"/>
    <updated>2013-05-22T00:00:00+08:00</updated>
-   <id>http://holbrook.github.io/2013/05/22/markdown</id>
+   <id>http://thinkinside.tk/2013/05/22/markdown</id>
    <content type="html">&lt;h1 id='id1'&gt;标题&lt;/h1&gt;
 
 &lt;h1 id='id2'&gt;一级标题&lt;/h1&gt;
@@ -275,7 +275,7 @@ puts md.to_html
 &lt;/ul&gt;
 
 &lt;p&gt;内部跳转&lt;/p&gt;
-&lt;a name='md-anchor' id='md-anchor' /&gt;
+&lt;a id='md-anchor' name='md-anchor' /&gt;
 &lt;p&gt;跳转至 &lt;a href='#md-anchor'&gt;文内链接&lt;/a&gt; 。&lt;/p&gt;
 
 &lt;p&gt;GitHub提交和问题链接 gfm&lt;/p&gt;
@@ -302,9 +302,9 @@ puts md.to_html
 
 &lt;h1 id='id23'&gt;图片&lt;/h1&gt;
 
-&lt;p&gt;&lt;img alt='GitHub' src='/images/github.png' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src='/images/github.png' alt='GitHub' /&gt;&lt;/p&gt;
 
-&lt;p&gt;GitHub Logo: &lt;img alt='GitHub' src='/images/github.png' /&gt;&lt;/p&gt;
+&lt;p&gt;GitHub Logo: &lt;img src='/images/github.png' alt='GitHub' /&gt;&lt;/p&gt;
 
 &lt;h1 id='id24'&gt;表格&lt;/h1&gt;
 
@@ -320,9 +320,9 @@ puts md.to_html
  
  <entry>
    <title>New Post</title>
-   <link href="http://holbrook.github.io/2012/12/21/new-post"/>
+   <link href="http://thinkinside.tk/2012/12/21/new-post"/>
    <updated>2012-12-21T00:00:00+08:00</updated>
-   <id>http://holbrook.github.io/2012/12/21/new-post</id>
+   <id>http://thinkinside.tk/2012/12/21/new-post</id>
    <content type="html">&lt;p&gt;layout: post title: &amp;#8220;new post&amp;#8221; description: &amp;#8221;&amp;#8221; category:&lt;/p&gt;
 
 &lt;h2 id='tags_'&gt;tags: &lt;span /&gt;&lt;/h2&gt;</content>
