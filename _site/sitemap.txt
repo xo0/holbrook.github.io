@@ -10,6 +10,6 @@ http://holbrook.github.io/rss.xml
 http://holbrook.github.io/sitemap.txt
 http://holbrook.github.io/tags.html
 
-http://holbrook.github.io/2013/05/23/vim-addon-manager
+http://holbrook.github.io/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager
 http://holbrook.github.io/2013/05/22/markdown
 http://holbrook.github.io/2012/12/21/new-post

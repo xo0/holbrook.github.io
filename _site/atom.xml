@@ -4,7 +4,7 @@
  <title>心内求法</title>
  <link href="http://holbrook.github.io/" rel="self"/>
  <link href="http://holbrook.github.io"/>
- <updated>2013-05-23T13:12:52+08:00</updated>
+ <updated>2013-05-23T13:40:08+08:00</updated>
  <id>http://holbrook.github.io</id>
  <author>
    <name>Holbrook Wong</name>
@@ -13,10 +13,10 @@
 
  
  <entry>
-   <title>Vim Addon Manager</title>
-   <link href="http://holbrook.github.io/2013/05/23/vim-addon-manager"/>
+   <title>重拾vim</title>
+   <link href="http://holbrook.github.io/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager"/>
    <updated>2013-05-23T00:00:00+08:00</updated>
-   <id>http://holbrook.github.io/2013/05/23/vim-addon-manager</id>
+   <id>http://holbrook.github.io/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager</id>
    <content type="html">&lt;p&gt;以前在&lt;a href='http://www.cnblogs.com/holbrook/' title='心内求法'&gt;博客园&lt;/a&gt;时，用&lt;a href='http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html' title='Emacs学习笔记(9'&gt;emacs org-mode&lt;/a&gt; 写博客，并且写了一系列&lt;a href='http://www.cnblogs.com/holbrook/tag/emacs/' title='emacs 学习笔记'&gt;《emacs 学习笔记》&lt;/a&gt;。 emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是有些不适应： 1. 小手指很受伤。 2. 过于依赖配置。 由于我的工作要经常登录到linux服务器进行操作，这就带来了一个问题： 服务器上的emacs在不配置的情况下几乎无法使用，但是在服务器上使用vim，又不符合手指中记忆的快捷键。&lt;/p&gt;
 
 &lt;p&gt;经过艰难的取舍，还是决定在个人工作领域也回到vim。保护手指，保护大脑。&lt;/p&gt;
@@ -275,7 +275,7 @@ puts md.to_html
 &lt;/ul&gt;
 
 &lt;p&gt;内部跳转&lt;/p&gt;
-&lt;a name='md-anchor' id='md-anchor' /&gt;
+&lt;a id='md-anchor' name='md-anchor' /&gt;
 &lt;p&gt;跳转至 &lt;a href='#md-anchor'&gt;文内链接&lt;/a&gt; 。&lt;/p&gt;
 
 &lt;p&gt;GitHub提交和问题链接 gfm&lt;/p&gt;

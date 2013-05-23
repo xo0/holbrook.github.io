@@ -3,7 +3,7 @@ layout: post
 title: "重拾vim"
 description: "emacs的不足, vim插件管理器"
 category: 器.工具使用
-tags: [vim][vundle]
+tags: [vim,vundle]
 ---
 
 以前在[博客园][1]时，用[emacs org-mode][2] 写博客，并且写了一系列[《emacs 学习笔记》][3]。
