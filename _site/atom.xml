@@ -4,7 +4,7 @@
  <title>心内求法</title>
  <link href="http://thinkinside.tk/" rel="self"/>
  <link href="http://thinkinside.tk"/>
- <updated>2013-05-23T16:47:15+08:00</updated>
+ <updated>2013-05-23T17:11:03+08:00</updated>
  <id>http://thinkinside.tk</id>
  <author>
    <name>Holbrook Wong</name>
@@ -275,7 +275,7 @@ puts md.to_html
 &lt;/ul&gt;
 
 &lt;p&gt;内部跳转&lt;/p&gt;
-&lt;a name='md-anchor' id='md-anchor' /&gt;
+&lt;a id='md-anchor' name='md-anchor' /&gt;
 &lt;p&gt;跳转至 &lt;a href='#md-anchor'&gt;文内链接&lt;/a&gt; 。&lt;/p&gt;
 
 &lt;p&gt;GitHub提交和问题链接 gfm&lt;/p&gt;

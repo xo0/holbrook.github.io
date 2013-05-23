@@ -5,8 +5,8 @@
         <description>心内求法 - Holbrook Wong</description>
         <link>http://thinkinside.tk</link>
         <link>http://thinkinside.tk</link>
-        <lastBuildDate>2013-05-23T16:47:15+08:00</lastBuildDate>
-        <pubDate>2013-05-23T16:47:15+08:00</pubDate>
+        <lastBuildDate>2013-05-23T17:11:03+08:00</lastBuildDate>
+        <pubDate>2013-05-23T17:11:03+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -270,7 +270,7 @@ puts md.to_html
 &lt;/ul&gt;
 
 &lt;p&gt;内部跳转&lt;/p&gt;
-&lt;a name='md-anchor' id='md-anchor' /&gt;
+&lt;a id='md-anchor' name='md-anchor' /&gt;
 &lt;p&gt;跳转至 &lt;a href='#md-anchor'&gt;文内链接&lt;/a&gt; 。&lt;/p&gt;
 
 &lt;p&gt;GitHub提交和问题链接 gfm&lt;/p&gt;
