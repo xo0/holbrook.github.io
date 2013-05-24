@@ -4,7 +4,7 @@
  <title>心内求法</title>
  <link href="http://thinkinside.tk/" rel="self"/>
  <link href="http://thinkinside.tk"/>
- <updated>2013-05-24T09:22:21+08:00</updated>
+ <updated>2013-05-24T12:57:43+08:00</updated>
  <id>http://thinkinside.tk</id>
  <author>
    <name>Holbrook Wong</name>
@@ -17,7 +17,13 @@
    <link href="http://thinkinside.tk/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager"/>
    <updated>2013-05-23T00:00:00+08:00</updated>
    <id>http://thinkinside.tk/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager</id>
-   <content type="html">&lt;p&gt;以前在&lt;a href='http://www.cnblogs.com/holbrook/' title='心内求法'&gt;博客园&lt;/a&gt;时，用&lt;a href='http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html' title='Emacs学习笔记(9'&gt;emacs org-mode&lt;/a&gt; 写博客，并且写了一系列&lt;a href='http://www.cnblogs.com/holbrook/tag/emacs/' title='emacs 学习笔记'&gt;《emacs 学习笔记》&lt;/a&gt;。 emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是有些不适应： 1. 小手指很受伤。 2. 过于依赖配置。 由于我的工作要经常登录到linux服务器进行操作，这就带来了一个问题： 服务器上的emacs在不配置的情况下几乎无法使用，但是在服务器上使用vim，又不符合手指中记忆的快捷键。&lt;/p&gt;
+   <content type="html">&lt;p&gt;以前在&lt;a title='心内求法' href='http://www.cnblogs.com/holbrook/'&gt;博客园&lt;/a&gt;时，用&lt;a title='Emacs学习笔记(9' href='http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html'&gt;emacs org-mode&lt;/a&gt; 写博客，并且写了一系列&lt;a title='emacs 学习笔记' href='http://www.cnblogs.com/holbrook/tag/emacs/'&gt;《emacs 学习笔记》&lt;/a&gt;。 emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是有些不适应： 1. 小手指很受伤。 2. 过于依赖配置。 由于我的工作要经常登录到linux服务器进行操作，这就带来了一个问题： 服务器上的emacs在不配置的情况下几乎无法使用，但是在服务器上使用vim，又不符合手指中记忆的快捷键。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;emacs有点重，比如不得不使用的ecb,cedet,jdee等等，都是大块头。&lt;/li&gt;
+
+&lt;li&gt;我还没有做好准备去掌握Erlang语言。但是对于vim，我可以使用我喜欢的python去写插件。&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;p&gt;经过艰难的取舍，还是决定在个人工作领域也回到vim。保护手指，保护大脑。&lt;/p&gt;
 
@@ -59,9 +65,13 @@
 filetype off                   &amp;quot; required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+
+
 &amp;quot; let Vundle manage Vundle
 &amp;quot; required! 
 Bundle &amp;#39;gmarik/vundle&amp;#39;
+
+
 &amp;quot; My Bundles here:
 &amp;quot;
 &amp;quot; original repos on github
@@ -74,17 +84,13 @@ Bundle &amp;#39;L9&amp;#39;
 Bundle &amp;#39;FuzzyFinder&amp;#39;
 &amp;quot; non github repos
 Bundle &amp;#39;git://git.wincent.com/command-t.git&amp;#39;
-&amp;quot; ...
-filetype plugin indent on     &amp;quot; required!
-&amp;quot;
-&amp;quot; Brief help
-&amp;quot; :BundleList          - list configured bundles
-&amp;quot; :BundleInstall(!)    - install(update) bundles
-&amp;quot; :BundleSearch(!) foo - search(or refresh cache first) for foo
-&amp;quot; :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-&amp;quot;
-&amp;quot; see :h vundle for more details or wiki for FAQ
-&amp;quot; NOTE: comments after Bundle command are not allowed..&lt;/code&gt;&lt;/pre&gt;
+&amp;quot; ...&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;对于重名的Vim插件，需要在插件后面加上作者的姓氏， 比如 Bundle &amp;#8216;Javascript-Indentation&amp;#8217; 2. 对于插件名称中包含空格和斜杠的情况， 需要将空格和斜杠替换为 -&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;p&gt;&lt;strong&gt;安装插件&lt;/strong&gt;&lt;/p&gt;
 
@@ -114,9 +120,39 @@ filetype plugin indent on     &amp;quot; required!
 #或者
 :BundleClean markdown&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id='id26'&gt;&lt;em&gt;必备插件&lt;/em&gt;&lt;/h2&gt;
+&lt;h2 id='todo'&gt;&lt;em&gt;必备插件（TODO）&lt;/em&gt;&lt;/h2&gt;
 
-&lt;p&gt;下面是我使用的一些vim插件，直接在.vimrc中配置：&lt;/p&gt;</content>
+&lt;p&gt;下面是我使用的一些vim插件，直接在.vimrc中配置。可以在 &lt;a href='https://github.com/holbrook/macENV/blob/master/vimrc'&gt;github&lt;/a&gt; 查看。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;编辑器增强&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='https://github.com/scrooloose/nerdtree'&gt;NERDTree&lt;/a&gt;（Bundle &amp;#8216;The-NERD-tree&amp;#8217;）可以在窗口左侧打开文件浏览器&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;语法高亮&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Markdown（Bundle &amp;#8216;Markdown&amp;#8217;） markdown文件的语法高亮&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id='vim'&gt;&lt;em&gt;vim基本操作&lt;/em&gt;&lt;/h2&gt;
+
+&lt;p&gt;以前整理过一个 &lt;a href='http://www.cnblogs.com/holbrook/archive/2009/05/13/2357377.html'&gt;vim 常用命令备忘&lt;/a&gt;, 如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='img/vim_cheet_sheet.xlsx'&gt;vim_cheet_sheet.xlsx&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;别人的一个更详细的版本：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='img/vi-vim-cheat-sheet-list.png'&gt;vi-vim-cheat-sheet-list&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;如果已经有一定的基础，还可以使用vim cheat sheet。下面的图分别可以用于打印版或者桌面背景。&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='打印版，Eng' src='img/vi-vim-cheat-sheet.gif' /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='打印版，Chs' src='img/vi-vim-cheat-sheet-sch.gif' /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='桌面版，Eng' src='img/vi-vim_cheat_sheet_dark.png' /&gt;&lt;/p&gt;</content>
  </entry>
  
  <entry>
@@ -267,9 +303,9 @@ puts md.to_html
 &lt;p&gt;文字链接&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;访问 &lt;a href='http://google.com' title='Search'&gt;Google&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;访问 &lt;a title='Search' href='http://google.com'&gt;Google&lt;/a&gt;&lt;/li&gt;
 
-&lt;li&gt;访问 &lt;a href='http://github.com' title='Git host'&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;访问 &lt;a title='Git host' href='http://github.com'&gt;GitHub&lt;/a&gt;&lt;/li&gt;
 
 &lt;li&gt;访问 &lt;a href='http://www.worldhello.net'&gt;WorldHello&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;

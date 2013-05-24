@@ -12,6 +12,11 @@ emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是
 2. 过于依赖配置。
     由于我的工作要经常登录到linux服务器进行操作，这就带来了一个问题：
     服务器上的emacs在不配置的情况下几乎无法使用，但是在服务器上使用vim，又不符合手指中记忆的快捷键。
+3. emacs有点重，比如不得不使用的ecb,cedet,jdee等等，都是大块头。
+4. 我还没有做好准备去掌握Erlang语言。但是对于vim，我可以使用我喜欢的python去写插件。
+
+
+
 
 经过艰难的取舍，还是决定在个人工作领域也回到vim。保护手指，保护大脑。
 
@@ -51,9 +56,13 @@ emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是
     filetype off                   " required!
     set rtp+=~/.vim/bundle/vundle/
     call vundle#rc()
+
+
     " let Vundle manage Vundle
     " required! 
     Bundle 'gmarik/vundle'
+    
+
     " My Bundles here:
     "
     " original repos on github
@@ -67,16 +76,13 @@ emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是
     " non github repos
     Bundle 'git://git.wincent.com/command-t.git'
     " ...
-    filetype plugin indent on     " required!
-    "
-    " Brief help
-    " :BundleList          - list configured bundles
-    " :BundleInstall(!)    - install(update) bundles
-    " :BundleSearch(!) foo - search(or refresh cache first) for foo
-    " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-    "
-    " see :h vundle for more details or wiki for FAQ
-    " NOTE: comments after Bundle command are not allowed..
+
+
+注意：
+
+1. 对于重名的Vim插件，需要在插件后面加上作者的姓氏， 比如 Bundle 'Javascript-Indentation'
+2. 对于插件名称中包含空格和斜杠的情况， 需要将空格和斜杠替换为 - 
+
 
 **安装插件**
 
@@ -103,11 +109,40 @@ Vbundle就会自动安装或更新前面配置好的插件
     #或者
     :BundleClean markdown
 
-*必备插件*
+*必备插件（TODO）*
 ---
 
-下面是我使用的一些vim插件，直接在.vimrc中配置：
+下面是我使用的一些vim插件，直接在.vimrc中配置。可以在 [github](https://github.com/holbrook/macENV/blob/master/vimrc) 查看。
 
-    
+
+
+**编辑器增强**
+
+- [NERDTree](https://github.com/scrooloose/nerdtree)（Bundle 'The-NERD-tree'）可以在窗口左侧打开文件浏览器
+
+**语法高亮**
+
+- Markdown（Bundle 'Markdown'） markdown文件的语法高亮
+
+
+*vim基本操作*
+---
+
+以前整理过一个 [vim 常用命令备忘](http://www.cnblogs.com/holbrook/archive/2009/05/13/2357377.html), 如下：
+
+[vim_cheet_sheet.xlsx](img/vim_cheet_sheet.xlsx)
+
+别人的一个更详细的版本：
+
+[vi-vim-cheat-sheet-list](img/vi-vim-cheat-sheet-list.png)
+
+
+如果已经有一定的基础，还可以使用vim cheat sheet。下面的图分别可以用于打印版或者桌面背景。
+
+![打印版，Eng](img/vi-vim-cheat-sheet.gif)
+
+![打印版，Chs](img/vi-vim-cheat-sheet-sch.gif)
+
+![桌面版，Eng](img/vi-vim_cheat_sheet_dark.png)
 
 {% include JB/setup %}
