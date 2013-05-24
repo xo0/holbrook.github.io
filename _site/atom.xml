@@ -2,101 +2,113 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
  
  <title>心内求法</title>
- <link href="http://thinkinside.tk/" rel="self"/>
+ <link href="http://thinkinside.tk/atom.xml" rel="self"/>
  <link href="http://thinkinside.tk"/>
- <updated>2013-05-24T13:03:33+08:00</updated>
+ <updated>2013-05-24T14:26:35+08:00</updated>
  <id>http://thinkinside.tk</id>
  <author>
-   <name>Holbrook Wong</name>
+   <name>Holbrook</name>
    <email>wanghaikuo@gmail.com</email>
  </author>
 
  
  <entry>
    <title>重拾vim</title>
-   <link href="http://thinkinside.tk/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager"/>
+   <link href="http://thinkinside.tk/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager.html"/>
    <updated>2013-05-23T00:00:00+08:00</updated>
    <id>http://thinkinside.tk/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager</id>
-   <content type="html">&lt;p&gt;以前在&lt;a href='http://www.cnblogs.com/holbrook/' title='心内求法'&gt;博客园&lt;/a&gt;时，用&lt;a href='http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html' title='Emacs学习笔记(9'&gt;emacs org-mode&lt;/a&gt; 写博客，并且写了一系列&lt;a href='http://www.cnblogs.com/holbrook/tag/emacs/' title='emacs 学习笔记'&gt;《emacs 学习笔记》&lt;/a&gt;。 emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是有些不适应： 1. 小手指很受伤。 2. 过于依赖配置。 由于我的工作要经常登录到linux服务器进行操作，这就带来了一个问题： 服务器上的emacs在不配置的情况下几乎无法使用，但是在服务器上使用vim，又不符合手指中记忆的快捷键。&lt;/p&gt;
+   <content type="html">
+   	&lt;p&gt;以前在&lt;a href=&quot;http://www.cnblogs.com/holbrook/&quot; title=&quot;心内求法&quot;&gt;博客园&lt;/a&gt;时，用&lt;a href=&quot;http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html&quot; title=&quot;Emacs学习笔记(9):org-mode，最好的文档编辑利器，没有之一&quot;&gt;emacs org-mode&lt;/a&gt; 写博客，并且写了一系列&lt;a href=&quot;http://www.cnblogs.com/holbrook/tag/emacs/&quot; title=&quot;emacs 学习笔记&quot;&gt;《emacs 学习笔记》&lt;/a&gt;。
+emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是有些不适应：
+1. 小手指很受伤。
+2. 过于依赖配置。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;由于我的工作要经常登录到linux服务器进行操作，这就带来了一个问题：
+服务器上的emacs在不配置的情况下几乎无法使用，但是在服务器上使用vim，又不符合手指中记忆的快捷键。
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;ol&gt;
 &lt;li&gt;emacs有点重，比如不得不使用的ecb,cedet,jdee等等，都是大块头。&lt;/li&gt;
-
 &lt;li&gt;我还没有做好准备去掌握Erlang语言。但是对于vim，我可以使用我喜欢的python去写插件。&lt;/li&gt;
 &lt;/ol&gt;
 
+
 &lt;p&gt;经过艰难的取舍，还是决定在个人工作领域也回到vim。保护手指，保护大脑。&lt;/p&gt;
 
-&lt;h2 id='vundle'&gt;&lt;em&gt;插件管理器(Vundle)&lt;/em&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;em&gt;插件管理器(Vundle)&lt;/em&gt;&lt;/h2&gt;
 
 &lt;p&gt;重新关注vim后，首先发现了一系列插件管理器。主要有：&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;a href='https://github.com/gmarik/vundle'&gt;Vundle&lt;/a&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;a href='http://www.vim.org/scripts/script.php?script_id=2905'&gt;vim-addon-manager&lt;/a&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;a href='http://www.vim.org/scripts/script.php?script_id=2332'&gt;pathogen.vim&lt;/a&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;a href='http://www.vim.org/scripts/script.php?script_id=3458'&gt;vvundle&lt;/a&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;a href='https://github.com/c9s/Vimana'&gt;vvimana&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/gmarik/vundle&quot;&gt;Vundle&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.vim.org/scripts/script.php?script_id=2905&quot;&gt;vim-addon-manager&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.vim.org/scripts/script.php?script_id=2332&quot;&gt;pathogen.vim&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.vim.org/scripts/script.php?script_id=3458&quot;&gt;vvundle&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/c9s/Vimana&quot;&gt;vvimana&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
+
 
 &lt;p&gt;经过简单的比较，我选择了Vundle。这里不想对上述插件管理器做一个完整的对比，只是简单说一个我看中的Vundle的特点：&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;只需要维护需要的插件列表就可以统一安装，同样，复制环境时也只需要复制一个文件(.vimrc)&lt;/li&gt;
-
-&lt;li&gt;支持git更新 3. 支持插件搜索功能 4. 自动管理插件依赖关系&lt;/li&gt;
+&lt;li&gt;支持git更新&lt;/li&gt;
+&lt;li&gt;支持插件搜索功能&lt;/li&gt;
+&lt;li&gt;自动管理插件依赖关系&lt;/li&gt;
 &lt;/ol&gt;
+
 
 &lt;p&gt;&lt;strong&gt;安装Vundle&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;安装Vundle只需要一条命令：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;配置插件&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;在.vimrc中配置需要的插件，作者给出了一个例子：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;set nocompatible               &amp;quot; be iMproved
-filetype off                   &amp;quot; required!
+&lt;pre&gt;&lt;code&gt;set nocompatible               &quot; be iMproved
+filetype off                   &quot; required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 
-&amp;quot; let Vundle manage Vundle
-&amp;quot; required! 
-Bundle &amp;#39;gmarik/vundle&amp;#39;
+&quot; let Vundle manage Vundle
+&quot; required! 
+Bundle 'gmarik/vundle'
 
 
-&amp;quot; My Bundles here:
-&amp;quot;
-&amp;quot; original repos on github
-Bundle &amp;#39;tpope/vim-fugitive&amp;#39;
-Bundle &amp;#39;Lokaltog/vim-easymotion&amp;#39;
-Bundle &amp;#39;rstacruz/sparkup&amp;#39;, {&amp;#39;rtp&amp;#39;: &amp;#39;vim/&amp;#39;}
-Bundle &amp;#39;tpope/vim-rails.git&amp;#39;
-&amp;quot; vim-scripts repos
-Bundle &amp;#39;L9&amp;#39;
-Bundle &amp;#39;FuzzyFinder&amp;#39;
-&amp;quot; non github repos
-Bundle &amp;#39;git://git.wincent.com/command-t.git&amp;#39;
-&amp;quot; ...&lt;/code&gt;&lt;/pre&gt;
+&quot; My Bundles here:
+&quot;
+&quot; original repos on github
+Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Bundle 'tpope/vim-rails.git'
+&quot; vim-scripts repos
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+&quot; non github repos
+Bundle 'git://git.wincent.com/command-t.git'
+&quot; ...
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;注意：&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;对于重名的Vim插件，需要在插件后面加上作者的姓氏， 比如 Bundle &amp;#8216;Javascript-Indentation&amp;#8217; 2. 对于插件名称中包含空格和斜杠的情况， 需要将空格和斜杠替换为 -&lt;/li&gt;
+&lt;li&gt;对于重名的Vim插件，需要在插件后面加上作者的姓氏， 比如 Bundle 'Javascript-Indentation'&lt;/li&gt;
+&lt;li&gt;对于插件名称中包含空格和斜杠的情况， 需要将空格和斜杠替换为 -&lt;/li&gt;
 &lt;/ol&gt;
+
 
 &lt;p&gt;&lt;strong&gt;安装插件&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;只需要在启动vim后，运行命令：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;:BundleInstall&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;:BundleInstall
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Vbundle就会自动安装或更新前面配置好的插件&lt;/p&gt;
 
@@ -104,191 +116,398 @@ Bundle &amp;#39;git://git.wincent.com/command-t.git&amp;#39;
 
 &lt;p&gt;使用帮助：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;:h vundle&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;:h vundle
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;查看插件清单：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;:BundleList&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;:BundleList
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;搜索插件：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;:BundleSearch markdown&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;:BundleSearch markdown
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;清理不用的插件：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;:BundleClean
 #或者
-:BundleClean markdown&lt;/code&gt;&lt;/pre&gt;
+:BundleClean markdown
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id='todo'&gt;&lt;em&gt;必备插件（TODO）&lt;/em&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;em&gt;必备插件（TODO）&lt;/em&gt;&lt;/h2&gt;
 
-&lt;p&gt;下面是我使用的一些vim插件，直接在.vimrc中配置。可以在 &lt;a href='https://github.com/holbrook/macENV/blob/master/vimrc'&gt;github&lt;/a&gt; 查看。&lt;/p&gt;
+&lt;p&gt;下面是我使用的一些vim插件，直接在.vimrc中配置。可以在 &lt;a href=&quot;https://github.com/holbrook/macENV/blob/master/vimrc&quot;&gt;github&lt;/a&gt; 查看。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;编辑器增强&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href='https://github.com/scrooloose/nerdtree'&gt;NERDTree&lt;/a&gt;（Bundle &amp;#8216;The-NERD-tree&amp;#8217;）可以在窗口左侧打开文件浏览器&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/scrooloose/nerdtree&quot;&gt;NERDTree&lt;/a&gt;（Bundle 'The-NERD-tree'）可以在窗口左侧打开文件浏览器&lt;/li&gt;
 &lt;/ul&gt;
+
 
 &lt;p&gt;&lt;strong&gt;语法高亮&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Markdown（Bundle &amp;#8216;Markdown&amp;#8217;） markdown文件的语法高亮&lt;/li&gt;
+&lt;li&gt;Markdown（Bundle 'Markdown'） markdown文件的语法高亮&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id='vim'&gt;&lt;em&gt;vim基本操作&lt;/em&gt;&lt;/h2&gt;
 
-&lt;p&gt;以前整理过一个 &lt;a href='http://www.cnblogs.com/holbrook/archive/2009/05/13/2357377.html'&gt;vim 常用命令备忘&lt;/a&gt;, 如下：&lt;/p&gt;
+&lt;h2&gt;&lt;em&gt;vim基本操作&lt;/em&gt;&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href='/assets/img/vim_cheet_sheet.xlsx'&gt;vim_cheet_sheet.xlsx&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;以前整理过一个 &lt;a href=&quot;http://www.cnblogs.com/holbrook/archive/2009/05/13/2357377.html&quot;&gt;vim 常用命令备忘&lt;/a&gt;, 如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/img/vim_cheet_sheet.xlsx&quot;&gt;vim_cheet_sheet.xlsx&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;别人的一个更详细的版本：&lt;/p&gt;
 
-&lt;p&gt;&lt;a href='/assets/img/vi-vim-cheat-sheet-list.png'&gt;vi-vim-cheat-sheet-list&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/img/vi-vim-cheat-sheet-list.png&quot;&gt;vi-vim-cheat-sheet-list&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;如果已经有一定的基础，还可以使用vim cheat sheet。下面的图分别可以用于打印版或者桌面背景。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src='/assets/img/vi-vim-cheat-sheet.gif' alt='打印版，Eng' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/vi-vim-cheat-sheet.gif&quot; alt=&quot;打印版，Eng&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src='/assets/img/vi-vim-cheat-sheet-sch.gif' alt='打印版，Chs' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/vi-vim-cheat-sheet-sch.gif&quot; alt=&quot;打印版，Chs&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src='/assets/img/vi-vim_cheat_sheet_dark.png' alt='桌面版，Eng' /&gt;&lt;/p&gt;</content>
+&lt;p&gt;&lt;img src=&quot;/assets/img/vi-vim_cheat_sheet_dark.png&quot; alt=&quot;桌面版，Eng&quot; /&gt;&lt;/p&gt;
+
+   	&lt;hr/&gt;
+	由于博客空间在国外，所以有时会造成不稳定（你懂滴），如果您觉得我的博文对您有帮助，可以点击下面按钮订阅到邮箱，本站所有文章均已全文输出。
+	&lt;br/&gt;
+	&lt;a rel="nofollow" target="_blank" href="http://list.qq.com/cgi-bin/qf_invite?id=9470cda4ab8e31116b60ca9011bc7991511661b78345faed"&gt;
+    &lt;img border="0" alt="填写您的邮件地址，订阅我们的精彩内容：" src="http://rescdn.list.qq.com/zh_CN/htmledition/images/qunfa/manage/picMode_light_m.png" /&gt;
+	&lt;/a&gt;
+   </content>
+ </entry>
+ 
+ <entry>
+   <title>重拾vim</title>
+   <link href="http://thinkinside.tk/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager.html"/>
+   <updated>2013-05-23T00:00:00+08:00</updated>
+   <id>http://thinkinside.tk/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager</id>
+   <content type="html">
+   	&lt;p&gt;以前在&lt;a href=&quot;http://www.cnblogs.com/holbrook/&quot; title=&quot;心内求法&quot;&gt;博客园&lt;/a&gt;时，用&lt;a href=&quot;http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html&quot; title=&quot;Emacs学习笔记(9):org-mode，最好的文档编辑利器，没有之一&quot;&gt;emacs org-mode&lt;/a&gt; 写博客，并且写了一系列&lt;a href=&quot;http://www.cnblogs.com/holbrook/tag/emacs/&quot; title=&quot;emacs 学习笔记&quot;&gt;《emacs 学习笔记》&lt;/a&gt;。
+emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是有些不适应：
+1. 小手指很受伤。
+2. 过于依赖配置。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;由于我的工作要经常登录到linux服务器进行操作，这就带来了一个问题：
+服务器上的emacs在不配置的情况下几乎无法使用，但是在服务器上使用vim，又不符合手指中记忆的快捷键。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;emacs有点重，比如不得不使用的ecb,cedet,jdee等等，都是大块头。&lt;/li&gt;
+&lt;li&gt;我还没有做好准备去掌握Erlang语言。但是对于vim，我可以使用我喜欢的python去写插件。&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;经过艰难的取舍，还是决定在个人工作领域也回到vim。保护手指，保护大脑。&lt;/p&gt;
+
+&lt;h2&gt;&lt;em&gt;插件管理器(Vundle)&lt;/em&gt;&lt;/h2&gt;
+
+&lt;p&gt;重新关注vim后，首先发现了一系列插件管理器。主要有：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/gmarik/vundle&quot;&gt;Vundle&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.vim.org/scripts/script.php?script_id=2905&quot;&gt;vim-addon-manager&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.vim.org/scripts/script.php?script_id=2332&quot;&gt;pathogen.vim&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.vim.org/scripts/script.php?script_id=3458&quot;&gt;vvundle&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/c9s/Vimana&quot;&gt;vvimana&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;经过简单的比较，我选择了Vundle。这里不想对上述插件管理器做一个完整的对比，只是简单说一个我看中的Vundle的特点：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;只需要维护需要的插件列表就可以统一安装，同样，复制环境时也只需要复制一个文件(.vimrc)&lt;/li&gt;
+&lt;li&gt;支持git更新&lt;/li&gt;
+&lt;li&gt;支持插件搜索功能&lt;/li&gt;
+&lt;li&gt;自动管理插件依赖关系&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;&lt;strong&gt;安装Vundle&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;安装Vundle只需要一条命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;配置插件&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在.vimrc中配置需要的插件，作者给出了一个例子：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set nocompatible               &quot; be iMproved
+filetype off                   &quot; required!
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+
+&quot; let Vundle manage Vundle
+&quot; required! 
+Bundle 'gmarik/vundle'
+
+
+&quot; My Bundles here:
+&quot;
+&quot; original repos on github
+Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Bundle 'tpope/vim-rails.git'
+&quot; vim-scripts repos
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+&quot; non github repos
+Bundle 'git://git.wincent.com/command-t.git'
+&quot; ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;对于重名的Vim插件，需要在插件后面加上作者的姓氏， 比如 Bundle 'Javascript-Indentation'&lt;/li&gt;
+&lt;li&gt;对于插件名称中包含空格和斜杠的情况， 需要将空格和斜杠替换为 -&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;&lt;strong&gt;安装插件&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;只需要在启动vim后，运行命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;:BundleInstall
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Vbundle就会自动安装或更新前面配置好的插件&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;其他操作&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;使用帮助：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;:h vundle
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看插件清单：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;:BundleList
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;搜索插件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;:BundleSearch markdown
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;清理不用的插件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;:BundleClean
+#或者
+:BundleClean markdown
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;&lt;em&gt;必备插件（TODO）&lt;/em&gt;&lt;/h2&gt;
+
+&lt;p&gt;下面是我使用的一些vim插件，直接在.vimrc中配置。可以在 &lt;a href=&quot;https://github.com/holbrook/macENV/blob/master/vimrc&quot;&gt;github&lt;/a&gt; 查看。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;编辑器增强&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/scrooloose/nerdtree&quot;&gt;NERDTree&lt;/a&gt;（Bundle 'The-NERD-tree'）可以在窗口左侧打开文件浏览器&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;strong&gt;语法高亮&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Markdown（Bundle 'Markdown'） markdown文件的语法高亮&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;&lt;em&gt;vim基本操作&lt;/em&gt;&lt;/h2&gt;
+
+&lt;p&gt;以前整理过一个 &lt;a href=&quot;http://www.cnblogs.com/holbrook/archive/2009/05/13/2357377.html&quot;&gt;vim 常用命令备忘&lt;/a&gt;, 如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/img/vim_cheet_sheet.xlsx&quot;&gt;vim_cheet_sheet.xlsx&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;别人的一个更详细的版本：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/img/vi-vim-cheat-sheet-list.png&quot;&gt;vi-vim-cheat-sheet-list&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;如果已经有一定的基础，还可以使用vim cheat sheet。下面的图分别可以用于打印版或者桌面背景。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/vi-vim-cheat-sheet.gif&quot; alt=&quot;打印版，Eng&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/vi-vim-cheat-sheet-sch.gif&quot; alt=&quot;打印版，Chs&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/vi-vim_cheat_sheet_dark.png&quot; alt=&quot;桌面版，Eng&quot; /&gt;&lt;/p&gt;
+
+   	&lt;hr/&gt;
+	由于博客空间在国外，所以有时会造成不稳定（你懂滴），如果您觉得我的博文对您有帮助，可以点击下面按钮订阅到邮箱，本站所有文章均已全文输出。
+	&lt;br/&gt;
+	&lt;a rel="nofollow" target="_blank" href="http://list.qq.com/cgi-bin/qf_invite?id=9470cda4ab8e31116b60ca9011bc7991511661b78345faed"&gt;
+    &lt;img border="0" alt="填写您的邮件地址，订阅我们的精彩内容：" src="http://rescdn.list.qq.com/zh_CN/htmledition/images/qunfa/manage/picMode_light_m.png" /&gt;
+	&lt;/a&gt;
+   </content>
  </entry>
  
  <entry>
    <title>markdown的主要语法</title>
-   <link href="http://thinkinside.tk/2013/05/22/markdown"/>
+   <link href="http://thinkinside.tk/2013/05/22/markdown.html"/>
    <updated>2013-05-22T00:00:00+08:00</updated>
    <id>http://thinkinside.tk/2013/05/22/markdown</id>
-   <content type="html">&lt;h1 id='id26'&gt;标题&lt;/h1&gt;
+   <content type="html">
+   	&lt;h1&gt;标题&lt;/h1&gt;
 
-&lt;h1 id='id27'&gt;一级标题&lt;/h1&gt;
+&lt;h1&gt;一级标题&lt;/h1&gt;
 
-&lt;h2 id='id28'&gt;二级标题&lt;/h2&gt;
+&lt;h2&gt;二级标题&lt;/h2&gt;
 
-&lt;h3 id='id29'&gt;三级标题&lt;/h3&gt;
+&lt;h3&gt;三级标题&lt;/h3&gt;
 
-&lt;h4 id='id30'&gt;四级标题&lt;/h4&gt;
+&lt;h4&gt;四级标题&lt;/h4&gt;
 
-&lt;h5 id='id31'&gt;五级标题&lt;/h5&gt;
+&lt;h5&gt;五级标题&lt;/h5&gt;
 
-&lt;h6 id='id32'&gt;六级标题&lt;/h6&gt;
+&lt;h6&gt;六级标题&lt;/h6&gt;
 
-&lt;p&gt;注解 标题后面可接匹配的井号。 Markdown的前两级标题还可以使用reST风格，即在标题下衬以等号或减号组成的下划线。&lt;/p&gt;
+&lt;p&gt;注解
+标题后面可接匹配的井号。
+Markdown的前两级标题还可以使用reST风格，即在标题下衬以等号或减号组成的下划线。&lt;/p&gt;
 
-&lt;h1 id='id33'&gt;一级标题&lt;/h1&gt;
+&lt;h1&gt;一级标题&lt;/h1&gt;
 
-&lt;h2 id='id34'&gt;二级标题&lt;/h2&gt;
+&lt;h2&gt;二级标题&lt;/h2&gt;
 
-&lt;h1 id='id35'&gt;段落&lt;/h1&gt;
+&lt;h1&gt;段落&lt;/h1&gt;
 
-&lt;h2 id='id36'&gt;空行分段&lt;/h2&gt;
+&lt;h2&gt;空行分段&lt;/h2&gt;
 
 &lt;p&gt;第一段内容。&lt;/p&gt;
 
 &lt;p&gt;第二段和第一段间有一空行。&lt;/p&gt;
 
-&lt;h2 id='id37'&gt;自动续行&lt;/h2&gt;
+&lt;h2&gt;自动续行&lt;/h2&gt;
 
-&lt;p&gt;一个回车不分段， 本行续上行。&lt;/p&gt;
+&lt;p&gt;一个回车不分段，
+本行续上行。&lt;/p&gt;
 
-&lt;h2 id='id38'&gt;插入换行&lt;/h2&gt;
+&lt;h2&gt;插入换行&lt;/h2&gt;
 
-&lt;p&gt;行尾两空格°° 保持换行。&lt;/p&gt;
+&lt;p&gt;行尾两空格°°
+保持换行。&lt;/p&gt;
 
-&lt;p&gt;GFM、Textile等 保持段落内换行符。&lt;/p&gt;
+&lt;p&gt;GFM、Textile等
+保持段落内换行符。&lt;/p&gt;
 
-&lt;h2 id='id39'&gt;段落缩进&lt;/h2&gt;
+&lt;h2&gt;段落缩进&lt;/h2&gt;
 
 &lt;p&gt;邮件体段落缩进：&lt;/p&gt;
 
-&lt;blockquote&gt;
-&lt;p&gt;第一级段落缩进。&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;第一级段落缩进。&lt;/p&gt;
 
-&lt;blockquote&gt;
-&lt;p&gt;第二级段落缩进。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;blockquote&gt;&lt;p&gt;第二级段落缩进。&lt;/p&gt;&lt;/blockquote&gt;
 
-&lt;p&gt;返回一级段落缩进。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;返回一级段落缩进。&lt;/p&gt;&lt;/blockquote&gt;
 
-&lt;h1 id='id40'&gt;代码块&lt;/h1&gt;
+&lt;h1&gt;代码块&lt;/h1&gt;
 
 &lt;p&gt;四个空格缩进是代码块：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ printf &amp;quot;Hello, world.\n&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;$ printf &quot;Hello, world.\n&quot;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;gfm：&lt;/p&gt;
 
-&lt;p&gt;三个连续的&lt;code&gt;或~等符号界定代码块。&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;三个连续的`或~等符号界定代码块。&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;ruby
-require &amp;#39;redcarpet&amp;#39;
-md = Redcarpet.new(&amp;quot;Hello, world.&amp;quot;)
+require 'redcarpet'
+md = Redcarpet.new(&quot;Hello, world.&quot;)
 puts md.to_html
 &lt;/code&gt;&lt;/p&gt;
 
-&lt;h1 id='id41'&gt;列表&lt;/h1&gt;
+&lt;h1&gt;列表&lt;/h1&gt;
 
-&lt;h2 id='id42'&gt;无序列表&lt;/h2&gt;
+&lt;h2&gt;无序列表&lt;/h2&gt;
 
-&lt;p&gt;* 星号、减号、加号开始列表。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;星号、减号、加号开始列表。&lt;/p&gt;
 
-&lt;p&gt;- 列表层级和缩进有关。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;列表层级和缩进有关。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;+ 和具体符号无关。&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;和具体符号无关。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;返回一级列表。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;* 返回一级列表。&lt;/p&gt;
 
-&lt;h2 id='id43'&gt;有序列表&lt;/h2&gt;
-
-&lt;p&gt;1. 数字和点开始有序列表。&lt;/p&gt;
-
-&lt;p&gt;1. 注意子列表的缩进位置。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;  1. 三级列表。
-  1. 编号会自动更正。&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;1. 二级列表，编号自动更正为2。&lt;/p&gt;
-
-&lt;p&gt;2. 返回一级列表。&lt;/p&gt;
-
-&lt;h2 id='id44'&gt;列表续行、段落和代码块&lt;/h2&gt;
-
-&lt;p&gt;1. 列表项可以折行， 对齐则自动续行。&lt;/p&gt;
-
-&lt;p&gt;2. 列表项可包含多个段落。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;空行开始的新段落必须缩进四个空格，
-段落才属于列表项。&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;有序列表&lt;/h2&gt;
 
 &lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;列表中的代码块要缩进8个空格。&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;数字和点开始有序列表。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt; $ printf &amp;quot;Hello, world.\n&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;注意子列表的缩进位置。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;三级列表。&lt;/li&gt;
+&lt;li&gt;编号会自动更正。&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;二级列表，编号自动更正为2。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;返回一级列表。&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h1 id='id45'&gt;分隔线&lt;/h1&gt;
 
-&lt;p&gt;三条或更多短线（或星号、下划线）\ 显示为分隔线。&lt;/p&gt;
+&lt;h2&gt;列表续行、段落和代码块&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;列表项可以折行，
+对齐则自动续行。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;列表项可包含多个段落。&lt;/p&gt;
+
+&lt;p&gt; 空行开始的新段落必须缩进四个空格，
+ 段落才属于列表项。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;列表中的代码块要缩进8个空格。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; $ printf &quot;Hello, world.\n&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;h1&gt;分隔线&lt;/h1&gt;
+
+&lt;p&gt;三条或更多短线（或星号、下划线）\
+显示为分隔线。&lt;/p&gt;
+
 &lt;hr /&gt;
-&lt;h1 id='id46'&gt;字体&lt;/h1&gt;
 
-&lt;p&gt;这些都是 &lt;strong&gt;粗体&lt;/strong&gt; 或 &lt;strong&gt;粗体&lt;/strong&gt; ， 这写都是 &lt;em&gt;斜体&lt;/em&gt; 或 &lt;em&gt;斜体&lt;/em&gt; 。&lt;/p&gt;
+&lt;h1&gt;字体&lt;/h1&gt;
 
-&lt;p&gt;~~删除线~~ 效果&lt;/p&gt;
-&lt;u&gt;下划线&lt;/u&gt;
+&lt;p&gt;这些都是 &lt;strong&gt;粗体&lt;/strong&gt; 或 &lt;strong&gt;粗体&lt;/strong&gt; ，
+这写都是 &lt;em&gt;斜体&lt;/em&gt; 或 &lt;em&gt;斜体&lt;/em&gt; 。&lt;/p&gt;
+
+&lt;p&gt;&lt;del&gt;删除线&lt;/del&gt; 效果&lt;/p&gt;
+
+&lt;p&gt;&lt;u&gt;下划线&lt;/u&gt; 效果&lt;/p&gt;
+
 &lt;p&gt;上标下标：&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Water: H&lt;sub&gt;2&lt;/sub&gt;O&lt;/li&gt;
-
 &lt;li&gt;E = mc&lt;sup&gt;2&lt;/sup&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;等宽字体： 行内反引号嵌入代码，如: &lt;code&gt;git status&lt;/code&gt; 。&lt;/p&gt;
+
+&lt;p&gt;等宽字体：
+行内反引号嵌入代码，如: &lt;code&gt;git status&lt;/code&gt; 。&lt;/p&gt;
 
 &lt;p&gt;引言：&lt;/p&gt;
 
@@ -296,72 +515,119 @@ puts md.to_html
 
 &lt;p&gt;清除标记空白：&lt;/p&gt;
 
-&lt;p&gt;标记符号前后空白\ 用\ &lt;strong&gt;反斜线&lt;/strong&gt;\ 消除&lt;/p&gt;
+&lt;p&gt;标记符号前后空白\
+用\ &lt;strong&gt;反斜线&lt;/strong&gt;\ 消除&lt;/p&gt;
 
-&lt;h1 id='id47'&gt;链接&lt;/h1&gt;
+&lt;h1&gt;链接&lt;/h1&gt;
 
 &lt;p&gt;文字链接&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;访问 &lt;a href='http://google.com' title='Search'&gt;Google&lt;/a&gt;&lt;/li&gt;
-
-&lt;li&gt;访问 &lt;a href='http://github.com' title='Git host'&gt;GitHub&lt;/a&gt;&lt;/li&gt;
-
-&lt;li&gt;访问 &lt;a href='http://www.worldhello.net'&gt;WorldHello&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;访问 &lt;a href=&quot;http://google.com&quot; title=&quot;Search&quot;&gt;Google&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;访问 &lt;a href=&quot;http://github.com&quot; title=&quot;Git host&quot;&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;访问 &lt;a href=&quot;http://www.worldhello.net&quot;&gt;WorldHello&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;内部跳转&lt;/p&gt;
-&lt;a name='md-anchor' id='md-anchor' /&gt;
-&lt;p&gt;跳转至 &lt;a href='#md-anchor'&gt;文内链接&lt;/a&gt; 。&lt;/p&gt;
+
+&lt;p&gt; 内部跳转&lt;/p&gt;
+
+&lt;p&gt; &lt;a name=&quot;md-anchor&quot; id=&quot;md-anchor&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;跳转至 &lt;a href=&quot;#md-anchor&quot;&gt;文内链接&lt;/a&gt; 。&lt;/p&gt;
 
 &lt;p&gt;GitHub提交和问题链接 gfm&lt;/p&gt;
 
 &lt;p&gt;指向同一提交的链接：&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;提交ID（SHA）: cea00609ca8&amp;#8230;&lt;/li&gt;
-
-&lt;li&gt;用户@提交ID: mojombo@cea00609ca8&amp;#8230;&lt;/li&gt;
-
-&lt;li&gt;用户名/项目名@提交ID: mojombo/god@cea00609ca8&amp;#8230;&lt;/li&gt;
+&lt;li&gt;提交ID（SHA）: cea00609ca8...&lt;/li&gt;
+&lt;li&gt;用户@提交ID: mojombo@cea00609ca8...&lt;/li&gt;
+&lt;li&gt;用户名/项目名@提交ID:
+mojombo/god@cea00609ca8...&lt;/li&gt;
 &lt;/ul&gt;
+
 
 &lt;p&gt;指向同一Issue的链接：&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Issue编号: #1&lt;/li&gt;
-
 &lt;li&gt;用户名及Issue编号: mojombo#1&lt;/li&gt;
-
-&lt;li&gt;用户名/项目名及Issue编号: mojombo/god#1&lt;/li&gt;
+&lt;li&gt;用户名/项目名及Issue编号:
+mojombo/god#1&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id='id48'&gt;图片&lt;/h1&gt;
 
-&lt;p&gt;&lt;img src='/images/github.png' alt='GitHub' /&gt;&lt;/p&gt;
+&lt;h1&gt;图片&lt;/h1&gt;
 
-&lt;p&gt;GitHub Logo: &lt;img src='/images/github.png' alt='GitHub' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/github.png&quot; title=&quot;Logo&quot; alt=&quot;GitHub&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id='id49'&gt;表格&lt;/h1&gt;
+&lt;p&gt;GitHub Logo: &lt;img src=&quot;/images/github.png&quot; title=&quot;Logo&quot; alt=&quot;GitHub&quot; /&gt;&lt;/p&gt;
+
+&lt;h1&gt;表格&lt;/h1&gt;
 
 &lt;p&gt;gfm&lt;/p&gt;
-&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;head1&lt;/th&gt;&lt;th&gt;head2&lt;/th&gt;&lt;th&gt;head2&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style='text-align: left;'&gt;left&lt;/td&gt;&lt;td style='text-align: center;'&gt;center&lt;/td&gt;&lt;td style='text-align: right;'&gt;right&lt;/td&gt;
-&lt;/tr&gt;&lt;tr&gt;&lt;td style='text-align: left;'&gt;left&lt;/td&gt;&lt;td style='text-align: center;'&gt;center&lt;/td&gt;&lt;td style='text-align: right;'&gt;right&lt;/td&gt;
-&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;h1 id='html'&gt;混用HTML&lt;/h1&gt;
-&lt;div style='background:#bbb;'&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;head1 &lt;/th&gt;
+&lt;th align=&quot;center&quot;&gt; head2  &lt;/th&gt;
+&lt;th align=&quot;right&quot;&gt; head2&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;left  &lt;/td&gt;
+&lt;td align=&quot;center&quot;&gt; center &lt;/td&gt;
+&lt;td align=&quot;right&quot;&gt; right&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;left  &lt;/td&gt;
+&lt;td align=&quot;center&quot;&gt; center &lt;/td&gt;
+&lt;td align=&quot;right&quot;&gt; right&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;h1&gt;混用HTML&lt;/h1&gt;
+
+&lt;div style=&quot;background:#bbb;&quot;&gt;
   HTML块中不能混用 **标记语法**
-&lt;/div&gt;</content>
+&lt;/div&gt;
+
+
+
+
+   	&lt;hr/&gt;
+	由于博客空间在国外，所以有时会造成不稳定（你懂滴），如果您觉得我的博文对您有帮助，可以点击下面按钮订阅到邮箱，本站所有文章均已全文输出。
+	&lt;br/&gt;
+	&lt;a rel="nofollow" target="_blank" href="http://list.qq.com/cgi-bin/qf_invite?id=9470cda4ab8e31116b60ca9011bc7991511661b78345faed"&gt;
+    &lt;img border="0" alt="填写您的邮件地址，订阅我们的精彩内容：" src="http://rescdn.list.qq.com/zh_CN/htmledition/images/qunfa/manage/picMode_light_m.png" /&gt;
+	&lt;/a&gt;
+   </content>
  </entry>
  
  <entry>
    <title>New Post</title>
-   <link href="http://thinkinside.tk/2012/12/21/new-post"/>
+   <link href="http://thinkinside.tk/2012/12/21/new-post.html"/>
    <updated>2012-12-21T00:00:00+08:00</updated>
    <id>http://thinkinside.tk/2012/12/21/new-post</id>
-   <content type="html">&lt;p&gt;layout: post title: &amp;#8220;new post&amp;#8221; description: &amp;#8221;&amp;#8221; category:&lt;/p&gt;
+   <content type="html">
+   	&lt;p&gt;layout: post
+title: &quot;new post&quot;
+description: &quot;&quot;
+category:&lt;/p&gt;
 
-&lt;h2 id='tags_'&gt;tags: &lt;span /&gt;&lt;/h2&gt;</content>
+&lt;h2&gt;tags: []&lt;/h2&gt;
+
+   	&lt;hr/&gt;
+	由于博客空间在国外，所以有时会造成不稳定（你懂滴），如果您觉得我的博文对您有帮助，可以点击下面按钮订阅到邮箱，本站所有文章均已全文输出。
+	&lt;br/&gt;
+	&lt;a rel="nofollow" target="_blank" href="http://list.qq.com/cgi-bin/qf_invite?id=9470cda4ab8e31116b60ca9011bc7991511661b78345faed"&gt;
+    &lt;img border="0" alt="填写您的邮件地址，订阅我们的精彩内容：" src="http://rescdn.list.qq.com/zh_CN/htmledition/images/qunfa/manage/picMode_light_m.png" /&gt;
+	&lt;/a&gt;
+   </content>
  </entry>
  
  
