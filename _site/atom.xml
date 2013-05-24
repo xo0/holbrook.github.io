@@ -4,7 +4,7 @@
  <title>心内求法</title>
  <link href="http://thinkinside.tk/" rel="self"/>
  <link href="http://thinkinside.tk"/>
- <updated>2013-05-24T12:57:43+08:00</updated>
+ <updated>2013-05-24T13:03:33+08:00</updated>
  <id>http://thinkinside.tk</id>
  <author>
    <name>Holbrook Wong</name>
@@ -17,7 +17,7 @@
    <link href="http://thinkinside.tk/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager"/>
    <updated>2013-05-23T00:00:00+08:00</updated>
    <id>http://thinkinside.tk/%E5%99%A8.%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2013/05/23/vim-addon-manager</id>
-   <content type="html">&lt;p&gt;以前在&lt;a title='心内求法' href='http://www.cnblogs.com/holbrook/'&gt;博客园&lt;/a&gt;时，用&lt;a title='Emacs学习笔记(9' href='http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html'&gt;emacs org-mode&lt;/a&gt; 写博客，并且写了一系列&lt;a title='emacs 学习笔记' href='http://www.cnblogs.com/holbrook/tag/emacs/'&gt;《emacs 学习笔记》&lt;/a&gt;。 emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是有些不适应： 1. 小手指很受伤。 2. 过于依赖配置。 由于我的工作要经常登录到linux服务器进行操作，这就带来了一个问题： 服务器上的emacs在不配置的情况下几乎无法使用，但是在服务器上使用vim，又不符合手指中记忆的快捷键。&lt;/p&gt;
+   <content type="html">&lt;p&gt;以前在&lt;a href='http://www.cnblogs.com/holbrook/' title='心内求法'&gt;博客园&lt;/a&gt;时，用&lt;a href='http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html' title='Emacs学习笔记(9'&gt;emacs org-mode&lt;/a&gt; 写博客，并且写了一系列&lt;a href='http://www.cnblogs.com/holbrook/tag/emacs/' title='emacs 学习笔记'&gt;《emacs 学习笔记》&lt;/a&gt;。 emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是有些不适应： 1. 小手指很受伤。 2. 过于依赖配置。 由于我的工作要经常登录到linux服务器进行操作，这就带来了一个问题： 服务器上的emacs在不配置的情况下几乎无法使用，但是在服务器上使用vim，又不符合手指中记忆的快捷键。&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;emacs有点重，比如不得不使用的ecb,cedet,jdee等等，都是大块头。&lt;/li&gt;
@@ -140,19 +140,19 @@ Bundle &amp;#39;git://git.wincent.com/command-t.git&amp;#39;
 
 &lt;p&gt;以前整理过一个 &lt;a href='http://www.cnblogs.com/holbrook/archive/2009/05/13/2357377.html'&gt;vim 常用命令备忘&lt;/a&gt;, 如下：&lt;/p&gt;
 
-&lt;p&gt;&lt;a href='img/vim_cheet_sheet.xlsx'&gt;vim_cheet_sheet.xlsx&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href='/assets/img/vim_cheet_sheet.xlsx'&gt;vim_cheet_sheet.xlsx&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;别人的一个更详细的版本：&lt;/p&gt;
 
-&lt;p&gt;&lt;a href='img/vi-vim-cheat-sheet-list.png'&gt;vi-vim-cheat-sheet-list&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href='/assets/img/vi-vim-cheat-sheet-list.png'&gt;vi-vim-cheat-sheet-list&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;如果已经有一定的基础，还可以使用vim cheat sheet。下面的图分别可以用于打印版或者桌面背景。&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt='打印版，Eng' src='img/vi-vim-cheat-sheet.gif' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src='/assets/img/vi-vim-cheat-sheet.gif' alt='打印版，Eng' /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt='打印版，Chs' src='img/vi-vim-cheat-sheet-sch.gif' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src='/assets/img/vi-vim-cheat-sheet-sch.gif' alt='打印版，Chs' /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt='桌面版，Eng' src='img/vi-vim_cheat_sheet_dark.png' /&gt;&lt;/p&gt;</content>
+&lt;p&gt;&lt;img src='/assets/img/vi-vim_cheat_sheet_dark.png' alt='桌面版，Eng' /&gt;&lt;/p&gt;</content>
  </entry>
  
  <entry>
@@ -160,45 +160,45 @@ Bundle &amp;#39;git://git.wincent.com/command-t.git&amp;#39;
    <link href="http://thinkinside.tk/2013/05/22/markdown"/>
    <updated>2013-05-22T00:00:00+08:00</updated>
    <id>http://thinkinside.tk/2013/05/22/markdown</id>
-   <content type="html">&lt;h1 id='id1'&gt;标题&lt;/h1&gt;
+   <content type="html">&lt;h1 id='id26'&gt;标题&lt;/h1&gt;
 
-&lt;h1 id='id2'&gt;一级标题&lt;/h1&gt;
+&lt;h1 id='id27'&gt;一级标题&lt;/h1&gt;
 
-&lt;h2 id='id3'&gt;二级标题&lt;/h2&gt;
+&lt;h2 id='id28'&gt;二级标题&lt;/h2&gt;
 
-&lt;h3 id='id4'&gt;三级标题&lt;/h3&gt;
+&lt;h3 id='id29'&gt;三级标题&lt;/h3&gt;
 
-&lt;h4 id='id5'&gt;四级标题&lt;/h4&gt;
+&lt;h4 id='id30'&gt;四级标题&lt;/h4&gt;
 
-&lt;h5 id='id6'&gt;五级标题&lt;/h5&gt;
+&lt;h5 id='id31'&gt;五级标题&lt;/h5&gt;
 
-&lt;h6 id='id7'&gt;六级标题&lt;/h6&gt;
+&lt;h6 id='id32'&gt;六级标题&lt;/h6&gt;
 
 &lt;p&gt;注解 标题后面可接匹配的井号。 Markdown的前两级标题还可以使用reST风格，即在标题下衬以等号或减号组成的下划线。&lt;/p&gt;
 
-&lt;h1 id='id8'&gt;一级标题&lt;/h1&gt;
+&lt;h1 id='id33'&gt;一级标题&lt;/h1&gt;
 
-&lt;h2 id='id9'&gt;二级标题&lt;/h2&gt;
+&lt;h2 id='id34'&gt;二级标题&lt;/h2&gt;
 
-&lt;h1 id='id10'&gt;段落&lt;/h1&gt;
+&lt;h1 id='id35'&gt;段落&lt;/h1&gt;
 
-&lt;h2 id='id11'&gt;空行分段&lt;/h2&gt;
+&lt;h2 id='id36'&gt;空行分段&lt;/h2&gt;
 
 &lt;p&gt;第一段内容。&lt;/p&gt;
 
 &lt;p&gt;第二段和第一段间有一空行。&lt;/p&gt;
 
-&lt;h2 id='id12'&gt;自动续行&lt;/h2&gt;
+&lt;h2 id='id37'&gt;自动续行&lt;/h2&gt;
 
 &lt;p&gt;一个回车不分段， 本行续上行。&lt;/p&gt;
 
-&lt;h2 id='id13'&gt;插入换行&lt;/h2&gt;
+&lt;h2 id='id38'&gt;插入换行&lt;/h2&gt;
 
 &lt;p&gt;行尾两空格°° 保持换行。&lt;/p&gt;
 
 &lt;p&gt;GFM、Textile等 保持段落内换行符。&lt;/p&gt;
 
-&lt;h2 id='id14'&gt;段落缩进&lt;/h2&gt;
+&lt;h2 id='id39'&gt;段落缩进&lt;/h2&gt;
 
 &lt;p&gt;邮件体段落缩进：&lt;/p&gt;
 
@@ -212,7 +212,7 @@ Bundle &amp;#39;git://git.wincent.com/command-t.git&amp;#39;
 &lt;p&gt;返回一级段落缩进。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h1 id='id15'&gt;代码块&lt;/h1&gt;
+&lt;h1 id='id40'&gt;代码块&lt;/h1&gt;
 
 &lt;p&gt;四个空格缩进是代码块：&lt;/p&gt;
 
@@ -228,9 +228,9 @@ md = Redcarpet.new(&amp;quot;Hello, world.&amp;quot;)
 puts md.to_html
 &lt;/code&gt;&lt;/p&gt;
 
-&lt;h1 id='id16'&gt;列表&lt;/h1&gt;
+&lt;h1 id='id41'&gt;列表&lt;/h1&gt;
 
-&lt;h2 id='id17'&gt;无序列表&lt;/h2&gt;
+&lt;h2 id='id42'&gt;无序列表&lt;/h2&gt;
 
 &lt;p&gt;* 星号、减号、加号开始列表。&lt;/p&gt;
 
@@ -240,7 +240,7 @@ puts md.to_html
 
 &lt;p&gt;* 返回一级列表。&lt;/p&gt;
 
-&lt;h2 id='id18'&gt;有序列表&lt;/h2&gt;
+&lt;h2 id='id43'&gt;有序列表&lt;/h2&gt;
 
 &lt;p&gt;1. 数字和点开始有序列表。&lt;/p&gt;
 
@@ -253,7 +253,7 @@ puts md.to_html
 
 &lt;p&gt;2. 返回一级列表。&lt;/p&gt;
 
-&lt;h2 id='id19'&gt;列表续行、段落和代码块&lt;/h2&gt;
+&lt;h2 id='id44'&gt;列表续行、段落和代码块&lt;/h2&gt;
 
 &lt;p&gt;1. 列表项可以折行， 对齐则自动续行。&lt;/p&gt;
 
@@ -270,11 +270,11 @@ puts md.to_html
 &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h1 id='id20'&gt;分隔线&lt;/h1&gt;
+&lt;h1 id='id45'&gt;分隔线&lt;/h1&gt;
 
 &lt;p&gt;三条或更多短线（或星号、下划线）\ 显示为分隔线。&lt;/p&gt;
 &lt;hr /&gt;
-&lt;h1 id='id21'&gt;字体&lt;/h1&gt;
+&lt;h1 id='id46'&gt;字体&lt;/h1&gt;
 
 &lt;p&gt;这些都是 &lt;strong&gt;粗体&lt;/strong&gt; 或 &lt;strong&gt;粗体&lt;/strong&gt; ， 这写都是 &lt;em&gt;斜体&lt;/em&gt; 或 &lt;em&gt;斜体&lt;/em&gt; 。&lt;/p&gt;
 
@@ -298,14 +298,14 @@ puts md.to_html
 
 &lt;p&gt;标记符号前后空白\ 用\ &lt;strong&gt;反斜线&lt;/strong&gt;\ 消除&lt;/p&gt;
 
-&lt;h1 id='id22'&gt;链接&lt;/h1&gt;
+&lt;h1 id='id47'&gt;链接&lt;/h1&gt;
 
 &lt;p&gt;文字链接&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;访问 &lt;a title='Search' href='http://google.com'&gt;Google&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;访问 &lt;a href='http://google.com' title='Search'&gt;Google&lt;/a&gt;&lt;/li&gt;
 
-&lt;li&gt;访问 &lt;a title='Git host' href='http://github.com'&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;访问 &lt;a href='http://github.com' title='Git host'&gt;GitHub&lt;/a&gt;&lt;/li&gt;
 
 &lt;li&gt;访问 &lt;a href='http://www.worldhello.net'&gt;WorldHello&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -336,13 +336,13 @@ puts md.to_html
 &lt;li&gt;用户名/项目名及Issue编号: mojombo/god#1&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id='id23'&gt;图片&lt;/h1&gt;
+&lt;h1 id='id48'&gt;图片&lt;/h1&gt;
 
-&lt;p&gt;&lt;img alt='GitHub' src='/images/github.png' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src='/images/github.png' alt='GitHub' /&gt;&lt;/p&gt;
 
-&lt;p&gt;GitHub Logo: &lt;img alt='GitHub' src='/images/github.png' /&gt;&lt;/p&gt;
+&lt;p&gt;GitHub Logo: &lt;img src='/images/github.png' alt='GitHub' /&gt;&lt;/p&gt;
 
-&lt;h1 id='id24'&gt;表格&lt;/h1&gt;
+&lt;h1 id='id49'&gt;表格&lt;/h1&gt;
 
 &lt;p&gt;gfm&lt;/p&gt;
 &lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;head1&lt;/th&gt;&lt;th&gt;head2&lt;/th&gt;&lt;th&gt;head2&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style='text-align: left;'&gt;left&lt;/td&gt;&lt;td style='text-align: center;'&gt;center&lt;/td&gt;&lt;td style='text-align: right;'&gt;right&lt;/td&gt;

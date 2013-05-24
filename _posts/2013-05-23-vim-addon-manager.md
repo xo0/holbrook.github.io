@@ -130,19 +130,19 @@ Vbundle就会自动安装或更新前面配置好的插件
 
 以前整理过一个 [vim 常用命令备忘](http://www.cnblogs.com/holbrook/archive/2009/05/13/2357377.html), 如下：
 
-[vim_cheet_sheet.xlsx](img/vim_cheet_sheet.xlsx)
+[vim_cheet_sheet.xlsx](/assets/img/vim_cheet_sheet.xlsx)
 
 别人的一个更详细的版本：
 
-[vi-vim-cheat-sheet-list](img/vi-vim-cheat-sheet-list.png)
+[vi-vim-cheat-sheet-list](/assets/img/vi-vim-cheat-sheet-list.png)
 
 
 如果已经有一定的基础，还可以使用vim cheat sheet。下面的图分别可以用于打印版或者桌面背景。
 
-![打印版，Eng](img/vi-vim-cheat-sheet.gif)
+![打印版，Eng](/assets/img/vi-vim-cheat-sheet.gif)
 
-![打印版，Chs](img/vi-vim-cheat-sheet-sch.gif)
+![打印版，Chs](/assets/img/vi-vim-cheat-sheet-sch.gif)
 
-![桌面版，Eng](img/vi-vim_cheat_sheet_dark.png)
+![桌面版，Eng](/assets/img/vi-vim_cheat_sheet_dark.png)
 
 {% include JB/setup %}
