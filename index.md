@@ -2,7 +2,7 @@
 layout: index
 ---
 
-{% for page in site.posts %}
+{% for page in site.posts limit:10 %}
 <div class="white-panel">
   <div class="single-post">
         <h4><a href="{{page.url}}">{{page.title}}</a></h4>
@@ -14,4 +14,24 @@ layout: index
   </div>
 </div>
 {% endfor %}
+
+
+<a href="/archive.html">查看所有{{site.posts.size}}篇文章...</a>
+
+
+<div class="sidebar-title">文章分类</div>
+        <div>
+            <ul class="tag_box inline">
+            {% assign categories_list = site.categories %}
+            {% include JB/categories_list %}
+            </ul>
+        </div>
+        <br>
+        <div class="sidebar-title">标签</div>
+        <div>
+            <ul class="tag_box inline">
+            {% assign tags_list = site.tags %}  
+            {% include JB/tags_list %}
+            </ul>
+        </div>
 
