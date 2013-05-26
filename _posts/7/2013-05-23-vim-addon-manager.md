@@ -145,4 +145,3 @@ Vbundle就会自动安装或更新前面配置好的插件
 
 ![桌面版，Eng](/assets/img/vi-vim_cheat_sheet_dark.png)
 
-{% include JB/setup %}
