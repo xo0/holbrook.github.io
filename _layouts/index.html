@@ -26,7 +26,20 @@ layout:           default
     	<!-- 文章导航
     	================================================== -->
     	<div class="span3">
-    		abc
+    		  <!--search on google-->
+          <div class="white-panel signup-form">
+            <input type="text" id="searchkey" placeholder="Search on google">
+          </div>
+          <script>
+            $('input#searchkey').bind('keyup', function(event){
+              if (event.keyCode=="13"){
+                var url='http://www.google.com/search?newwindow=1&q=site%3Athinkinside.tk+'+$('input#searchkey')[0].value;
+                window.open(url); 
+                
+                
+              }
+            });
+          </script>
     	</div>
     </div>
   </div>
