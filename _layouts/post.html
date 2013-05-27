@@ -14,14 +14,14 @@ layout: default
             <div class="single-post">
                     <h1>{{ page.title }}</h1>
               <p class="pre-meta">
-                {{ page.date|date:"%Y-%m-%d" }} &sdot; 分类：aaa &sdot; 标签： aaa bbb ccc ddd
+                {% include post_info_bar %}
               </p>
               <div id="content">
                 {{ content }}   
               </div> 
                                 
               <p class="pre-meta">
-                {{ page.date|date:"%Y-%m-%d" }} &sdot; 分类：aaa &sdot; 标签： aaa bbb ccc ddd
+                {% include post_info_bar %}
               </p>
             </div>
             
