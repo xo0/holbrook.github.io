@@ -41,11 +41,32 @@ layout:           default
           </script>
           </div>
           
-
+          <!--tags cloud-->
           <div class="white-panel gradient-panel">
             <h5>本站标签</h5>
             {% include tags_cloud %}
-          </div>
+          
+            <h5>文章分类</h5>
+            <ul class="tag_box inline">
+  {% assign categories_list = site.categories %}
+  {% if categories_list.first[0] == null %}
+    {% for category in categories_list %} 
+      <li><a href="{{ BASE_PATH }}{{ site.JB.categories_path }}#{{ category }}-ref" rel="category">
+        {{ category | join: "/" }} <span>{{ site.categories[category].size }}</span>
+      </a></li>
+    {% endfor %}
+  {% else %}
+    {% for category in categories_list %} 
+      <li><a href="{{ BASE_PATH }}{{ site.JB.categories_path }}#{{ category[0] }}-ref" rel="category">
+        {{ category[0] | join: "/" }} <span>{{ category[1].size }}</span>
+      </a></li>
+    {% endfor %}
+  {% endif %}
+  {% assign categories_list = nil %}
+</ul>
+
+          <h5>最新文章</h5>
+        </div>
     	</div>
     </div>
   </div>
