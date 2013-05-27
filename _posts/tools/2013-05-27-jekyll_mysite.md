@@ -65,11 +65,17 @@ Jekyll支持[Liquid][3]模板语言，写文档时的感觉很像是在写Django
 ---
 
 ###抛弃Jekyll bootstrap###
+JB/
 
 ###处理图片
 page_url
 
 ###处理表格
+
+###博客搬家
+
+
+gem install jekyll-import --pre
 
 ###markdown编辑工具###
 
