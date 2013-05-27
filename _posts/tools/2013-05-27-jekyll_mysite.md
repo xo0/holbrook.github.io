@@ -3,7 +3,7 @@ layout: post
 title: "Jekyll建站过程"
 description: "本站建立过程中的一些经验，不断完善中..."
 category: 工具使用
-tags: [Jekyll, github]
+tags: [jekyll, github]
 imgroot: "/images/posts/tools/jekyll_mysite/"
 ---
 
