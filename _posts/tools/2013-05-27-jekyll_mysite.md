@@ -6,6 +6,7 @@ category: 工具使用
 tags: [jekyll, github]
 imgroot: "/images/posts/tools/jekyll_mysite/"
 ---
+{% include page_setup %}
 
 ##基础篇##
 ---
@@ -64,6 +65,11 @@ Jekyll支持[Liquid][3]模板语言，写文档时的感觉很像是在写Django
 ---
 
 ###抛弃Jekyll bootstrap###
+
+###处理图片
+page_url
+
+###处理表格
 
 ###markdown编辑工具###
 
