@@ -65,7 +65,11 @@ Jekyll支持[Liquid][3]模板语言，写文档时的感觉很像是在写Django
 ---
 
 ###抛弃Jekyll bootstrap###
-JB/
+- 增加了一个叫做"JB"的全局变量
+- 增加了子目录为"JB/"的一些include文件
+- 增加了themes支持
+- sitemap????
+- robots???
 
 ###处理图片
 page_url
