@@ -87,24 +87,18 @@ var _hmt = _hmt || [];
         <a href="/" class="brand"><img src="/images/logo.png" width="23" height="23" alt="首页">{{ site.title }}</a>
         <div class="container">
           <div class="menu span10">
-                <ul class="nav">
-              <li class="active">
-                <a href="/">首页</a>
-              </li>
-              <li class="">
-                <a href="/categories.html">分类</a>
-              </li>
-              <li class="">
-                <a href="/tags.html">标签</a>
-              </li>
-              <li class="">
-                <a href="/archive.html">归档</a>
-              </li>
+              <ul class="nav">
+              {% for item in site.menuitems %}
+                {% if item.url == page.url %}
+                <li class="active">
+                {% else %}
+                <li>
+                {% endif %}
+                <a href="{{item.url}}">{{item.name}}</a>
+                </li>
+              {% endfor %}
               
-
-              <li class="">
-                <a href="./about.html">关于</a>
-              </li>
+              
                
 
               <li>

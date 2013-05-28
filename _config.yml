@@ -1,16 +1,37 @@
-auto:	          true
+auto:	        true
 
-markdown:         rdiscount
-pygments:         true
-paginate:         6
-permalink:        /:title
+markdown:       rdiscount
+pygments:       true
+paginate:       6
+permalink:      /:title
 
-title:            心内求法
-url:              http://thinkinside.tk
-feed:             /atom.xml
+title:          心内求法
+url:            http://thinkinside.tk
+feed:           /atom.xml
 author:
-    name:         Holbrook
-    twitter:      twitter.com/holbrook
-description:      "Holbrook's blog"
-author_info:      <a href="http://thinkinside.tk/about">Holbrook</a>
+    name:       Holbrook
+    twitter:    twitter.com/holbrook
+description:    "Holbrook's blog"
+author_info:    <a href="http://thinkinside.tk/about">Holbrook</a>
 
+abc:			def
+
+menuitems:
+- name:			首页
+  url:          /index.html
+- name:		  	分类
+  url:          /categories.html
+- name:		  	标签
+  url:          /tags.html
+- name:		  	归档
+  url:		  	/archive.html			
+- name:		  	读书
+  url:		  	/reading.html			
+- name:		  	工作
+  url:		  	/working.html			
+- name:		  	关于
+  url:		  	/about.html	
+
+outlinks:
+
+friends:
