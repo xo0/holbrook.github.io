@@ -3,7 +3,7 @@ layout: post
 title: "量化金融相关的网络资源"
 description: "量化金融相关的网络资源，不断补充中..."
 category: 量化金融
-tags: [resource]
+tags: [resource, 量化金融]
 ---
 
 ##网络资源
