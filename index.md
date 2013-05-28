@@ -15,8 +15,9 @@ layout: index
 </div>
 {% endfor %}
 
-
+<!--div class="row">
 <a href="/archive.html">查看所有{{site.posts.size}}篇文章...</a>
+</div-->
 
 
 
