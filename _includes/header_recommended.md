@@ -1,3 +1,5 @@
+{% if page.url == '/index.html' %}
+<header class="jumbotron subhead" id="overview">
 <style>
 .banner { position: relative; overflow: auto; }
     .banner li { list-style: none; }
@@ -11,11 +13,5 @@
     </ul>
     <ol class="dots"><li class="dot">1</li><li class="dot">2</li><li class="dot active">3</li><li class="dot">4</li></ol>
  </div>
-
- <!-- unslide
-=========================== -->
-<script src="//code.jquery.com/jquery-latest.min.js"></script>
-<script src="//unslider.com/unslider.js"></script>
-<script>
-$('.banner').unslider();
-</script>
+</header>
+{% endif %}
