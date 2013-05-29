@@ -156,7 +156,7 @@ Jekyll bootstrap确实能带来一些变量，但是和RoR一样，充满了各�
 的形式命名，比如：
     2011-12-31-new-years-eve-is-awesome.md
 
-_layouts目录存放页面模板，其他还可以使用html、css、image等静态资源。
+ _layouts目录存放页面模板，其他还可以使用html、css、image等静态资源。
 
 Jekyll会把任何不以下划线开头的文件和目录都复制/生成到网站（在本地是生成到_site/目录)。
 
