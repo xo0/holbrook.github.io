@@ -2,10 +2,10 @@
 
 &sdot; 分类：
 {% for cat in page.categories %}
-	<a href="#">{{cat}}</a>&nbsp;
+	<a href="/categories.html#{{cat}}-ref">{{cat}}</a>&nbsp;
 {% endfor %}
 
 &sdot; 标签： 
 {% for tag in page.tags %}
-	<a href="#">{{tag}}</a>&nbsp;
+	<a href="/tags.html#{{tag}}-ref">{{tag}}</a>&nbsp;
 {% endfor %}
