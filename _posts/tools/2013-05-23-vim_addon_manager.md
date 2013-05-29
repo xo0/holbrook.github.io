@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "重拾vim"
-description: "emacs的不足, vim插件管理器"
+description: "从emacs切换回vim"
 date: 2013-05-23
 category: 工具使用
 tags: [vim , vundle]
