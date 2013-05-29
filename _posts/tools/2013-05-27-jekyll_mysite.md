@@ -67,6 +67,11 @@ Jekyll支持[Liquid][3]模板语言，写文档时的感觉很像是在写Django
 
     # 检查ruby版本
     ruby -v
+    #更换更快的gem源，可选
+    gem sources --remove http://rubygems.org/
+    gem sources -a http://ruby.taobao.org/
+    gem sources -l
+
     #如果不是1.9.3+，需要升级到1.9.3
     gem install rvm
     rvm install 1.9.3
@@ -123,7 +128,7 @@ Jekyll-Bootstrap提供了一个Rakefile（ruby的makefile），包含一些博�
 Jekyll bootstrap确实能带来一些变量，但是和RoR一样，充满了各种puzzle。 
 更加让中国人不爽的是，作者将其缩写定义为“JB”。
 
-经过初步的尝试后，我决定放弃JB，用原生的Jekyll来构建博客，让一切都在掌控之中。
+经过初步的尝试后，我决定放弃JB，也不想尝试[Octopress](http://octopress.org/)。我的选择是用原生的Jekyll来构建博客，让一切都在掌控之中。
 
 
 ###Jekyll的目录结构
@@ -152,6 +157,8 @@ Jekyll bootstrap确实能带来一些变量，但是和RoR一样，充满了各�
     2011-12-31-new-years-eve-is-awesome.md
 
 _layouts目录存放页面模板，其他还可以使用html、css、image等静态资源。
+
+Jekyll会把任何不以下划线开头的文件和目录都复制/生成到网站（在本地是生成到_site/目录)。
 
 ###设计模板
 
