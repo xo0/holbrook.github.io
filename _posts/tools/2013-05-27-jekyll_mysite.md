@@ -126,19 +126,49 @@ Jekyll bootstrap确实能带来一些变量，但是和RoR一样，充满了各�
 经过初步的尝试后，我决定放弃JB，用原生的Jekyll来构建博客，让一切都在掌控之中。
 
 
-###Jekyll的目录结构（TODO）
+###Jekyll的目录结构
 
+使用Jekyll创建一个干净的站点：
 
-
-###发布博客文章(TODO)
-
-在_posts文件夹中，可以创建子目录。
-
-必须使用
+    $ jekyll new clearly
+    $ tree clearly/
+    clearly/
+    ├── _config.yml
+    ├── _layouts
+    │   ├── default.html
+    │   └── post.html
+    ├── _posts
+    │   └── 2013-05-29-welcome-to-jekyll.markdown
+    ├── css
+    │   ├── main.css
+    │   └── syntax.css
+    └── index.html
+    
+    
+其中，博客文章放在_posts目录中，可以使用子目录。
+博客文章必须使用
     YEAR-MONTH-DAY-title.MARKUP
 的形式命名，比如：
     2011-12-31-new-years-eve-is-awesome.md
-    2012-09-12-how-to-write-a-blog.textile
+
+_layouts目录存放页面模板，其他还可以使用html、css、image等静态资源。
+
+###设计模板
+
+jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头部变量声明中指定了layout：
+
+    ---
+    layout: post
+    ...
+    ---
+
+则Jekyll在生成页面时会使用该模板进行渲染，用文档的内容替换模板中的{{ content }}部分。
+
+模板本身也是文档，所以一个模板也可以用layout变量指定使用一个模板作为布局，这就是模板的继承。
+
+此外，在设计模板时，利用好Liquid语言的include语法能够带来很大的变量。被包含的页面部件需要放在_includes文件夹中。
+
+因为Jekyll生成的是静态站点，可能会需要大量的js以增加动态特性，在设计模板时要遵循[Unobtrusive JavaScript原则](http://dev.opera.com/articles/view/the-seven-rules-of-unobtrusive-javascrip/)。
 
 ###灵活的导航
 
