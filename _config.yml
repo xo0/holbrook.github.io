@@ -13,16 +13,16 @@ description:    "Holbrook's blog"
 author_info:    <a href="http://thinkinside.tk/about">Holbrook</a>
 menuitems:
     - name:			首页
-      url:          /index.html
-    - name:		  	分类
-      url:          /categories.html
-    - name:		  	标签
-      url:          /tags.html
-    - name:		  	归档
-      url:		  	/archive.html			
-    - name:		  	读书
-      url:		  	/reading.html			
-    - name:		  	工作
-      url:		  	/working.html			
-    - name:		  	关于
-      url:		  	/about.html	
+      url:      /index.html
+    - name:		  分类
+      url:      /categories.html
+    - name:		  标签
+      url:      /tags.html
+    - name:		  归档
+      url:		  /archive.html			
+    - name:		  读书
+      url:		  /reading.html			
+    - name:		  工作
+      url:		  /working.html			
+    - name:		  关于
+      url:		  /about.html	
