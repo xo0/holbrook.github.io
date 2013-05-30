@@ -73,10 +73,10 @@
           <bounds x="228" y="36" width="97" height="55"/>
         </child>
         <child xsi:type="archimate:DiagramObject" id="1b056924" textAlignment="2" archimateElement="2e549b15">
-          <bounds x="72" y="96"/>
+          <bounds x="72" y="96" width="120" height="37"/>
         </child>
         <child xsi:type="archimate:DiagramObject" id="de7b8cca" textAlignment="2" archimateElement="e5d6ad96">
-          <bounds x="264" y="96"/>
+          <bounds x="264" y="96" width="120" height="37"/>
         </child>
       </child>
     </element>
