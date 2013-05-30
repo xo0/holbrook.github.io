@@ -232,6 +232,49 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
 
 ###分类、标签、归档和RSS
 
+这些都是博客站点必须有的元素。分类、标签和归档可以安装不同的方式检索博客文章；RSS可以订阅博客。
+
+用Jekyll的变量和模板很容易实现这些元素。
+
+注意：不管文件的扩展名是md、html还是xml、txt，只要文件的头部包含变量声明，Jekyll的模板引擎就会对其进行处理。
+其中md和html文件都会处理为html，其他类型会保持扩展名。
+
+但如果不是写文档，最好不要使用md，否则会按照markdown语法进行渲染，带来一些意想不到的麻烦。
+
+具体的例子可以参考JB中的代码。
+
+你可能需要对每个分类、每个标签建立单独的索引页面，这个活手工做比较麻烦，可以使用Jekyll插件或者自己写脚本生成文件，
+但这不符合“KISS”原则，这里不进行探讨。
+
+对于标签云(tag cloud)，在不使用插件的情况下，可以使用js实现，参考如下代码：
+
+    <div class="tag-cloud">
+       {/% for tag in site.tags %/}
+          <a href="/tags.html#{/{ tag[0] }/}-ref" id="{/{ forloop.index }/}" class="__tag" style="margin: 5px">{/{ tag[0] }/}</a>
+       {/% endfor %/}
+    </div>
+    
+    <script type="text/javascript">
+       $(function() {
+          var minFont = 15.0,
+              maxFont = 40.0,
+              diffFont = maxFont - minFont,
+              size = 0;
+           
+          {/% assign max = 1.0 %/}
+          {/% for tag in site.tags %/}
+             {/% if tag[1].size > max %/}
+                {/% assign max = tag[1].size %/}
+             {/% endif %/}
+          {/% endfor %/}
+                
+          {/% for tag in site.tags %/}
+             size = (Math.log({{ tag[1].size }}) / Math.log({{ max }})) * diffFont + minFont;
+             $("#{{ forloop.index }}").css("font-size", size + "px");
+          {/% endfor %/}
+       });
+    </script>
+
 关于分类和标签的设计，可以参考xxxxx
 
 ###处理图片(TODO)
