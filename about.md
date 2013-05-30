@@ -1,7 +1,7 @@
 ---
 layout: page
-title: About Me
+title: 心内求法与心外求法
 ---
 
 
-{{page.url}}
+心内求法与心外求法

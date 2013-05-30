@@ -275,9 +275,12 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
        });
     </script>
 
-关于分类和标签的设计，可以参考xxxxx
+关于分类和标签的设计，可以参考[这篇文章](http://thinkinside.tk/2012/11/05/blog_design_categories_and_tags.html)
+
 
 ###处理图片(TODO)
+
+{{page.url}}
 page_url
 
 ###处理表格(TODO)
