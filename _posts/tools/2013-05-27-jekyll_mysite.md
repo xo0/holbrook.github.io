@@ -390,10 +390,7 @@ Jekyll生成的是静态网站，诸如评论、推荐、关注之类的功能�
 可以选择的有国外的[Google Analysis](http://www.google.cn/intl/zh-CN_ALL/analytics/)、[SiteMeter](http://www.sitemeter.com)和国内的[百度统计](http://tongji.baidu.com/web/welcome/login)、
    [量子恒道统计](http://linezing.com)等。
 
-对于GA:
-
-    <script src="www.google-analytics.com—ga.js" async="true"></script>   
-
+出于种种无奈，还是选择了百度。
 
 
 
