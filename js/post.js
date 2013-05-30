@@ -79,7 +79,7 @@ $(document).ready(function(){
                 if(h3[i]){
                     tmpl += '<ul class="nav nav-list">';
                     for(var j=0;j<h3[i].length;j++){
-                        tmpl += '<li><a href="#" data-id="'+h3[i][j].id+'"><i class="icon-chevron-right"></i>'+h3[i][j].name+'</a></li>';
+                        tmpl += '<li><a href="#'+h3[i][j].name+'-ref" data-id="'+h3[i][j].id+'"><i class="icon-chevron-right"></i>'+h3[i][j].name+'</a></li>';
                     }
                     tmpl += "</ul>";
                 }

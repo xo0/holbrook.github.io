@@ -278,6 +278,37 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
 关于分类和标签的设计，可以参考[这篇文章](http://thinkinside.tk/2012/11/05/blog_design_categories_and_tags.html)
 
 
+###语法高亮
+
+对于程序员，博客中难免会包含一些代码。实现代码高亮可以有几种方法：
+
+- 利用外部资源，比如[GitHub Gist](https://gist.github.com/)
+  
+  简单，但是需要使用外部链接或通过js嵌入到页面，不利于文档和代码的统一维护
+
+- 使用Jekyll插件，比如调用[pygments](http://pygments.org/)
+
+  灵活，但是比较复杂，不符合“KISS”原则
+
+- 使用js在前端渲染，比如[google-code-prettify](https://code.google.com/p/google-code-prettify/)
+
+  这是本站采取的方式。只需要在post的模板中进行配置，就可以为所有博文的代码进行渲染
+
+Jekyll在编译markdown时，会将符合“代码格式”的内容放到一个< pre>< code></ code>< /pre>标签中。
+而prettify提供的js会对html中的所有< pre>< /pre>或< code></ code>区块进行处理，甚至会自动判断使用的语言。
+
+在post模板的合适位置中增加以下内容：
+
+    <link href="/js/google-code-prettify/prettify.css" rel="stylesheet">
+    <script src="/js/google-code-prettify/run_prettify.js"></script>
+    <script>
+    $(document).ready(function(){
+         prettyPrint();
+    });
+    </script>
+
+如果要更改配色方案，只需要修改css文件。
+
 ###处理图片(TODO)
 
 {{page.url}}
