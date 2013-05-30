@@ -27,21 +27,15 @@ layout: default
               <!--  分享  -->
               <!-- Baidu Button BEGIN -->
               <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
-              <a class="bds_tsina"></a>
-              <a class="bds_douban"></a>
+              <span class="bds_more">分享到：</span>
               <a class="bds_qzone"></a>
-              <a class="bds_baidu"></a>
+              <a class="bds_tsina"></a>
+              <a class="bds_tqq"></a>
               <a class="bds_renren"></a>
-              <a class="bds_mshare"></a>
-              <a class="bds_sqq"></a>
-              <a class="bds_thx"></a>
-              <a class="bds_xg"></a>
-              <a class="bds_twi"></a>
-              <a class="bds_fbook"></a>
-              <span class="bds_more">更多</span>
+              <a class="bds_t163"></a>
               <a class="shareCount"></a>
               </div>
-              <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+              <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6715859" ></script>
               <script type="text/javascript" id="bdshell_js"></script>
               <script type="text/javascript">
               document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
@@ -60,10 +54,12 @@ layout: default
               {% endfor %}
             </ul>
               <hr/>
+
               <!--wumii block-->
               <script type="text/javascript" id="wumiiRelatedItems"></script>
 
-              <!--for wumii-->
+
+              <!--for wumii ， can be moved to footer-->
              <script type="text/javascript">
                 var wumiiPermaLink = "{{site.url}}{{page.url}}"; //请用代码生成文章永久的链接
                 var wumiiTitle = "{{page.title}}"; //请用代码生成文章标题
@@ -76,6 +72,7 @@ layout: default
             <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
                 <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
             </a>
+            <!--end of wumii-->
             
 
             <!--youjian-->
@@ -92,16 +89,10 @@ layout: default
          <!--  评论  -->
         <div class="row white-panel">
             <div class="single-post">
-
-
-             
-           
-
             <!-- UY BEGIN -->
             <div id="uyan_frame"></div>
-            <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async=""></script>
+            <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
             <!-- UY END -->
-          
         </div>
           
 
