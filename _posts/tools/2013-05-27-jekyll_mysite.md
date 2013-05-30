@@ -309,12 +309,77 @@ Jekyll在编译markdown时，会将符合“代码格式”的内容放到一个
 
 如果要更改配色方案，只需要修改css文件。
 
-###文档目录
+###文档目录(TODO)
 
 如果写比较长的文章，提供一个类似于developerworks上的文档目录进行导航可以方便阅读。
 
+###使用公式
+
+[MathJax](http://www.mathjax.org/) is an open source JavaScript display engine for mathematics that works in all modern browsers.
+
+使用maruku来解析markdown文件，可以把LaTeX解析成图片，
+
+优点是网页加载速度快。但是在windows下安装复杂，且需要安装有LaTeX
+        Mathjax  <http://www.mathjax.org/>，缺点是动态加载，速度慢。
+
+参考：http://chen.yanping.me/cn/blog/2012/03/10/octopress-with-latex/
 
 ###社会化网络
+
+Jekyll生成的是静态网站，诸如评论、推荐、关注之类的功能就无法实现了。
+
+不过好在现在有很多社会化网络应用，通过混搭(marshup) 可以把各种各样第三方的功能部件（widgets）加到你的博客中。
+
+与博客相关的Widget主要有几类：
+
+1. 社会化评论
+   
+   专门提供评论功能的网站，可以为博客增加评论功能。也可能附带着关注、相关文章、推荐等功能。
+
+   国外的有[disqus](http://disqus.com/)，国内的有[友言](http://www.uyan.cc/)，[多说](http://duoshuo.com/)
+
+2. 社会化推荐
+
+   自动推荐跨站的相关文章。
+
+   国内的有[友荐](http://www.ujian.cc/publishers)，[无觅](http://www.wumii.com/widget/relatedItems.htm)。
+   Jekyll本身也可以实现站内文章推荐的功能。
+
+3. 社会化分享
+
+   将自己喜欢的网址分享给别人，国内的有[加网](http://www.jiathis.com/) ，[百度分享](http://share.baidu.com/)，
+
+4. 社会化用户管理（TODO)
+
+   ？
+
+1. 微博
+   
+   每篇可以在上面
+
+
+
+由于存在着伟大的墙，我只好尽量选择国内的社会化网络资源。对于更喜欢的国外的资源，尽量考虑如何不拖慢墙内用户的访问速度。
+
+增加了facebook, twitter等在墙内“不存在”的东西，
+
+下面是我对上述资源的利用方式：
+
+- 增加xxx 
+- 增加xxx
+
+###流量分析和统计
+
+第三方的流量分析和统计工具可以说是最古老的marshup，尽管没有社会化网络的功能。
+
+可以选择的有国外的[Google Analysis](http://www.google.cn/intl/zh-CN_ALL/analytics/)、[SiteMeter](http://www.sitemeter.com)和国内的[百度统计](http://tongji.baidu.com/web/welcome/login)、
+   [量子恒道统计](http://linezing.com)等。
+
+对于GA:
+
+    <script src="www.google-analytics.com—ga.js" async="true"></script>   
+
+
 
 
 ###处理图片(TODO)
@@ -360,5 +425,5 @@ Jekyll提供了一个import的子命令(需要插件jekyll-import），可以将
 
 域名的好处不言而喻。
 
-###墙内墙外（TODO）###
-增加了facebook, twitter等在墙内“不存在”的东西，需要考虑如何不拖慢墙内用户的访问速度。
+
+
