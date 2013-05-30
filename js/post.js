@@ -49,7 +49,7 @@ $(document).ready(function(){
             });
 
             //添加h1
-            tmpl += '<li class="h1"><a href="#" data-top="0"><i class="icon-chevron-right"></i>'+$('h1').text()+'</a></li>';
+            tmpl += '<p>文章目录</p>';
 
             for(var i=0;i<h2.length;i++){
                 tmpl += '<li><a href="#" data-id="'+h2[i].id+'"><i class="icon-chevron-right"></i>'+h2[i].name+'</a></li>';
@@ -107,4 +107,5 @@ $(document).ready(function(){
     //     prettyPrint();
     //     menuIndex();
     // });
+    menuIndex();
 });
