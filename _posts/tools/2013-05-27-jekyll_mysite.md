@@ -300,7 +300,7 @@ Jekyll在编译markdown时，会将符合“代码格式”的内容放到一个
 在post模板的合适位置中增加以下内容：
 
     <link href="/js/google-code-prettify/prettify.css" rel="stylesheet">
-    <script src="/js/google-code-prettify/run_prettify.js"></script>
+    <script src="/js/google-code-prettify/prettify.js"></script>
     <script>
     $(document).ready(function(){
          prettyPrint();
@@ -308,6 +308,14 @@ Jekyll在编译markdown时，会将符合“代码格式”的内容放到一个
     </script>
 
 如果要更改配色方案，只需要修改css文件。
+
+###文档目录
+
+如果写比较长的文章，提供一个类似于developerworks上的文档目录进行导航可以方便阅读。
+
+
+###社会化网络
+
 
 ###处理图片(TODO)
 
