@@ -87,11 +87,13 @@ Jekyll支持[Liquid][3]模板语言，写文档时的感觉很像是在写Django
     gem sources -l
 
     #如果不是1.9.3+，需要升级到1.9.3
-    gem install rvm
+    bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
+    source ~/.bashrc
+
     rvm install 1.9.3
     # 安装jekyll, 并使用rdiscount作为markdown解析器
     sudo gem install jekyll
-    gem search rdiscount
+    gem install rdiscount
 
     # 使用Jekyll-Bootstrap，其实就是一个复制的过程。下面的USERNAME代表你在github上的用户名
     git clone https://github.com/plusjade/jekyll-bootstrap.git USERNAME.github.com
@@ -309,6 +311,8 @@ Jekyll在编译markdown时，会将符合“代码格式”的内容放到一个
 
 如果要更改配色方案，只需要修改css文件。
 
+pip install pygments
+
 ###文档目录(TODO)
 
 如果写比较长的文章，提供一个类似于developerworks上的文档目录进行导航可以方便阅读。
@@ -323,6 +327,51 @@ Jekyll在编译markdown时，会将符合“代码格式”的内容放到一个
         Mathjax  <http://www.mathjax.org/>，缺点是动态加载，速度慢。
 
 参考：http://chen.yanping.me/cn/blog/2012/03/10/octopress-with-latex/
+
+
+###处理图片(TODO)
+
+{{page.url}}
+page_url
+
+###处理表格(TODO)
+
+###博客搬家（TODO）
+
+用Jekyll写博客的，通常不会是新博主，会存在博客搬家的需求。
+
+Jekyll提供了一个import的子命令(需要插件jekyll-import），可以将旧的博客导入到Jekyll。
+
+
+[exitwp](https://github.com/thomasf/exitwp)是一个用python开发的工具，号称是将wordpress的博客导出并转换成markdown，但实际上
+任何能导出rss/atom的博客都可以用这个工具进行转换。
+
+    git clone https://github.com/thomasf/exitwp
+    sudo pip install --upgrade  -r pip_requirements.txt
+    cd exitwp/wordpress-xml/
+    wget http://your/atom/file/xml
+    cd ..
+    python exitwp.py
+
+
+
+
+###markdown编辑工具###
+
+####vim####
+
+####Sublime Text2####
+
+####emacs####
+
+
+##推广篇##
+---
+
+###使用域名(TODO)
+
+
+
 
 ###社会化网络
 
@@ -392,50 +441,6 @@ Jekyll生成的是静态网站，诸如评论、推荐、关注之类的功能�
 
 出于种种无奈，还是选择了百度。
 
-
-
-###处理图片(TODO)
-
-{{page.url}}
-page_url
-
-###处理表格(TODO)
-
-###博客搬家（TODO）
-
-用Jekyll写博客的，通常不会是新博主，会存在博客搬家的需求。
-
-Jekyll提供了一个import的子命令(需要插件jekyll-import），可以将旧的博客导入到Jekyll。
-
-
-[exitwp](https://github.com/thomasf/exitwp)是一个用python开发的工具，号称是将wordpress的博客导出并转换成markdown，但实际上
-任何能导出rss/atom的博客都可以用这个工具进行转换。
-
-    git clone https://github.com/thomasf/exitwp
-    sudo pip install --upgrade  -r pip_requirements.txt
-    cd exitwp/wordpress-xml/
-    wget http://your/atom/file/xml
-    cd ..
-    python exitwp.py
-
-
-
-
-###markdown编辑工具###
-
-####vim####
-
-####Sublime Text2####
-
-####emacs####
-
-
-##推广篇##
----
-
-###使用域名
-
-域名的好处不言而喻。
 
 
 
