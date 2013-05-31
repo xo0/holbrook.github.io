@@ -26,4 +26,7 @@ GitHub推出了针对Mac OS X的桌面客户端，简称GitHub for Mac。虽然�
 
 Dropbox
 
+brew
+	brew install tree
+
 
