@@ -288,18 +288,22 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
   
   简单，但是需要使用外部链接或通过js嵌入到页面，不利于文档和代码的统一维护
 
-- 使用Jekyll插件，比如调用[pygments](http://pygments.org/)
-
-  灵活，但是比较复杂，不符合“KISS”原则
-
 - 使用js在前端渲染，比如[google-code-prettify](https://code.google.com/p/google-code-prettify/)
 
-  这是本站采取的方式。只需要在post的模板中进行配置，就可以为所有博文的代码进行渲染
+  简单高效，对语言的支持不够多
 
-Jekyll在编译markdown时，会将符合“代码格式”的内容放到一个< pre>< code></ code>< /pre>标签中。
-而prettify提供的js会对html中的所有< pre>< /pre>或< code></ code>区块进行处理，甚至会自动判断使用的语言。
+- 使用Jekyll插件，比如调用[pygments](http://pygments.org/)
 
-在post模板的合适位置中增加以下内容：
+  推荐方式。支持[100多种语言](http://pygments.org/languages/)。
+
+
+
+~~~本站采取js的方式。只需要在post的模板中进行配置，就可以为所有博文的代码进行渲染~~~
+
+~~~Jekyll在编译markdown时，会将符合“代码格式”的内容放到一个< pre>< code></ code>< /pre>标签中。~~~
+~~~而prettify提供的js会对html中的所有< pre>< /pre>或< code></ code>区块进行处理，甚至会自动判断使用的语言。~~~
+
+~~~在post模板的合适位置中增加以下内容：~~~
 
     <link href="/js/google-code-prettify/prettify.css" rel="stylesheet">
     <script src="/js/google-code-prettify/prettify.js"></script>
@@ -309,9 +313,40 @@ Jekyll在编译markdown时，会将符合“代码格式”的内容放到一个
     });
     </script>
 
-如果要更改配色方案，只需要修改css文件。
+~~~如果要更改配色方案，只需要修改css文件。~~~
+
+本站采用pygments的方式：
+
+- 安装pygments
+{% highlight %}
 
 pip install pygments
+
+{% endhighlight %}
+
+- 在_config.yml中设置
+
+{% highlight %}
+
+pygments:       true
+
+{% endhighlight %}
+
+- 在代码的前后增加过滤器：
+
+{% highlight ruby linenos %}
+
+{/% highlight ruby linenos %/}
+def foo
+  puts 'foo'
+end
+{/% endhighlight %/}
+
+{% endhighlight %}
+
+- 更改样式
+
+  从[这里](https://github.com/mojombo/tpw/blob/master/css/syntax.css)获取css样例，并自行更改。
 
 ###文档目录(TODO)
 
