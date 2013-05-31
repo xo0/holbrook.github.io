@@ -318,7 +318,8 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
 本站采用pygments的方式：
 
 - 安装pygments
-{% highlight %}
+
+{% highlight bash %}
 
 pip install pygments
 
@@ -326,7 +327,7 @@ pip install pygments
 
 - 在_config.yml中设置
 
-{% highlight %}
+{% highlight yaml %}
 
 pygments:       true
 
