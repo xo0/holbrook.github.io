@@ -289,8 +289,12 @@ keepalived支持配置监控脚本，我们可以通过脚本监控NginX的状�
 
 对于简单重复性劳动，人总是容易犯错，这种事情最好交给机器去做。 比如，在这个案例中，作为统一接入服务器，可能经常要修改nginx的配置、nginx下面的html文件等。而且，一定要保证集群中的每台服务器的配置相同。 最好的做法是由配置管理服务器来管理，如果没有，也可以使用简单的linux文件同步来解决。
 
-##5 SSL配置
---
+##5 支持https
+---
+
+需要安装openSSL：
+    
+    yum install openssl-devel
 
 在nginx/conf下生成秘钥：
 
@@ -325,5 +329,32 @@ keepalived支持配置监控脚本，我们可以通过脚本监控NginX的状�
       #...
       }
     }
+
+##6 支持webservice
+---
+
+通过chunkin-nginx-module模块支持webservice。
+
+否则会报错：411：http 头中缺少 Conten-Length 参数
+
+步骤：
+
+    git clone https://github.com/agentzh/chunkin-nginx-module.git
+
+    #重新编译nginx
+    cd PATH/TO/NGINX/SOURCE
+    ./configure xxx --add-module=/PATH/TO/chunkin-nginx-module
+    make && make install
+
+在nginx的server{}节点中增加配置：
+
+
+    chunkin on; 
+ 
+    error_page 411 = @my_411_error; 
+
+    location @my_411_error { 
+        chunkin_resume; 
+    } 
 
  
