@@ -1,5 +1,5 @@
 ---
-layout: index
+layout: page
 ---
 
 {% for page in site.posts limit:10 %}

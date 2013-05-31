@@ -219,19 +219,19 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
       url:		  	/about.html	
     
 然后在模板的导航部分可以这样写：
-
-    <ul class="nav">
-      {/% for item in site.menuitems %/}
-        {/% if item.url == page.url %/}
-        <li class="active">
-        {/% else %/}
-        <li>
-        {/% endif %/}
-        <a href="{{item.url}}">{{item.name}}</a>
-        </li>
-      {/% endfor %/}
-    </ul>
-
+{% highlight html %}
+<ul class="nav">
+  {/% for item in site.menuitems %/}
+    {/% if item.url == page.url %/}
+    <li class="active">
+    {/% else %/}
+    <li>
+    {/% endif %/}
+    <a href="{{item.url}}">{{item.name}}</a>
+    </li>
+  {/% endfor %/}
+</ul>
+{% endhighlight %}
 ###分类、标签、归档和RSS
 
 这些都是博客站点必须有的元素。分类、标签和归档可以安装不同的方式检索博客文章；RSS可以订阅博客。
@@ -249,7 +249,7 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
 但这不符合“KISS”原则，这里不进行探讨。
 
 对于标签云(tag cloud)，在不使用插件的情况下，可以使用js实现，参考如下代码：
-
+{% highlight html %}
     <div class="tag-cloud">
        {/% for tag in site.tags %/}
           <a href="/tags.html#{/{ tag[0] }/}-ref" id="{/{ forloop.index }/}" class="__tag" style="margin: 5px">{/{ tag[0] }/}</a>
@@ -276,6 +276,7 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
           {/% endfor %/}
        });
     </script>
+{% endhighlight %}
 
 关于分类和标签的设计，可以参考[这篇文章](http://thinkinside.tk/2012/11/05/blog_design_categories_and_tags.html)
 
@@ -304,14 +305,15 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
 ~~~而prettify提供的js会对html中的所有< pre>< /pre>或< code></ code>区块进行处理，甚至会自动判断使用的语言。~~~
 
 ~~~在post模板的合适位置中增加以下内容：~~~
-
-    <link href="/js/google-code-prettify/prettify.css" rel="stylesheet">
-    <script src="/js/google-code-prettify/prettify.js"></script>
-    <script>
-    $(document).ready(function(){
-         prettyPrint();
-    });
-    </script>
+{% highlight html %}
+<link href="/js/google-code-prettify/prettify.css" rel="stylesheet">
+<script src="/js/google-code-prettify/prettify.js"></script>
+<script>
+$(document).ready(function(){
+     prettyPrint();
+});
+</script>
+{% endhighlight %}
 
 ~~~如果要更改配色方案，只需要修改css文件。~~~
 
