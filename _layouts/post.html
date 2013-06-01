@@ -18,11 +18,23 @@ layout: default
         <p class="pre-meta">
           {% include post_info_bar %}
         </p>
+        <!--上一篇，下一篇-->
+        <div class="row-fluid">
+          {% if page.previous %}
+          <div class="span6">
+                    <a href="{{ page.previous.url }}" rel="bookmark">&laquo;&nbsp;上一篇：{{ page.previous.title | truncatewords:5 }}</a>
+          </div>
+          {% endif %}
+          {% if page.next %}
+          <div class="span6">
+            <a class="pull-right" href="{{ page.next.url }}" rel="bookmark">下一篇：{{ page.next.title | truncatewords:5 }}&nbsp;&raquo;</a>
+          </div>
+          {% endif %}
+        </div>
 
         <!--  分享  -->
         <!-- Baidu Button BEGIN -->
-        <div class="container">
-          分享本文：
+        <div class="container">          
           <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
           <span class="bds_more">分享到：</span>
           <a class="bds_qzone"></a>
@@ -33,6 +45,7 @@ layout: default
           <a class="shareCount"></a>
           </div>
         </div>
+
         <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6715859" ></script>
         <script type="text/javascript" id="bdshell_js"></script>
         <!--baidu share-->
@@ -92,8 +105,9 @@ layout: default
     <!-- 文章导航
     ================================================== -->
     <div class="span3">      
-      <div id="menuIndex" class="white-panel"></div>
-    </div>
+      <div id="menuIndex" class="white-panel">
+      </div>
+     </div>
   </div>
 </div>
 <script src="/assets/js/post.js"></script>
