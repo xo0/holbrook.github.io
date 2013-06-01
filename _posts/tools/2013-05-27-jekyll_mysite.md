@@ -22,10 +22,10 @@ imgroot: "/images/posts/tools/jekyll_mysite/"
 - 推广篇：博客推广的一些手段和方法
 
 
-##基础篇##
+## 基础篇
 ---
 
-###关于Jekyll###
+### 关于Jekyll ###
 
 ![Jekyll](/images/posts/tools/jekyll_mysite/jekyll.jpg)
 
@@ -46,7 +46,7 @@ Jekyll支持[Liquid][3]模板语言，写文档时的感觉很像是在写Django
 [5]:http://jekyllrb.com/docs/frontmatter/
 
 
-###关于github Pages###
+### 关于github Pages ###
 
 [github][]是程序员的facebook。[github Pages][6]是github提供的静态网页托管。可以为用户或者项目创建站点。
 有意思的是，github Pages对于上传的静态文件会通过Jekyll进行处理后再发布出来。
@@ -56,7 +56,8 @@ Jekyll支持[Liquid][3]模板语言，写文档时的感觉很像是在写Django
 [github]:https://github.com/
 [6]:http://pages.github.com/
 
-###使用github Pages写博客的好处###
+### 使用github Pages写博客的好处 ###
+
 为什么说”一些程序员聚集的博客站点可能要小心应对了“呢？ 因为github Pages简直是为程序员量身定制的博客系统。
 （当然，估计也只有程序员会愿意折腾这些事情）。
 
@@ -68,14 +69,14 @@ Jekyll支持[Liquid][3]模板语言，写文档时的感觉很像是在写Django
 5. 高效，使用markdown语言能提高写作的效率（但是个人觉得不如org-mode)
 6. 免费，无限流量，无限空间
 
-###关于Jekyll Bootstrap
+### 关于Jekyll Bootstrap
 
 [jekyll-bootstrap](http://jekyllbootstrap.com/)是用Jekyll建立博客的一套模板，提供了主题（themes)、评论、。。等功能，
 
 对于Jekyll的初学者能提供很大的帮助，其网站上号称“基于GitHub Pages建博客的最快方式”，可以“用3分钟就建立一个博客”。
 
 
-###3分钟建立博客
+### 3分钟建立博客
 
 让我们看看上述工具的组合如何用3分钟建立博客。假设你已经有git的基础，在github上托管过项目。并且使用的不是windows。
 
@@ -107,9 +108,9 @@ Jekyll支持[Liquid][3]模板语言，写文档时的感觉很像是在写Django
 
     好了，等上几分钟，你的主页就发布在了https://USERNAME.github.com。
 
-###其他操作
+### 其他操作
 
-####jekyll命令
+#### jekyll命令
 
 安装jekyll会产生一个命令行工具：jekyll，提供以下功能：
 
@@ -120,7 +121,7 @@ Jekyll支持[Liquid][3]模板语言，写文档时的感觉很像是在写Django
     new                  Creates a new Jekyll site scaffold in PATH             
     serve                Serve your site locally 
 
-####Rakefile
+#### Rakefile
 
 Jekyll-Bootstrap提供了一个Rakefile（ruby的makefile），包含一些博客相关的任务（task），包括：
 
@@ -136,10 +137,10 @@ Jekyll-Bootstrap提供了一个Rakefile（ruby的makefile），包含一些博�
 	
 
 
-##进阶篇##
+## 进阶篇
 ---
 
-###放弃Jekyll bootstrap###
+### 放弃Jekyll bootstrap###
 
 Jekyll bootstrap确实能带来一些变量，但是和RoR一样，充满了各种puzzle。 
 更加让中国人不爽的是，作者将其缩写定义为“JB”。
@@ -147,7 +148,7 @@ Jekyll bootstrap确实能带来一些变量，但是和RoR一样，充满了各�
 经过初步的尝试后，我决定放弃JB，也不想尝试[Octopress](http://octopress.org/)。我的选择是用原生的Jekyll来构建博客，让一切都在掌控之中。
 
 
-###Jekyll的目录结构
+### Jekyll的目录结构
 
 使用Jekyll创建一个干净的站点：
 
@@ -176,7 +177,7 @@ Jekyll bootstrap确实能带来一些变量，但是和RoR一样，充满了各�
 
 Jekyll会把任何不以下划线开头的文件和目录都复制/生成到网站（在本地是生成到_site/目录)。
 
-###设计模板
+### 设计模板
 
 jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头部变量声明中指定了layout：
 
@@ -193,7 +194,7 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
 
 因为Jekyll生成的是静态站点，可能会需要大量的js以增加动态特性，在设计模板时要遵循[Unobtrusive JavaScript原则](http://dev.opera.com/articles/view/the-seven-rules-of-unobtrusive-javascrip/)。
 
-###灵活的导航
+### 灵活的导航
 
 使用静态的导航菜单会带来两个问题：
 
@@ -202,6 +203,7 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
 
 可以在_config.yml中设置一个导航菜单的变量：
 
+{% highlight yaml %}
     menuitems:
     - name:			首页
       url:          /index.html
@@ -217,7 +219,8 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
       url:		  	/working.html			
     - name:		  	关于
       url:		  	/about.html	
-    
+{% endhighlight %}    
+
 然后在模板的导航部分可以这样写：
 {% highlight html %}
 <ul class="nav">
@@ -232,7 +235,8 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
   {/% endfor %/}
 </ul>
 {% endhighlight %}
-###分类、标签、归档和RSS
+
+### 分类、标签、归档和RSS
 
 这些都是博客站点必须有的元素。分类、标签和归档可以安装不同的方式检索博客文章；RSS可以订阅博客。
 
@@ -281,7 +285,7 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
 关于分类和标签的设计，可以参考[这篇文章](http://thinkinside.tk/2012/11/05/blog_design_categories_and_tags.html)
 
 
-###语法高亮
+### 语法高亮
 
 对于程序员，博客中难免会包含一些代码。实现代码高亮可以有几种方法：
 
@@ -351,11 +355,11 @@ end
 
   从[这里](https://github.com/mojombo/tpw/blob/master/css/syntax.css)获取css样例，并自行更改。
 
-###文档目录(TODO)
+### 文档目录(TODO)
 
 如果写比较长的文章，提供一个类似于developerworks上的文档目录进行导航可以方便阅读。
 
-###使用公式
+### 使用公式
 
 [MathJax](http://www.mathjax.org/) is an open source JavaScript display engine for mathematics that works in all modern browsers.
 
@@ -367,14 +371,18 @@ end
 参考：http://chen.yanping.me/cn/blog/2012/03/10/octopress-with-latex/
 
 
-###处理图片(TODO)
+### 处理图片
+
+设置一个IMAGE_ROOT变量，可以可以在post中设置，也可以在post的模板中通过指定的规则capture（或者assign）。
+
+则引可以使用{{page.IMAGE_ROOT}}/xxx.png的形式插入图片，便于以后的调整和管理。
 
 {{page.url}}
 page_url
 
-###处理表格(TODO)
+### 处理表格(TODO)
 
-###博客搬家（TODO）
+### 博客搬家（TODO）
 
 用Jekyll写博客的，通常不会是新博主，会存在博客搬家的需求。
 
@@ -392,26 +400,15 @@ Jekyll提供了一个import的子命令(需要插件jekyll-import），可以将
     python exitwp.py
 
 
-
-
-###markdown编辑工具###
-
-####vim####
-
-####Sublime Text2####
-
-####emacs####
-
-
-##推广篇##
+## 推广篇
 ---
 
-###使用域名(TODO)
+### 使用域名(TODO)
 
 
 
 
-###社会化网络
+### 社会化网络
 
 Jekyll生成的是静态网站，诸如评论、推荐、关注之类的功能就无法实现了。
 
@@ -470,7 +467,7 @@ Jekyll生成的是静态网站，诸如评论、推荐、关注之类的功能�
 
   只选一个，还是选择[百度分享](http://share.baidu.com/)吧，与[百度统计](http://tongji.baidu.com/web/welcome/login)可以勾搭在一起，而且据说有利于百度的SEO。
 
-###流量分析和统计
+### 流量分析和统计
 
 第三方的流量分析和统计工具可以说是最古老的marshup，尽管没有社会化网络的功能。
 
