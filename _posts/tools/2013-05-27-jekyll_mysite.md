@@ -285,6 +285,11 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
 关于分类和标签的设计，可以参考[这篇文章](http://thinkinside.tk/2012/11/05/blog_design_categories_and_tags.html)
 
 
+### 分页
+
+TODO: ajax分页
+TODO: 浮动标题 on paginator
+
 ### 语法高亮
 
 对于程序员，博客中难免会包含一些代码。实现代码高亮可以有几种方法：
