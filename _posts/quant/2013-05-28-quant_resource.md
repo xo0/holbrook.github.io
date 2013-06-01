@@ -36,6 +36,10 @@ tags: [resource, 量化金融]
 
   爱荷华州立大学统计系博士。该博客包含[中文版](http://yihui.name/cn/)和[英文版][http://yihui.name/en/]。内容比较杂，与量化金融相关的主要包括统计学和R语言的一些文章。
 
+- [黄双斗博客](http://blog.sina.com.cn/hsd315)
+
+  主要是[R学习笔记](http://blog.sina.com.cn/s/articlelist_1798760053_1_1.html)，还包括SAS学习笔记以及统计学、算法、数据挖掘等的一些学习笔记。
+
 - [格物堂](http://yishuo.org/)
 
   统计学、R语言相关的博客。
