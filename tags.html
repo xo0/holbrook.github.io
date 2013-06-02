@@ -26,8 +26,23 @@ title  : tags
 
 {% for tag in site.tags %} 
   <h2 id="{{ tag[0] }}-ref">{{ tag[0] }}</h2>
-  <ul>
+  <ul><span>
     {% assign pages_list = tag[1] %}  
-    {% include pages_list %}
+    {% for node in pages_list %}
+  {% if node.title != null %}
+    {% if group == null or group == node.group %}
+
+      	<li>{{ node.date | date: "%Y-%m-%d" }} &raquo; <a href="{{ BASE_PATH }}{{node.url}}">{{node.title}}</a>
+&sdot; 
+        {% for cat in node.categories %}
+        <a class="badge" href="/categories.html#{{cat}}-ref">{{cat}}</a>&nbsp;
+        {% endfor %}
+      	</li>
+      
+    {% endif %}
+  {% endif %}
+{% endfor %}
+{% assign pages_list = nil %}
+{% assign group = nil %}
   </ul>
 {% endfor %}

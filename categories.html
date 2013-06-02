@@ -27,7 +27,22 @@ title: 分类
   <h2 id="{{ category[0] }}-ref">{{ category[0] | join: "/" }}</h2>
   <ul>
     {% assign pages_list = category[1] %}  
-    {% include pages_list %}
+    {% for node in pages_list %}
+  {% if node.title != null %}
+    {% if group == null or group == node.group %}
+      
+        <li>{{ node.date | date: "%Y-%m-%d" }} &raquo; <a href="{{ BASE_PATH }}{{node.url}}">{{node.title}}</a>
+&sdot; 
+      {% for tag in node.tags %}
+        <a class="label" href="/tags.html#{{tag}}-ref">{{tag}}</a>&nbsp;
+      {% endfor %}
+        </li>
+      
+    {% endif %}
+  {% endif %}
+{% endfor %}
+{% assign pages_list = nil %}
+{% assign group = nil %}
   </ul>
 {% endfor %}
 
