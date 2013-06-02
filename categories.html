@@ -9,7 +9,7 @@ title: 分类
     {% for category in categories_list %} 
     	<li><a href="{{ BASE_PATH }}{{ site.JB.categories_path }}#{{ category }}-ref" rel="category">
     		{{ category | join: "/" }} 
-    	</a><<span class="badge">{{ site.categories[category].size }}</span>/li>
+    	</a><span class="badge">{{ site.categories[category].size }}</span></li>
     {% endfor %}
   {% else %}
     {% for category in categories_list %} 
