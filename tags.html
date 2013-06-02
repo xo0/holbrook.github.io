@@ -3,7 +3,23 @@ layout : page
 title  : tags
 ---
 
-{% include tags_cloud %}
+{% for tag in page.tags %}{{tag}},{% endfor %}{{page.categories}}
+
+<ul class="tag_box inline">
+ {% for tag in site.tags %} 
+ <li>
+ 	<a href="#{{ tag[0] }}-ref">{{ tag[0] }} </a>
+ 	{%if tag[0].size > 10 %}
+ 	<span class="badge badge-important">{{ tag[0].size }}</span>
+ 	
+ 	{% else %}
+ 	<span class="badge">{{ tag[0].size }}</span>
+ 	{% endif %}
+ </li>
+ {% endfor %}
+</ul>
+
+
 <hr/>
 
 
