@@ -1,21 +1,45 @@
 ---
-layout : single
+layout : page
 title  : 读书
 ---
 
-##在读
----
+## 在读
 
-###[《统计学：从数据到结论》(v2)](http://book.douban.com/subject/2193810/)
+<div class="row">
+  	<div class="span3"><a href="http://book.douban.com/subject/2193810/">《统计学：从数据到结论》</a></div>
+  	<div class="span4">
+  		<div class="controls progress">
+      		<div class="bar" style="width: 18%;"></div>3/17
+    	</div>
+	</div>
+</div>
 
-- 第1章 一些基本概念(finished, 2013-05-12)
-- 第2章 数据的收集(finished, 2013-05-19)
-- 第3章 数据的描述()
+<div class="row">
+  	<div class="span3"><a href="http://book.douban.com/subject/1281186/">《系统交易方法》</a>（第二次阅读）</div>
+  	<div class="span4">
+  		<div class="controls progress">
+      		<div class="bar" style="width: 13%;"></div>1/8
+    	</div>
+	</div>
+</div>
 
-###[《系统交易方法》](http://book.douban.com/subject/1281186/)
+## 已读
+
+<div class="row">
+  	<div class="span3"><a href="http://book.douban.com/subject/2193810/">《统计学：从数据到结论》</a></div>
+  	<div class="span3">
+			<a class="badge badge-inverse" href="/2013/05/12/statistics_intro_1.html">1</a>
+			<a class="badge badge-inverse" href="/2013/05/19/statistics_intro_2.html">2</a>
+			<a class="badge badge-inverse" href="/2013/05/31/statistics_intro_3.html">3</a>
+			<a class="badge" href="#">...</a>
+	</div>
+</div>
 
 
+## 豆瓣
 
-##已读
----
+[@Me](http://www.douban.com/people/58312900/)
 
+- 我的豆列
+
+  + [量化金融相关](http://book.douban.com/doulist/2500402/)
