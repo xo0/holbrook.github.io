@@ -11,6 +11,9 @@ layout: default
         <p class="pre-meta">
           {% include post_info_bar %}
         </p>
+        {% if page.description %}
+        <p>摘要：{{page.description}}</p>
+        {% endif %}
         <div id="content">
           {{ content }}   
         </div> 

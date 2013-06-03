@@ -85,12 +85,13 @@ VS/DR的整个过程与VS/TUN非常类似，不同之处在于调度器不对请
           
 三种IP负载均衡技术的优缺点归纳在下表中：
           
-       
-          VS/NAT	 VS/TUN	 VS/DR
-服务器要求	   -	 支持IP隧道	 Non-arp设备
-服务器网络	  - 	 LAN/WAN	 LAN
-服务器数量	 少(10+)	 多(100+)  多(100+)
-服务器网关   负载均衡  主动路由  主动路由
+<table class="tabletable-condensed">
+<tr><th></th><th>VS/NAT</th><th>VS/TUN</th><th>VS/DR</th><th></tr>
+<tr><td>服务器要求</td><td>-</td><td>支持IP隧道</td><td>Non-arp设备</td></tr>
+<tr><td>服务器网络</td><td>-</td><td>LAN/WAN</td><td>LAN</td></tr>
+<tr><td>服务器数量</td><td>少(10+)</td><td>多(100</td><td>+)多(100+)</td></tr>
+<tr><td>服务器网关</td><td>负载均衡</td><td>主动路由</td><td>主动路由</td></tr>
+</table>
 
 
 ### VS/NAT
