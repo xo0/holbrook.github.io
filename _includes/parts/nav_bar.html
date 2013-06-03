@@ -1,19 +1,21 @@
 <!-- Navbar
 ================================================== -->
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
+<header class="head navbar navbar-inverse navbar-fixed-top">
+  <div class="header fn-clear">
     <a href="/" class="brand"><img src="/assets/ico/logo.png" alt="首页"/></a>
     <div class="menu container">
 
           <ul class="nav">
           {% for item in site.menuitems %}
             {% if item.url == page.url %}
-            <li class="active">
-            {% else %}
-            <li>
-            {% endif %}
-            <a href="{{item.url}}">{{item.name}}</a>
+            <li style="background: #2f3133; border-radius: 8px 8px; border-top: 1px solid #252a30; border-left: 1px solid #252a30; border-right: 1px solid #252a30; border-bottom: 1px solid #4a4d52; box-shadow: -2px -2px 8px #222222 inset;">
+              <a href="#" style="color:#fff;">{{item.name}}</a>
             </li>
+            {% else %}
+            <li><a href="{{item.url}}">{{item.name}}</a>
+            </li>
+            {% endif %}
+              
           {% endfor %}
             <li>
             <a href="#"><wb:follow-button uid="1878878250" type="red_1" width="67" height="24" ></wb:follow-button></a>
@@ -26,9 +28,9 @@
         <li>
 
           <div class="input-append" style="height:25px;display: block;color: #fff;
-background-color: #555;margin-top:8px;">
-    <input type="text" class="span2" id="searchkey" placeholder="Search..." 
-      style="background: transparent;color: #fff; border: 0px #000 solid;width: 140px;">
+background: #2f3133; border-radius: 8px 8px; border-top: 1px solid #252a30; border-left: 1px solid #252a30; border-right: 1px solid #252a30; border-bottom: 1px solid #4a4d52; box-shadow: -2px -2px 8px #222222 inset;margin-top:8px;">
+    <input type="text" class="span2" id="searchkey" placeholder="搜索..." 
+      style="background: transparent;color: #fff; border: 0px #000 solid;width: 140px;height:20px;">
   </div>
           
 
@@ -65,5 +67,5 @@ background-color: #555;margin-top:8px;">
     </ul>
     </div>
   </div>
-</div>
+</header>
 <!-- END of Navbar -->
