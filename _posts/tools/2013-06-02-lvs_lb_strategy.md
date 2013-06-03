@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "lvs中的负载均衡方式"
-description: ""
+description: "LVS是实现软件负载均衡的一种方式。LVS支持多种负载均衡策略，包括：VS/NAT、VS/TUN和VS/DR。分别基于网络地址转换技术、IP隧道技术和直接路由技术。"
 category: 工具使用
 tags: [负载均衡, cluster, lvs]
 IMAGE_ROOT:      /images/tools/lvs_lb_strategy
 ---
 
 
+LVS是实现软件的[IP负载均衡](http://thinkinside.tk/2013/06/03/lb_solutions_list.html#)的一种方式。更多的负载均衡机制可以参考[这篇文章](http://thinkinside.tk/2013/06/03/lb_solutions_list.html)。
 
 LVS支持多种负载均衡策略，包括：VS/NAT、VS/TUN和VS/DR。分别基于网络地址转换技术、IP隧道技术和直接路由技术。
 

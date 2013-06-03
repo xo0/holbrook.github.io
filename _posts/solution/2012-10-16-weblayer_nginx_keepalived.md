@@ -6,7 +6,7 @@ category: 解决方案
 tags: [HA, nginx, keepalived, 负载均衡, cluster]
 ---
 
-这是为公司做的一个真实方案，原文发布在[博客园](http://www.cnblogs.com/holbrook/archive/2012/10/16/2726915.html)，现在迁移到本站并重新整理。
+本文介绍使用NginX和keepalived实现软件的[IP负载均衡](http://thinkinside.tk/2013/06/03/lb_solutions_list.html#)的方式。更多的负载均衡机制可以参考[这篇文章](http://thinkinside.tk/2013/06/03/lb_solutions_list.html)。
 
 ## 1. 概述
 ---
