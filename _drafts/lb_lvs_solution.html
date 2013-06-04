@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+<style>
+@media print {.noPrint {display:none;}}
+a, a:visited {color: #004;}
+body {font-family: helvetica; font-size: 9pt;}
+header {border-bottom: 1px solid #000; padding: 3px;}
+header .title {margin-top: 0px; margin-bottom: 0px; border-bottom: none; font-size: 12pt;}
+header .author {margin-top: 0px; margin-bottom: 0px; font-size: 8pt; color: #666}
+header .date {margin-top: 0px; margin-bottom: 0px; font-size: 8pt; color: #666} 
+h1 {border-bottom: 1px solid #ccc; font-size: 14pt; color: #000;}
+h1 a {color: #000; text-decoration: none;}
+h2, h2 a {font-size: 12pt; color: #000; text-decoration: none;}
+h3, h3 a {font-size: 10pt; color: #000; text-decoration: none;}
+header h2 a {font-size: 10pt;}
+header h3 a {font-size: 10pt;}
+td.lineNumbers { width: 50px; }
+table.sourceCode {border: 1px solid #ccc;}
+.header-section-number {color: #aac;}
+</style>
+</head>
+<body>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">layout: post</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">title: &quot;LVS负载均衡方案&quot;</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">description: &quot;&quot;</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">category: 解决方案</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tags: [负载均衡]</td>
+</tr>
+</tbody>
+</table>
+<p>服务器集群和负载均衡的方式目前主要有DNS轮询、CDN（内容分发网络）和IP负载均衡。 其中DNS的方式简单经济，但是可靠性很差；CDN方式无论是自建还是使用第三方的平台都比较昂贵；IP负载均衡技术具有较好的均衡性。</p>
+<p>从实现方式上，IP负载均衡可以分为硬件负载均衡（如F5）和软件负载均衡（如LVS、NginX、HAProxy)。</p>
+<p>信息技术中心之前实施了基于NginX的负载均衡方案，使用NginX反向代理多个应用服务器，实现应用服务器的负载均衡， 并通过NginX对域名和虚拟目录进行统一的管理。 经过半年多的使用，该方案收到了良好的效果，目前已经应用到外网、办公网和内网的多个应用系统。</p>
+<p>如果从公司的总体基础设施架构上来看，该方案还有一些问题没有解决：</p>
+<ol type="1">
+<li><p>性能问题。nginx使用主备的方式实现HA，只有单个节点工作。在目前的虚拟机环境下每秒处理请求约2.4万，最大并发用户数为700左右。这样的负载能力对于内部应用系统完全够用，但是对于互联网应用就有所不足了。</p></li>
+<li><p>链路负载均衡</p></li>
+<li><p>不具备跨域负载均衡的能力 无法在总部和灾备中心之间进行负载调度。机房和灾备中心不能同时提供服务</p></li>
+<li><p>管理负载。多组nginx分散管理，</p></li>
+</ol>
+<p>文件同步，共享存储，内容分发，自动部署等</p>
+<p>目前公司使用F5来解决网站等高并发系统的负载均衡，对于个别的应用系统，已经实现了 F5 --&gt; NginX --&gt; AppServer 的访问通道。 但是F5本身价格较高，在扩展的弹性方面有所不足。而且F5只解决了上述问题中的1，2，没有解决3，。。。</p>
+<p>本方案在现有NginX的基础上，使用LVS代替F5作为负载均衡器，并补充必要的其他架构组件，以其解决上述问题。</p>
+<p>作为扩展部分，提及用LVS实现数据库负载均衡(mysql)，邮件服务器负载均衡，xxx，以备后续的架构规划过程中的参考。</p>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">4. 文件同步，共享存储，内容分发，自动部署等</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5. 可管理性</td>
+</tr>
+</tbody>
+</table>
+<h1 id="现状分析">现状分析</h1>
+<h1 id="架构方案">架构方案</h1>
+<p>LVS:负载均衡 Nginx：web服务，基于内容的请求调度（通过 路径 划分 应用系统）</p>
+<h1 id="实施计划">实施计划</h1>
+<ol type="1">
+<li>先外网，后内网</li>
+<li>先总部，后新疆</li>
+<li>逐步增加cache 服务器等</li>
+</ol>
+<h1 id="后续方案">后续方案</h1>
+<ol type="1">
+<li>LVS-mysql</li>
+<li>LVS-mail</li>
+</ol>
+<p>3.</p>
+</body>
+</html>

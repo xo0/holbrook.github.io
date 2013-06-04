@@ -77,6 +77,10 @@ tags: [macos]
   比如：
 	brew install tree
 
+- QuickSilver
+
+- 输入法?
+
 - 键盘鼠标共享[SynergyKM]()/ [QuickSynergy]()
 
 
