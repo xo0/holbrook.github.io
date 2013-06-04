@@ -15,7 +15,7 @@ title: 分类
     {% for category in categories_list %} 
     	<li><a href="{{ BASE_PATH }}{{ site.JB.categories_path }}#{{ category[0] }}-ref" rel="category">
     		{{ category[0] | join: "/" }} 
-    	</a><span class="badge">{{ category[1].size }}</span></li>
+    	</a><span class="badge" style="vertical-align: super;">{{ category[1].size }}</span></li>
     {% endfor %}
   {% endif %}
   {% assign categories_list = nil %}
