@@ -26,7 +26,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2013-06-05 11:57:13 +0800</string>
+	<string>2013-06-05 16:43:52 +0800</string>
 	<key>Modifier</key>
 	<string>wanghaikuo</string>
 	<key>NotesVisible</key>
@@ -1099,8 +1099,8 @@ MASTER}</string>
 					<integer>87</integer>
 					<key>Points</key>
 					<array>
-						<string>{367.397, 274.276}</string>
-						<string>{330.416, 298.77}</string>
+						<string>{367.329, 274.276}</string>
+						<string>{330.332, 298.722}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1132,8 +1132,8 @@ MASTER}</string>
 					<integer>86</integer>
 					<key>Points</key>
 					<array>
-						<string>{396.5, 274.5}</string>
-						<string>{396.5, 298.5}</string>
+						<string>{396.35, 274.5}</string>
+						<string>{396.166, 298.5}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1165,8 +1165,8 @@ MASTER}</string>
 					<integer>85</integer>
 					<key>Points</key>
 					<array>
-						<string>{302.964, 274.5}</string>
-						<string>{302.92, 298.5}</string>
+						<string>{302.894, 274.5}</string>
+						<string>{302.763, 298.5}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1198,8 +1198,8 @@ MASTER}</string>
 					<integer>84</integer>
 					<key>Points</key>
 					<array>
-						<string>{332.07, 274.276}</string>
-						<string>{369.083, 298.82}</string>
+						<string>{331.928, 274.277}</string>
+						<string>{368.617, 298.726}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1525,7 +1525,7 @@ MASTER}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{369.5, 299}, {54, 36}}</string>
+					<string>{{365.25, 299}, {62.5, 36}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -1545,7 +1545,7 @@ MASTER}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{276, 299}, {54, 36}}</string>
+					<string>{{271.75, 299}, {62.5, 36}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
