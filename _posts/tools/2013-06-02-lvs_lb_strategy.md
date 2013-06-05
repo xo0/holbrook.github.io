@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "lvs中的负载均衡方式"
-description: "LVS是实现软件负载均衡的一种方式。LVS支持多种负载均衡策略，包括：VS/NAT、VS/TUN和VS/DR。分别基于网络地址转换技术、IP隧道技术和直接路由技术。"
+description: "LVS是实现软件负载均衡的一种方式。LVS支持多种负载均衡机制，包括：VS/NAT、VS/TUN和VS/DR。分别基于网络地址转换技术、IP隧道技术和直接路由技术。VS/FULLNAT是新兴的LVS的负载均衡机制，试图解决前面三种机制各自的不足。"
 category: 工具使用
 tags: [负载均衡, cluster, lvs]
 IMAGE_ROOT:      /images/tools/lvs_lb_strategy
@@ -10,7 +10,7 @@ IMAGE_ROOT:      /images/tools/lvs_lb_strategy
 
 LVS是实现软件的[IP负载均衡](http://thinkinside.tk/2013/06/03/lb_solutions_list.html#)的一种方式。更多的负载均衡机制可以参考[这篇文章](http://thinkinside.tk/2013/06/03/lb_solutions_list.html)。
 
-LVS支持多种负载均衡策略，包括：VS/NAT、VS/TUN和VS/DR。分别基于网络地址转换技术、IP隧道技术和直接路由技术。
+基于不同的网络技术，LVS支持多种负载均衡机制。包括：VS/NAT（基于网络地址转换技术）、VS/TUN（基于IP隧道技术）和VS/DR（基于直接路由技术）。VS/FULLNAT从本质上来说也是基于网络地址转换技术。
 
 	
 ## VS/NAT
@@ -118,15 +118,14 @@ VS/DR的整个过程与VS/TUN非常类似，不同之处在于调度器不对请
 - 缺点
   
   + 所有的服务器必须支持“IP Tunneling”协议，要安装内核模块（比如IPIP等），配置复杂
-  + 仍然有IP隧道的开销
+  + 有建立IP隧道的开销
   + 服务器上直接绑定虚拟IP(Virtaul IP)，风险很大
 
 ### VS/DR
 
 - 优点
-  
-  + 不需要调度应答报文，性能高
-  + 与VS/TUN相比，没有IP隧道的开销
+
+  + 与VS/TUN相比，没有IP隧道的开销，性能最好
 
 - 缺点
   + 要求负载调度器与实际服务器都有一块网卡连在同一物理网段（同一个VLAN）上
