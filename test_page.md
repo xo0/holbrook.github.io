@@ -1,5 +1,5 @@
 ---
-layout: page2
+layout: page
 title: 心内求法与心外求法
 ---
 
