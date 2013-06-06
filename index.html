@@ -4,14 +4,13 @@ layout: 	page
 
 
 {% for page in paginator.posts %}
-<div class="tagsinput" style="height: 100%;">
-        <h4>{{page.title}}</h4>
+
+        <h4><a href="{{page.url}}">{{page.title}}&nbsp;&nbsp;&raquo;&raquo;</a></h4>
         <p class="pre-meta">
            {% include post_info_bar %}
         </p>
         <p>{{ page.description }}</p>
-        <a href="{{page.url}}" class="pull-right" target="_blank"><h4>阅读全文&rarr;</h4></a>
-</div>
+<hr style="height:1px;border:none;border-top:1px dashed #987cb9; color:#987cb9;"/>
 {% endfor %}
 
 
