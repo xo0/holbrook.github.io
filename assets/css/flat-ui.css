@@ -419,7 +419,7 @@ textarea {
 }
 a {
   color: #16a085;
-  text-decoration: underline;
+  text-decoration: none;
   -webkit-transition: 0.25s;
   -moz-transition: 0.25s;
   -o-transition: 0.25s;
@@ -428,7 +428,8 @@ a {
 }
 a:hover {
   color: #1abc9c;
-  text-decoration: none;
+  font-weight:bold;
+  text-decoration: underline;
 }
 h1 {
   font-size: 32px;
