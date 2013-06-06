@@ -1,62 +1,56 @@
 ---
-layout: default
+layout:           default
 ---
 
-<div class="container">
+<div class="container-fluid">  
   <div class="row">
     <div class="span9">
-      <!--文章内容-->
-      <div class="white-panel">
-        <h1>{{ page.title }}</h1>
-        <p class="pre-meta">
-          {% include post_info_bar %}
-        </p>
-        {% if page.description %}
-        <p>摘要：{{page.description}}</p>
-        {% endif %}
-        <div id="content">
+      <h1>{% if page.title %}{{ page.title }} {% else %} {{ site.title }}{% endif %}</h1>
+      <p class="pre-meta">{% include post_info_bar %}</p>
+      {% if page.description %}<p>摘要：{{page.description}}</p>{% endif %}
+      <div id="content">
           {{ content }}   
-        </div> 
+      </div> 
                           
-        <p class="pre-meta">
-          {% include post_info_bar %}
-        </p>
-        <!--上一篇，下一篇-->
-        <div class="row-fluid">
-          {% if page.previous %}
-          <div class="span6">
-                    <a href="{{ page.previous.url }}" rel="bookmark">&laquo;&nbsp;上一篇：{{ page.previous.title | truncatewords:5 }}</a>
-          </div>
-          {% endif %}
-          {% if page.next %}
-          <div class="span6">
-            <a class="pull-right" href="{{ page.next.url }}" rel="bookmark">下一篇：{{ page.next.title | truncatewords:5 }}&nbsp;&raquo;</a>
-          </div>
-          {% endif %}
-        </div>
+      <p class="pre-meta">{% include post_info_bar %}</p>
 
-        <!--  分享  -->
-        <!-- Baidu Button BEGIN -->
-        <div class="container">          
-          <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
-          <span class="bds_more">分享到：</span>
-          <a class="bds_qzone"></a>
-          <a class="bds_tsina"></a>
-          <a class="bds_tqq"></a>
-          <a class="bds_renren"></a>
-          <a class="bds_t163"></a>
-          <a class="shareCount"></a>
-          </div>
+      <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      {% if page.previous %}
+        <div class="span6">
+        <a href="{{ page.previous.url }}" rel="bookmark">&laquo;&nbsp;上一篇：{{ page.previous.title | truncatewords:5 }}</a>
         </div>
+      {% endif %}
+      
+      {% if page.next %}
+        <div class="span6">
+          <a class="pull-right" href="{{ page.next.url }}" rel="bookmark">下一篇：{{ page.next.title | truncatewords:5 }}&nbsp;&raquo;</a>
+        </div>
+      {% endif %}
+      </div>
 
-        <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6715859" ></script>
-        <script type="text/javascript" id="bdshell_js"></script>
-        <!--baidu share-->
-        <script type="text/javascript">
-        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
-        </script>
-        <!-- Baidu Button END -->
-      </div><!--END of 文章内容-->
+      <!--  分享  -->
+      <!-- Baidu Button BEGIN -->
+      <div class="container">          
+        <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+        <span class="bds_more">分享到：</span>
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_tqq"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_t163"></a>
+        <a class="shareCount"></a>
+        </div>
+      </div>
+
+      <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6715859" ></script>
+      <script type="text/javascript" id="bdshell_js"></script>
+      <!--baidu share-->
+      <script type="text/javascript">
+      document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+      </script>
+      <!-- Baidu Button END -->
+     
 
       <!--相关文章-->
       <div class="row white-panel">
@@ -102,25 +96,12 @@ layout: default
           <!-- UY END -->
         </div>
       </div>
+    </div>
 
-
-    </div>    
-    <!-- 文章导航
-    ================================================== -->
-    <div class="span3">      
-      <div id="menuIndex" class="white-panel">
-      </div>
-     </div>
-  </div>
+    <!--style="position:fixed;right:20px;"-->
+    <div class="span3">
+      <div id="menuIndex" class="white-panel"></div>
+    </div>
+  </div><!--END of 文章内容-->
 </div>
 <script src="/assets/js/post.js"></script>
-
-
-
-
-        
-
-
-
-
-

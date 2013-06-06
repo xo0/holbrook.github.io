@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" xmlns:wb=“http://open.weibo.com/wb”> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" xmlns:wb=“http://open.weibo.com/wb”> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" xmlns:wb=“http://open.weibo.com/wb”> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" xmlns:wb=“http://open.weibo.com/wb”> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
@@ -20,26 +20,29 @@
     <link rel="alternate" type="text/xml" title="《心内求法》博客" href="{{ site.feed }}" />
 
     <!-- Le styles -->
-    
+    <link href="/assets/css/syntax.css" rel="stylesheet">
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="/assets/css/syntax.css" rel="stylesheet">
-    <link href="/assets/css/flat-ui.css" rel="stylesheet">
+    <link href="/assets/css/docs.css" rel="stylesheet">
+    <link href="/assets/css/todc-bootstrap.css" rel="stylesheet">
     <style>
     h1, h2, h3, .masthead p, .subhead p, .marketing h2, .lead
-    {
-      font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei UI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
-      font-weight: normal;
-    }
+{
+  font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei UI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+  font-weight: normal;
+}
 
-    #scrollUp {
-      bottom: 20px;
-      right: 20px;
-      height: 38px;  /* Height of image */
-      width: 38px; /* Width of image */
-      background: url("/assets/img/top.png") no-repeat;
-    }
+#scrollUp {
+  bottom: 20px;
+  right: 20px;
+  height: 38px;  /* Height of image */
+  width: 38px; /* Width of image */
+  background: url("/assets/img/top.png") no-repeat;
+}
     </style>
+    <!--link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet"-->
+    <link href="/assets/css/bootstro.min.css"  rel="stylesheet">
+
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="/assets/js/html5shiv.js"></script>
@@ -54,20 +57,23 @@
 
     <!--百度统计开放平台-->
     <script>
-    var _hmt = _hmt || [];
+      var _hmt = _hmt || [];
     </script>
 
     <!--basic js for all pages -->
-    <script src="/assets2/js/jquery.min.js"></script>
-    <script src="/assets2/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.unveil.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bootstro.min.js"></script>
 
   </head>
 
   <body data-spy="scroll" data-target=".bs-docs-sidebar">
+  {% include parts/nav_bar.html %}
 
   {{ content }}
 
-  {% include parts/footer1.html %} 
+  {% include parts/footer.html %} 
 
     <!-- Le javascript
     ================================================== -->
