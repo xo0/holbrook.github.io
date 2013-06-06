@@ -5,7 +5,7 @@ description: "使用MacOS已经有5年了，在这个过程中积累了一些顺
 在这里作为一个介绍和整理。工具在精不在多，在巧不在大，好的工具会让你得心应手、心情愉悦，提高工作效率。"
 
 category: 工具使用
-tags: [macos]
+tags: [macos, resources]
 ---
 
 ## 开发类
