@@ -11,20 +11,21 @@ layout:           default
       <div id="content">
           {{ content }}   
       </div> 
-                          
+      
+      <hr/>      
       <p class="pre-meta">{% include post_info_bar %}</p>
 
       <!--上一篇，下一篇-->
       <div class="row-fluid">
-      {% if page.previous %}
-        <div class="span6">
-        <a href="{{ page.previous.url }}" rel="bookmark">&laquo;&nbsp;上一篇：{{ page.previous.title | truncatewords:5 }}</a>
-        </div>
-      {% endif %}
-      
       {% if page.next %}
         <div class="span6">
           <a class="pull-right" href="{{ page.next.url }}" rel="bookmark">下一篇：{{ page.next.title | truncatewords:5 }}&nbsp;&raquo;</a>
+        </div>
+      {% endif %}
+
+      {% if page.previous %}
+        <div class="span6">
+        <a href="{{ page.previous.url }}" rel="bookmark">&laquo;&nbsp;上一篇：{{ page.previous.title | truncatewords:5 }}</a>
         </div>
       {% endif %}
       </div>
@@ -100,7 +101,23 @@ layout:           default
 
     <!--style="position:fixed;right:20px;"-->
     <div class="span3">
-      <div id="menuIndex" class="white-panel"></div>
+      <div class="todo-search">
+        <input class="span10 todo-search-field" type="search" value="" placeholder="搜索...">
+      </div>
+      <div class="row-fluid btn-group" style="background-color: rgb(44, 62, 80);padding: 3px 0 3px 0;">
+        {% for item in site.menuitems %}
+            {% if item.url == page.url %}
+            <a class="span4 btn btn-primary" href="#">{{item.name}}</a>
+            {% else %}
+            <a class="span4 btn btn-inverse active" href="{{item.url}}">{{item.name}}</a>
+            {% endif %}
+        {% endfor %}
+      </div>
+
+      <div id="menuIndex" class="row-fluid" style="background-color:#ecf0f5;"></div>
+      <div class="row-fluid" style="background-color: rgb(44, 62, 80);">
+          推荐阅读
+      </div>
     </div>
   </div><!--END of 文章内容-->
 </div>
