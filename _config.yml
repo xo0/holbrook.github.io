@@ -34,5 +34,3 @@ menuitems:
       url:      /reading.html
     - name:     工作
       url:      /working.html
-    - name:     关于
-      url:      /about.html
