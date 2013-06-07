@@ -10,7 +10,7 @@ title : Sitemap
 		<changefreq>weekly</changefreq>
 		<priority>0.6</priority>
 	</url>
-{% endfor %}
+{% endfor %}ies
 {% for post in site.posts %}
 	<url>
 		<loc>{{site.url}}{{ post.url }}</loc>

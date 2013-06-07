@@ -2,18 +2,14 @@
 layout: post
 title: "《统计学:从数据到结论》读书笔记"
 description: "统计学：从数据到结论，ISBN：9787503749964，作者：吴喜之"
-category: 读书笔记
-tags: [统计学]
+category: 理论学习
+tags: [统计学, 读书笔记]
 ---
 @[豆瓣](http://book.douban.com/subject/2193810/)
 
-##第4章 机会的度量：概率和分布(TODO)
+##第6章 (TODO)
 
-##第5章 简单统计推断：总体参数的估计(TODO)
-
-##第6章 简单统计推断：总体参数的假设检验(TODO)
-
-##第7章 相关和回归分析(TODO)
+##第7章 (TODO)
 
 ##第8章 列联表、 x^2检验和对数线性模型(TODO)
 
