@@ -314,7 +314,8 @@ keepalived支持配置监控脚本，我们可以通过脚本监控NginX的状�
     #生成免密码文件
     openssl rsa -in cert.key -out cert.key.unsecure
 
-如果要启用SSL，在nginx中进行如下配置：
+如果要启用SSL，首先在安装nginx是要增加配置参数：--with-http_ssl_module ，
+然后在nginx中进行如下配置：
 
     # 这里是SSL的相关配置
     server {
@@ -329,6 +330,30 @@ keepalived支持配置监控脚本，我们可以通过脚本监控NginX的状�
       #...
       }
     }
+
+公共证书的申请过程：
+
+1. 生成RSA(私钥)文件：
+
+    openssl genrsa -des3 -out myRSA.key 2048
+
+2. 生成csr文件：
+ 
+    openssl req -new -key myRSA.key -out my.csr
+
+3. 将csr提交给证书机构，比如GlobalSign。
+
+4. 证书机构会返回私有证书(crt)和中级证书（crt）
+
+5. 到机构网站下载根证书（root_CA.cer), 将根证书拼接到私有证书之后
+
+6. 在nginx中配置证书：
+
+    ssl_certificate /etc/ssl/my.crt;
+    ssl_certificate_key /etc/ssl/myRSA.key;
+    ssl_client_certificate /etc/ssl/root_CA.cer;
+
+
 
 ##6 支持webservice
 ---
