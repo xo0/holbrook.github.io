@@ -9,7 +9,7 @@ title  : 读书
   	<div class="span3"><a href="http://book.douban.com/subject/2193810/">《统计学：从数据到结论》</a></div>
   	<div class="span4">
   		<div class="controls progress">
-      		<div class="bar" style="width: 18%;"></div>3/17
+      		<div class="bar" style="width: 24%;"></div>4/17
     	</div>
 	</div>
 </div>
@@ -31,6 +31,7 @@ title  : 读书
 			<a class="badge badge-inverse" href="/2013/05/12/statistics_intro_1.html">1</a>
 			<a class="badge badge-inverse" href="/2013/05/19/statistics_intro_2.html">2</a>
 			<a class="badge badge-inverse" href="/2013/05/31/statistics_intro_3.html">3</a>
+      <a class="badge badge-inverse" href="/2013/06/07/statistics_intro_4.html">4</a>
 			<a class="badge" href="#">...</a>
 	</div>
 </div>
