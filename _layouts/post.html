@@ -2,35 +2,35 @@
 layout:           default
 ---
 
-<div class="container-fluid">  
-  <div class="row-fluid">
-    <div class="span9" style="border-bottom:1px;">
-      <h1>{% if page.title %}{{ page.title }} {% else %} {{ site.title }}{% endif %}</h1>
-    </div>
-  </div>
-  <div class="row-fluid">
-    <div class="span9">
-      <p class="pre-meta">{% include post_info_bar %}</p>
-      {% if page.description %}<p>摘要：{{page.description}}</p>{% endif %}
-      <hr style="height:3px;border:none;border-top:3px double #987cb9;"/>
-      <div id="content">
-          {{ content }}   
-      </div> 
-      
-      <hr/>      
-      <p class="pre-meta">{% include post_info_bar %}</p>
+<div class="span9">{{ content }}</div>
+
+    <!--style="position:fixed;right:20px;"-->
+<div class="span3">{% include parts/sidebar.html %}</div>
+
+
+<div class="span9">
+  <p class="pre-meta">{% include post_info_bar %}</p>
+  
+  {% if page.description %}<p>摘要：{{page.description}}</p>{% endif %}
+  <hr style="height:3px;border:none;border-top:3px double #987cb9;"/>
+  <div id="content">
+      {{ content }}   
+  </div> 
+  
+  <hr/>      
+  <p class="pre-meta">{% include post_info_bar %}</p>
 
       <!--上一篇，下一篇-->
       <div class="row-fluid">
       {% if page.next %}
         <div class="span6">
-          <a class="pull-right" href="{{ page.next.url }}" rel="bookmark">&laquo;&nbsp;下一篇：{{ page.next.title | truncatewords:5 }}</a>
+          <a href="{{ page.next.url }}" rel="bookmark">&laquo;&nbsp;下一篇：{{ page.next.title | truncatewords:5 }}</a>
         </div>
       {% endif %}
 
       {% if page.previous %}
         <div class="span6">
-        <a href="{{ page.previous.url }}" rel="bookmark">上一篇：{{ page.previous.title | truncatewords:5 }}&nbsp;&raquo;</a>
+        <a class="pull-right" href="{{ page.previous.url }}" rel="bookmark">上一篇：{{ page.previous.title | truncatewords:5 }}&nbsp;&raquo;</a>
         </div>
       {% endif %}
       </div>
