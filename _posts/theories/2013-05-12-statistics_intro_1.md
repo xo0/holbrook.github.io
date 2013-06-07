@@ -2,8 +2,8 @@
 layout: post
 title: "《统计学:从数据到结论》读书笔记(1/17:一些基本概念)"
 description: "统计学：从数据到结论，ISBN：9787503749964，作者：吴喜之"
-category: 读书笔记
-tags: [统计学]
+category: 理论学习
+tags: [统计学, 读书笔记]
 ---
 
 @[豆瓣](http://book.douban.com/subject/2193810/)
