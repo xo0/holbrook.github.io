@@ -2,12 +2,6 @@
 layout:           default
 ---
 
-<div class="span9">{{ content }}</div>
-
-    <!--style="position:fixed;right:20px;"-->
-<div class="span3">{% include parts/sidebar.html %}</div>
-
-
 <div class="span9">
   <p class="pre-meta">{% include post_info_bar %}</p>
   
@@ -59,8 +53,8 @@ layout:           default
      
 
       <!--相关文章-->
-      <div class="row white-panel">
-        <div class="single-post">
+      <div class="row-fluid">
+        
           <h4>相关文章</h4>
           <!--wumii block-->
           <script type="text/javascript" id="wumiiRelatedItems"></script>
@@ -84,42 +78,32 @@ layout:           default
 
         <!--youjian-->
         <!-- UJian Button BEGIN -->
+        <hr/>
         <div class="ujian-hook"></div>
         <script type="text/javascript">var ujian_config = {showType:1};</script>
         <script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1784345"></script>
         <a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
         <!-- UJian Button END -->
         
-        </div>
+       
       </div><!--END of 相关文章-->
-
+      <hr/>
       <!--  评论  -->
-      <div class="row white-panel">
-        <div class="single-post">
+      <div class="row-fluid">
+        
           <!-- UY BEGIN -->
           <div id="uyan_frame"></div>
           <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
           <!-- UY END -->
-        </div>
+        
       </div>
 
  
   </div>
        <!--style="position:fixed;right:20px;"-->
     <div class="span3">
-    <div class="todo-search">
-        <input class="span10 todo-search-field" type="search" value="" placeholder="搜索...">
-      </div>
-      <div class="row-fluid btn-group" style="background-color: rgb(44, 62, 80);padding: 3px 0 3px 0;">
-        {% for item in site.menuitems %}
-            {% if item.url == page.url %}
-            <a class="span4 btn btn-primary" href="#">{{item.name}}</a>
-            {% else %}
-            <a class="span4 btn btn-inverse active" href="{{item.url}}">{{item.name}}</a>
-            {% endif %}
-        {% endfor %}
-      </div>
-
+      {% include parts/sidebar.html %}
+    
       <div id="menuIndex" class="row-fluid" style="background-color:#ecf0f5;"></div>
       <div class="row-fluid" style="background-color: rgb(44, 62, 80);">
           推荐阅读
