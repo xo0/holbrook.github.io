@@ -15,7 +15,7 @@ tags: [负载均衡]
 本文试图用LVS替代F5，与NginX配合，提出一种低成本的、一致的负载均衡方案，
 并在此基础上结合DNS轮询和CDN技术，探讨跨越总部机房和灾备机房的分布式系统架构实现。
 
-
+TODO：原理图，from RHEL docs
 # 现状分析
 
 信息技术中心之前实施了基于NginX的负载均衡方案，使用NginX反向代理多个应用服务器，实现应用服务器的负载均衡，
@@ -62,37 +62,60 @@ LVS工作在4层，支持大多数的TCP和UDP协议。支持TCP协议的应用�
 LVS具有极高的性能，经实际测试每秒处理xxx,最大并发xxx并发
 
 
-## 负载均衡
+## 虚拟IP与负载均衡
 
-![负载均衡](../images/2013/lb_lvs_solution/loadbalance.png)
+任何负载均衡技术都要建立某种一对多的映射机制: 一个请求的入口映射到多个处理请求的节点。LVS属于IP负载均衡机制，将一个虚拟IP(Virtual IP,VIP)与后端多个真实服务器建立映射关系，客户端访问虚拟IP，LVS根据一定的调度策略和后端服务器的状态将请求转发到真实服务器(Real Server)。
+根据所采用的实现技术不同，真实服务器可以将应答报文直接返回客户端或者经过LVS返回客户端。如下图：
 
-客户端访问的是LVS提供的一个VIP(Virtual IP,虚拟IP)。LVS根据一定的调度策略和后端服务器的状态将请求转发到真实服务器(Real Server)。
-根据所采用的实现技术不同，真实服务器可以将应答报文直接返回客户端或者经过LVS返回客户端。
+![VIP](../images/2013/lb_lvs_solution/loadbalance.png)
 
-LVS支持[多种负载均衡的实现技术](http://thinkinside.tk/2013/06/02/lvs_lb_strategy.html)，包括VS/NAT, VS/TUN, VS/DR和VS/FULLNAT。
+
+LVS支持[多种IP负载均衡技术](http://thinkinside.tk/2013/06/02/lvs_lb_strategy.html)，包括VS/NAT, VS/TUN, VS/DR和VS/FULLNAT。
 
 其中VS/TUN和VS/DR由真实服务器直接应答，所以性能较好，但是网络配置复杂，服务器有暴露的风险，运维成本较高；而VS/NAT的负载能力相对较差。
-VS/FULLNAT试图。。。。
 
-## 调度算法的选择
+VS/FULLNAT是淘宝最新开源的LVS , 资料少
+
+拟采用CS/NAT方式，即通过NAT技术
 
 
-## 监控检查
+
+TODO:图和说明
+
+## 调度算法的选择(?)
+
+
+
+## 健康检查
+  LVS支持4-7层健康检查
+  LVS之间有心跳检测（keepalived?)
 
 ## 会话保持
 
+TODO:图， 红框，通道。原理（同一IP/mac地址，LVS的策略，NginX的策略）
+
 ## 安全
 
+## 部署结构
 
+防火墙之后，网段/子网，真实服务器等，参考》RHEL文档
 
 ## 广域、多链路负载均衡
 
-简单的 :DNS
+LVS的DR模式，支持通过广域网进行负载均衡。这个其他任何负载均衡软件目前都不具备。
+
+简单的 :DNS轮询不能保证可靠性
 中等的： GeoDNS:  求推荐靠谱的GeoDNS服务商:dnspod实在是有点慢
 	http://dyn.com/
 	GeoDNS是根据用户地理位置解析到不同的IP上
 	推荐 dyn.com 我在用twitter.com 也在dyn的服务，不过他们的服务级别比我用的要高，当然价格也贵。。
+  智能DNS：
+  自建DNS服务器：
+
 复杂的，需要网络运营商的配合，才能能在真正的BGP路由中插入VIP地址。一般来说运营商很少作这样的设置。
+需要LVS使用VS/DR模式？？？
+
+过于复杂
 
 ## LVS集群
 
