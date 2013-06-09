@@ -32,11 +32,12 @@ imgroot: "/images/posts/tools/jekyll_mysite/"
 已经有太多的文章介绍了[Jekyll](http://jekyllrb.com/)(/'dʒiːk əl/)。
 简单的说，Jekyll是用ruby语言实现的一个静态网站生成器，可以将[Markdown][1] (或者[Textile][2])编辑的文档生成html。
 当然也可以用来生成博客。
+我使用Markdown标记语言，其语法可以参考[这里](http://wowubuntu.com/markdown)。
 
 Jekyll支持[Liquid][3]模板语言，写文档时的感觉很像是在写Django模板。Jekyll定义了一些[内置的变量][4]，包括全局变量、页面变量等。
 [在文档中可以设置页面变量的值][5]。
 
-与RoR一样，Jekyll也可以通过插件来增加额外的功能。
+与RoR类似，Jekyll也可以通过插件来增加额外的功能。
 
 
 [1]:http://daringfireball.net/projects/markdown/
