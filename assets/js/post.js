@@ -26,11 +26,11 @@ $(document).ready(function(){
    
     var menuIndex = function(){
         //var ie6 = ($.browser.msie && $.browser.version=="6.0") ? true : false;
-        if($('h2',$('#content')).length > 2 && !isMobile.any()){
+        if($('h1',$('#content')).length > 2 && !isMobile.any()){
             var h2 = [],h3 = [],tmpl = '<ul class="nav nav-list">',h2index = 0;
 
-            $.each($('h2,h3',$('#content')),function(index,item){
-                if(item.tagName.toLowerCase() == 'h2'){
+            $.each($('h1,h2',$('#content')),function(index,item){
+                if(item.tagName.toLowerCase() == 'h1'){
                     var h2item = {};
                     h2item.name = $(item).text();
                     h2item.id = 'menuIndex'+index;
