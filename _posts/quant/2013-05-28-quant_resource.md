@@ -4,6 +4,7 @@ title: "量化金融相关的网络资源"
 description: "量化金融相关的网络资源，不断补充中..."
 category: 量化金融
 tags: [resource, 量化金融]
+lastmod: 2013-06-10
 ---
 
 ##网络资源

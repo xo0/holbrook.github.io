@@ -4,6 +4,7 @@ title: "负载均衡的实现方式"
 description: "负载均衡(Load Balance)，将工作任务分摊到多个处理单元。常见的负载均衡包括：DNS轮询、IP负载均衡和CDN。其中IP负载均衡可以使用硬件设备或软件方式来实现。"
 category: 解决方案
 tags: [负载均衡, lvs]
+lastmod: 2013-06-10
 ---
 
 ## 什么是负载均衡

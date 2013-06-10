@@ -5,6 +5,7 @@ description: "从emacs切换回vim"
 date: 2013-05-23
 category: 工具使用
 tags: [vim , vundle]
+lastmod: 2013-06-10
 ---
 
 以前在[博客园][1]时，用[emacs org-mode][2] 写博客，并且写了一系列[《emacs 学习笔记》][3]。

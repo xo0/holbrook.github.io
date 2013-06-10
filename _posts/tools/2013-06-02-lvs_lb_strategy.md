@@ -5,6 +5,7 @@ description: "LVS是实现软件负载均衡的一种方式。LVS支持多种负
 category: 工具使用
 tags: [负载均衡, cluster, lvs]
 IMAGE_ROOT:      /images/tools/lvs_lb_strategy
+lastmod: 2013-06-10
 ---
 
 
