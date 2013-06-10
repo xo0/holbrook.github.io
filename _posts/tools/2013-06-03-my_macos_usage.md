@@ -6,6 +6,7 @@ description: "使用MacOS已经有5年了，在这个过程中积累了一些用
 
 category: 工具使用
 tags: [macos, resource]
+lastmod: 2013-06-10
 ---
 
 Mac OS 属于UNIX家族，配合[HomeBrew]()，有大量的命令行工具可用。要尽量使用这些命令行工具。

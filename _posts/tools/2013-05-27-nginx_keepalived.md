@@ -4,6 +4,7 @@ title: "用nginX+keepalived实现高可用的负载均衡"
 description: "实施nginx和keepalived的规划、安装、配置等步骤"
 category: 工具使用
 tags: [HA, nginx, keepalived, 负载均衡, cluster]
+lastmod: 2013-06-10
 ---
 
 前面的[《统一web访问层方案》](http://thinkinside.tk/weblayer_nginx_keepalived/)中就目的、目标和整体方案进行了讨论，本文讨论具体的实施。简单来说就是在两台服务器上分别部署NginX，并通过keepalived实现高可用。

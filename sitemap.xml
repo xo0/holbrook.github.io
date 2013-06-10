@@ -1,22 +1,32 @@
 ---
-title : Sitemap
+layout: nil
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+<!--  Homepage -->
+  <url>
+    <loc>{{site.url}}</loc>
+    <lastmod>{{ site.time | date: "%Y-%m-%d" }}</lastmod>
+    <changefreq>daily</changefreq>
+	<priority>1.0</priority>
+  </url>
+
 {% for page in site.pages %}
 	<url>
 		<loc>{{site.url}}{{ page.url }}</loc>
-		<lastmod>{{ page.date | date:"%Y-%m-%d" }}</lastmod>
-		<changefreq>weekly</changefreq>
-		<priority>0.6</priority>
+		<lastmod>{{ site.time | date: "%Y-%m-%d" }}</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.9</priority>
 	</url>
 {% endfor %}ies
-{% for post in site.posts %}
+{% for page in site.posts %}
 	<url>
-		<loc>{{site.url}}{{ post.url }}</loc>
-		<lastmod>{{ post.date | date:"%Y-%m-%d" }}</lastmod>
+		<loc>{{site.url}}{{ page.url }}</loc>
+		{% include lastmod %}
 		<changefreq>weekly</changefreq>
-		<priority>0.6</priority>
+		<priority>0.8</priority>
 	</url>
 {% endfor %}
 </urlset>
+

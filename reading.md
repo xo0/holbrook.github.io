@@ -15,7 +15,7 @@ title  : 读书
 </div>
 
 <div class="row">
-  	<div class="span3"><a href="http://book.douban.com/subject/1281186/">《系统交易方法》</a>（第二次阅读）</div>
+  	<div class="span3"><a href="http://book.douban.com/subject/1281186/">《系统交易方法》</a></div>
   	<div class="span4">
   		<div class="controls progress">
       		<div class="bar" style="width: 13%;"></div>1/8

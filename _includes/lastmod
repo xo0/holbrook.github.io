@@ -1,0 +1,7 @@
+{% if page.lastmod %}
+	<lastmod>{{ page.lastmod | date: "%Y-%m-%d" }}</lastmod>
+{% elsif page.date %}
+    <lastmod>{{ page.date | date: "%Y-%m-%d" }}</lastmod>
+{% else %}
+    <lastmod>{{ site.time | date: "%Y-%m-%d" }}</lastmod>
+{% endif %}

@@ -4,6 +4,7 @@ title: "Python之禅(The Zen of Python)"
 description: "Python之禅, 中英对照"
 category: 杂七杂八
 tags: [python]
+lastmod: 2013-06-10
 ---
 
 # [The Zen of Python](http://www.python.org/dev/peps/pep-0020/)
