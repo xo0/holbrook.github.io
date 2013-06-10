@@ -4,12 +4,11 @@ layout: 	page
 
 
 {% for page in paginator.posts %}
-
-        <h4><a href="{{page.url}}">{{page.title}}&nbsp;&nbsp;&raquo;&raquo;</a></h4>
-        <p class="pre-meta">
-           {% include post_info_bar %}
-        </p>
-        <p>{{ page.description }}</p>
+<h4><a href="{{page.url}}">{{page.title}}&nbsp;&nbsp;&raquo;&raquo;</a></h4>
+<p class="pre-meta">
+   {% include post_info_bar %}
+</p>
+<p>{{ page.description }}</p>
 <hr style="height:1px;border:none;border-top:1px dashed #987cb9; color:#987cb9;"/>
 {% endfor %}
 

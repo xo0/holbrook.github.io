@@ -3,7 +3,13 @@ layout:           default
 ---
 
 <div class="span9">
-  <p class="pre-meta">{% include post_info_bar %}</p>
+  <p class="pre-meta">{% include post_info_bar %}
+{% if page.lastmod %}
+  <span class="alert alert-success"><strong>
+  最近更新：{{ page.lastmod | date: "%Y-%m-%d" }}
+  </strong></span>
+  {% endif %}
+  </p>
   
   {% if page.description %}<p>摘要：{{page.description}}</p>{% endif %}
   <hr style="height:3px;border:none;border-top:3px double #987cb9;"/>
