@@ -20,19 +20,19 @@ title : RSS Feed
         <link>{{ site.production_url }}</link>
         <language>cn</language>
         <lastBuildDate>{{ site.time | date_to_xmlschema }}</lastBuildDate>
-        <pubDate>{{ site.time | date_to_xmlschema }}</pubDate>
+        <pubDate>{% include lastmod %}</pubDate>
         <ttl>1800</ttl>
 
-{% for post in site.posts %}
+{% for post in site.posts limit:100 %}
         <item>
                 <title>{{ post.title }}</title>
                 <link>{{ site.production_url }}{{ post.url }}</link>
                 <category>{{}}</category>
-                <description>{{ post.content | xml_escape }}</description>
-                <content:encoded>{{ post.content | xml_escape }}</content:encoded>
+                <description>{{ post.description | append:' ' | xml_escape }}</description>
+                <content:encoded>{{ post.description | append:' ' | xml_escape }}</content:encoded>
                 <wfw:commentRSS>/</wfw:commentRSS>
                 <guid>{{ site.production_url }}{{ post.id }}</guid>
-                <pubDate>{{ post.date | date_to_xmlschema }}</pubDate>
+                <pubDate>{% include lastmod %}</pubDate>
         </item>
 {% endfor %}
 
