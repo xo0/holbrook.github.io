@@ -2,6 +2,8 @@
 layout:           default
 ---
 
+{% capture IMG_PATH %}/images/{{ page.date | date: "%Y" }}/{{page.path}}/{% endcapture %}
+
 <div class="span9">
   <p class="pre-meta">{% include post_info_bar %}
 {% if page.lastmod %}
