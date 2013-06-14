@@ -5,16 +5,21 @@ description: "从emacs切换回vim"
 date: 2013-05-23
 category: 工具使用
 tags: [vim , vundle]
-lastmod: 2013-06-10
+lastmod: 2013-06-14
 ---
 
 以前在[博客园][1]时，用[emacs org-mode][2] 写博客，并且写了一系列[《emacs 学习笔记》][3]。
 emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是有些不适应：
+
 1. 小手指很受伤。
+
 2. 过于依赖配置。
-    由于我的工作要经常登录到linux服务器进行操作，这就带来了一个问题：
-    服务器上的emacs在不配置的情况下几乎无法使用，但是在服务器上使用vim，又不符合手指中记忆的快捷键。
+
+   由于我的工作要经常登录到linux服务器进行操作，这就带来了一个问题：
+   服务器上的emacs在不配置的情况下几乎无法使用，但是在服务器上使用vim，又不符合手指中记忆的快捷键。
+
 3. emacs有点重，比如不得不使用的ecb,cedet,jdee等等，都是大块头。
+
 4. 我还没有做好准备去掌握Erlang语言。但是对于vim，我可以使用我喜欢的python去写插件。
 
 
@@ -26,8 +31,7 @@ emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是
 [2]:http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html "Emacs学习笔记(9):org-mode，最好的文档编辑利器，没有之一"
 [3]:http://www.cnblogs.com/holbrook/tag/emacs/ "emacs 学习笔记"
 
-*插件管理器(Vundle)*
----
+# 插件管理器(Vundle)
 
 重新关注vim后，首先发现了一系列插件管理器。主要有：
 
@@ -44,13 +48,13 @@ emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是
 3. 支持插件搜索功能
 4. 自动管理插件依赖关系
 
-**安装Vundle**
+## 安装Vundle
 
 安装Vundle只需要一条命令：
 
     $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
-**配置插件**
+## 配置插件
 
 在.vimrc中配置需要的插件，作者给出了一个例子：
 
@@ -86,7 +90,7 @@ emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是
 2. 对于插件名称中包含空格和斜杠的情况， 需要将空格和斜杠替换为 - 
 
 
-**安装插件**
+## 安装插件
 
 只需要在启动vim后，运行命令：
 
@@ -94,7 +98,7 @@ emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是
 
 Vbundle就会自动安装或更新前面配置好的插件
 
-**其他操作**
+## 其他操作
 
 使用帮助：
 
@@ -111,39 +115,37 @@ Vbundle就会自动安装或更新前面配置好的插件
     #或者
     :BundleClean markdown
 
-*必备插件（TODO）*
----
+# 必备插件（TODO）
 
 下面是我使用的一些vim插件，直接在.vimrc中配置。可以在 [github](https://github.com/holbrook/macENV/blob/master/vimrc) 查看。
 
 
 
-**编辑器增强**
+## 编辑器增强
 
 - [NERDTree](https://github.com/scrooloose/nerdtree)（Bundle 'The-NERD-tree'）可以在窗口左侧打开文件浏览器
 
-**语法高亮**
+## 语法高亮
 
 - Markdown（Bundle 'Markdown'） markdown文件的语法高亮
 
 
-*vim基本操作*
----
+# vim基本操作
 
 以前整理过一个 [vim 常用命令备忘](http://www.cnblogs.com/holbrook/archive/2009/05/13/2357377.html), 如下：
 
-[vim_cheet_sheet.xlsx](/assets/img/vim_cheet_sheet.xlsx)
+[vim_cheet_sheet.xlsx](/images/2013/vim_addon_manager/vim_cheet_sheet.xlsx)
 
 别人的一个更详细的版本：
 
-[vi-vim-cheat-sheet-list](/assets/img/vi-vim-cheat-sheet-list.png)
+[vi-vim-cheat-sheet-list](/images/2013/vim_addon_manager/vi-vim-cheat-sheet-list.png)
 
 
 如果已经有一定的基础，还可以使用vim cheat sheet。下面的图分别可以用于打印版或者桌面背景。
 
-![打印版，Eng](/assets/img/vi-vim-cheat-sheet.gif)
+![打印版，Eng](/images/2013/vim_addon_manager/vi-vim-cheat-sheet.gif)
 
-![打印版，Chs](/assets/img/vi-vim-cheat-sheet-sch.gif)
+![打印版，Chs](/images/2013/vim_addon_manager/vi-vim-cheat-sheet-sch.gif)
 
-![桌面版，Eng](/assets/img/vi-vim_cheat_sheet_dark.png)
+![桌面版，Eng](/images/2013/vim_addon_manager/vi-vim_cheat_sheet_dark.png)
 
