@@ -5,7 +5,7 @@ description: "从emacs切换回vim"
 date: 2013-05-23
 category: 工具使用
 tags: [vim , vundle]
-lastmod: 2013-06-14
+lastmod: 2013-06-17
 ---
 
 以前在[博客园][1]时，用[emacs org-mode][2] 写博客，并且写了一系列[《emacs 学习笔记》][3]。
@@ -53,6 +53,24 @@ emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是
 安装Vundle只需要一条命令：
 
     $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+
+如果你使用git管理vim配置，还可以使用git submodule：
+
+    git submodule add https://github.com/gmarik/vundle.git vim/bundle/vundle
+    
+会在.gitmodule中增加如下配置：
+
+    [submodule "vim/bundle/vundle"]
+        path = vim/bundle/vundle
+        url = https://github.com/gmarik/vundle.git
+
+之后运行git命令：
+
+    git submodule init
+    git submodule update
+
+即可。
+
 
 ## 配置插件
 
