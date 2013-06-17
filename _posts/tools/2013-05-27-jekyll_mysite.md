@@ -4,7 +4,7 @@ title: "Jekyll建站过程"
 description: "本站建立过程中的一些经验，不断完善中..."
 category: 工具使用
 tags: [jekyll, github]
-lastmod: 2013-06-10
+lastmod: 2013-06-17
 imgroot: "/images/posts/tools/jekyll_mysite/"
 ---
 {% include page_setup %}
@@ -410,9 +410,33 @@ Jekyll提供了一个import的子命令(需要插件jekyll-import），可以将
 ## 推广篇
 ---
 
-### 使用域名(TODO)
+### 使用域名
 
+Github Pages会为站点分配类似"USERNAME.github.com"的二级域名。你也可以使用自己的域名。
 
+1. 申请域名
+
+   免费的域名(.tk)可以在[DotTK](http://www.dot.tk/zh/index.html)申请。
+   
+   .tk是南太平洋岛国托克劳的国家域名，支持域名转发（可隐藏原URL）、电邮转发、A记录解析、CNAME别名记录、MX邮件记录、设置DNS服务器等服务。
+
+   收费的域名到处有，是否使用国内的域名商随你。
+
+2. 域名解析服务
+
+   一般来说域名提供商会提供简单的解析服务，也支持将解析服务指向到其他的提供者。
+
+   国外的如[Godaddy](http://www.godaddy.com/)，可能被墙。
+
+   国内的如[DNSPod](https://www.dnspod.cn/)，有免费版。
+
+3. 配置
+
+   - 在jekyll站点中增加CNAME文件，记录使用的域名
+   - 如果使用顶级域名，在域名解析服务提供商那里将A记录指向[204.232.175.78](1)
+   - 如果使用二级域名，在域名解析服务提供商那里增加CNAME记录，指向[204.232.175.78](1)
+
+[1]:https://help.github.com/articles/my-custom-domain-isn-t-working
 
 
 ### 社会化网络
