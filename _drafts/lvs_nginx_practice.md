@@ -13,34 +13,49 @@ tags: [负载均衡, cluster, lvs, nginx]
 
 
 # 配置
+
 ## LVS 配置
 
-### 初始 LVS 配置
+### 配置系统服务
 
 {% highlight bash %}
 
 # 查看服务配置
 /sbin/chkconfig --list
 
-# 配置服务自启动
+# 配置服务在启动级别 3 和 5 激活
 /sbin/chkconfig --level35 sshd on
-/sbin/chkconfig --level35 sshd on
+/sbin/chkconfig --level35 pulse on
 
 {% endhighlight %}
 
+### 打开IP转发功能
 
-1. 配置服务
-   服务配置工具：chkconfig、ncurses-based 程序 ntsysv 和图形界面程序 Services Configuration Tool。
+在`/etc/sysctl.conf`中设置`net.ipv4.ip_forward = 1`
 
-   需要自启动的服务：
+手工开启（可以不需要重启）：`/sbin/sysctl -w net.ipv4.ip_forward=1`
 
-   - piranha-gui 服务(只用于主节点)
-   - pulse 服务
-   - sshd 服务
+查看状态：`/sbin/sysctl net.ipv4.ip_forward`
 
-最好是将这些服务设置为在运行级别 3 和运行级别 5 都激活。要达到此目的,请使用 chkconfig,并 为每个服务输入以下命令:
-/sbin/chkconfig --level 35 daemon on
-在上面的命令中,请使用您想要激活的服务名称替换 daemon。要获得系统中的服务及在什么运行级别 将其设定为激活的列表,请使用以下命令:
+
+
+
+# 只在主节点配置
+piranha-gui
+
+# 可选
+/sbin/chkconfig --level35 iptables on
+
+
+# 为 Piranha Configuration Tool设置密码
+/usr/sbin/piranha-passwd
+
+# 启动 Piranha Configuration Tool服务
+# 该服务依赖Apache HTTP Server，默认使用3636提供web配置界面
+/sbin/service piranha-gui start
+
+
+
 
 
 ## NginX配置
