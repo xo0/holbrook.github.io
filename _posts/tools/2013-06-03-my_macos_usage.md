@@ -6,7 +6,7 @@ description: "使用MacOS已经有5年了，在这个过程中积累了一些用
 
 category: 工具使用
 tags: [macos, resource]
-lastmod: 2013-06-10
+lastmod: 2013-06-20
 ---
 
 Mac OS 属于UNIX家族，配合[HomeBrew]()，有大量的命令行工具可用。要尽量使用这些命令行工具。
@@ -20,26 +20,26 @@ Mac OS 属于UNIX家族，配合[HomeBrew]()，有大量的命令行工具可用
 
 - ~~~ Archi：一个绘制ArchiMate的工具 ~~~ （ 改用办公类-> 绘图 -> OmniGraffle )
 - ~~~ VP-UML ~~~ (用手绘图拍照 + OmniGraffle代替)
+- wxFormBuilder: 界面原型工具
 
-## 开发工具
 
-- eclipse
+## coding
+
+- [Eclipse](http://www.eclipse.org/downloads/): Java开发必不可少的工具
+- [Mule Studio](http://www.mulesoft.org/download-mule-esb-community-edition)：专用工具，可以考虑用Eclipse + maven代替
 - ~~~ PyCharm ~~~(改用MacVim)
-- ~~~ Emacs ~~~ (改用MacVim)
+- ~~~ Emacs ~~~ (改用MacVim, 原因见[这里](http://thinkinside.tk/2013/05/23/vim_addon_manager.html))
 - ~~~ Sublime Text ~~~(改用MacVim)
-- MacVim
-- RStudio
-- wxFormBuilder
+- [MacVim](https://github.com/b4winckler/macvim), 编辑器之神。本来Sublime Text在某些方面有望代替Vim，但是从Sublime Text 3开始就没有免费无限期试用了，只好放弃。
+- [R](http://www.r-project.org/) 和 [RStudio](http://www.rstudio.com/), 统计分析工具
+
+## 其他工具
 - Navicat Premium：多种数据库的客户端
 
 
 ## 版本管理
 
-- 命令行工具： svn, git
-
-- [GitHub for Mac]()
-
-  GitHub推出的针对Mac OS X的桌面客户端   
+- [GitHub for Mac]()：GitHub推出的针对Mac OS X的桌面客户端   
 
 ## 项目管理
 
@@ -51,7 +51,14 @@ Mac OS 属于UNIX家族，配合[HomeBrew]()，有大量的命令行工具可用
   + 功能包含了自定检视表、阶层式的纲要模式、成本追踪、里程碑、任务限制与相关性、资源分配、时程控制、Gantt 图表、违反事项显示、关键路径等等
 
 # 办公类
----
+
+## 任务计划
+
+- MacVim + Vim-OrgMode: Emacs Org-mode 是[最好的任务管理利器]()，但是既然[放弃了Emacs]()，可以使用Vim 上的替代品。Vim上的各种org-mode插件都只实现了Emacs Org-mode的一部分功能。作为任务管理，目前最好的插件是[Vim-OrgMode](https://github.com/jceb/vim-orgmode)，实现了按标题导航、按标题编辑功能，更主要的是实现了TODO管理以及标题上的标签(tags)，用来管理任务计划足够了。
+
+
+Bundle 'vim-orgmode'
+
 
 ## 思考
 
@@ -67,6 +74,7 @@ Mac OS 属于UNIX家族，配合[HomeBrew]()，有大量的命令行工具可用
 
 - Emacs Org-mode
 - MacVim/Sublime Text + markdown
+- MacTeX
 - M$ Office 2011
 
 ## 绘图
