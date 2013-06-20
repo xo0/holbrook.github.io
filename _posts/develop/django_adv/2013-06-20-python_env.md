@@ -3,7 +3,7 @@ layout: post
 title: "python的环境管理"
 description: "用python开发软件时，由于操作系统中可能存在多个不同的python版本，并且在不同版本、不同目录下安装了各种各样的python包，导致开发环境的不一致，也会带来发布软件时运行环境的问题。通过python的包管理器pip和环境管理器virtualenv，可以很容易解决这些问题。"
 category: 软件开发
-tags: [python, pip, 环境管理器virtualenv]
+tags: [python, pip, virtualenv]
 lastmod: 2013-06-20
 ---
 
