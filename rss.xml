@@ -16,8 +16,8 @@ title : RSS Feed
         <atom:link href="http://thinkinside.tk/atom.xml" type="application/rss+xml" rel="self"></atom:link>
         <title>{{ site.title }}</title>
         <description>心内求法 - 制心一境，住心观性，澄心外照，摄心内证</description>
-        <link>{{ site.production_url }}{{ site.rss_path }}</link>
-        <link>{{ site.production_url }}</link>
+        <link>{{ site.url }}{{ site.rss_path }}</link>
+        <link>{{ site.url }}</link>
         <language>cn</language>
         <lastBuildDate>{{ site.time | date_to_xmlschema }}</lastBuildDate>
         <pubDate>{% include lastmod %}</pubDate>
@@ -26,12 +26,12 @@ title : RSS Feed
 {% for post in site.posts limit:100 %}
         <item>
                 <title>{{ post.title }}</title>
-                <link>{{ site.production_url }}{{ post.url }}</link>
+                <link>{{ site.url }}{{ post.url }}</link>
                 <category>{{}}</category>
                 <description>{{ post.description | append:' ' | xml_escape }}</description>
                 <content:encoded>{{ post.description | append:' ' | xml_escape }}</content:encoded>
                 <wfw:commentRSS>/</wfw:commentRSS>
-                <guid>{{ site.production_url }}{{ post.id }}</guid>
+                <guid>{{ site.url }}{{ post.id }}</guid>
                 <pubDate>{% include lastmod %}</pubDate>
         </item>
 {% endfor %}
