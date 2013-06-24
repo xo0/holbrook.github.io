@@ -7,6 +7,14 @@ tags: [DevOps]
 lastmod: 2013-06-10
 ---
 
+对系统工程师来说，配置管理已经向前跃进了一大步. 系统配置的自动化不仅可预测,可重复, 还具有可管理性. 配置管理工具通常使用版本控制化的配置模板来描述基础设施的目标状态。凭借版本控制化的配置，可以将环境回滚（或前滚）到前面（或后序）状态；环境配置文件的自动化管理也是持续性交付管道的必要特性。
+CFEngine, Puppet和Chef(按年龄降序)是开源领域流行的配置管理工具。 我是一个Puppet的长期用户, 与自定义的配置脚本相比，它在系统自动化的组织性和可靠性方面带来了巨大的提升。(我是在2009年作出这一次飞跃，与此相比, 以前的日子简直是混乱不堪…).
+虽然配置管理工具精于描述并达到想要的状态, 但并不擅长动态地查询或设置状态. 这一点在状态资源还没有被纳入配置管理时特别明显。Llinux系统管理员的传统解决办法是ssh循环登陆节点列表并执行一堆命令。这不仅容易出错, 且每一次循环都要打开新的ssh会话，效率低下。想像一下要在1000台机器上顺序执行命令！更不用说网络安全，ssh密钥和命令执行权限的问题。这当然是一种可行的办法,但缺少一种可管理的框架。
+这就是命令编排工具产生的原因。这些工具旨在大量的节点上并行执行命令和实时操作。CFEngine, Puppet和Chef各自用不同的方法来解决命令编排问题。Puppet使用MCollective作为其武器,并将其集成到商业版中。
+近来，我开始探索使用SaltStack <http://wiki.saltstack.cn/SaltStack>来解决配置管理和命令编排这两个问题。SaltStack <http://wiki.saltstack.cn/SaltStack>开始于2011年，是一个相对较新的项目，但在系统管理员和DevOps <http://wiki.saltstack.cn/DevOps>工程师中拥有越来越多的粉丝。
+
+
+
 # DevOps对工具的需求
 
 在我所在的公司，IT部门划分成开发和运维等不同的团队。
@@ -39,6 +47,8 @@ Func <http://wiki.saltstack.cn/Func>、
 MCollective <http://wiki.saltstack.cn/MCollective> 	（puppet企业版？中使用)
 Salt <http://wiki.saltstack.cn/Salt>
 RunDeck <http://wiki.saltstack.cn/RunDeck>
+
+
 
 
 
