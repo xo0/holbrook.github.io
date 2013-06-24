@@ -14,11 +14,30 @@ layout:           default
   </p>
   
   {% if page.description %}<p>摘要：{{page.description}}</p>{% endif %}
-  <hr style="height:3px;border:none;border-top:3px double #987cb9;"/>
+  <hr style="height:3px;border:none;border-top:3px double"/>
   <div id="content">
       {{ content }}   
   </div> 
   
+  <!--  分享  -->
+  <!-- Baidu Button BEGIN -->
+  <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+  <span class="bds_more">分享到：</span>
+  <a class="bds_tsina">新浪微博</a>
+  <a class="bds_baidu">百度搜藏</a>
+  <a class="bds_xg">鲜果</a>
+  <a class="bds_twi">Twitter</a>
+  <a class="bds_fbook">Facebook</a>
+  <a class="bds_youdao">有道云笔记</a>
+  <a class="bds_mail">邮件分享</a>
+  </div>
+  <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6715859" ></script>
+  <script type="text/javascript" id="bdshell_js"></script>
+  <script type="text/javascript">
+  document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
+  </script>
+  <!-- Baidu Button END -->
+
   <hr/>      
   <p class="pre-meta">{% include post_info_bar %}</p>
 
@@ -37,27 +56,7 @@ layout:           default
       {% endif %}
       </div>
 
-      <!--  分享  -->
-      <!-- Baidu Button BEGIN -->
-      <div class="container">          
-        <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
-        <span class="bds_more">分享到：</span>
-        <a class="bds_qzone"></a>
-        <a class="bds_tsina"></a>
-        <a class="bds_tqq"></a>
-        <a class="bds_renren"></a>
-        <a class="bds_t163"></a>
-        <a class="shareCount"></a>
-        </div>
-      </div>
-
-      <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6715859" ></script>
-      <script type="text/javascript" id="bdshell_js"></script>
-      <!--baidu share-->
-      <script type="text/javascript">
-      document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
-      </script>
-      <!-- Baidu Button END -->
+     
      
 
       <!--相关文章-->
