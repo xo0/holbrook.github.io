@@ -2,7 +2,7 @@ markdown:       rdiscount
 safe:           true
 lsi:            false
 pygments:       true
-paginate:       6
+paginate:       10
 permalink:      /:year/:month/:day/:title.html
 title:          心内求法
 url:            http://thinkinside.tk
