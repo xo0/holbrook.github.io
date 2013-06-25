@@ -76,7 +76,7 @@ groups定义在master的配置文件`/etc/salt/master`中。
 
 group 的定义可以使用各种匹配规则，比如：
 
-{% highlight %}
+{% highlight bash %}
 
 group1: 'L@foo.domain.com, bar.domain.com,baz.domain.com or bl*.domain.com'
 group2: 'G@os:Debian and foo.domain.com'
