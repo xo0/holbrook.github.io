@@ -129,5 +129,111 @@ Salt已经内置了[大量的模块](http://docs.saltstack.com/ref/modules/all/i
     salt 'minion1.example.com' state.highstate -v test=True
 
 
-# 配置管理（TODO)
+# 配置管理（state)
 
+配置管理是Salt中非常重要的内容之一。Salt通过内置的state模块支持配置管理所需的功能。
+
+Salt中可以定义节点的目标状态，称之为state。state对应配置管理中的配置，可以对其进行标识、变更控制、变更识别、状态报告、跟踪和归档以及审计等一些的管理行为。
+
+## 状态描述
+
+Salt使用SLS文件（SaLt State file）描述状态。SLS使用[YAML](http://yaml.org/spec/1.1/)格式进行数据序列化，因此简单明了，可读性也很高。
+
+### 基本描述(yaml)
+
+下边是一个简单的SLS文件例子:
+
+{% highlight yaml %}
+
+ apache:
+   pkg:
+     - installed
+   service:
+     - running
+     - require:
+       - pkg: apache
+
+{% endhighlight %}
+
+该文件描述一个ID为`apache`的配置状态：
+
+- 软件包（pkg)已经安装
+- 服务应该处于运行中
+- 服务的运行依赖于`apache`软件包的安装
+
+state文件中的所有YAML变量名来自Salt的state模块。内置的state模块清单参考[这里](http://docs.saltstack.com/ref/states/all/index.html)。
+
+### 扩展描述(jinja)
+
+state可以使用[jinja](http://jinja.pocoo.org/)模板引擎进行扩展，其语法可以参考[这里](http://jinja.pocoo.org/docs/templates/)。
+
+下面是一个更复杂的例子：
+
+{% highlight html+jinja %}
+
+vim:
+  pkg:    
+    {% if grains['os_family'] == 'RedHat' %}    
+    - name: vim-enhanced    
+    {% elif grains['os'] == 'Debian' %}    
+    - name: vim-nox    
+    {% elif grains['os'] == 'Ubuntu' %}    
+    - name: vim-nox    
+    {% endif %}    
+    - installed
+    
+{% endhighlight %}
+
+该state增加了判断逻辑：如果是redhard系列的就安装 vim-enhanced，如果系统是Debian或者Ubuntu就安装vim-nox。
+
+### 逻辑关系
+
+state之间可以有[逻辑关系](http://docs.saltstack.com/ref/states/ordering.html)。常见的关系举例如下：
+
+- require：依赖某个state，在运行此state前，先运行依赖的state，依赖可以有多个
+
+{% highlight yaml %}
+ httpd:
+   pkg:
+     - installed
+   file.managed:
+     - name: /etc/httpd/conf/httpd.conf
+     - source: salt://httpd/httpd.conf
+     - require:
+       - pkg: httpd
+{% endhighlight %}
+
+- watch：在某个state变化时运行此模块
+
+{% highlight yaml %}
+redis:
+  pkg:
+    - latest
+  file.managed:
+    - source: salt://redis/redis.conf
+    - name: /etc/redis.conf
+    - require:
+      - pkg: redis
+    service.running:
+      - enable: True
+      - watch:
+      - file: /etc/redis.conf
+      - pkg: redis
+{% endhighlight %}
+
+watch除具备require功能外，还增了关注状态的功能
+
+
+- order：优先级比require和watch低，有order指定的state比没有order指定的优先级高
+
+{% highlight yaml %}
+vim:
+  pkg.installed:
+    - order: 1
+{% endhighlight %}
+
+想让某个state最后一个运行，可以用last
+
+
+
+## 顶级配置top.sls
