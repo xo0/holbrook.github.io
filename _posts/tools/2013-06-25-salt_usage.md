@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "salt的主要功能"
+title: "salt的主要功能及使用"
 description: ""
 category: 工具使用
 tags: [devops, salt, python]
-lastmod: 2013-06-25
+lastmod: 2013-06-26
 ---
 
 [Salt的介绍](/2013/06/24/salt_intro.html)中提到了Salt支持变更操作、配置管理、状态监控所需的一些功能，如下图：
@@ -12,6 +12,8 @@ lastmod: 2013-06-25
 ![salt_functions](/images/2013/salt_usage/salt_functions.png)
 
 本文详细介绍如何使用这些功能。
+
+如果想对Salt的功能和使用有一个初步的了解，最好参考官方文档：[Salt Stack Walkthrough](http://salt.readthedocs.org/en/latest/topics/tutorials/walkthrough.html)。
 
 # 批量操作(targeting)
 
@@ -68,6 +70,8 @@ lastmod: 2013-06-25
 分组匹配见本文的下一节。
 
 
+
+
 # 节点分组（nodegroups）
 
 好吧，批量操作确实很爽。但是每次都输入匹配规则有点麻烦，对于复杂的匹配规则更是如此。
@@ -119,21 +123,45 @@ Salt可以执行的命令也可以分为两种：
 
 Salt已经内置了[大量的模块](http://docs.saltstack.com/ref/modules/all/index.html)，这些模块涵盖了日常管理任务的主要任务，包括：
 
-- 通用的管理任务，比如apt, at, cp, cron, disk, extfs, file, hosts, iptables, mount, network, pam, parted, pkg, ps, selinux, shadow, ssh, test等
+- 通用的管理任务，比如apt, at, cp, cron, disk, extfs, file, grains, hosts, iptables, mount, network, pam, parted, pkg, ps, selinux, shadow, ssh, test等
 - 针对特定软件的任务，比如apache, cassandra, djangomod, git, mongodb, mysql, nginx, nova, postgres, solr, sqlite3, 和tomcat
 
 而且，自己开发Salt模块也非常简单，很容易将实际管理操作中的一些经验通过自定义的模块固化下来，并方便分享。
+
 
 在开发和调试模块的时候，可以使用`test=True`参数进行模拟执行(Dry run)。比如：
 
     salt 'minion1.example.com' state.highstate -v test=True
 
+# 节点信息(grains)
+
+[grains](http://docs.saltstack.com/topics/targeting/grains.html)是Salt内置的一个非常有用的模块。在用salt进行管理客户端的时候或者写state的时候都可以引用grains的变量。
+
+grains的基本使用举例如下：
+
+{% highlight bash %}
+
+ # 查看grains分类
+ salt '*' grains.ls  
+
+ # 查看grains所有信息
+ salt '*' grains.items
+ 
+ # 查看grains某个信息
+ salt '*' grains.item osrelease
+
+{% endhighlight %}
 
 # 配置管理（state)
 
-配置管理是Salt中非常重要的内容之一。Salt通过内置的state模块支持配置管理所需的功能。
+配置管理是Salt中非常重要的内容之一。Salt通过内置的state模块支持配置管理所需的功能。关于这部分内容，官方文档有很详细的描述，可以参考
+[part 1](http://salt.readthedocs.org/en/latest/topics/tutorials/states_pt1.html)，
+[part 2](http://salt.readthedocs.org/en/latest/topics/tutorials/states_pt2.html)和
+[part 3](http://salt.readthedocs.org/en/latest/topics/tutorials/states_pt3.html)。
 
 Salt中可以定义节点的目标状态，称之为state。state对应配置管理中的配置，可以对其进行标识、变更控制、变更识别、状态报告、跟踪和归档以及审计等一些的管理行为。
+
+
 
 ## 状态描述
 
@@ -161,7 +189,12 @@ Salt使用SLS文件（SaLt State file）描述状态。SLS使用[YAML](http://ya
 - 服务应该处于运行中
 - 服务的运行依赖于`apache`软件包的安装
 
-state文件中的所有YAML变量名来自Salt的state模块。内置的state模块清单参考[这里](http://docs.saltstack.com/ref/states/all/index.html)。
+state文件中的所有YAML变量名来自Salt的state模块。
+
+Salt内置了大量的state模块，比如cron, cmd, file, group, host, mount, pkg, service, ssh_auth，user等。
+详细清单参考[这里](http://docs.saltstack.com/ref/states/all/index.html)。
+
+还可以开发自己的state模块。
 
 ### 扩展描述(jinja)
 
@@ -173,13 +206,13 @@ state可以使用[jinja](http://jinja.pocoo.org/)模板引擎进行扩展，其�
 
 vim:
   pkg:    
-    {% if grains['os_family'] == 'RedHat' %}    
+    { % if grains['os_family'] == 'RedHat' % } 
     - name: vim-enhanced    
-    {% elif grains['os'] == 'Debian' %}    
+    { % elif grains['os'] == 'Debian' % }
     - name: vim-nox    
-    {% elif grains['os'] == 'Ubuntu' %}    
+    { % elif grains['os'] == 'Ubuntu' % }
     - name: vim-nox    
-    {% endif %}    
+    { % endif % }
     - installed
     
 {% endhighlight %}
@@ -236,4 +269,11 @@ vim:
 
 
 
-## 顶级配置top.sls
+
+
+
+## 顶级配置top.sls(TODO)
+
+## 状态执行(State Enforcement)
+
+http://docs.saltstack.com/ref/states/index.html#state-enforcement
