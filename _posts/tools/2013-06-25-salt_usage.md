@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "salt的主要功能及使用"
-description: ""
+description: "本文介绍Salt的主要功能和基本使用，包括minion节点的管理，批量操作，以及非常重要的配置管理。
+掌握了这些内容，可以使用Salt极大提高运维的效率（事实上，Salt对于开发阶段也能提供很大的帮助，开发和运维的界限正在逐渐模糊）。"
 category: 工具使用
 tags: [devops, salt, python]
 lastmod: 2013-06-26
@@ -272,8 +273,88 @@ vim:
 
 
 
-## 顶级配置top.sls(TODO)
+## 保存状态
 
-## 状态执行(State Enforcement)
+状态描述文件(SLS)要保存在master节点中，并通过指令分发到minion节点。
 
-http://docs.saltstack.com/ref/states/index.html#state-enforcement
+1. 路径设置
+
+Salt master的配置文件(`/etc/salt/master`)中可以通过`file_roots`参数指定状态文件的保存路径。可以为不同的环境（如开发环境、UAT环境、生产环境、灾备环境等）分别指定路径，如下所示：
+
+{% highlight yaml %}
+
+file_roots:
+  base:
+    - /srv/salt/
+  dev:
+    - /srv/salt/dev/services
+    - /srv/salt/dev/states
+  prod:
+    - /srv/salt/prod/services
+    - /srv/salt/prod/states
+
+{% endhighlight %}
+
+其中,base环境是必须的。
+
+2. 入口文件
+
+`file_roots`中必须指定“base”环境的路径，因为该路径中存在Salt state的[入口文件: top.sls](http://docs.saltstack.com/ref/states/highstate.html)。
+
+
+Top文件建立配置环境、节点和状态配置之间的映射关系。比如一个简单的top.sls文件：
+
+{% highlight yaml %}
+
+base:
+  '*':
+    - servers
+dev:
+  '*nodb*':
+    - mongodb
+
+{% endhighlight %}
+
+该文件指定了：
+- 所有节点使用base环境的servers配置
+- *nodb*节点使用dev环境的mongodb配置
+
+结合第一部分的file_roots配置，该top配置意味存在以下的配置文件：
+
+- /srv/salt/servers.sls
+- /srv/salt/dev/mongodb.sls
+
+注：这里也可以使用文件夹`/srv/salt/servers/`和`/srv/salt/dev/mongodb/`，在文件夹中放置一组状态文件和配置文件，便于建立复杂的状态配置。
+
+
+top.sls中的可配置内容非常丰富，具体内容可以参考[官方文档](http://docs.saltstack.com/ref/states/highstate.html)。
+
+3. 状态生效（State Enforcement）
+
+master上对状态进行定义，最终这些状态要传递到minion节点上。在本节的例子中，如果定义好了状态文件`/srv/salt/dev/mongodb.sls`：
+
+{% highlight yaml %}
+
+mongodb:
+  pkg:
+    - installed
+
+{% endhighlight %}
+
+可以使用命令`salt "minion1" state.highstate -v test=True`进行模拟测试；如果没有异常再使用命令
+`salt 'minion*' state.highstate -v`使得配置生效。
+
+更多的内容参考[官方文档](http://docs.saltstack.com/ref/states/index.html#state-enforcement)。
+
+
+## 更多
+
+Salt的state模块的功能不仅如此，还可以使用模板和变量，以及定义状态的定时自动生效。
+
+
+# 小结
+
+本文介绍Salt的主要功能和基本使用，包括minion节点的管理，批量操作，以及非常重要的配置管理。
+掌握了这些内容，可以使用Salt极大提高运维的效率（事实上，Salt对于开发阶段也能提供很大的帮助，开发和运维的界限正在逐渐模糊）。
+
+后续会介绍一些使用案例以及Salt的高级功能。

@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "你真的会数钱吗？"
-description: "货币，记账相关的领域模型，使用值对象"
+title: ""
+description: ""
 category: 领域模型
 tags: [DevOps]
 lastmod: 2013-06-10
