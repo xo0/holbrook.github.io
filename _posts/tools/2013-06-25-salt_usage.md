@@ -329,7 +329,7 @@ dev:
 
 top.sls中的可配置内容非常丰富，具体内容可以参考[官方文档](http://docs.saltstack.com/ref/states/highstate.html)。
 
-3. 状态生效（State Enforcement）
+## 状态生效（State Enforcement）
 
 master上对状态进行定义，最终这些状态要传递到minion节点上。在本节的例子中，如果定义好了状态文件`/srv/salt/dev/mongodb.sls`：
 
