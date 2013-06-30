@@ -25,6 +25,7 @@ lastmod: 2013-06-30
 - ssh/banner
 - ssh/ssh_config
 - ssh/sshd_config
+- ssh/custom-server.sls
 
 两个配置分别放在了`apache`和`ssh`文件夹。一个Salt状态可以使用单个的SLS文件，或者使用一个文件夹。后者更加灵活方便。
 
@@ -107,6 +108,93 @@ lastmod: 2013-06-30
        * custom_var="default value"
        * other_var=123
 
-# apache/httpd.conf
+# ssh/init.sls
 
-（TODO)
+{% highlight yaml %}
+ openssh-client:
+    pkg.installed
+ 
+  /etc/ssh/ssh_config:
+    file.managed:
+      - user: root
+      - group: root
+      - mode: 644
+      - source: salt://ssh/ssh_config
+      - require:
+        - pkg: openssh-client
+
+{% endhighlight %}
+
+说明：
+
+
+# ssh/server.sls
+
+{% highlight yaml %}
+
+ include:
+    - ssh
+ 
+ openssh-server:
+   pkg.installed
+
+ sshd:
+   service.running:
+     - require:
+       - pkg: openssh-client
+       - pkg: openssh-server
+       - file: /etc/ssh/banner
+       - file: /etc/ssh/sshd_config
+
+ /etc/ssh/sshd_config:
+   file.managed:
+     - user: root
+     - group: root
+     - mode: 644
+     - source: salt://ssh/sshd_config
+     - require:
+       - pkg: openssh-server
+
+ /etc/ssh/banner:
+   file:
+     - managed
+     - user: root
+     - group: root
+     - mode: 644
+     - source: salt://ssh/banner
+     - require:
+       - pkg: openssh-server
+
+{% endhighlight %}
+
+说明：
+
+- include语句将别的state添加到当前文件中，使得state可以跨文件引用。
+   
+  使用include相当于把被引用的内容文件添加到自身，可以require、watch或extend被引用的SLS中定义的内容。
+
+  这里引用了`ssh`state。
+
+- `openssh-server`配置项
+- `sshd`
+- `/etc/ssh/sshd_config`配置项
+- `/etc/ssh/banner`配置项
+
+# ssh/custom-server.sls
+
+{% highlight yaml %}
+ include:
+   - ssh.server
+
+ extend:
+   /etc/ssh/banner:
+     file:
+       - source: salt://ssh/custom-banner
+{% endhighlight %}
+
+说明：
+
+- 引用`ssh`state的server配置项
+- `extend`可以复用已有的state，在原来的基础上进行扩展，增加新的配置或修改已有的配置。
+  1. 将`/etc/ssh/banner`配置项的文件修改为`salt://ssh/custom-banner`
+
