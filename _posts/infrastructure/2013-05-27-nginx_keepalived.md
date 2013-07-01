@@ -2,7 +2,7 @@
 layout: post
 title: "用nginX+keepalived实现高可用的负载均衡"
 description: "实施nginx和keepalived的规划、安装、配置等步骤"
-category: 工具使用
+category: 基础架构
 tags: [HA, nginx, keepalived, 负载均衡, cluster]
 lastmod: 2013-06-10
 ---

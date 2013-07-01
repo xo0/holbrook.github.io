@@ -3,7 +3,7 @@ layout: post
 title: "重拾vim"
 description: "从emacs切换回vim"
 date: 2013-05-23
-category: 工具使用
+category: 杂七杂八
 tags: [vim , vundle]
 lastmod: 2013-06-17
 ---

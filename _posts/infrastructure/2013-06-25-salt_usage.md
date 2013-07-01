@@ -3,7 +3,7 @@ layout: post
 title: "salt的主要功能及使用"
 description: "本文介绍Salt的主要功能和基本使用，包括minion节点的管理，批量操作，以及非常重要的配置管理。
 掌握了这些内容，可以使用Salt极大提高运维的效率（事实上，Salt对于开发阶段也能提供很大的帮助，开发和运维的界限正在逐渐模糊）。"
-category: 工具使用
+category: 基础架构
 tags: [devops, salt, python]
 lastmod: 2013-06-26
 ---
