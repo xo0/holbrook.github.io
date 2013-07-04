@@ -3,7 +3,7 @@ layout: post
 title: "ZeroMQ简介"
 description: "zeroMQ不是TCP，不是socket，也不是消息队列，而是这些的综合体。"
 category: 基础架构
-tags: [ZeroMQ,消息中间件]
+tags: [ZeroMQ, 消息中间件]
 lastmod: 
 ---
 
@@ -133,8 +133,8 @@ ZeroMQ如何拯救世界
 
 由于ZeroMQ的强大，我们可以用ZeroMQ搭建出非常强悍的应用。比如：
 
-- [Salt]()的底层就使用了ZeroMQ作为通信机制
-- [Mongrel2](http://mongrel2.org/home)是使用ZeroMQ开发的一个Web服务器。
+- [Salt](/2013/06/24/salt_intro.html)的底层就使用了ZeroMQ作为通信机制
+- [Mongrel2](http://mongrel2.org/home)是使用ZeroMQ开发的一个Web服务器
   
   Mongrel2是应用ZeroMQ的一个有趣的案例：所有入站消息通过“Push”套接字路由到Mongrel2，套接字可以自动实现负载均衡，将消息分发到连接处理器。反过来，连接处理器处理入站消息（通过Pull套接字），然后将处理结果发布到一个“Pub”套接字，Mongrel2服务器本身已订阅了该套接字，并且通过主题（topic）过滤器监听该套接字的进程号。如下图：
 
