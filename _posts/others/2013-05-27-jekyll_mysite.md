@@ -256,7 +256,7 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
 {% highlight html %}
     <div class="tag-cloud">
        {/% for tag in site.tags %/}
-          <a href="/tags.html#{/{ tag[0] }/}-ref" id="{/{ forloop.index }/}" class="__tag" style="margin: 5px">{/{ tag[0] }/}</a>
+          <a href="/pages/tags.html#{/{ tag[0] }/}-ref" id="{/{ forloop.index }/}" class="__tag" style="margin: 5px">{/{ tag[0] }/}</a>
        {/% endfor %/}
     </div>
     
