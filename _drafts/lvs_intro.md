@@ -1,12 +1,13 @@
-# LVS是什么
+# LVS简介
 
-[LVS](http://www.linuxvirtualserver.org/), Linux Virtual Server, Linux虚拟服务器。
+[LVS(Linux Virtual Server, Linux虚拟服务器)](http://www.linuxvirtualserver.org/), 实现了负载均衡集群的前端调度器（Director）。
 
-LVS可以作为负载均衡集群的前端调度器，从而实现高性能和高可用性。
+LVS工作在4层，支持大多数的TCP和UDP协议。支持TCP协议的应用有：HTTP，HTTPS ，FTP，SMTP，POP3，IMAP4，PROXY，LDAP，SSMTP等。支持UDP协议的应用有：DNS，NTP，ICP，视频、音频流播放协议等。可以用于Web服务、Cache服务、DNS服务、FTP服务、MAIL服务、视频/音频点播服务等。
 
-LVS工作在4层，支持TCP和UDP协议，可以广泛用于web、cache、mail、ftp、media、VoIP等服务的负载均衡。
+LVS是[章文嵩博士](http://zh.linuxvirtualserver.org)在1998年发起的开源项目，遵循GPL许可。现在LVS已经集成到Linux内核中(>2.4)，并且支持FreeBSD系统。
 
-LVS是[章文嵩博士](http://zh.linuxvirtualserver.org)在1998年发起的开源项目，目前已经集成到Linux内核中。
+LVS具有极高的性能，可以支撑上百万的并发连接。
+
 
 # LVS的特性
 
@@ -33,17 +34,36 @@ LVS实现了基于IP技术的负载均衡，提供3种负载均衡机制：
 
 # LVS与F5的对比
 
+  LVS最直接的竞争对手应该是F5 BIG-IP。F5可以支持400万--800万并发连接，支持一些方便配置和管理的功能，价格在几十万人民币左右;
+  而LVS完全免费，可以支持100万--400万并发连接，一些特性的配置和图形化监控等功能需要自己解决。
 
 # LVS的应用场景
 
-由于LVS工作在4层，所有工作在TCP/IP之上的应用或服务都可以通过LVS建立负载均衡集群以提高并发能力。下面列出LVS的典型应用场景。
+由于LVS工作在4层，所有工作在TCP/IP之上的应用或服务都可以通过LVS建立负载均衡集群以提高并发能力。按照集群的用途，可以列出LVS的典型应用场景：
 
-## Web负载均衡
+- web缓存及反向代理
+  web缓存及反向代理位于web服务器之前，可以缓存静态内容，只把动态内容的请求反向代理到后端的web服务器。常见的web缓存服务器如Squid，NginX都可以使用LVS构建集群系统。
 
-## IP管理
-与Nginx的域名和虚拟目录管理类似
+- web服务器/应用服务器
+  LVS可以作为web服务器/应用服务器（如Nginx,Apache,Tomcat等）的前端调度器，支持会话保持功能。
 
-网站最前端的指向应该是LVS，也就是DNS的指向应为lvs均衡器，lvs的优点令它非常适合做这个任务。重要的ip地址，最好交由lvs托管，比如数据库的ip、webservice服务器的ip等等，这些ip地址随着时间推移，使用面会越来越大，如果更换ip则故障会接踵而至。所以将这些重要ip交给lvs托管是最为稳妥的。
+- 数据库服务器
+  典型的mysql主-从集群中，LVS可以作为多个从服务器的负载调度器。
+
+- 重要IP的管理
+  对于重要的IP地址（如ESB、数据库、中间件等），可以交给LVS进行统一管理，避免更换IP带来的麻烦。
+  
+
+# LVS与NginX的对比
+
+Web负载均衡的实现产品很多，除了F5这种硬件负载均衡器之外，还有很多开源的软件产品。常见的如LVS,NginX,HAProxy等。
+
+NginX是使用比较广泛Web负载均衡器。NginX工作在7层，
+
+LVS与NginX
+
+3～5万条并发连接
+
 
 # Web负载均衡：LVS与NginX的对比
 
@@ -82,6 +102,4 @@ A：简单来说，之所以需要基于Layer7 的负载均衡，有以下原因
 - [LVS中文社区](http://zh.linuxvirtualserver.org/)
 - [LVS手册：可伸缩网络服务的设计与实现](http://zh.linuxvirtualserver.org/node/7)
 - man ipvsadm
-
-
-3、  《Red_Hat_Enterprise_Linux-5-Virtual_Server_Administration-zh-CN》
+- 《Red_Hat_Enterprise_Linux-5-Virtual_Server_Administration-zh-CN》
