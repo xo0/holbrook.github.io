@@ -33,7 +33,7 @@ title  : tags
     {% if group == null or group == node.group %}
 
       	<li>{{ node.date | date: "%Y-%m-%d" }}{% for cat in node.categories %}
-        <a class="badge" href="/categories.html#{{cat}}-ref">{{cat}}</a>&nbsp;
+        <a class="badge" href="/pages/categories.html#{{cat}}-ref">{{cat}}</a>&nbsp;
         {% endfor %}
          &raquo; <a href="{{ BASE_PATH }}{{node.url}}">{{node.title}}</a>
       	</li>

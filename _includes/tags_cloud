@@ -1,6 +1,6 @@
 <div class="tag-cloud">
    {% for tag in site.tags %}
-      <a href="/tags.html#{{ tag[0] }}-ref" id="{{ forloop.index }}" class="__tag" style="margin: 5px">{{ tag[0] }}</a>
+      <a href="/pages/tags.html#{{ tag[0] }}-ref" id="{{ forloop.index }}" class="__tag" style="margin: 5px">{{ tag[0] }}</a>
    {% endfor %}
 </div>
 

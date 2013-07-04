@@ -12,11 +12,11 @@
 
     {% for category in site.categories %} 
     {% if page.categories[0] == category[0] %}
-      <a class="span4 btn btn-primary" href="/categories.html#{{ category[0] }}-ref"  rel="category">
+      <a class="span4 btn btn-primary" href="/pages/categories.html#{{ category[0] }}-ref"  rel="category">
         {{ category[0] | join: "/" }} <sup>{{ category[1].size }}</sup>
       </a>
     {% else %}
-        <a class="span4 btn btn-inverse active" href="/categories.html#{{ category[0] }}-ref" rel="category">
+        <a class="span4 btn btn-inverse active" href="/pages/categories.html#{{ category[0] }}-ref" rel="category">
           {{ category[0] | join: "/" }} <sup>{{ category[1].size }}</sup>
         </a>
     {% endif %}

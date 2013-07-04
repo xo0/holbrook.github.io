@@ -34,7 +34,7 @@ title: 分类
         <li>{{ node.date | date: "%Y-%m-%d" }} &raquo; <a href="{{ BASE_PATH }}{{node.url}}">{{node.title}}</a>
 &sdot; 
       {% for tag in node.tags %}
-        <a class="label" href="/tags.html#{{tag}}-ref">{{tag}}</a>&nbsp;
+        <a class="label" href="/pages/tags.html#{{tag}}-ref">{{tag}}</a>&nbsp;
       {% endfor %}
         </li>
       
