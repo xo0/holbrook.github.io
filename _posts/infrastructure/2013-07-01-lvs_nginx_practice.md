@@ -4,7 +4,7 @@ title: "lvs+nginx的负载均衡实验"
 description: "LVS+NginX是构建大型B/S应用的典型方式。本文记录在实验环境搭建这样一个架构，并进行功能、可靠性、性能等方面的测试的过程。"
 category: 基础架构
 tags: [负载均衡, cluster, lvs, nginx]
-
+lastmod: 2013-07-03
 ---
 
 # 准备环境
@@ -166,4 +166,6 @@ LVS和RS都配置好之后，可以启动LVS服务。前面提到，pulse是LVS�
 2. 经过LVS访问nginx比直接访问nginx会增加50毫秒左右的响应时间。
 
 3. 官方的测试数字是：VS/NAT方式达到1112并发，VS/DR或VS/TUN方式可以达到25,000并发。
+
+4. F5的并发处理能力超过10万，可以保持的连接数能达到几百万。
 
