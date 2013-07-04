@@ -25,12 +25,12 @@ menuitems:
     - name:     首页
       url:      /index.html
     - name:     分类
-      url:      /categories.html
+      url:      /pages/categories.html
     - name:     标签
-      url:      /tags.html
+      url:      /pages/tags.html
     - name:     归档
-      url:      /archive.html
+      url:      /pages/archive.html
     - name:     读书
-      url:      /reading.html
+      url:      /pages/reading.html
     - name:     工作
-      url:      /working.html
+      url:      /pages/working.html
