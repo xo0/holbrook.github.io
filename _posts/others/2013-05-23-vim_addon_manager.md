@@ -143,6 +143,10 @@ Vbundle就会自动安装或更新前面配置好的插件
 
 - [NERDTree](https://github.com/scrooloose/nerdtree)（Bundle 'The-NERD-tree'）可以在窗口左侧打开文件浏览器
 
+- Bundle 'vim-orgmode'
+- Bundle 'winmanager'
+- Bundle 'SuperTab'
+
 ## 语法高亮
 
 - Markdown（Bundle 'Markdown'） markdown文件的语法高亮
