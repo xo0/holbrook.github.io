@@ -4,7 +4,7 @@ title: "用salt管理成千上万的服务器"
 description: "实在是厌倦了对大量服务器日复一日的重复操作。尤其是在虚拟化的时代，系统的每个组件都有很多个相同的节点在运行，更让重复的次数再乘以N。
 当我发现Salt的时候，我的眼前一亮：这正是我所需要的东西。"
 category: 基础架构
-tags: [devops, salt, python]
+tags: [devops, salt]
 lastmod: 2013-06-25
 ---
 
