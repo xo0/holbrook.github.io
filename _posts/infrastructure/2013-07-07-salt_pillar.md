@@ -185,5 +185,5 @@ base:
 
 # 参考资料
 
-- [Pillar Walkthrough](http://docs.saltstack.com/topics/tutorials/pillar.html)
-- [Pillar of Salt](http://docs.saltstack.com/topics/pillar/index.html)
+- [《Pillar Walkthrough》](http://docs.saltstack.com/topics/tutorials/pillar.html)
+- [《Pillar of Salt》](http://docs.saltstack.com/topics/pillar/index.html)
