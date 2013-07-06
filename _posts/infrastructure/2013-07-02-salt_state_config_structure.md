@@ -70,4 +70,4 @@ dev:
 
 掌握了这三点，就掌握了Salt state配置的脉络。
 
-实际上，Salt pillar的配置中也使用了类似的结构。
+实际上，Salt中[Pillar的配置](/2013/07/07/salt_pillar.html)也使用了类似的结构。
