@@ -1,4 +1,4 @@
-|          | WebService         | RESTful       |
+|          | WebService         | RESTful       |  私有，如Thrift
 |----------+--------------------+---------------|
 | 业务分解 | 服务               | 资源          |
 | 请求定义 | RPC, Message       | REST          |
