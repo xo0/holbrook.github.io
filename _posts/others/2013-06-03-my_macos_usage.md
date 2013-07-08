@@ -113,7 +113,7 @@ Bundle 'vim-orgmode'
 - Quicksilver: 不用这个软件就不是一个真正的Macer
 - CoRD
 - HomeBrew
-- [TotalTerminal](http://totalterminal.binaryage.com/)：与Linux下面的[Tilda]()类似的一个系统级的终端工具。喜欢命令行的人士必备的利器。
+- [TotalTerminal](http://totalterminal.binaryage.com/)：与Linux下面的[Tilda](http://sourceforge.net/projects/tilda/)类似的一个系统级的终端工具。喜欢命令行的人士必备的利器。
 
 
   比如：
