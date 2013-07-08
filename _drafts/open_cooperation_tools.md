@@ -1,8 +1,8 @@
 开放的协作工具
 
-[google Docs](docs.google.com)(已被墙)
+- [google Docs](http://docs.google.com)(已被墙)
 
-[Slide Share](http://www.slideshare.net/)(已被墙)
+- [Slide Share](http://www.slideshare.net/)(已被墙)
 
 - [Open Party](http://www.beijing-open-party.org/)
 
