@@ -1,3 +1,13 @@
+
+---
+layout: post
+title: "精彩的ESB"
+description: ""
+category: 基础架构
+tags: [SOA, ESB]
+lastmod: 
+---
+
 ESB的糟糕不在于其思想，而在于其设计。还有掺杂的“标准之争”。
 
 需要正确使用，才能发挥ESB的积极作用。
