@@ -12,5 +12,9 @@ OpenParty是由北京的多个技术社区共同举办的社交活动。本着�
 
 - LinkedIn
 
-对比和选型
+- 对比和选型
 http://www.findthebest.com/
+
+- 图标生成
+  http://ongakuer.com/blog/?s=Search...&button= <http://ongakuer.com/blog/?s=Search...&button=>
+
