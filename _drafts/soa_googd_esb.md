@@ -3,7 +3,7 @@
 layout: post
 title: "精彩的ESB"
 description: ""
-category: 基础架构
+category: 基础设施
 tags: [SOA, ESB]
 lastmod: 
 ---

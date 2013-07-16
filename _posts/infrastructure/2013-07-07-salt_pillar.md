@@ -2,7 +2,7 @@
 layout: post
 title: "Pillar：定义Salt配置管理的数据"
 description: "State定义了Salt配置管理的内容，Pillar则定义了Salt配置管理的数据。Pillar使得同一个配置项在各个minion中可以使用不同的数据，从而不需要在State中定义大量的include, extend等关系。"
-category: 基础架构
+category: 基础设施
 tags: [devops, salt]
 lastmod: 
 ---
