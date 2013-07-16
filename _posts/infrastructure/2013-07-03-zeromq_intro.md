@@ -2,7 +2,7 @@
 layout: post
 title: "ZeroMQ简介"
 description: "zeroMQ不是TCP，不是socket，也不是消息队列，而是这些的综合体。"
-category: 基础架构
+category: 基础设施
 tags: [ZeroMQ, 消息中间件]
 lastmod: 
 ---

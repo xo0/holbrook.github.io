@@ -2,7 +2,7 @@
 layout: post
 title: "用Salt管理NginX"
 description: "结合Salt中的模块、state、pillar等功能解决NginX的配置和监控等问题"
-category: 基础架构
+category: 基础设施
 tags: [salt, NginX]
 lastmod: 
 ---
@@ -28,6 +28,29 @@ lastmod:
 在[这篇文章](http://thinkinside.tk/2013/05/27/nginx_keepalived.html)中，我就提到可以用配置管理工具或者文件同步工具解放自己。现在有了Salt，可以很容易的解决上述问题。
 
 # 配置标准化
+
+## 安装
+
+1. 依赖包：gcc pcre-devel zlib-devel openssl-devel
+2. 安装包：从内部服务器下载源代码
+3. 编译参数
+   
+   --with-http_ssl_module
+
+   --add-module=/PATH/TO/chunkin-nginx-module
+
+
+## 配置项
+
+两个集群都属于生成环境，一个用于内部，一个用于外部。分别
+
+   将每个虚拟主机改为单独的配置文件，并在`nginx.conf`中include
+
+   静态文件：从版本库获取
+
+## 配置数据
+
+
 
 # State设计
 

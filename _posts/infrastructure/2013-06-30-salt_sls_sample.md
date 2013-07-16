@@ -3,7 +3,7 @@ layout: post
 title: "Salt state实例解析"
 description: "在Salt的官方教程中，以apache和sshd的state配置作为例子。掌握这两个例子，就能够触类旁通，处理日常工作中大部分的配置管理问题。
 本文对这两个例子进行详细的分析和注释"
-category: 基础架构
+category: 基础设施
 tags: [salt]
 lastmod: 2013-06-30
 ---

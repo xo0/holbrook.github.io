@@ -3,7 +3,7 @@ layout: post
 title: "用salt管理成千上万的服务器"
 description: "实在是厌倦了对大量服务器日复一日的重复操作。尤其是在虚拟化的时代，系统的每个组件都有很多个相同的节点在运行，更让重复的次数再乘以N。
 当我发现Salt的时候，我的眼前一亮：这正是我所需要的东西。"
-category: 基础架构
+category: 基础设施
 tags: [devops, salt]
 lastmod: 2013-06-25
 ---
@@ -64,7 +64,7 @@ Salt的体系结构中将节点区分为: master, minion, syndic。
 还可以通过Salt提供的[安装脚本](https://github.com/saltstack/salt-bootstrap)，或者[PyPI](https://pypi.python.org/pypi/salt)进行安装。
 
 对于Linux，尤其是企业环境中常用的RHEL,CentOS,Ubuntu，可以通过包管理器非常容易的安装master 和/或 minion。
-比如: yum(需要先配置[EPEL]()), apt(需要增加`http://debian.madduck.net/repo/`库)，yaourt，ports。
+比如: yum(需要先配置[EPEL](http://fedoraproject.org/wiki/EPEL/zh-cn)), apt(需要增加`http://debian.madduck.net/repo/`库)，yaourt，ports。
 
 Mac OS X 先使用HomeBrew解决依赖包：`brew install swig zmq`，然后用PyPI安装：`pip install salt`。
 

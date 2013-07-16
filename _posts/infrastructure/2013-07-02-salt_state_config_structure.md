@@ -3,7 +3,7 @@ layout: post
 title: "Salt state 配置结构"
 description: "Salt的state配置比较复杂，官方文档也比较零散。初学者不易掌握。但是如果把Salt的state配置看做是编写代码，就很容易掌握其脉络。
 配置的目标是通过master管理多个mision的状态，最终配置的实现是使用文件夹和文件。而Salt state的设计就是在二者之间建立逻辑关系。"
-category: 基础架构
+category: 基础设施
 tags: [salt]
 lastmod: 2013-07-07
 ---
