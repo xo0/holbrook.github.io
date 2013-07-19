@@ -80,7 +80,7 @@ keepalived的配置文件（`/etc/keepalived/keepalived.conf`)中包含3部分�
 
 - 节点1
 
-{% highlight c %}
+{% highlight nginx %}
 
 vrrp_instance VI_1 { 
     state MASTER 
@@ -90,7 +90,7 @@ vrrp_instance VI_1 {
     advert_int 1 
     authentication { 
         auth_type PASS 
-        auth_pass 1paituan.com 
+        auth_pass password 
     } 
     virtual_ipaddress { 
         192.168.1.8 
@@ -104,7 +104,7 @@ vrrp_instance VI_2 {
     advert_int 1 
     authentication { 
         auth_type PASS 
-        auth_pass 1paituan.com 
+        auth_pass password 
     } 
     virtual_ipaddress { 
         192.168.1.9 
@@ -115,7 +115,7 @@ vrrp_instance VI_2 {
 
 - 节点2
 
-{% highlight c %}
+{% highlight nginx %}
 
 vrrp_instance VI_1 { 
     state BACKUP 
@@ -125,7 +125,7 @@ vrrp_instance VI_1 {
     advert_int 1 
     authentication { 
         auth_type PASS 
-        auth_pass 1paituan 
+        auth_pass password 
     } 
     virtual_ipaddress { 
         192.168.1.8                   
@@ -139,11 +139,11 @@ vrrp_instance VI_2 {
     advert_int 1 
     authentication { 
         auth_type PASS 
-        auth_pass 1paituan 
+        auth_pass password 
     } 
     virtual_ipaddress { 
         192.168.1.9                   
     } 
 }
 
-{% endhighlight %}
+{% endhighlight nginx %}
