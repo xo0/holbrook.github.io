@@ -84,7 +84,7 @@ virtualenv的使用举例如下：
  cd /PATH/TO/YOUR/VIRTUAL_ENV
  
  # 创建一个虚拟环境，不使用系统的site-packages中的模块
- virtualenv –no-site-packages ENV_NAME
+ virtualenv --no-site-packages ENV_NAME
  
  # 激活虚拟环境，注意激活后命令行的提示符变化
  source /PATH/TO/YOUR/VIRTUAL_ENV/ENV_NAME/bin/active
