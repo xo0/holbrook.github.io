@@ -4,7 +4,7 @@ title: "用nginX+keepalived实现高可用的负载均衡"
 description: "实施nginx和keepalived的规划、安装、配置等步骤"
 category: 基础设施
 tags: [HA, nginx, keepalived, 负载均衡, cluster]
-lastmod: 2013-07-29
+lastmod: 2013-07-30
 ---
 
 前面的[《统一web访问层方案》](http://thinkinside.tk/weblayer_nginx_keepalived/)中就目的、目标和整体方案进行了讨论，本文讨论具体的实施。简单来说就是在两台服务器上分别部署NginX，并通过keepalived实现高可用。
@@ -402,14 +402,15 @@ keepalived支持配置监控脚本，我们可以通过脚本监控NginX的状�
 查看编译参数：使用命令`/usr/local/nginx/sbin/nginx -V`
 
 安装好之后增加配置：
-{% highlight c %}
+{% highlight nginx %}
 
     location /nginx_status {
-      stub_status on;
-      access_log   off;
-      #allow SOME.IP.ADD.RESS;
-      deny all;
+        stub_status on;
+        access_log   off;
+        # deny all;
+        allow all;
     }
+
 {% endhighlight %} 
 
 重新加载配置后，会看到一些文本：
