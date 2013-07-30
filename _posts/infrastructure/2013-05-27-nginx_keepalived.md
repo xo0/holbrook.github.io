@@ -4,13 +4,13 @@ title: "用nginX+keepalived实现高可用的负载均衡"
 description: "实施nginx和keepalived的规划、安装、配置等步骤"
 category: 基础设施
 tags: [HA, nginx, keepalived, 负载均衡, cluster]
-lastmod: 2013-07-16
+lastmod: 2013-07-29
 ---
 
 前面的[《统一web访问层方案》](http://thinkinside.tk/weblayer_nginx_keepalived/)中就目的、目标和整体方案进行了讨论，本文讨论具体的实施。简单来说就是在两台服务器上分别部署NginX，并通过keepalived实现高可用。
 
 
-## 1 规划和准备
+# 1 规划和准备
 ---
 
 需要统一访问的应用系统：
@@ -33,7 +33,7 @@ web访问服务器
 
 
 
-## 2 安装
+# 2 安装
 ---
 
 两台接入服务器分别安装NginX和keepalived:
@@ -71,10 +71,9 @@ web访问服务器
  
 {% endhighlight %}
 
-## 3 配置
----
+# 3 配置
  
-### 3.1 配置NginX
+## 3.1 配置NginX
 
 两台接入服务器的NginX的配置完全一样,主要是配置/usr/local/nginx/conf/nginx.conf的http。其中多域名指向是通过虚拟主机（配置http下面的server）实现；同一域名的不同虚拟目录通过每个server下面的不同location实现；到后端的服务器在http下面配置upstream,然后在server或location中通过proxypass引用。要实现前面规划的接入方式，http的配置如下：
 
@@ -136,7 +135,7 @@ web访问服务器
 首先用IP访问前表中各个应用服务器的url，再用域名和路径访问前表中各个应用系统的域名/虚拟路径
 
 
-### 3.2 配置keepalived
+## 3.2 配置keepalived
 
 按照上面的安装方法，keepalived的配置文件在/etc/keepalived/keepalived.conf。主、从服务器的配置相关联但有所不同。如下：
 
@@ -228,7 +227,7 @@ web访问服务器
 
 5. 启动主服务器上的keepalived，看看主服务器能否重新接管虚拟IP
 
-### 3.3 让keepalived监控NginX的状态
+## 3.3 让keepalived监控NginX的状态
 
 经过前面的配置，如果主服务器的keepalived停止服务，从服务器会自动接管VIP对外服务；一旦主服务器的keepalived恢复，会重新接管VIP。 但这并不是我们需要的，我们需要的是当NginX停止服务的时候能够自动切换。
 
@@ -292,11 +291,11 @@ keepalived支持配置监控脚本，我们可以通过脚本监控NginX的状�
 
  {% endhighlight %}
 
-## 4 还可以做什么
+# 4 还可以做什么
 
 对于简单重复性劳动，人总是容易犯错，这种事情最好交给机器去做。 比如，在这个案例中，作为统一接入服务器，可能经常要修改nginx的配置、nginx下面的html文件等。而且，一定要保证集群中的每台服务器的配置相同。 最好的做法是由配置管理服务器来管理，如果没有，也可以使用简单的linux文件同步来解决。
 
-## 5 支持https
+# 5 支持https
 
 需要安装openSSL：
     
@@ -366,7 +365,7 @@ keepalived支持配置监控脚本，我们可以通过脚本监控NginX的状�
 
 {% endhighlight %}    
 
-## 6 支持webservice
+# 6 支持webservice
 
 通过chunkin-nginx-module模块支持webservice。
 
@@ -396,7 +395,7 @@ keepalived支持配置监控脚本，我们可以通过脚本监控NginX的状�
     } 
 {% endhighlight %}    
 
-## 7 状态监控
+# 7 状态监控
 
 编译时需要增加`--with-http_stub_status_module`参数。
 

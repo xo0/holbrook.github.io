@@ -1,49 +1,140 @@
-用ganglia监控lvs和nginx集群的性能
-
-对基础设施的监控主要包括两个方面：状态，性能和可用性。通俗的讲就是：是否在干活，干了多少活，还能干多少。
-
-有很多开源的强大工具可以用于监控，比如Cacti，Nagios以及比较新的[Shinken](http://www.shinken-monitoring.org/)和Zabbix。这些工具的主要功能是状态监控和报警——就像一个合格的监工，随时掌握基础设施是否在干活，发现谁没干活马上报告。
-
-如果是传统的运维工作，有这些工具就足够强大了。但是对于分布式系统的开发+运维人员（DevOps?），更关心的是掌握分布式系统的性能和可用性，根据数据做出性能调整、升级、扩容等的决策，从而保证Service能够满足不断增长的业务需求。本文要介绍的[Ganglia]()就是这样一种工具。
-
-
+---
+layout: post
+title: "用Ganglia监控集群的性能"
+description: "对基础设施的监控主要包括三个方面：状态，性能和可用性。通俗的讲就是：是否在干活，干了多少活，还能干多少。与Cacti、Nagios、Zabbix等工具相比，Ganglia更关注整个集群的性能和可用性。可以用于集群的性能监控、分析和优化。"
+category: 基础设施
+tags: [HA, nginx, keepalived, 负载均衡, cluster]
+lastmod: 2013-07-16
+---
 
 
 # Ganglia简介
-Ganglia监控软件主要是用来监控系统性能的软件，如：cpu 、mem、硬盘利用率， I/O负载、网络流量情况等，通过曲线很容易见到每个节点的工作状态，对合理调整、分配系统资源，提高系统整体性能起到重要作用。支持浏览器方式访问，但不能监控节点硬件技术指标，ganglia 是分布式的监控系统，有两个Daemon, 分别是：客户端Ganglia Monitoring Daemon (gmond)和服务端Ganglia Meta Daemon (gmetad)，还有Ganglia PHP Web Frontend（基于web的动态访问方式）组成。是一个Linux下图形化监控系统运行性能的软件，界面美观、丰富，功能强大。RRDtool是系统存放和显示time-series (即网络带宽、温度、人数、服务器负载等) 。并且它提出有用的图表由处理数据强制执行有些数据密度。
 
-Ganglia 是 UC Berkeley 发起的一个开源监视项目，设计用于测量数以千计的节点。每台计算机都运行一个收集和发送度量数据（如处理器速度、内存使用量等）的名为 gmond 的守护进程。它将从操作系统和指定主机中收集。接收所有度量数据的主机可以显示这些数据并且可以将这些数据的精简表单传递到层次结构中。正因为有这种层次结构模式，才使得 Ganglia 可以实现良好的扩展。gmond 带来的系统负载非常少，这使得它成为在集群中各台计算机上运行的一段代码，而不会影响用户性能。
+对基础设施的监控主要包括三个方面：状态，性能和可用性。通俗的讲就是：是否在干活，干了多少活，还能干多少。
 
+有很多开源的强大工具可以用于监控，比如
+[Cacti](http://www.cacti.net/)，
+[Nagios](http://www.nagios.org)
+以及比较新的
+[Shinken](http://www.shinken-monitoring.org/)和
+[Zabbix](http://www.zabbix.com)。
+这些工具的主要功能是状态监控和报警——就像一个合格的监工，随时掌握基础设施是否在干活，发现谁没干活马上报告。
 
-
-集群监控软件ganglia
-http://sourceforge.net/projects/ganglia
-Ganglia监控软件主要是用来监控系统性能的软件，如：cpu 、mem、硬盘利用率， I/O负载、网络流量情况等，通过曲线很容易见到每个节点的工作状态，对合理调整、分配系统资源，提高系统整体性能起到重要作用。支持浏览器方式访问，但不能监控节点硬件技术指标ganglia 是分布式的监控系统，有两个服务端：Daemon, 分别是：客户端。C/S架构。
-和服务端Ganglia Meta Daemon (gmetad)，还有Ganglia PHP Web Frontend（基于web的动态访问方式）组成。是一个Linux下图形化监控系统运行性能的软件，界面美观、丰富，功能强大。RRDtool是系统存放和显示time-series (即网络带宽、温度、人数、服务器负载等) 。并且它提出有用的图表由处理数据强制执行有些数据密度。下载地址
-http://people.ee.ethz.ch/~oetiker/w...l/download.html 。
-
-
-
-# 安装
-
-在RHEL/CentOS上如果配置了EPEL，那么安装只需要一条命令：
+如果是传统的运维工作，有这些工具就足够强大了。但是对于分布式系统的开发+运维人员（DevOps?），更关心的是掌握分布式系统的性能和可用性，根据数据做出性能调整、升级、扩容等的决策，从而保证基础设施服务能够满足不断增长的业务需求。
 
 
+[Ganglia](http://ganglia.sourceforge.net/)就是这样一种工具。Ganglia 是 UC Berkeley 发起的一个开源监视项目，设计用于测量数以千计的节点。Ganglia主要监控集群的性能指标，如cpu 、mem、硬盘利用率， I/O负载、网络流量情况等，
+也可以监控自定义的性能指标。通过Ganglia绘制的曲线很容易见到每个节点的工作状态，对合理调整、分配系统资源，提高系统整体性能起到重要作用。
+
+gmond 带来的系统负载非常少，这使得它成为在集群中各台计算机上运行的一段代码，而不会影响用户性能。
+
+# Ganglia架构
+
+Ganglia的整体架构如下图所示：
+
+![Ganglia-architecture](/images/2013/ganglia/ganglia_architecture.gif)
+
+1. 每个被检测的节点或集群运行一个gmond进程，进行监控数据的收集、汇总和发送。gmond即可以作为发送者（收集本机数据），也可以作为接收者（汇总多个节点的数据）。
+2. 通常在整个监控体系中只有一个gmetad进程。该进程定期检查所有的gmonds，主动收集数据，并存储在RRD存储引擎中。
+3. ganglia-web是使用php编写的web界面，以图表的方式展现存储在RRD中的数据。通常与gmetad进程运行在一起。
+
+其中，[RRDtool](http://oss.oetiker.ch/rrdtool/)(Round Robin Database tool,环状数据库工具)是一组操作RRD数据的API，支持数据图形化。RRD是一种环状数据库技术，只存储固定数量的数据，新的数据会覆盖最旧的数据。
+更多信息可以参考[RRDtool简体中文教程 v1.01](http://bbs.chinaunix.net/forum.php?mod=viewthread&tid=864861&page=1)。
+
+# Ganglia规划
+
+在动手部署Ganglia之前，首先要对监控体系进行初步的规划。主要考虑两方面的问题：
+
+1. 单集群 or 多集群
+
+   如果节点较少，使用单集群配置起来更容易；
+   如果节点很多，使用多集群可以避免广播风暴。但是需要为每个集群配置不同的组播通道（通过端口区分），同时要配置gmetad同时监听这多个通道。
+
+2. 组播模式 or 单播模式
+
+   组播模式是ganglia的默认模式，同一集群的多个gmond之间互相交换数据，gmetad中可以指定集群中的任意一个或多个节点作为"data_source"；
+   
+   组播模式可能会带来网络的 “抖动（Jitter）”。据说设置节点的时钟同步可以避免抖动的问题； 但如果网络环境不支持组播（比如Amazon’s AWS EC2），就需要使用单播模式。单播模式时，将大部分节点的gmond.conf中,global的deaf设置改为"yes"，则这些节点只发生数据，不接收其他节点的数据，同样也不能作为gmetad中的"data_source"。
+
+   单播模式中还需要设置“send_metadata_interval”，比如30秒。以强制发送元数据。
 
 
-CentOS上安装配置 Ganglia-3.4.0
-1、Ganglia简介：
-Ganglia是UC Berkeley发起的一个开源集群监视项目，设计用于测量数以千计的节点。Ganglia的核心包含gmond、gmetad以及一个Web前端。主要是用来监控系统性能，如：cpu 、mem、硬盘利用率、 I/O负载、网络流量情况等，通过曲线很容易见到每个节点的工作状态，对合理调整、分配系统资源，提高系统整体性能起到重要作用。
-2、Ganglia进程介绍：
-每台计算机都运行一个收集和发送度量数据的名为 gmond 的守护进程。接收所有度量数据的主机可以显示这些数据并且可以将这些数据的精简表单传递到层次结构中。正因为有这种层次结构模式，才使得 Ganglia 可以实现良好的扩展。gmond 带来的系统负载非常少，这使得它成为在集群中各台计算机上运行的一段代码，而不会影响用户性能。所有这些数据多次收集会影响节点性能。网络中的 “抖动”发生在大量小消息同时出现时，可以通过将节点时钟保持一致，来避免这个问题。
-gmetad可以部署在集群内任一台节点或者通过网络连接到集群的独立主机，它通过单播路由的方式与gmond通信，收集区域内节点的状态信息，并以XML数据的形式，保存在数据库中。
-由RRDTool工具处理数据，并生成相应的的图形显示，以Web方式直观的提供给客户端。
-3、安装配置ganglia的过程：
-（1）安装前的准备工作
-（2）安装服务器端
-（3）客户端的安装
-（4）web前端的安装
-（5）安装成功后的测试工作
+ganglia将一个gmetad覆盖的所有集群/节点称为一个grid。可以在/etc/ganglia/gmetad.conf中通过`gridname`指定其名称。多个grid的数据也可以聚合到一个上级gmetad中。
+
+# 安装和配置
+
+## 安装
+
+在RHEL/CentOS上如果配置了EPEL源，则安装变得非常简单。用yum可以查到如下软件包：
+
+- ganglia.i686 : Ganglia Distributed Monitoring System
+- ganglia.x86_64 : Ganglia Distributed Monitoring System
+- ganglia-devel.i686 : Ganglia Library
+- ganglia-devel.x86_64 : Ganglia Library
+- ganglia-gmetad.x86_64 : Ganglia Metadata collection daemon
+- ganglia-gmond.x86_64 : Ganglia Monitoring daemon
+- ganglia-gmond-python.x86_64 : Ganglia Monitor daemon python DSO and metric modules
+- ganglia-web.x86_64 : Ganglia Web Frontend
+
+在不同的节点选择对应的软件包安装即可。
+
+## 配置防火墙规则
+
+gmond和gmetad之间默认使用UDP的8649端口进行通信，如果配置多个集群，还会有其他端口。要保证这些端口畅通。
+
+
+
+## 配置被监控节点(/etc/ganglia/gmond.conf)
+
+
+最重要的配置是集群名称(cluster.name)。
+
+如果要配置多个集群，每个集群要使用不同的端口。共三个地方：
+
+- udp_send_channel.port
+- udp_recv_channel.port
+- tcp_accept_channel.port
+
+## 配置中心节点(/etc/ganglia/gmetad.conf)
+
+最重要的是配置数据源。比如：
+
+    data_source "NginX" a.a.a.101:8661 a.a.a.102:8661
+    data_source "LVS"   b.b.b.101 b.b.b.102
+
+
+
+## 配置web
+
+默认启动httpd服务后，就可以通过`http://IP/ganglia`访问。如果提示权限问题，需要检查：
+
+1. selinux设置
+2. 防火墙设置
+3. /etc/httpd/conf.d/ganglia.conf中的`Deny from all`限制
+
+# 扩展监控功能
+
+Ganglia默认只监控一些通用的性能指标，如果要监控自定义的指标，就需要对Ganglia进行扩展。
+
+## 两种扩展机制
+
+Ganglia支持两种扩展机制：
+
+1. 使用Ganglia提供的gmetric命令将数据发送给gmond。这种方式比较灵活。
+2. 开发自定义的gmond模块。
+
+## 用gmetric监控NginX的例子
+
+NginX支持[状态监控](/nginx_keepalived.html#menuIndex9)。通过web的方式可以获得NginX状态的一些文本。
+
+## LVS
+
+# 与Nagios结合
+Nagios 一直致力于成为一种报警机制
+Ganglia 没有内置通知系统
+将两者集成在一起是非常普遍的实践
+
+
 
 
 
