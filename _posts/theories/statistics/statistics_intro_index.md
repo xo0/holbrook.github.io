@@ -7,9 +7,6 @@ tags: [统计学, 读书笔记]
 ---
 @[豆瓣](http://book.douban.com/subject/2193810/)
 
-##第6章 (TODO)
-
-##第7章 (TODO)
 
 ##第8章 列联表、 x^2检验和对数线性模型(TODO)
 
