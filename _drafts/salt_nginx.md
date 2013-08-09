@@ -25,19 +25,24 @@ lastmod:
 
 上述只是最经常的重复性工作。让人厌烦且容易出错。此外还有其他的配置项和配置参数，以及静态文件都要在多个节点间保持一致。
 
-在[这篇文章](http://thinkinside.tk/2013/05/27/nginx_keepalived.html)中，我就提到可以用配置管理工具或者文件同步工具解放自己。现在有了Salt，可以很容易的解决上述问题。
+在[这篇文章](/2013/05/27/nginx_keepalived.html)中，我就提到可以用配置管理工具或者文件同步工具解放自己。
+尽管可以使用分布式文件系统，比如[DRBD](/2013/07/17/ha_drbd.html)或[MooseFS](/2013/08/02/moosefs.html)来解决配置文件的同步，
+但对于nginx进程的reload, stop, start等，还是需要到各个节点重复操作。
+
+使用Salt，既可以实现文件的同步，还可以进行批量操作。带来的一个附加的好处是：通过yaml生成配置文件，使得配置变得“结构化”，从而可以通过编程的方式管理这些配置。
 
 # 配置标准化
 
-## 安装
+## 内容的拆分
 
-1. 依赖包：gcc pcre-devel zlib-devel openssl-devel
-2. 安装包：从内部服务器下载源代码
-3. 编译参数
-   
-   --with-http_ssl_module
+nginx的配置文件可以是一个单独的nginx.conf，也可以include其他配置文件。比如，一个通常的做法是在主配置文件中`include conf.d/*.conf`。
 
-   --add-module=/PATH/TO/chunkin-nginx-module
+一般会通过nginx管理大量的`upstream`和`server`，对于复杂的配置情况，upstream和server之间可能是多对多的映射关系。
+
+为了更灵活，我将nginx的配置拆分成三个部分：
+
+- 基本参数
+
 
 
 ## 配置项
@@ -49,6 +54,7 @@ lastmod:
    静态文件：从版本库获取
 
 ## 配置数据
+
 
 
 
