@@ -13,6 +13,22 @@ ESB的糟糕不在于其思想，而在于其设计。还有掺杂的“标准�
 需要正确使用，才能发挥ESB的积极作用。
 
 
+# RPC？
+
+AMQP：
+
+- 模型层：定义				解析 or 代码生成？ IDL
+- 会话层：保障传输				路由？
+- 传输层：数据封装、传输、解析
+
+OSI?
+
+
+Thrift:
+- 模型层： thriftDL
+- TProtocol	: TBinaryProtocol, TCompactProtocol, TJSONProtocol, TSimpleJSONProtocol, etc...
+- TTransport: TSocket, TFile, ….
+
 
 
 概括地讲，ESB 具有四个主要功能：
