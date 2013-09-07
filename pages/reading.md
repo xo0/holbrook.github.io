@@ -9,7 +9,7 @@ title  : 读书
   	<div class="span3"><a href="http://book.douban.com/subject/2193810/">《统计学：从数据到结论》</a></div>
   	<div class="span4">
   		<div class="controls progress">
-      		<div class="bar" style="width: 41%;"></div>7/17
+      		<div class="bar" style="width: 47%;"></div>8/17
     	</div>
 	</div>
 </div>
@@ -23,8 +23,9 @@ title  : 读书
 	</div>
 </div>
 
-## 已读
 
+## 已读
+o
 <div class="row">
   	<div class="span3"><a href="http://book.douban.com/subject/2193810/">《统计学：从数据到结论》</a></div>
   	<div class="span9">
@@ -35,11 +36,12 @@ title  : 读书
       <a class="badge badge-inverse" href="/2013/07/09/statistics_intro_5.html">5</a>
       <a class="badge badge-inverse" href="/2013/08/02/statistics_intro_6.html">6</a>
       <a class="badge badge-inverse" href="/2013/08/05/statistics_intro_7.html">7</a>
+      <a class="badge badge-inverse" href="/2013/09/05/statistics_intro_8.html">8</a>
 			<a class="badge" href="#">...</a>
 	</div>
 </div>
 
-
+o
 ## 豆瓣
 
 [@Me](http://www.douban.com/people/58312900/)
@@ -47,3 +49,5 @@ title  : 读书
 - 我的豆列
 
   + [量化金融相关](http://book.douban.com/doulist/2500402/)
+
+
