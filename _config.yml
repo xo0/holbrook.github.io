@@ -34,3 +34,5 @@ menuitems:
       url:      /pages/reading.html
     - name:     工作
       url:      /pages/working.html
+    - name:     运动 
+      url:      http://www.codoon.com/p/holbrook
