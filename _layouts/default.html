@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html xmlns:wb=“http://open.weibo.com/wb”>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -6,12 +6,12 @@
   <head>
     <meta charset="utf-8">
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=100" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
     <meta name="author" content="{{ site.author.name }}">
     <meta name="keywords" content="{% for tag in site.tags %}{{tag[0]}},{% endfor %}心内求法">
-    <meta name="robots" content="index,follow">
+    <meta name="robots" content="all" />
     <meta name="application-name" content="thinkinside.tk">
 
 
@@ -19,31 +19,11 @@
     <link rel="alternate" type="application/rss+xml" title="《心内求法》博客" href="{{ site.feed }}" />
     <link rel="alternate" type="text/xml" title="《心内求法》博客" href="{{ site.feed }}" />
 
-    <!-- Le styles -->
-    
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="/assets/css/syntax.css" rel="stylesheet">
-    <link href="/assets/css/flat-ui.css" rel="stylesheet">
-    <style>
-    h1, h2, h3, .masthead p, .subhead p, .marketing h2, .lead
-    {
-      font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei UI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
-      font-weight: normal;
-    }
-
-    #scrollUp {
-      bottom: 20px;
-      right: 20px;
-      height: 38px;  /* Height of image */
-      width: 38px; /* Width of image */
-      background: url("/assets/img/top.png") no-repeat;
-    }
-    </style>
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/assets/js/html5shiv.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" /><!--[if lt IE 6]>
+    <link rel="stylesheet" type="text/css" href="/assets/css/ie.css" /><![endif]-->
+    <!--
+    Licensing for this website's design:     <http://thinkinside.tk//assets/css/License.rtf>
+    -->
 
     <!-- Le fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/ico/icon-144.png">
@@ -51,76 +31,34 @@
       <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/ico/icon-72.png">
                     <link rel="apple-touch-icon-precomposed" href="/assets/ico/icon-57.png">
                                    <link rel="shortcut icon" href="/assets/ico/favicon.png">
-
+    <script src="/assets/js/jquery-1.9.1.min.js"></script>
     <!--百度统计开放平台-->
     <script>
     var _hmt = _hmt || [];
     </script>
 
-    <!--basic js for all pages -->
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-
   </head>
 
-  <body data-spy="scroll" data-target=".bs-docs-sidebar">
-    <div class="container-fluid">  
-      <div class="row-fluid">
-        <div class="span9" style="border-bottom:1px;">
-          <h1>{% if page.title %}{{ page.title }} {% else %} {{ site.title }}{% endif %}</h1>
-        </div>
-      </div>
-      <div class="row-fluid">
+
+<body class="sandvox has-page-title no-sidebar no-custom-banner no-navigation no-IR" id="thinkinside_tk">
+    <div id="page-container">
+      <div id="page">
         {{ content }}
-      </div>
-    </div>
-
-
-
-  {% include parts/footer.html %} 
-
-  <!-- Le javascript
-  ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-
-  <script src="/assets/js/bootstro.min.js"></script>
-  <script src="/assets/js/jquery.scrollUp.min.js"></script>
-    <script>
-      $(document).ready(function(){
-        $("img.lazy").unveil();
-        
-             $("#start-intro").click(function(){
-                bootstro.start();    
-            });
-
-             $.scrollUp({
-                  scrollName: 'scrollUp', // Element ID
-                  topDistance: '300', // Distance from top before showing element (px)
-                  topSpeed: 300, // Speed back to top (ms)
-                  animation: 'fade', // Fade, slide, none
-                  animationInSpeed: 200, // Animation in speed (ms)
-                  animationOutSpeed: 200, // Animation out speed (ms)
-                  scrollText: '', // Text for element
-                  activeOverlay: false  // Set CSS color to display scrollUp active point, e.g '#00FFFF'
-            });
-          });
-    </script>
-
-    <!--search box-->
-    <script>
-    $('input#searchkey').bind('keyup', function(event){
-      if (event.keyCode=="13"){
-        var url='http://www.google.com/search?newwindow=1&q=site%3Athinkinside.tk+'+$('input#searchkey')[0].value;
-        window.open(url); 
-      }
-    });
-    </script>
-
+        <div class="clear below-content"></div>
+        <div id="page-bottom">
+          <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+          <div id="page-bottom-contents">
+            {% include parts/footer.html %}   
+            
+          </div>
+        </div> <!-- page-bottom -->
+      </div> <!-- container -->
+    </div> <!-- specific body type -->
     
-
-    <!--script src="/assets/js/holder.js"></script-->
-    <!--script src="/assets/js/application.js"></script-->
-
+    <script>
+    $(document).ready(function(){var e=window.devicePixelRatio&&window.devicePixelRatio>1?window.devicePixelRatio:1,n=window.innerWidth>window.innerHeight?screen.height:screen.width;$("span[data-img-src-hr]").each(function(){var s=$(this).width(),o=$(this).data("width"),u=$(this).data("height"),a=$(this).data("alt");t='<img src="',d=e>1&&o<2*s&&o<2*n;i=0,r=$(this)[0].attributes;if(d){t+=$(this).data("img-src-hr")}else{t+=$(this).data("img-src")}t+='"';if(a)t+=' alt="'+a+'"';if(o)t+=' width="'+o+'"';if(u)t+=' height="'+u+'"';for(l=r.length;i<l;i++){var f=r[i].name;if(!f.match(/(data-width|data-height|data-alt|data-img-src)/g)){t+=" "+f+'="'+r[i].value+'"'}}t+=" />";$(this).replaceWith($(t))})})
+    </script>
+  
     <!-- Baidu Button BEGIN -->
     <script type="text/javascript" id="bdshare_js" data="type=slide&amp;img=5&amp;pos=right&amp;uid=6715859" >
     </script>
@@ -130,7 +68,7 @@
     var bds_config={"bdTop":302};
     document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.    ceil(new Date()/3600000);
     </script>
-<!-- Baidu Button END -->
+    <!-- Baidu Button END -->
 
     <!-- Analytics
     ================================================== -->
