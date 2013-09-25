@@ -1,7 +1,42 @@
 ---
 layout:           default
 ---
-<div class="span9">{{ content }}</div>
 
-    <!--style="position:fixed;right:20px;"-->
-<div class="span3">{% include parts/sidebar.html %}</div>
+<div id="page-top" class="no-logo has-title has-tagline">
+          <div id="title">
+            <h1 class="title in"><a href="./">
+              <span class="in">{{ site.title }} </span>
+            </a>
+            <a target="_blank" href="/rss.xml"><img vspace="2" border="0" style="margin-bottom: 3px;" alt="feedsky" src="/assets/img/feed-icon.gif"></a>
+        </h1>
+
+            <div id="sitemenu-container">
+            <div id="sitemenu">
+              
+              <div id="sitemenu-content">
+                <ul>
+{% for item in site.menuitems %}
+	{% if item.url == page.url %}
+					<li class="i1 e currentPage"><span class="in">{{item.name}}</span></li>
+    {% else %}
+    				<li class="i1 o"><a href="{{item.url}}"><span class="in">{{item.name}}</span></a></li>
+    {% endif %}
+{% endfor %}
+                </ul>
+              </div> <!-- /sitemenu-content -->
+            </div> <!-- /sitemenu -->
+          </div> <!-- sitemenu-container -->
+            
+          </div><!-- title -->
+         
+        </div> <!-- page-top -->
+        
+        <div id="page-content" class="no-navigation">
+          <div id="main">
+            <div id="main-content">
+            	{{ content }}              
+            </div> <!-- main-content -->
+            <div id="main-bottom"></div>
+          </div> <!-- main -->
+        </div> <!-- content -->
+        
