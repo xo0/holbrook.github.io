@@ -3,51 +3,40 @@ layout : page
 title  : tags
 ---
 
-<div class="article">
-
-</div>
-<div class="article">
-    <div class="article-content">
-      <div class="RichTextElement">
-        <div class="tag-cloud">
-   {% for tag in site.tags %}
-      <span class="in"><a href="/pages/tags.html#{{ tag[0] }}-ref" id="{{ forloop.index }}" class="i1 o" style="margin: 5px">{{ tag[0] }}<sup>{{ tag[1].size }}</sup></a></span>
-      
-   {% endfor %}
-</div>
 
 
+<ul class="tag_box inline">
+ {% for tag in site.tags %} 
+ <li>
+ 	<a href="#{{ tag[0] }}-ref">{{ tag[0] }} </a>
+ 	{%if tag[1].size > 10 %}
+ 	<span class="badge badge-important">{{ tag[1].size }}</span>
+ 	
+ 	{% else %}
+ 	<span class="badge">{{ tag[1].size }}</span>
+ 	{% endif %}
+ </li>
+ {% endfor %}
+</ul>
 
-      </div>
-    </div> <!-- /article-content -->
-</div> <!-- /article -->
 
-<hr style="height:1px;border:none;border-top:1px dashed #987cb9; color:#987cb9;"/>
+<hr/>
+
 
 
 {% for tag in site.tags %} 
-<div class="article">
-  <h3 id="{{ tag[0] }}-ref" class="collection-index"><span class="in" style="text-decoration: none;">
-    <a href="#">
-  {{ tag[0] }}</a></span></h3>
-  
-    <div class="article-content">
-  <ul>
+  <h2 id="{{ tag[0] }}-ref">{{ tag[0] }}</h2>
+  <ul><span>
     {% assign pages_list = tag[1] %}  
     {% for node in pages_list %}
   {% if node.title != null %}
     {% if group == null or group == node.group %}
 
-        <li>{{ node.date | date: "%Y-%m-%d" }}
+      	<li>{{ node.date | date: "%Y-%m-%d" }}{% for cat in node.categories %}
+        <a class="badge" href="/pages/categories.html#{{cat}}-ref">{{cat}}</a>&nbsp;
+        {% endfor %}
          &raquo; <a href="{{ BASE_PATH }}{{node.url}}">{{node.title}}</a>
-
-         <div class="timestamp in"><span class="in">
-{% for cat in node.categories %}
-        <a class="label" href="/pages/categories.html#{{cat}}-ref">{{cat}}</a>&nbsp;
-      {% endfor %}
-</span></div>
-
-        </li>
+      	</li>
       
     {% endif %}
   {% endif %}
@@ -55,34 +44,4 @@ title  : tags
 {% assign pages_list = nil %}
 {% assign group = nil %}
   </ul>
-      </div> <!-- /article-content -->
-</div> <!-- /article -->
-
-<hr style="height:1px;border:none;border-top:1px dashed #987cb9; color:#987cb9;"/>
-
-
-  
-
 {% endfor %}
-
-    <!-- tag cloud -->
-<script type="text/javascript">
-   $(function() {
-      var minFont = 12.0,
-          maxFont = 36.0,
-          diffFont = maxFont - minFont,
-          size = 0;
-       
-      {% assign max = 1.0 %}
-      {% for tag in site.tags %}
-         {% if tag[1].size > max %}
-            {% assign max = tag[1].size %}
-         {% endif %}
-      {% endfor %}
-            
-      {% for tag in site.tags %}
-         size = (Math.log({{ tag[1].size }}) / Math.log({{ max }})) * diffFont + minFont;
-         $("#{{ forloop.index }}").css("font-size", size + "px");
-      {% endfor %}
-   });
-</script>
