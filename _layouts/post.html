@@ -2,62 +2,48 @@
 layout:           default
 ---
 
-<div id="page-top" class="no-logo has-title has-tagline">
-          <div id="title">
-            <h1 class="title in"><a href="./"><span class="in">{{ page.title }}</span></a></h1>
-            <p id="tagline">
-            <div class="timestamp in">
-              <span class="in">
-              by <a href="/">心内求法</a> {% include post_info_bar %}
+{% capture IMG_PATH %}/images/{{ page.date | date: "%Y" }}/{{page.path}}/{% endcapture %}
 
+<div class="span9">
+  <p class="pre-meta">{% include post_info_bar %}
 {% if page.lastmod %}
-  <strong>
+  <span class="alert alert-success"><strong>
   最近更新：{{ page.lastmod | date: "%Y-%m-%d" }}
-  </strong>
+  </strong></span>
   {% endif %}
+  </p>
+  
+  {% if page.description %}<p>摘要：<br/>{{page.description}}</p>{% endif %}
+  
+      <div id="menuIndex" class="row-fluid" style="background-color:#ecf0f5;"></div>
+  <hr style="height:3px;border:none;border-top:3px double"/>
+  <div id="content">
+      {{ content }}   
+  </div> 
+  
+  <!--  分享  -->
+  <!-- Baidu Button BEGIN -->
+  <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+  <span class="bds_more">分享到：</span>
+  <a class="bds_tsina">新浪微博</a>
+  <a class="bds_baidu">百度搜藏</a>
+  <a class="bds_xg">鲜果</a>
+  <a class="bds_twi">Twitter</a>
+  <a class="bds_fbook">Facebook</a>
+  <a class="bds_youdao">有道云笔记</a>
+  <a class="bds_mail">邮件分享</a>
+  </div>
+  <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6715859" ></script>
+  <script type="text/javascript" id="bdshell_js"></script>
+  <script type="text/javascript">
+  document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
+  </script>
+  <!-- Baidu Button END -->
 
-            </span></div>
-            
-</p>
-          </div><!-- title -->
+  <hr/>      
+  <p class="pre-meta">{% include post_info_bar %}</p>
 
-        </div> <!-- page-top -->
-        
-        <div id="page-content" class="no-navigation">
-          <div id="main">
-            <div id="main-content">
-              <div class="article">
-                <div class="article-content">
-                  <div class="RichTextElement">
-                    <div>{% if page.description %}<p>摘要：<br/>{{page.description}}</p>{% endif %}</div>
-
-                    <hr style="height:1px;border:none;border-top:1px dashed #987cb9; color:#987cb9;"/>
-                {{ content }}  
-
-                <hr style="height:1px;border:none;border-top:1px dashed #987cb9; color:#987cb9;"/>
-              <!--  分享  -->
-              <!-- Baidu Button BEGIN -->
-              <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
-              <span class="bds_more">分享到：</span>
-              <a class="bds_tsina">新浪微博</a>
-              <a class="bds_baidu">百度搜藏</a>
-              <a class="bds_xg">鲜果</a>
-              <a class="bds_twi">Twitter</a>
-              <a class="bds_fbook">Facebook</a>
-              <a class="bds_youdao">有道云笔记</a>
-              <a class="bds_mail">邮件分享</a>
-              </div>
-              <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6715859" ></script>
-              <script type="text/javascript" id="bdshell_js"></script>
-              <script type="text/javascript">
-              document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
-              </script>
-              <!-- Baidu Button END -->
-              <div><p>{% include post_info_bar %}</p></div>
-
-
-              <!--上一篇，下一篇-->
-              <p>
+      <!--上一篇，下一篇-->
       <div class="row-fluid">
       {% if page.next %}
         <div class="span6">
@@ -71,7 +57,6 @@ layout:           default
         </div>
       {% endif %}
       </div>
-    </p>
 
      
      
@@ -123,13 +108,18 @@ layout:           default
           <!-- UY END -->
         
       </div>
-                  </div>
-                </div> <!-- /article-content -->
-                <div class="article-info">
-                </div> <!-- /article-info -->
-              </div> <!-- /article -->
-            </div> <!-- main-content -->
-            <div id="main-bottom"></div>
-          </div> <!-- main -->
-        </div> <!-- content -->
-        
+
+ 
+  </div>
+       <!--style="position:fixed;right:20px;"-->
+    <div class="span3">
+      {% include parts/sidebar.html %}
+    
+
+      <div class="row-fluid" style="background-color: rgb(44, 62, 80);">
+          推荐阅读
+      </div>
+    </div>
+</div>
+</div>
+<script src="/assets/js/post.js"></script>
