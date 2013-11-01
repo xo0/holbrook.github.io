@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "手少阳三焦经——内关"
+title: "手少阳三焦经——外关"
 description: ""
 category: 中医学 
 tags: [手少阳三焦经]
