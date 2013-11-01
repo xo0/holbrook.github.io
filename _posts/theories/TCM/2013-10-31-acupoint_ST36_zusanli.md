@@ -37,7 +37,7 @@ lastmod: 2013-10-31
 
 腧穴示意图（右侧）
 
-![](/images/TCM/acupoint/model_ST36.jpg)
+![](/images/TCM/acupoint/ST36_model.jpg)
 
 腧穴模型图(左侧)
 
