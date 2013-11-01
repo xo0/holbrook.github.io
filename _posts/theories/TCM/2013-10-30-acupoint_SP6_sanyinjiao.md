@@ -43,7 +43,7 @@ lastmod: 2013-10-30
 
 腧穴示意图（右侧）
 
-![三阴交](/images/TCM/acupoint/model_SP6_GB38.jpg)
+![三阴交](/images/TCM/acupoint/SP6_GB38_model.jpg)
 
 腧穴模型图(左侧)
 

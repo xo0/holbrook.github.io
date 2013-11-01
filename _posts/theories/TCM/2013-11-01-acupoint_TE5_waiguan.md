@@ -43,7 +43,7 @@ tags: [手少阳三焦经]
 
 小臂前段解剖图（右侧)
 
-![](/images/TCM/acupoint/PC6_SJ5.png)
+![](/images/TCM/acupoint/PC6_TE5.png)
 
 腧穴示意图（右侧）
 

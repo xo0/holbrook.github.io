@@ -49,11 +49,11 @@ tags: [手厥阴心包经]
 
 小臂前段解剖图（右侧)
 
-![](/images/TCM/acupoint/PC6_SJ5.png)
+![](/images/TCM/acupoint/PC6_TE5.png)
 
 腧穴示意图（右侧）
 
-![](/images/TCM/acupoint/pc6.jpg)
+![](/images/TCM/acupoint/PC6_TE5_model.jpg.jpg)
 
 腧穴模型图(左侧)
 
