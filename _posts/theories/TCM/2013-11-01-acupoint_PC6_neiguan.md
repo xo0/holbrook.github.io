@@ -53,7 +53,7 @@ tags: [手厥阴心包经]
 
 腧穴示意图（右侧）
 
-![](/images/TCM/acupoint/PC6_TE5_model.jpg.jpg)
+![](/images/TCM/acupoint/PC6_TE5_model.jpg)
 
 腧穴模型图(左侧)
 
