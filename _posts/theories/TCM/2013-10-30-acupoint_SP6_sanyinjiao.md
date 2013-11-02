@@ -4,7 +4,6 @@ title: "足太阴脾经——三阴交"
 description: ""
 category: 中医学 
 tags: [足太阴脾经]
-lastmod: 2013-10-30
 ---
 
 
