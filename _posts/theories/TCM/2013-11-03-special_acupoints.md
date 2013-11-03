@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "经穴中的“特定穴”"
+title: 特定穴
 description: "尽管任何腧穴都有其治疗作用，但是针灸临床会经常使用其中的一部分。这些腧穴称为“特定穴”（special acupoints）。特定穴往往具有特殊的治疗效果。"
 category: 中医学 
 tags: []
