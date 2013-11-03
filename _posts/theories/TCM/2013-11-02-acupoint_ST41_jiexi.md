@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "足阳明胃经——解析"
+title: "足阳明胃经——解溪"
 description: ""
 category: 中医学 
 tags: [足阳明胃经]
