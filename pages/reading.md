@@ -35,8 +35,8 @@ title  : 读书
       <a class="badge badge-inverse" href="/2013/07/09/statistics_intro_5.html">5</a>
       <a class="badge badge-inverse" href="/2013/08/02/statistics_intro_6.html">6</a>
       <a class="badge badge-inverse" href="/2013/08/05/statistics_intro_7.html">7</a>
-      <a class="badge badge-inverse" href="/2013/08/05/statistics_intro_8.html">8</a>
-      <a class="badge badge-inverse" href="/2013/08/05/statistics_intro_9.html">9</a>
+      <a class="badge badge-inverse" href="/2013/09/05/statistics_intro_8.html">8</a>
+      <a class="badge badge-inverse" href="/2013/12/11/statistics_intro_9.html">9</a>
 			<a class="badge" href="#">...</a>
 	</div>
 </div>
