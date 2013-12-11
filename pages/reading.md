@@ -9,14 +9,14 @@ title  : 读书
   	<div class="span3"><a href="http://book.douban.com/subject/2193810/">《统计学：从数据到结论》</a></div>
   	<div class="span4">
   		<div class="controls progress">
-      		<div class="bar" style="width: 41%;"></div>7/17
+      		<div class="bar" style="width: 53%;"></div>9/17
     	</div>
 	</div>
 </div>
 
 <div class="row">
   	<div class="span3"><a href="http://book.douban.com/subject/1281186/">《系统交易方法》</a></div>
-  	<div class="span4">
+  	<div class="span4">  
   		<div class="controls progress">
       		<div class="bar" style="width: 13%;"></div>1/8
     	</div>
@@ -35,6 +35,8 @@ title  : 读书
       <a class="badge badge-inverse" href="/2013/07/09/statistics_intro_5.html">5</a>
       <a class="badge badge-inverse" href="/2013/08/02/statistics_intro_6.html">6</a>
       <a class="badge badge-inverse" href="/2013/08/05/statistics_intro_7.html">7</a>
+      <a class="badge badge-inverse" href="/2013/08/05/statistics_intro_8.html">8</a>
+      <a class="badge badge-inverse" href="/2013/08/05/statistics_intro_9.html">9</a>
 			<a class="badge" href="#">...</a>
 	</div>
 </div>
