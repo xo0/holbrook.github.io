@@ -44,7 +44,7 @@ lastmod:
 
 在规则引擎中，将知识表达为规则（rules），要分析的情况定义为事实（facts）。二者在内存中的存储分别称为Production Memory和Working Memory，如下图：
 
-![](/images/rule-engine/rule.png)
+![](/images/rule-engine/rule_engine.png)
 
 rules和facts是规则引擎接受的输入参数，而规则引擎本身包括两个组成部分：Pattern Matcher和Agenda。Pattern Matcher根据facts找到匹配的rules，Agenda管理PatternMatcher挑选出来的规则的执行次序。在外围，还会有一个执行引擎（Execution Engine）负责根据Agenda输出的rules执行具体的操作。
 
