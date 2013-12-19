@@ -5,7 +5,7 @@ description: ""
 category: 量化金融
 tags: [交易系统, NoSQL]
 ---
-
+ 
 # 关系数据库，数据文件 还是 NoSQL
 
 股票行情数据具有如下特点：
@@ -195,7 +195,7 @@ class Person {
 - 关联到单个对象
 - 关联到集合
 
-
+{% highlight java %}
 EntityCursor<Person> employees = dao.personByEmployerIds.subIndex(gizmoInc.id).entities();
 try {
     for (Person employee : employees) {
@@ -203,7 +203,7 @@ System.out.println(employee.ssn + ' ' + employee.name); }
 } finally {
     employees.close();
 }
-
+{% endhighlight %}
 
 - 等值连接
 
@@ -211,6 +211,7 @@ System.out.println(employee.ssn + ' ' + employee.name); }
 
 比如，以下代码查询所有Bob的孩子中为gizmo公司工作的 员工:
 
+{% highlight java %}
 EntityJoin<String,Person> join = new EntityJoin(dao.personBySsn);
 join.addCondition(dao.personByParentSsn, "111-11-1111"); join.addCondition(dao.personByEmployerIds, gizmoInc.id);
 ForwardCursor<Person> results = join.entities(); try {
@@ -219,15 +220,16 @@ for (Person person : results) { System.out.println(person.ssn + ' ' + person.nam
 } finally {
     results.close();
 }
-
+{% endhighlight %}
 
 ### 建立连接
 
 ### 事务支持
 
-
+{% highlight java %}
 Transaction txn = env.beginTransaction(null, null); dao.employerById.put(txn, gizmoInc); dao.employerById.put(txn, gadgetInc);
 txn.commit();
+{% endhighlight %}
 
 ### 模型变化
 
@@ -246,10 +248,11 @@ Berkeley DB在API的很多地方提供了性能调优的选项。常见的包括
 
   通过DatabaseConfig参数可以用来调整Berkeley DB引擎的性能。
   比如,可指定内部B树节点的大小来调整性能,通过如下方式来指定:
-
+{% highlight java %}
     DatabaseConfig config = store.getPrimaryConfig(Employer.class); 
     config.setNodeMaxEntries(64);
     store.setPrimaryConfig(config);
+{% endhighlight %}
 
 - CRUD操作参数
 
