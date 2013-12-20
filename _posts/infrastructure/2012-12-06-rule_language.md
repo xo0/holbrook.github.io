@@ -28,8 +28,7 @@ lastmod:
 
 下面是一个drl的例子：
 
-{% highlight basic %}
-
+```
 package com.sample
  
 import com.sample.DroolsTest.Message;
@@ -50,5 +49,4 @@ rule "GoodBye"
     then
         System.out.println( myMessage );
 end
-
-{% endhighlight %}
+```
