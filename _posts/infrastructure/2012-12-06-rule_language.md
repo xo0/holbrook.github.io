@@ -378,6 +378,7 @@ end
 # 类型声明
 
 可以在规则文件中定义Fact类型，而不需要编写Java类。比如：
+
 ```
 declare Address 
     city : String
@@ -405,6 +406,7 @@ addressType.set(add, "addressName","Capital");
 在声明中还可以定义元数据。可以为 Fact 对象、Fact对象的属性或者是规则来定义元数据,元数据定义采用的是“@”符号开头。
 
 比如：
+
 ```
 declare User
     @createTime(2009-10-25) 
