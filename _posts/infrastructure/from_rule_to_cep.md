@@ -12,123 +12,14 @@ lastmod:
 从实现角度来看，Drools Fusion即使规则引擎，又可以作为CEP
 
 
-3.Drools Fusion 用户指南_中文.pdf
-
-CEP
-	Event
-		特性
-			不可变
-			时间约束
-			生命周期管理
-			滑动窗口
-		元数据
-			@role
-			@timestamp
-			@duration
-			@expires
 	Session Clock
 	stream
-	时间推理
 	滑动窗口
 	事件的内存管理
 
 
 
 
-
-# CEP
-
-一个宽泛的定义，
-事件,指在应用程序域中的状态的一个有意义改变的一条记录。
-
-
-单事件、多原子事件,或者甚至相关层次事件
-
-
-复杂事件处理 关注的是相关性,以及原子事件组合成的复杂(复合)事件
-
-复杂事件处理(CEP),本质上是一个事件处理概念,涉及处理多个事 件的任务与在事件云内部识别有意义事件的目标
-
-换言之,CEP 是关于从一个事件云中检测和选择感兴趣的事件(不只这些), 找出它们之间的关系,根据它们和它们之间的关系推断新的数据。
-
-
-在业务方面:
-- 业务规则常常被定义在出现了事件触发情况的基础上
-- 业务规则和事件处理查询经常变化，业务需要立即响应新的市场条件，新的规则和新的策略
-
-# 事件
-
-事件(Event)是特殊类型的事实(Fact)。与事实相比，事件有一些特殊的特性：
-
-- 不可改变
-  
-  事件记录了已经发生的事情，而“过去”是不可改变的。
-
-- 强时间约束
-
-  事件有发生的时点，事件之间通常基于事件发生的时点进行关联。
-
-- 被管理的生命周期
-
-  有效时间窗口之外的事件不再有意义，可以被引擎自动回收。  
-
-？- 用滑动窗口
-  因为所有的事件都有与它们关联的时间戳,所以,对它们可以 定义和使用滑动窗口,允许在一个时间段上根据值的聚合创建规则,
-  例如, 整个 60 分钟的一个事件的值的平均值。
-
-
-
-## 事件声明
-
-DRL中的[declare](/2012/12/06/rule_language.html#menuIndex7)可以用于声明事件，只需要在declare中增加一条`@role(event)`
-的元数据。实际上，declare默认隐含了`@role(fact)`的元数据，表面声明的是事实(Fact)。
-
-比如：
-
-```
-import some.package.StockTick
-declare StockTick
-    @role( event )
-end
-
-//或者使用内嵌的事件声明
-declare StockTick
-    @role( event )
-    datetime : java.util.Date
-    symbol : String
-    price : double
-end
-```
-
-## 事件元数据
-
-事件有一些Fact不具备的元数据。可以在declare中指定。
-
-- @timestamp
-
-  事件默认的时间戳是在insert到工作空间时，由引擎从Session Clock 获取并分配给事件。如果要指定使用事件的某一个属性作为时间戳，
-  可以用`@timestamp`元数据指定。比如：
-
-
-  ```
-  declare StockTick
-      @role( event )
-      @timestamp( datetime )
-      datetime : java.util.Date
-      symbol : String
-      price : double
-  end
-  ```
-
-- @duration
-
-  默认事件的期限为0，称为point-in-time 事件。有些事件具有期限性，称为interval-based 事件。
-
-  要声明事件的期限，通过`@duration`指定事件的一个属性，该属性以 **毫秒数** 记录了事件的期限。
-
-- @expires  
-
-  当引擎运行在流(STREAM)模式时，指定一个过期时间可以用于内存管理。其格式为`[#d][#h][#m][#s][#[ms]]`，比如：`@expires( 1h35m )`
 
 # 会话时钟
 

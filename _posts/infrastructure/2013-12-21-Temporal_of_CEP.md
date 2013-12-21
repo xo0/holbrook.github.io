@@ -7,15 +7,15 @@ tags: [CEP]
 lastmod: 
 ---
 
-CEP中的事件(Event)具有两个与时间相关的属性。一个是timestamp，标记事件发生的时间；另一个是duration，标记事件持续的时间间隔。
+[CEP](/2012/11/06/about_cep.html)中的[事件(Event)](/2013/12/21/event_in_CEP.html)具有两个与时间相关的属性。一个是timestamp，标记事件发生的时间；另一个是duration，标记事件持续的时间间隔。
 
 由这两个时间属性，还可以计算出事件结束的事件。
 
-时间推理(Temporal)是CEP中特有的条件判断(LHS)，其判断的要素正是基于事件的上述时间属性。
+时间推理(Temporal)是CEP中特有的条件判断([LHS](/2012/12/06/rule_language.html#menuIndex3))，其判断的要素正是基于事件的上述时间属性。
 
 Allen在《An Interval-based Representation of Temporal Knowledge》中描述了13种时间推理的运算符。
 
-下面用DRL语言介绍这13种运算符。其中，运算符的参数均为`3m30s`、`4m`等格式。
+下面用DRL语言介绍这13种运算符。其中，运算符的参数格式均为`[#d][#h][#m][#s][#[ms]]`。比如`3m30s`、`4m`等。
 
 
 # After 和 Before
