@@ -30,9 +30,5 @@ menuitems:
       url:      /pages/tags.html
     - name:     归档
       url:      /pages/archive.html
-    - name:     读书
-      url:      /pages/reading.html
-    - name:     工作
-      url:      /pages/working.html
     - name:     手机版 
       url:      http://www.wumii.com/auto_app/download/nbn2Kljo
