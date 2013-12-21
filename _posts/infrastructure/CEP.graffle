@@ -2511,6 +2511,8 @@ B after A, x
 		<integer>0</integer>
 		<key>ExpandedCanvases</key>
 		<array/>
+		<key>Frame</key>
+		<string>{{81, 0}, {694, 778}}</string>
 		<key>ListView</key>
 		<true/>
 		<key>OutlineWidth</key>
