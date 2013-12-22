@@ -3,7 +3,7 @@ layout: post
 title: "手厥阴心包经——内关"
 description: ""
 category: 中医学 
-tags: [手厥阴心包经]
+tags: [腧穴, 络穴, 八脉交会穴]
 ---
 
 

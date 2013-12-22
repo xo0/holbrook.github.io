@@ -3,7 +3,7 @@ layout: post
 title: "足太阳膀胱经——承山"
 description: ""
 category: 中医学 
-tags: [足太阳膀胱经]
+tags: [腧穴]
 ---
 
 ## 名称由来
