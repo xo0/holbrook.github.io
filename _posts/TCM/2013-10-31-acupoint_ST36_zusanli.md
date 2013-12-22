@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "足阳明胃经——足三里"
+title: "足阳明胃经——足三里(合穴)"
 description: ""
 category: 中医学 
-tags: [足阳明胃经]
+tags: [腧穴, 合穴]
 lastmod: 2013-10-31
 ---
 

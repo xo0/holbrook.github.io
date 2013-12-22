@@ -1,11 +1,12 @@
 ---
 layout: post
-title: "任脉——中脘"
+title: "任脉——中脘(胃募穴，腑会穴)"
 description: ""
 category: 中医学 
-tags: [任脉]
+tags: [腧穴, 募穴, 八会穴]
 ---
 
+胃募穴，腑会穴
 
 ## 定位
 

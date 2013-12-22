@@ -3,7 +3,7 @@ layout: post
 title: "足阳明胃经——解溪"
 description: ""
 category: 中医学 
-tags: [足阳明胃经]
+tags: [腧穴]
 ---
 
 ## 名称由来

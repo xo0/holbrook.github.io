@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "手太阳小肠经——养老"
+title: "手太阳小肠经——养老(郄穴)"
 description: ""
 category: 中医学 
-tags: [手太阳小肠经]
+tags: [腧穴, 郄穴]
 ---
 
 ## 名称由来
