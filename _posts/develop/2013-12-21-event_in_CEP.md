@@ -2,7 +2,7 @@
 layout: post
 title: "CEP中的事件(Event)"
 description: ""
-category: 基础设施
+category: 软件开发
 tags: [CEP]
 lastmod: 
 ---
