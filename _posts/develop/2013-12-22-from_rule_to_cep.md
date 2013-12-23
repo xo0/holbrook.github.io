@@ -2,7 +2,7 @@
 layout: post
 title: "从规则引擎到复杂事件处理(CEP)"
 description: "Drools Fusion既是规则引擎，又可以作为CEP。除了事件定义时间推理之外，对于引擎本身也会有一些不同的使用。主要体现在会话时钟、流模式、滑动窗口和对事件的内存管理。"
-category: 基础设施
+category: 软件开发
 tags: [规则引擎, CEP]
 lastmod: 
 ---

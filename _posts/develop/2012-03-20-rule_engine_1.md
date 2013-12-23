@@ -2,7 +2,7 @@
 layout: post
 title: "规则，推理机和规则引擎"
 description: ""
-category: 基础设施
+category: 软件开发
 tags: [规则引擎]
 lastmod: 
 ---

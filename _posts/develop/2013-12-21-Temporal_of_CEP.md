@@ -2,7 +2,7 @@
 layout: post
 title: "CEP中的时间推理(Temporal)"
 description: "时间推理(Temporal)是CEP中特有的条件判断(LHS)。本文介绍13种时间推理运算符及其DRL表示"
-category: 基础设施
+category: 软件开发
 tags: [CEP]
 lastmod: 
 ---

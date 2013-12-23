@@ -2,7 +2,7 @@
 layout: post
 title: "Drools规则引擎API概述"
 description: "与此对应，规则引擎API也分成三个部分。在Drools中，分别叫做Knowledge API，Fact API和Execution API。"
-category: 基础设施
+category: 软件开发
 tags: [规则引擎]
 lastmod: 
 ---

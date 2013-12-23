@@ -2,7 +2,7 @@
 layout: post
 title: "Drools规则描述语言快速手册"
 description: ""
-category: 基础设施
+category: 软件开发
 tags: [规则引擎]
 lastmod: 
 ---

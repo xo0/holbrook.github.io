@@ -194,9 +194,10 @@ tags: [交易系统, 规则引擎]
 
 ## 用规则描述语言实现
 
-使用Drools的DSL描述如下：
+定义[事件](http://thinkinside.tk/2013/12/21/event_in_CEP.html)，规划好[入口点](http://thinkinside.tk/2013/12/22/from_rule_to_cep.html#menuIndex3)，然后用[规则描述语言](http://thinkinside.tk/2012/12/06/rule_language.html)实现从事件产生交易信号的规则。
 
-（TODO）
+最后，通过[描述符]()定义该策略的名称、资源清单、参数设置等信息，以备复用。
+
 
 
 
