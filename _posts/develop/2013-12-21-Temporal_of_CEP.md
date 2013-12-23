@@ -18,13 +18,15 @@ Allen在《An Interval-based Representation of Temporal Knowledge》中描述了
 下面用DRL语言介绍这13种运算符。其中，运算符的参数格式均为`[#d][#h][#m][#s][#[ms]]`。比如`3m30s`、`4m`等。
 
 
-# After 和 Before
+# After 和 Before(之前和之后)
 
   ![](/images/rule-engine/temporal-after_and_before.png)
 
   ```
   // x∈[a,b]时，满足以下条件
+  //A发生在B之前
   $eventA : EventA( this before[a,b] $eventB )
+  //B发生在A之后
   $eventB : EventB( this after[a,b] $eventA )
 
   ```  
@@ -33,7 +35,7 @@ Allen在《An Interval-based Representation of Temporal Knowledge》中描述了
   + 如果只给出一个参数a,则b=+∞
   
 
-# Coincides
+# Coincides（同时发生）
 
   ![](/images/rule-engine/temporal-coincides.png)
 
@@ -48,13 +50,15 @@ Allen在《An Interval-based Representation of Temporal Knowledge》中描述了
   + 如果不给出参数，则a=0,b=0
 
 
-# During 和 Includes
+# During 和 Includes（包含）
 
   ![](/images/rule-engine/temporal-during.png)
 
   ```
   // x∈[a,b]，且y∈[c,d]时，满足以下条件
+  //A在B期间发生
   $eventA : EventA( this during[a,b,c,d] $eventB )
+  //B包含A
   $eventB : EventB( this includes[a,b,c,d] $eventA )
   
   ```  
@@ -64,14 +68,16 @@ Allen在《An Interval-based Representation of Temporal Knowledge》中描述了
   + 如果不给出参数，则a=0,b=+∞, c=0,d=+∞
 
 
-# Finishes 和 Finished by
+# Finishes 和 Finished by（同时结束）
 
 
   ![](/images/rule-engine/temporal-finishes.png)
 
   ```
   // x∈[0,a]时，满足以下条件
+  //A在B之后开始，和B同时结束
   $eventA : EventA( this finishes[a] $eventB )
+  //B在A之前开始，和B同时结束
   $eventB : EventB( this finishedby[a] $eventA )
 
   ```  
@@ -80,13 +86,15 @@ Allen在《An Interval-based Representation of Temporal Knowledge》中描述了
 
 
 
-# Meets 和 Met by
+# Meets 和 Met by（相邻）
 
   ![](/images/rule-engine/temporal-after_and_before.png)
 
   ```
   // x∈[0,a]时，满足以下条件
+  //A结束时B开始
   $eventA : EventA( this meets[a] $eventB )
+  //A结束时B开始
   $eventB : EventB( this metby[a] $eventA )
 
   ```  
@@ -94,13 +102,15 @@ Allen在《An Interval-based Representation of Temporal Knowledge》中描述了
   + 如果没有给出参数，则a=0
 
 
-# Overlaps 和 Overlappd by
+# Overlaps 和 Overlappd by（相交）
 
   ![](/images/rule-engine/temporal-overlaps.png)
 
   ```
   // x∈[a,b]时，满足以下条件
+  //A在B之前开始，在B之后结束
   $eventA : EventA( this overlaps[a,b] $eventB )
+  //B在A之后开始，在A之前结束
   $eventB : EventB( this overlappedby[a,b] $eventA )
 
   ```  
@@ -110,14 +120,16 @@ Allen在《An Interval-based Representation of Temporal Knowledge》中描述了
 
 
 
-# Starts 和 Started by
+# Starts 和 Started by（同时开始）
 
 
   ![](/images/rule-engine/temporal-starts.png)
 
   ```
   // x∈[0,a]时，满足以下条件
+  //A和B同时开始，A先结束
   $eventA : EventA( this starts[a] $eventB )
+  //B和A同时开始，B后结束
   $eventB : EventB( this startedby[a] $eventA )
 
   ```  
