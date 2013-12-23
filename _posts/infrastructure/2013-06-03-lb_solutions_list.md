@@ -3,7 +3,7 @@ layout: post
 title: "Web负载均衡的几种实现方式"
 description: "负载均衡(Load Balance)是集群技术（Cluster）的一种应用。负载均衡可以将工作任务分摊到多个处理单元，从而提高并发处理能力。目前最常见的负载均衡应用是Web负载均衡。根据实现的原理不同，常见的web负载均衡技术包括：DNS轮询、IP负载均衡和CDN。其中IP负载均衡可以使用硬件设备或软件方式来实现。"
 category: 解决方案
-tags: [负载均衡, lvs]
+tags: [负载均衡, lvs, 解决方案]
 lastmod: 2013-06-10
 ---
 
