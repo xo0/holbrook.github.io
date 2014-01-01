@@ -2,6 +2,8 @@
 
 [前面](/2013/12/31/jsr330.html)提到[Spring](http://spring.io/)支持[JSR330](https://jcp.org/en/jsr/detail?id=330)。
 
+不仅如此，Spring从2.5开始，还支持[JSR250](https://jcp.org/en/jsr/detail?id=250)(Common Annotations for the JavaTM Platform)注解，以及[JSR317](JavaTM Persistence 2.0)中的JPA注解。
+
 在JSR330中定义的[依赖注入的标准注解](/2013/12/31/jsr330.html#menuIndex3)之外，Spring还扩展了自己的一些注解，对对象进行更精细的声明。
 
 
