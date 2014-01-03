@@ -1,247 +1,41 @@
+---
+layout: post
+title: "Sping中定义的注解"
+description: "使用注解的好处是减少配置。结合基于Java代码的容器配置，可以实现“零配置”。"
+category: 软件开发
+tags: [spring]
+lastmod: 
+---
 
+[前面](/2013/12/31/jsr330.html)提到[Spring](http://spring.io/)支持
+[JSR330](https://jcp.org/en/jsr/detail?id=330)中定义的[依赖注入的标准注解](/2013/12/31/jsr330.html#menuIndex3)。
 
-[前面](/2013/12/31/jsr330.html)提到[Spring](http://spring.io/)支持[JSR330](https://jcp.org/en/jsr/detail?id=330)。
+Spring从2.5开始，还支持[JSR250](https://jcp.org/en/jsr/detail?id=250)(Common Annotations for the JavaTM Platform)注解，以及[JSR317](JavaTM Persistence 2.0)中的[JPA注解](/2012/12/30/JPA.html)。
 
-不仅如此，Spring从2.5开始，还支持[JSR250](https://jcp.org/en/jsr/detail?id=250)(Common Annotations for the JavaTM Platform)注解，以及[JSR317](JavaTM Persistence 2.0)中的JPA注解。
+不仅如此，Spring还扩展了自己的一些注解，能够进行更精细的声明。
 
-在JSR330中定义的[依赖注入的标准注解](/2013/12/31/jsr330.html#menuIndex3)之外，Spring还扩展了自己的一些注解，对对象进行更精细的声明。
+使用注解的好处是减少配置。结合[基于Java代码的容器配置](/2014/01/01/spring_Java_based_container_configuration.html)，可以实现“零配置”。
 
+本文介绍Spring中定义的一些注解。
 
-不仅如此，
-Spring3的基于注解实现Bean依赖注入支持如下三种注解：
+# 标记bean
 
-   * Spring自带依赖注入注解： Spring自带的一套依赖注入注解；
-   * JSR-250注解：Java平台的公共注解，是Java EE 5规范之一，在JDK6中默认包含这些注解，从Spring2.5开始支持。
-   * JSR-330注解：Java 依赖注入标准，Java EE 6规范之一，可能在加入到未来JDK版本，从Spring3开始支持；
-   * JPA注解：用于注入持久化上下文和尸体管理器。
+[JSR330](https://jcp.org/en/jsr/detail?id=330)中没有约定bean的注解，需要注入（`@Inject`）的地方，通过`[@Named](/2013/12/31/jsr330.html#menuIndex3)`限定器指定需要注入的接口类型。
 
+在Spring中，定义了`@Component`、`@Repository`、`@Service`、`@Controller`等注解，用于标记bean：
 
+- `@Component`： 是一个泛化的概念，仅仅表示一个组件 (Bean) ，可以作用在任何层次。
+- `@Service`： 通常作用在业务层，但是目前该功能与 @Component 相同。
+- `@Controller`： 通常作用在控制层，但是目前该功能与 @Component 相同。
+- `@Repository`：通常用在数据访问层的DAO类上。Spring会将该注解标记的类中抛出的数据访问异常封装为 Spring 的数据访问异常类型。
 
+此外，Spring还允许自定义bean的注解类型。比如，如果自定义一个@Cache的注解来表示缓存类:
 
-# @Inject --> @Autowired
+```
 
-  @Inject没有“required”属性
-
-  自动装配
-
-
-       自动装配就是指由Spring来自动地注入依赖对象，无需人工参与。
-自动装配的好处是减少构造器注入和setter注入配置 
-
-       目前Spring3.0支持“no”、“byName ”、“byType”、“constructor”四种自动装配，默认是“no”指不支持自动装配的，
-         一、default：表示使用默认的自动装配，默认的自动装配需要在<beans>标签中使用default-autowire属性指定，其支持“no”、“byName ”、“byType”、“constructor”四种自动装配，如果需要覆盖默认自动装配，请继续往下看；
-二、no：意思是不支持自动装配，必须明确指定依赖。
-三、byName：根据名字进行自动装配，只能用于setter注入。比如我们有方法“setHelloApi”，则“byName”方式Spring容器将查找名字为helloApi的Bean并注入，如果找不到指定的Bean，将什么也不注入。
-      四、“byType”：通过设置Bean定义属性autowire="byType"，意思是指根据类型注入，用于setter注入，比如如果指定自动装配方式为“byType”，而“setHelloApi”方法需要注入HelloApi类型数据，则Spring容器将查找HelloApi类型数据，如果找到一个则注入该Bean，如果找不到将什么也不注入，如果找到多个Bean将优先注入<bean>标签“primary”属性为true的Bean，否则抛出异常来表明有个多个Bean发现但不知道使用哪个。让我们用例子来讲解一下这几种情况吧。
-       1）根据类型只找到一个Bean，此处注意了，在根据类型注入时，将把当前Bean自己排除在外，即如下配置中helloApi和bean都是HelloApi接口的实现，而“bean”通过类型进行注入“HelloApi”类型数据时自己是排除在外的，
-       2）根据类型找到多个Bean时，对于集合类型（如List、Set）将注入所有匹配的候选者，而对于其他类型遇到这种情况可能需要使用“autowire-candidate”属性为false来让指定的Bean放弃作为自动装配的候选者，或使用“primary”属性为true来指定某个Bean为首选Bean：
-       2.1）通过设置Bean定义的“autowire-candidate”属性为false来把指定Bean后自动装配候选者中移除：
-<bean class="cn.javass.spring.chapter2.helloworld.HelloImpl"/>
-<!-- 从自动装配候选者中去除 -->
-<bean class="cn.javass.spring.chapter2.helloworld.HelloImpl"
-autowire-candidate="false"/>
-<bean id="bean1" class="cn.javass.spring.chapter3.bean.HelloApiDecorator"
-    autowire="byType"/>
-
-       2.2）通过设置Bean定义的“primary”属性为false来把指定自动装配时候选者中首选Bean：
-<bean class="cn.javass.spring.chapter2.helloworld.HelloImpl"/>
-<!-- 自动装配候选者中的首选Bean-->
-<bean class="cn.javass.spring.chapter2.helloworld.HelloImpl" primary="true"/>
-<bean id="bean" class="cn.javass.spring.chapter3.bean.HelloApiDecorator"
-    autowire="byType"/>
-五、“constructor”：通过设置Bean定义属性autowire="constructor"，功能和“byType”功能一样，根据类型注入构造器参数，只是用于构造器注入方式，直接看例子吧：
-
-<bean class="cn.javass.spring.chapter2.helloworld.HelloImpl"/>
-<!-- 自动装配候选者中的首选Bean-->
-<bean class="cn.javass.spring.chapter2.helloworld.HelloImpl" primary="true"/>
-<bean id="bean"
-    class="cn.javass.spring.chapter3.bean.HelloApiDecorator"
-    autowire="constructor"/>
-
-六、autodetect：自动检测是使用“constructor”还是“byType”自动装配方式，已不推荐使用。如果Bean有空构造器那么将采用“byType”自动装配方式，否则使用“constructor”自动装配方式。此处要把3.0的xsd替换为2.5的xsd，否则会报错。
-
-<?xml version="1.0" encoding="UTF-8"?>
-<beans  xmlns="http://www.springframework.org/schema/beans"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:context="http://www.springframework.org/schema/context"
-        xsi:schemaLocation="
-          http://www.springframework.org/schema/beans
-          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-          http://www.springframework.org/schema/context
-          http://www.springframework.org/schema/context/spring-context-2.5.xsd">
-<bean class="cn.javass.spring.chapter2.helloworld.HelloImpl"/>
-  <!-- 自动装配候选者中的首选Bean-->
-  <bean class="cn.javass.spring.chapter2.helloworld.HelloImpl" primary="true"/>
-  <bean id="bean"
-        class="cn.javass.spring.chapter3.bean.HelloApiDecorator"
-        autowire="autodetect"/>
-</beans>
-
-
-       可以采用在“<beans>”标签中通过“default-autowire”属性指定全局的自动装配方式，即如果default-autowire=”byName”，将对所有Bean进行根据名字进行自动装配。
-
-不是所有类型都能自动装配：
-
-   * 不能自动装配的数据类型：Object、基本数据类型（Date、CharSequence、Number、URI、URL、Class、int）等；
-   * 通过“<beans>”标签default-autowire-candidates属性指定的匹配模式，不匹配的将不能作为自动装配的候选者，例如指定“*Service，*Dao”，将只把匹配这些模式的Bean作为候选者，而不匹配的不会作为候选者；
-   * 通过将“<bean>”标签的autowire-candidate属性可被设为false，从而该Bean将不会作为依赖注入的候选者。
-
-数组、集合、字典类型的根据类型自动装配和普通类型的自动装配是有区别的：
-
-   * 数组类型、集合（Set、Collection、List）接口类型：将根据泛型获取匹配的所有候选者并注入到数组或集合中，如“List<HelloApi> list”将选择所有的HelloApi类型Bean并注入到list中，而对于集合的具体类型将只选择一个候选者，“如 ArrayList<HelloApi> list”将选择一个类型为ArrayList的Bean注入，而不是选择所有的HelloApi类型Bean进行注入；
-   * 字典（Map）接口类型：同样根据泛型信息注入，键必须为String类型的Bean名字，值根据泛型信息获取，如“Map<String, HelloApi> map” 将选择所有的HelloApi类型Bean并注入到map中，而对于具体字典类型如“HashMap<String, HelloApi> map”将只选择类型为HashMap的Bean注入，而不是选择所有的HelloApi类型Bean进行注入。
-
-       自动装配我们已经介绍完了，自动装配能带给我们什么好处呢？首先，自动装配确实减少了配置文件的量；其次， “byType”自动装配能在相应的Bean更改了字段类型时自动更新，即修改Bean类不需要修改配置，确实简单了。
-
-       自动装配也是有缺点的，最重要的缺点就是没有了配置，在查找注入错误时非常麻烦，还有比如基本类型没法完成自动装配，所以可能经常发生一些莫名其妙的错误，在此我推荐大家不要使用该方式，最好是指定明确的注入方式，或者采用最新的Java5+注解注入方式。所以大家在使用自动装配时应该考虑自己负责项目的复杂度来进行衡量是否选择自动装配方式。
-
-       自动装配注入方式能和配置注入方式一同工作吗？当然可以，大家只需记住配置注入的数据会覆盖自动装配注入的数据。
-
-       大家是否注意到对于采用自动装配方式时如果没找到合适的的Bean时什么也不做，这样在程序中总会莫名其妙的发生一些空指针异常，而且是在程序运行期间才能发现，有没有办法能在提前发现这些错误呢？接下来就让我来看下依赖检查吧。
-
-
-@Autowired：自动装配
-基于@Autowired的自动装配，默认是根据类型注入，可以用于构造器、字段、方法注入，使用方式如下：
-@Autowired(required=true)
-构造器、字段、方法
-@Autowired默认是根据参数类型进行自动装配，且必须有一个Bean候选者注入，如果允许出现0个Bean候选者需要设置属性“required=false”，“required”属性含义和@Required一样，只是@Required只适用于基于XML配置的setter注入方式。
-（1）、构造器注入：通过将@Autowired注解放在构造器上来完成构造器注入，默认构造器参数通过类型自动装配，如下所示：
-package cn.javass.spring.chapter12;
-import org.springframework.beans.factory.annotation.Autowired;
-public class TestBean11 {
-    private String message;
-    @Autowired //构造器注入
-    private TestBean11(String message) {
-        this.message = message;
-    }
-    //省略message的getter和setter
-}
-（2）、字段注入：通过将@Autowired注解放在构造器上来完成字段注入。
-package cn.javass.spring.chapter12;
-import org.springframework.beans.factory.annotation.Autowired;
-public class TestBean12 {
-    @Autowired //字段注入
-    private String message;
-    //省略getter和setter
-}
-（3）、方法参数注入：通过将@Autowired注解放在方法上来完成方法参数注入。
-package cn.javass.spring.chapter12;
-import org.springframework.beans.factory.annotation.Autowired;
-public class TestBean13 {
-    private String message;
-    @Autowired //setter方法注入
-    public void setMessage(String message) {
-        this.message = message;
-    }
-    public String getMessage() {
-        return message;
-    }
-}
-
-package cn.javass.spring.chapter12;
-//省略import
-public class TestBean14 {
-    private String message;
-    private List<String> list;
-    @Autowired(required = true) //任意一个或多个参数方法注入
-    private void initMessage(String message, ArrayList<String> list) {
-        this.message = message;
-        this.list = list;
-    }
-    //省略getter和setter
-}
-
-方法参数注入除了支持setter方法注入，还支持1个或多个参数的普通方法注入，在基于XML配置中不支持1个或多个参数的普通方法注入，方法注入不支持静态类型方法的注入。
-
-注意“initMessage(String message, ArrayList<String> list)”方法签名中为什么使用ArrayList而不是List呢？具体参考【3.3.3  自动装配】一节中的集合类型注入区别。
-
-
-# @Named --> @Component， @Qualifier
-
-  能够进行更细致的划分
-
-
-Spring基于注解实现Bean定义支持如下三种注解：
-
-   * Spring自带的@Component注解及扩展@Repository、@Service、@Controller；
-   * JSR-250 1.1版本中中定义的@ManagedBean注解，是Java EE 6标准规范之一，不包括在JDK中，需要在应用服务器环境使用（如Jboss）
-   * JSR-330的@Named注解
-
-## @Component
-
-基于@Component的@Repository、@Service、@Controller分别用于数据访问层，业务逻辑层和展现层。
-此外，还可以自定义注解，通过@Manager
-
-@Service本身就是被@Componet这个元注解(meta annotaion)标注的。因此对于这三个层的Bean, spring的文档也推荐将它们标注为@Service, @Controller与@Repository，因为这样更方便其它工具对这些特殊Bean的处理以及为它们加上相关AOP的 aspects，spring在后续版本的升级上也可能对它们增加更多的特殊语义。比如，对于@Repository，spring会自动加上exception translation，用于转化持久层抛出的异常。
-
-
-
-有些注解运行放置在多个地方，如@Named允许放置在类型、字段、方法参数上等，因此一般情况下放置在类型上表示定义，放置在参数、方法等上边一般代表使用（如依赖注入等等）。
-
-
-
-一、@Component：定义Spring管理Bean，使用方式如下：
-@Component("标识符")
-POJO类
-  在类上使用@Component注解，表示该类定义为Spring管理Bean，使用默认value（可选）属性表示Bean标识符。
-package cn.javass.spring.chapter12;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
-@Component("component")
-public class TestCompoment {
-    @Autowired
-    private ApplicationContext ctx;
-    public ApplicationContext getCtx() {
-        return ctx;
-    }
-}
-
-
-
-二、@Repository：@Component扩展，被@Repository注解的POJO类表示DAO层实现，从而见到该注解就想到DAO层实现，使用方式和@Component相同；
-package cn.javass.spring.chapter12.dao.hibernate;
-import org.springframework.stereotype.Repository;
-@Repository("testHibernateDao")
-public class TestHibernateDaoImpl {
-
-}
-三、@Service：@Component扩展，被@Service注解的POJO类表示Service层实现，从而见到该注解就想到Service层实现，使用方式和@Component相同；
-package cn.javass.spring.chapter12.service.impl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-import cn.javass.spring.chapter12.dao.hibernate.TestHibernateDaoImpl;
-@Service("testService")
-public class TestServiceImpl {
-    @Autowired
-    @Qualifier("testHibernateDao")
-    private TestHibernateDaoImpl dao;
-    public TestHibernateDaoImpl getDao() {
-        return dao;
-    }
-}
-四、@Controller：@Component扩展，被@Controller注解的类表示Web层实现，从而见到该注解就想到Web层实现，使用方式和@Component相同；
-package cn.javass.spring.chapter12.action;
-//省略import
-@Controller
-public class TestAction {
-    @Autowired
-    private TestServiceImpl testService;  
-    public void list() {
-        //调用业务逻辑层方法
-    }
-}
-
-大家是否注意到@Controller中并没有定义Bean的标识符，那么默认Bean的名字将是以小写开头的类名（不包括包名），即如“TestAction”类的Bean标识符为“testAction”。
-
-六、自定义扩展：Spring内置了三种通用的扩展注解@Repository、@Service、@Controller ，大多数情况下没必要定义自己的扩展，在此我们演示下如何扩展@Component注解来满足某些特殊规约的需要；
-
-在此我们可能需要一个缓存层用于定义缓存Bean，因此我们需要自定义一个@Cache的注解来表示缓存类。
-
-1、扩展@Component：
-package cn.javass.spring.chapter12.stereotype;
-//省略import
+//定义注解类型
+package my.app.stereotype;
+……
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
@@ -249,62 +43,111 @@ package cn.javass.spring.chapter12.stereotype;
 public @interface Cache{
       String value() default "";
 }
-    扩展十分简单，只需要在扩展的注解上注解@Component即可，@Repository、@Service、@Controller也是通过该方式实现的，没什么特别之处
 
-package cn.javass.spring.chapter12.cache;
+
+//使用自定义注解
+
 @Cache("cache")
 public class TestCache {
 
 }
 
+```
 
+# bean作用域
+
+[JSR330](https://jcp.org/en/jsr/detail?id=330)中只定义了`[@Singleton](/2013/12/31/jsr330.html#menuIndex3)`，标记singleton作用域；
+spring提供“singleton”和“prototype”两种基本作用域，以及“request”、“session”、“global session”三种web作用域；
+Spring还允许用户定制自己的作用域。作用域的作用是标记Bean对象相对于其他Bean对象的请求可见范围。
+
++ 基本作用域
+
+  - singleton
+  
+    Bean在容器中只有一个实例，其整个生命周期交由容器管理。Spring使用注册表模式实现singleton模式，不需要在bean代码中用编程方式实现。
+  
+  - prototype
+  
+    每次请求bean时容器创建并返回该bean的一个新的实例。
+
++ Web作用域
+
+  Web作用域只有在应用处于Web环境、并且在Web容器中配置对应的监听器或拦截器之后才会生效。包括：
+
+  
+  - request
+    
+    每个http请求创建一个新的Bean，比如Form表单数据对象。
+
+  - session
+
+    表示每个会话创建一个新的Bean。比如当前用户的用户信息对象。
+
+  - globalSession
+
+    用于portlet环境。如果在非portlet环境，等同于session作用域。
+
+在Spring中，作用域用`@Scpoe`进行标记。比如：
+
+```
+@Scope("prototype") 
+@Repository 
+public class Demo { … }
+```
+
+# 自动装配
+
+自动装配是指根据一定的策略，自动注入依赖对象，无需人工参与。使用自动装配可以减少构造器注入和setter注入配置。
+
+Spring可以使用[JSR250规定的`@Resource`、`@Qualifier`注解]()处理自动装配，
+也可以使用Spring自身的`@Autowired`和`@Qualifier`的组合。
+
+`@Autowired`用于根据类型进行装配。该注解可以用于 Setter 方法、构造函数、字段，甚至普通方法，前提是方法必须有至少一个参数。
+
+`@Autowired`可以用于数组和使用泛型的集合类型。然后 Spring 会将容器中所有类型符合的 Bean 注入进来。
+`@Autowired`标注作用于 Map 类型时，如果 Map 的 key 为 String 类型，则 Spring 会将容器中所有类型符合 Map 的 value 对应的类型的 Bean 增加进来，用 Bean 的 id 或 name 作为 Map 的 key。
+
+`@Autowired`标注作用于普通方法时，会产生一个副作用，就是在容器初始化该 Bean 实例的时候就会调用该方法。当然，前提是执行了自动装配，对于不满足装配条件的情况，该方法也不会被执行。
+
+当标注了`@Autowired`后，自动注入不能满足，则会抛出异常。我们可以给 @Autowired 标注增加一个 required=false 属性，以改变这个行为。
+
+另外，每一个类中只能有一个构造函数的 @Autowired.required() 属性为 true。否则就出问题了。如果用 @Autowired 同时标注了多个构造函数，那么，Spring 将采用贪心算法匹配构造函数 ( 构造函数最长 )。
+
+@Autowired 还有一个作用就是，如果将其标注在 BeanFactory 类型、ApplicationContext 类型、ResourceLoader 类型、ApplicationEventPublisher 类型、MessageSource 类型上，那么 Spring 会自动注入这些实现类的实例，不需要额外的操作。
+
+JSR330中只定义了一个`@Named`注解，可以根据bean的ID进行限定；
+当容器中存在多个 Bean 的类型与需要注入的相同时，注入将不能执行，我们可以给 @Autowired 增加一个候选值，做法是在 @Autowired 后面增加一个 @Qualifier 标注，提供一个 String 类型的值作为候选的 Bean 的名字。举例如下：
+
+@Autowired(required=false) 
+@Qualifier("ppp") 
+public void setPerson(person p){}
+
+@Qualifier 甚至可以作用于方法的参数 ( 对于方法只有一个参数的情况，我们可以将 @Qualifer 标注放置在方法声明上面，但是推荐放置在参数前面 )，举例如下：
+
+```
+@Autowired(required=false) 
+public void sayHello(@Qualifier("ppp")Person p,String name){}
+```
+
+如果 @Autowired 注入的是 BeanFactory、ApplicationContext、ResourceLoader 等系统类型，那么则不需要 @Qualifier，此时即使提供了 @Qualifier 注解，也将会被忽略；而对于自定义类型的自动装配，如果使用了 @Qualifier 注解并且没有名字与之匹配的 Bean，则自动装配匹配失败。
+
+
+
+# 依赖检查
+
+使用自动装配，很可能发生没有装配成功的情况。通常，在运行时(runtime)才会发现错误（比如空指针异常）。
+
+为了能够提前发现装配错误，Spring提供了`@Required`注解用于依赖检查。
+
+`@Required`注解应用在setter方法上，其机制 **不是** 判断字段值是否存在，
+而是判断是否调用了setter方法。`@Required`也不检查setter方法的有效性。即使注入了"null"，也认为执行了注入。
+
+如果标注了`@Required`的Setter方法没有被调用，则 Spring 在解析的时候会抛出异常。
+
+##########
 
 ## @Qualifier：限定描述符，用于细粒度选择候选者；
 
-@Autowired默认是根据类型进行注入的，因此如果有多个类型一样的Bean候选者，则需要限定其中一个候选者，否则将抛出异常，
-@Qualifier限定描述符除了能根据名字进行注入，但能进行更细粒度的控制如何选择候选者，具体使用方式如下：
-@Qualifier(value = "限定标识符")
-字段、方法、参数
-
-（1）、根据基于XML配置中的<qualifier>标签指定的名字进行注入，使用如下方式指定名称：
-<qualifier  type="org.springframework.beans.factory.annotation.Qualifier"  value="限定标识符"/>
-
-其中type属性可选，指定类型，默认就是Qualifier注解类，name就是给Bean候选者指定限定标识符，一个Bean定义中只允许指定类型不同的<qualifier>，如果有多个相同type后面指定的将覆盖前面的。
-package cn.javass.spring.chapter12;
-import javax.sql.DataSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-
-public class TestBean31 {
-    private DataSource dataSource;
-    @Autowired
-    //根据<qualifier>标签指定Bean限定标识符
-    public void initDataSource(@Qualifier("mysqlDataSource") DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-    public DataSource getDataSource() {
-        return dataSource;
-    }
-}
-
-（2）、缺省的根据Bean名字注入：最基本方式，是在Bean上没有指定<qualifier>标签时一种容错机制，即缺省情况下使用Bean标识符注入，但如果你指定了<qualifier>标签将不会发生容错。
-
-package cn.javass.spring.chapter12;
-//省略import
-public class TestBean32 {
-    private DataSource dataSource;
-    @Autowired
-    @Qualifier(value = "mysqlDataSource2") //指定Bean限定标识符
-    //@Qualifier(value = "mysqlDataSourceBean")
-    //是错误的注入，不会发生回退容错，因为你指定了<qualifier>
-    public void initDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-    public DataSource getDataSource() {
-        return dataSource;
-    }
-}
-默认情况下（没指定<qualifier>标签）@Qualifier的value属性将匹配Bean 标识符。
 
 （3）、扩展@Qualifier限定描述符注解：对@Qualifier的扩展来提供细粒度选择候选者；
 
@@ -461,18 +304,60 @@ public void testQualifierInject5() {
    * 对于集合、数组、字典类型的限定描述符注入，将注入多个具有相同限定标识符的Bean。
   
 
-# @Singleton --> @Scope
-
-	可以定义@Scope("singleton")等多种作用域 
 
 
-@Scope：定义Bean作用域，默认单例，使用方式如下：
-@Component("component")
-@Scope("singleton")
-public class TestCompoment {
-……
+
+# @Inject --> @Autowired
+
+
+构造器、字段、方法
+（1）、构造器注入：通过将@Autowired注解放在构造器上来完成构造器注入，默认构造器参数通过类型自动装配，如下所示：
+package cn.javass.spring.chapter12;
+import org.springframework.beans.factory.annotation.Autowired;
+public class TestBean11 {
+    private String message;
+    @Autowired //构造器注入
+    private TestBean11(String message) {
+        this.message = message;
+    }
+    //省略message的getter和setter
+}
+（2）、字段注入：通过将@Autowired注解放在构造器上来完成字段注入。
+package cn.javass.spring.chapter12;
+import org.springframework.beans.factory.annotation.Autowired;
+public class TestBean12 {
+    @Autowired //字段注入
+    private String message;
+    //省略getter和setter
+}
+（3）、方法参数注入：通过将@Autowired注解放在方法上来完成方法参数注入。
+package cn.javass.spring.chapter12;
+import org.springframework.beans.factory.annotation.Autowired;
+public class TestBean13 {
+    private String message;
+    @Autowired //setter方法注入
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    public String getMessage() {
+        return message;
+    }
 }
 
+package cn.javass.spring.chapter12;
+//省略import
+public class TestBean14 {
+    private String message;
+    private List<String> list;
+    @Autowired(required = true) //任意一个或多个参数方法注入
+    private void initMessage(String message, ArrayList<String> list) {
+        this.message = message;
+        this.list = list;
+    }
+    //省略getter和setter
+}
+
+方法参数注入除了支持setter方法注入，还支持1个或多个参数的普通方法注入，在基于XML配置中不支持1个或多个参数的普通方法注入，方法注入不支持静态类型方法的注入。
 
 
 # @Value
@@ -502,36 +387,6 @@ private TestBean43(@Value(value = "#{message}#{message}") String message) {
 }
 
 
-# @Required：依赖检查
-
-
-自动装配，很可能发生没有匹配的Bean进行自动装配，如果此种情况发生，只有在程序运行过程中发生了空指针异常才能发现错误，如果能提前发现该多好啊，这就是依赖检查的作用。
-依赖检查：用于检查Bean定义的属性都注入数据了，不管是自动装配的还是配置方式注入的都能检查，如果没有注入数据将报错，从而提前发现注入错误，只检查具有setter方法的属性。
-
-
-依赖检查有none、simple、object、all四种方式
-一、none：默认方式，表示不检查；
-二、objects：检查除基本类型外的依赖对象
-三、simple：对基本类型进行依赖检查，包括数组类型，其他依赖不报错
-四、all：对所以类型进行依赖检查
-
-
-基于@Required的依赖检查表示注解的setter方法必须，即必须通过在XML配置中配置setter注入，如果没有配置在容器启动时会抛出异常从而保证在运行时不会遇到空指针异常，@Required只能放置在setter方法上，且通过XML配置的setter注入，可以使用如下方式来指定：
-java代码：
-package cn.javass.spring.chapter12;
-public class TestBean {
-    private String message;
-    @Required
-    public void setMessage(String message) {
-        this.message = message;
-    }
-    public String getMessage() {
-        return message;
-    }
-}
-
-
-
 
 
 
@@ -559,7 +414,7 @@ public class TestCompoment {
 ……
 }
 
-# 其他
+# 其他注解
 
 12.3.6  提供更多的配置元数据
 1、@Lazy：定义Bean将延迟初始化，使用方式如下：
@@ -634,3 +489,5 @@ public class TestCompoment {
 
 
 xml优先于注解
+
+更详细的资料，参考[这里](http://www.ibm.com/developerworks/cn/opensource/os-cn-spring-iocannt/)
