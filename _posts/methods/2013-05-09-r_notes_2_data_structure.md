@@ -10,7 +10,7 @@ description: "主要内容：1.向量和矩阵;
 7.用序列填充对象;
 8.数据编辑器.
 "
-category: 软件开发
+category: 方法工具
 tags: [R, 量化金融]
 lastmod: 2013-07-05
 ---
