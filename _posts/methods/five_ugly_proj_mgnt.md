@@ -2,7 +2,7 @@
 layout: post
 title: "5种丑陋的项目管理"
 description: ""
-category: 手段方法
+category: 方法工具
 tags: [项目管理]
 lastmod: 2013-08-02
 ---

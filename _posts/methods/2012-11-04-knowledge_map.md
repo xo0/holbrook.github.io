@@ -2,7 +2,7 @@
 layout: post
 title: "知识地图与知识管理"
 description: "知识地图与知识管理"
-category: 手段方法
+category: 方法工具
 tags: [知识地图, KM]
 lastmod: 2013-06-10
 ---
