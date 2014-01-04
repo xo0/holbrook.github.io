@@ -2,7 +2,7 @@
 layout: post
 title: "统一web访问层方案"
 description: "使用nginx和keepalived搭建统一的web访问层，并实现负载均衡、高可用、回话保持。这是为公司做的一个真实方案。"
-category: 解决方案
+category: 基础设施
 tags: [HA, nginx, keepalived, 负载均衡, cluster, 解决方案]
 lastmod: 2013-06-10
 ---
