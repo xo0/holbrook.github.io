@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Sping中定义的注解"
+title: "Sping中的注解"
 description: "使用注解的好处是减少配置。结合基于Java代码的容器配置，可以实现“零配置”。"
 category: 软件开发
 tags: [spring]
