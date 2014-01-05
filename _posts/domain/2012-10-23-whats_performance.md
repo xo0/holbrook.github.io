@@ -3,7 +3,7 @@ layout: post
 title: "QQ餐厅与系统性能模型"
 description: "如果你在玩QQ餐厅的时候被老板抓到，可以理直气壮的说：'我在研究系统性能模型'。本文以QQ餐厅作为模型，讨论系统性能的主要指标"
 category: 领域模型
-tags: [性能测试]
+tags: [测试]
 lastmod: 2013-06-25
 ---
 
