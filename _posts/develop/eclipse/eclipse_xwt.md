@@ -3,7 +3,7 @@ https://www.eclipse.org/proposals/technology.xwt/
 
 # 使用XWT
 
-曾几何时，用XML定义用户界面成了一种主流，比如Flex的MXML, .NetFramework WPF的XAML，JavaFX的FXML等等。
+曾几何时，用XML定义用户界面成了一种主流，比如Flex的MXML, .NetFramework WPF的XAML，JavaFX的FXML、Mozilla的XUL等等。
 
 尽管Eclipse的SWT是一项很牛的技术，但是一直以来，开发Eclipse插件/应用的方式并不现代化。
 
