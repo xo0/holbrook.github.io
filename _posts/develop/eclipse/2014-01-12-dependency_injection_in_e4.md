@@ -1,4 +1,12 @@
-Eclipse e4：从OSGi-DS到依赖注入
+---
+layout: post
+title: "Eclipse e4：从OSGi-DS到依赖注入"
+description: "e4开始，可以不使用代码或xml进行服务注册和寻找，而使用依赖注入进行装配"
+category: 软件开发
+tags: [eclipse]
+lastmod: 
+---
+
 
 
 # MANIFEST.MF
