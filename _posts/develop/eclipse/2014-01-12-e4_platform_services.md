@@ -78,7 +78,7 @@ e4提供了很多平台级的服务，注册于OSGi context之上的其他各个
 
   - Logger 
 
-    org.eclipse.e4.core.services.Logger - Provides logging functionality
+    `org.eclipse.e4.core.services`插件中的`Logger`提供了日志功能
 
   - Adapter 
 
@@ -281,6 +281,24 @@ e4的应用模型中，MWindow对象可以保持选中的Part。e4在IEclipseCon
   // execute the command
   handlerService.executeHandler(cmd); 
 ```
+
+
+# 逻辑层相关服务
+
+## Logger
+
+在`org.eclipse.e4.core.services`插件中提供了`org.eclipse.e4.core.services.Logger`类，可以通过`@Inject`注解或使用`IEclipseContext`接口获取：
+
+```
+@Inject 
+private Logger logger;
+
+
+//or use code:
+Logger log = (Logger) context.get(Logger.class.getName());
+
+```
+
 
 
 # 实现自己的服务

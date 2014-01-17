@@ -49,8 +49,12 @@ OSGi规范利用了`MANIFEST.MF`文件，在其中增加了一些bundle的描述
 
 # OSGi服务的注册和寻找
 
-OSGi模块中，只有`Export-Package`中声明的包才可以被其他模块访问。不仅如此，OSGi还可以为模块指定一个"激活类(`Bundle-Activator`)“，
-这个类会在模块启动时被执行，通常用于指定本模块的服务的实现者并发布服务。比如：
+OSGi模块中，只有`Export-Package`中声明的包才可以被其他模块访问。为了避免一个模块对其他模块的直接引用，
+通常会实现一个“接口定义”模块和多个“接口实现”模块。通过服务注册和发现的方式进行服务的使用。
+
+OSGi还可以为模块指定一个"激活类(`Bundle-Activator`)“，
+这个类会在模块启动时被执行，通常在这里进行本模块的接口实现(服务)的发布，以及向本模块内的类注入其他模块实现的接口(服务).
+比如：
 
 ```
 public class MyActivator implements org.osgi.framework.BundleActivator{ 
@@ -192,3 +196,6 @@ public class MyOwnClass {
 } 
 ```
 
+# 创建自己的可注入对象
+
+`@Creatable`
