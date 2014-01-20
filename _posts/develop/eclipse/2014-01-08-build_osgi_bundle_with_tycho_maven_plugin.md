@@ -51,18 +51,41 @@ Tycho以一组maven插件的形式，支持Eclipse的plug-ins, features, update 
   </build>
 ```
 
+## 定义bundle仓库
+
+比如，基于Eclipse 4.3(Kepler)的RCP应用，使用了Texo、GeminiJPA等插件，需要如下的仓库定义：
+
+```
+  <repositories>
+    <repository>
+      <id>Kepler</id>
+      <url>http://download.eclipse.org/releases/kepler</url>
+      <layout>p2</layout>
+    </repository>
+    <repository>
+      <id>Texo</id>
+      <url>http://download.eclipse.org/modeling/emft/texo/updates/interim</url>
+      <layout>p2</layout>
+    </repository>
+    <repository>
+      <id>GeminiJPA</id>
+      <url>http://download.eclipse.org/gemini/jpa/updates</url>
+      <layout>p2</layout>
+    </repository>
+    <repository>
+      <id>EclipseLink</id>
+      <url>http://download.eclipse.org/rt/eclipselink/updates/</url>
+      <layout>p2</layout>
+    </repository>
+  </repositories>
+```  
 
 ## 定义目标
 
-大多数场景，在父工程中直接定义使用的Eclipse官方p2仓库和发布目标：
+定义不同的目标平台：
+
 
 ```
-  <repository>
-    <id>kepler</id>
-    <url>http://download.eclipse.org/releases/kepler</url>
-    <layout>p2</layout>
-  </repository>
-
   <plugin>
     <groupId>org.eclipse.tycho</groupId>
     <artifactId>target-platform-configuration</artifactId>
@@ -172,4 +195,11 @@ Tycho的逻辑是以上述标准的配置文件优先。比如，在pom文件中
 "目标定义"子工程中还可以使用”目标定义文件（Target Definition, *.target）“进行复杂的配置。
 可以参考[这里](http://wiki.eclipse.org/Tycho/Target_Platform)的说明，也可以查看[GitHub上的例子](https://github.com/toedter/e4-tutorial)的例子。
 
+
+
+# Test工程
+
+与专门的测试工具[Pax Exam]()相比，Tycho test使用起来会更简单。当然前提是测试由Tycho构建的OSGi应用。
+
+Tycho将一个"Fragment"工程包装成Maven工程，可以在其中编写测试代码，然后使用"JUnit Plug-in Test"执行测试。
 
