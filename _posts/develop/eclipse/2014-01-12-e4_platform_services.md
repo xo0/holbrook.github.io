@@ -358,6 +358,17 @@ e4中定义了`org.eclipse.e4.core.services.events.IEventBroker`接口，可以�
 
 ## Logger
 
+Eclipse 3.x中，Log的接口和实现类分别为`org.eclipse.core.runtime.ILog`和`org.osgi.service.log.LogService`，可以使用`ServiceTracker`获取：
+
+```
+LogService getLog() {
+  fLogServiceTracker = new ServiceTracker(fBundleContext, LogService.class.getName(), null);
+  return (LogService) fLogServiceTracker.getService();
+}
+```
+
+为了方便，在`Plugin`的基类中实现了`getLog()`方法，所有的`Plugin`子类可以直接使用。
+
 在`org.eclipse.e4.core.services`插件中提供了`org.eclipse.e4.core.services.Logger`类，可以通过`@Inject`注解或使用`IEclipseContext`接口获取：
 
 ```
