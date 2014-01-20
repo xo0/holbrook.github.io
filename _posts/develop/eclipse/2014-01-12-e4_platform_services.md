@@ -66,7 +66,7 @@ e4提供了很多平台级的服务，注册于OSGi context之上的其他各个
 
   - IEventBroker
 
-    Provides functionality to send event data and to register for specified events and event topics.
+    提供基于发布、订阅机制的事件处理功能
 
   - StatusReporter	 
 
@@ -284,6 +284,77 @@ e4的应用模型中，MWindow对象可以保持选中的Part。e4在IEclipseCon
 
 
 # 逻辑层相关服务
+
+## IEventBroker
+
+Eclipse 3.x中，事件处理使用Observer模式：事件接收者实现事件发布者指定的Listener接口，并注册到事件发布者。
+这带来两个问题：
+
+- 一个Listener接口要写很多个实现，这些实现中的代码有重复
+- 事件发布者和接收者的生命周期紧耦合
+
+Eclipse e4中，将OSGi的`EventAdmin`API封装为事件服务，提供了基于发布、订阅机制的事件处理功能：`EventBroker`作为事件总线，通过`EventBroker`可以发布和订阅事件。
+
+要使用e4事件服务，需要增加依赖插件：
+    * org.eclipse.e4.core.services
+    * org.eclipse.osgi.services
+
+
+- 获取EventBroker
+
+e4中定义了`org.eclipse.e4.core.services.events.IEventBroker`接口，可以通过依赖注入、e4上下文等方式获取：
+
+```
+  @Inject
+  IEventBroker eventBroker;
+
+  @Inject
+  private IEclipseContext eclipseContext;
+  ……
+  IEventBroker eventBroker = eclipseContext.get(IEventBroker.class);
+
+- 发布事件
+
+可以用`IEventBroker`的`post()`或`send()`方法，进行同步(synchronous)或异步(asynchronous)事件的发布：
+
+```
+  boolean IEventBroker.post(String topic, Object data) // synchronous delivery
+
+  boolean IEventBroker.send(String topic, Object data) // asynchronous delivery
+
+```
+
+返回值为是否发生成功。
+
+
+- 订阅事件
+
+可以通过依赖注入或者`IEventBroker`的`subscribe()`方法订阅事件：
+
+```
+  @Inject 
+  @Optional
+  private void closeHandler(@UIEventTopic(''TOPIC_STRING'') foo.Bar payload) {    
+    //do something with payload 
+  }
+```
+
+```
+  @Inject
+  IEventBroker eventBroker;
+
+  org.osgi.service.event.EventHandler closeHandler = new EventHandler() { 
+    public void handleEvent(Event event) { 
+        foo.Bar payload = (foo.Bar) event.getProperty(IEventBroker.DATA);
+    }
+  }
+
+  eventBroker.subscribe(TOPIC_STRING, closeHandler);
+  ……
+  eventBroker.unsubscribe(closeHandler);
+```
+
+消息对象(payload)作为附件存储在`IEventBroker.DATA`属性中。对于`Dictionary`或`Map`等集合类型的消息，会将其中所有的值按照KEY添加为属性。
 
 ## Logger
 
