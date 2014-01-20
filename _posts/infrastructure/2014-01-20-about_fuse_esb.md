@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "JBOSS FUSE:你必须知道的一系列开源产品和技术"
+title: "JBOSS FUSE:你必须知道的那些事"
 description: ""
 category: 基础设施
 tags: [esb]
