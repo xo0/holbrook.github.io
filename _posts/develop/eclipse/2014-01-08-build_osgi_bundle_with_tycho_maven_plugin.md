@@ -3,7 +3,7 @@ layout: post
 title: "Tycho：用Maven构建Eclipse Plugin项目"
 description: "Tycho以一组maven插件的形式，支持Eclipse的plug-ins, features, update sites (based on p2) 、products等类型工程的构建。"
 category: 软件开发
-tags: [eclipse, maven]
+tags: [OSGi, maven]
 lastmod: 
 ---
 

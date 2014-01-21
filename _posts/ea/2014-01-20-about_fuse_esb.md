@@ -2,8 +2,8 @@
 layout: post
 title: "JBOSS FUSE:你必须知道的那些事"
 description: ""
-category: 基础设施
-tags: [esb]
+category: 企业架构
+tags: [SOA]
 lastmod: 
 ---
 
@@ -12,7 +12,9 @@ lastmod:
 
 # JBoss Fuse：企业级ESB
 
-我没写错，就是“企业级ESB”。尽管“ESB”是“企业服务总线“的缩写，但却是有写所谓的”ESB“并不具备企业级特性。比如MuleCE甚至MuleEE。
+我没写错，就是“企业级ESB”。尽管“ESB”是“企业服务总线“的缩写，但确实有些”所谓的ESB“并不具备企业级特性。
+
+比如MuleCE，甚至MuleEE。
 
 [JBoss Fuse](http://www.jboss.org/products/fuse)具备了一个企业级平台所需要的特性：
 
@@ -184,4 +186,5 @@ OSGi R4.2对Blueprint进行了标准化。
 
 [EIP(Enterprise Integration Patterns)](http://www.enterpriseintegrationpatterns.com/)，企业整合模式。
 
+## JBI(TODO)
 
