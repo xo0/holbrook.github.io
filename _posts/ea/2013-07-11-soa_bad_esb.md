@@ -2,7 +2,7 @@
 layout: post
 title: "糟糕的ESB"
 description: "技术领域又出现了无奈的一幕：最糟糕的技术被贴上最耀眼的标签，被推送到用户面前，免费赠送的还有厂商滔滔不绝的口水，让用户相信这才是最好的。"
-category: 基础设施
+category: 企业架构
 tags: [SOA, ESB]
 lastmod: 
 ---

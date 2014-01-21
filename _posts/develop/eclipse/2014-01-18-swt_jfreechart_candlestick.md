@@ -3,7 +3,7 @@ layout: post
 title: "在SWT中用JFreeChart实现K线图"
 description: ""
 category: 软件开发
-tags: [ZeroMQ, 消息中间件]
+tags: [chart]
 lastmod: 
 ---
 
