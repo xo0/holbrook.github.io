@@ -188,3 +188,31 @@ OSGi R4.2对Blueprint进行了标准化。
 
 ## JBI(TODO)
 
+[JSR 208: JBI(Java Business Integration)](https://jcp.org/en/jsr/detail?id=208)是一种SOA的组件整合标准模型。
+
+SOA在Java领域有两套标准：
+
+- 商业的SCA和SDO标准，由IBM和BEA等公司推出。其中SCA实现了业务组件和传输协议的分离，可以处理各种平台组件的集成；SDO可以的自由读取各种不同数据源的数据。
+- JSR组织的JBI标准，由SUN最早推出，但是没有得到BEA和IBM的承认。JBI只关注Java组件的集成。
+
+
+JBI容器由三部分组成：
+
+![](/images/fuse/jbi_3_parts.gif)
+
+- BC(Binding Components)
+ 
+  绑定组件用于接收各种不同传输协议的请求。可以细分为接收BC和发送BC：接收BC主要负责发送请求和接收响应，发送BC主要用来调用外部的服务。
+
+- SE(Service Engines)
+
+  服务引擎处理JBI容器内部的消息。JBI容器通常在接收到消息后，需要对请求的消息做一些“处理”，然后再调用外部服务的提供者。根据功能的不同，将SE组件分为以下三种类型：
+
+  + Transform SE：处理各种传输协议和格式变化
+  + BPEL SE：将Web Service进行流程编排
+  + Rules SE：按照规则将各种服务进行集成
+  
+- NMB(Normalized Message Router)
+
+  规格化消息路由器是JBI内部消息系统的核心，所有的组建之间不能交换消息，只能通过NMR来传递。
+  
