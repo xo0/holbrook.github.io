@@ -203,3 +203,6 @@ Tycho的逻辑是以上述标准的配置文件优先。比如，在pom文件中
 
 Tycho将一个"Fragment"工程包装成Maven工程，可以在其中编写测试代码，然后使用"JUnit Plug-in Test"执行测试。
 
+# 对比Maven-Bundle-Plugin
+
+Maven-Bundle-Plugin提供了与Tycho不同风格的另一种构建OSGi的maven插件。关于二者的对比，可以参考[这里](/2014/01/21/tycho_vs_maven_bundle_plugin.html)
