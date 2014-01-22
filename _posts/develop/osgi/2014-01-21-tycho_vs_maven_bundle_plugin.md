@@ -119,9 +119,126 @@ Maven-Bundle-Plugin的这种机制使得工程完全的”maven化”，更适�
 由于[这里](http://felix.apache.org/site/integrating-felix-with-eclipse.html)有非常详细的说明，故不再赘述。
 
 其实，我们还可以基于maven构建，而不是使用Java Project的方式。使用maven的好处是这种方法可以用于任何支持maven的IDE。
-步骤如下：
 
-//TODO:
+Felix runtime的主要内容包括：
+
+![](/images/fuse/felix-tree.png)
+
+其中：
+
+- bin/felix.jar  启动的jar, MainClass是`org.apache.felix.main.Main`
+- bundle/	存放可用的bundle，Felix runtime中内置了4个必需的bundle
+- conf/conf.properties 启动配置。类似于Eclipse的`configuration/config.ini`。Felix配置项可以参考[官方网站中的内容](http://felix.apache.org/site/apache-felix-framework-configuration-properties.html)
+
+知道了Felix runtime的构成，就可以用maven构建出相同的结构，并插入到项目周期的适当位置。pom如下：
+
+```
+ <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>thinkinside.demo.fuse</groupId>
+	<artifactId>felix-launcher</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Felix Launcher</name>
+	<properties>
+		<felix.bundlerepository.version>1.6.4</felix.bundlerepository.version>
+		<felix.gogo.version>0.10.0</felix.gogo.version>
+		<felix.framework.version>4.2.1</felix.framework.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>bundle</directory>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.apache.felix</groupId>
+									<artifactId>org.apache.felix.gogo.command</artifactId>
+									<version>${felix.gogo.version}</version>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.apache.felix</groupId>
+									<artifactId>org.apache.felix.gogo.runtime</artifactId>
+									<version>${felix.gogo.version}</version>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.apache.felix</groupId>
+									<artifactId>org.apache.felix.gogo.shell</artifactId>
+									<version>${felix.gogo.version}</version>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.osgi</groupId>
+									<artifactId>org.osgi.compendium</artifactId>
+									<version>4.2.0</version>
+								</artifactItem>
+							</artifactItems>
+							<outputDirectory>bundle</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.main</artifactId>
+			<version>${felix.framework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ops4j.pax.url</groupId>
+			<artifactId>pax-url-assembly</artifactId>
+			<version>1.6.0</version>
+		</dependency>
+	</dependencies>
+ </project>
+```
+
+该pom在标准的生命周期中增加了两项工作：
+
+- 在`generate-resources`阶段，创建bundle文件夹，复制必需的4个bundle
+- 在`clean`阶段，清除bundle文件夹
+
+
+最后，还需要一个配置文件。在工程目录建立`/conf/config.properties`文件，并进行基本配置：
+
+```
+felix.auto.deploy.action=install,start
+felix.log.level=1
  
+org.osgi.framework.storage.clean=onFirstInit
+```
+
+配置完成了，先执行`mvn compile`生成需要的资源。此时使用命令`mvn exec:java -Dexec.mainClass="org.apache.felix.main.Main"`即可以启动Felix runtime：
+
+![](/images/fuse/felix_launch_from_maven.png)
+
+在Eclipse中，将这个工程作为`Java Application`运行，选择`org.apache.felix.main.Main`作为Main Class，就可以进行运行和调试。
+
 
 
