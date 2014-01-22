@@ -12,7 +12,7 @@ lastmod:
 曾几何时，你在Spring和OSGi之间摇摆不定；曾几何时，你对SpringDM感到迷惑不解。
 你是否向往OSGi的动态特性，又为遗留代码（尤其是基于Spring的代码）感到不舍？
 
-现在，这些都已不在是问题！
+现在，这些都不再是问题！
 
 在[OSGi Service Platform Release 4](http://www.osgi.org/Release4/HomePage) V4.2中，
 提到了很多的[企业级规范(Enterprise Specification)](http://www.osgi.org/download/r4v42/r4.enterprise.pdf)，
