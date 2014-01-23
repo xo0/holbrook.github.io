@@ -28,7 +28,7 @@ mvn archetype:generate  \
 
 会创建如下结构的一个工程：
 
-![](images/fuse/webservice-demo-structure.png)
+![](/images/fuse/webservice-demo-structure.png)
 
 从`pom.xml`来看，这是一个[使用maven-bundle-plugin构建的OSGi bundle工程](/2014/01/21/tycho_vs_maven_bundle_plugin.html)。
 
