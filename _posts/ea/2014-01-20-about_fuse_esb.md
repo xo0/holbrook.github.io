@@ -31,9 +31,9 @@ JBoss Fuse由大量成熟的开源软件组合而成，包括但不仅限于：
     * Apache CXF
     * Apache Camel
     * Apache ActiveMQ
-      - BluePrint
-      - Spring
-	* Karaf
+    * SpringDM  
+	+ Karaf
+    - BluePrint
   + Fuse Fabric
   + HawtIO
 
@@ -82,7 +82,36 @@ Camel基于OSGi框架并使用依赖注入。支持Blueprint或Spring DM作为OS
 管理模型(JMX)等功能。
 
 其中，为了解决企业级应用开发所习惯的依赖注入，这些项目都实现了OSGi R4.2中规定了Blueprint标准。
+也就是说，[Blueprint是OSGi中的依赖注入规范](/2014/01/22/osgi_blueprint_container.html)。
 Apache Aries项目中对应的产品就是[Aries Blueprint](http://aries.apache.org/modules/blueprint.html)。
+
+# Spring DM
+
+[Spring DM(Spring Dynamic Modules)](http://docs.spring.io/osgi/docs/current/reference/html/)，其目标是使得用Spring开发的应用能够在OSGi容器中运行。Spring DM设计的Spring应用与OSGi平台的关系如下图：
+
+![](/images/fuse/spring-osgi-model.png)
+
+将应用模块封装为OSGi bundle时，需要将该应用的Spring装配文件放置到jar包的`META-INF/spring/`目录下。
+该装配文件除了传统的`bean`配置外，还可以配置`osgi:service`，以引用或发布OSGi服务。
+
+也可以在`MANIFEST.MF`中用`Spring-Context`参数进行指定。比如：
+
+```
+ Spring-Context: config/applicationContext.xml, config/beans-security.xml 
+ Spring-Context: *;create-asynchronously=false
+ Spring-Context: config/osgi-*.xml;wait-for-dependencies:=false
+ Spring-Context: *;timeout:=60 
+ Spring-Context: *;publish-context:=false
+```
+
+Spring DM提供了`spring-osgi-annotation`,`spring-osgi-core`,`spring-osgi-io`,`spring-osgi-extender`等bundle，可以部署到OSGi容器中。
+
+其中，`spring-osgi-extender`会创建OSGi容器中的“Spring Application Context”，并监听OSGi容器的事件。当有新的bundle部署时，`spring-osgi-extender`会检查该bundle是否包含`Spring-Context`或者`META-INF/spring/`中的装配文件。如果有，则将其视为“spring bundle”，会根据装配文件进行bean的组装，当需要引用或发布OSGi服务时，`spring-osgi-extender`会调用OSGi框架中相应的方法。
+最后，将bean加入到Application Context中。
+
+Spring DM与Blueprint的功能非常类似，实际上，先有Spring DM，然后才有Blueprint。尽管Spring DM项目已经停止了，但是
+为了适应“遗留系统”，在ServiceMix中依然集成了SpringDM。
+
 
 # Apache ActiveMQ
 
@@ -106,6 +135,7 @@ Apache Aries项目中对应的产品就是[Aries Blueprint](http://aries.apache.
 
 
 Karaf已经被诸多Apache项目作为基础容器,比如Apache Geronimo, Apache ServiceMix, Fuse ESB等。
+
 
 
 
