@@ -3,7 +3,7 @@ layout: post
 title: "JBoss Fuse: 开发和部署Web Service"
 description: ""
 category: 软件开发
-tags: [CEP]
+tags: [SOA, OSGi, Maven]
 lastmod: 
 ---
 
