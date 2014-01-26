@@ -9,20 +9,13 @@
 
 ![](images/jira/project-issues.jpg)
 
-任何需要开展行动的事情：
-Bug &sdot; 
-New Requirement &sdot; 
-Improvement &sdot;
-New Feature &sdot; 
-Task &sdot;
-Sub-Task &sdot;
-**ANYTHING**
-
-在我们使用的Jira中文版中：事件
+- 任何需要开展行动的事情
+- Jira汉化版中翻译为“事件”
 
 <div class="notes">
 有影响，需要处理的事情
 缺陷，新需求，改进，新特性，任务和子任务，其他任何事情
+常见的有以下几种（Jira中内置的）
 </div>
 
 ## bugs
@@ -30,7 +23,14 @@ Sub-Task &sdot;
 ![](images/jira/bug.jpg)
 
 <div class="notes">
-缺陷：软件中存在的导致软件产品在某种程度上不能满足用户的需要的错误。
+bug(缺陷)：软件中存在的导致软件产品在某种程度上不能满足用户的需要的错误。产生原因：
+1）设计不合理;
+2）功能未实现；
+3）与需求不一致;
+5）用户不能接受的其他问题，如存取时间过长、界面不美观;
+6）甚至，软件实现了需求未提到的功能。
+
+一般分成几个级别：致命的(Fatal)，严重的(Critical)，一般的(Major)，微小的(Minor),建议(Enhancemental)
 </div>
 
 ## New Requirement
@@ -38,18 +38,18 @@ Sub-Task &sdot;
 ![](images/jira/Requirements.jpeg)
 
 <div class="notes">
+项目之痛
+新需求，需求变更
 软件为了达到目标所要具备的条件或能力。（多种定义）
 </div>
-
 
 ## Improvement
 
 ![](images/jira/Improvement.jpeg)
 
 <div class="notes">
-  对已实现的特性的改善或提高
-
-  我们真的很努力
+对已实现的特性的改善或提高
+我们真的很努力
 </div>
 
 ## New Feature
@@ -68,7 +68,7 @@ Sub-Task &sdot;
 项目的进度和任务可以在jira中管理
 <div>
 
-## ANYTHING
+## ANYTHING else...
 
 ![](images/jira/issues1.jpg)
 
@@ -157,7 +157,7 @@ Opensymphony 2010年11月份关闭
 
 - 问题跟踪系统(Issue Tracker)
 - 协同各角色的工作(workflow)
-- 促进交流和反馈
+- 促进交流和反馈(Notify and Subscribe)
 
 ## 事件的分类
 
@@ -181,8 +181,6 @@ Opensymphony 2010年11月份关闭
 ![](images/jira/actions.png)
 
 <div class="notes">
-
-
 很容易想到，用状态机来管理事件的状态变迁
 核心的四个状态，对应前面的四个核心步骤
 
@@ -190,7 +188,6 @@ Opensymphony 2010年11月份关闭
 增加回路和reopened状态：适应现实的复杂性
 
 很多缺陷/需求处理流程都是这个状态机的子集
-
 
 Jira lets you prioritise, assign, track, report and audit your 'issues'
 
@@ -203,7 +200,6 @@ Jira lets you prioritise, assign, track, report and audit your 'issues'
 ## Ticket
 
 ![](images/jira/ticket.jpg)
-
 
 Ticket，用于跟踪
 
@@ -222,8 +218,6 @@ Ticket，用于跟踪
 
 reporting and statistics
 支持图形和图表的个性化的报表，可以监控所有issues的进程
-
-
 </div>	
 
 ------------------
@@ -239,8 +233,7 @@ reporting and statistics
 
 <div class="notes">
 按各种指标分类汇总
-</div>	
-
+</div>
 
 ------------------
 
@@ -260,16 +253,13 @@ reporting and statistics
 ![](images/jira/portal2.png)
 
 
-## 订阅和通知
+## 邮件通知
 
-notify what you need, and when you need:
+![](images/jira/notify_settings.png)
 
-send email when issues are updated
+## 订阅项目活动
 
-email to remind on overdue tasks
-
-subscribe to weekly/monthly reports on issue status
-
+![](images/jira/rss.png)
 
 ## 小结：基本概念
 
@@ -312,31 +302,21 @@ can use as
 ## 
 
 - 创建issue
-- 操作issue
-  + comment
-  + assign
-  + watch
-  + workflow
+- 操作issue (comment &sdot; assign &sdot; watch &sdot; workflow)
 - 子任务
-- issue导航
-- 过滤器
-  + 创建
-  + 分享
+- 导航和搜索
+- 过滤器 (创建 &sdot; 分享)
 - 报告(report)
-- Dashboard
-  + 自定义
-  + 分享
-- subscriptions (订阅？)
-- 通知
-- 搜索
+- Dashboard( 自定义 &sdot; 分享)
+- 通知和订阅
 
-#
+# Powered by
 
 <div class="notes">
 others
 </div>
 
-## Powered by
+## 
 
 - Markdown
 - reveal.js

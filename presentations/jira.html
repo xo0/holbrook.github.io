@@ -31,10 +31,12 @@
 <figure>
 <img src="images/jira/project-issues.jpg" />
 </figure>
-<p>任何需要开展行动的事情： Bug ⋅ New Requirement ⋅ Improvement ⋅ New Feature ⋅ Task ⋅ Sub-Task ⋅ <strong>ANYTHING</strong></p>
-<p>在我们使用的Jira中文版中：事件</p>
+<ul>
+<li>任何需要开展行动的事情</li>
+<li>Jira汉化版中翻译为“事件”</li>
+</ul>
 <aside class="notes">
-有影响，需要处理的事情 缺陷，新需求，改进，新特性，任务和子任务，其他任何事情
+有影响，需要处理的事情 缺陷，新需求，改进，新特性，任务和子任务，其他任何事情 常见的有以下几种（Jira中内置的）
 </aside>
 </section><section id="bugs" class="slide level2">
 <h1>bugs</h1>
@@ -42,7 +44,8 @@
 <img src="images/jira/bug.jpg" />
 </figure>
 <aside class="notes">
-缺陷：软件中存在的导致软件产品在某种程度上不能满足用户的需要的错误。
+<p>bug(缺陷)：软件中存在的导致软件产品在某种程度上不能满足用户的需要的错误。产生原因： 1）设计不合理; 2）功能未实现； 3）与需求不一致; 5）用户不能接受的其他问题，如存取时间过长、界面不美观; 6）甚至，软件实现了需求未提到的功能。</p>
+一般分成几个级别：致命的(Fatal)，严重的(Critical)，一般的(Major)，微小的(Minor),建议(Enhancemental)
 </aside>
 </section><section id="new-requirement" class="slide level2">
 <h1>New Requirement</h1>
@@ -50,7 +53,7 @@
 <img src="images/jira/Requirements.jpeg" />
 </figure>
 <aside class="notes">
-软件为了达到目标所要具备的条件或能力。（多种定义）
+项目之痛 新需求，需求变更 软件为了达到目标所要具备的条件或能力。（多种定义）
 </aside>
 </section><section id="improvement" class="slide level2">
 <h1>Improvement</h1>
@@ -58,8 +61,7 @@
 <img src="images/jira/Improvement.jpeg" />
 </figure>
 <aside class="notes">
-<p>对已实现的特性的改善或提高</p>
-我们真的很努力
+对已实现的特性的改善或提高 我们真的很努力
 </aside>
 </section><section id="new-feature" class="slide level2">
 <h1>New Feature</h1>
@@ -78,8 +80,8 @@
 项目的进度和任务可以在jira中管理
 <div>
 
-</section><section id="anything" class="slide level2">
-<h1>ANYTHING</h1>
+</section><section id="anything-else..." class="slide level2">
+<h1>ANYTHING else...</h1>
 <figure>
 <img src="images/jira/issues1.jpg" />
 </figure>
@@ -148,7 +150,7 @@ Opensymphony 2010年11月份关闭 诞生的高质量项目：（java） WebWork
 <ul>
 <li>问题跟踪系统(Issue Tracker)</li>
 <li>协同各角色的工作(workflow)</li>
-<li>促进交流和反馈</li>
+<li>促进交流和反馈(Notify and Subscribe)</li>
 </ul>
 </section><section id="事件的分类" class="slide level2">
 <h1>事件的分类</h1>
@@ -200,7 +202,7 @@ Opensymphony 2010年11月份关闭 诞生的高质量项目：（java） WebWork
 </figure>
 <aside class="notes">
 <p>以上是针对单个事件 整个项目，图表统计 30天汇总, 已创建 vs 已解决</p>
-<p>reporting and statistics 支持图形和图表的个性化的报表，可以监控所有issues的进程</p>
+reporting and statistics 支持图形和图表的个性化的报表，可以监控所有issues的进程
 </aside>
 </section><section class="slide level2">
 
@@ -236,12 +238,16 @@ Opensymphony 2010年11月份关闭 诞生的高质量项目：（java） WebWork
 <figure>
 <img src="images/jira/portal2.png" />
 </figure>
-</section><section id="订阅和通知" class="slide level2">
-<h1>订阅和通知</h1>
-<p>notify what you need, and when you need:</p>
-<p>send email when issues are updated</p>
-<p>email to remind on overdue tasks</p>
-<p>subscribe to weekly/monthly reports on issue status</p>
+</section><section id="邮件通知" class="slide level2">
+<h1>邮件通知</h1>
+<figure>
+<img src="images/jira/notify_settings.png" />
+</figure>
+</section><section id="订阅项目活动" class="slide level2">
+<h1>订阅项目活动</h1>
+<figure>
+<img src="images/jira/rss.png" />
+</figure>
 </section><section id="小结基本概念" class="slide level2">
 <h1>小结：基本概念</h1>
 <figure>
@@ -277,27 +283,17 @@ Opensymphony 2010年11月份关闭 诞生的高质量项目：（java） WebWork
 <h1></h1>
 <ul>
 <li>创建issue</li>
-<li>操作issue</li>
-<li>comment</li>
-<li>assign</li>
-<li>watch</li>
-<li>workflow</li>
+<li>操作issue (comment ⋅ assign ⋅ watch ⋅ workflow)</li>
 <li>子任务</li>
-<li>issue导航</li>
-<li>过滤器</li>
-<li>创建</li>
-<li>分享</li>
+<li>导航和搜索</li>
+<li>过滤器 (创建 ⋅ 分享)</li>
 <li>报告(report)</li>
-<li>Dashboard</li>
-<li>自定义</li>
-<li>分享</li>
-<li>subscriptions (订阅？)</li>
-<li>通知</li>
-<li>搜索</li>
+<li>Dashboard( 自定义 ⋅ 分享)</li>
+<li>通知和订阅</li>
 </ul>
 </section></section>
-<section><section id="section-1" class="titleslide slide level1"><h1></h1></section><section id="powered-by" class="slide level2">
-<h1>Powered by</h1>
+<section><section id="powered-by" class="titleslide slide level1"><h1>Powered by</h1></section><section id="section-1" class="slide level2">
+<h1></h1>
 <ul>
 <li>Markdown</li>
 <li>reveal.js</li>
