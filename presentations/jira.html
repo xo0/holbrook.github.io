@@ -47,13 +47,40 @@
 <p>bug(缺陷)：软件中存在的导致软件产品在某种程度上不能满足用户的需要的错误。产生原因： 1）设计不合理; 2）功能未实现； 3）与需求不一致; 5）用户不能接受的其他问题，如存取时间过长、界面不美观; 6）甚至，软件实现了需求未提到的功能。</p>
 一般分成几个级别：致命的(Fatal)，严重的(Critical)，一般的(Major)，微小的(Minor),建议(Enhancemental)
 </aside>
+</section><section class="slide level2">
+
+<h3 id="fatal致命的">Fatal(致命的)</h3>
+<ul>
+<li>阻塞开发或测试的工作</li>
+<li>影响系统无法运行的错误 <br/></li>
+</ul>
+<h3 id="critical严重的">Critical（严重的）</h3>
+<ul>
+<li>系统崩溃、丢失数据或内存溢出等严重错误</li>
+<li>必需完成的任务 <br/></li>
+</ul>
+<h3 id="major一般的">Major（一般的）</h3>
+<ul>
+<li>主要的功能无效</li>
+<li>新增功能建议 <br/></li>
+</ul>
+<h3 id="minor微小的">Minor（微小的）</h3>
+<ul>
+<li>功能部分无效</li>
+<li>现有系统的改进 <br/></li>
+</ul>
+<h3 id="trivial建议性">Trivial（建议性）</h3>
+<ul>
+<li>拼写错误、文本未对齐等</li>
+</ul>
 </section><section id="new-requirement" class="slide level2">
 <h1>New Requirement</h1>
 <figure>
 <img src="images/jira/Requirements.jpeg" />
 </figure>
 <aside class="notes">
-项目之痛 新需求，需求变更 软件为了达到目标所要具备的条件或能力。（多种定义）
+<p>项目之痛 新需求，需求变更 软件为了达到目标所要具备的条件或能力。（多种定义）</p>
+新需求：非计划中的新功能
 </aside>
 </section><section id="improvement" class="slide level2">
 <h1>Improvement</h1>
@@ -61,7 +88,8 @@
 <img src="images/jira/Improvement.jpeg" />
 </figure>
 <aside class="notes">
-对已实现的特性的改善或提高 我们真的很努力
+<p>对已实现的特性的改善或提高 我们真的很努力</p>
+新特性：计划中的未实现功能
 </aside>
 </section><section id="new-feature" class="slide level2">
 <h1>New Feature</h1>
@@ -69,7 +97,7 @@
 <img src="images/jira/ideas.jpg" />
 </figure>
 <aside class="notes">
-新提出的、尚未实现的特性
+<p>新提出的、尚未实现的特性 改进：已实现特性的更好的做法</p>
 </aside>
 </section><section id="task-and-sub-task" class="slide level2">
 <h1>Task and Sub-Task</h1>
@@ -77,7 +105,7 @@
 <img src="images/jira/daily_tasks.jpg" />
 </figure>
 <div class="notes">
-项目的进度和任务可以在jira中管理
+项目的进度和任务可以在jira中管理 任务、子任务：需要做的事情
 <div>
 
 </section><section id="anything-else..." class="slide level2">
@@ -133,6 +161,17 @@
 </figure>
 <aside class="notes">
 如何处理？很简单！ 一般过程：4个步骤 提出问题，分析/分配问题，解决问题，验证问题 也就是，用户或测试/负责人/开发人员/测试人员
+</aside>
+</section><section id="其他问题" class="slide level2">
+<h1>其他问题</h1>
+<ul>
+<li>如何保证所有事件都按照既定流程处理？</li>
+<li>如何在大量事件中找到特定的事件并了解其状态？</li>
+<li>如何保证事件的最新进展被大家所知？</li>
+<li>如何统计项目或模块的状况？</li>
+</ul>
+<aside class="notes">
+流程的保证：ticket（传票系统）
 </aside>
 </section></section>
 <section><section id="jira介绍" class="titleslide slide level1"><h1>Jira介绍</h1></section><section id="全球知名小公司高富帅的ceo" class="slide level2">
@@ -304,6 +343,28 @@ reporting and statistics 支持图形和图表的个性化的报表，可以监�
 </aside>
 </section></section>
 <section><section id="qa" class="titleslide slide level1"><h1>Q&amp;A</h1></section></section>
+<section><section id="深入jira" class="titleslide slide level1"><h1>深入Jira</h1></section><section id="项目和事件" class="slide level2">
+<h1>项目和事件</h1>
+<figure>
+<img src="images/jira/uml_prject_and_issue.png" />
+</figure>
+</section><section id="工作流" class="slide level2">
+<h1>工作流</h1>
+<figure>
+<img src="images/jira/uml_workflow.png" />
+</figure>
+<aside class="notes">
+<p>工作流适合多人改变单一事物的状态</p>
+<p>环节，可以改变或不改变状态 环节可以链接到状态 环节由有权限的人处理</p>
+<p>跳转：环节直接的路径 项目和工作流之间通过 工作流方案 解耦 主体通过执行环节，改变事件的状态</p>
+JIRA默认工作流？ 可配置成xx样子？
+</aside>
+</section><section id="权限系统" class="slide level2">
+<h1>权限系统</h1>
+<figure>
+<img src="images/jira/uml_rbac.png" />
+</figure>
+</section></section>
     </div>
   </div>
 
