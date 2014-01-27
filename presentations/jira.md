@@ -2,6 +2,14 @@
 % 问题跟踪系统
 % <br/><br/>王海阔 @hysec.com, 2014
 
+# Tips
+
+http://thinkinside.tk/presentations/jira.html
+
+请使用 **现代** 浏览器
+
+- Chrome, Safari, Firefox, Opera ...
+- 如果一定要使用IE，请使用IE10+
 
 # 项目中的“问题”
 
@@ -23,6 +31,7 @@
 ![](images/jira/bug.jpg)
 
 <div class="notes">
+我们最熟悉的
 bug(缺陷)：软件中存在的导致软件产品在某种程度上不能满足用户的需要的错误。产生原因：
 1）设计不合理;
 2）功能未实现；
@@ -30,8 +39,12 @@ bug(缺陷)：软件中存在的导致软件产品在某种程度上不能满足
 5）用户不能接受的其他问题，如存取时间过长、界面不美观;
 6）甚至，软件实现了需求未提到的功能。
 
-一般分成几个级别：致命的(Fatal)，严重的(Critical)，一般的(Major)，微小的(Minor),建议(Enhancemental)
+很多概念来自于bug,比如：级别
 </div>
+
+## bug levels
+
+一般分成几个级别：致命的(Fatal)，严重的(Critical)，一般的(Major)，微小的(Minor),建议(Enhancemental)
 
 ## New Requirement
 
@@ -131,25 +144,23 @@ bug(缺陷)：软件中存在的导致软件产品在某种程度上不能满足
 ![](images/jira/atlassian.png)
 
 <div class="notes">
+公司：Atlassian [ætlɑʒen]，澳大利亚, “全球知名小公司”
 Jira， confluence，crowd：项目管理三剑客
-出自Atlassian [ætlɑʒen]，澳大利亚, “全球知名小公司”
-    创立于2002年，启动资金为1万美元 信用卡贷款
-    第一年起便已经实现盈利, 2010财年收入5900万美元
-大名鼎鼎的产品：
-    bitbucket：分布式配置管理平台，sourceforge, git的强力竞争者
-    JIRA：需求、缺陷管理
-    confluence：企业级wiki，知识管理平台
-    crowd：基于 Web 的单点登录系统
+问题管理，企业级wiki, 统一认证和单点登录(OpenID)
+（现在Crowd已经被替换为 HipChat，一个IM工具）
+bitbucket：代码托管平台
 
-创始人兼CEO：Mike Cannon-Brookes，年轻，帅，有才--》
-    开源社区OpenSymphony的创始人
-    《Java Open source Programming》的合著者
+2002年，启动资金为1万美元的信用卡贷款，当年实现盈利
+2010年，收入5900万美元
 
-Opensymphony 2010年11月份关闭
-    诞生的高质量项目：（java）
-      WebWork：MVC框架，后来被纳入struts2的核心
-      Quartz ：任务调度
-      OSWorkflow：工作流引擎
+创始人兼CEO：Mike Cannon-Brookes
+- 《Java Open source Programming》的合著者
+- 开源社区OpenSymphony的创始人
+  Opensymphony 2010年11月份关闭
+  诞生的高质量项目：（java）
+    + WebWork：后来作为struts2的核心
+    + Quartz ：任务调度
+    + OSWorkflow：工作流引擎
 </div>
 
 
@@ -181,31 +192,20 @@ Opensymphony 2010年11月份关闭
 ![](images/jira/actions.png)
 
 <div class="notes">
-很容易想到，用状态机来管理事件的状态变迁
-核心的四个状态，对应前面的四个核心步骤
-
-增加直接的通路：松散控制
-增加回路和reopened状态：适应现实的复杂性
-
-很多缺陷/需求处理流程都是这个状态机的子集
-
-Jira lets you prioritise, assign, track, report and audit your 'issues'
-
-- create an issue(types)
-- after creating(details)
-- add comments
-
+一个有限状态机：核心的四个状态
+松散控制：增加直接的通路
+基于reopened状态：适应现实的复杂性
 </div>
 
 ## Ticket
 
 ![](images/jira/ticket.jpg)
 
-Ticket，用于跟踪
-
-在项目开发过程中出现的任何事件，都可以用一个Ticket来标识，例如Bug，项目计划，功能改进，项目建议，Todo等等，都可以写成一个Ticket，开发人员通过访问查看Ticket系统，可以及时的了解到项目进度，有待解决的地方等等
-每个Ticket都可以被修改和说明（Description属性），并说明这个Ticket是Bug还是项目建议还是其他什么（Type属性），指派由哪个人对这个Ticket负责（Assigned to/Owner属性），设定Ticket的优先级（Priority属性），设定Ticket的最终完成时间（Milestone属性），设定这个Ticket属于哪个模块（Component属性）。
-
+<div class="notes">
+传票系统，标记事件的当前处理人
+一个事件，一系列ticket
+通过ticket可以跟踪处理过程，了解项目进度等
+</div>
 
 ## 项目状态
 
