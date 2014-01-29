@@ -217,10 +217,12 @@ svn备份一般采用三种方式：
 
   `svnadmin dump --deltas $SVN_REPOSITORIES_ROOT/dev -r10:15 –-incremental |bzip2 |tee dev_10-15.bz2  | md5sum >dev_10-15.md5`
 
-- md4校验
+- md5校验
 
   `md5sum -c dev_full.md5 < dev_full.bz2`
 
 - 恢复
 
   `bzcat dev_full.bz2 | svnadmin load dev`
+
+  注意按顺序恢复；如果是恢复全库备份，最好删除原有的库。
