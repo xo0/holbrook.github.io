@@ -23,15 +23,26 @@ Camel的整体架构如下图所示：
 端点，接收或发送消息的通道。Endpoint通过[URI](http://zh.wikipedia.org/wiki/%E7%BB%9F%E4%B8%80%E8%B5%84%E6%BA%90%E6%A0%87%E5%BF%97%E7%AC%A6)连接消息源或目标。
 为了适应各种不同的URI协议，如http,ftp,JMS,smtp等，Camel中提供了多种Endpoint，也支持扩展自己的Endpoint。
 
-![](/images/camle/endpoints.png)
+![](/images/camel/endpoints.png)
 
 
 # Component
 
+到其他系统的连接器(connector)，并在Camel中创建Endpoint。
+
+`org.apache.camel.Component`接口只定义了两个方法：
+
+- `createConfiguration(String)`
+- `createEndpoint(String)`
+
+Camel中提供了大量的Component的实现：
+
+![](/images/camel/components.png)
 
 
-## Processor
+# Processor
 
+# 
 
 # 实现规则
 
