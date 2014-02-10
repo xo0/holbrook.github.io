@@ -3,7 +3,7 @@ layout: post
 title: "JBoss Fuse: 开发和部署路由(Route)"
 description: ""
 category: 软件开发
-tags: [SOA, OSGi, Maven]
+tags: [SOA, OSGi, Maven, FUSE]
 lastmod: 
 ---
 

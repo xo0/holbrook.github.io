@@ -3,7 +3,7 @@ layout: post
 title: "JBOSS FUSE:你必须知道的那些事"
 description: ""
 category: 企业架构
-tags: [SOA]
+tags: [SOA, FUSE]
 lastmod: 
 ---
 
