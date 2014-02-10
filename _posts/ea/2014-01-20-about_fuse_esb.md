@@ -68,6 +68,7 @@ ServiceMix使用OSGi将上述这些组件整合到一起，并使用Apache Karaf
 
 CXF 继承了 Celtix 和 XFire 两大开源项目的精华，提供了对 JAX-WS 和 JAX-RS 全面的支持，并且提供了多种 Binding 、DataBinding、Transport 以及各种 Format 的支持，并且可以根据实际项目的需要，采用代码优先（Code First）或者 WSDL 优先（WSDL First）来轻松地实现 Web Services 的发布和使用。
 
+关于使用Fuse发布Web Service，可以参考：[《JBoss Fuse: 开发和部署Web Service》](/2014/01/23/develop_a_fuse_webservice.html)。
 
 # Apache Camel
 
@@ -75,6 +76,8 @@ Apache Camel基于规则路由和中介引擎实现了[企业集成模式(EIP,En
 ，可以基于POJO定义路由配置和中介的规则，不需要大量的XML配置文件。
 
 Camel基于OSGi框架并使用依赖注入。支持Blueprint或Spring DM作为OSGi的依赖注入的框架。
+
+这里有关于Camel的介绍：[《Camel的核心概念》](/2014/02/10/apache_camel.html)。
 
 # Apache Aries Blueprint
 
