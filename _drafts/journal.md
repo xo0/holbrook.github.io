@@ -75,12 +75,6 @@ vagrant, Paas, 开发环境虚拟化
 
 ## SomeDay
 
-其他：
-
-4. 整理T2接口
-
-
-
 
 
 
