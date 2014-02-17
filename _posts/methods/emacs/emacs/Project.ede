@@ -1,8 +1,0 @@
-;; Object ttt
-;; EDE project file.
-(ede-proj-project "ttt"
-  :name "ttt"
-  :file "Project.ede"
-  :targets 'nil
-  :makefile-type 'Makefile.am
-  )

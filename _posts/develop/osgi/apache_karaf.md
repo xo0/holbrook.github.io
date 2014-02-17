@@ -1,18 +1,25 @@
 ---
 layout: post
-title: "用Apache Karaf作为“OSGi中间件”"
+title: "Apache Karaf：OSGi中间件"
 description: ""
 category: 软件开发
 tags: [OSGi, maven]
 lastmod: 
 ---
 
-# 为什么需要Apache Karaf
+# 为什么需要“OSGi中间件”
 
 尽管在OSGi Runtime(Felix, Equinox等)的基础上，OSGi组织又规定了[Blueprint规范以实现OSGi环境下的依赖注入](/2014/01/22/osgi_blueprint_container.html)，
 但这还不够——没有提供类似Web开发框架那样的一些“平台级”的功能。比如日志，控制台，配置文件等。
 
-Apache Karaf弥补了OSGi框架和应用之间的这些不足，提供了一个“OSGi中间件”，能够更方便的开发和部署基于OSGi的应用。其意义类似于Tomcat对于Java Web应用的作用。
+很难想象没有Tomcat这样的Web中间件，开发Java Web应用的工作量有多大。同样的，OSGi应用也需要一种“中间件”，来实现各应用共性的一些功能，并管理应用的部署。
+
+[Apache Karaf](http://karaf.apache.org/)就是这样的一个"OSGi中间件"。最早，Karaf只是[Apache ServiceMix](http://servicemix.apache.org/)的Kernel子项目，后来独立出来成为Apache的顶级项目。
+目前，Apache Karaf已经用于Apache Geronimo, Apache ServiceMix, Fuse ESB等项目。
+
+Apache Karaf的主要竞争对手是[Eclipse Virgo](http://www.eclipse.org/virgo/)。
+
+# Apache Karaf的功能
 
 ![](/images/fuse/Karaf.jpg)
 
@@ -24,55 +31,34 @@ Apache Karaf提供了如下“开箱即用”的功能：
 
 - 动态配置
 
-  尽管OSGi框架已经提供了`ConfigurationAdmin`服务以处理配置信息，但是使用起来不够方便。Karaf
-
-Dynamic configuration: Services are usually configured through the ConfigurationAdmin OSGi service. Such configuration can be defined in Karaf using property files inside the [home]/etc directory. These configurations are monitored and changes on the properties files will be propagated to the services.
-
-通过ConfigAdmin（源代码位于etc目录中）的配置
+  Karaf在`$KARAF_HOME/etc`文件夹中存储配置文件。这些配置内容可以在Karaf运行时动态修改。
 
 - 日志处理
 
-Logging System: using a centralized logging back end supported by Log4J, Karaf supports a number of different APIs (JDK 1.4, JCL, SLF4J, Avalon, Tomcat, OSGi)
-Provisioning: Provisioning of libraries or applications can be done through a number of different ways, by which they will be downloaded locally, installed and started.
-Native OS integration: Karaf can be integrated into your own Operating System as a service so that the lifecycle will be bound to your Operating System.
+  基于Log4J的日志系统，同时支持多种日志API，如JDK 1.4, JCL, SLF4J, Avalon, Tomcat, OSGi等。
 
-包含了一个可配置的日志系统（基于Log4J，但针对众多通用的日志系统进行了包装）
+- 系统服务
+
+  Karaf可以作为系统服务运行。
 
 - 控制台
 
-Extensible Shell console: Karaf features a nice text console where you can manage the services, install new applications or libraries and manage their state. This shell is easily extensible by deploying new commands dynamically along with new features or applications.
+  可以在控制台进行服务管理、安装bundle等操作。还可以扩展自己的控制台命令。
 
-- 远程访问
-
-Remote access: use any SSH client to connect to Karaf and issue commands in the console
-
-通过SSH实现的远程访问
-
-- 安全框架
-
-Security framework based on JAAS
-
-内建的JAAS支持
+  可以通过SSH远程访问其他服务器上的Karaf控制台。
 
 - 多实例管理
 
-Managing instances: Karaf provides simple commands for managing multiple instances. You can easily create, delete, start and stop instances of Karaf through the console.
+  一个服务器上可以运行多个Karaf实例。对实例的管理可以在Karaf控制台中进行。
 
 - Bundle仓库
   
-Karaf还安装了Pax URL的MVN协议，这样就可以从Maven中央仓库（在必要的情况下会自动将其包装为bundle）安装bundle了。
+  Karaf中内置了[Pax URL](https://ops4j1.jira.com/wiki/display/paxurl/Pax+URL)的MVN协议，可以从Maven中央仓库安装bundle。
 
-- Bundle集合
+- Bundle集合(Feature)
 
-Karaf还提出了特性的概念，所谓特性就是bundle的集合，能以组的形式安装到运行着的OSGi运行时当中。特性包含了对obr、jetty以及spring的支持，做到了开箱即用。这样，如果需要安装多个bundle，但这些bundle之间并没有严格的运行期依赖，那么这种支持就可以大大简化这种情况。
+  类似于Eclipse的Feature，Karaf中也支持Feature，即bundle的集合。使用Feature可以简化OSGi应用的部署。
 
-
-在迁移到Apache Felix项目中前Karaf是ServiceMix Kernel，并且最终成为了Apache的顶级项目。Karaf还加入到了其他框架当中，如Eclipse Virgo和EclipseRT packages，提供了预先配置的框架与好用的OSGi bundle，这样在上手使用OSGi运行时时就会比以往更加简单。
-
-
-同时Karaf作为一款成熟而且优秀的OSGi运行环境以及容器已经被诸多Apache项目作为基础容器,例如:Apache Geronimo, Apache ServiceMix, Fuse ESB,由此可见Karaf在性能,功能和稳定性上都是个不错的选择。
-
-Karaf已经被诸多Apache项目作为基础容器,比如Apache Geronimo, Apache ServiceMix, Fuse ESB等。
 
 
 # Karaf初体验
