@@ -1,8 +1,25 @@
 markdown:       rdiscount
-pygments: true
-permalink: /:title
+safe:           true
+lsi:            false
+pygments:       true
+paginate:       10
+permalink:      /:year/:month/:day/:title.html
+author:			Holbrook(wanghaikuo@gmail.com)
+title:          心内求法
+url:            http://thinkinside.tk
+description:    "Holbrook's blog"
+feed:           /atom.xml
 
-url:
-
-redcarpet:
-  extensions: [strikethrough]
+menuitems:
+    - name:     首页
+      url:      /index.html
+    - name:     分类
+      url:      /pages/categories.html
+    - name:     标签
+      url:      /pages/tags.html
+    - name:     订阅
+      url:      /feed.xml
+    - name:     归档
+      url:      /pages/archive.html
+    - name:     手机版 
+      url:      http://www.wumii.com/auto_app/download/nbn2Kljo

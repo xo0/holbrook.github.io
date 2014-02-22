@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 首页
+title: 归档
 ---
 
 <section class="post-archive">
@@ -11,7 +11,7 @@ title: 首页
 
   <div class="year-bundle row gutters fadeInDown animated">
     <h2 class="post-year col span_2">{{ post.date | date: '%Y' }}</h2>
-    <div class="posts-by-year col span_10">
+  <div class="posts-by-year col span_10">
 
 {% else %}
 {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
