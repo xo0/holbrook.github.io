@@ -1,0 +1,53 @@
+---
+layout: 	page
+---
+
+{% for page in paginator.posts %}
+
+
+<div class="article">
+  <h3 class="collection-index"><span class="in" style="text-decoration: none;"><a href="{{page.url}}" target="_blank">{{page.title}}&nbsp;&nbsp;&raquo;</a></span></h3>
+  
+    <div class="article-content">
+      <div class="RichTextElement">
+        <div><p>{{ page.description }}</p></div>
+      </div>
+    </div> <!-- /article-content -->
+    <div class="article-info">
+      <div class="timestamp in"><span class="in">{% include post_info_bar %}</span></div>
+    </div> <!-- /article-info -->
+</div> <!-- /article -->
+
+<hr style="height:1px;border:none;border-top:1px dashed #987cb9; color:#987cb9;"/>
+{% endfor %}
+
+
+{% if paginator.total_pages > 1 %}
+<div id="sitemenu-container">
+            <div id="sitemenu">
+<div id="sitemenu-content">
+<ul>
+  {% for page in (1..paginator.total_pages) %}
+    {% if page == paginator.page %}
+    <li class="i1 e currentPage"><span class="in">{{ page }}</span></li>
+    {% else %}
+    <li class="i1 o"><a href="/{%if page > 1 %}page{{ page }}/{% endif %}"><span class="in">{{ page }}</span></a></li>
+
+    
+    {% endif %}
+    {% endfor %}
+
+</ul>
+</div> <!-- /sitemenu-content -->
+            </div> <!-- /sitemenu -->
+          </div> <!-- sitemenu-container -->
+{% endif %}	
+
+
+
+<h5>以前的文章</h5>
+<ul>
+  <li><a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)</li>
+  <li><a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)</li>
+  <li><a href="http://wanghaikuo.blogjava.net/" target="_blank">@blogjava</a>(2006.10--2007.7)</li>
+</ul>
