@@ -13,13 +13,13 @@ feed:           /atom.xml
 menuitems:
     - name:     首页
       url:      /index.html
+    - name:     归档
+      url:      /pages/archive.html
     - name:     分类
       url:      /pages/categories.html
     - name:     标签
       url:      /pages/tags.html
     - name:     订阅
       url:      /feed.xml
-    - name:     归档
-      url:      /pages/archive.html
     - name:     手机版 
       url:      http://www.wumii.com/auto_app/download/nbn2Kljo
