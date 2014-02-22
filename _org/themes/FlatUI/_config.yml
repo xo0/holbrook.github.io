@@ -1,0 +1,34 @@
+markdown:       rdiscount
+safe:           true
+lsi:            false
+pygments:       true
+paginate:       10
+permalink:      /:year/:month/:day/:title.html
+title:          心内求法
+url:            http://thinkinside.tk
+feed:           /atom.xml
+author:
+    name:       Holbrook
+    twitter:    twitter.com/holbrook
+description:    "Holbrook's blog"
+author_info:    <a href="http://thinkinside.tk/about">Holbrook</a>
+category_code:
+    - 量化金融:  quant    
+    - 解决方案:  solution 
+    - tools:    工具使用
+    - develop:  软件开发
+    - domain:   领域模型
+    - methods:  手段方法
+    - reading:  读书笔记
+    - others:   杂七杂八
+menuitems:
+    - name:     首页
+      url:      /index.html
+    - name:     分类
+      url:      /pages/categories.html
+    - name:     标签
+      url:      /pages/tags.html
+    - name:     归档
+      url:      /pages/archive.html
+    - name:     手机版 
+      url:      http://www.wumii.com/auto_app/download/nbn2Kljo

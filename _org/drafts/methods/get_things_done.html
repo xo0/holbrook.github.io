@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+<title>GTD，计划好一切</title>
+<!-- 2014-02-22 Sat 17:08 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Holbrook(wanghaikuo@gmail.com)" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">GTD，计划好一切</h1>
+<div id="table-of-contents">
+<h2>&#30446;&#24405;</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. 焦虑的来源</a></li>
+<li><a href="#sec-2">2. 减轻压力的三个有效方法</a></li>
+<li><a href="#sec-3">3. GTD简介</a>
+<ul>
+<li><a href="#sec-3-1">3.1. 一个流程</a></li>
+<li><a href="#sec-3-2">3.2. 二分钟法则</a></li>
+<li><a href="#sec-3-3">3.3. 三条原则</a></li>
+<li><a href="#sec-3-4">3.4. 四个列表</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. 模型</a>
+<ul>
+<li><a href="#sec-4-1">4.1. 事件的状态</a></li>
+<li><a href="#sec-4-2">4.2. 重要程度与结构性拖延</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5. 工具</a></li>
+<li><a href="#sec-6">6. 资源</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 焦虑的来源</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+现代人几乎都生活在焦虑之中。<a href="http://www.mifengtd.cn">褪墨</a><sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup> 上面有一个<a href="http://www.mifengtd.cn/articles/emotion-mind-map.html">很典型的故事</a>：
+</p>
+
+<blockquote>
+<p>
+那天下午，我在放学的路上想起了下周即将到来的考试。上次考试我没有考好，我和老师都很失望，期待着这一次能走出阴影；然而我越是这么想就越心慌，想起了还有五套布置的模拟题没有完成。我的脚步变得沉重起来，希望能给朋友打个电话缓解一下压力。可是在这个新的集体里，我还没有找到非常过心的朋友，唯一的一个老朋友昨天刚刚搬到外地上学去了，以后不知能不能联系到。&#x2014;&#x2014;不仅没有新的朋友，连老朋友也要失去！难道这就是我的新生活的样子吗？我叹了口气。
+到了家门口，站在一层，电梯还是慢慢地徘徊在最高楼层附近，真是浪费时间。我步行爬上了12层，已经累得气喘吁吁。没错，学业的压力让我很久没有锻炼了，我知道这样不好，可我似乎无能为力。我去洗澡想冲掉汗水，在镜子里发现自己曾经引以为豪的腹肌也不知何时消失了，我的腰腹有了赘肉，我很难过。
+做作业吧。我需要查找一个关键概念的含义，但是老师上周发的讲义却消失在乱糟糟的文件堆里，不知去向。我只好求助于网络了，但是我的电脑总是很慢，开机、打开浏览器、解析网页&#x2026;&#x2026;浪费掉的时间至少占使用电脑时间的20%，可是都是零散时间，不能利用这些时间，我几乎要抓狂了！
+到了这里，被一堆烦心事折磨一番后，我终于崩溃了，很可能会在这时抛下学习，着魔般地打开了某个游戏，但其实我一点也不想玩游戏，我只是心情很差。糟糕的情绪最终让我回到了拖延的怪圈。
+</p>
+</blockquote>
+
+<p>
+可能很多人都有过这种经历，或者类似的情况：
+</p>
+
+<ul class="org-ul">
+<li>不管做什么事情，都发现一系列的依赖条件没有满足或不够好
+</li>
+<li>没有勇气去睡觉，总感觉什么事情没有做完晚上不睡
+</li>
+<li>觉得要做的事情太多，索性什么都不做，但是并不愉悦
+</li>
+<li>觉得自己碌碌无为，每天都很忙却看不到希望
+</li>
+</ul>
+
+<p>
+有少数人确实要处理太多的事情(比如，Boss)，大多数人其实的压力并不大。那么焦虑主要来自：
+</p>
+
+<ul class="org-ul">
+<li>没有进行合适的计划和安排
+
+<p>
+毕竟，事情更多的Boss可以有助手帮助安排一些日常或处理一些事物，而这种计划能力并不是人人都具备。如果计划安排的不好，事情就会堆积起来，导致焦虑的产生，或者产生“习惯性拖延”。需要注意的是：拖延并不能减轻压力，只会导致压力的累积和增大。
+</p>
+</li>
+
+<li>无法预期
+
+<p>
+这里的“预期”有两方面的含义：
+</p>
+
+<ul class="org-ul">
+<li>在微观上，无法预期某件事情的发展情况
+</li>
+<li>在宏观上，对自己的未来不明确，怀疑当下所做事情的意义
+</li>
+</ul>
+</li>
+
+<li>低效率
+</li>
+</ul>
+
+<p>
+总是或主动、或被动的同时处理多件事情。古人都知道“一心不可二用”，现代行为学也认为大脑在切换工作时需要进行一段时间的预热，所以“同时处理多件事情”并不是真的“同时”，而是在短时间多次进行工作的切换，必然导致低效率，而低效率又会产生焦虑，从而导致恶性循环。
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> 减轻压力的三个有效方法</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+如果为自己找一个借口，可以说这是由于<a href="http://book.douban.com/subject/6758932/">信息时代造成大脑超负荷运转</a>，并且继续这样的状态过完自己的余生。
+</p>
+
+<p>
+如果想改变，我认为有三点很重要：
+</p>
+
+<ol class="org-ol">
+<li>确定目标
+
+<p>
+工作和生活中，有很多事情是不喜欢做但又必须去做的，不是每个人都能足够的自律去很好的完成这些事情&#x2014;&#x2014;要么拖延，要么应付。
+之所以有这种感觉，是因为自己的目标不明确。有目标的人不管遇到什么事情，都会潜意识里将事情纳入到自己的目标计划中，权衡利弊，综合考虑，使得每件事情的完成或解决都使得自己的目标实现更进一步。
+而没有目标的人，只能被动应对，很容易产生碌碌无为的挫败感。
+记住一句话：“性格决定命运，思路决定出路”。要为自己确定一个层面比较高的目标，视点的高度决定了眼界的尺度。
+</p>
+</li>
+
+<li>正确的方法
+
+<p>
+前面说过，不是每个人都有很好的计划和安排能力，但是这种能力可以后天培养。本文重点要介绍的就是GTD(Getting Things Done)&#x2013;无压力工作方法。
+这种方法不但可以训练计划能力，也可以帮助自己加强自律，提高效率。
+</p>
+</li>
+
+<li>定期冥想
+
+<p>
+上面两点只是提高应对大量事件和信息的能力，但是不可否认，现在的社会环境对于大脑来说仍然是过载的，而这恐怕只能通过漫长的进化过程来解决。
+为了修复很受伤的大脑，别人它提前挂掉，还是要汲取古人的智慧&#x2014;&#x2014;冥想，其实是一种很好的修复方法。由于这部分内容很容易引起“科学派”的口诛笔伐，暂且按下不表。
+</p>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> GTD简介</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+GTD(Getting Things Done)是戴维·艾伦（David Allen）总结出的一套面向机构的“无压力工作”方法。
+</p>
+
+<p>
+喜欢读完整版的可以去下载中文版：<a href="http://www.mifengtd.cn/articles/getting_things_done_cn_download.html">《尽管去做&#x2014;&#x2014;无压工作的艺术》</a>，
+</p>
+
+<p>
+喜欢“一张图搞定”的可以看下面两张图：
+</p>
+
+
+<div class="figure">
+<p><img src="file:///assets/images/gtd/gtd_quickref.png" alt="gtd_quickref.png" />
+</p>
+</div>
+
+
+<div class="figure">
+<p><img src="file:///assets/images/gtd/gtd2_big.jpg" alt="gtd2_big.jpg" />
+</p>
+</div>
+
+
+<p>
+如果你喜欢“抓住要点”，那么我就啰嗦一下GTD的要点：
+</p>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> 一个流程</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+收集 &#x2013;&gt; 分类 &#x2013;&gt; 计划 &#x2014;&gt; 处理 &#x2013;&gt; 回顾
+</p>
+
+
+
+<ol class="org-ol">
+<li>收集
+</li>
+</ol>
+
+<p>
+将所有要处理的事情放到统一的收集箱(Inbox)
+</p>
+
+<ol class="org-ol">
+<li>根据事情的特性进行分类和(预)处理：
+</li>
+
+<li>不需要马上行动的事情放入：
+
+<ul class="org-ul">
+<li>垃圾箱(Trash) &#x2014;&#x2014; 对于垃圾信息
+</li>
+<li>列表(Task List) &#x2014;&#x2014; 对于不需要明确日期的事情
+</li>
+<li>日程表(Calendar) &#x2014;&#x2014; 对于有明确日期的事情
+</li>
+<li>参考资料(Reference) &#x2014;&#x2014; 对于有价值的资料或文档
+</li>
+</ul>
+</li>
+
+<li>需要马上行动的事情：
+
+<ul class="org-ul">
+<li>两分钟可以完成的 &#x2014;&#x2014; 立即完成
+</li>
+<li>需要他人配合的 &#x2014;&#x2014; 通知，并记录为Waiting
+</li>
+<li>条件不满足无法开始 &#x2014;&#x2014; 将先决条件的事情纳入收集箱
+</li>
+</ul>
+</li>
+</ol>
+
+<p>
+还可以计划处理的场合(Place)、时间和资源。
+</p>
+
+<ol class="org-ol">
+<li>如果已经清空了收集箱，开始计划Task List中的事情
+</li>
+<li>每天处理：
+</li>
+</ol>
+
+<p>
+1). 日程表 2). Task List中可以完成的事情
+</p>
+
+<ol class="org-ol">
+<li>定期回顾
+</li>
+</ol>
+
+<p>
+每天、每周回顾已完成的任务，计划和Waiting。
+</p>
+
+<p>
+每周进行计划和总结是个好习惯。
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> 二分钟法则</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+如果一件事情能够在两分钟内完成，去马上完成！
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> 三条原则</h3>
+<div class="outline-text-3" id="text-3-3">
+<ol class="org-ol">
+<li>将所要要完成的任务和事件全部用工具记录，并从大脑中情况
+</li>
+<li>同一时刻只处理一件事情
+</li>
+<li>不断考虑“是否有下一个行动”
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> 四个列表</h3>
+<div class="outline-text-3" id="text-3-4">
+<ul class="org-ul">
+<li>日程表：已明确日期的要处理的事情
+</li>
+<li>待办表：未明确日期的要处理的事情
+</li>
+<li>等待表：协作，等待他人完成，或项目计划中的事项
+</li>
+<li>完成表：已完成的事情
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> 模型</h2>
+<div class="outline-text-2" id="text-4">
+
+<div class="figure">
+<p><img src="gtd.png" alt="gtd.png" />
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> 事件的状态</h3>
+<div class="outline-text-3" id="text-4-1">
+
+<div class="figure">
+<p><img src="gtd_state.png" alt="gtd_state.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> 重要程度与结构性拖延</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+<a href="http://www.structuredprocrastination.com/index.php">http://www.structuredprocrastination.com/index.php</a>：去做一些无关紧要的事，以逃避更重要的事情
+</p>
+
+<p>
+结构型拖延的意思就是根据实际情况，把必须要做的任务做成一个列表。这个任务列表是按重要度来排列的。很紧急很重要的任务在最上面。不太要紧但又必须要做的事排在下面一点，我们可以做这些事情来逃避最上面的更重要的任务。按这种恰当的结构来排列任务，拖沓之人就变成了个有用之人，并且真的可以像我一样获得个多产高效的名声。
+</p>
+
+<p>
+拖沓的人往往误入歧途。他们想要减少任务，觉得如果只有很少事情可做的话，他们会立即抖擞精神，把事情搞定。这其实和拖沓之人的本性相反，毁掉了他们更重要的做事的驱动力。列表上任务越少就越显得重要，只有一个方法可以逃避这些任务，那就是什么事情都不做。
+</p>
+
+<p>
+该把什么样的事情列在任务列表的最上面，这里有个小技巧。理想的任务应该有两个特性，首先，它们好像有最后期限（但实际没有）。然后，它们好像特别重要（其实不是）。幸运的是，我们生活里这样的事情很多。在大学里大部分的课程任务都属于这个种类，我觉得，很多更大的任务也适用。
+</p>
+
+<p>
+善于观察的读者现在可能会觉得，结构型拖延需要一点自我欺骗，因为这好像不断的对自己犯罪。确实是这样。要意识到，并坚持夸大任务的重要度，给任务设定不真实的期限，同时自己要真的觉得这些任务确实很重要很紧急。这不是个问题，因为事实上拖沓成性的人确实有这样杰出自欺能力。
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> 工具</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+ThinkingRock <a href="http://www.mifengtd.cn/articles/thinkingrock\_overview.html">http://www.mifengtd.cn/articles/thinkingrock\_overview.html</a>
+</p>
+
+<p>
+<a href="http://www.mifengtd.cn/articles/%E5%87%A0%E4%B8%AA%E4%B8%AD%E6%96%87gtd%E5%9C%A8%E7%BA%BF%E7%BD%91%E7%AB%99.html">http://www.mifengtd.cn/articles/%E5%87%A0%E4%B8%AA%E4%B8%AD%E6%96%87gtd%E5%9C%A8%E7%BA%BF%E7%BD%91%E7%AB%99.html</a>
+GTD工具： Doit.im
+</p>
+
+<p>
+国内最优秀的GTD个人时间管理工具，支持多个平台。参考介绍。
+</p>
+
+<p>
+Omnifocus
+</p>
+
+<p>
+Mac下最强大的GTD实践工具，支持Mac OS，iPad和iPhone。参考系列介绍。
+</p>
+
+<p>
+Wunderlist
+</p>
+
+<p>
+跨平台的To-Do List工具。
+</p>
+
+<p>
+Worktile
+</p>
+
+<p>
+一款免费、好用的团队协同工具。
+</p>
+
+<p>
+Todoist
+</p>
+
+<p>
+一款简洁强大的跨平台的To-Do软件。
+</p>
+
+<p>
+Any.do
+</p>
+
+<p>
+一款小清新的跨平台To-Do软件。
+</p>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> 资源</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+关于时间管理的博客：
+</p>
+
+
+<p>
+GTDLife（<a href="http://www.gtdlife.cn%EF%BC%89%E5%85%B3%E6%B3%A8GTD%E5%BA%94%E7%94%A8%EF%BC%8C%E5%85%B3%E6%B3%A8%E4%B8%AA%E4%BA%BA%E4%BB%B7%E5%80%BC%E6%8F%90%E5%8D%87%EF%BC%8C%E5%92%8C%E4%BD%A0%E4%B8%80%E5%90%8C%E6%88%90%E9%95%BF%EF%BC%8C%E5%88%86%E4%BA%ABGTD%E7%BB%8F%E9%AA%8C">http://www.gtdlife.cn%EF%BC%89%E5%85%B3%E6%B3%A8GTD%E5%BA%94%E7%94%A8%EF%BC%8C%E5%85%B3%E6%B3%A8%E4%B8%AA%E4%BA%BA%E4%BB%B7%E5%80%BC%E6%8F%90%E5%8D%87%EF%BC%8C%E5%92%8C%E4%BD%A0%E4%B8%80%E5%90%8C%E6%88%90%E9%95%BF%EF%BC%8C%E5%88%86%E4%BA%ABGTD%E7%BB%8F%E9%AA%8C</a>。
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">&#33050;&#27880;: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<a href="http://www.mifengtd.cn">褪墨</a>， 一个关于时间管理、个人提升和演讲技巧的博客。在帮助别人的同时，大家都在提高。
+</p></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#26399;: <span class="timestamp-wrapper"><span class="timestamp">[2014-02-22]</span></span></p>
+<p class="author">&#20316;&#32773;: Holbrook(wanghaikuo@gmail.com)</p>
+<p class="date">Created: 2014-02-22 Sat 17:08</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.5h)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
