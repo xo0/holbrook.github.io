@@ -1,0 +1,43 @@
+---
+layout: default
+title: 分类
+---
+<ul class="tag_box inline">
+  {% assign categories_list = site.categories %}
+  {% if categories_list.first[0] == null %}
+    {% for category in categories_list %} 
+      <a href="{{ BASE_PATH }}{{ site.JB.categories_path }}#{{ category }}-ref" rel="category">
+        {{ category | join: "/" }} 
+      </a><span class="badge">{{ site.categories[category].size }}</span>&nbsp;
+    {% endfor %}
+  {% else %}
+    {% for category in categories_list %} 
+      <a href="{{ BASE_PATH }}{{ site.JB.categories_path }}#{{ category[0] }}-ref" rel="category">
+        {{ category[0] | join: "/" }} 
+      </a><span class="badge" style="vertical-align: super;">{{ category[1].size }}</span>&nbsp;
+    {% endfor %}
+  {% endif %}
+  {% assign categories_list = nil %}
+</ul>
+
+<section class="post-archive">
+
+  {% for category in site.categories %} 
+  <div class="year-bundle row gutters fadeInDown animated">
+        <h2 class="post-year col span_2" id="{{ category[0] }}-ref">
+          {{ category[0] | join: "/" }}
+        </h2>
+        <div class="posts-by-year col span_10">
+          {% for post in category[1] %}
+            
+            <div class="row gutters archive-entry">
+              <a href="{{ post.url }}" title="{{ post.title }}" class="col span_8">{{ post.title }}</a>
+              <div class="archive-date col span_4">
+                <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+  </div>
+{% endfor %}
+</section>
