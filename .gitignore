@@ -1,5 +1,5 @@
-_site
-
+**/_site
+**/themes/**/_posts
 **/.DS_Store
 *.bak
 .DS_Store
