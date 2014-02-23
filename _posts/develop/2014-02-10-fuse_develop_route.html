@@ -1,0 +1,170 @@
+---
+title: 开发和部署JBoss FUSE中的路由(Route)
+tags:
+  - SOA
+  - OSGi
+  - Maven
+  - FUSE
+categories:
+  - 软件开发
+layout: post
+---
+<div id="table-of-contents">
+<h2>&#30446;&#24405;</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. 快速开始</a></li>
+<li><a href="#sec-2">2. 基于Blueprint装配Camel</a></li>
+<li><a href="#sec-3">3. 部署到ServiceMix</a></li>
+<li><a href="#sec-4">4. 从ServiceMix到Fuse</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 快速开始</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+因为<a href="file:///2014/01/20/about_fuse_esb.html#menuIndex1">Fuse的核心组成部分是ServiceMix</a>，而ServiceMix的核心组成部分是Apache Camel，所以“用Fuse开发路由”也就是“开发Camel路由”。
+</p>
+
+<p>
+[Camel提供了大量的开发工具(<a href="http://search.maven.org/#search|ga|1|org.apache.camel.archetypes">http://search.maven.org/#search|ga|1|org.apache.camel.archetypes</a>)，
+</p>
+
+<p>
+其中<a href="http://search.maven.org/#search|ga|1|a:%22camel-archetype-blueprint%22">camel-archetype-blueprint</a>
+是一个<a href="http://maven.apache.org/guides/introduction/introduction-to-archetypes.html">maven
+archetype</a>，
+可以基于<a href="file:///2014/01/22/osgi_blueprint_container.html">Blueprint</a>，以依赖注入的方式配置CamelContext。下面快速创建一个demo:
+</p>
+
+<pre class="example">
+mvn archetype:generate  \
+-DarchetypeGroupId=org.apache.camel.archetypes \
+-DarchetypeArtifactId=camel-archetype-blueprint \
+-DarchetypeVersion=2.12.2 \
+-DgroupId=thinkinside.demo.fuse \
+-DartifactId=route-demo \
+-Dversion=1.0.0-SNAPSHOT
+</pre>
+
+<p>
+会创建如下结构的一个工程：
+</p>
+
+<p>
+<img src="file:///images/fuse/route-demo-structure.png" alt="route-demo-structure.png" />
+从=pom.xml=来看，这是一个<a href="file:///2014/01/21/tycho_vs_maven_bundle_plugin.html">使用maven-bundle-plugin构建的OSGi
+bundle工程</a>。
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> 基于<a href="file:///2014/01/22/osgi_blueprint_container.html">Blueprint</a>装配Camel</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Context
+</p>
+
+<p>
+工程的`META-INF/blueprint/blueprint.xml'文件是一个Blueprint配置文件： 
+</p>
+
+<pre class="example">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/blueprint"
+       xsi:schemaLocation="
+       http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+       http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd"&gt;
+
+  &lt;bean id="helloBean" class="thinkinside.demo.fuse.HelloBean"&gt;
+      &lt;property name="say" value="Hi from Camel"/&gt;
+  &lt;/bean&gt;
+
+  &lt;camelContext id="blueprintContext" trace="false" xmlns="http://camel.apache.org/schema/blueprint"&gt;
+    &lt;route id="timerToLog"&gt;
+      &lt;from uri="timer:foo?period=5000"/&gt;
+      &lt;setBody&gt;
+          &lt;method ref="helloBean" method="hello"/&gt;
+      &lt;/setBody&gt;
+      &lt;log message="The message contains ${body}"/&gt;
+      &lt;to uri="mock:result"/&gt;
+    &lt;/route&gt;
+  &lt;/camelContext&gt;
+
+&lt;/blueprint&gt;
+</pre>
+
+<p>
+该配置文件中，定义了一个id为=blueprintContext=的Camel
+Context。这个Context中定义了一个路由：
+</p>
+
+<ol class="org-ol">
+<li>入口为一个Timer类型的Endpoint
+</li>
+<li>使用预定义的bean为Message设置body
+</li>
+<li>记录日志
+</li>
+<li>出口为一个Mock类型的Endpoint
+</li>
+</ol>
+
+<p>
+如果使用FuseIDE，可以看到图形化的配置界面：
+</p>
+
+
+<div class="figure">
+<p><img src="file:///images/fuse/route-design.png" alt="route-design.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> 部署到ServiceMix</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+执行=mvn package=后，得到=route-demo-1.0.0-SNAPSHOT.jar=，这是一个OSGi
+bundle。可以将jar文件部署到
+</p>
+
+<p>
+=$SERVICEMIX_HOME/deploy/=目录中。正常情况下，bundle的依赖关系被满足，该bundle会被自动启动。
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> 从ServiceMix到Fuse</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+上述的过程也适用于JBoss Fuse。
+</p>
+
+<p>
+但是Fuse对ServiceMix进行了再次封装，需要使用Fuse对应的版本。比如，=camel-archetype-blueprint=的版本可能要使用=2.10.0.redhat-60024=这样的“Fuse版本号”，否则在部署到Fuse是可能会发生版本不匹配的问题。
+</p>
+
+<p>
+Fuse提供了一个maven仓库，专门提供这种定制版本的组件，需要在maven中配置：
+</p>
+
+<pre class="example">
+&lt;repository&gt;
+    &lt;id&gt;fusesource&lt;/id&gt;
+    &lt;url&gt;http://repo.fusesource.com/nexus/content/groups/public/&lt;/url&gt;
+    &lt;snapshots&gt;
+        &lt;enabled&gt;false&lt;/enabled&gt;
+    &lt;/snapshots&gt;
+    &lt;releases&gt;
+         &lt;enabled&gt;true&lt;/enabled&gt;
+     &lt;/releases&gt;
+&lt;/repository&gt;
+</pre>
+</div>
+</div>

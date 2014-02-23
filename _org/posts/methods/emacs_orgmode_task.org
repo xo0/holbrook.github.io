@@ -9,7 +9,7 @@
 程序员对于“TODO”这个词一定不陌生。一个TODO意味着有一件事情需要去做。更深入一步来说，TODO是一个未完成的任务。
 
 Org-mode能够完美解决任务管理的各种问题，包括任务/子任务的划分，关键时间的设定，任务状态变化的跟踪，以及任务的检索和查询。
-再配合[[http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html][Org-mode的强大编辑功能]]， 能够实现很多功能，比如时间管理（GTD），项目计划和管理，工作日志等。
+再配合[[./emacs_orgmode_editor.org][Org-mode的强大编辑功能]]， 能够实现很多功能，比如时间管理（GTD），项目计划和管理，工作日志等。
 
 本文介绍Org-mode强大的任务管理功能。
 
@@ -26,12 +26,10 @@ Org-mode内置的任务状态只有两种：TODO和DONE。如果需要更多的�
 关键字应该各不相同，这样对于一个选项 Org 才知道该用哪个状态序列（集合）。例子中也给出了快速使用一个关键字的方法，就是在关键字后面括号中给出快捷字母——当用
 C-c C-t时，会询问，让你输入一个字母。
 
-要自定义任务状态，可以使用文档元数据“#+SEQ_TODO：”，可以在文档的任何地方定义，但是建议统一定义在文档头部：
+要自定义任务状态，可以使用文档元数据 =#+SEQ_TODO= ，可以在文档的任何地方定义，但是建议统一定义在文档头部：
 
-#+BEGIN_QUOTE
 : #+SEQ_TODO: REPORT(r) BUG(b) KNOWNCAUSE(k) | FIXED(f)
 : #+SEQ_TODO: TODO(T!) | DONE(D@)3  CANCELED(C@/!)
-#+END_QUOTE
 
 将光标放在这些内容上，输入 C-c C-c 可以直接生效。此时再用C-c C-t设定任务时，会打开一个新的缓冲区：
 
@@ -50,7 +48,7 @@ C-c C-t时，会询问，让你输入一个字母。
 
 使用C-c C-t 或者 S-LEFT/RIGTH 切换一些状态后，任务会变成这个样子：
 
-[[./orgmode/todo2.png]]
+[[img:/assets/images/orgmode/todo2.png]]
 
 会自动生成时间戳，提示填写说明。从而留下完整的记录。
 
@@ -58,57 +56,49 @@ C-c C-t时，会询问，让你输入一个字母。
 上面的任务状态设置只适用于当前文档。如果希望设定所有.org文档的默认任务状态，需要在.emacs配置文件中定义。
 上面的任务状态在配置文件中的等效设置为：
 
-#+BEGIN_QUOTE
 : (setq org-todo-keywords
 :     '((sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
 :       (sequence "TODO(T!)" "|" "DONE(D@)3" "CANCELED(C@/!)")
-:      ))    
-#+END_QUOTE
+:      ))
 
 
-除了状态序列外，还可以定义type，来标记任务的分类。可以参考[[http://orgmode.org/manual/TODO-types.html#TODO-types][这里]] 。
+除了状态序列外，还可以定义type，来标记任务的分类。可以参考[[http://orgmode.org/manual/TODO-types.html#TODO-types][这里]]。
 
 * 设置任务优先级
-在Org-mode中，还针对任务设定了A，B，C三种优先级，在安排日程的时候可以按照优先级进行排序。为任务设定优先级是通过
-快捷键 S-UP/DOWN
+在Org-mode中，还针对任务设定了A，B，C三种优先级，在安排日程的时候可以按照优先级进行排序。为任务设定优先级是通过快捷键 =S-UP/DOWN= 。
 
 * 跟踪子任务完成情况
 对于有多个子任务的上级任务，很常见的一个需求是随时跟踪子任务的完成情况。
 Org-mode支持在上级任务上增加标记，当子任务的状态发生改变时自动更新上级任务的完成情况。
-支持百分比和分数两种形式，类似[66%] 或者 [2/3]。
+支持百分比和分数两种形式，类似 =[66%]= 或者 =[2/3]= 。
 
-可以在上级任务标题中的任意位置插入[%] 或者 [/], 当子任务的状态发生变化时，会自动更新该位置的值。
+可以在上级任务标题中的任意位置插入 =[%]= 或者 =[/]=, 当子任务的状态发生变化时，会自动更新该位置的值。
 比如：
 
-#+BEGIN_QUOTE
 : * Organize Party [%]
 : ** Call people [/]
 : *** Peter
 : *** Sarah
 : ** Buy food
 : ** Talk to neighbor
-#+END_QUOTE
- 
+
 注意：
     1. 当改变子任务状态时，只更新上一级任务的完成情况，不可级联。
     2. 即使所有的子任务都完成，也只是标记上一级任务的完成情况为100%，而不能自动更新上级任务的完成状态。如果需要自动设定为完成，可以在.emacs中增加如下配置：
 
-#+BEGIN_QUOTE
 :     (defun org-summary-todo (n-done n-not-done)
 :       "Switch entry to DONE when all subentries are done, to TODO otherwise."
 :       (let (org-log-done org-log-states)   ; turn off logging
 :         (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
-:     
+:
 :     (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
-#+END_QUOTE
 
 * 用复选框标记非标题类型的子任务
 
-前面的任务和子任务都是标题形式。Org-mode还支持非标题形式的子任务。对于以”[ ]“开头的[[http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html#sec-3-4][列表]]， 会被当作复选框。这样就形成了局部的子任务，
+前面的任务和子任务都是标题形式。Org-mode还支持非标题形式的子任务。对于以 =[ ]= 开头的[[img:/2012/04/12/emacs_orgmode_editor.html#sec-3-4][列表]] 会被当作复选框。这样就形成了局部的子任务，
 适用于将一个任务划分成几个简单的步骤。
 下面是一个例子：
 
-#+START_QUOTE
 : *** 一个任务 [0/2]
 : 该任务包含几个步骤：
 : - [-] 步骤1 [1/2]
@@ -117,7 +107,6 @@ Org-mode支持在上级任务上增加标记，当子任务的状态发生改变
 : - [-] 步骤2 [1/2]
 :   - [X] 步骤2.1
 :   - [ ] 步骤2.2
-#+END_QUOTE
 
 与子任务类似，步骤的状态变化会改变上级步骤/任务的完成情况。
 下面是复选框相关的命令：
@@ -128,14 +117,12 @@ Org-mode支持在上级任务上增加标记，当子任务的状态发生改变
 | M-S-RET | 增加一个子项   |
 
 * 查询任务
-在[[http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html#sec-1-2-3][Org-mode的编辑功能]] 中介绍过大纲的检索功能：
-#+BEGIN_QUOTE
-: 前面 C-c /	 	只列出包含搜索结果的大纲，并高亮，支持多种搜索方式
-#+END_QUOTE
 
-该功能可以按照多种方式检索，其中针对任务有两种方式：
-todo 和 TODO key words。
-分别实现高亮所有TODO和具有特定关键字的TODO
+在[[img:/2012/04/12/emacs_orgmode_editor.html#sec-1-2-3][Org-mode的编辑功能]] 中介绍过大纲的检索功能：
+
+: 前面 C-c /	 	只列出包含搜索结果的大纲，并高亮，支持多种搜索方式
+
+该功能可以按照多种方式检索，其中针对任务有两种方式：todo 和 TODO key words，分别实现高亮所有TODO和具有特定关键字的TODO。
 
 * 任务的时间计划
 Org-mode中的任务还可以设置计划时间（SCHEDULED）和截止时间（DEADLINE），方便任务的管理和排程。
