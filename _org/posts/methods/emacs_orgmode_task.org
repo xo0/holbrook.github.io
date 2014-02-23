@@ -30,12 +30,12 @@ C-c C-t时，会询问，让你输入一个字母。
 
 #+BEGIN_QUOTE
 : #+SEQ_TODO: REPORT(r) BUG(b) KNOWNCAUSE(k) | FIXED(f)
-: #+SEQ_TODO: TODO(T!) | DONE(D@)3  CANCELED(C@/!)    
+: #+SEQ_TODO: TODO(T!) | DONE(D@)3  CANCELED(C@/!)
 #+END_QUOTE
 
 将光标放在这些内容上，输入 C-c C-c 可以直接生效。此时再用C-c C-t设定任务时，会打开一个新的缓冲区：
 
-[[./orgmode/todo1.png]]
+[[img:/assets/images/orgmode/todo1.png]]
 
 对照前面的定义不难发现：
 
