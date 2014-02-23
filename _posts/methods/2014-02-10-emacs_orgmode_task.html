@@ -1,5 +1,5 @@
 ---
-title: org-mode，最强的任务管理利器，没有之一
+title: org-mode，JBoss Fuse: 开发和部署路由(Route)
 tags:
   - emacs
   - org-mode
@@ -36,7 +36,7 @@ layout: post
 
 <p>
 Org-mode能够完美解决任务管理的各种问题，包括任务/子任务的划分，关键时间的设定，任务状态变化的跟踪，以及任务的检索和查询。
-再配合<a href="/./emacs_orgmode_editor.html">Org-mode的强大编辑功能</a>， 能够实现很多功能，比如时间管理（GTD），项目计划和管理，工作日志等。
+再配合<a href="http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html">Org-mode的强大编辑功能</a>， 能够实现很多功能，比如时间管理（GTD），项目计划和管理，工作日志等。
 </p>
 
 <p>
@@ -70,13 +70,15 @@ C-c C-t时，会询问，让你输入一个字母。
 </p>
 
 <p>
-要自定义任务状态，可以使用文档元数据 <code>#+SEQ_TODO</code> ，可以在文档的任何地方定义，但是建议统一定义在文档头部：
+要自定义任务状态，可以使用文档元数据=#+SEQ\<sub>TODO：</sub>=，可以在文档的任何地方定义，但是建议统一定义在文档头部：
 </p>
 
+<blockquote>
 <pre class="example">
 #+SEQ_TODO: REPORT(r) BUG(b) KNOWNCAUSE(k) | FIXED(f)
 #+SEQ_TODO: TODO(T!) | DONE(D@)3  CANCELED(C@/!)
 </pre>
+</blockquote>
 
 <p>
 将光标放在这些内容上，输入 C-c C-c 可以直接生效。此时再用C-c C-t设定任务时，会打开一个新的缓冲区：
@@ -91,7 +93,7 @@ C-c C-t时，会询问，让你输入一个字母。
 </p>
 
 <ul class="org-ul">
-<li>可以定义多组状态序列，每个“#+SEQ_TODO”行定义一组
+<li>可以定义多组状态序列，每个“#+SEQ<sub>TODO”行定义一组</sub>
 </li>
 <li>状态之间用空格分隔
 </li>
@@ -115,9 +117,11 @@ C-c C-t时，会询问，让你输入一个字母。
 使用C-c C-t 或者 S-LEFT/RIGTH 切换一些状态后，任务会变成这个样子：
 </p>
 
-<p>
-<img src="/assets/images/orgmode/todo2.png" alt="nil"/>
+
+<div class="figure">
+<p><img src="/./orgmode/todo2.png" alt="todo2.png" />
 </p>
+</div>
 
 <p>
 会自动生成时间戳，提示填写说明。从而留下完整的记录。
@@ -129,16 +133,18 @@ C-c C-t时，会询问，让你输入一个字母。
 上面的任务状态在配置文件中的等效设置为：
 </p>
 
+<blockquote>
 <pre class="example">
 (setq org-todo-keywords
     '((sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
       (sequence "TODO(T!)" "|" "DONE(D@)3" "CANCELED(C@/!)")
-     ))
+     ))    
 </pre>
+</blockquote>
 
 
 <p>
-除了状态序列外，还可以定义type，来标记任务的分类。可以参考<a href="http://orgmode.org/manual/TODO-types.html#TODO-types">这里</a>。
+除了状态序列外，还可以定义type，来标记任务的分类。可以参考<a href="http://orgmode.org/manual/TODO-types.html#TODO-types">这里</a> 。
 </p>
 </div>
 </div>
@@ -146,7 +152,8 @@ C-c C-t时，会询问，让你输入一个字母。
 <h2 id="sec-3"><span class="section-number-2">3</span> 设置任务优先级</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-在Org-mode中，还针对任务设定了A，B，C三种优先级，在安排日程的时候可以按照优先级进行排序。为任务设定优先级是通过快捷键 <code>S-UP/DOWN</code> 。
+在Org-mode中，还针对任务设定了A，B，C三种优先级，在安排日程的时候可以按照优先级进行排序。为任务设定优先级是通过
+快捷键 S-UP/DOWN
 </p>
 </div>
 </div>
@@ -156,14 +163,15 @@ C-c C-t时，会询问，让你输入一个字母。
 <p>
 对于有多个子任务的上级任务，很常见的一个需求是随时跟踪子任务的完成情况。
 Org-mode支持在上级任务上增加标记，当子任务的状态发生改变时自动更新上级任务的完成情况。
-支持百分比和分数两种形式，类似 <code>[66%]</code> 或者 <code>[2/3]</code> 。
+支持百分比和分数两种形式，类似<code>[66%]</code> 或者 <code>[2/3]</code>。
 </p>
 
 <p>
-可以在上级任务标题中的任意位置插入 <code>[%]</code> 或者 <code>[/]</code>, 当子任务的状态发生变化时，会自动更新该位置的值。
+可以在上级任务标题中的任意位置插入<code>[%]</code> 或者 <code>[/]</code>, 当子任务的状态发生变化时，会自动更新该位置的值。
 比如：
 </p>
 
+<blockquote>
 <pre class="example">
 * Organize Party [%]
 ** Call people [/]
@@ -172,6 +180,7 @@ Org-mode支持在上级任务上增加标记，当子任务的状态发生改变
 ** Buy food
 ** Talk to neighbor
 </pre>
+</blockquote>
 
 <p>
 注意：
@@ -183,6 +192,7 @@ Org-mode支持在上级任务上增加标记，当子任务的状态发生改变
 </li>
 </ol>
 
+<blockquote>
 <pre class="example">
 (defun org-summary-todo (n-done n-not-done)
   "Switch entry to DONE when all subentries are done, to TODO otherwise."
@@ -191,17 +201,21 @@ Org-mode支持在上级任务上增加标记，当子任务的状态发生改变
 
 (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 </pre>
+</blockquote>
 </div>
 </div>
 <div id="outline-container-sec-5" class="outline-2">
 <h2 id="sec-5"><span class="section-number-2">5</span> 用复选框标记非标题类型的子任务</h2>
 <div class="outline-text-2" id="text-5">
 <p>
-前面的任务和子任务都是标题形式。Org-mode还支持非标题形式的子任务。对于以 <code>[ ]</code> 开头的<img src="/2012/04/12/emacs_orgmode_editor.html#sec-3-4" alt="列表"/> 会被当作复选框。这样就形成了局部的子任务，
+前面的任务和子任务都是标题形式。Org-mode还支持非标题形式的子任务。对于以”[ ]“开头的<a href="http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html#sec-3-4">列表</a>， 会被当作复选框。这样就形成了局部的子任务，
 适用于将一个任务划分成几个简单的步骤。
 下面是一个例子：
 </p>
 
+<p>
+#+START<sub>QUOTE</sub>
+</p>
 <pre class="example">
 *** 一个任务 [0/2]
 该任务包含几个步骤：
@@ -212,6 +226,9 @@ Org-mode支持在上级任务上增加标记，当子任务的状态发生改变
   - [X] 步骤2.1
   - [ ] 步骤2.2
 </pre>
+<p>
+#+END<sub>QUOTE</sub>
+</p>
 
 <p>
 与子任务类似，步骤的状态变化会改变上级步骤/任务的完成情况。
@@ -250,15 +267,18 @@ Org-mode支持在上级任务上增加标记，当子任务的状态发生改变
 <h2 id="sec-6"><span class="section-number-2">6</span> 查询任务</h2>
 <div class="outline-text-2" id="text-6">
 <p>
-在<img src="/2012/04/12/emacs_orgmode_editor.html#sec-1-2-3" alt="Org-mode的编辑功能"/> 中介绍过大纲的检索功能：
+在<a href="http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html#sec-1-2-3">Org-mode的编辑功能</a> 中介绍过大纲的检索功能：
 </p>
-
+<blockquote>
 <pre class="example">
 前面 C-c /              只列出包含搜索结果的大纲，并高亮，支持多种搜索方式
 </pre>
+</blockquote>
 
 <p>
-该功能可以按照多种方式检索，其中针对任务有两种方式：todo 和 TODO key words，分别实现高亮所有TODO和具有特定关键字的TODO。
+该功能可以按照多种方式检索，其中针对任务有两种方式：
+todo 和 TODO key words。
+分别实现高亮所有TODO和具有特定关键字的TODO
 </p>
 </div>
 </div>
@@ -275,7 +295,7 @@ Org-mode中的任务还可以设置计划时间（SCHEDULED）和截止时间（
 <div class="outline-text-3" id="text-7-1">
 <p>
 在Org-mode中，将带有日期和时间信息的特定格式的字符串称为时间戳。时间戳使用”&lt; &gt;“进行标记，比如：
-#+START_QUOTE
+#+START<sub>QUOTE</sub>
 </p>
 <pre class="example">
 &lt;2005-10-01 Tue&gt;
@@ -283,7 +303,7 @@ Org-mode中的任务还可以设置计划时间（SCHEDULED）和截止时间（
 &lt;2003-09-16 Tue 12:00-12:30&gt;
 </pre>
 <p>
-#+END_QUOTE
+#+END<sub>QUOTE</sub>
 </p>
 
 <p>
@@ -292,13 +312,13 @@ Org-mode中的任务还可以设置计划时间（SCHEDULED）和截止时间（
 </p>
 
 <p>
-#+START_QUOTE
+#+START<sub>QUOTE</sub>
 </p>
 <pre class="example">
 &lt;2007-05-16 Wed 12:30 +1w&gt;
 </pre>
 <p>
-#+END_QUOTE
+#+END<sub>QUOTE</sub>
 </p>
 
 <p>
