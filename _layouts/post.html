@@ -48,15 +48,59 @@ layout: default
   <!--百度分享 BEGIN-->
 <div class="bdsharebuttonbox" class="top_line">
   <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 <!--百度分享 END-->
 
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
 
-<!-- UY BEGIN -->
-<div id="uyan_frame"></div>
-<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1784345"></script>
-<!-- UY END -->
+
+
 
 
 </article>
 
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      {% if page.next %}
+        <div class="span6">
+          <a href="{{ page.next.url }}" rel="bookmark">&laquo;&nbsp;下一篇：{{ page.next.title | truncatewords:5 }}</a>
+        </div>
+      {% endif %}
+
+      {% if page.previous %}
+        <div class="span6">
+        <a class="pull-right" href="{{ page.previous.url }}" rel="bookmark">上一篇：{{ page.previous.title | truncatewords:5 }}&nbsp;&raquo;</a>
+        </div>
+      {% endif %}
+      </div>
+      <!--上一篇，下一篇 END-->
+      
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "{{site.url}}{{page.url}}"; //请用代码生成文章永久的链接
+            var wumiiTitle = "{{page.title}}"; //请用代码生成文章标题
+            var wumiiTags = "{% include texttags %}"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["{{page.categories}}"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
