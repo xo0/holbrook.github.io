@@ -20,7 +20,7 @@ title : RSS Feed
         <link>{{ site.url }}</link>
         <language>cn</language>
         <lastBuildDate>{{ site.time | date_to_xmlschema }}</lastBuildDate>
-        <pubDate>{% include lastmod %}</pubDate>
+        <pubDate></pubDate>
         <ttl>1800</ttl>
 
 {% for post in site.posts limit:100 %}
@@ -32,7 +32,7 @@ title : RSS Feed
                 <content:encoded>{{ post.description | append:' ' | xml_escape }}</content:encoded>
                 <wfw:commentRSS>/</wfw:commentRSS>
                 <guid>{{ site.url }}{{ post.id }}</guid>
-                <pubDate>{% include lastmod %}</pubDate>
+                <pubDate></pubDate>
         </item>
 {% endfor %}
 
