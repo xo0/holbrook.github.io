@@ -15,17 +15,21 @@ title: 首页
           
             
             <div class="row gutters archive-entry">
-              <h2 class="post-year col">{{post.title}}</h2>
+              <a href="{{ post.url }}"><h2 class="post-year col">{{post.title}}</h2></a>
               <p>{{ post.description }}</p>
               
               <p>  分类：
                 {% for cat in post.categories %}
-                  <a href="/pages/categories.html#{{cat}}-ref">{{cat}}</a>&nbsp;
+                  <a href="/pages/categories.html#{{cat}}-ref">{{cat}}</a>
+                  <sup>{{ cat.size }}</sup>
+                  &nbsp;
                 {% endfor %}
 
                 &sdot; 标签： 
                 {% for tag in post.tags %}
-                  <a href="/pages/tags.html#{{tag}}-ref">{{tag}}</a>&nbsp;
+                  <a href="/pages/tags.html#{{tag}}-ref">{{tag}}</a>
+                  <sup>{{ tag.size }}</sup>
+                  &nbsp;
                 {% endfor %}
               </p>
               

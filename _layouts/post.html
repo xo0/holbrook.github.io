@@ -1,125 +1,62 @@
 ---
-layout:           default
+layout: default
 ---
+<style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
 
-{% capture IMG_PATH %}/images/{{ page.date | date: "%Y" }}/{{page.path}}/{% endcapture %}
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
 
-<div class="span9">
-  <p class="pre-meta">{% include post_info_bar %}
-{% if page.lastmod %}
-  <span class="alert alert-success"><strong>
-  最近更新：{{ page.lastmod | date: "%Y-%m-%d" }}
-  </strong></span>
-  {% endif %}
-  </p>
-  
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">{{ page.title }}</h1>
   {% if page.description %}<p>摘要：<br/>{{page.description}}</p>{% endif %}
+
+  <time class="published" datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%Y-%m-%d' }}
   
-      <div id="menuIndex" class="row-fluid" style="background-color:#ecf0f5;"></div>
-  <hr style="height:3px;border:none;border-top:3px double"/>
-  <div id="content">
-      {{ content }}   
-  </div> 
+&sdot; 分类：
+  {% for cat in page.categories %}
+    <a href="/pages/categories.html#{{cat}}-ref">{{cat}}</a>
+    <sup>{{ cat.size }}</sup>
+    &nbsp;
+  {% endfor %}
+
+  &sdot; 标签： 
+  {% for tag in page.tags %}
+    <a href="/pages/tags.html#{{tag}}-ref">{{tag}}</a>
+    <sup>{{ tag.size }}</sup>
+    &nbsp;
+  {% endfor %}
+
+  </time>
+</div>
+
   
-  <!--  分享  -->
-  <!-- Baidu Button BEGIN -->
-  <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
-  <span class="bds_more">分享到：</span>
-  <a class="bds_tsina">新浪微博</a>
-  <a class="bds_baidu">百度搜藏</a>
-  <a class="bds_xg">鲜果</a>
-  <a class="bds_twi">Twitter</a>
-  <a class="bds_fbook">Facebook</a>
-  <a class="bds_youdao">有道云笔记</a>
-  <a class="bds_mail">邮件分享</a>
-  </div>
-  <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6715859" ></script>
-  <script type="text/javascript" id="bdshell_js"></script>
-  <script type="text/javascript">
-  document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
-  </script>
-  <!-- Baidu Button END -->
 
-  <hr/>      
-  <p class="pre-meta">{% include post_info_bar %}</p>
-
-      <!--上一篇，下一篇-->
-      <div class="row-fluid">
-      {% if page.next %}
-        <div class="span6">
-          <a href="{{ page.next.url }}" rel="bookmark">&laquo;&nbsp;下一篇：{{ page.next.title | truncatewords:5 }}</a>
-        </div>
-      {% endif %}
-
-      {% if page.previous %}
-        <div class="span6">
-        <a class="pull-right" href="{{ page.previous.url }}" rel="bookmark">上一篇：{{ page.previous.title | truncatewords:5 }}&nbsp;&raquo;</a>
-        </div>
-      {% endif %}
-      </div>
-
-     
-     
-
-      <!--相关文章-->
-      <div class="row-fluid">
-        
-          <h4>相关文章</h4>
-           <!--youjian-->
-        <!-- UJian Button BEGIN -->
-<div class="ujian-hook"></div>
-<script type="text/javascript">var ujian_config = {num:10,showType:4,lkrc:0,bgColor:'#',mouseoverColor:'#FFFFFF',textColor:'#16A085'};</script>
-<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1784345"></script>
-<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
-<!-- UJian Button END -->
-
-          <!--wumii block-->
-          <script type="text/javascript" id="wumiiRelatedItems"></script>
+  {{ content }}
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
 
 
-          <!--for wumii ， can be moved to footer-->
-         <script type="text/javascript">
-            var wumiiPermaLink = "{{site.url}}{{page.url}}"; //请用代码生成文章永久的链接
-            var wumiiTitle = "{{page.title}}"; //请用代码生成文章标题
-            var wumiiTags = "{% include texttags %}"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
-            var wumiiCategories = ["{{page.categories}}"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
-            var wumiiSitePrefix = "http://www.thinkinside.tk/";
-            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
-        </script>
-        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
-        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
-            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
-        </a>
-        <!--end of wumii-->
-        
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1784345"></script>
+<!-- UY END -->
 
-       
 
-        
-       
-      </div><!--END of 相关文章-->
-      <hr/>
-      <!--  评论  -->
-      <div class="row-fluid">
-        
-          <!-- UY BEGIN -->
-          <div id="uyan_frame"></div>
-          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
-          <!-- UY END -->
-        
-      </div>
+</article>
 
- 
-  </div>
-       <!--style="position:fixed;right:20px;"-->
-    <div class="span3">
-      {% include parts/sidebar.html %}
-    
-
-      <div class="row-fluid" style="background-color: rgb(44, 62, 80);">
-          推荐阅读
-      </div>
-    </div>
-</div>
-</div>
-<script src="/assets/js/post.js"></script>

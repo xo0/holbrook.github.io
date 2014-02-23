@@ -1,0 +1,7 @@
+<nav class="col span_10">
+	{% for item in site.menuitems %}
+  
+  <a href="{{ item.url }}" title="{{ item.name }}"
+     {% if page.title == item.name %}class="current-page"{% endif %}>{{ item.name }}</a>
+  {% endfor %}
+</nav>
