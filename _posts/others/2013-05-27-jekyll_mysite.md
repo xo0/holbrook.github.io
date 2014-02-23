@@ -7,7 +7,7 @@ tags: [jekyll, github]
 lastmod: 2013-06-17
 imgroot: "/images/posts/tools/jekyll_mysite/"
 ---
-{% include page_setup %}
+
 
 
 早在2012年8月，就通过[这篇文章](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)知道了Jekyll,  但是一直没有去尝试。

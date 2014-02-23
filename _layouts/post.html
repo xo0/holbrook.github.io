@@ -84,7 +84,7 @@ layout: default
       {% endif %}
       </div>
       <!--上一篇，下一篇 END-->
-      
+
 
 <!--wumii block-->
           <script type="text/javascript" id="wumiiRelatedItems"></script>
@@ -94,7 +94,7 @@ layout: default
          <script type="text/javascript">
             var wumiiPermaLink = "{{site.url}}{{page.url}}"; //请用代码生成文章永久的链接
             var wumiiTitle = "{{page.title}}"; //请用代码生成文章标题
-            var wumiiTags = "{% include texttags %}"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiTags = "心内求法{% for tag in page.tags %},{{tag}}{% endfor %}"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
             var wumiiCategories = ["{{page.categories}}"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
             var wumiiSitePrefix = "http://www.thinkinside.tk/";
             var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
