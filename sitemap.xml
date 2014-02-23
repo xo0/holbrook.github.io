@@ -23,7 +23,7 @@ layout: nil
 {% for page in site.posts %}
 	<url>
 		<loc>{{site.url}}{{ page.url }}</loc>
-		<lastmod>{% include lastmod %}</lastmod>
+		<lastmod></lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.8</priority>
 	</url>
