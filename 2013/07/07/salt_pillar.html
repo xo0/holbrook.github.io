@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="# 为什么需要Pillar看了[这篇文档](/2013/06/30/salt_sls_sample.html)，你可能已经被Salt State的强大所折服。是的，Salt State能够解决很多配置管理的问题，但是如下两个场景，如果..." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>Pillar：定义Salt配置管理的数据 &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">Pillar：定义Salt配置管理的数据</h1>
+  <p>摘要：<br/>State定义了Salt配置管理的内容，Pillar则定义了Salt配置管理的数据。Pillar使得同一个配置项在各个minion中可以使用不同的数据，从而不需要在State中定义大量的include, extend等关系。</p>
+
+  <time class="published" datetime="2013-07-07">2013-07-07
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#基础设施-ref">基础设施</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#devops-ref">devops</a>
+    <sup>6</sup>
+    &nbsp;
+  
+    <a href="/pages/tags.html#salt-ref">salt</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <h1>为什么需要Pillar</h1>
+
+<p>看了<a href="/2013/06/30/salt_sls_sample.html">这篇文档</a>，你可能已经被Salt State的强大所折服。</p>
+
+<p>是的，Salt State能够解决很多配置管理的问题，但是如下两个场景，如果只用state进行配置就会比较麻烦：</p>
+
+<ol>
+<li><p>让<code>apache</code>配置项适应不同的OS</p>
+
+<p><a href="/2013/06/30/salt_sls_sample.html#menuIndex1">这个例子</a>中的apache配置中通过pkg模块验证<code>apache</code>软件包是否安装。但是在RedHat系统的yum包管理器和Debian系统的apt包管理器中，apache的包名字分别为<code>httpd</code>和<code>apache2</code>。如何避免为apache配置项针对不同的包管理器定义不同的state？</p></li>
+<li><p>同一个应用在不同环境中的数据库连接</p>
+
+<p>假如你开发了一个Django应用，数据库连接信息在应用的settings.py中定义：</p></li>
+</ol>
+
+
+<div class="highlight"><pre><code class="python">   <span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s">&#39;django.db.backends.mysql&#39;</span><span class="p">,</span>
+        <span class="s">&#39;NAME&#39;</span><span class="p">:</span> <span class="s">&#39;test&#39;</span><span class="p">,</span>
+        <span class="s">&#39;USER&#39;</span><span class="p">:</span> <span class="s">&#39;root&#39;</span><span class="p">,</span>
+        <span class="s">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s">&#39;password&#39;</span><span class="p">,</span>
+        <span class="s">&#39;HOST&#39;</span><span class="p">:</span> <span class="s">&#39;localhost&#39;</span><span class="p">,</span>
+        <span class="s">&#39;PORT&#39;</span><span class="p">:</span> <span class="s">&#39;3306&#39;</span><span class="p">,</span> 
+    <span class="p">}</span>
+   <span class="p">}</span>
+
+   
+</code></pre></div>
+
+
+<p>   显然，数据库连接信息在开发环境、测试环境、生成环境中各不相同。如果把该应用作为一个state，如何实现在不同环境中的自动部署？</p>
+
+<p>Salt Pillar就是为了解决类似上述的问题而提供的组件。</p>
+
+<h1>Pillar是什么？</h1>
+
+<p>如<a href="/2013/07/02/salt_state_config_structure.html">这篇文章</a>所述，Salt Sate定义了配置项以及minion和配置项直接的映射关系；与此类似，Pillar定义了数据以及minion和数据的映射关系。Pillar中定义的数据可以在Salt的其他组件中引用，当然最常见的情况是在State中引用Pillar数据。</p>
+
+<p>比如，在上一节的第一个问题中，我们可以这样定义State:</p>
+
+<div class="highlight"><pre><code class="yaml">  <span class="l-Scalar-Plain">apache</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">pkg.installed</span><span class="p-Indicator">:</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> 
+</code></pre></div>
+
+
+<p>其中，<code>salt.states.pkg.installed</code>函数的<code>name</code>参数就是引用了Pillar中定义的变量<code>apache</code>。</p>
+
+<p>而该变量在Pillar中的定义如下：</p>
+
+<div class="highlight"><pre><code class="yaml"><span class="p-Indicator">{</span> <span class="err">%</span> <span class="nv">if grains</span><span class="p-Indicator">[</span><span class="s">&#39;os_family&#39;</span><span class="p-Indicator">]</span> <span class="nv">== &#39;RedHat&#39; %</span> <span class="p-Indicator">}</span>
+<span class="l-Scalar-Plain">apache</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">httpd</span>
+<span class="p-Indicator">{</span> <span class="err">%</span> <span class="nv">elif grains</span><span class="p-Indicator">[</span><span class="s">&#39;os_family&#39;</span><span class="p-Indicator">]</span> <span class="nv">== &#39;Debian&#39; %</span> <span class="p-Indicator">}</span>
+<span class="l-Scalar-Plain">apache</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">apache2</span>
+<span class="p-Indicator">{</span> <span class="err">%</span> <span class="nv">endif %</span> <span class="p-Indicator">}</span>
+</code></pre></div>
+
+
+<h1>Pillar的配置结构</h1>
+
+<p>Pillar与State就像是配置管理的左右手，所以Pillar的配置结构与<a href="/2013/07/02/salt_state_config_structure.html">State的配置结构</a>几乎完全一样。</p>
+
+<h2>Pillar Tree和Environment</h2>
+
+<p>与<a href="/2013/07/02/salt_state_config_structure.html#menuIndex0">State Tree</a>一样，Salt中可以定义一棵Pillar Tree，并且将Pillar按照环境进行分组管理。</p>
+
+<p>Pillar Tree定义在salt master的配置文件<code>/etc/salt/master</code>的<code>pillar_roots</code>变量中：</p>
+
+<div class="highlight"><pre><code class="yaml"> <span class="l-Scalar-Plain">pillar_roots</span><span class="p-Indicator">:</span>
+   <span class="l-Scalar-Plain">base</span><span class="p-Indicator">:</span>
+     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">/srv/pillar</span>
+ 
+   <span class="l-Scalar-Plain">ext_pillar</span><span class="p-Indicator">:</span>
+     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">hiera</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/etc/hiera.yaml</span>
+     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">cmd_yaml</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">cat /etc/salt/yaml</span>
+</code></pre></div>
+
+
+<h2>Pillar定义</h2>
+
+<p>Pillar是一组key-value，使用yaml的语法格式。</p>
+
+<p>简单的定义比如：</p>
+
+<pre><code>foo: bar
+</code></pre>
+
+<p>可以使用<code>{ { pillar['foo'] } }</code>的形式进行引用；</p>
+
+<p>复杂的定义比如：</p>
+
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">users</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">thatch</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1000</span>
+  <span class="l-Scalar-Plain">shouse</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1001</span>
+  <span class="l-Scalar-Plain">utahdave</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1002</span>
+  <span class="l-Scalar-Plain">redbeard</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1003</span>  
+</code></pre></div>
+
+
+<p>可以使用包含jinja语法的yaml进行引用：</p>
+
+<div class="highlight"><pre><code class="yaml"> <span class="p-Indicator">{</span> <span class="err">%</span> <span class="nv">for user</span><span class="p-Indicator">,</span> <span class="nv">uid in pillar.get(&#39;users&#39;</span><span class="p-Indicator">,</span> <span class="p-Indicator">{}</span><span class="nv">).items() %</span> <span class="p-Indicator">}</span>
+   <span class="p-Indicator">{</span> <span class="p-Indicator">{</span><span class="nv">user</span><span class="p-Indicator">}</span> <span class="p-Indicator">}:</span>
+     <span class="l-Scalar-Plain">user.present</span><span class="p-Indicator">:</span>
+       <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">uid</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span> <span class="p-Indicator">{</span><span class="nv">uid</span><span class="p-Indicator">}</span> <span class="p-Indicator">}</span>
+<span class="-Error"> </span><span class="p-Indicator">{</span> <span class="err">%</span> <span class="nv">endfor %</span> <span class="p-Indicator">}</span>
+</code></pre></div>
+
+
+<p>定义好的pillar数据保存在Pillar Tree下面的某个<code>sls</code>文件中。为了能够在State中引用Pillar数据，
+Pillar的目录结构和文件名需要与State能够对应。</p>
+
+<p>Pillar可以用于任何数据的定义，比如ssh key、证书、密码口令等敏感数据，minion的模块、状态、信息反馈，以及要传递给minion的任何变量的值等等。
+这些数据都会以加密通道安全的分发到minion上面。</p>
+
+<p>Pillar的数据不仅仅可以来自SLS文件，还可以从其他数据源获取数据。相关内容可以自行查阅<a href="http://docs.saltstack.com/topics/pillar/index.html">官方文档</a>。</p>
+
+<h2>minion与Pillar之间的映射</h2>
+
+<p>与<a href="/2013/07/02/salt_state_config_structure.html#menuIndex2">minion与state之间的映射</a>一样，
+在Pillar的base目录中也存在一个名为<code>top.sls</code>的入口文件，定义minion与Pillar的映射关系，例如：</p>
+
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">base</span><span class="p-Indicator">:</span>
+  <span class="s">&#39;*&#39;</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">packages</span>
+  <span class="s">&#39;alpha&#39;</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">database</span>
+</code></pre></div>
+
+
+<p>上边的例子定义了packages对所有的minion有效，database只对名字为'alpha'的minion有效.</p>
+
+<h1>Pillar数据的查询和使用</h1>
+
+<ol>
+<li>查询pillar数据</li>
+</ol>
+
+
+<div class="highlight"><pre><code class="yaml">    <span class="l-Scalar-Plain">salt &#39;client2&#39; pillar.data</span>
+    <span class="l-Scalar-Plain">salt &#39;*&#39; pillar.data</span>
+    <span class="l-Scalar-Plain">salt &#39;*&#39; pillar.raw key=&#39;roles&#39;</span>
+   
+</code></pre></div>
+
+
+<p>更多的函数可以参考<a href="https://salt.readthedocs.org/en/latest/ref/modules/all/salt.modules.pillar.html">pillar模块的文档</a>。</p>
+
+<ol>
+<li><p>刷新pillar数据</p>
+
+<p>在master上修改Pilla文件后，需要用以下命令刷新minion上的数据（同步到minion）：</p>
+
+<pre><code>salt '*' saltutil.refresh_pillar
+</code></pre></li>
+<li><p>在其他sls文件中引用数据</p>
+
+<p>Pillar解析后是dict对象，直接使用Python语法，可以用索引（<code>pillar['pkgs']['apache']</code>）或get方法（<code>pillar.get('users', {})</code>）获取到需要的数据。</p></li>
+<li><p>在Targetting中使用Pillar</p>
+
+<p>Targetting中可以用<code>-I</code>选项指定用Pillar数据选择minion。</p></li>
+</ol>
+
+
+<h1>参考资料</h1>
+
+<ul>
+<li><a href="http://docs.saltstack.com/topics/tutorials/pillar.html">《Pillar Walkthrough》</a></li>
+<li><a href="http://docs.saltstack.com/topics/pillar/index.html">《Pillar of Salt》</a></li>
+</ul>
+
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2013/07/08/soa_whats_service.html" rel="bookmark">&laquo;&nbsp;下一篇：SOA：理解什么是服务</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2013/07/04/lvs_intro.html" rel="bookmark">上一篇：lvs概述&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2013/07/07/salt_pillar.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "Pillar：定义Salt配置管理的数据"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,devops,salt"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["基础设施"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="![0](/images/2013/r_notes/0.png)在学习量化投资的时候，我发现了[R](http://www.r-project.org)。R到底是什么呢？在开始之前，先看看R的神奇之处。# R初窥从[CRAN（The ..." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>R学习笔记(1)：R是什么 &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">R学习笔记(1)：R是什么</h1>
+  <p>摘要：<br/>从使用角度，R是一个有着统计分析功能及强大作图功能的软件，在GNU协议General Public Licence4下免费发行。 从编程角度，R语言是面向对象的统计编程语言，是由AT&T贝尔实验室所创的S语言发展出的一种方言。 从计算角度，R 是一种为统计计算和图形显示而设计的语言及环境。 从开发角度，R 是一组开源的数据操作，计算和图形显示工具的整合包有各种方式可以进行编程调用。 从架构角度，R 是为统计计算和图形展示而设计的一个系统。它包括一种编程语言，高级别图形展示函数，和其它语言的接口以及调试工具。</p>
+
+  <time class="published" datetime="2013-05-03">2013-05-03
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#方法工具-ref">方法工具</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#R-ref">R</a>
+    <sup>1</sup>
+    &nbsp;
+  
+    <a href="/pages/tags.html#量化金融-ref">量化金融</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <p><img src="/images/2013/r_notes/0.png" alt="0" /></p>
+
+<p>在学习量化投资的时候，我发现了<a href="http://www.r-project.org">R</a>。R到底是什么呢？在开始之前，先看看R的神奇之处。</p>
+
+<h1>R初窥</h1>
+
+<p>从<a href="http://cran.r-project.org%E2%80%94mirrors.html">CRAN（The Comprehensive R Archive Network）</a>
+中选择一个镜像，然后下载合适的安装包（R支持Linux、Mac OS X和Windows）。
+安装并运行R后，可以看到R的控制台（我的操作系统是Mac OS）：</p>
+
+<p><img src="/images/2013/r_notes/1.png" alt="1" /></p>
+
+<p>在R的控制台输入如下命令：</p>
+
+<div class="highlight"><pre><code class="r">install.packages<span class="p">(</span><span class="s">&#39;quantmod&#39;</span><span class="p">)</span> <span class="c1"># 安装quantmod包</span>
+require<span class="p">(</span>quantmod<span class="p">)</span> <span class="c1">#引用quantmod包</span>
+getSymbols<span class="p">(</span><span class="s">&quot;GOOG&quot;</span><span class="p">,</span>src<span class="o">=</span><span class="s">&quot;yahoo&quot;</span><span class="p">,</span>from<span class="o">=</span><span class="s">&quot;2013-01-01&quot;</span><span class="p">,</span> to<span class="o">=</span><span class="s">&#39;2013-04-24&#39;</span><span class="p">)</span> <span class="c1">#从雅虎财经获取google的股票数据</span>
+chartSeries<span class="p">(</span>GOOG<span class="p">,</span>up.col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">,</span>dn.col<span class="o">=</span><span class="s">&#39;green&#39;</span><span class="p">)</span>  <span class="c1">#显示K线图</span>
+addMACD<span class="p">()</span> <span class="c1">#增加MACD图</span>
+</code></pre></div>
+
+
+<p>就能够看到下图的效果了：</p>
+
+<p><img src="/images/2013/r_notes/2.png" alt="2" /></p>
+
+<p>最后，退出R：</p>
+
+<div class="highlight"><pre><code class="r">q<span class="p">()</span>  <span class="c1"># Terminate an R Session</span>
+</code></pre></div>
+
+
+<h1>R是什么</h1>
+
+<p>是不是很神奇？反正当时我完全被Hold住了。</p>
+
+<p>那么R到底是什么？或者说，R到底是做什么用的？从不同的角度出发，对R会有不同的描述。</p>
+
+<ul>
+<li><p>从使用角度</p>
+
+<p>R是一个有着统计分析功能及强大作图功能的软件，在GNU协议General Public Licence4下免费发行。</p></li>
+<li><p>从编程角度</p>
+
+<p>R语言是面向对象的统计编程语言，是由AT&amp;T贝尔实验室所创的S语言发展出的一种方言。</p></li>
+<li><p>从计算角度</p>
+
+<p>R 是一种为统计计算和图形显示而设计的语言及环境。</p></li>
+<li><p>从开发角度</p>
+
+<p>R 是一组开源的数据操作，计算和图形显示工具的整合包有各种方式可以进行编程调用。</p></li>
+<li><p>从架构角度</p>
+
+<p>R 是为统计计算和图形展示而设计的一个系统。它包括一种编程语言，高级别图形展示函数，和其它语言的接口以及调试工具。</p></li>
+</ul>
+
+
+<p>如果一定要找到一个与R类似的软件，那就是商业软件Matlab。R和Matlab都是基于编程进行数据分析的工具，Matlab适用的领域更广，而R更擅长统计分析领域。</p>
+
+<p>与Matlab相比，R更具备开放性：</p>
+
+<ul>
+<li>R是自由软件，Matlab是商业软件；</li>
+<li>R可以方便的通过“包”进行扩展，R的核心只有25个包，但是有几千个外部包可以调用，当然你也可以开发自己的；</li>
+<li>R语言比Matlab的要强大；</li>
+<li>R和其他编程语言/数据库之间有很好的接口；其他语言也可以很方便的调用R的API和结果对象。</li>
+</ul>
+
+
+<p>R常用于金融和统计领域。大多数人使用R就是因为它的统计功能，R的内部实现了很多经典的or时髦的统计技术。</p>
+
+<p><img src="/images/2013/r_notes/3.png" alt="3" /></p>
+
+<h1>R的核心概念</h1>
+
+<h2>对象</h2>
+
+<p>R语言是一种面向对象的语言，所有的对象都有两个内在属性：元素类型和长度。</p>
+
+<p>元素类型是对象内元素的基本类型，包括：数值(numeric),字符型(character),复数型(complex)、逻辑型（logical）、函数（function）等，通过mode()函数可以查看一个对象的类型。</p>
+
+<p>长度是对象中元素的数目，通过函数length()可以查看对象的长度。</p>
+
+<p>除了元素类型外，对象本身也有不同的“类型”，表示不同的数据结构（struct)。R中的对象类型主要包括：</p>
+
+<ul>
+<li>向量(vector): 由一系列有序元素构成。</li>
+<li>因子(factor）：对同长的其他向量元素进行分类（分组）的向量对象。R 同时提供有序（ordered）和无序（unordered）因子。</li>
+<li>数组(array)：带有多个下标的类型相同的元素的集合</li>
+<li>矩阵(matrix)：矩阵仅仅是一个双下标的数组。R提供了一下函数专门处理二维数组（矩阵）。</li>
+<li>数据框(data frame)：和矩阵类似的一种结构。在数据框中，列可以是不同的对象。</li>
+<li>时间序列(time series)：包含一些额外的属性,如频率和时间.</li>
+<li>列表（list）:是一种泛化（general form）的向量。它没有要求所有元素是同一类型，许多时候就是向量和列表类型。列表为统计计算的结果返回提供了一种便利的方法。</li>
+</ul>
+
+
+<h2>常量</h2>
+
+<p>R中还定义了一些常量，比如：</p>
+
+<ul>
+<li>NA：表示不可用</li>
+<li>Inf: 无穷</li>
+<li>-Inf: 负无穷</li>
+<li>TRUE：真</li>
+<li>FALSE：假</li>
+</ul>
+
+
+<h1>R的基本使用</h1>
+
+<h2>命令</h2>
+
+<p>R是一种语法非常简单的表达式语言(expression language)。使用者通过命令（command）与R进行交互。</p>
+
+<p>基本命令要么是表达式(expressions)要么就是赋值(assignments)。如果一条命令是表达式,那么它将会被解析(evaluate),并将结果显示在屏幕上,同时清空该命令所占内存。赋值同样会解析表达式并且把值传给变量但结果不会自动显示在屏幕上。</p>
+
+<p>基于命令，可以用交互的方式或者批处理/脚本文件的方式使用R。</p>
+
+<h2>交互式使用 R</h2>
+
+<p>交互式shell是一种很方便的环境，可以进行各种尝试，随时调整过程。与Python、Ruby等语言一样，R也提供了shell环境。本文开始的例子就是以交互的方式使用R。当打开R控制台时，R会显示命令提示符">"，此时可以输入命令。
+下面是交互式使用R的几个例子：</p>
+
+<p>例一：</p>
+
+<div class="highlight"><pre><code class="r">help.start<span class="p">()</span> <span class="c1">#启动在线帮助，会打开浏览器。</span>
+x <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">50</span><span class="p">);</span> y <span class="o">&lt;-</span> rnorm<span class="p">(</span>x<span class="p">)</span>  <span class="c1">#产生两个随机向量x和y</span>
+plot<span class="p">(</span>x<span class="p">,</span>y<span class="p">)</span> <span class="c1">#使用x,y画二维散点图, 会打开一个图形窗口</span>
+ls<span class="p">()</span> <span class="c1">#查看当前工作空间里面的 R 对象</span>
+rm<span class="p">(</span>x<span class="p">,</span>y<span class="p">)</span> <span class="c1">#清除x,y对象</span>
+x <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">20</span>  <span class="c1"># 相当于x=(1,2,…,20)</span>
+</code></pre></div>
+
+
+<p>例二：</p>
+
+<div class="highlight"><pre><code class="r">x <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="c1">#等价于 x = (1, 2, ..., 20)。 </span>
+w <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">+</span> sqrt<span class="p">(</span>x<span class="p">)</span><span class="o">/</span><span class="m">2</span><span class="c1">#标准差的`权重&#39;向量。 </span>
+dummy <span class="o">&lt;-</span> data.frame<span class="p">(</span>x<span class="o">=</span>x<span class="p">,</span> y<span class="o">=</span> x <span class="o">+</span> rnorm<span class="p">(</span>x<span class="p">)</span><span class="o">*</span>w<span class="p">)</span><span class="c1">#创建一个由x 和 y构成的双列数据框</span>
+dummy <span class="c1">#查看dummy对象中的数据。 </span>
+fm <span class="o">&lt;-</span> lm<span class="p">(</span>y <span class="o">~</span> x<span class="p">,</span> data<span class="o">=</span>dummy<span class="p">)</span><span class="c1">#拟合 y 对 x 的简单线性回归</span>
+summary<span class="p">(</span>fm<span class="p">)</span><span class="c1">#查看分析结果。 </span>
+fm1 <span class="o">&lt;-</span> lm<span class="p">(</span>y <span class="o">~</span> x<span class="p">,</span> data<span class="o">=</span>dummy<span class="p">,</span> weight<span class="o">=</span><span class="m">1</span><span class="o">/</span>w<span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="c1">#加权回归</span>
+summary<span class="p">(</span>fm1<span class="p">)</span><span class="c1">#查看分析结果。</span>
+
+attach<span class="p">(</span>dummy<span class="p">)</span><span class="c1">#让数据框中的列项可以像一般的变量那样使用。 </span>
+lrf <span class="o">&lt;-</span> lowess<span class="p">(</span>x<span class="p">,</span> y<span class="p">)</span><span class="c1">#做一个非参局部回归。 </span>
+plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">)</span><span class="c1">#标准散点图。 </span>
+lines<span class="p">(</span>x<span class="p">,</span> lrf<span class="o">$</span>y<span class="p">)</span><span class="c1">#增加局部回归曲线。 </span>
+abline<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> lty<span class="o">=</span><span class="m">3</span><span class="p">)</span><span class="c1">#真正的回归曲线：(截距 0，斜率 1)。 </span>
+abline<span class="p">(</span>coef<span class="p">(</span>fm<span class="p">))</span><span class="c1">#无权重回归曲线。 </span>
+abline<span class="p">(</span>coef<span class="p">(</span>fm1<span class="p">),</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">)</span><span class="c1">#加权回归曲线。 </span>
+
+detach<span class="p">()</span><span class="c1">#将数据框从搜索路径中去除。 </span>
+
+plot<span class="p">(</span>fitted<span class="p">(</span>fm<span class="p">),</span> resid<span class="p">(</span>fm<span class="p">),</span>
+     xlab<span class="o">=</span><span class="s">&quot;Fitted values&quot;</span><span class="p">,</span>
+     ylab<span class="o">=</span><span class="s">&quot;Residuals&quot;</span><span class="p">,</span>
+     main<span class="o">=</span><span class="s">&quot;Residuals vs Fitted&quot;</span><span class="p">)</span>  <span class="c1">#显示一个检验异方差性（heteroscedasticity）的标准回归诊断图。 </span>
+
+qqnorm<span class="p">(</span>resid<span class="p">(</span>fm<span class="p">),</span> main<span class="o">=</span><span class="s">&quot;Residuals Rankit Plot&quot;</span><span class="p">)</span><span class="c1">#用正态分值图检验数据的偏度（skewness），峰度（kurtosis）和异常值（outlier）。</span>
+
+rm<span class="p">(</span>fm<span class="p">,</span> fm1<span class="p">,</span> lrf<span class="p">,</span> x<span class="p">,</span> dummy<span class="p">)</span><span class="c1">#再次清空。</span>
+</code></pre></div>
+
+
+<p>例三： Michaelson 和 Morley 测量光速的经典实验</p>
+
+<div class="highlight"><pre><code class="r">filepath <span class="o">&lt;-</span> system.file<span class="p">(</span><span class="s">&quot;data&quot;</span><span class="p">,</span> <span class="s">&quot;morley.tab&quot;</span> <span class="p">,</span> package<span class="o">=</span><span class="s">&quot;datasets&quot;</span><span class="p">)</span><span class="c1">#从对象 morley 中得到实验数据的文件路径</span>
+filepath<span class="c1">#查看文件路径</span>
+file.show<span class="p">(</span>filepath<span class="p">)</span><span class="c1">#查看文件内容</span>
+mm <span class="o">&lt;-</span> read.table<span class="p">(</span>filepath<span class="p">)</span><span class="c1">#以数据框的形式读取数据</span>
+mm<span class="o">$</span>Expt <span class="o">&lt;-</span> factor<span class="p">(</span>mm<span class="o">$</span>Expt<span class="p">)</span>
+mm<span class="o">$</span>Run <span class="o">&lt;-</span> factor<span class="p">(</span>mm<span class="o">$</span>Run<span class="p">)</span><span class="c1">#将 Expt 和 Run 改为因子。 </span>
+attach<span class="p">(</span>mm<span class="p">)</span><span class="c1">#让数据在位置 3 (默认) 可见（即可以直接访问）。 </span>
+plot<span class="p">(</span>Expt<span class="p">,</span> Speed<span class="p">,</span> main<span class="o">=</span><span class="s">&quot;Speed of Light Data&quot;</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&quot;Experiment No.&quot;</span><span class="p">)</span><span class="c1">#用简单的盒状图比较五次实验。 </span>
+fm <span class="o">&lt;-</span> aov<span class="p">(</span>Speed <span class="o">~</span> Run <span class="o">+</span> Expt<span class="p">,</span> data<span class="o">=</span>mm<span class="p">)</span><span class="c1">#分析随机区组，`runs&#39; 和 `experiments&#39; 作为因子。 </span>
+summary<span class="p">(</span>fm<span class="p">)</span>
+
+fm0 <span class="o">&lt;-</span> update<span class="p">(</span>fm<span class="p">,</span> . <span class="o">~</span> . <span class="o">-</span> Run<span class="p">)</span>
+anova<span class="p">(</span>fm0<span class="p">,</span> fm<span class="p">)</span><span class="c1">#拟合忽略 `runs&#39; 的子模型，并且对模型更改前后进行方差分析。 </span>
+detach<span class="p">()</span>
+rm<span class="p">(</span>fm<span class="p">,</span> fm0<span class="p">)</span><span class="c1">#在进行下面工作前，清空数据。</span>
+
+<span class="c1">#下面是等高线和影像显示的示例</span>
+x <span class="o">&lt;-</span> seq<span class="p">(</span><span class="o">-</span>pi<span class="p">,</span> pi<span class="p">,</span> len<span class="o">=</span><span class="m">50</span><span class="p">)</span><span class="c1">#x 是一个在区间 [-pi\, pi] 内等间距的50个元素的向量</span>
+y <span class="o">&lt;-</span> x
+f <span class="o">&lt;-</span> outer<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> y<span class="p">)</span> cos<span class="p">(</span>y<span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="m">1</span> <span class="o">+</span> x<span class="o">^</span><span class="m">2</span><span class="p">))</span><span class="c1">#f 是一个方阵，行列分别被 x 和 y 索引，对应的值是函数 cos(y)/(1 + x^2) 的结果。 </span>
+oldpar <span class="o">&lt;-</span> par<span class="p">(</span>no.readonly <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+par<span class="p">(</span>pty<span class="o">=</span><span class="s">&quot;s&quot;</span><span class="p">)</span><span class="c1">#保存图形参数，设定图形区域为“正方形”。 </span>
+contour<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> f<span class="p">)</span>
+contour<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> f<span class="p">,</span> nlevels<span class="o">=</span><span class="m">15</span><span class="p">,</span> add<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="c1">#绘制 f 的等高线；增加一些曲线显示细节。 </span>
+fa <span class="o">&lt;-</span> <span class="p">(</span>f<span class="o">-</span>t<span class="p">(</span>f<span class="p">))</span><span class="o">/</span><span class="m">2</span><span class="c1">#fa 是 f 的“非对称部分”(t() 是转置函数)。 </span>
+contour<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> fa<span class="p">,</span> nlevels<span class="o">=</span><span class="m">15</span><span class="p">)</span><span class="c1">#画等高线</span>
+par<span class="p">(</span>oldpar<span class="p">)</span><span class="c1"># 恢复原始的图形参数</span>
+image<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> f<span class="p">)</span>
+image<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> fa<span class="p">)</span><span class="c1">#绘制一些高密度的影像显示</span>
+objects<span class="p">();</span> 
+rm<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> f<span class="p">,</span> fa<span class="p">)</span><span class="c1">#在继续下一步前，清空数据。</span>
+
+th <span class="o">&lt;-</span> seq<span class="p">(</span><span class="o">-</span>pi<span class="p">,</span> pi<span class="p">,</span> len<span class="o">=</span><span class="m">100</span><span class="p">)</span>
+z <span class="o">&lt;-</span> exp<span class="p">(</span><span class="m">1i</span><span class="o">*</span>th<span class="p">)</span><span class="c1">#1i 表示复数 i</span>
+
+par<span class="p">(</span>pty<span class="o">=</span><span class="s">&quot;s&quot;</span><span class="p">)</span>
+plot<span class="p">(</span>z<span class="p">,</span> type<span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">)</span><span class="c1">#图形参数是复数时，表示虚部对实部画图。这可能是一个圆。 </span>
+w <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span> <span class="o">+</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span><span class="o">*</span><span class="m">1i</span><span class="c1">#假定我们想在这个圆里面随机抽样。一种方法将让复数的虚部和实部值是标准正态随机数 ... </span>
+w <span class="o">&lt;-</span> ifelse<span class="p">(</span>Mod<span class="p">(</span>w<span class="p">)</span> <span class="o">&gt;</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="o">/</span>w<span class="p">,</span> w<span class="p">)</span><span class="c1">#将圆外的点映射成它们的倒数。 </span>
+plot<span class="p">(</span>w<span class="p">,</span> xlim<span class="o">=</span>c<span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> ylim<span class="o">=</span>c<span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> pch<span class="o">=</span><span class="s">&quot;+&quot;</span><span class="p">,</span>xlab<span class="o">=</span><span class="s">&quot;x&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">)</span>
+lines<span class="p">(</span>z<span class="p">)</span><span class="c1">#所有的点都在圆中，但分布不是均匀的。 </span>
+
+<span class="c1">#下面采用均匀分布。现在圆盘中的点看上去均匀多了。 </span>
+w <span class="o">&lt;-</span> sqrt<span class="p">(</span>runif<span class="p">(</span><span class="m">100</span><span class="p">))</span><span class="o">*</span>exp<span class="p">(</span><span class="m">2</span><span class="o">*</span>pi<span class="o">*</span>runif<span class="p">(</span><span class="m">100</span><span class="p">)</span><span class="o">*</span><span class="m">1i</span><span class="p">)</span>
+plot<span class="p">(</span>w<span class="p">,</span> xlim<span class="o">=</span>c<span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> ylim<span class="o">=</span>c<span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> pch<span class="o">=</span><span class="s">&quot;+&quot;</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&quot;x&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">)</span>
+lines<span class="p">(</span>z<span class="p">)</span>
+
+rm<span class="p">(</span>th<span class="p">,</span> w<span class="p">,</span> z<span class="p">)</span><span class="c1">#再次清空。 </span>
+q<span class="p">()</span><span class="c1">#离开 R 程序</span>
+ 
+</code></pre></div>
+
+
+<h2>工作空间(workspace)</h2>
+
+<p>R shell 可以任意地保存一个完整的环境,称为工作空间（workspace)。前面的例子中，运行q()命令退出R时，会被询问是否要保存工作空间：</p>
+
+<p><img src="/images/2013/r_notes/4.png" alt="4" /></p>
+
+<p>工作空间（workspace)保存了一些环境信息。每次与R的会话(session)可以从一个全新的环境开始，也可以在原来的基础上继续，这些运行信息就保存在工作空间中。
+如果在UNIX系统以命令行的方式启动R，则当前目录就是本次会话的工作空间：</p>
+
+<div class="highlight"><pre><code class="bash">mkdir r_test
+<span class="nb">cd </span>r_test/
+R
+</code></pre></div>
+
+
+<p>看看R能为工作空间保存些什么内容：</p>
+
+<div class="highlight"><pre><code class="r"><span class="o">&gt;</span> x <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">50</span><span class="p">);</span> y <span class="o">&lt;-</span> rnorm<span class="p">(</span>x<span class="p">)</span>  <span class="c1">#产生两个随机向量x和y</span>
+<span class="o">&gt;</span> q<span class="p">()</span>
+Save workspace image<span class="o">?</span> <span class="p">[</span>y<span class="o">/</span>n<span class="o">/</span>c<span class="p">]</span><span class="o">:</span> y
+</code></pre></div>
+
+
+<p>如果运行<code>ls -Al</code>，会发现R保存了两个隐藏文件：.RData和.Rhistory。
+其中RData以二进制的方式保存了会话中的变量值，Rhistory以文本文件的方式保存了会话中的所有命令。</p>
+
+<p>如果在一个已有的工作空间中启动R，会提示：
+<code>原来保存的工作空间已还原</code></p>
+
+<p>此时可以用函数<code>ls()</code>和<code>history()</code>看到之前保存的数据和命令。
+使用<code>rm()</code>或<code>remove()</code>可以删除工作空间中的变量。</p>
+
+<p>在R控制台，也可以使用函数getwd()和setwd()来获取/设置工作空间目录；使用list.files()查看当前目录下的文件。</p>
+
+<p>如果以GUI方式运行R控制台，可以通过菜单来加载或保存工作空间。</p>
+
+<h2>脚本/批处理</h2>
+
+<p>前面提到R可以在工作空间中保存历史命令。其实这就是一个工作空间中的默认脚本，当加载工作空间时自动执行。</p>
+
+<p>我们完全可以写自己的脚本，指定R批量执行一些命令。通常，自己的脚本会以“.R”作为扩展名。一个最简单的例子test.R：</p>
+
+<div class="highlight"><pre><code class="r">x <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">50</span><span class="p">);</span> y <span class="o">&lt;-</span> rnorm<span class="p">(</span>x<span class="p">)</span>  <span class="c1">#产生两个随机向量x和y</span>
+plot<span class="p">(</span>x<span class="p">,</span>y<span class="p">)</span> <span class="c1">#使用x,y画二维散点图, 会打开一个图形窗口</span>
+</code></pre></div>
+
+
+<p>并保存到工作空间，然后在R控制台，使用命令<code>source('test.R')</code>就可以执行该脚本，
+还可以使用<code>source('test.R', echo=TRUE)</code>输出更详细的信息。</p>
+
+<p>编写脚本自动执行一些任务时，sink()函数会比较有用。
+<code>sink("record.lis")</code>会把所有后续的输出结果从控制台重定向到外部文件 record.lis 中，此时控制台中看不到命令输出的结果。
+使用命令<code>sink()</code>可以让输出流重新定向到控制台。</p>
+
+<h1>帮助系统</h1>
+
+<p>GNU软件通常都会有非常好的帮助系统，无论对于初学者还是熟练者都能带来很大的帮助。R当然也不例外。R中提供的帮助主要有以下几种：</p>
+
+<h2>文档和搜索</h2>
+
+<p><code>help.start()</code> 命令会打开浏览器，显示帮助文档。包括一些入门的文档，以及<a href="http://127.0.0.1:18099/doc/html/Search.html">搜索功能</a>。</p>
+
+<p><img src="/images/2013/r_notes/5.png" alt="5" /></p>
+
+<h2>演示</h2>
+
+<p><code>demo()</code>会按照包分组，列出所有可用的演示：</p>
+
+<p><img src="/images/2013/r_notes/6.png" alt="6" /></p>
+
+<p>按照名称可以开始演示，比如<code>demo(is.things)</code></p>
+
+<h2>函数帮助</h2>
+
+<p>如果已经知道一个函数的名称(比如solve)，需要了解其所属的包、用途、用法、参数说明、返回值、参考文献、相关函数以及范例等，可以使用命令
+<code>help(solve)</code>或<code>?solve</code>。该命令会弹出一个窗口：</p>
+
+<p><img src="/images/2013/r_notes/7.png" alt="7" /></p>
+
+<h2>函数示例</h2>
+
+<p>对于函数，还可以使用example()执行示例，比如<code>example(solve)</code>。</p>
+
+<h2>关键字和运算符</h2>
+
+<p>与函数的帮助类似，但是需要加上引号，如：</p>
+
+<div class="highlight"><pre><code class="r"><span class="o">?</span> <span class="s">&#39;[[&#39;</span>   <span class="c1"># 等价于 help(&#39;[[&#39;)</span>
+<span class="o">?</span><span class="s">&#39;+&#39;</span>    <span class="c1">#等价于 help(&#39;+&#39;)</span>
+<span class="o">?</span><span class="s">&#39;if&#39;</span>    <span class="c1">#等价于 help(&#39;if&#39;)</span>
+</code></pre></div>
+
+
+<h2>搜索</h2>
+
+<p>如果不知道函数名称，还可以进行搜索，比如：</p>
+
+<div class="highlight"><pre><code class="r"><span class="o">??</span><span class="s">&#39;analysis&#39;</span>  <span class="c1">#等价于 search(&#39;analysis&#39;)</span>
+</code></pre></div>
+
+
+<h2>官方搜索</h2>
+
+<p>前面的帮助都受限于本地环境已经安装的包。如果要搜索R中所有的资源（包，函数、数学方法等），需要在R的官方网站搜索：</p>
+
+<p><a href="http://www.r-project.org%E2%80%94search.html">www.r-project.org—search.html</a></p>
+
+<h1>学习资料</h1>
+
+<ul>
+<li><a href="http://www.R-project.org">R官方网站</a></li>
+<li><a href="http://cran.r-project.org%E2%80%94manuals.html">官方网站上的一些手册和文档（必看）</a></li>
+<li><a href="http://staff.washington.edu%E2%80%94Rcourse">华盛顿大学的一个R教程</a></li>
+<li><a href="http://thinkinside.tk/2013/05/09/r_notes_2_data_structure.html">下一篇：R学习笔记(2)：R中的数据类型和数据结构</a></li>
+</ul>
+
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2013/05/09/r_notes_2_data_structure.html" rel="bookmark">&laquo;&nbsp;下一篇：R学习笔记(2)：R中的数据类型和数据结构</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2013/01/26/technical_analysis.html" rel="bookmark">上一篇：技术分析的理论体系&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2013/05/03/r_notes_1_what.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "R学习笔记(1)：R是什么"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,R,量化金融"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["方法工具"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>

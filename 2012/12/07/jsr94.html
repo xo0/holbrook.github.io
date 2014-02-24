@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="Java World似乎总会出现一些接口规范，这样做的好处是可以面向接口编程，可以在实现了该接口的产品/组件之间自由切换，避免被厂商绑架。 本文要介绍的[JSR94:Java Rule Engine API](http://jcp.o..." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>Java规则引擎规范：JSR94 &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">Java规则引擎规范：JSR94</h1>
+  <p>摘要：<br/>Java World似乎总会出现一些接口规范，这样做的好处是可以面向接口编程，可以在实现了该接口的产品/组件之间自由切换，避免被厂商绑架。 本文要介绍的JSR94:Java Rule Engine API，Java规则引擎API规范。</p>
+
+  <time class="published" datetime="2012-12-07">2012-12-07
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#软件开发-ref">软件开发</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#规则引擎-ref">规则引擎</a>
+    <sup>4</sup>
+    &nbsp;
+  
+    <a href="/pages/tags.html#JSR-ref">JSR</a>
+    <sup>3</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <p>Java World似乎总会出现一些接口规范，这样做的好处是可以面向接口编程，可以在实现了该接口的产品/组件之间自由切换，避免被厂商绑架。 本文要介绍的<a href="http://jcp.org/aboutJava/communityprocess/final/jsr094/index.html">JSR94:Java Rule Engine API</a>，
+Java规则引擎API规范。</p>
+
+<h1>1 概述</h1>
+
+<p>JSR-94是JCP(Java Community Process)制定的关于Java规则引擎API的规范，包括接口定义和示例代码。于2004年8月发布。 JSR-94定义了javax.rules和javax.rules.admin,前者包含了Java规则引擎运行时（Rumtime)API及异常（Exception）定义，后者包含了规则管理相关的API和异常定义。</p>
+
+<h1>2 规则管理API</h1>
+
+<p>规则管理API在javax.rules.admin中定义,主要包括以下类/接口：</p>
+
+<p><img src="/images/rule-engine/javax.rules.admin.png" alt="javax.rules.admin" /></p>
+
+<ul>
+<li>Rule：规则实体</li>
+<li>RuleExecutionSet：执行集，某个规则对应的动作</li>
+<li>LocalRuleExecutionSetProvider：用于从本地创建执行集，如InputStream,Reader等</li>
+<li>RuleExectuionSetProvider：用于从本地或远程创建执行集，如xml Element，Serializable等</li>
+<li>RuleAdministrator：用于获取ExecutionSetProvider，并管理执行集的注册/注销</li>
+</ul>
+
+
+<p>规则管理API实现的功能包括：</p>
+
+<ol>
+<li>装载规则（Rule）和执行集（RuleExecutionSet)</li>
+<li>执行集的注册/注销,只有注册的执行集对应的规则才能被客户访问</li>
+</ol>
+
+
+<h1>3 运行时API</h1>
+
+<p>运行时API在javax.rules中定义，主要包括以下类/接口：</p>
+
+<p><img src="/images/rule-engine/javax.rules.png" alt="javax.rules" /></p>
+
+<ul>
+<li>RuleServiceProviderManager: 通过URL注册/注销RuleServiceProvider</li>
+<li>RuleServiceProvider: 提供对RuleRuntime和RuleAdministrator的访问</li>
+<li>RuleRuntime: 规则引擎运行时，可以创建规则会话</li>
+<li>RuleSession: 规则会话，用于执行规则</li>
+<li>RuleExecutionSetMetaData: 执行集元数据，包括name,url,description等。执行集元数据会被RuleSession使用</li>
+<li>StatelessRuleSession: 无状态规则会话</li>
+<li>StatefulRuleSession: 有状态规则会话</li>
+<li>Handle和ObjectFilter: 有状态会话维护会话状态的帮助类</li>
+</ul>
+
+
+<p>规则引擎运行时API实现的功能包括：</p>
+
+<ol>
+<li>注册/注销规则引擎实例，只有注册的规则引擎实例才能被使用</li>
+<li>从注册的规则引擎实例创建Runtime</li>
+<li>从Runtime创建会话，包括有状态和无状态两种会话</li>
+<li>通过会话执行规则</li>
+</ol>
+
+
+<h1>4 异常定义</h1>
+
+<p>除了前面提到的主要类/接口外，JSR94还规定了规则引擎运行时及管理的一些异常，如下：</p>
+
+<p><img src="/images/rule-engine/javax.rules.exceptions.png" alt="javax.rules.exceptions" /></p>
+
+<h1>5 代码示例</h1>
+
+<p>下面是使用Drools作为规则引擎实例的一个例子，规则文件使用了Drools的drl格式：</p>
+
+<p>JSR94Sample.java</p>
+
+<div class="highlight"><pre><code class="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">sample</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.FileReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.rules.ConfigurationException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.rules.RuleRuntime</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.rules.RuleServiceProvider</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.rules.RuleServiceProviderManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.rules.StatelessRuleSession</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.rules.admin.LocalRuleExecutionSetProvider</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.rules.admin.RuleAdministrator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.rules.admin.RuleExecutionSet</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.drools.jsr94.rules.RuleServiceProviderImpl</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JSR94Sample</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">RuleServiceProvider</span> <span class="n">ruleProvider</span><span class="o">;</span>
+    
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">initProvider</span><span class="o">(){</span>
+        <span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="n">RuleServiceProviderImpl</span><span class="o">.</span><span class="na">RULE_SERVICE_PROVIDER</span><span class="o">;</span>
+        <span class="n">Class</span> <span class="n">providerClass</span> <span class="o">=</span> <span class="n">RuleServiceProviderImpl</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+        
+        <span class="k">try</span><span class="o">{</span>
+            <span class="c1">//注册ruleProvider</span>
+            <span class="n">RuleServiceProviderManager</span><span class="o">.</span><span class="na">registerRuleServiceProvider</span><span class="o">(</span><span class="n">uri</span><span class="o">,</span> <span class="n">providerClass</span><span class="o">);</span>
+            
+            <span class="c1">//从RuleServiceProviderManager获取ruleProvider</span>
+            <span class="n">ruleProvider</span> <span class="o">=</span> <span class="n">RuleServiceProviderManager</span><span class="o">.</span><span class="na">getRuleServiceProvider</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">ConfigurationException</span> <span class="n">e</span><span class="o">){</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">adminSample</span><span class="o">(){</span>
+        
+
+        <span class="k">try</span><span class="o">{</span>
+            <span class="c1">//获取RuleAdministrator实例</span>
+            <span class="n">RuleAdministrator</span> <span class="n">admin</span> <span class="o">=</span> <span class="n">ruleProvider</span><span class="o">.</span><span class="na">getRuleAdministrator</span><span class="o">();</span>
+            
+            <span class="c1">//获取RuleExectuionSetProvider</span>
+            <span class="n">HashMap</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">();</span>   
+            <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">,</span> <span class="s">&quot;My Rules&quot;</span><span class="o">);</span>   
+            <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;description&quot;</span><span class="o">,</span> <span class="s">&quot;A trivial rulebase&quot;</span><span class="o">);</span>
+            
+            <span class="n">LocalRuleExecutionSetProvider</span> <span class="n">ruleExecutionSetProvider</span> <span class="o">=</span> <span class="n">admin</span><span class="o">.</span><span class="na">getLocalRuleExecutionSetProvider</span><span class="o">(</span><span class="n">properties</span><span class="o">);</span>
+            
+            <span class="c1">//创建RuleExecutionSet</span>
+            <span class="n">FileReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">&quot;bin/sample.drl&quot;</span><span class="o">);</span>
+            <span class="n">RuleExecutionSet</span> <span class="n">reSet</span> <span class="o">=</span> <span class="n">ruleExecutionSetProvider</span><span class="o">.</span><span class="na">createRuleExecutionSet</span><span class="o">(</span><span class="n">reader</span><span class="o">,</span> <span class="n">properties</span><span class="o">);</span>
+            
+            <span class="c1">//注册RuleExecutionSet</span>
+            <span class="n">admin</span><span class="o">.</span><span class="na">registerRuleExecutionSet</span><span class="o">(</span><span class="s">&quot;mysample&quot;</span><span class="o">,</span><span class="n">reSet</span><span class="o">,</span><span class="n">properties</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+        
+    <span class="o">}</span>
+    
+    
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">runtimeSampe</span><span class="o">(){</span>
+        <span class="k">try</span><span class="o">{</span>
+            <span class="c1">//获取RuleRuntime, 创建会话</span>
+            <span class="n">RuleRuntime</span> <span class="n">runtime</span> <span class="o">=</span> <span class="n">ruleProvider</span><span class="o">.</span><span class="na">getRuleRuntime</span><span class="o">();</span>
+            <span class="n">StatelessRuleSession</span> <span class="n">ruleSession</span> <span class="o">=</span> <span class="o">(</span><span class="n">StatelessRuleSession</span><span class="o">)</span><span class="n">runtime</span><span class="o">.</span><span class="na">createRuleSession</span><span class="o">(</span><span class="s">&quot;mysample&quot;</span><span class="o">,</span><span class="kc">null</span><span class="o">,</span><span class="n">RuleRuntime</span><span class="o">.</span><span class="na">STATELESS_SESSION_TYPE</span><span class="o">);</span>
+            
+            <span class="c1">//初始化输入数据</span>
+            <span class="n">Message</span> <span class="n">message1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Message</span><span class="o">();</span>
+            <span class="n">message1</span><span class="o">.</span><span class="na">setMessage</span><span class="o">(</span><span class="s">&quot;Hello World&quot;</span><span class="o">);</span>
+            <span class="n">message1</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="n">Message</span><span class="o">.</span><span class="na">HELLO</span><span class="o">);</span>
+            
+            <span class="n">Message</span> <span class="n">message2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Message</span><span class="o">();</span>
+            <span class="n">message2</span><span class="o">.</span><span class="na">setMessage</span><span class="o">(</span><span class="s">&quot;Goodbye World&quot;</span><span class="o">);</span>
+            <span class="n">message2</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="n">Message</span><span class="o">.</span><span class="na">GOODBYE</span><span class="o">);</span>
+            
+            
+            <span class="n">List</span> <span class="n">inputs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span>
+            <span class="n">inputs</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">message1</span><span class="o">);</span>
+            <span class="n">inputs</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">message2</span><span class="o">);</span>
+            
+            <span class="c1">//执行规则</span>
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span> <span class="n">results</span> <span class="o">=</span> <span class="n">ruleSession</span><span class="o">.</span><span class="na">executeRules</span><span class="o">(</span><span class="n">inputs</span><span class="o">);</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">results</span><span class="o">.</span><span class="na">size</span><span class="o">();</span><span class="n">i</span><span class="o">++){</span>
+                <span class="n">Message</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">message</span><span class="o">);</span>
+            <span class="o">}</span>
+            
+            
+            <span class="c1">//释放会话资源</span>
+            <span class="n">ruleSession</span><span class="o">.</span><span class="na">release</span><span class="o">();</span>
+            
+        <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+    
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// TODO Auto-generated method stub</span>
+        <span class="n">initProvider</span><span class="o">();</span>
+        <span class="n">adminSample</span><span class="o">();</span>
+        <span class="n">runtimeSampe</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Message</span> <span class="o">{</span>
+
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">HELLO</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">GOODBYE</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">message</span><span class="o">;</span>
+
+        <span class="kd">private</span> <span class="kt">int</span> <span class="n">status</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="n">String</span> <span class="nf">getMessage</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">message</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMessage</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getStatus</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">status</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setStatus</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">status</span> <span class="o">=</span> <span class="n">status</span><span class="o">;</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div>
+
+
+<p>规则文件使用的就是<a href="/2012/12/06/rule_language.html">这里</a>的例子。</p>
+
+<h1>6 实现JSR94的产品</h1>
+
+<p>主要的一些实现了JSR94的规则引擎产品如下：</p>
+
+<ul>
+<li><a href="http://www.jboss.org/drools/">Drools</a>:   开源  DRL,xDRL,DSL,Decision Table ReteOO  Eclipse,excel   文件系统    jar</li>
+<li><a href="http://mandarax.sourceforge.net/">Mandarax</a>:     开源  RuleML</li>
+<li><a href="http://openrules.com/">OpenRules</a>:   开源  Decision Table  Rete    excel       war</li>
+<li><a href="http://jlisa.sourceforge.net/">JLisa</a>:   开源</li>
+<li><a href="http://www.fico.com/en/Products/DMTools/Pages/FICO-Blaze-Advisor-System.aspx">Blaze</a>:    商业  SRL</li>
+<li><a href="http://www-01.ibm.com/software/integration/business-rule-management/jrules-family/">WebSphere ILOG JRules</a>:  商业</li>
+<li><a href="http://herzberg.ca.sandia.gov/">JESS</a>:   商业</li>
+</ul>
+
+
+<h1>7 小结</h1>
+
+<p>JSR94为规则引擎提供了公用标准API,为实现规则管理API和运行时API提供了指导规范, 目前已经获得很多开源/商业规则引擎产品的支持。 但是JSR94没有对<a href="/2012/12/06/rule_language.html">规则的描述语言</a>进行规范，导致各规则引擎产品大多采用自己私有的描述语言。</p>
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2012/12/30/JPA.html" rel="bookmark">&laquo;&nbsp;下一篇：JPA概要</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2012/12/06/rule_language.html" rel="bookmark">上一篇：Drools规则描述语言快速手册&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2012/12/07/jsr94.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "Java规则引擎规范：JSR94"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,规则引擎,JSR"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["软件开发"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>

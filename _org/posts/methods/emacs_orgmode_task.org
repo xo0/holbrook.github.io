@@ -9,7 +9,7 @@
 程序员对于“TODO”这个词一定不陌生。一个TODO意味着有一件事情需要去做。更深入一步来说，TODO是一个未完成的任务。
 
 Org-mode能够完美解决任务管理的各种问题，包括任务/子任务的划分，关键时间的设定，任务状态变化的跟踪，以及任务的检索和查询。
-再配合[[./emacs_orgmode_editor.org][Org-mode的强大编辑功能]]， 能够实现很多功能，比如时间管理（GTD），项目计划和管理，工作日志等。
+再配合[[file:emacs_orgmode_editor.org][Org-mode的强大编辑功能]] 能够实现很多功能，比如时间管理（GTD），项目计划和管理，工作日志等。
 
 本文介绍Org-mode强大的任务管理功能。
 
@@ -33,7 +33,7 @@ C-c C-t时，会询问，让你输入一个字母。
 
 将光标放在这些内容上，输入 C-c C-c 可以直接生效。此时再用C-c C-t设定任务时，会打开一个新的缓冲区：
 
-[[img:/assets/images/orgmode/todo1.png]]
+[[http://holbrook.github.com/assets/images/orgmode/todo1.png]]
 
 对照前面的定义不难发现：
 
@@ -48,12 +48,12 @@ C-c C-t时，会询问，让你输入一个字母。
 
 使用C-c C-t 或者 S-LEFT/RIGTH 切换一些状态后，任务会变成这个样子：
 
-[[img:/assets/images/orgmode/todo2.png]]
+[[http://holbrook.github.com/assets/images/orgmode/todo2.png]]
 
 会自动生成时间戳，提示填写说明。从而留下完整的记录。
 
 
-上面的任务状态设置只适用于当前文档。如果希望设定所有.org文档的默认任务状态，需要在.emacs配置文件中定义。
+上面的任务状态设置只适用于当前文档。如果希望设定所有 =.org= 文档的默认任务状态，需要在 =.emacs= 配置文件中定义。
 上面的任务状态在配置文件中的等效设置为：
 
 : (setq org-todo-keywords
