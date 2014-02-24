@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="@[豆瓣](http://book.douban.com/subject/2193810/)概率：0--1之间的一个数目，表示事情发生的可能性/经常性。# 得到概率的几种途径1. 利用等可能事件   在机会均等的情况下，概率 = 要计..." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>《统计学》读书笔记(4/17:机会的度量：概率和分布) &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">《统计学》读书笔记(4/17:机会的度量：概率和分布)</h1>
+  <p>摘要：<br/>统计学：从数据到结论，ISBN：9787503749964，作者：吴喜之</p>
+
+  <time class="published" datetime="2013-06-07">2013-06-07
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#理论学习-ref">理论学习</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#统计学-ref">统计学</a>
+    <sup>3</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <p>@<a href="http://book.douban.com/subject/2193810/">豆瓣</a></p>
+
+<p>概率：0--1之间的一个数目，表示事情发生的可能性/经常性。</p>
+
+<h1>得到概率的几种途径</h1>
+
+<ol>
+<li><p>利用等可能事件</p>
+
+<p>在机会均等的情况下，概率 = 要计算概率的情况的组合数 / 全部可能情况的组合数</p></li>
+<li><p>根据长期相对频率</p>
+
+<p>如果出现的机会不等，而且未知，可以用观测数据估计概率， 此时 概率 = 观测到的发生次数k / 重复实验的次数n</p>
+
+<p>只适用于可以重复实验的情况</p></li>
+<li><p>主观概率</p>
+
+<p>不可计算、不可实验的、主要取决于主观因素的一次性事件，其发生的概率称为主观概率。</p></li>
+</ol>
+
+
+<h1>概率的运算</h1>
+
+<p>事件相当于集合</p>
+
+<p>概率的运算可以从集合运算的角度考虑</p>
+
+<ol>
+<li><p>互补事件的概率</p>
+
+<p>互补事件/互余事件/对立事件：相当于补集的概念。互补事件的概率之和为1</p>
+
+<p>优势/赔率：两个互补事件概率的比值</p></li>
+<li><p>概率的加法</p>
+
+<p>两个不可能发生的事件，发生其中之一的概率，等于两个事件概率之和，相当于并集的概念</p></li>
+<li><p>概率的乘法</p>
+
+<p> 两个事件同时发生的概率，等于两个事件概率之积，相当于交集的概念</p>
+
+<p> 仅当两个事件独立时才成立。如果不独立，需要引入条件概率</p></li>
+</ol>
+
+
+<h1>概率的分布</h1>
+
+<pre><code>概率-变量值 的函数称为概率分布。可以用图或公式表示。
+
+概率分布与总体/样本空间相关
+</code></pre>
+
+<ol>
+<li><p>离散随机变量的分布</p>
+
+<p>对于变量的每一个离散的值，对应着一个概率。全部概率的和为1</p>
+
+<p>这样的关系称为该离散随机变量的概率分布</p></li>
+<li><p>二项分布</p>
+
+<p>最简单的离散分布，变量只能有两个值（如硬币的正反面），两个事件互补</p>
+
+<p>TODO: 更详细的说明</p></li>
+<li><p>多项分布</p>
+
+<p>二项分布的扩展</p></li>
+<li><p>泊松(Poisson)分布</p>
+
+<p>衡量某种事件在一定期间内出现的次数的概率</p></li>
+<li><p>超几何分布</p>
+
+<p>研究有限总体的不放回抽样（检查样品后不放回，避免重复检查）</p>
+
+<p>比如抽取样品进行质检</p>
+
+<p>TODO: 公式和理解</p></li>
+<li><p>连续随机变量的分布</p>
+
+<p>与离散变量的分布相对</p>
+
+<p>表现为概率密度函数。所有区间概率的积分为1</p></li>
+<li><p>正态分布/高斯分布</p>
+
+<p>一个对称的钟形曲线，最高点对应均值</p>
+
+<p>TODO: 更多的变量和参数</p></li>
+<li><p>x<sup>2</sup>-分布/卡方分布</p>
+
+<p>n个独立标准正态变量的平方和，称为有n个自由度的x<sup>2</sup>-分布</p></li>
+<li><p>t-分布/学生分布</p>
+
+<p>正态分布的变换</p>
+
+<p>TODO：图形</p></li>
+<li><p>F-分布</p>
+
+<p>两个独立x<sup>2</sup>-分布变量的比，称为F-分布变量</p>
+
+<p>F-分布有两个自由度</p>
+
+<p>TODO: 图形</p></li>
+<li><p>均匀分布/矩形分布</p>
+
+<p>最简单的连续型分布，取值范围是一个区间。形状是一个矩形</p></li>
+<li><p>累积分布函数</p>
+
+<p>为了便于计算某个区间的概率，对概率函数进行积分后得到的函数</p></li>
+</ol>
+
+
+<h1>抽样分布、中心极限定理</h1>
+
+<p>  抽样分布：样本的统计量（均值、中位数、标准差等）随着样本的不同也是随机的，其分布称为抽样分布</p>
+
+<p>  抽样分布的特征可以帮助判断抽样是否合理</p>
+
+<h1>用小概率事件进行判断</h1>
+
+<p>  如果对某种（统计）结论进行验证，可以抽取一定的样本进行检验，并得出一个概率。</p>
+
+<p>  如果该结果与事先的结论不符，可以根据事先结论计算得到实验结果的概率。</p>
+
+<p>  如果得到实验结果的概率非常低，可以认为结论不正确。</p>
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2013/06/20/python_env.html" rel="bookmark">&laquo;&nbsp;下一篇：python的环境管理</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2013/06/03/my_macos_usage.html" rel="bookmark">上一篇：我在MacOS下使用的软件&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2013/06/07/statistics_intro_4.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "《统计学》读书笔记(4/17:机会的度量：概率和分布)"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,统计学"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["理论学习"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="# 命令行界面是否过时？答案是：不会的！1965年[OS/360](http://en.wikipedia.org/wiki/OS/360_and_successors)的发布标志着与硬件分离的“通用”操作系统的出现。尽管8年后的19..." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>命令行界面(CLI) &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">命令行界面(CLI)</h1>
+  <p>摘要：<br/></p>
+
+  <time class="published" datetime="2014-01-30">2014-01-30
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#软件开发-ref">软件开发</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#CLI-ref">CLI</a>
+    <sup>3</sup>
+    &nbsp;
+  
+    <a href="/pages/tags.html#设计-ref">设计</a>
+    <sup>2</sup>
+    &nbsp;
+  
+    <a href="/pages/tags.html#python-ref">python</a>
+    <sup>6</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <h1>命令行界面是否过时？</h1>
+
+<p>答案是：不会的！</p>
+
+<p>1965年<a href="http://en.wikipedia.org/wiki/OS/360_and_successors">OS/360</a>的发布标志着与硬件分离的“通用”操作系统的出现。</p>
+
+<p>尽管8年后的1973年出现了<a href="http://en.wikipedia.org/wiki/Xerox_Alto">图形界面程序</a>，
+16年后的1981年出现了<a href="http://en.wikipedia.org/wiki/Xerox_Star">图形界面的操作系统</a>，
+但是在此之后，至今三十几年过去了，图形界面(GUI)仍无法取代命令行界面(CLI)。</p>
+
+<p>有什么理由可以说，图形界面终将取代命令行界面呢？</p>
+
+<p>不管是传统的linux“神器”，如find, grep, curl, netcat, xargs, rsync, screen，awk, vi, emacs，
+还是让人惊叹的新作，如maven, git, salt，都有着强大的命令行界面。甚至你会有一种感觉：
+为这些软件设计图形界面根本就是画蛇添足。</p>
+
+<p>命令行界面的优势在于：</p>
+
+<ul>
+<li><p>效率高</p>
+
+<p>鼠标操作是最简单，同时也是最笨拙的操作</p></li>
+<li><p>更专注</p>
+
+<p>鼠标操作容易分心</p></li>
+<li><p>速度快</p>
+
+<p>CLI程序需要的资源少，启动和执行速度更快</p></li>
+<li><p>易远程</p>
+
+<p>ssh、telnet的连接比vnc、remote desktop等更容易</p></li>
+<li><p>自动化</p>
+
+<p>CLI不仅可以给人使用，也适用于自动化脚本</p></li>
+<li><p>zhuangbility</p>
+
+<p>^o^</p></li>
+</ul>
+
+
+<h1>命令行界面的类型</h1>
+
+<p>按照复杂程度，命令行界面可以分为：</p>
+
+<ul>
+<li><p>非交互式</p>
+
+<p>一次性输入所有的参数，程序执行期间不需要用户的干预。这是最常见的命令行界面形式。</p></li>
+<li><p>基于行的交互</p>
+
+<p>在执行过程中，需要用户输入一些内容，比如确认信息、路径参数等。</p>
+
+<p>由于用户交互会使程序难以用于自动化脚本，所以这种命令行界面并不多见，常用于基于命令行的安装程序。</p></li>
+<li><p>文本用户界面</p>
+
+<p>类似于图形用户界面，没有明确的执行流程，完全由用户控制程序的执行步骤。比如vi和emacs。</p></li>
+</ul>
+
+
+<h1>CLI世界的潜规则</h1>
+
+<p>为了使你的CLI程序不会显得格格不入，在设计CLI程序时要遵守一些潜规则。</p>
+
+<ul>
+<li><p>良好命名</p>
+
+<ul>
+<li>容易理解</li>
+<li>名字要短</li>
+<li>容易记忆</li>
+</ul>
+</li>
+<li><p>必备选项</p>
+
+<p>所有的命令行工具都应该提供<code>-v/--version</code>和<code>-h/--help</code>选项。</p></li>
+<li><p>保持安静</p>
+
+<p>程序的输出要"恰到好处"，让用户/其他程序明确知道必要的信息，又不过分“啰嗦”。过多的输出即会浪费系统资源和带宽，也会让用户感觉不舒服，更重要的是会使得其他程序的处理逻辑变得复杂。以下的原则有利于保持安静：</p>
+
+<ul>
+<li>不要输出无关的信息，比如版本号、作者名——除非用户要求</li>
+<li>对于很明确的结果，不需要再提醒用户。只应提示例外(exception)情况</li>
+<li>不需要告诉用户输出的是什么东西——用户会知道的</li>
+<li>如有必要，可以提供<code>-v/--verbose</code>和<code>-q/--quiet</code>选项，供用户选择</li>
+</ul>
+</li>
+<li><p>明确要求</p>
+
+<p>在基于行的交互式CLI中，需要用户输入时要给出明确的提示，比如：</p>
+
+<p><code>Do you really want to do this (y/n)?</code></p>
+
+<p><code>Enter a date (YYYY-MM-DD):</code></p></li>
+<li><p>支持管道</p>
+
+<p>程序应该支持从管道或文件重定向中读取数据：</p>
+
+<ul>
+<li>如果文件名作为参数传递给程序，就读取文件的内容作为输入</li>
+<li>如果没有提供这样的参数，就从标准输入中读取，一直到 CTRL+D</li>
+</ul>
+</li>
+<li><p>功能单一</p>
+
+<p>UNIX哲学中重要的一条原则就是：每个程序只做一件事情，并把它做好。</p>
+
+<p>复杂的功能通过程序间的配合完成，而为了与其他的程序配合，要尽量支持管道和重定向。</p>
+
+<p>既然“只做一件事”，就要“做好一件事”。</p></li>
+<li><p>遵循惯例</p>
+
+<p>UNIX中命令行参数会有一些惯例，比如<code>-</code>后面的单字母选项可以连用（如<code>ls -Al</code>), <code>--</code>后面使用多字母选项等；此外，遵循已经被广泛使用的命令的参数，也会容易被接受。</p></li>
+</ul>
+
+
+<h1>CLI支持库</h1>
+
+<p>CLI是如此重要，以至于很多语言/平台都提供了开发CLI的支持库，比如：</p>
+
+<ul>
+<li><p>python的optparse和argparse</p>
+
+<p>argparse更先进，旨在替代optparse，但是从python2.7开始才支持。如果希望在比较旧的linux上运行(通常支持python2.4)，最好还是使用optparse。</p></li>
+<li><p>java的Apache Commons CLI</p></li>
+<li>Apache karaf的karaf-command-archetype</li>
+</ul>
+
+
+<h1>CLI的设计要点(TODO)</h1>
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2014/02/10/apache_camel.html" rel="bookmark">&laquo;&nbsp;下一篇：Apache Camel的核心概念</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2014/01/29/svn_install_config_and_mgnt.html" rel="bookmark">上一篇：subversion安装、配置和管理&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2014/01/30/cli_design.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "命令行界面(CLI)"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,CLI,设计,python"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["软件开发"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="曾几何时，你在Spring和OSGi之间摇摆不定；曾几何时，你对SpringDM感到迷惑不解。你是否向往OSGi的动态特性，又为遗留代码（尤其是基于Spring的代码）感到不舍？现在，这些都不再是问题！在[OSGi Service P..." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>Blueprint: OSGi的依赖注入(DI)容器 &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">Blueprint: OSGi的依赖注入(DI)容器</h1>
+  <p>摘要：<br/>曾几何时，你在Spring和OSGi之间摇摆不定；曾几何时，你对SpringDM感到迷惑不解。你是否向往OSGi的动态特性，又为遗留代码（尤其是基于Spring的代码）感到不舍？现在，这些都不再是问题！</p>
+
+  <time class="published" datetime="2014-01-22">2014-01-22
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#软件开发-ref">软件开发</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#OSGi-ref">OSGi</a>
+    <sup>4</sup>
+    &nbsp;
+  
+    <a href="/pages/tags.html#maven-ref">maven</a>
+    <sup>5</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <p>曾几何时，你在Spring和OSGi之间摇摆不定；曾几何时，你对SpringDM感到迷惑不解。
+你是否向往OSGi的动态特性，又为遗留代码（尤其是基于Spring的代码）感到不舍？</p>
+
+<p>现在，这些都不再是问题！</p>
+
+<p>在<a href="http://www.osgi.org/Release4/HomePage">OSGi Service Platform Release 4</a> V4.2中，
+提到了很多的<a href="http://www.osgi.org/download/r4v42/r4.enterprise.pdf">企业级规范(Enterprise Specification)</a>，
+其中包括了规范121：Blueprint容器规范(Container Specification)。</p>
+
+<p>Buleprint容器规范规定了一个OSGi容器(不是OSGi rumtime)的方方面面：</p>
+
+<p><img src="/images/fuse/Blueprint_Container_Specification_list.png" alt="" /></p>
+
+<p>Buleprint(或者说，OSGi Enterprise)目前有两个主要的实现：<a href="http://www.eclipse.org/gemini/">Eclipse Gemini</a>和<a href="http://aries.apache.org/">Apache Aries</a>。</p>
+
+<p>其中Gemini的代码最初来自Spring DM，其实Blueprint规范的最早版本也来自Spring；而Aries已经用在Apache的众多企业级产品中。</p>
+
+<p>在本文中，使用Aries Blueprint。</p>
+
+<h1>依赖注入</h1>
+
+<p>Blueprint Container 规范为 OSGi 定义了一个 依赖性注入（DI,Dependency Injection）框架，可以处理OSGi 的动态特性。
+与<a href="/2014/01/12/dependency_injection_in_e4.html#menuIndex2">OSGi服务</a>或<a href="/2014/01/12/dependency_injection_in_e4.html#menuIndex3">OSGi Declarative Service</a>，不同，Blueprint依赖注入可以处理POJO对象的装配，使得POJO能够在OSGi中跨bundle访问。</p>
+
+<p>这与<a href="http://thinkinside.tk/2013/12/31/jsr330.html">JSR330:Java依赖注入规范</a>很像，是该规范在OSGi环境下的扩展。
+这也就是Spring DM(Spring Dynamic Modules)干的事情。实际上，Buleprint容器规范最初就来自于Spring，
+而其Gemini实现更是来自SpringDM的捐赠。</p>
+
+<p>无奈，如今<a href="http://www.infoq.com/cn/news/2012/11/spring-osgi-gradle">Spring已经宣布放弃OSGi</a>正所谓造化弄人，让人唏嘘不已。</p>
+
+<h1>Blueprint XML</h1>
+
+<p>Blueprint使用XML文件描述装配关系，下面是一个例子：</p>
+
+<p>```
+ &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?>
+ <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"></p>
+
+<p>   <!-- Bean Manager Examples --></p>
+
+<p>   <bean id="accountOne" class="org.apache.aries.samples.Account"></p>
+
+<pre><code>   &lt;argument value="1"/&gt;
+   &lt;property name="description" value="#1 account"/&gt;
+</code></pre>
+
+<p>   </bean></p>
+
+<p>   &lt;bean id="accountTwo" class="org.apache.aries.samples.StaticAccountFactory"</p>
+
+<pre><code>     factory-method="createAccount"&gt;   
+   &lt;argument value="2"/&gt;
+   &lt;property name="description" value="#2 account"/&gt;     
+</code></pre>
+
+<p>   </bean></p>
+
+<p>   <bean id="accountFactory" class="org.apache.aries.samples.AccountFactory"></p>
+
+<pre><code>   &lt;argument value="account factory"/&gt;      
+</code></pre>
+
+<p>   </bean></p>
+
+<p>   &lt;bean id="accountThree"</p>
+
+<pre><code>     factory-ref="accountFactory" 
+     factory-method="createAccount"&gt;   
+   &lt;argument value="3"/&gt;
+   &lt;property name="description" value="#3 account"/&gt;      
+</code></pre>
+
+<p>   </bean></p>
+
+<p>   &lt;bean id="prototypeAccount" class="org.apache.aries.samples.Account"</p>
+
+<pre><code>     scope="prototype"&gt;
+   &lt;argument value="4"/&gt;
+</code></pre>
+
+<p>   </bean></p>
+
+<p>   &lt;bean id="singletonAccount" class="org.apache.aries.samples.Account"</p>
+
+<pre><code>     scope="singleton"&gt;
+   &lt;argument value="5"/&gt;
+</code></pre>
+
+<p>   </bean></p>
+
+<p>   &lt;bean id="accountFour" class="org.apache.aries.samples.Account"</p>
+
+<pre><code>     init-method="init" destroy-method="destroy"&gt;
+   &lt;argument value="6"/&gt;
+   &lt;property name="description" value="#6 account"/&gt; 
+</code></pre>
+
+<p>   </bean></p>
+
+<p>   <!-- Service Manager Examples --></p>
+
+<p>   <bean id="myAccount" class="org.apache.aries.samples.MyAccount"></p>
+
+<pre><code>   &lt;argument value="7"/&gt;
+   &lt;property name="description" value="MyAccount"/&gt; 
+</code></pre>
+
+<p>   </bean></p>
+
+<p>   <service id="serviceOne" ref="myAccount" interface="java.io.Serializable"/></p>
+
+<p>   <service id="serviceTwo" ref="myAccount"></p>
+
+<pre><code>  &lt;interfaces&gt;
+      &lt;value&gt;java.io.Serializable&lt;/value&gt;
+  &lt;/interfaces&gt;
+</code></pre>
+
+<p>   </service></p>
+
+<p>   <service id="serviceThree" ref="myAccount" auto-export="all-classes"/></p>
+
+<p>   <service id="serviceFour" ref="myAccount" auto-export="all-classes"></p>
+
+<pre><code>  &lt;service-properties&gt;
+      &lt;entry key="mode" value="shared"/&gt;
+      &lt;entry key="active"&gt;
+          &lt;value type="java.lang.Boolean"&gt;true&lt;/value&gt;
+      &lt;/entry&gt;
+  &lt;/service-properties&gt;
+</code></pre>
+
+<p>   </service></p>
+
+<p>   <service id="serviceFive" ref="myAccount" auto-export="all-classes" ranking="3"/></p>
+
+<p>   <service id="serviceSix" ref="myAccount" auto-export="all-classes"></p>
+
+<pre><code>  &lt;registration-listener 
+          registration-method="register" unregistration-method="unregister"&gt;
+      &lt;bean class="org.apache.aries.samples.RegistrationListener"/&gt;         
+  &lt;/registration-listener&gt;
+</code></pre>
+
+<p>   </service></p>
+
+<p>   <!-- Service Reference Manager Examples --></p>
+
+<p>   &lt;reference-list id="serviceReferenceListTwo" interface="java.io.Serializable"</p>
+
+<pre><code>               availability="optional"&gt;
+  &lt;reference-listener 
+          bind-method="bind" unbind-method="unbind"&gt;
+      &lt;bean class="org.apache.aries.samples.ReferenceListener"/&gt;        
+  &lt;/reference-listener&gt;
+</code></pre>
+
+<p>   &lt;/reference-list></p>
+
+<p>   <!-- Environmental Manager Example --></p>
+
+<p>   <bean id="accountManagerOne" class="org.apache.aries.samples.AccountManager"></p>
+
+<pre><code>  &lt;property name="managerBundle" ref="blueprintBundle"/&gt;
+</code></pre>
+
+<p>   </bean></p>
+
+<p>   <!-- Object Values Examples --></p>
+
+<p>   <bean id="accountManagerTwo" class="org.apache.aries.samples.AccountManager"></p>
+
+<pre><code>   &lt;property name="managedAccount"&gt;
+       &lt;ref component-id="accountOne"/&gt;
+   &lt;/property&gt;
+</code></pre>
+
+<p>   </bean></p>
+
+<p>   <bean id="accountManagerThree" class="org.apache.aries.samples.AccountManager"></p>
+
+<pre><code>   &lt;property name="managedAccount"&gt;
+       &lt;bean class="org.apache.aries.samples.Account"&gt;
+           &lt;argument value="10"/&gt;
+           &lt;property name="description" value="Inlined Account"/&gt; 
+       &lt;/bean&gt;
+   &lt;/property&gt;
+</code></pre>
+
+<p>   </bean></p>
+
+<p>   <bean id="accountManagerFour" class="org.apache.aries.samples.AccountManager"></p>
+
+<pre><code>   &lt;property name="accountNumbers"&gt;
+       &lt;list&gt;
+           &lt;value&gt;123&lt;/value&gt;
+           &lt;value&gt;456&lt;/value&gt;
+           &lt;value&gt;789&lt;/value&gt;
+       &lt;/list&gt;
+   &lt;/property&gt;
+</code></pre>
+
+<p>   </bean></p>
+
+<p> </blueprint></p>
+
+<p>```
+可以看出，这个文件与Spring的配置文件非常类似。</p>
+
+<p>Blueprint XML中可以标记<code>bean</code>，<code>service</code>、<code>reference-list</code>等元素，用于bean管理、service管理和service引用管理。</p>
+
+<p><img src="/images/fuse/blueprint_config.png" alt="" /></p>
+
+<ul>
+<li><p>Bean管理</p>
+
+<p>通过<code>&lt;bean&gt;</code>标签定义Bean，容器可以创建bean、设置属性。bean的创建可以基于构造函数、静态工厂或工厂方法；属性可以是基本类型，也可以引用其他的bean。可以设置bean的scope为singleton或prototype。</p></li>
+<li><p>Service管理</p>
+
+<p>bean只能在当前bundle中使用。要跨bundle引用，必须定义服务。服务可以依赖bean或其他服务。</p>
+
+<p>服务管理用于在OSGi服务注册表中注册服务。容器会根据服务的依赖关系是否满足，自动注册或注销服务。</p></li>
+<li><p>Service引用管理</p>
+
+<p>通过<code>&lt;reference&gt;</code>和<code>&lt;reference-list&gt;</code>标签可以引用其他bundle中发布的服务。两个标签分布用于引用单个服务和引用服务列表。</p></li>
+</ul>
+
+
+<p>一个bundle可以有一个或多个xml配置，通常位于<code>OSGI-INF/blueprint/</code>目录下，也可以在<code>META-INF/MANIFEST.MF</code>文件中通过
+<code>Bundle-Blueprint</code>属性进行指定。</p>
+
+<p>更多关于Blueprint XML配置的内容和例子，可以参考<a href="http://aries.apache.org/documentation/tutorials/blueprinthelloworldtutorial.html">Apache Aries官方的例子</a>，以及<a href="https://www.ibm.com/developerworks/cn/opensource/os-osgiblueprint/">developerWorks上的这篇文章</a></p>
+
+<h1>工作原理</h1>
+
+<p>Blueprint Container 使用扩展器（extender）模式，监视OSGi框架中的bundle的状态。当新的bundle被激活时，
+Blueprint根据该bundle是否有Blueprint XML配置文件判断是否需要容器进行处理。</p>
+
+<p>处理的过程是为该bundle创建一个容器，通过容器解析XML文件，并将组件装配到一起。如果bundle中的服务依赖得到满足，容器还会调用<a href="/2014/01/12/dependency_injection_in_e4.html#menuIndex3">OSGi DS</a>发布服务。</p>
+
+<p>在停止bundle时，也会进行相反的销毁过程。</p>
+
+<h1>在Eclipse中运行和调试</h1>
+
+<p>可以在前面<a href="/2014/01/21/tycho_vs_maven_bundle_plugin.html#menuIndex2">通过maven手工创建Felix运行环境</a>的基础上，
+增加Blueprint需要的bundle:</p>
+
+<p>```</p>
+
+<pre><code>&lt;!-- for aries blueprint --&gt;
+&lt;artifactItem&gt;
+    &lt;groupId&gt;org.apache.aries.blueprint&lt;/groupId&gt;
+    &lt;artifactId&gt;org.apache.aries.blueprint&lt;/artifactId&gt;
+    &lt;version&gt;1.1.0&lt;/version&gt;
+&lt;/artifactItem&gt;
+&lt;artifactItem&gt;
+    &lt;groupId&gt;org.apache.aries.proxy&lt;/groupId&gt;
+    &lt;artifactId&gt;org.apache.aries.proxy&lt;/artifactId&gt;
+    &lt;version&gt;1.0.1&lt;/version&gt;
+&lt;/artifactItem&gt;
+&lt;artifactItem&gt;
+    &lt;groupId&gt;org.apache.aries&lt;/groupId&gt;
+    &lt;artifactId&gt;org.apache.aries.util&lt;/artifactId&gt;
+    &lt;version&gt;1.1.0&lt;/version&gt;
+&lt;/artifactItem&gt;
+&lt;artifactItem&gt;
+    &lt;groupId&gt;org.apache.felix&lt;/groupId&gt;
+    &lt;artifactId&gt;org.apache.felix.configadmin&lt;/artifactId&gt;
+    &lt;version&gt;1.2.4&lt;/version&gt;
+&lt;/artifactItem&gt;
+&lt;artifactItem&gt;
+    &lt;groupId&gt;org.ops4j.pax.logging&lt;/groupId&gt;
+    &lt;artifactId&gt;pax-logging-api&lt;/artifactId&gt;
+    &lt;version&gt;1.4&lt;/version&gt;
+&lt;/artifactItem&gt;
+&lt;artifactItem&gt;
+    &lt;groupId&gt;org.ops4j.pax.logging&lt;/groupId&gt;
+    &lt;artifactId&gt;pax-logging-service&lt;/artifactId&gt;
+    &lt;version&gt;1.4&lt;/version&gt;
+&lt;/artifactItem&gt;
+</code></pre>
+
+<p>```</p>
+
+<h1>使用Apache Felix Karaf</h1>
+
+<p>自己搭建的Felix+Blueprint环境功能很有限，比如缺失了很多必要的基础组件和管理功能。更好的选择是使用<a href="http://karaf.apache.org/">Apache Felix Karaf</a>。</p>
+
+<p>Karaf在Felix和Blueprint的基础上，还增加了一些插件，以提供认证和登录、热部署、动态配置、控制台以及一些管理功能。</p>
+
+<p>更贴心的是，Karaf还提供了Eclipse插件：<a href="http://karaf.apache.org/index/subprojects/eik.html">Eclipse Integration for Karaf (EIK)</a>，从而可以：</p>
+
+<ul>
+<li>Custom Eclipse perspective for Apache Karaf development:
+
+<ul>
+<li>places valuable Karaf runtime information in one location</li>
+</ul>
+</li>
+<li>Apache Karaf installation management in your workspace:
+
+<ul>
+<li>Karaf installations are managed as workspace projects giving the developer visibility in to the runtime</li>
+<li>each Karaf installation is automatically synchronized with your workspace, including additional bundles, configuration files</li>
+</ul>
+</li>
+<li>Run and debug Karaf installations with a single Eclipse Launcher:
+
+<ul>
+<li>the launch configuration allows developers to fine tune how Karaf will launch</li>
+</ul>
+</li>
+<li>Automatic deployment of workspace plugin projects:
+
+<ul>
+<li>create plugin-projects and have them deployed automatically</li>
+</ul>
+</li>
+<li>Advanced instrumentation of the running Karaf instance:
+
+<ul>
+<li>watch bundles deploy in real time and examine the OSGi service registry from within the Eclipse IDE</li>
+</ul>
+</li>
+<li>Access Eclipse platform IDE plugins from within a running Karaf instance:
+
+<ul>
+<li>all Eclipse plugins are presented as an OBR</li>
+</ul>
+</li>
+</ul>
+
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2014/01/23/develop_a_fuse_webservice.html" rel="bookmark">&laquo;&nbsp;下一篇：JBoss Fuse: 开发和部署Web Service</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2014/01/21/tycho_vs_maven_bundle_plugin.html" rel="bookmark">上一篇：OSGi构建工具：Tycho还是Maven-Bundle-Plugin？&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2014/01/22/osgi_blueprint_container.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "Blueprint: OSGi的依赖注入(DI)容器"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,OSGi,maven"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["软件开发"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>

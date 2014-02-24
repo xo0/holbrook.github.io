@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="一篇旧的博文，原文发表在[博客园](http://www.cnblogs.com/holbrook/archive/2013/01/01/2841307.html)。--- 快年底了，假如你们公司的美国总部给每个人发了一笔201212..." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>你真的会数钱吗？ &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">你真的会数钱吗？</h1>
+  <p>摘要：<br/>货币，记账相关的领域模型，使用值对象</p>
+
+  <time class="published" datetime="2013-01-01">2013-01-01
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#领域模型-ref">领域模型</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#分析模式-ref">分析模式</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <p>一篇旧的博文，原文发表在<a href="http://www.cnblogs.com/holbrook/archive/2013/01/01/2841307.html">博客园</a>。</p>
+
+<hr />
+
+<p>快年底了，假如你们公司的美国总部给每个人发了一笔201212.21美元的特别奖金，作为程序员的你， 该如何把这笔钱收入囊中？</p>
+
+<h1>1.美元？美元！</h1>
+
+<p>你可能觉得，这根本不是问题。在自己的账户中直接加上一笔“转入”就行了。但是首先就遇到了币种的问题。</p>
+
+<p>一般来说，银行账户都是单币种的。你可能会说不对啊，我的一卡通就能存入不同的币种啊？但那是一个“账号（Account Number）”对应的多个“账户(Account)”。 通常财务记账的时候，一个“账户(Account)”都使用同一币种。</p>
+
+<p>账户(Account)记录了资金的往来，包含很多条目(Entry)。账户会记录结余，结余等于所有条目中金额的总和。</p>
+
+<p>我们不可能为每个币种设计一种条目，所以需要抽象出一个货币类——Money，适用于各种不同的币种：</p>
+
+<p><img src="/images/posts/domain/money/money.png" alt="Money类" /></p>
+
+<p>Money类至少要记录金额和币种:</p>
+
+<ul>
+<li><p>对于金额，由于货币存在最小面额，所以金额的类型可以采用定点小数或者整型。考虑到会对金额进行一些运算，用整数处理应该更方便。如果用java语言实现，可以使用long类型。</p></li>
+<li><p>对于币种，java提供了java.util.Currency类，专门用于表示货币，符合ISO 4217货币代码标准。Currency使用Singleton模式，需要用getInstance方法获得实例。</p>
+
+<p>主要的方法包括：</p>
+
+<ul>
+<li>String getCurrencyCode() 获取货币的ISO 4217货币代码</li>
+<li>int getDefaultFractionDigits() 获取与此货币一起使用的默认小数位数</li>
+<li>static Currency getInstance(Locale locale) 返回给定语言环境的国家/地区的 Currency 实例</li>
+<li>static Currency getInstance(String currencyCode) 返回给定货币代码的 Currency 实例。</li>
+<li>String getSymbol() 获取默认语言环境的货币符号</li>
+<li>String getSymbol(Locale locale) 获取指定语言环境的货币符号</li>
+<li>String toString() 返回此货币的 ISO 4217 货币代码</li>
+</ul>
+
+
+<p>通过Currency类的帮助，我们的Money类看起来大概是这个样子(为了方便，提供多种构造函数)：</p>
+
+<pre><code>public class Money {
+    private long amount;
+    private Currency currency;
+
+    public double getAmount() {
+        return BigDecimal.valueOf(amount, currency.getDefaultFractionDigits()).doubleValue();
+
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public Money(double amount, Currency currency) {
+        this.currency = currency;
+        this.amount = Math.round(amount * centFactor());
+    }
+
+    public Money(long amount, Currency currency) {
+        this.currency = currency;
+        this.amount = amount * centFactor();
+    }
+
+    private static final int[] cents = new int[] { 1, 10, 100, 1000,10000 };
+
+    private int centFactor() {
+        return cents[currency.getDefaultFractionDigits()];
+    }
+}
+</code></pre></li>
+</ul>
+
+
+<p>用Money类表示我们的$201212.21奖金，就是：</p>
+
+<pre><code>Money myMoney = new Money(201212.21,Currency.getInstance(Locale.US));
+</code></pre>
+
+<h1>2.存入账户</h1>
+
+<p>终于解决了币种的问题，可以把钱存入账户了。存入的逻辑是：在条目中记录一笔账目，并计算账户的余额。</p>
+
+<p>不同币种之间相加或相减是没有意义的，为了避免人为错误，在Money的代码中就要禁止这种操作。我们可以采用抛出异常的方式。 为了简单起见，这里不再定义一个单独的"MoneyException"，而是直接使用java.lang.Exception:</p>
+
+<pre><code>public Money add(Money money) throws Exception{
+    if(!money.getCurrency().equals(this.currency)){
+        throw(new Exception("different currency can't be add"));
+    }
+    BigDecimal value = this.getAmount().add(money.getAmount());
+    Money result = new Money(value.doubleValue(),this.getCurrency());
+    return result;
+}
+
+public Money minus(Money money) throws Exception{
+    if(!money.getCurrency().equals(this.currency)){
+        throw(new Exception("different currency can't be minus"));
+    }
+
+    BigDecimal value =this.getAmount().add(money.getAmount().negate());
+    Money result = new Money(value.doubleValue(),this.getCurrency());
+    return result;
+
+}
+</code></pre>
+
+<h1>3.收税</h1>
+
+<p>先不要高兴得太早，这笔钱属于“一次性所得”，需要交20%的个人所得税。税后所得应该是多少？</p>
+
+<p>你可能说：是80%。只要为Money加上一个multiply(double factor)方法就可以进行计算了。</p>
+
+<p>但是牵扯到了舍入的问题。由于货币存在最小单位，在做乘/除法运算的时候就要考虑到舍入的问题了。最好是能够控制舍入的行为。假如税务部门对于 舍入的计算有明确规定，我们也可以做一个遵纪守法的好公民。</p>
+
+<p>在java.math.BigDecimal中定义了7种舍入模式：</p>
+
+<ul>
+<li>ROUND_UP：等于远离0的数。</li>
+<li>ROUND_DOWN：等于靠近0的数。</li>
+<li>ROUND_CEILING：等于靠近正无穷的数。</li>
+<li>ROUND_FLOOR：等于靠近负无穷的数。</li>
+<li>ROUND_HALFUP：等于靠近的数，若舍入位为5，应用ROUNDUP。</li>
+<li>ROUND_HALFDOWN：等于靠近的数，若舍入位为5，应用ROUNDDOWN。</li>
+<li>ROUND_HALFEVEN：舍入位前一位为奇数，应用ROUNDHALFUP；舍入位前一位为偶数，应用ROUNDHALFDOWN。</li>
+</ul>
+
+
+<p>我们可以借用这些模式作为参数：</p>
+
+<pre><code>public static final int ROUND_UP = BigDecimal.ROUND_UP;
+public static final int ROUND_DOWN = BigDecimal.ROUND_DOWN;
+public static final int ROUND_CEILING = BigDecimal.ROUND_CEILING;
+public static final int ROUND_FLOOR = BigDecimal.ROUND_FLOOR;
+public static final int ROUND_HALF_UP = BigDecimal.ROUND_HALF_UP;
+public static final int ROUND_HALF_DOWN = BigDecimal.ROUND_HALF_DOWN;
+public static final int ROUND_HALF_EVEN = BigDecimal.ROUND_HALF_EVEN;
+public static final int ROUND_UNNECESSARY = BigDecimal.ROUND_UNNECESSARY;
+
+
+public Money multiply(double multiplicand, int roundingMode) {
+    BigDecimal amount = this.getAmount().multiply(new BigDecimal(multiplicand));
+    amount = amount.divide(BigDecimal.ONE,roundingMode);
+    return new Money(amount.doubleValue(),this.getCurrency());
+}
+
+public Money divide(double divisor, int roundingMode) {
+    BigDecimal amount = this.getAmount().divide(new BigDecimal(divisor),
+            roundingMode);
+    Money result = new Money(amount.doubleValue(), this.getCurrency());
+    return result;
+}
+</code></pre>
+
+<h1>4.转成人民币</h1>
+
+<p>尽管各领域的国际化提了十几年，但是在国内想直接用美元消费还是有一定困难。所以你决定将这笔钱换成人民币。</p>
+
+<p>对于账户来说，就是在美元账户和人民币账户分别做一笔转出和转入。 转入和转出的amount值是不同的，因为涉及到币种转换的问题。 显然，账户对象不应该知道如何进行汇率转换，责任又落在了Money类上。</p>
+
+<p>最直观的做法是在Money类上增加一个convertTo(Currency currency)的方法。 但汇率实在是一个复杂的问题：</p>
+
+<ul>
+<li>汇率是经常变化的；</li>
+<li>汇率转换时的舍入处理会有相关的约定；</li>
+</ul>
+
+
+<p>这些复杂的问题处理如果直接放在Money类上会显得十分笨重，单独设计一个MoneyConverter类会比较好：</p>
+
+<pre><code>import java.util.Currency;
+
+public interface MoneyConverter {
+    Money convertTo(Money money,Currency currency) throws Exception;
+}
+</code></pre>
+
+<p>我们实现一个最简单的转化器，使用固定的汇率值：</p>
+
+<pre><code>import java.math.BigDecimal;
+import java.util.Currency;
+import java.util.Locale;
+
+public class SimpleMoneyConverter implements MoneyConverter {
+
+    private static final BigDecimal DOLLAR_TO_CNY =  new BigDecimal(6.2365);
+    private static final Currency DOLLAR = Currency.getInstance(Locale.US);
+    private static final Currency CNY = Currency.getInstance(Locale.CHINA);
+    @Override
+    public Money convertTo(Money money,Currency target) throws Exception{
+        if(!known(money.getCurrency()) || !known(target)){
+            throw (new Exception("unknown currency"));
+        }
+
+        BigDecimal factorSource =BigDecimal.ONE, factorTarget = BigDecimal.ONE;
+        if(money.getCurrency().equals(DOLLAR))
+                factorSource = DOLLAR_TO_CNY;
+        if(target.equals(DOLLAR))
+                factorTarget = DOLLAR_TO_CNY;
+        BigDecimal value = money.getAmount().multiply(factorSource).divide(factorTarget);
+
+        return new Money(value.doubleValue(),target);
+    }
+
+    private boolean known(Currency currency){
+        return(currency.equals(DOLLAR) || currency.equals(CNY) );
+    }
+
+}
+</code></pre>
+
+<p>可以看到，即使是最简单的转换器，处理起来也比较麻烦。所以千万不要在Money类中做这件事情。</p>
+
+<p>通过转换器可以很容易得到转成人民币后的值。</p>
+
+<h1>5.分钱</h1>
+
+<p>有好处不能独享。这笔钱你决定和老婆三七开。当然，你三！</p>
+
+<p>这又是一个新的舍入问题：即使你指定各自的舍入计算方法，也不能保证各部分舍入后的值加总后仍等于原值。</p>
+
+<p>前面的“可定制乘除法”似乎不能很好的解决这个问题，所以我们需要一个新的方法： Money[] allocate(double[] ratioes)</p>
+
+<p>传入分配比例的数组，返回分配结果的数组。</p>
+
+<p>为了保证分配的公平，可以使用伪随机数来处理误差。</p>
+
+<p>该方法的实现如下：</p>
+
+<pre><code>public Money[] allocate(double[] ratioes) throws Exception{
+    if(ratioes.length==0){
+        throw (new Exception("there is no ratio"));
+    }
+
+    double ratioTotal = 0;
+    for(double ratio:ratioes){
+        ratioTotal += ratio;
+    }
+
+    if(0==ratioTotal){
+        throw(new Exception("total of ratioes is zero"));
+    }
+
+
+    double total = this.getAmount().doubleValue();
+    double delta = total;
+    Money[] results = new Money[ratioes.length];
+
+    for(int i=0;i&lt;ratioes.length;i++){
+        double amount = total*ratioes[i]/ratioTotal;
+        results[i] = new Money(amount,this.getCurrency());
+        delta -= results[i].getAmount().doubleValue();
+    }
+
+    int i = (int)(Math.random() * ratioes.length); 
+    results[i] = results[i].minus(new Money(delta,this.getCurrency()));
+    return results;
+}
+</code></pre>
+
+<h1>6.记账</h1>
+
+<p>将一切重要的数据保存到数据库是很通常的做法。但是将Money保存到数据库的时候，你要小心了！</p>
+
+<p>Money不能作为单独的实体。如果把Money当做实体来处理，就会产生一些问题：</p>
+
+<p>会有很多实体关联到Money，比如本文中的Account，Entry等。
+需要非常小心处理对Money对象的引用，避免多个实体引用到同一个Money对象。在第一点的前提下，这会变得很困难。
+所以应该把Money嵌入到需要的实体中，而不是把Money作为单独的实体。这样，Money仅仅是实体对象（比如Entry）的一个属性，只不过其具有多个内置的属性值。</p>
+
+<p>在JPA中，可以使用@Embeddable来标注Money类。</p>
+
+<p>更复杂的情况是，由于一个Account中的所有Entry都应该具有相同的Currency，将Currency保存到Account中会更简洁，Entry中只记录ammount。</p>
+
+<p>可以为Money的currency属性增加@Transient标注，在Entry类的getMoney中进行组装。</p>
+
+<h1>7.来点高级的</h1>
+
+<p>在DDD（领域驱动设计）中，Money是典型的值对象（Value Object）。值对象与实体的根本区别是：值对象不需要进行标识（ID）。</p>
+
+<p>这会带来一些处理上的不同：</p>
+
+<ul>
+<li>实体对象根据ID判断是否相等，值对象只根据内部属性值判断是否相等</li>
+<li>值对象通常小而且简单，创建的代价较小</li>
+<li>值对象只传递值，不传递对象引用，不用判断值对象是否指向同一个物理对象</li>
+<li>通常将值对象设计为通过构造函数进行属性设置，一旦创建就无法改变其属性值</li>
+<li>由于值对象根据内部属性值判等，我们要为Money类覆盖equals方法： public boolean equals(Object other)</li>
+</ul>
+
+
+<h1>8.其他未尽事宜</h1>
+
+<p>我们还可以为Money类增加互相比较的方法（略）</p>
+
+<p>可以在构造函数中进行格式校验（略）</p>
+
+<p>可以增加一些帮助显式的方法 使用currency的getSymbol(Locale locale)方法、和NumberFormat的format方法，比如：</p>
+
+<pre><code>NumberFormat nf=NumberFormat.getCurrencyInstance(Locale.CHINA);
+
+String s=nf.format(73084.803984);// result：￥73,084.80
+</code></pre>
+
+<h1>9.小结</h1>
+
+<p>本文探讨如何在应用中处理货币类型，包括币种转换、各种计算、如何持久化等内容。</p>
+
+<p>货币类型是典型的值对象，本文也介绍了一点值对象的特点。更多的内容可以参考DDD。</p>
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2013/01/26/technical_analysis.html" rel="bookmark">&laquo;&nbsp;下一篇：技术分析的理论体系</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2012/12/30/JPA.html" rel="bookmark">上一篇：JPA概要&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2013/01/01/money.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "你真的会数钱吗？"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,分析模式"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["领域模型"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>

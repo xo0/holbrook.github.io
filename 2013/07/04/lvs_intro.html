@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="# LVS简介[LVS(Linux Virtual Server, Linux虚拟服务器)](http://www.linuxvirtualserver.org/), 实现了负载均衡集群的前端调度器（Director）。LVS工作在4..." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>lvs概述 &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">lvs概述</h1>
+  <p>摘要：<br/>LVS简介、功能特性、与F5、NginX的比较，以及LVS适合应用的场景</p>
+
+  <time class="published" datetime="2013-07-04">2013-07-04
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#基础设施-ref">基础设施</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#负载均衡-ref">负载均衡</a>
+    <sup>4</sup>
+    &nbsp;
+  
+    <a href="/pages/tags.html#cluster-ref">cluster</a>
+    <sup>7</sup>
+    &nbsp;
+  
+    <a href="/pages/tags.html#lvs-ref">lvs</a>
+    <sup>3</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <h1>LVS简介</h1>
+
+<p><a href="http://www.linuxvirtualserver.org/">LVS(Linux Virtual Server, Linux虚拟服务器)</a>, 实现了负载均衡集群的前端调度器（Director）。</p>
+
+<p>LVS工作在4层，支持大多数的TCP和UDP协议。支持TCP协议的应用有：HTTP，HTTPS ，FTP，SMTP，POP3，IMAP4，PROXY，LDAP，SSMTP等。支持UDP协议的应用有：DNS，NTP，ICP，视频、音频流播放协议等。可以用于Web服务、Cache服务、DNS服务、FTP服务、MAIL服务、视频/音频点播服务等。</p>
+
+<p>LVS是<a href="http://zh.linuxvirtualserver.org">章文嵩博士</a>在1998年发起的开源项目，遵循GPL许可。现在LVS已经集成到Linux内核中(>2.4)，并且支持FreeBSD系统。</p>
+
+<p>LVS具有极高的性能，可以支撑上百万的并发连接。</p>
+
+<h1>LVS的功能特性</h1>
+
+<p>LVS实现了基于IP技术的负载均衡，提供3种负载均衡机制：</p>
+
+<ul>
+<li>VS/NAT（基于网络地址转换技术）</li>
+<li>VS/TUN（基于IP隧道技术）</li>
+<li>VS/DR（基于直接路由技术）</li>
+</ul>
+
+
+<p>三种机制的详细说明参考<a href="/2013/06/02/lvs_lb_strategy.html">这里</a>。</p>
+
+<p>在三种机制的基础上，LVS还提供了多种负载调度（Scheduling）策略。包括：</p>
+
+<ul>
+<li>rr（Round Robin）, 平均分配负载</li>
+<li>wrr（Weighted Round Robin），在rr的基础上增加权重设置</li>
+<li>lc（Least-Connections），分配给连接数最少的服务器</li>
+<li>wlc（Weighted Least-Connections），在lc的基础上增加权重设置</li>
+<li>lblc（Locality-Based Least Connections），在lc的基础上将相同目标IP地址的请求调度到同一台服务器。通常用于缓冲（Cache）集群，可以提高各缓存服务器的访问局部性和Cache命中率</li>
+<li>lblcr（Locality-Based Least Connections with Replication），与lblc类似，只不过同一个目标IP地址会映射到一组缓存服务器</li>
+<li>dh（Destination Hashing），根据目标地址的Hash运算结果进行分配，通常用于链路负载均衡</li>
+<li>sh（Source Hashing），根据请求客户端地址的Hash运算结果进行分配，可以实现某种程度的会话保持（Session Persistence)</li>
+<li>sed（Shortest Expected Delay），在wlc的基础上，进一步计算出期望延迟，向<code>(1+已有连接数)/权重</code>最小者分配请求</li>
+<li>nq（Never Queue），无队列调度。直接分配给当前无连接的服务器</li>
+</ul>
+
+
+<h1>LVS的监控支持</h1>
+
+<p>由于LVS主要进行网络包的转发，所以几乎不消耗CPU资源，从而无法用<code>top</code>、<code>vmstat</code>等命令查看资源使用情况。但是使用LVS提供的<code>ipvsadm</code>命令可以查看LVS的连接情况，也可以通过LVS建立的设备文件<code>/proc/net/ip_vs_stats</code>进行查看。</p>
+
+<p>此外，第三方的模块<a href="http://kb.linuxvirtualserver.org/wiki/Net-SNMP-LVS-Module">net-snmp-lvs-module</a>可以通过MIB/SNMP监控LVS；<a href="http://tepedino.org/lvs-rrd/">lvs_rrd</a> 可以用Web的方式查看LVS的监控图表。</p>
+
+<p><img src="/images/2013/lvs/lvs-monitoring.gif" alt="lvs-monitoring" /></p>
+
+<p>更多的内容可以参考<a href="http://www.austintek.com/LVS/LVS-HOWTO/HOWTO/LVS-HOWTO.monitoring_lvs.html">LVS-HOWTO</a>。</p>
+
+<h1>LVS与F5的对比</h1>
+
+<p>LVS最直接的竞争对手应该是<a href="http://www.f5.com/">F5 Networks公司</a>的BIG-IP系列产品。BIG-IP是著名的硬件负载均衡交换机，支持4层和7层的负载均衡。不同型号的BIG-IP产品的负载能力有所不同，主流型号可以支持400万--800万并发连接。作为商业产品，BIG-IP提供了方便的配置、管理工具，但使用起来仍然比较复杂。BIG-IP设备的价格在十几万至几十万人民币。</p>
+
+<p>与BIG-IP相比，LVS只能支持100万--400万并发连接，并且需要自己解决配置、图形化监控等功能（可以通过第三方的软件）。
+好处也很明显：</p>
+
+<ol>
+<li>完全免费</li>
+<li>可定制性</li>
+</ol>
+
+
+<h1>LVS与NginX的对比</h1>
+
+<p>常见的软件负载均衡产品有LVS,NginX,HAProxy等。其中NginX是应用比较广泛的七层负载均衡软件。由于NginX工作在7层，可以按照http协议中的数据（如URL、cookie等）进行负载调度，这是LVS不具备的能力。NginX配置简单，对网络条件的要求也很少。NginX可以支持3--5万的并发连接（7层）。</p>
+
+<p>与NginX相比，LVS并发处理能力要高2个数量级。但这种能力的提高是以相对复杂的网络条件和配置步骤为代价的。同时，LVS无法根据http协议的内容进行负载调度。</p>
+
+<p>LVS不能处理7层的协议内容，但是使用的范围更广泛，可以对绝大多数的TCP和UDP协议的请求进行调度。LVS也可以作为NginX的前端。</p>
+
+<h1>LVS的应用场景</h1>
+
+<p>由于LVS工作在4层，所有工作在TCP/IP之上的应用或服务都可以通过LVS建立负载均衡集群以提高并发能力。按照集群的用途，可以列出LVS的典型应用场景：</p>
+
+<ul>
+<li><p>web缓存及反向代理</p>
+
+<p>web缓存及反向代理位于web服务器之前，可以缓存静态内容，只把动态内容的请求反向代理到后端的web服务器。常见的web缓存服务器如Squid，NginX都可以使用LVS构建集群系统。</p></li>
+<li><p>web服务器/应用服务器</p>
+
+<p>LVS可以作为web服务器/应用服务器（如Nginx,Apache,Tomcat等）的前端调度器，支持会话保持功能。LVS + NginX的组合可以代替F5 BIG-IP的功能，并能达到低端BIG-IP的性能。</p></li>
+<li><p>数据库服务器</p>
+
+<p>典型的mysql主-从集群中，LVS可以作为多个从服务器的负载调度器。</p></li>
+<li><p>重要IP的管理</p>
+
+<p>对于重要的IP地址（如ESB、数据库、中间件等），可以交给LVS进行统一管理，避免更换IP带来的故障和问题。</p></li>
+</ul>
+
+
+<h1>参考资料</h1>
+
+<ul>
+<li><a href="http://www.linuxvirtualserver.org/">LVS官方网站</a></li>
+<li><a href="http://zh.linuxvirtualserver.org/">LVS中文社区</a></li>
+<li><a href="http://zh.linuxvirtualserver.org/node/7">LVS手册：可伸缩网络服务的设计与实现</a></li>
+<li>man ipvsadm</li>
+<li>《Red_Hat_Enterprise_Linux-5-Virtual_Server_Administration-zh-CN》</li>
+</ul>
+
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2013/07/07/salt_pillar.html" rel="bookmark">&laquo;&nbsp;下一篇：Pillar：定义Salt配置管理的数据</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2013/07/03/zeromq_intro.html" rel="bookmark">上一篇：ZeroMQ简介&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2013/07/04/lvs_intro.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "lvs概述"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,负载均衡,cluster,lvs"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["基础设施"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>

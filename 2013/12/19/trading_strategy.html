@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="# 交易策略的要点[前面](/2013/12/16/trade_system.html)提到，交易策略是系统化交易的核心。但是要注意的是，风险管理比交易策略要重要10倍。交易策略的一些要点整理如下：- 交易策略是一套完整的交易规则体系..." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>交易策略与规则引擎 &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">交易策略与规则引擎</h1>
+  <p>摘要：<br/></p>
+
+  <time class="published" datetime="2013-12-19">2013-12-19
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#量化金融-ref">量化金融</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#交易系统-ref">交易系统</a>
+    <sup>4</sup>
+    &nbsp;
+  
+    <a href="/pages/tags.html#规则引擎-ref">规则引擎</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <h1>交易策略的要点</h1>
+
+<p><a href="/2013/12/16/trade_system.html">前面</a>提到，交易策略是系统化交易的核心。但是要注意的是，风险管理比交易策略要重要10倍。</p>
+
+<p>交易策略的一些要点整理如下：</p>
+
+<ul>
+<li>交易策略是一套完整的交易规则体系</li>
+<li>这些规则对投资决策的各个环节做出明确规定</li>
+<li>这些规则必须客观、唯一</li>
+<li>所谓完整，至少要包括入场和出场两个规则——完成一个完整的交易周期，入场和出场信号必须确定会发生</li>
+<li>出场策略比入场策略要重要10倍</li>
+<li>越简单的策略越可靠</li>
+<li>要有错误处理机制</li>
+</ul>
+
+
+<h1>交易策略的种类</h1>
+
+<p>所谓<a href="/2012/03/20/rule_engine_1.html">规则，规定了一组确定的条件和此条件所产生的结果</a>。根据条件的类别不同，可以把交易策略分成以下几种：</p>
+
+<h2>基于技术指标</h2>
+
+<ol>
+<li><p>例1</p>
+
+<ul>
+<li>规则定义
+
+<ul>
+<li>入场规则：短期均线上穿长期均线</li>
+<li>出场规则：短期均线下穿长期均线</li>
+</ul>
+</li>
+<li><p>评价</p>
+
+<p>简单但完整的交易策略</p></li>
+</ul>
+</li>
+<li><p>例2</p>
+
+<ul>
+<li>规则定义
+
+<ul>
+<li>入场规则：RSI&lt;10</li>
+<li>出场规则：RSI>90</li>
+</ul>
+</li>
+<li><p>评价</p>
+
+<p>有严重的设计缺陷。因为RSI可能长期不能趋近于某一极值，从而得不到对应的操作信号，长期无法完成完整的买卖周期。</p></li>
+</ul>
+</li>
+</ol>
+
+
+<h2>基于统计分析</h2>
+
+<p>此类策略要研究市场数据的统计分布特征，需要较强的数学功底</p>
+
+<ol>
+<li><p>例1</p>
+
+<ul>
+<li>规则定义
+
+<ul>
+<li>入场规则：跳空高开若干</li>
+<li>出场规则：利润达到x值或收盘价，或者损失达到y止损</li>
+</ul>
+</li>
+<li><p>评价</p>
+
+<p>其思想是捕捉跳空开盘对后市的影响</p></li>
+</ul>
+</li>
+<li><p>例2</p>
+
+<ul>
+<li>规则定义
+
+<ul>
+<li>入场规则：突破跳空</li>
+<li>出场规则：衰竭跳空</li>
+</ul>
+</li>
+<li>评价
+两个问题：1）跳空不一定会出现，从而导致交易周期不完整；2）过于主观随意</li>
+</ul>
+</li>
+<li><p>例3</p>
+
+<ul>
+<li>规则定义
+
+<ul>
+<li>入场规则：迪马克波动系数终点</li>
+<li>出场规则：反向迪马克波动系数终点</li>
+</ul>
+</li>
+<li><p>评价</p>
+
+<p>交易周期不完整</p></li>
+</ul>
+</li>
+</ol>
+
+
+<h2>基于图形分析</h2>
+
+<p>这类是最传统、最常见的交易策略</p>
+
+<ol>
+<li><p>例1</p>
+
+<ul>
+<li>规则定义
+
+<ul>
+<li>入场规则：维克多突破</li>
+<li>出场规则：反向维克多突破</li>
+</ul>
+</li>
+<li><p>评价</p>
+
+<p>简单但完整</p></li>
+</ul>
+</li>
+<li><p>例2</p>
+
+<ul>
+<li>规则定义
+
+<ul>
+<li>入场规则：罗斯钩式突破</li>
+<li>出场规则：反向罗斯钩式突破</li>
+</ul>
+</li>
+<li><p>评价</p>
+
+<p>完整</p></li>
+</ul>
+</li>
+<li><p>例3</p>
+
+<ul>
+<li>规则定义
+
+<ul>
+<li>入场规则：卡尔汉数突破</li>
+<li>出场规则：反向卡尔汉数突破</li>
+</ul>
+</li>
+<li>评价</li>
+</ul>
+</li>
+<li><p>例4</p>
+
+<ul>
+<li>规则定义
+
+<ul>
+<li>入场规则：W型反转</li>
+<li>出场规则：M型反转</li>
+</ul>
+</li>
+<li><p>评价</p>
+
+<p>不一定会发生，交易周期不完整</p></li>
+</ul>
+</li>
+<li><p>例5</p>
+
+<ul>
+<li>规则定义
+
+<ul>
+<li>入场规则：晨星式</li>
+<li>出场规则：昏星式</li>
+</ul>
+</li>
+<li><p>评价</p>
+
+<p>不一定会发生，交易周期不完整</p></li>
+</ul>
+</li>
+</ol>
+
+
+<h2>基于数学理论</h2>
+
+<p>   需要较强的金融投资理论背景</p>
+
+<ol>
+<li><p>例1：飞镖系统</p>
+
+<ul>
+<li><p>规则定义</p>
+
+<ul>
+<li>入场规则：飞镖击中的股票</li>
+<li>出场规则：持有至规定期限</li>
+</ul>
+</li>
+<li><p>评价</p>
+
+<p>其收益战胜了华尔街股票分析家，验证了投资学术界的随机行走理论</p></li>
+</ul>
+</li>
+<li><p>例2：以满月为买入信号，以新月为卖出信号。</p>
+
+<p>这是一个以金融占星术理论为基础的交易系统。该方法以月球引力场的变化来解释地球生态系统的周期性变比。</p></li>
+<li><p>例3：硬币法——以随机选择过程为基础</p>
+
+<p>（略）</p></li>
+</ol>
+
+
+<h2>基于基本分析</h2>
+
+<ol>
+<li>P/E小于某一值时买入，P/E大于某一值时卖出</li>
+<li>收益增长率大于某一值时买入，收益增长率小于某一值时卖出</li>
+<li>每年某月买入白糖合约，若干月后平仓（季节波动）</li>
+<li>新建住房开工率持续上升若干月买入铜合约，若干月后平仓（因果关系）</li>
+</ol>
+
+
+<h2>基于心理分析</h2>
+
+<p>例： 传言开始是进场，传言证实后出场</p>
+
+<h2>其他</h2>
+
+<p>基于人工智能、神经网络、混沌理论（Chaos)等</p>
+
+<h1>用规则引擎驱动交易策略</h1>
+
+<p>尽管要求交易策略要尽可能简单，但是交易信号产生的条件可能五花八门。为了使交易系统具备更好的适应性，还是应该使用<a href="/2012/03/20/rule_engine_1.html">规则引擎</a>来驱动。这就需要将交易策略规则化。</p>
+
+<p>一般来说，交易策略的规则化需要经过确定规则（定性）、确定参数（定量）以及用规则语言描述（实现）三个步骤。</p>
+
+<ul>
+<li><p>策略定性</p>
+
+<p>将交易策略表示为条件与交易信号。对于最简单的交易策略，可能只有入场信号和出场信号。但也会有一些稍复杂的情况需要处理：</p>
+
+<ul>
+<li>对于期货交易，入场信号可以区分为“做多”和“做空”，出场信号均为“平仓”</li>
+<li>有些交易策略的入场、出场信号可能会划分出不同的风险级别——风险越高的信号，产生的时间越早，可能的获利越大，但判断失误的风险也更大</li>
+<li>完善的交易系统，对于(正确入场,正确出场)、(正确入场,错误出场)、(错误入场,正确出场)、(错误入场,错误出场)  等情况都要考虑到，针对这些情况都要及时给出交易信号</li>
+</ul>
+</li>
+<li><p>确定参数</p>
+
+<p>将策略中可变的部分定义为参数。这些参数可以在引擎中进行设置，以调整策略的具体行为。</p>
+
+<p>参数可能要经过实际检验，才能得出最优的参数。</p></li>
+<li><p>定义事件</p>
+
+<p>交易信号都是由某些数据触发，<a href="#menuIndex1">如前</a>所述，这些数据可能是行情、指标、基本面等。</p>
+
+<p>不管是哪种数据，从规则引擎的角度，都需要定义为<a href="/2013/12/21/event_in_CEP.html">事件(Event)</a>。</p></li>
+<li><p>定义操作</p>
+
+<p>规则匹配的结果就是产生某种<a href="/2012/12/06/rule_language.html#menuIndex4">操作</a>。
+考虑到交易策略要与后续的<a href="">资金管理</a>等策略结合，这里将操作也定义为事件，作为资金管理策略的输入。</p></li>
+<li><p>描述规则</p>
+
+<p>使用前面定义好的参数、事件和操作，用<a href="http://thinkinside.tk/2012/12/06/rule_language.html">规则描述语言</a>将定性的策略描述为定量的规则。</p></li>
+</ul>
+
+
+<h1>实例</h1>
+
+<p>以“简单算术平均线”策略为例，其实现过程如下：</p>
+
+<ul>
+<li><p>规则定性</p>
+
+<ol>
+<li>规则1：当短期平均线向上穿越长期平均线时，买入</li>
+<li>规则2：当短期平均线向下穿越长期平均线时，卖出</li>
+</ol>
+</li>
+<li><p>确定参数</p>
+
+<p>这个策略中，可以作为参数的变量包括：</p>
+
+<ol>
+<li>选用哪种价格，比如开盘价、收盘价、最高价、最低价等</li>
+<li>短期和长期均线的长度</li>
+</ol>
+
+
+<p>为简单起见，这里只把均线的长度作为参数。</p>
+
+<p>可以在DRL的global部分用全局变量定义规则的参数。这些参数将用于事件属性或规则条件中，用于调整策略的具体行为。如下：</p>
+
+<p><code>
+global java.lang.Integer SHORT_LENGTH;
+global java.lang.Integer LONG_LENGTH;
+</code></p>
+
+<p>global参数可以使用在规则引擎会话中，使用<a href="/2013/12/20/drools_API.html#menuIndex1">KnowledgeSession</a>的<code>setGlobal()</code>方法进行设置。</p></li>
+<li><p>事件定义</p>
+
+<p>定义一个“均线事件”(MAEvent):</p>
+
+<p>```
+public class MAEvent {</p>
+
+<p>  public Date datetime;
+  public long duration;</p>
+
+<p>  public int length;
+  public double average;
+  public double price;</p>
+
+<p>  public String toString(){
+    return ""+this.getDatetime().toLocaleString()+":MA"+this.length+"="+average+"\t("+price+")";
+  }</p>
+
+<p>}
+```</p>
+
+<p>并在规则文件中进行声明：</p>
+
+<p><code>
+import my.package.MAEvent
+……
+declare MAEvent
+  @role(event)
+  @timestamp( datetime )
+  @duration( duration )
+end
+</code></p></li>
+<li><p>定义操作</p>
+
+<p>这里使用一个“操作信号事件”(SingalEvent)作为操作，符合条件时将该事件<a href="/2012/12/06/rule_language.html#menuIndex4">insert</a>到规则引擎：</p>
+
+<p>```
+public class SignalEvent extends AbstractEvent{</p>
+
+<p>  public enum SignalType{LONG,SHORT}</p>
+
+<p>  public Date datetime;
+  public long duration;</p>
+
+<p>  public SignalType type;
+  public String strategyName;
+}<br/>
+```</p>
+
+<p>在规则文件中声明：</p>
+
+<p><code>
+declare SignalEvent
+  @role(event)
+  @timestamp(datetime)
+  @duration(duration)
+end
+</code></p></li>
+<li><p>描述规则</p>
+
+<p>```
+rule "LONG SIGNAL"
+    when
+        $MA5_1:MAEvent(length==SHORT_LENGTH);
+        $MA5_0:MAEvent(length==SHORT_LENGTH,this meets[1d] $MA5_1);
+        $MA20_1:MAEvent(length==LONG_LENGTH,this coincides $MA5_1,average>=$MA5_1.average);
+        $MA20_0:MAEvent(length==LONG_LENGTH,this meets[1d] $MA20_1,this coincides $MA5_0,
+          average&lt;=$MA5_0.average
+        );</p>
+
+<pre><code>then
+
+  SignalEvent e = new SignalEvent();
+  e.datetime = $MA5_1.datetime;
+  e.strategyName = "简单移动平均线策略";
+  e.type = SignalEvent.SignalType.LONG;
+  e.price = $MA5_1.price;
+    insert(e);
+
+System.out.println(e);
+</code></pre>
+
+<p>end</p>
+
+<p>rule "SHORT SIGNAL"
+    when
+        $MA5_1:MAEvent(length==SHORT_LENGTH);
+        $MA5_0:MAEvent(length==SHORT_LENGTH,this meets[1d] $MA5_1);
+        $MA20_1:MAEvent(length==LONG_LENGTH,this coincides $MA5_1,average&lt;=$MA5_1.average);
+        $MA20_0:MAEvent(length==LONG_LENGTH,this meets[1d] $MA20_1, this coincides $MA5_0,
+          average>=$MA5_0.average
+        );</p>
+
+<pre><code>then
+    SignalEvent e = new SignalEvent();
+  e.datetime = $MA5_1.datetime;
+  e.strategyName = "简单移动平均线策略";
+  e.type = SignalEvent.SignalType.SHORT;
+  e.price = $MA5_1.price;
+    insert(e);
+
+    System.out.println(e);
+</code></pre>
+
+<p>end
+```</p></li>
+</ul>
+
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2013/12/20/drools_API.html" rel="bookmark">&laquo;&nbsp;下一篇：Drools规则引擎API概述</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2013/12/19/Berkeley_DB.html" rel="bookmark">上一篇：使用Oracle Berkeley DB持久化股票行情数据&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2013/12/19/trading_strategy.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "交易策略与规则引擎"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,交易系统,规则引擎"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["量化金融"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="zeroMQ不是TCP，不是socket，也不是消息队列，而是这些的综合体。![ZeroMQ](/images/2013/zeromq/logo.gif)# ZeroMQ是什么[ZeroMQ](http://www.zeromq.or..." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>ZeroMQ简介 &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">ZeroMQ简介</h1>
+  <p>摘要：<br/>zeroMQ不是TCP，不是socket，也不是消息队列，而是这些的综合体。</p>
+
+  <time class="published" datetime="2013-07-03">2013-07-03
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#软件开发-ref">软件开发</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#ZeroMQ-ref">ZeroMQ</a>
+    <sup>6</sup>
+    &nbsp;
+  
+    <a href="/pages/tags.html#消息中间件-ref">消息中间件</a>
+    <sup>5</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <p>zeroMQ不是TCP，不是socket，也不是消息队列，而是这些的综合体。</p>
+
+<p><img src="/images/2013/zeromq/logo.gif" alt="ZeroMQ" /></p>
+
+<h1>ZeroMQ是什么</h1>
+
+<p><a href="http://www.zeromq.org/">ZeroMQ</a>以嵌入式网络编程库的形式实现了一个并行开发框架（concurrency framework），
+能够提供进程内(inproc)、进程间(IPC)、网络(TCP)和广播方式的消息信道，
+并支持扇出(fan-out)、发布-订阅(pub-sub)、任务分发（task distribution）、请求/响应（request-reply）等通信模式。
+ZeroMQ的性能足以用来构建集群产品，
+其异步I/O模型能够为多核消息系统提供足够的扩展性。
+ZeroMQ支持30多种语言的API，可以用于绝大多数操作系统。
+在提供这些优秀特性的同时，ZeroMQ是开源的，遵循LGPLv3许可。</p>
+
+<p>ZeroMQ的明确目标是“成为标准网络协议栈的一部分，之后进入Linux内核”。</p>
+
+<h1>Zero 之禅（The Zen of Zero）</h1>
+
+<p>ZeroMQ是一个很有个性的项目，其名称也暗合禅意：</p>
+
+<ul>
+<li>Ø 是一种权衡：让一些丹麦人恼火，但是“Ø”本身也降低了google搜索的命中率以及twitter上的关注度</li>
+<li>Ø 暗合“零代理(broker)”、“零延迟”</li>
+<li>Ø 的目标是“零管理、零消耗、零浪费”</li>
+<li>Ø 符合简约主义：力量的源泉是降低复杂度，而不是增加新功能</li>
+</ul>
+
+
+<h1>ZeroMQ对socket API的封装</h1>
+
+<p>与libevent, ACE等项目不同，使用ZeroMQ时可以不关注网络细节。
+ZeroMQ的API提供了对于传统socket API的封装，对于套接字类型、连接处理、帧、甚至路由的底层细节都进行了抽象，
+使得一套API可以用于进程内通讯、IPC、TCP和广播等多种消息信道。</p>
+
+<p>ZeroMQ自己定位为“智能传输层”（The Intelligent Transport Layer），位于网络层和应用层之间。
+ZeroMQ使得构建大型并发应用时，可以将基本单元随意的“组装”，由ZeroMQ解决通信的弹性伸缩，</p>
+
+<p>ZeroMQ的这种设计大大简化了应用程序消息通信的实现，使得在多种场景下重用相同的交互模式成为可能。
+使用ZeroMQ可以让编写高性能网络应用程序极为简单和有趣。</p>
+
+<p>与socket相比，ZeroMQ API的特征如下：</p>
+
+<ul>
+<li>在后台线程中异步地处理IO。后台线程使用无需锁的数据结构与应用线程通信，所以ZeroMQ应用程序不需要锁、信号量，或者其他等待状态。</li>
+<li>组件可以动态地加入和退出，ZeroMQ会自动重新连接。这意味着可以以任何次序启动组件。可以创建“面向服务架构（service-oriented architectures)”，其中的服务可以在任何时候加入或者退出网络。</li>
+<li>在需要的时候自动对消息排队。这种处理是智能的，在排队前会尽量让消息靠近接收者。</li>
+<li>有处理队列溢出的方法（“高水位标记”）。队列满的时候，ZeroMQ会自动阻塞发送者，或者丢弃消息，取决于你正在使用的消息传递类型（模式）。</li>
+<li>ZeroMQ让应用程序可以使用传输端点相互交流：TCP、多播、进程内、进程间。使用不同的传输端点时不用修改代码。</li>
+<li>根据消息传递模式的不同，使用不同的策略来安全地处理慢速/阻塞的接收者。</li>
+<li>使用请求-应答、发布-订阅等多种模式来路由消息。这些模式定义了如何创建网络拓扑结构。</li>
+<li>需要降低互联的各部分间的复杂性的时候，可以在网络中放置模式扩展的“设备”（小的代理）。</li>
+<li>通过在线路中使用简单的帧，可以精确地传递整个消息。发送10K的消息，则会收到10K的消息。</li>
+<li>不对消息格式做任何假定。消息是从零到数G字节的块。需要在高层使用其他产品来表示数据，如Google的Protocol Buffers、XDR等等。</li>
+<li>智能地处理网络错误。有时候重试，有时候告诉你操作失败。</li>
+<li>降低能耗。使用较少的CPU时间来做更多事情意味着使用更少的能源，而且较老的机器可以使用更长的时间。</li>
+</ul>
+
+
+<h1>ZeroMQ的通信协议</h1>
+
+<p>ZeroMQ定义了<a href="http://rfc.zeromq.org/spec:13">ZMTP（ZeroMQ Message Transport Protocol, ZeroMQ消息传输协议）</a>，在TCP协议之上定义了向后兼容性的规则，可扩展的安全机制，命令和消息分帧，连接元数据，以及其他传输层功能。</p>
+
+<p>相对于其他的消息传输协议/通信协议，ZeroMQ有明显的优势：</p>
+
+<ul>
+<li>TCP：ZeroMQ基于消息，使用消息模式而不是字节流。</li>
+<li>XMPP：ZeroMQ更简单、快速、更底层。Jabber可建在ØMQ之上。</li>
+<li>AMQP：完成相同的工作，ZeroMQ要快100倍，而且不需要代理（规范更简洁——比AMQP的规范文档少278页）</li>
+<li>IPC：ZeroMQ可以跨主机通信</li>
+<li>CORBA：ZeroMQ不会将复杂到恐怖的消息格式强加于你。</li>
+<li>RPC：ZeroMQ完全是异步的，你可以随时增加/删除参与者。</li>
+<li><a href="http://www.faqs.org/rfcs/rfc1149.html">RFC 1149</a>：ZeroMQ比它快多了！</li>
+<li>29west LBM：ZeroMQ是自由软件！</li>
+<li>IBM Low-latency：ZeroMQ是自由软件！</li>
+<li>Tibco：ZeroMQ仍然是自由软件！</li>
+</ul>
+
+
+<h1>ZeroMQ不是消息队列</h1>
+
+<p>在摩尔定律的魔咒下，“分布式处理”逐渐成为主流，随之而来的是关于消息通讯、消息中间件的项目层出不穷。</p>
+
+<p>其中最有名的应该是ZeroMQ和RabbitMQ，Thrift。
+<a href="http://www.rabbitmq.com/">RabbitMQ</a>是符合<a href="http://www.amqp.org/">AMQP(Advanced Message Queuing Protocol, 高级消息队列协议)</a>的消息中间件，
+而<a href="http://thrift.apache.org/">Thrift</a>是出自于Facebook的跨语言服务访问的框架。</p>
+
+<p>2011年，<a href="http://zh.wikipedia.org/wiki/%E6%AD%90%E6%B4%B2%E6%A0%B8%E5%AD%90%E7%A0%94%E7%A9%B6%E7%B5%84%E7%B9%94">欧洲核子研究组织（CERN）</a>
+调查了统一用于操作CERN加速器的中间件解决方案的方式，欧洲核子研究组织的研究比较了
+<a href="http://zh.wikipedia.org/wiki/CORBA">CORBA</a>、
+<a href="http://zh.wikipedia.org/w/index.php?title=Internet_Communications_Engine&amp;action=edit&amp;redlink=1">Ice</a>，
+<a href="http://zh.wikipedia.org/w/index.php?title=Apache_Thrift&amp;action=edit&amp;redlink=1">Thrift</a>，
+ZeroMQ,
+YAMI4，
+<a href="http://zh.wikipedia.org/w/index.php?title=Run-Time_Infrastructure_(simulation">RTI</a>&amp;action=edit&amp;redlink=1)和
+<a href="http://zh.wikipedia.org/w/index.php?title=Apache_Qpid&amp;action=edit&amp;redlink=1">Qpid/AMQP</a>，
+ZeroMQ得到了最高的分数。</p>
+
+<p>但ZeroMQ最大的特点不在性能，而是机制。尽管名字中包含了"MQ"，但ZeroMQ并不是“消息队列/消息中间件”。ZeroMQ是一个传输层API库，
+更关注消息的传输。与消息队列相比，ZeroMQ有以下一些特点：</p>
+
+<p>1 点对点无中间节点</p>
+
+<p>  传统的消息队列都需要一个消息服务器来存储转发消息。而ZeroMQ则放弃了这个模式，把侧重点放在了点对点的消息传输上，并且（试图）做到极致。以为消息服务器最终还是转化为服务器对其他节点的点对点消息传输上。ZeroMQ能缓存消息，但是是在发送端缓存。ZeroMQ里有水位设置的相关接口来控制缓存量。当然，ZeroMQ也支持传统的消息队列（通过zmq_device来实现）。</p>
+
+<p>2 强调消息收发模式</p>
+
+<p>  在点对点的消息传输上ZeroMQ将通信的模式做了归纳，比如常见的订阅模式（一个消息发多个客户），分发模式（N个消息平均分给X个客户）等等。下面是目前支持的消息模式配对，任何一方都可以做为服务端。
+  - PUB and SUB
+  - REQ and REP
+  - REQ and XREP
+  - XREQ and REP
+  - XREQ and XREP
+  - XREQ and XREQ
+  - XREP and XREP
+  - PUSH and PULL
+  - PAIR and PAIR</p>
+
+<p>3 以统一接口支持多种底层通信方式</p>
+
+<p>  不管是线程间通信，进程间通信还是跨主机通信，ZeroMQ都使用同一套API进行调用，只需要更改通信协议名称（如，从"ipc:///xxx"改为"tcp://<em>.</em>.<em>.</em>:****"）即可。</p>
+
+<p>4 异步，强调性能</p>
+
+<p>  ZeroMQ设计之初就是为了高性能的消息发送而服务的，所以其设计追求简洁高效。它发送消息是异步模式，通过单独出一个IO线程来实现，所以消息发送调用之后不要立刻释放相关资源哦，会出错的（以为还没发送完），要把资源释放函数交给ZeroMQ让ZeroMQ发完消息自己释放。</p>
+
+<h1>ZeroMQ的应用案例</h1>
+
+<p>ZeroMQ如何拯救世界</p>
+
+<p>由于ZeroMQ的强大，我们可以用ZeroMQ搭建出非常强悍的应用。比如：</p>
+
+<ul>
+<li><a href="/2013/06/24/salt_intro.html">Salt</a>的底层就使用了ZeroMQ作为通信机制</li>
+<li><p><a href="http://mongrel2.org/home">Mongrel2</a>是使用ZeroMQ开发的一个Web服务器</p>
+
+<p>Mongrel2是应用ZeroMQ的一个有趣的案例：所有入站消息通过“Push”套接字路由到Mongrel2，套接字可以自动实现负载均衡，将消息分发到连接处理器。反过来，连接处理器处理入站消息（通过Pull套接字），然后将处理结果发布到一个“Pub”套接字，Mongrel2服务器本身已订阅了该套接字，并且通过主题（topic）过滤器监听该套接字的进程号。如下图：</p>
+
+<p><img src="/images/2013/zeromq/zmq-mongrel2.png" alt="zmq-mongrel2" /></p></li>
+</ul>
+
+
+<p>ZeroMQ带来了一种新的分布式应用架构的思考方式。善用ZeroMQ，可以为应用带来非常强大的特性。</p>
+
+<h1>参考资料</h1>
+
+<ul>
+<li><a href="http://zguide.zeromq.org/page:all">官方指南</a>，这篇巨长的文档不仅介绍了ZeroMQ的主要方面，网络编程，还融入了ZeroMQ作者对于编程的理念，很值得精读</li>
+<li><a href="http://www.infoq.com/news/2010/09/introduction-zero-mq">An Introduction to ØMQ (ZeroMQ)</a>,InfoQ上面对于ZeroMQ的一篇介绍性文章</li>
+<li><a href="http://www.zeromq.org/community">ZeroMQ社区</a>，</li>
+<li><a href="http://hi.baidu.com/ah__fu/item/bdff1d88d236f8c299255f65">ZeroMQ：云计算时代最好的通讯库</a></li>
+<li><a href="http://blog.codingnow.com/2011/02/zeromq_message_patterns.html">ZeroMQ 的模式</a></li>
+</ul>
+
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2013/07/04/lvs_intro.html" rel="bookmark">&laquo;&nbsp;下一篇：lvs概述</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2013/07/02/salt_state_config_structure.html" rel="bookmark">上一篇：Salt state 配置结构&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2013/07/03/zeromq_intro.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "ZeroMQ简介"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,ZeroMQ,消息中间件"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["软件开发"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>

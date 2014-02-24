@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="在Salt的[官方教程](http://salt.readthedocs.org/en/latest/topics/tutorials/starting_states.html)中，以apache和sshd的state配置作为例子。掌..." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>Salt state实例解析 &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">Salt state实例解析</h1>
+  <p>摘要：<br/>在Salt的官方教程中，以apache和sshd的state配置作为例子。掌握这两个例子，就能够触类旁通，处理日常工作中大部分的配置管理问题。 本文对这两个例子进行详细的分析和注释</p>
+
+  <time class="published" datetime="2013-06-30">2013-06-30
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#基础设施-ref">基础设施</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#salt-ref">salt</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <p>在Salt的<a href="http://salt.readthedocs.org/en/latest/topics/tutorials/starting_states.html">官方教程</a>中，以apache和sshd的state配置作为例子。掌握这两个例子，就能够触类旁通，处理日常工作中大部分的配置管理问题。
+本文对这两个例子进行详细的分析和注释。</p>
+
+<h1>目录结构</h1>
+
+<p><a href="http://salt.readthedocs.org/en/latest/topics/tutorials/starting_states.html">文档</a>
+中的例子包含了多个文件。这些文件之间互相引用和关联。目录结构及文件清单如下：</p>
+
+<ul>
+<li>apache/init.sls</li>
+<li><p>apache/httpd.conf</p></li>
+<li><p>ssh/init.sls</p></li>
+<li>ssh/server.sls</li>
+<li>ssh/banner</li>
+<li>ssh/ssh_config</li>
+<li>ssh/sshd_config</li>
+<li>ssh/custom-server.sls</li>
+</ul>
+
+
+<p>两个配置分别放在了<code>apache</code>和<code>ssh</code>文件夹。一个Salt状态可以使用单个的SLS文件，或者使用一个文件夹。后者更加灵活方便。</p>
+
+<h1>apache/init.sls</h1>
+
+<div class="highlight"><pre><code class="yaml"> <span class="l-Scalar-Plain">apache</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">pkg</span><span class="p-Indicator">:</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">installed</span>
+    <span class="l-Scalar-Plain">service</span><span class="p-Indicator">:</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">running</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">watch</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">pkg</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">apache</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">file</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/etc/httpd/conf/httpd.conf</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">apache</span>
+    <span class="l-Scalar-Plain">user.present</span><span class="p-Indicator">:</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">uid</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">87</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">gid</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">87</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">home</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/var/www/html</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">shell</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/bin/nologin</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">require</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">group</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">apache</span>
+    <span class="l-Scalar-Plain">group.present</span><span class="p-Indicator">:</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">gid</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">87</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">require</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">pkg</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">apache</span>
+ 
+ <span class="-Error"> </span><span class="l-Scalar-Plain">/etc/httpd/conf/httpd.conf</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">file.managed</span><span class="p-Indicator">:</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">salt://apache/httpd.conf</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">root</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">group</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">root</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">mode</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">644</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">template</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">jinja</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">context</span><span class="p-Indicator">:</span>
+        <span class="l-Scalar-Plain">custom_var</span><span class="p-Indicator">:</span> <span class="s">&quot;override&quot;</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span>
+        <span class="l-Scalar-Plain">custom_var</span><span class="p-Indicator">:</span> <span class="s">&quot;default</span><span class="nv"> </span><span class="s">value&quot;</span>
+        <span class="l-Scalar-Plain">other_var</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">123</span>
+ 
+</code></pre></div>
+
+
+<p>说明：</p>
+
+<ol>
+<li>sls文件使用<a href="http://yaml.org/spec/1.1/">YAML</a>格式定义，最外面的层级定义配置项。</li>
+<li>一个sls文件中可以有多个配置项，配置项的ID可以起任意的名字。本例中包含ID为<code>apache</code>和<code>/etc/httpd/conf/httpd.conf</code>两个配置项。</li>
+<li>配置项内是一系列的状态声明。所有的状态项来自Salt状态模块。即可以使用<a href="http://docs.saltstack.com/ref/states/all/index.html">Salt内置的状态模块</a>，也可以<a href="http://docs.saltstack.com/ref/states/writing.html">编写自定义的状态模块</a></li>
+<li><p>状态声明内部指定状态函数的调用。状态函数是每个Salt状态模块中定义的函数。</p></li>
+<li><p>apache配置项</p>
+
+<ul>
+<li><a href="http://docs.saltstack.com/ref/states/all/salt.states.pkg.html#module-salt.states.pkg">pkg模块</a>，使用操作系统的包管理器(如yum, apt-get)安装软件包
+
+<ul>
+<li><a href="http://docs.saltstack.com/ref/states/all/salt.states.pkg.html#salt.states.pkg.installed">salt.states.pkg.installed函数</a>, 验证软件包是否安装以及是否为指定的版本</li>
+</ul>
+</li>
+<li><a href="http://docs.saltstack.com/ref/states/all/salt.states.service.html#module-salt.states.service">service模块</a>管理服务/守护进程(daemon)的启动或停止
+
+<ul>
+<li><a href="http://docs.saltstack.com/ref/states/all/salt.states.service.html#salt.states.service.running">salt.states.service.running函数</a>检查服务是否已经启动</li>
+<li><a href="http://docs.saltstack.com/ref/states/all/salt.states.service.html#module-salt.states.service">service模块</a>定义了<a href="http://docs.saltstack.com/ref/states/all/salt.states.service.html#salt.states.service.mod_watch">salt.states.service.mod_watch</a>函数，可以使用<a href="http://docs.saltstack.com/ref/states/ordering.html#the-watch-requisite"><code>watch</code>要素</a>监控其他的模块是否满足。这里监控以下情况：
+
+<ol>
+<li><code>apache</code><a href="http://docs.saltstack.com/ref/states/all/salt.states.pkg.html#module-salt.states.pkg">软件包(pkg)</a>是否已安装</li>
+<li><code>/etc/httpd/conf/httpd.conf</code><a href="http://docs.saltstack.com/ref/states/all/salt.states.file.html#module-salt.states.file">文件(file)</a>是否存在</li>
+<li><code>apache</code><a href="http://docs.saltstack.com/ref/states/all/salt.states.user.html#module-salt.states.user">用户(user)</a>是否存在</li>
+</ol>
+</li>
+<li><code>user.present</code>是简写形式，直接调用<a href="http://docs.saltstack.com/ref/states/all/salt.states.user.html#module-salt.states.user"><code>user</code></a>模块的<a href="http://docs.saltstack.com/ref/states/all/salt.states.user.html#salt.states.user.present"><code>present</code></a>函数检查是否存在如下属性的<code>apache</code>用户：
+
+<ol>
+<li>uid=87</li>
+<li>gid=87</li>
+<li>home目录为<code>/var/www/html</code></li>
+<li>登录脚本为<code>/bin/nologin</code></li>
+<li>检查依赖项：<code>apache</code><a href="http://docs.saltstack.com/ref/states/all/salt.states.group.html#module-salt.states.group">用户组</a></li>
+</ol>
+</li>
+<li><code>group.present</code>是简写形式，直接调用<a href="http://docs.saltstack.com/ref/states/all/salt.states.group.html#module-salt.states.group"><code>group</code></a>模块的<a href="http://docs.saltstack.com/ref/states/all/salt.states.group.html#salt.states.group.present"><code>present</code></a>函数检查是否存在如下属性的<code>apache</code>用户组：
+
+<ol>
+<li>gid=87</li>
+<li>检查依赖项：<code>apache</code><a href="http://docs.saltstack.com/ref/states/all/salt.states.pkg.html#module-salt.states.pkg">软件包</a></li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>/etc/httpd/conf/httpd.conf</code>配置项
+
+<ul>
+<li><code>file.managed</code>是简写形式，直接调用<a href="http://docs.saltstack.com/ref/states/all/salt.states.file.html#module-salt.states.file">file模块</a>的<a href="http://docs.saltstack.com/ref/states/all/salt.states.file.html#salt.states.file.managed">managed方法</a>根据需要从master获取文件并可能会通过模板系统(templating system)进行渲染。文件要满足如下要求：
+
+<ol>
+<li>使用master上面的apache/httpd.conf文件</li>
+<li>user=root</li>
+<li>group=root</li>
+<li>mode=644</li>
+<li>使用<a href="http://jinja.pocoo.org/"><code>jinja</code></a>模板渲染</li>
+<li>上下文变量：
+
+<ul>
+<li>custom_var="override"</li>
+</ul>
+</li>
+<li>默认值:
+
+<ul>
+<li>custom_var="default value"</li>
+<li>other_var=123</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+
+
+<h1>ssh/init.sls</h1>
+
+<div class="highlight"><pre><code class="yaml"> <span class="l-Scalar-Plain">openssh-client</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">pkg.installed</span>
+ 
+  <span class="l-Scalar-Plain">/etc/ssh/ssh_config</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">file.managed</span><span class="p-Indicator">:</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">root</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">group</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">root</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">mode</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">644</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">salt://ssh/ssh_config</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">require</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">pkg</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">openssh-client</span>
+</code></pre></div>
+
+
+<p>说明：</p>
+
+<h1>ssh/server.sls</h1>
+
+<div class="highlight"><pre><code class="yaml"> <span class="l-Scalar-Plain">include</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">ssh</span>
+ 
+ <span class="l-Scalar-Plain">openssh-server</span><span class="p-Indicator">:</span>
+   <span class="l-Scalar-Plain">pkg.installed</span>
+
+ <span class="l-Scalar-Plain">sshd</span><span class="p-Indicator">:</span>
+   <span class="l-Scalar-Plain">service.running</span><span class="p-Indicator">:</span>
+     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">require</span><span class="p-Indicator">:</span>
+       <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">pkg</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">openssh-client</span>
+       <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">pkg</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">openssh-server</span>
+       <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">file</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/etc/ssh/banner</span>
+       <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">file</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/etc/ssh/sshd_config</span>
+
+ <span class="l-Scalar-Plain">/etc/ssh/sshd_config</span><span class="p-Indicator">:</span>
+   <span class="l-Scalar-Plain">file.managed</span><span class="p-Indicator">:</span>
+     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">root</span>
+     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">group</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">root</span>
+     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">mode</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">644</span>
+     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">salt://ssh/sshd_config</span>
+     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">require</span><span class="p-Indicator">:</span>
+       <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">pkg</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">openssh-server</span>
+
+ <span class="l-Scalar-Plain">/etc/ssh/banner</span><span class="p-Indicator">:</span>
+   <span class="l-Scalar-Plain">file</span><span class="p-Indicator">:</span>
+     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">managed</span>
+     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">root</span>
+     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">group</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">root</span>
+     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">mode</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">644</span>
+     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">salt://ssh/banner</span>
+     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">require</span><span class="p-Indicator">:</span>
+       <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">pkg</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">openssh-server</span>
+</code></pre></div>
+
+
+<p>说明：</p>
+
+<ul>
+<li><p>include语句将别的state添加到当前文件中，使得state可以跨文件引用。</p>
+
+<p>使用include相当于把被引用的内容文件添加到自身，可以require、watch或extend被引用的SLS中定义的内容。</p>
+
+<p>这里引用了<code>ssh</code>state。</p></li>
+<li><p><code>openssh-server</code>配置项</p></li>
+<li><code>sshd</code></li>
+<li><code>/etc/ssh/sshd_config</code>配置项</li>
+<li><code>/etc/ssh/banner</code>配置项</li>
+</ul>
+
+
+<h1>ssh/custom-server.sls</h1>
+
+<div class="highlight"><pre><code class="yaml"> <span class="l-Scalar-Plain">include</span><span class="p-Indicator">:</span>
+   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">ssh.server</span>
+
+ <span class="l-Scalar-Plain">extend</span><span class="p-Indicator">:</span>
+   <span class="l-Scalar-Plain">/etc/ssh/banner</span><span class="p-Indicator">:</span>
+     <span class="l-Scalar-Plain">file</span><span class="p-Indicator">:</span>
+       <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">salt://ssh/custom-banner</span>
+</code></pre></div>
+
+
+<p>说明：</p>
+
+<ul>
+<li>引用<code>ssh</code>state的server配置项</li>
+<li><code>extend</code>可以复用已有的state，在原来的基础上进行扩展，增加新的配置或修改已有的配置。
+
+<ol>
+<li>将<code>/etc/ssh/banner</code>配置项的文件修改为<code>salt://ssh/custom-banner</code></li>
+</ol>
+</li>
+</ul>
+
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2013/07/01/lvs_nginx_practice.html" rel="bookmark">&laquo;&nbsp;下一篇：lvs+nginx的负载均衡实验</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2013/06/25/salt_usage.html" rel="bookmark">上一篇：salt的主要功能及使用&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2013/06/30/salt_sls_sample.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "Salt state实例解析"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,salt"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["基础设施"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>

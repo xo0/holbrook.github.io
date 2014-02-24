@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="# 概述[前面](/2014/01/12/dependency_injection_in_e4.html)提到，e4中可以通过依赖注入进行服务的发布和获取。并且，”在Eclipse e4中，将全局的上下文分成了多个层次“：![](/i..." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>Eclipse e4中的平台服务 &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">Eclipse e4中的平台服务</h1>
+  <p>摘要：<br/></p>
+
+  <time class="published" datetime="2014-01-12">2014-01-12
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#软件开发-ref">软件开发</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#OSGi-ref">OSGi</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <h1>概述</h1>
+
+<p><a href="/2014/01/12/dependency_injection_in_e4.html">前面</a>提到，e4中可以通过依赖注入进行服务的发布和获取。并且，”在Eclipse e4中，将全局的上下文分成了多个层次“：</p>
+
+<p><img src="/images/e4/e4_context_hierarchy.png" alt="" /></p>
+
+<p>e4提供了很多平台级的服务，注册于OSGi context之上的其他各个context层。这些服务提供了开发应用的很多通用的功能。一些常用的服务包括：</p>
+
+<p>展现层MVC的视图、模型、控制器相关的服务，以及逻辑层服务。</p>
+
+<ul>
+<li><p>视图相关服务</p>
+
+<ul>
+<li><p>EPartService</p>
+
+<p>访问和修改Part，使用Part模板，切换perspectives，支持Edit方法</p></li>
+<li><p>ESelectionService</p>
+
+<p>处理GUI界面中的”选中“</p></li>
+<li><p>EMenuService</p>
+
+<p>Registers a popup menu (MPopupMenu) for an SWT control.</p></li>
+<li><p>org.eclipse.jface.window.IShellProvider</p>
+
+<p>在SWT环境中访问Shell</p></li>
+<li><p>IThemeEngine</p>
+
+<p>Allows to switch the styling of the application at runtime.</p></li>
+</ul>
+</li>
+<li><p>模型相关服务</p>
+
+<ul>
+<li><p>EModelService</p>
+
+<p>在运行时访问或更改e4的<a href="/2014/01/07/eclipse_e4_RCP_quickstart.html#menuIndex1">应用模型</a></p></li>
+</ul>
+</li>
+<li><p>控制器相关服务</p>
+
+<ul>
+<li><p>MDirtyable</p>
+
+<p>用于标记Part中的内容是否被修改过</p></li>
+<li><p>ECommandService</p>
+
+<p>访问、创建和更改应用模型中的command对象</p></li>
+<li><p>EHandlerService</p>
+
+<p>访问、更改或触发(trigger)应用模型中的handler对象</p></li>
+</ul>
+</li>
+<li><p>逻辑层相关服务</p>
+
+<ul>
+<li><p>IEventBroker</p>
+
+<p>提供基于发布、订阅机制的事件处理功能</p></li>
+<li><p>StatusReporter</p>
+
+<p>Allows you to report Status objects.</p></li>
+<li><p>EContextService</p>
+
+<p>Activate and deactivate key bindings defined as BindingContext in the application model. The content referred to in this service is the BindingContext and not the IEclipseContext.</p></li>
+<li><p>Logger</p>
+
+<p><code>org.eclipse.e4.core.services</code>插件中的<code>Logger</code>提供了日志功能</p></li>
+<li><p>Adapter</p>
+
+<p>An adapter can adapt an object to the specified type, allowing clients to request domain-specific behavior for an object. It integrates IAdaptable and IAdapterManager</p></li>
+</ul>
+</li>
+</ul>
+
+
+<h1>视图相关服务</h1>
+
+<h2>EPartService</h2>
+
+<p>在应用模型中，可以定义PartDescriptors。PartDescriptors可以作为创建Part的模板。</p>
+
+<p><img src="/images/e4/PartDescriptors.png" alt="" /></p>
+
+<p>通过EPartService可以访问这些模板，比如：</p>
+
+<p>```</p>
+
+<p>  @Inject private EPartService partService;</p>
+
+<p>  // Showing and hiding parts
+  detailsTodoPart = partService.findPart("com.example.todo.rcp.parts.tododetails");
+  partService.hidePart(detailsTodoPart);
+  ……
+  detailsTodoPart.setVisible(true);
+  partService.showPart(detailsTodoPart, PartState.VISIBLE);</p>
+
+<p>  //Switching perspectives
+  @Execute</p>
+
+<pre><code>public void execute(MApplication app, EPartService partService, 
+    EModelService modelService) {
+  MPerspective element = 
+      (MPerspective) modelService.find("secondperspective", app);
+  // now switch perspective
+  partService.switchPerspective(element);
+}
+</code></pre>
+
+<p>  // creating parts dynamically
+  @Execute</p>
+
+<pre><code>public void execute(EPartService partService) {
+
+  // create a new Part based on a PartDescriptor
+  // in the application model 
+  // assume the ID is used for the PartDescriptor
+  MPart part = partService
+      .createPart("com.example.e4.rcp.todo.partdescriptor.fileeditor");
+  part.setLabel("New Dynamic Part");
+
+  // If multiple parts of this type are now allowed 
+  // in the application model, 
+  // then the provided part will be shown 
+  // and returned
+  partService.showPart(part, PartState.ACTIVATE);
+}
+</code></pre>
+
+<p>  //switch perspective
+  @Execute</p>
+
+<pre><code>public void execute(MApplication app, EPartService partService, 
+    EModelService modelService) {
+  MPerspective element = 
+      (MPerspective) modelService.find("secondperspective", app);
+  partService.switchPerspective(element);
+}
+</code></pre>
+
+<p>```</p>
+
+<h2>ESelectionService</h2>
+
+<p>e4的应用模型中，MWindow对象可以保持选中的Part。e4在IEclipseContext中注册了<code>ESelectionService</code>，可以设置或获取选中的组件。</p>
+
+<p>使用<code>setSelection()</code>方法可以设置选中状态：</p>
+
+<p>```
+  // use field injection for the service
+  @Inject ESelectionService selectionService;</p>
+
+<p>  // viewer is a JFace Viewer
+  viewer.addSelectionChangedListener(new ISelectionChangedListener() {</p>
+
+<pre><code>@Override
+public void selectionChanged(SelectionChangedEvent event) {
+  IStructuredSelection selection = (IStructuredSelection) 
+      viewer.getSelection();
+  selectionService.setSelection(selection.getFirstElement());
+}
+</code></pre>
+
+<p>  });</p>
+
+<p>```</p>
+
+<p>使用<code>getSelection(partId)</code>方法可以获取选中的组件，更常用的做法是使用<code>IServiceConstants.ACTIVE_SELECTION</code>作为<code>@Named</code>注解的参数，自动注入选中的组件：</p>
+
+<p>```
+  @Inject
+  public void setTodo(@Optional</p>
+
+<pre><code>  @Named(IServiceConstants.ACTIVE_SELECTION) Todo todo) {
+if (todo != null) {
+  // do something with the value
+}
+</code></pre>
+
+<p>  }
+```</p>
+
+<h1>模型相关服务EModelService</h1>
+
+<p>使用<code>EModelService</code>可以在运行时访问或更改e4的<a href="/2014/01/07/eclipse_e4_RCP_quickstart.html#menuIndex1">应用模型</a>，比如增加或删除模型元素。EModelService中一些常用的方法包括：</p>
+
+<ul>
+<li><code>cloneElement()</code>和<code>cloneSnippet()</code>：克隆元素或模型片段</li>
+<li><code>findElements()</code>：通过ID、类型、或标签(tags)搜索元素</li>
+</ul>
+
+
+<p>使用举例：</p>
+
+<p>```
+  //search by type</p>
+
+<pre><code>private void findParts(MApplication application,
+    EModelService service) {
+  List&lt;MPart&gt; parts = service.findElements(application, null,
+      MPart.class, null);
+  System.out.println("Found parts(s) : " + parts.size());
+
+}
+</code></pre>
+
+<p>  //Dynamically create a new window
+  MWindow window = modelService.createModelElement(MWindow.class);
+  window.setWidth(200);
+  window.setHeight(300);</p>
+
+<p>  // add new Window to the application
+  application.getChildren().add(window);</p>
+
+<p>```</p>
+
+<h1>控制器相关服务</h1>
+
+<h2>MDirtyable和@Persist注解</h2>
+
+<p>   e4中不再区分ViewPart和EditPart，而是统一使用Part。通过MDirtyable可以标记Part中的内容是否被修改过；使用<code>@Persist</code>注解可以标记持久化Part内容的方法。比如：</p>
+
+<p>```
+  public class MyEditPart {</p>
+
+<pre><code>@Inject
+MDirtyable dirty;
+
+@PostConstruct
+public void createControls(Composite parent) {
+  Button button = new Button(parent, SWT.PUSH);
+  button.addSelectionListener(new SelectionAdapter() {
+    @Override
+    public void widgetSelected(SelectionEvent e) {
+      dirty.setDirty(true);
+    }
+  });
+}
+
+@Persist
+public void save(MDirtyable dirty, ITodoService todoService) {
+  // save changes via ITodoService for example
+  todoService.saveTodo(todo);
+  // save was successful
+  dirty.setDirty(false);
+} 
+</code></pre>
+
+<p>  }
+```</p>
+
+<p>在上面的例子中，看起来<code>@Persist</code>注解没有多大用处。其实，该注解主要用于EPartService的<code>saveAll()</code>方法：</p>
+
+<p>```
+  public class SaveHandler {</p>
+
+<pre><code>@Execute
+void execute(EPartService partService) {
+  partService.saveAll(false);
+}
+</code></pre>
+
+<p>  }
+```</p>
+
+<h2>ECommandService和EHandlerService</h2>
+
+<p>举例如下：</p>
+
+<p>```
+  Command command = commandService.getCommand("com.example.mycommand");</p>
+
+<p>  // check if the command is defined
+  System.out.println(command.isDefined());</p>
+
+<p>  // activate Handler, assume AboutHandler() class exists already
+  handlerService.activateHandler("com.example.mycommand",</p>
+
+<pre><code>  new AboutHandler());
+</code></pre>
+
+<p>  ParameterizedCommand cmd =</p>
+
+<pre><code>commandService.createCommand("com.example.mycommand", null);
+</code></pre>
+
+<p>  // check if the command can get executed
+  System.out.println(handlerService.canExecute(cmd));</p>
+
+<p>  // execute the command
+  handlerService.executeHandler(cmd);
+```</p>
+
+<h1>逻辑层相关服务</h1>
+
+<h2>IEventBroker</h2>
+
+<p>Eclipse 3.x中，事件处理使用Observer模式：事件接收者实现事件发布者指定的Listener接口，并注册到事件发布者。
+这带来两个问题：</p>
+
+<ul>
+<li>一个Listener接口要写很多个实现，这些实现中的代码有重复</li>
+<li>事件发布者和接收者的生命周期紧耦合</li>
+</ul>
+
+
+<p>Eclipse e4中，将OSGi的<code>EventAdmin</code>API封装为事件服务，提供了基于发布、订阅机制的事件处理功能：<code>EventBroker</code>作为事件总线，通过<code>EventBroker</code>可以发布和订阅事件。</p>
+
+<p>要使用e4事件服务，需要增加依赖插件：</p>
+
+<pre><code>* org.eclipse.e4.core.services
+* org.eclipse.osgi.services
+</code></pre>
+
+<ul>
+<li>获取EventBroker</li>
+</ul>
+
+
+<p>e4中定义了<code>org.eclipse.e4.core.services.events.IEventBroker</code>接口，可以通过依赖注入、e4上下文等方式获取：</p>
+
+<p>```
+  @Inject
+  IEventBroker eventBroker;</p>
+
+<p>  @Inject
+  private IEclipseContext eclipseContext;
+  ……
+  IEventBroker eventBroker = eclipseContext.get(IEventBroker.class);</p>
+
+<ul>
+<li>发布事件</li>
+</ul>
+
+
+<p>可以用<code>IEventBroker</code>的<code>post()</code>或<code>send()</code>方法，进行同步(synchronous)或异步(asynchronous)事件的发布：</p>
+
+<p>```
+  boolean IEventBroker.post(String topic, Object data) // synchronous delivery</p>
+
+<p>  boolean IEventBroker.send(String topic, Object data) // asynchronous delivery</p>
+
+<p>```</p>
+
+<p>返回值为是否发生成功。</p>
+
+<ul>
+<li>订阅事件</li>
+</ul>
+
+
+<p>可以通过依赖注入或者<code>IEventBroker</code>的<code>subscribe()</code>方法订阅事件：</p>
+
+<p>```
+  @Inject
+  @Optional
+  private void closeHandler(@UIEventTopic(''TOPIC_STRING'') foo.Bar payload) {</p>
+
+<pre><code>//do something with payload 
+</code></pre>
+
+<p>  }
+```</p>
+
+<p>```
+  @Inject
+  IEventBroker eventBroker;</p>
+
+<p>  org.osgi.service.event.EventHandler closeHandler = new EventHandler() {</p>
+
+<pre><code>public void handleEvent(Event event) { 
+    foo.Bar payload = (foo.Bar) event.getProperty(IEventBroker.DATA);
+}
+</code></pre>
+
+<p>  }</p>
+
+<p>  eventBroker.subscribe(TOPIC_STRING, closeHandler);
+  ……
+  eventBroker.unsubscribe(closeHandler);
+```</p>
+
+<p>消息对象(payload)作为附件存储在<code>IEventBroker.DATA</code>属性中。对于<code>Dictionary</code>或<code>Map</code>等集合类型的消息，会将其中所有的值按照KEY添加为属性。</p>
+
+<h2>Logger</h2>
+
+<p>Eclipse 3.x中，Log的接口和实现类分别为<code>org.eclipse.core.runtime.ILog</code>和<code>org.osgi.service.log.LogService</code>，可以使用<code>ServiceTracker</code>获取：</p>
+
+<p><code>
+LogService getLog() {
+  fLogServiceTracker = new ServiceTracker(fBundleContext, LogService.class.getName(), null);
+  return (LogService) fLogServiceTracker.getService();
+}
+</code></p>
+
+<p>为了方便，在<code>Plugin</code>的基类中实现了<code>getLog()</code>方法，所有的<code>Plugin</code>子类可以直接使用。</p>
+
+<p>在<code>org.eclipse.e4.core.services</code>插件中提供了<code>org.eclipse.e4.core.services.Logger</code>类，可以通过<code>@Inject</code>注解或使用<code>IEclipseContext</code>接口获取：</p>
+
+<p>```
+@Inject
+private Logger logger;</p>
+
+<p>//or use code:
+Logger log = (Logger) context.get(Logger.class.getName());</p>
+
+<p>```</p>
+
+<h1>实现自己的服务</h1>
+
+<p>Usually services have two parts: the interface definition and the implementation. How these two are linked is defined by a context function , an OSGi service or plain context value setting (IEclipseContext). Please note that there can be more than one service implementation for an interface.</p>
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2014/01/17/jfreechart.html" rel="bookmark">&laquo;&nbsp;下一篇：JFreeChart概述</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2014/01/12/dependency_injection_in_e4.html" rel="bookmark">上一篇：Eclipse e4：从OSGi-DS到依赖注入&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2014/01/12/e4_platform_services.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "Eclipse e4中的平台服务"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,OSGi"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["软件开发"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>

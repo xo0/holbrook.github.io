@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="[Tycho](http://www.sonatype.org/tycho)是一个Maven插件，目标是使用Maven构建Eclipse插件，OSGI Bundle等工程。如果说[Maven](http://maven.apache...." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>Tycho：用Maven构建Eclipse Plugin项目 &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">Tycho：用Maven构建Eclipse Plugin项目</h1>
+  <p>摘要：<br/>Tycho以一组maven插件的形式，支持Eclipse的plug-ins, features, update sites (based on p2) 、products等类型工程的构建。</p>
+
+  <time class="published" datetime="2014-01-08">2014-01-08
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#软件开发-ref">软件开发</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#OSGi-ref">OSGi</a>
+    <sup>4</sup>
+    &nbsp;
+  
+    <a href="/pages/tags.html#maven-ref">maven</a>
+    <sup>5</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <p><a href="http://www.sonatype.org/tycho">Tycho</a>是一个Maven插件，目标是使用Maven构建Eclipse插件，OSGI Bundle等工程。</p>
+
+<p>如果说<a href="http://maven.apache.org/">Maven</a>的出现是一群Java程序员受不了繁琐的插件依赖管理，受不了冗长的ant build.xml文件而创造出来的，
+那Tycho则是一群Eclipse、OSGi插件开发人员受不了重复地配置类似的Maven pom.xml而创造出来的。</p>
+
+<p>Tycho以一组maven插件的形式，支持Eclipse的plug-ins, features, update sites (based on p2) 、products等类型的工程，
+表现为不同的maven打包类型(packaging):</p>
+
+<ul>
+<li>eclipse-plugin</li>
+<li>eclipse-feature</li>
+<li>eclipse-test-plugin</li>
+<li>eclipse-repository</li>
+<li>eclipse-target-definition</li>
+</ul>
+
+
+<h1>父工程</h1>
+
+<p>基于OSGi的工程通常会划分很多模块，对于Maven来说，一般通过一个父工程（parent）来管理所有模块的构建。父工程的<code>packaging</code>类型为<code>pom</code>.</p>
+
+<p>为了使用Tycho，需要在父工程的pom文件中增加一些配置。</p>
+
+<h2>增加Tycho插件</h2>
+
+<p>父工程中定义的插件可以在所有子工程中使用：</p>
+
+<p>```
+  <properties></p>
+
+<pre><code>&lt;tycho-version&gt;0.16.0&lt;/tycho-version&gt;
+</code></pre>
+
+<p>  </properties></p>
+
+<p>  <build></p>
+
+<pre><code>&lt;plugins&gt;
+  &lt;plugin&gt;
+    &lt;groupId&gt;org.eclipse.tycho&lt;/groupId&gt;
+    &lt;artifactId&gt;tycho-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;${tycho-version}&lt;/version&gt;
+    &lt;extensions&gt;true&lt;/extensions&gt;
+  &lt;/plugin&gt;
+&lt;/plugins&gt;
+</code></pre>
+
+<p>  </build>
+```</p>
+
+<h2>定义bundle仓库</h2>
+
+<p>比如，基于Eclipse 4.3(Kepler)的RCP应用，使用了Texo、GeminiJPA等插件，需要如下的仓库定义：</p>
+
+<p>```
+  <repositories></p>
+
+<pre><code>&lt;repository&gt;
+  &lt;id&gt;Kepler&lt;/id&gt;
+  &lt;url&gt;http://download.eclipse.org/releases/kepler&lt;/url&gt;
+  &lt;layout&gt;p2&lt;/layout&gt;
+&lt;/repository&gt;
+&lt;repository&gt;
+  &lt;id&gt;Texo&lt;/id&gt;
+  &lt;url&gt;http://download.eclipse.org/modeling/emft/texo/updates/interim&lt;/url&gt;
+  &lt;layout&gt;p2&lt;/layout&gt;
+&lt;/repository&gt;
+&lt;repository&gt;
+  &lt;id&gt;GeminiJPA&lt;/id&gt;
+  &lt;url&gt;http://download.eclipse.org/gemini/jpa/updates&lt;/url&gt;
+  &lt;layout&gt;p2&lt;/layout&gt;
+&lt;/repository&gt;
+&lt;repository&gt;
+  &lt;id&gt;EclipseLink&lt;/id&gt;
+  &lt;url&gt;http://download.eclipse.org/rt/eclipselink/updates/&lt;/url&gt;
+  &lt;layout&gt;p2&lt;/layout&gt;
+&lt;/repository&gt;
+</code></pre>
+
+<p>  </repositories>
+```</p>
+
+<h2>定义目标</h2>
+
+<p>定义不同的目标平台：</p>
+
+<p>```
+  <plugin></p>
+
+<pre><code>&lt;groupId&gt;org.eclipse.tycho&lt;/groupId&gt;
+&lt;artifactId&gt;target-platform-configuration&lt;/artifactId&gt;
+&lt;configuration&gt;
+  &lt;environments&gt;
+    &lt;environment&gt;
+      &lt;os&gt;linux&lt;/os&gt;
+      &lt;ws&gt;gtk&lt;/ws&gt;
+      &lt;arch&gt;x86&lt;/arch&gt;
+    &lt;/environment&gt;
+    &lt;environment&gt;
+      &lt;os&gt;macosx&lt;/os&gt;
+      &lt;ws&gt;cocoa&lt;/ws&gt;
+      &lt;arch&gt;x86_64&lt;/arch&gt;
+    &lt;/environment&gt;
+  &lt;/environments&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<p>  </plugin>
+```</p>
+
+<p>如果要发布比较复杂的目标，比如Eclipse Product的发布，需要单独构建<code>eclipse-target-definition</code>类型的子工程。</p>
+
+<h1>为现有工程生成pom</h1>
+
+<p>Tycho提供了一个工具，可以为现有的Eclipse Plugin、Feature等工程生成pom文件，从而将其整合到Tycho的管理之下。</p>
+
+<p>该工具也是基于maven的，只需要在工程文件夹执行命令：</p>
+
+<p>```</p>
+
+<pre><code>mvn org.eclipse.tycho:tycho-pomgenerator-plugin:generate-poms -DgroupId=thinkinside.tangle
+</code></pre>
+
+<p>```</p>
+
+<p>生成的pom文件举例如下：</p>
+
+<p>```
+  &lt;?xml version="1.0" encoding="UTF-8"?><br/>
+  &lt;project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="  http://maven.apache.org/POM/4.0.0"</p>
+
+<pre><code>  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+&lt;groupId&gt;thinkinside.tangle&lt;/groupId&gt;
+&lt;artifactId&gt;tangle-app&lt;/artifactId&gt;
+&lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+&lt;packaging&gt;eclipse-plugin&lt;/packaging&gt;
+</code></pre>
+
+<p>  </project>
+```</p>
+
+<p>由于种种原因，Eclipse Plugin工程的配置内容分散在多个文件中，包括：</p>
+
+<ul>
+<li>OSGi的配置文件：MANIFEST.MF</li>
+<li>插件工程构建文件：build.properties</li>
+<li>插件定义文件：plugin.xml</li>
+<li>产品描述文件：.product</li>
+</ul>
+
+
+<p>这些文件中的配置项有重复，开发人员要保证各文件中的相关配置的一致性。</p>
+
+<p>Tycho在生成pom文件时，会检查这些配置文件，将其中的配置项写入pom文件中。</p>
+
+<p>Tycho的逻辑是以上述标准的配置文件优先。比如，在pom文件中没有定义依赖关系，而是以<code>MANIFEST.MF</code>中定义的依赖为准。</p>
+
+<p>如果现有工程已经有了pom文件，还可以使用Tycho进行更新：</p>
+
+<p><code>
+  mvn org.eclipse.tycho:tycho-versions-plugin:update-pom -Dtycho.mode=maven
+</code></p>
+
+<h1>"目标定义"子工程</h1>
+
+<p>前面提到，如果要发布比较复杂的目标，比如Eclipse Product的发布，需要单独构建<code>eclipse-target-definition</code>类型的子工程。</p>
+
+<p>在"目标定义"子工程中创建<code>.product</code>文件，然后在pom文件中添加：</p>
+
+<p>```
+  <build></p>
+
+<pre><code>&lt;plugins&gt;
+  &lt;plugin&gt;
+    &lt;groupId&gt;org.eclipse.tycho&lt;/groupId&gt;
+    &lt;artifactId&gt;tycho-p2-director-plugin&lt;/artifactId&gt;
+    &lt;version&gt;${tycho-version}&lt;/version&gt;
+    &lt;executions&gt;
+      &lt;execution&gt;
+        &lt;!-- install the product for all configured os/ws/arch environments 
+          using p2 director --&gt;
+        &lt;id&gt;materialize-products&lt;/id&gt;
+        &lt;goals&gt;
+          &lt;goal&gt;materialize-products&lt;/goal&gt;
+        &lt;/goals&gt;
+      &lt;/execution&gt;
+      &lt;!-- (optional) create product zips (one per os/ws/arch) --&gt;
+      &lt;execution&gt;
+        &lt;id&gt;archive-products&lt;/id&gt;
+        &lt;goals&gt;
+          &lt;goal&gt;archive-products&lt;/goal&gt;
+        &lt;/goals&gt;
+      &lt;/execution&gt;
+
+
+
+    &lt;/executions&gt;
+  &lt;/plugin&gt;
+&lt;/plugins&gt;
+</code></pre>
+
+<p>  </build>
+```</p>
+
+<p>"目标定义"子工程中还可以使用”目标定义文件（Target Definition, *.target）“进行复杂的配置。
+可以参考<a href="http://wiki.eclipse.org/Tycho/Target_Platform">这里</a>的说明，也可以查看<a href="https://github.com/toedter/e4-tutorial">GitHub上的例子</a>的例子。</p>
+
+<h1>Test工程</h1>
+
+<p>与专门的测试工具<a href="">Pax Exam</a>相比，Tycho test使用起来会更简单。当然前提是测试由Tycho构建的OSGi应用。</p>
+
+<p>Tycho将一个"Fragment"工程包装成Maven工程，可以在其中编写测试代码，然后使用"JUnit Plug-in Test"执行测试。</p>
+
+<h1>对比Maven-Bundle-Plugin</h1>
+
+<p>Maven-Bundle-Plugin提供了与Tycho不同风格的另一种构建OSGi的maven插件。关于二者的对比，可以参考<a href="/2014/01/21/tycho_vs_maven_bundle_plugin.html">这里</a></p>
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2014/01/10/emf.html" rel="bookmark">&laquo;&nbsp;下一篇：仰望MDA，拥抱EMF</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2014/01/07/eclipse_e4_RCP_quickstart.html" rel="bookmark">上一篇：Eclipse e4 概览&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2014/01/08/build_osgi_bundle_with_tycho_maven_plugin.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "Tycho：用Maven构建Eclipse Plugin项目"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,OSGi,maven"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["软件开发"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>

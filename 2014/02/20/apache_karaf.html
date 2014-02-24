@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="# 为什么需要“OSGi中间件”尽管在OSGi Runtime(Felix, Equinox等)的基础上，OSGi组织又规定了[Blueprint规范以实现OSGi环境下的依赖注入](/2014/01/22/osgi_blueprin..." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>Apache Karaf：OSGi中间件 &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">Apache Karaf：OSGi中间件</h1>
+  <p>摘要：<br/></p>
+
+  <time class="published" datetime="2014-02-20">2014-02-20
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#软件开发-ref">软件开发</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#OSGi-ref">OSGi</a>
+    <sup>4</sup>
+    &nbsp;
+  
+    <a href="/pages/tags.html#maven-ref">maven</a>
+    <sup>5</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <h1>为什么需要“OSGi中间件”</h1>
+
+<p>尽管在OSGi Runtime(Felix, Equinox等)的基础上，OSGi组织又规定了<a href="/2014/01/22/osgi_blueprint_container.html">Blueprint规范以实现OSGi环境下的依赖注入</a>，
+但这还不够——没有提供类似Web开发框架那样的一些“平台级”的功能。比如日志，控制台，配置文件等。</p>
+
+<p>很难想象没有Tomcat这样的Web中间件，开发Java Web应用的工作量有多大。同样的，OSGi应用也需要一种“中间件”，来实现各应用共性的一些功能，并管理应用的部署。</p>
+
+<p><a href="http://karaf.apache.org/">Apache Karaf</a>就是这样的一个"OSGi中间件"。最早，Karaf只是<a href="http://servicemix.apache.org/">Apache ServiceMix</a>的Kernel子项目，后来独立出来成为Apache的顶级项目。
+目前，Apache Karaf已经用于Apache Geronimo, Apache ServiceMix, Fuse ESB等项目。</p>
+
+<p>Apache Karaf的主要竞争对手是<a href="http://www.eclipse.org/virgo/">Eclipse Virgo</a>。</p>
+
+<h1>Apache Karaf的功能</h1>
+
+<p><img src="/images/fuse/Karaf.jpg" alt="" /></p>
+
+<p>Apache Karaf提供了如下“开箱即用”的功能：</p>
+
+<ul>
+<li><p>热部署</p>
+
+<p>尽管OSGi支持热部署，但并不是自动热部署，需要调用一些API去执行插拔的动作。Karaf在运行时可以自动处理<code>[home]/deploy</code>文件夹中的OSGi bundle，能够自动加载并在满足依赖关系时自动启动。</p></li>
+<li><p>动态配置</p>
+
+<p>Karaf在<code>$KARAF_HOME/etc</code>文件夹中存储配置文件。这些配置内容可以在Karaf运行时动态修改。</p></li>
+<li><p>日志处理</p>
+
+<p>基于Log4J的日志系统，同时支持多种日志API，如JDK 1.4, JCL, SLF4J, Avalon, Tomcat, OSGi等。</p></li>
+<li><p>系统服务</p>
+
+<p>Karaf可以作为系统服务运行。</p></li>
+<li><p>控制台</p>
+
+<p>可以在控制台进行服务管理、安装bundle等操作。还可以扩展自己的控制台命令。</p>
+
+<p>可以通过SSH远程访问其他服务器上的Karaf控制台。</p></li>
+<li><p>多实例管理</p>
+
+<p>一个服务器上可以运行多个Karaf实例。对实例的管理可以在Karaf控制台中进行。</p></li>
+<li><p>Bundle仓库</p>
+
+<p>Karaf中内置了<a href="https://ops4j1.jira.com/wiki/display/paxurl/Pax+URL">Pax URL</a>的MVN协议，可以从Maven中央仓库安装bundle。</p></li>
+<li><p>Bundle集合(Feature)</p>
+
+<p>类似于Eclipse的Feature，Karaf中也支持Feature，即bundle的集合。使用Feature可以简化OSGi应用的部署。</p></li>
+</ul>
+
+
+<h1>Karaf初体验</h1>
+
+<p>安装好Java环境，加压缩Karaf，执行<code>$KARAF_HOME/bin/karaf</code>，可以看到Karaf的启动界面：</p>
+
+<p><img src="/images/karaf/karaf1.png" alt="" /></p>
+
+<p>如图的提示，使用<code>&lt;tab&gt;</code>可以列出所有可用的命令，所有的命令支持<code>--help</code>参数。</p>
+
+<p>如果执行<code>list</code>命令，可以列出所有的bundles:</p>
+
+<p><img src="/images/karaf/karaf2.png" alt="" /></p>
+
+<p>还有很多其他的命令，比如</p>
+
+<ul>
+<li><code>bundle:install</code> 安装bundle</li>
+<li><code>feature:repo-add</code> 安装feature库</li>
+<li><code>feature:install</code> 安装feature</li>
+</ul>
+
+
+<p>等等。详情可以参考官方的<a href="http://karaf.apache.org/manual/latest/quick-start.html">Quick Start</a>。</p>
+
+<p>如果查看Karaf的目录，可以看到如下的目录结构：</p>
+
+<ul>
+<li><code>/bin</code>: 启动、停止、登录karaf控制台的脚本</li>
+<li><code>/etc</code>: 配置文件</li>
+<li><code>/data</code>: 存放运行时的工作文件，清空这个目录可以使Karaf回到初始状态</li>
+<li><code>/cache</code>: OSGi framework的bundle缓存</li>
+<li><code>/generated-bundles</code>: 开发用的临时目录</li>
+<li><code>/log</code>: 日志</li>
+<li><code>/deploy</code>: 用于bundle的热部署</li>
+<li><code>/instances</code>: 存放karaf的各个实例用到的数据</li>
+<li><code>/lib</code>: 启动Karaf时需要的一些库</li>
+<li><code>/lib/ext</code>: Karaf需要的扩展库</li>
+<li><code>/lib/endorsed</code>: Karaf对其他API的再封装(背书)的一些jar包</li>
+<li><code>/system</code>: OSGi bundles库，使用Maven 2仓库的结构</li>
+</ul>
+
+
+<h1>Karaf启动模式和实例</h1>
+
+<ul>
+<li>常规模式(regular mode) 使用命令<code>bin/karaf</code>，可以在前端启动Karaf并进入控制台</li>
+<li>服务模式(server mode) 使用命令<code>bin/karaf server</code>，可以在前端启动Karaf，但不进入控制台</li>
+<li>后台模式(background mode) 使用命令<code>bin/start</code>，可以在后台启动Karaf。</li>
+</ul>
+
+
+<p>如果安装了service-wrapper(可以在Karaf中执行<code>feature:install service-wrapper</code>)，还可以将
+Karaf安装为系统服务。</p>
+
+<p>一个Karaf节点可以运行多个"Karaf实例"。实际上，默认情况下Karaf会启动一个名为<code>root</code>的实例。
+实例是包含单独的配置文件、数据文件等信息的一个Karaf副本，每个实例可以单独启动或部署bundle。</p>
+
+<p>Karaf控制台中提供了一些管理实例的命令：</p>
+
+<ul>
+<li><code>instance:create</code> 创建实例</li>
+<li><code>instance:clone</code> 从现有的实例克隆一个新的实例</li>
+<li><code>instance:start</code> 启动实例</li>
+<li><code>instance:status</code> 查看实例状态</li>
+<li><code>instance:connect</code> 连接(切换)到某个实例</li>
+<li><code>instance:stop</code> 停止实例</li>
+<li><code>instance:destroy</code> 删除实例</li>
+</ul>
+
+
+<h1>ssh、客户端和Web控制台</h1>
+
+<p>Karaf内置了一个SSHd server，可以通过ssh远程访问Karaf控制台。
+要启动远程控制台服务，需要在控制台中启动bundle: <code>bundle:restart -f org.apache.karaf.shell.ssh</code>。此时，远端可以使用ssh远程访问控制台，比如: <code>ssh -p 8101 karaf@localhost</code>。默认karaf用户的密码也是karaf。ssh的用户、密码、端口等都可以在<code>etc/org.apache.karaf.shell.cfg</code>中配置。</p>
+
+<p>Karaf的客户端'bin/client'即可以连接本地控制台，也可以通过ssh连接远程控制台，甚至可以执行单个的命令。比如：</p>
+
+<p><code>
+bin/client -u karaf -p karaf -a 8101 hostname osgi:shutdown
+</code></p>
+
+<p>Karaf还可以安装Web控制台(<code>feature:install webconsole</code>)。通过Web控制台能够管理
+Karaf的bundle、feature、实例、配置以及查看日志。启动web控制台后，默认可以通过<a href="http://localhost:8181/system/console">http://localhost:8181/system/console</a>
+访问web控制台，默认的用户名/密码为<code>karaf/karaf</code>。Web控制台的配置文件位于<code>etc/org.ops4j.pax.web.cfg</code>。</p>
+
+<h1>bundle URL和bundle仓库</h1>
+
+<p>Karaf在安装bundle时，可以使用多种URL来定位bundle，比如：</p>
+
+<ul>
+<li><p>http <code>http://repo1.maven.org/maven2/org/apache/servicemix/nmr/org.apache.servicemix.nmr.api/1.0.0-m2/org.apache.servicemix.nmr.api-1.0.0-m2.jar</code></p></li>
+<li><p>file <code>file:base/bundles/org.apache.servicemix.nmr.api-1.0.0-m2.jar</code></p></li>
+<li>maven库 <code>mvn:org.apache.servicemix.nmr/org.apache.servicemix.nmr.api/1.0.0-m2</code></li>
+</ul>
+
+
+<p>其中，maven库方式是使用maven库作为bundle仓库，从其中检索需要的bundle。与maven类似，可以自动解决bundle之间的依赖问题。
+Karaf提供了OBR (OSGi Bundle Repository)，能够管理bundle仓库。在控制台使用命令<code>feature:install obr</code>安装OBR之后，就可以：</p>
+
+<ul>
+<li><p>增加新的bundle仓库</p>
+
+<p><code>obr:url-add file:///user/.m2/repository/repository.xml</code></p></li>
+<li><p>查看已安装的bundle仓库</p>
+
+<p><code>obr:url-list</code></p></li>
+<li><p>刷新仓库</p>
+
+<p><code>obr:url-refresh</code></p></li>
+<li><p>删除仓库</p>
+
+<p><code>obr:url-remove</code></p></li>
+<li><p>列出所有可用的bundle</p>
+
+<p><code>obr:list</code></p></li>
+<li><p>查找bundle</p>
+
+<p><code>obr:find</code></p></li>
+</ul>
+
+
+<h1>OSGi应用，Karaf Feature和KAR</h1>
+
+<p>OSGi运行的基本单元是bundle，bundle之间有依赖关系。一组满足依赖关系的bundle集合，加上相关的配置信息，称为一个“OSGi应用”。
+将OSGi应用部署到Karaf的行为称为“provisioning”。</p>
+
+<p>为了简化OSGi应用的部署，Karaf定义了feature，用于描述OSGi应用的部署信息，包括：</p>
+
+<ul>
+<li>名称</li>
+<li>版本号</li>
+<li>描述信息</li>
+<li>bundle集合</li>
+<li>配置文件信息</li>
+<li>依赖的其他feature</li>
+</ul>
+
+
+<p>可以看出，Karaf中的feature与Eclipse Feature非常类似。</p>
+
+<p>Karaf控制台中提供了一系列的feature和feature库的管理命令，包括：
+- feature:info
+- feature:install
+- feature:list
+- feature:repo-add
+- feature:repo-list
+- feature:repo-refresh
+- feature:repo-remove
+- feature:uninstall
+- feature:version-list</p>
+
+<p>由于feature中可能使用远端的bundle，Karaf提出了<code>KAR</code>格式，可以把一个bundle相关的所有资源打包在一起。
+这类似于使用maven定义的web工程，和最终打包的war文件之间的关系。
+Karaf控制台中，可以打包(<code>kar:create</code>)、安装(<code>kar:install</code>)、卸载(<code>kar:uninstall</code>)或列出(<code>kar:list</code>)KAR文件。</p>
+
+<h1>企业级特性</h1>
+
+<p>Karaf提供了一系列的功能，以支持企业级应用的开发，包括：</p>
+
+<ul>
+<li><p>日志</p>
+
+<p>Karaf提供了<a href="http://karaf.apache.org/manual/latest/users-guide/log.html">灵活的日志系统</a>，支持</p>
+
+<ul>
+<li>OSGi Log Service</li>
+<li>Log4j</li>
+<li>Commons Logging</li>
+<li>Logback</li>
+<li>SLF4J</li>
+<li>java Util Logging</li>
+</ul>
+
+
+<p>等日志框架。不管应用中使用了上述哪种日志框架，Karaf中都可以进行统一的管理，如log level, appender等。</p></li>
+<li><p>安全</p>
+
+<p>Karaf提供了基于JAAS(Java Authentication and Authorization Service)的<a href="http://karaf.apache.org/manual/latest/users-guide/security.html">安全框架</a>，可以控制对OSGi service、控制台命令、JMX、Web控制台等资源的访问。并且在应用中也可以使用Karaf的安全框架。</p></li>
+<li><p>Web</p>
+
+<p>Karaf可以<a href="http://karaf.apache.org/manual/latest/users-guide/webcontainer.html">作为Web容器</a>使用，完全支持JSP/Servlet规范。
+Karaf的Web容器同时支持WAR和WAB的部署。</p></li>
+<li><p>JNDI</p>
+
+<p>Karaf<a href="http://karaf.apache.org/manual/latest/users-guide/jndi.html">支持OSGi中的JNDI服务</a>。</p></li>
+<li><p>JDBC、JPA和JTA</p>
+
+<p>Karaf中即可以<a href="http://karaf.apache.org/manual/latest/users-guide/jdbc.html">使用JDBC</a>直接连接数据库，
+也可以<a href="http://karaf.apache.org/manual/latest/users-guide/jpa.html">使用JPA</a>作为持久层框架。Karaf可以通过Blueprint管理JPA的persist Unit。</p>
+
+<p>Karaf支持<a href="http://karaf.apache.org/manual/latest/users-guide/jta.html">JTA</a>，以实现容器管理的事务。</p></li>
+<li><p>其他</p>
+
+<p>Karaf还支持<a href="http://karaf.apache.org/manual/latest/users-guide/ejb.html">EJB</a>、<a href="http://karaf.apache.org/manual/latest/users-guide/cdi.html">CDI</a>、<a href="http://karaf.apache.org/manual/latest/users-guide/monitoring.html">JMX</a>、<a href="http://karaf.apache.org/manual/latest/users-guide/jms.html">JMS</a>等企业级特性。</p>
+
+<p>Karaf内置支持主备方式的部署，以保证高可用。使用<a href="http://karaf.apache.org/index/subprojects/cellar.html">Apache Karaf Cellar</a>可以实现Karaf的集群部署。</p></li>
+</ul>
+
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2014/02/22/orgmode_test.html" rel="bookmark">&laquo;&nbsp;下一篇：测试</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2014/02/17/graphviz.html" rel="bookmark">上一篇：Graphviz概述&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2014/02/20/apache_karaf.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "Apache Karaf：OSGi中间件"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,OSGi,maven"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["软件开发"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>

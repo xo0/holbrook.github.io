@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="[在规则引擎中，通常会使用某种表述性的语言（而不是编程语言）来描述规则](/2012/03/20/rule_engine_1.html)。所以规则描述语言也是规则引擎的一个重要组成部分。目前在规则描述语言方面，并没有一个通用的标准获得..." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>Drools规则描述语言快速手册 &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">Drools规则描述语言快速手册</h1>
+  <p>摘要：<br/></p>
+
+  <time class="published" datetime="2012-12-06">2012-12-06
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#软件开发-ref">软件开发</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#规则引擎-ref">规则引擎</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <p><a href="/2012/03/20/rule_engine_1.html">在规则引擎中，通常会使用某种表述性的语言（而不是编程语言）来描述规则</a>。
+所以规则描述语言也是规则引擎的一个重要组成部分。</p>
+
+<p>目前在规则描述语言方面，并没有一个通用的标准获得规则引擎厂商的广泛支持，大部分规则描述语言都是厂商私有的。</p>
+
+<p>大体来说，规则语言可以分为结构化的（Structured)和基于标记的（Markup，通常为xml）。</p>
+
+<p>常见的规则描述语言包括：</p>
+
+<ul>
+<li>srl(Structured Rule Language) : Fair Isaac（以前是Blaze Software）定义的结构化规则描述语言</li>
+<li>drl(Drools Rule Language) : Jboss（以前是drools.org)定义的结构化规则描述语言</li>
+<li>RuleML(Rule Markup Language）: www.ruleml.org定义的xml规则描述语言</li>
+<li>SRML(Simple Rule Markup Language): xml规则描述语言</li>
+<li>BRML(Business Rules Markup Language):xml规则描述语言</li>
+<li>SWRL（A Semantic Web Rule Language):www.daml.org定义的xml规则描述语言</li>
+</ul>
+
+
+<p>不管是哪种规则描述语言，都需要描述一组条件以及在此条件下执行的操作（即规则）。</p>
+
+<h1>概览</h1>
+
+<p>下面是一个drl的例子：</p>
+
+<p>```
+package com.sample</p>
+
+<p>import com.sample.DroolsTest.Message;</p>
+
+<p>rule "Hello World"</p>
+
+<pre><code>when
+    m : Message( status == Message.HELLO, myMessage : message )
+then
+    System.out.println( myMessage );
+    m.setMessage( "Goodbye cruel world" );
+    m.setStatus( Message.GOODBYE );
+    update( m );
+</code></pre>
+
+<p>end</p>
+
+<p>rule "GoodBye"</p>
+
+<pre><code>when
+    Message( status == Message.GOODBYE, myMessage : message )
+then
+    System.out.println( myMessage );
+</code></pre>
+
+<p>end
+```</p>
+
+<p>完整的drl文件会包含以下几个部分：</p>
+
+<ul>
+<li>package 声明</li>
+<li>imports</li>
+<li>declares</li>
+<li>globals</li>
+<li>functions</li>
+<li>queries</li>
+<li>rules</li>
+</ul>
+
+
+<h1>package和import声明</h1>
+
+<p>与Java语言类似，drl的头部需要有package和import的声明。</p>
+
+<p>规则文件当中必须要有一个 <strong>package</strong> 声明,同时 package 声明必须要放在规则文件的第一行。</p>
+
+<h1>规则定义</h1>
+
+<p>drl中，一个规则的标准结构如下：</p>
+
+<p>```
+rule "name"</p>
+
+<pre><code>attributes
+when 
+    LHS
+then 
+    RHS
+</code></pre>
+
+<p>end
+```</p>
+
+<p>一个规则通常包括三个部分:属性部分(attribute)、条件 部分(LHS)和结果部分(RHS)。</p>
+
+<h2>条件部分(LHS)</h2>
+
+<p>在 LHS 当中,可以包含多个条件,如果 LHS 部分没空的话,那么引擎会自动添加一 个 eval(true)的条件。</p>
+
+<p>多个条件之间之间用可以使用 <strong>and</strong> 或 <strong>or</strong> 来进行连接。默认是 <strong>and</strong> 关系。</p>
+
+<p>每个条件的语法为：</p>
+
+<p>[绑定变量名:]Object([field 约束])</p>
+
+<p>“绑定变量名”是可选的。绑定的变量可以在该LHS后续的条件中引用。</p>
+
+<p>“field 约束”是指当前对象里相关字段的条件限制, 多个约束之间可以用“&amp;&amp;”(and)、“||”(or)和“,”(and)来连接。</p>
+
+<p>举例如下：</p>
+
+<p>```
+when</p>
+
+<pre><code>$customer:Customer()
+</code></pre>
+
+<p>then</p>
+
+<pre><code>……
+</code></pre>
+
+<p>when</p>
+
+<pre><code>$customer:Customer(age&gt;20,gender==􏰃male􏰃)
+Order(customer==$customer,price&gt;1000)
+</code></pre>
+
+<p>then</p>
+
+<pre><code>……
+</code></pre>
+
+<p>when</p>
+
+<pre><code>Customer(age&gt;20 || (gender=='male' &amp;&amp; city==‘sh'))
+</code></pre>
+
+<p>then</p>
+
+<pre><code>……
+</code></pre>
+
+<p>```</p>
+
+<p>约束中可以使用的比较操作符包括：</p>
+
+<p>```</p>
+
+<blockquote><p>、>=、&lt;、&lt;=、= =、!=、contains、not contains、 memberof、not memberof、matches、not matches
+```</p></blockquote>
+
+<p>举例如下：</p>
+
+<p>```
+when</p>
+
+<pre><code>$order:Order();
+$customer:Customer(age &gt;20, orders contains $order); 
+</code></pre>
+
+<p>then</p>
+
+<pre><code>……
+</code></pre>
+
+<p>when</p>
+
+<pre><code>$order:Order(name memberOf orderNames); # orderNames为数组或集合类型
+</code></pre>
+
+<p>then</p>
+
+<pre><code>……
+</code></pre>
+
+<p>when</p>
+
+<pre><code>$customer:Customer(name matches "李.*"); # 正则表达式匹配
+</code></pre>
+
+<p>then</p>
+
+<pre><code>……
+</code></pre>
+
+<p>```</p>
+
+<h2>结果部分(RHS)</h2>
+
+<p>RHS 部分定义了当LHS满足是要进行的操作。</p>
+
+<p>RHS中可以编写代码，可以使用 LHS 部分当中定义的绑定变量名以及drl头部定义的全局变量。</p>
+
+<p>在 RHS 当中虽然可以直接编写 Java 代码,但不建议在代码当中有条件判断,如果需要条件判断,那么请重新考虑将其放在 LHS 当中,否则就违背了使用规则的初衷。</p>
+
+<h3>使用宏函数</h3>
+
+<p>RHS中可以使用宏函数对工作空间(Working Memory)进行操作。当调用宏函数后，所有未设置“no-loop”属性的规则都会被重新匹配，符合条件的重新触发。</p>
+
+<p>宏函数包括：</p>
+
+<ul>
+<li>insert：将一个 Fact 对象插入到当前的 Working Memory</li>
+<li>update：对当前 Working Memory 中的 Fact 进行更新</li>
+<li>retract ：从 Working Memory 中删除某个 Fact 对象</li>
+</ul>
+
+
+<p>这些宏函数都是StatefulSession中定义的方法。</p>
+
+<p>举例如下：</p>
+
+<p>```
+when</p>
+
+<pre><code>……
+</code></pre>
+
+<p>then</p>
+
+<pre><code>Customer cus=new Customer(); 
+cus.setName("张三"); 
+insert(cus);
+</code></pre>
+
+<p>when</p>
+
+<pre><code>$customer:Customer(name=="张三",age&lt;10); 
+</code></pre>
+
+<p>then</p>
+
+<pre><code>$customer.setAge($customer.getAge()+1); 
+update($customer);
+</code></pre>
+
+<p>when</p>
+
+<pre><code>$customer:Customer(name=="张三",age&lt;10); 
+</code></pre>
+
+<p>then</p>
+
+<pre><code>Customer customer=new Customer(); 
+customer.setName("张三"); 
+customer.setAge($customer.getAge()+1);
+
+# 用新对象替换Working Memory中的旧对象
+update(drools.getWorkingMemory().getFactHandleByIdentity($customer),customer);  
+</code></pre>
+
+<p>when</p>
+
+<pre><code>$customer:Customer(name=="张三"); 
+</code></pre>
+
+<p>then</p>
+
+<pre><code>retract($customer);
+</code></pre>
+
+<p>```</p>
+
+<h3>modify代码块</h3>
+
+<p>modify代码块用于快速修改并更新(update)某个 Fact 对象的多个属性。语法及例子如下：</p>
+
+<p>```
+modify(fact-expression){</p>
+
+<pre><code>&lt;修改 Fact 属性的表达式&gt;[,&lt;修改 Fact 属性的表达式&gt;*]
+</code></pre>
+
+<p>}</p>
+
+<p>when</p>
+
+<pre><code>$customer:Customer(name=="张三",age==20); 
+</code></pre>
+
+<p>then</p>
+
+<pre><code>modify($customer){ 
+    setId("super man"), 
+    setAge(30)
+}
+</code></pre>
+
+<p>```</p>
+
+<h3>drools宏对象</h3>
+
+<p>通过使用 drools 宏对象可以实现在规则文件里直接访问 Working Memory, 从而获取对当前的 Working Memory 的更多控制。</p>
+
+<p>drools 宏对象的常用方法包括：</p>
+
+<ul>
+<li>drools.getWorkingMemory()：获取当前的 WorkingMemory 对象</li>
+<li>drools.halt()：在当前规则执行完成后,不再执行 其它未执行的规则。</li>
+<li>drools.getRule()：得到当前的规则对象</li>
+<li>drools.insert(new Object)：向当前的 WorkingMemory 当中插入 指定的对象,功能与宏函数 insert 相同。</li>
+<li>drools.update(new Object)：更新当前的 WorkingMemory 中指定 的对象,功能与宏函数 update 相同。</li>
+<li>drools.update(FactHandle Object)：更新当前的 WorkingMemory 中指定 的对象,功能与宏函数 update 相同。</li>
+<li>drools.retract(new Object)：从当前的 WorkingMemory 中删除指 定的对象,功能与宏函数 retract 相 同。</li>
+</ul>
+
+
+<p>例如：</p>
+
+<p>```
+when</p>
+
+<pre><code>eval(true);
+</code></pre>
+
+<p>then</p>
+
+<pre><code>Customer cus=new Customer(); 
+cus.setName("张三"); 
+drools.insert(cus)
+</code></pre>
+
+<p>```</p>
+
+<h3>kcontext宏对象</h3>
+
+<p>kcontext 也是 Drools 提供的一个宏对象,它的作用主要是用来得到当前的 KnowledgeRuntime 对象,KnowledgeRuntime 对象可以实现与引擎的各种交互。</p>
+
+<h2>规则属性</h2>
+
+<p>主要的规则属性如下：</p>
+
+<p>13 个:  auto-focus、、lock-on-active、no-loop、 ruleflow-group、、when。</p>
+
+<ul>
+<li><p>salience</p>
+
+<p>设置规则执行的优先级,数字越大越先执行，数字相同的使用随机顺序。默认值为0，可以设置为负数。</p></li>
+<li><p>no-loop</p>
+
+<p>默认为false。设置为true时，表示该规则只会被引擎检查一次。引擎内部对Fact更新时，忽略本规则的再次检查。</p></li>
+<li><p>date-effective</p>
+
+<p>设置规则的开始生效日期。默认接受“dd-MMM-yyyy”格式的字符串。可以用代码修改日期格式，如：</p>
+
+<p><code>System.setProperty("drools.dateformat","yyyy-MM-dd")</code>。</p></li>
+<li><p>date-expires</p>
+
+<p>设置规则的过期日期。格式与<code>date-effective</code>相同。</p></li>
+<li><p>enabled</p>
+
+<p>默认为true。设置规则是否可用。</p></li>
+<li><p>dialect</p>
+
+<p>设置规则中使用的编程语言。默认为java，还可以设置为mvel。通过drools.getRule().getDialect()可以获取该属性的设置。</p></li>
+<li><p>duration</p>
+
+<p>延迟指定的时间后，在 <strong>另一个线程中</strong> 触发规则。单位为毫秒。</p></li>
+<li><p>activation-group</p>
+
+<p>为规则划指定一个活动组（组名为字符串）。同一个活动组中的规则只执行一个，根据优先级(salience)来决定执行哪一个规则。</p></li>
+<li><p>agenda-group 和 auto-focus</p>
+
+<p>为规则指定一个议程(agenda)组。指定了议程组的规则只有在该议程组得到焦点时才被触发。但如果规则同时指定了auto-focus属性为true，则该规则自动得到焦点。</p>
+
+<p>指定议程组焦点可以通过回话(session)：</p>
+
+<p><code>
+session.getAgenda().getAgendaGroup("GROUP_NAME").setFocus();
+session.fireAllRules();
+</code></p>
+
+<p>也可以实现org.drools.runtime.rule.AgendaFilter 接口：</p></li>
+</ul>
+
+
+<div class="highlight"><pre><code class="java">    <span class="kn">package</span> <span class="n">test</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.drools.runtime.rule.Activation</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.drools.runtime.rule.AgendaFilter</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestAgendaFilter</span> <span class="kd">implements</span> <span class="n">AgendaFilter</span> <span class="o">{</span> 
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">startName</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="nf">TestAgendaFilter</span><span class="o">(</span><span class="n">String</span> <span class="n">startName</span><span class="o">){</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">startName</span><span class="o">=</span><span class="n">startName</span><span class="o">;</span> 
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">accept</span><span class="o">(</span><span class="n">Activation</span> <span class="n">activation</span><span class="o">)</span> <span class="o">{</span> 
+            <span class="n">String</span> <span class="n">ruleName</span><span class="o">=</span><span class="n">activation</span><span class="o">.</span><span class="na">getRule</span><span class="o">().</span><span class="na">getName</span><span class="o">();</span> 
+            <span class="k">if</span><span class="o">(</span><span class="n">ruleName</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">startName</span><span class="o">)){</span>
+                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span> 
+            <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span> 
+            <span class="o">}</span>
+        <span class="o">}</span> 
+    <span class="o">}</span>  
+  
+</code></pre></div>
+
+
+<ul>
+<li><p>ruleflow-group</p>
+
+<p>指定规则流组。</p></li>
+<li><p>lock-on-active</p>
+
+<p>当在规则上使用 ruleflow-group 属性或 agenda-group 属性的时候,将 lock-on-action 属性 的值设置为 true,可能避免因某些 Fact 对象被修改而使已经执行过的规则再次被激活执行。lock-on-active 是 no-loop 的增强版属性，在规则流中很有用。</p></li>
+</ul>
+
+
+<p>举例如下：</p>
+
+<p>```
+rule "rule1"</p>
+
+<pre><code>salience 1 
+when
+……
+</code></pre>
+
+<p>```</p>
+
+<h1>注释</h1>
+
+<p>Drools 当中注释的写法与编写 Java 类的注 释的写法完全相同,注释的写法分两种:单行注释与多行注释。</p>
+
+<p>单行注释可以采用“#”或者“//”来进行标记， 多行注释以“/<em>”开始,以“</em>/”结束。</p>
+
+<p>例如：</p>
+
+<p>```
+/<em> 规则rule1的注释
+这是一个测试用规则
+</em>/
+rule "rule1"</p>
+
+<pre><code>when
+    eval(true) #没有条件判断 
+then
+    System.out.println("rule1 execute"); //仅仅是输出
+</code></pre>
+
+<p>end
+```</p>
+
+<h1>类型声明</h1>
+
+<p>可以在规则文件中定义Fact类型，而不需要编写Java类。比如：</p>
+
+<p>```
+declare Address</p>
+
+<pre><code>city : String
+addressName : String
+</code></pre>
+
+<p>end</p>
+
+<p>declare Person</p>
+
+<pre><code>name:String
+birthday:Date
+address:Address //使用declare声明的对象作为address属性类型 
+order:Order //使用名为Order的JavaBean作为order属性类型
+</code></pre>
+
+<p>end
+```</p>
+
+<p>在KnowledgeBase中可以获取规则文件中定义的Fact类型，比如：</p>
+
+<p><code>
+//获取规则文件当中定义的Address对象并对其进行实例化
+FactType addressType=knowledgeBase.getFactType("test","Address");
+Object add=addressType.newInstance();
+addressType.set(add, "city","Beijing");
+addressType.set(add, "addressName","Capital");
+</code></p>
+
+<p>在声明中还可以定义元数据。可以为 Fact 对象、Fact对象的属性或者是规则来定义元数据,元数据定义采用的是“@”符号开头。</p>
+
+<p>比如：</p>
+
+<p>```
+declare User</p>
+
+<pre><code>@createTime(2009-10-25) 
+username : String @maxLenth(30) 
+userid : String @key
+birthday : java.util.Date
+</code></pre>
+
+<p>end
+```</p>
+
+<p>元数据的获取？(TODO)</p>
+
+<h1>全局变量（TODO）</h1>
+
+<h1>函数和import function</h1>
+
+<h2>函数的定义和使用</h2>
+
+<p>函数是定义在规则文件当中一代码块,作用是将在规则文件当中若干个规则都会用到的业务操作封装起来,实现业务代码的复用,减少规则编写的工作量。
+函数的可见范围是函数所在的规则文件。</p>
+
+<p>函数以function定义，可以是void，也可以有返回值。例如：</p>
+
+<p>```
+package test
+import java.util.List;
+import java.util.ArrayList;
+/<em>
+一个测试函数
+用来向Customer对象当中添加指定数量的Order对象的函数
+</em>/</p>
+
+<p>function void setOrder(Customer customer,int orderSize) {</p>
+
+<pre><code>List ls=new ArrayList(); 
+for(int i=0;i&lt; orderSize;i++){
+    Order order=new Order();
+    ls.add(order);
+}
+customer.setOrders(ls);
+</code></pre>
+
+<p>}</p>
+
+<p>/<em>
+测试规则
+</em>/
+rule "rule1" when</p>
+
+<pre><code>$customer :Customer();
+</code></pre>
+
+<p>then</p>
+
+<pre><code>setOrder($customer,5);
+System.out.println("rule 1 customer has order size:"+$customer.getOrders().size());
+</code></pre>
+
+<p>end</p>
+
+<p>/<em>
+测试规则
+</em>/
+rule "rule2" when</p>
+
+<pre><code>$customer :Customer();
+</code></pre>
+
+<p>then</p>
+
+<pre><code>setOrder($customer,10);
+System.out.println("rule 2 customer has order size:"+$customer.getOrders().size());
+</code></pre>
+
+<p>end
+```</p>
+
+<h2>引入静态方法</h2>
+
+<p>实际应用当中,可以考虑使用在 Java 类当中定义静态方法的办法来替代在规则文件当 中定义函数。</p>
+
+<p>Drools 提供了一个特殊的 import 语句:import function,通过该 import 语句,可以实现将一个 Java 类中静态方法引入到一个规则文件当中,使得该文件当中的规 则可以像使用普通的 Drools 函数一样来使用 Java 类中某个静态方法。</p>
+
+<p>比如：</p>
+
+<div class="highlight"><pre><code class="java"><span class="kn">package</span> <span class="n">test</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RuleTools</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printInfo</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">){</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;your name is :&quot;</span><span class="o">+</span><span class="n">name</span><span class="o">);</span> 
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+
+<p>```
+package test
+import function test.RuleTools.printInfo;
+/<em>
+测试规则
+</em>/
+rule "rule1"</p>
+
+<pre><code>when
+    eval(true); 
+then
+    printInfo("test import function");
+</code></pre>
+
+<p>end</p>
+
+<p>```</p>
+
+<h1>查询定义</h1>
+
+<p>查询用于根据条件在当前的 WorkingMemory 当中查找 Fact。Drools 当中查询可分为两种:一种是不需要外部传入参数;一种是需要外部传入参 数。</p>
+
+<p>如：</p>
+
+<p>```
+query "testQuery"</p>
+
+<pre><code>customer:Customer(age&gt;30,orders.size &gt;10)
+</code></pre>
+
+<p>end</p>
+
+<p>query "testQuery2"(int $age,String $gender)</p>
+
+<pre><code>customer:Customer(age&gt;$age,gender==$gender)
+</code></pre>
+
+<p>end
+```</p>
+
+<p>通过session可以在外部调用规则文件中的查询，比如：</p>
+
+<div class="highlight"><pre><code class="java"><span class="err">……</span>
+<span class="n">QueryResults</span> <span class="n">queryResults</span><span class="o">=</span><span class="n">statefulSession</span><span class="o">.</span><span class="na">getQueryResults</span><span class="o">(</span><span class="s">&quot;testQuery&quot;</span><span class="o">);</span>
+<span class="k">for</span><span class="o">(</span><span class="n">QueryResultsRow</span> <span class="nl">qr:</span><span class="n">queryResults</span><span class="o">){</span>
+    <span class="n">Customer</span> <span class="n">cus</span><span class="o">=(</span><span class="n">Customer</span><span class="o">)</span><span class="n">qr</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;customer&quot;</span><span class="o">);</span> <span class="c1">//打印查询结果</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;customer name :&quot;</span><span class="o">+</span><span class="n">cus</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+<span class="o">}</span>
+
+<span class="n">QueryResults</span> <span class="n">queryResults2</span><span class="o">=</span><span class="n">statefulSession</span><span class="o">.</span><span class="na">getQueryResults</span><span class="o">(</span><span class="s">&quot;testQuery2&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[]{</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">20</span><span class="o">),</span><span class="s">&quot;F&quot;</span><span class="o">});</span>
+
+<span class="err">……</span>
+</code></pre></div>
+
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2012/12/07/jsr94.html" rel="bookmark">&laquo;&nbsp;下一篇：Java规则引擎规范：JSR94</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2012/12/05/algorithm_of_pattern_match.html" rel="bookmark">上一篇：规则引擎中常用的模式匹配算法&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2012/12/06/rule_language.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "Drools规则描述语言快速手册"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,规则引擎"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["软件开发"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>

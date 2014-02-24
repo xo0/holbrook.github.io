@@ -36,7 +36,7 @@ layout: post
 
 <p>
 Org-mode能够完美解决任务管理的各种问题，包括任务/子任务的划分，关键时间的设定，任务状态变化的跟踪，以及任务的检索和查询。
-再配合<a href="/./emacs_orgmode_editor.html">Org-mode的强大编辑功能</a>， 能够实现很多功能，比如时间管理（GTD），项目计划和管理，工作日志等。
+再配合<a href="/emacs_orgmode_editor.html">Org-mode的强大编辑功能</a> 能够实现很多功能，比如时间管理（GTD），项目计划和管理，工作日志等。
 </p>
 
 <p>
@@ -82,16 +82,18 @@ C-c C-t时，会询问，让你输入一个字母。
 将光标放在这些内容上，输入 C-c C-c 可以直接生效。此时再用C-c C-t设定任务时，会打开一个新的缓冲区：
 </p>
 
-<p>
-<img src="/assets/images/orgmode/todo1.png" alt="nil"/>
+
+<div class="figure">
+<p><img src="http://holbrook.github.com/assets/images/orgmode/todo1.png" alt="todo1.png" />
 </p>
+</div>
 
 <p>
 对照前面的定义不难发现：
 </p>
 
 <ul class="org-ul">
-<li>可以定义多组状态序列，每个“#+SEQ_TODO”行定义一组
+<li>可以定义多组状态序列，每个“#+SEQ<sub>TODO”行定义一组</sub>
 </li>
 <li>状态之间用空格分隔
 </li>
@@ -115,9 +117,11 @@ C-c C-t时，会询问，让你输入一个字母。
 使用C-c C-t 或者 S-LEFT/RIGTH 切换一些状态后，任务会变成这个样子：
 </p>
 
-<p>
-<img src="/assets/images/orgmode/todo2.png" alt="nil"/>
+
+<div class="figure">
+<p><img src="http://holbrook.github.com/assets/images/orgmode/todo2.png" alt="todo2.png" />
 </p>
+</div>
 
 <p>
 会自动生成时间戳，提示填写说明。从而留下完整的记录。
@@ -125,7 +129,7 @@ C-c C-t时，会询问，让你输入一个字母。
 
 
 <p>
-上面的任务状态设置只适用于当前文档。如果希望设定所有.org文档的默认任务状态，需要在.emacs配置文件中定义。
+上面的任务状态设置只适用于当前文档。如果希望设定所有 <code>.org</code> 文档的默认任务状态，需要在 <code>.emacs</code> 配置文件中定义。
 上面的任务状态在配置文件中的等效设置为：
 </p>
 
@@ -197,7 +201,7 @@ Org-mode支持在上级任务上增加标记，当子任务的状态发生改变
 <h2 id="sec-5"><span class="section-number-2">5</span> 用复选框标记非标题类型的子任务</h2>
 <div class="outline-text-2" id="text-5">
 <p>
-前面的任务和子任务都是标题形式。Org-mode还支持非标题形式的子任务。对于以 <code>[ ]</code> 开头的<img src="/2012/04/12/emacs_orgmode_editor.html#sec-3-4" alt="列表"/> 会被当作复选框。这样就形成了局部的子任务，
+前面的任务和子任务都是标题形式。Org-mode还支持非标题形式的子任务。对于以 <code>[ ]</code> 开头的<i>列表</i> 会被当作复选框。这样就形成了局部的子任务，
 适用于将一个任务划分成几个简单的步骤。
 下面是一个例子：
 </p>
@@ -250,7 +254,7 @@ Org-mode支持在上级任务上增加标记，当子任务的状态发生改变
 <h2 id="sec-6"><span class="section-number-2">6</span> 查询任务</h2>
 <div class="outline-text-2" id="text-6">
 <p>
-在<img src="/2012/04/12/emacs_orgmode_editor.html#sec-1-2-3" alt="Org-mode的编辑功能"/> 中介绍过大纲的检索功能：
+在<i>Org-mode的编辑功能</i> 中介绍过大纲的检索功能：
 </p>
 
 <pre class="example">
@@ -275,7 +279,7 @@ Org-mode中的任务还可以设置计划时间（SCHEDULED）和截止时间（
 <div class="outline-text-3" id="text-7-1">
 <p>
 在Org-mode中，将带有日期和时间信息的特定格式的字符串称为时间戳。时间戳使用”&lt; &gt;“进行标记，比如：
-#+START_QUOTE
+#+START<sub>QUOTE</sub>
 </p>
 <pre class="example">
 &lt;2005-10-01 Tue&gt;
@@ -283,7 +287,7 @@ Org-mode中的任务还可以设置计划时间（SCHEDULED）和截止时间（
 &lt;2003-09-16 Tue 12:00-12:30&gt;
 </pre>
 <p>
-#+END_QUOTE
+#+END<sub>QUOTE</sub>
 </p>
 
 <p>
@@ -292,13 +296,13 @@ Org-mode中的任务还可以设置计划时间（SCHEDULED）和截止时间（
 </p>
 
 <p>
-#+START_QUOTE
+#+START<sub>QUOTE</sub>
 </p>
 <pre class="example">
 &lt;2007-05-16 Wed 12:30 +1w&gt;
 </pre>
 <p>
-#+END_QUOTE
+#+END<sub>QUOTE</sub>
 </p>
 
 <p>

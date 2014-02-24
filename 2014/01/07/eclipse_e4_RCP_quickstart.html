@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="尽管至今为止，[Eclipse e4](http://www.eclipse.org/e4/)仍然处于孵化器阶段(Incubation Phase)，但是e4代表了Eclipse的未来。e4是位于底层的Equinox、EMF、SWT/..." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>Eclipse e4 概览 &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">Eclipse e4 概览</h1>
+  <p>摘要：<br/>尽管至今为止，仍然处于孵化器阶段(Incubation Phase)，但是e4代表了Eclipse的未来。e4提供的新特性包括： 基于EMF的应用模型(Application Model)；依赖注入；基于CSS定义外观</p>
+
+  <time class="published" datetime="2014-01-07">2014-01-07
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#软件开发-ref">软件开发</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#OSGi-ref">OSGi</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <p>尽管至今为止，<a href="http://www.eclipse.org/e4/">Eclipse e4</a>仍然处于孵化器阶段(Incubation Phase)，但是e4代表了Eclipse的未来。</p>
+
+<p>e4是位于底层的Equinox、EMF、SWT/JFace和上层的Eclipse应用(Plugin、RCP、RAP等)之间的一个应用开发平台。
+从RCP的角度来说，e4的一个主要目标就是更轻松地编写和重用组件。
+为了实现这个目标，与之前的Eclipse平台相比，e4带来的新特性主要包括：</p>
+
+<ul>
+<li>基于EMF的应用模型(Application Model)</li>
+<li>依赖注入</li>
+<li>基于CSS定义外观</li>
+</ul>
+
+
+<h1>快速开始</h1>
+
+<p>需要的环境和工具包括：</p>
+
+<ul>
+<li>Java >= 1.7</li>
+<li>Eclipse >= 4.3</li>
+<li><a href="https://marketplace.eclipse.org/content/enide-eclipse-boostrap-e4">Enide - Eclipse bootstrap e4</a></li>
+<li><a href="http://www.eclipse.org/windowbuilder/">WindowBuilder</a></li>
+</ul>
+
+
+<p>安装了Eclipse bootstrap e4插件之后，可以创建Eclipse 4 --> Eclipse 4 Application Project。</p>
+
+<p>生成的目录结构如下：</p>
+
+<p><img src="/images/e4/e4_project.png" alt="" /></p>
+
+<p>其中，<code>*.product</code>文件是Eclipse插件项目的产品配置文件，可以以“E4Application”的方式运行：</p>
+
+<p><img src="/images/e4/e4_product.png" alt="" /></p>
+
+<p>在<code>*.product</code>文件上右键-->Run As-->Eclipse Application，就可以启动一个e4应用：</p>
+
+<p><img src="/images/e4/e4_application.png" alt="" /></p>
+
+<p>整个工程可以导出(Export)为"Eclipse Product"，称为一个可以脱离Eclipse独立运行的、跨平台的RCP应用。</p>
+
+<h1>应用模型</h1>
+
+<p>好吧，到目前为止，e4所表现出来的功能与Eclipse 3.x相比没什么区别。但是请关注一下上面生成的<code>Application.e4xmi</code>文件。
+该文件是e4中的应用模型文件。</p>
+
+<p>在 Eclipse 平台 UI 的早期版本中，workbench 被显式地硬编码来布局 workbench 窗口、workbench 页面、编辑器区域或视图堆栈。e4 引入了额外的一层，可将UI元素提取和抽象成一个模型。应用程序可以重新配置或扩展这个模型来制作不同的外观。这个模型也可被动态操纵；模型的改变可以立即反映出 UI 的变化。</p>
+
+<p>e4的模型的特性为：</p>
+
+<ul>
+<li>基于抽象描述</li>
+<li>可以在运行时(runtime)更改</li>
+<li>支持扩展</li>
+</ul>
+
+
+<h2>抽象描述</h2>
+
+<p>e4的应用模型基于抽象描述——应用模型只定义了需要哪些组件，而不关注这些组件是如何实现的。e4应用模型实现了应用模型和实际视图(Views)的分离。</p>
+
+<p>由于应用模型没有绑定的具体实现，这意味着一种可能：同一个应用模型可以用各种界面技术（如SWT/JFace, Swing甚至web，Flash）来实现。</p>
+
+<p>模型中即描述了可视的组件，如 windows, parts (views 和 editors), menus, toolbars等，也可以描述非可视化组件如handlers, commands , key bindings等。所有能够在模型中描述的组件（包括可视化组件和非可视化组件），都实现了MApplicationElement接口，如下图：</p>
+
+<p><img src="/images/e4/e4_MApplicationElement.png" alt="" /></p>
+
+<p>用Eclipse 4 model editor打开<code>Application.e4xmi</code>，可以看到如下的视图：</p>
+
+<p><img src="/images/e4/e4_app_model.png" alt="" /></p>
+
+<p><code>Application.e4xmi</code>是基于EMF定义的。其定义文件(.ecore）位于 org.eclipse.e4.ui.model.workbench 插件的model文件夹中。</p>
+
+<h2>常用的可视化组件</h2>
+
+<p>e4中的可视化组件描述类都来自<code>MUIElement</code>，该接口当然也继承了<code>MApplicationElement</code>接口。
+常用的可视化组件包括：</p>
+
+<ul>
+<li><p>Window</p>
+
+<p>窗口。一个Eclipse 应用可以包含一个或多个窗口。</p>
+
+<p><img src="/images/e4/elements/window.png" alt="" /></p></li>
+<li><p>Parts</p>
+
+<p>e4中不区分Views和editors，而是统一定义为Parts。Part能够放置在用户界面的任何位置，每个Part可以有自己的菜单、工具条，可以出来自己的模型数据。</p>
+
+<p><img src="/images/e4/elements/part.png" alt="" /></p></li>
+<li><p>Perspective</p>
+
+<p>Perspective是Parts的容器，可以管理内部Part的布局。一个应用可以有多个不同的Perspective(不能同时出现)，以适应不同的应用场景。
+比如，Eclipse IDE提供了Java、Java EE、Debug等Perspective。</p>
+
+<p>在应用模型中，为了管理方便，还可以将Perspective放置到Perspective Stack中。</p></li>
+<li><p>PartStack 和 PartSashContainer</p>
+
+<p>Part可以直接用于Window或Perspective中，也可以将其分组。使用PartStack 和 PartSashContainer可以实现Part的分组和布局管理。</p>
+
+<p>PartStack可以容纳多个Part，每次只能显示其中一个Part，以页签(tab)的形式进行切换，而PartSashContainer以水平或竖直布局的方式同时显示多个Part。如下图：</p>
+
+<p><img src="/images/e4/elements/partstack.png" alt="" /></p>
+
+<p>通过PartStack和PartSashContainer的组合，能够创建出非常复杂的布局：</p>
+
+<p><img src="/images/e4/elements/partsashcontainer.png" alt="" /></p>
+
+<p>PartStack 和 PartSashContainer中的子组件，可以设置“容器数据(Container Data)”，作为决定自己在容器中布局的参数。</p>
+
+<p><img src="/images/e4/elements/containerdata.png" alt="" /></p>
+
+<p>需要注意的是，容器中的所有元素要么都设置容器数据，要么都不设置，否则会出现异常。</p></li>
+</ul>
+
+
+<h1>依赖注入</h1>
+
+<p>基于上一节的内容，我们可以脱离UI组件的实现，直接定义出应用模型。</p>
+
+<p>同样的，当我们实现一个UI组件的时候，也完全无需考虑应用模型的存在。在e4中，View甚至无需实现任何接口，而是通过依赖注入的方式获取UI组件的上下文环境。可以使用<a href="/2013/12/31/jsr330.html">JSR330</a>中定义的<code>@Inject</code>注解，也可以使用e4的<code>org.eclipse.e4.ui.di</code>包中定义的<code>@Focus</code>、<code>@Persist</code>等注解。比如：</p>
+
+<p>```
+public class SamplePart {</p>
+
+<pre><code>private Text txtInput;
+private TableViewer tableViewer;
+
+@Inject
+private MDirtyable dirty;
+
+@PostConstruct
+public void createComposite(Composite parent) {
+    parent.setLayout(new GridLayout(1, false));
+
+    txtInput = new Text(parent, SWT.BORDER);
+    txtInput.setMessage("Enter text to mark part as dirty");
+    txtInput.addModifyListener(new ModifyListener() {
+        @Override
+        public void modifyText(ModifyEvent e) {
+            dirty.setDirty(true);
+        }
+    });
+    txtInput.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+
+    tableViewer = new TableViewer(parent);
+
+    tableViewer.add("Sample item 1");
+    tableViewer.add("Sample item 2");
+    tableViewer.add("Sample item 3");
+    tableViewer.add("Sample item 4");
+    tableViewer.add("Sample item 5");
+    tableViewer.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
+}
+
+@Focus
+public void setFocus() {
+    tableViewer.getTable().setFocus();
+}
+
+@Persist
+public void save() {
+    dirty.setDirty(false);
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>由于UI组件与应用模型完全解耦，可以对UI组件单独进行测试：</p>
+
+<p>```
+public static void main(String[] args) {</p>
+
+<pre><code>Display display = new Display();
+  Shell shell = new Shell(display);
+  shell.setLayout(new FillLayout());
+  SamplePart part = new SamplePart();
+  part.createComposite(shell);
+  shell.open();
+  while( !shell.isDisposed() ) {
+      if( ! display.readAndDispatch() ) {
+        display.sleep();
+      }
+  }
+</code></pre>
+
+<p>}
+```</p>
+
+<h1>向模型注入资源</h1>
+
+<p>前面两节分别介绍了创建应用模型和UI组件，接下来就是将二者结合起来。</p>
+
+<p>在应用模型中，使用URI注入外部资源。比如，一个Part的Icon、Class都是通过URI注入的。这些资源是延迟加载(lazy loaded)的——只有显示某个可视化组件时，才加载其需要的资源。</p>
+
+<p>模型使用的资源即可以在运行时注入或更改，也可以在Eclipse 4 model editor中指定初始的资源：</p>
+
+<p><img src="/images/e4/e4_app_model.png" alt="" /></p>
+
+<p>任何形式的URI都可以作为资源使用。比如：<code>http://thinkinside.tk/assets/ico/favicon.png</code>。</p>
+
+<p>对于Eclipse的插件环境，可以使用应用模型所在的插件(bundle)或来自其他插件的资源，分别使用</p>
+
+<p>  <code>bundleclass://Bundle-SymbolicName/ package.classname</code> 和</p>
+
+<p>  <code>platform:/plugin/Bundle-SymbolicName/ path/filename.extension</code>的形式。</p>
+
+<p>比如：</p>
+
+<p>```
+bundleclass://tangle-app/parts.SamplePart</p>
+
+<p>platform:/plugin/test/icons/save_edit.gif
+```</p>
+
+<h1>定义行为</h1>
+
+<p>e4的应用模型中，通过<code>Handler</code>定义行为。可视化组件和<code>Handler</code>之间通过<code>Command</code>关联。</p>
+
+<p>与GUI组件一样，Handler的定义和实现也是分离的。在应用模型中定义的<code>Handler</code>通过Class URI关联到具体的实现类。我们可以单独编写一个<code>Handler</code>，无需实现任何接口：</p>
+
+<p>```
+public class MyHandler {</p>
+
+<pre><code>@Execute
+public void execute(Shell shell) {
+    MessageDialog.openInformation(shell, "", "Hello World!");
+}
+
+
+@CanExecute
+public boolean canExecute() {
+
+    return true;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>其中，<code>canExecute()</code>方法是可选的。该方法定义了<code>execute()</code>方法是否可以被执行的一个开关。</p>
+
+<p>由于<code>Handler</code>与应用模型完全解耦，可以单独对<code>Handler</code>进行测试：</p>
+
+<p>```
+public static void main(String[] args) {
+  Display display = new Display();
+  Shell shell = new Shell(display);
+  shell.open();
+  MyHandler.execute(shell);
+  while( !shell.isDisposed() ) {</p>
+
+<pre><code>  if( ! display.readAndDispatch() ) {
+    display.sleep();
+  }
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>最简单的事件处理是菜单/工具条的处理。使用模型编辑器，可以在图形界面中很容易的将<code>Handler</code>和菜单项都关联到同一个<code>Commnad</code>，
+即实现了行为的定义。这里不做截图，定义好的<code>Application.e4xmi</code>中相关内容可能是：</p>
+
+<p>```</p>
+
+<pre><code>&lt;!--定义一个Command--&gt;
+&lt;commands xmi:id="_4mWoMHcyEeOYmvSF-9z33Q" elementId="holbrook.tangle.demo.myCommand" commandName="测试Cmd"/&gt;
+
+&lt;!--定义一个Handler，并关联到Command--&gt;
+&lt;handlers xmi:id="_J-fYsHczEeOYmvSF-9z33Q" elementId="holbrook.tangle.demo.myHandler" contributionURI="bundleclass://tangle-app/handlers.MyHandler" command="_4mWoMHcyEeOYmvSF-9z33Q"/&gt;
+
+&lt;!--定义一个菜单项，也关联到Command--&gt;
+&lt;mainMenu xmi:id="_FfY8UHbUEeOYmvSF-9z33Q" elementId="tangle-app.menu.0"&gt;
+  &lt;children xsi:type="menu:Menu" xmi:id="_OwboQHc0EeOYmvSF-9z33Q" elementId="tangle-app.menu.1" label="测试菜单"&gt;
+    &lt;children xsi:type="menu:HandledMenuItem" xmi:id="_TwOjEHc0EeOYmvSF-9z33Q" elementId="tangle-app.handledmenuitem.0" label="测试Cmd" command="_4mWoMHcyEeOYmvSF-9z33Q"/&gt;
+  &lt;/children&gt;
+&lt;/mainMenu&gt;
+</code></pre>
+
+<p>```</p>
+
+<h1>CSS样式</h1>
+
+<p>e4将桌面应用和Web应用的一些特性融合在了一起，比如，可以通过CSS定义桌面应用的外观。</p>
+
+<p>使用Eclipse bootstrap e4创建的Eclipse 4 Application Project，会包含一个<code>css/default.css</code>的空文件。
+编辑这个文件就可以修改应用的外观。</p>
+
+<p>在e4中，CSS选择器使用<code>type#id.class</code>的格式。其中：</p>
+
+<ul>
+<li>type：对应SWT组件类（如Button、Composite等）</li>
+<li>id：对应应用模型中的<code>elementId</code></li>
+</ul>
+
+
+<p>一些映射关系可以参考<a href="http://wiki.eclipse.org/E4/CSS/SWT_Mapping">这里</a></p>
+
+<p>下面是一个CSS的例子：</p>
+
+<p>```
+Text {</p>
+
+<pre><code>font: Verdana 15px;
+color: red;
+background-color: green;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>默认情况下，该CSS就会生效。因为在<code>plugin.xml</code>中，已经指定了CSS的扩展点：</p>
+
+<p><img src="/images/e4e4_css_extension.png" alt="" /></p>
+
+<p>更灵活的使用CSS是通过主题管理器。</p>
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2014/01/08/build_osgi_bundle_with_tycho_maven_plugin.html" rel="bookmark">&laquo;&nbsp;下一篇：Tycho：用Maven构建Eclipse Plugin项目</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2014/01/06/integration_tests_within_spring.html" rel="bookmark">上一篇：Spring对集成测试的支持&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2014/01/07/eclipse_e4_RCP_quickstart.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "Eclipse e4 概览"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,OSGi"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["软件开发"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>

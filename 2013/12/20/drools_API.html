@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="[如前所述](/2012/03/20/rule_engine_1.html)，规则引擎中，将知识表达为规则（rules），要分析的情况定义为事实（facts）。二者在内存中的存储分别称为Production Memory和Workin..." >
+<meta name="author" content="Holbrook(wanghaikuo@gmail.com)">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>Drools规则引擎API概述 &middot; 心内求法</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/images/favicon.png" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/syntax.css">
+<link rel="stylesheet" href="/public/css/responsive.gs.12col.css">
+<link rel="stylesheet" href="/public/css/animate.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="/public/css/googleapis.css">
+
+
+<!-- font Awesome -->
+<link href="/public/css/font-awesome.css" rel="stylesheet">
+
+
+<!-- feed links -->
+<link rel="alternate" href="http://thinkinside.tk/feed.xml" type="application/rss+xml" title="">
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="top row gutters">
+        <div class="col span_2" id="logo-container">
+          <a href="/" id="actual-logo" title="心内求法" style="background-image: url(/public/images/logo.png);"></a>
+        </div>
+        <nav class="col span_10">
+	
+  
+  <a href="/index.html" title="首页"
+     >首页</a>
+  
+  
+  <a href="/pages/archive.html" title="归档"
+     >归档</a>
+  
+  
+  <a href="/pages/categories.html" title="分类"
+     >分类</a>
+  
+  
+  <a href="/pages/tags.html" title="标签"
+     >标签</a>
+  
+  
+  <a href="/feed.xml" title="订阅"
+     >订阅</a>
+  
+  
+  <a href="http://www.wumii.com/auto_app/download/nbn2Kljo" title="手机版"
+     >手机版</a>
+  
+</nav>
+
+      </header>
+
+      <style>
+.top_line {
+  border-top: 1px solid #b3b3b3;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(179, 179, 179);
+}
+
+.bottom_line {
+  border-bottom: 1px solid #b3b3b3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(179, 179, 179);
+}
+
+</style>
+
+<article class="single-post row gutters bottom_line">
+  <div class="bottom_line">
+  <h1 style="font-size: 2em;">Drools规则引擎API概述</h1>
+  <p>摘要：<br/>与此对应，规则引擎API也分成三个部分。在Drools中，分别叫做Knowledge API，Fact API和Execution API。</p>
+
+  <time class="published" datetime="2013-12-20">2013-12-20
+  
+&sdot; 分类：
+  
+    <a href="/pages/categories.html#软件开发-ref">软件开发</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  &sdot; 标签： 
+  
+    <a href="/pages/tags.html#规则引擎-ref">规则引擎</a>
+    <sup>4</sup>
+    &nbsp;
+  
+
+  </time>
+</div>
+
+  
+
+  <p><a href="/2012/03/20/rule_engine_1.html">如前所述</a>，
+规则引擎中，将知识表达为规则（rules），要分析的情况定义为事实（facts）。二者在内存中的存储分别称为Production Memory和Working Memory。在外围，还会有一个执行引擎（Execution Engine）。</p>
+
+<p>与此对应，规则引擎API也分成三个部分。在Drools中，分别叫做Knowledge API，Fact API和Execution API。</p>
+
+<h1>Knowledge API</h1>
+
+<p>Drools将知识库(KnowledgeBase)作为<a href="/2012/12/07/jsr94.html">JSR94</a>中的规则执行集(RuleExecutionSet)。知识库中的知识以包(KnowledgePackage)为单位组合而成。每个包中聚合多个规则(Rule)。</p>
+
+<p>通常，一个包中的内容会在一个或多个资源(Resource)中保存。资源的类型可以有很多种,如.drl 文件、.dslr 文件或 xls 文件等。</p>
+
+<p>规则包还可以从规则流(rule flow) 文件中获取。</p>
+
+<p><img src="/images/rule-engine/KnowledgeBase.png" alt="KnowledgeBase" /></p>
+
+<p>与此对应，Drools定义了一组Knowledge API来操作知识库。</p>
+
+<p><img src="/images/rule-engine/KnowledgeAPI.png" alt="KnowledgeBase" /></p>
+
+<p>构建知识库的一般过程为：</p>
+
+<ol>
+<li>通过ResourceFactory获取资源。可以从Classpath、URL、File、ByteArray、Reader等输入源中获取</li>
+<li>构建KnowledgeBuilder，将资源添加到KnowledgeBuilder中。KnowledgeBuilder通常由KnowledgeBuilderFactory创建</li>
+<li>从KnowledgeBuilder中获取规则包</li>
+<li>创建KnowledgeBase，可以通过KnowledgeBaseConfiguration定义KnowledgeBase的一些属性，默认的配置位于drools-core-VERSION.jar 包下 META-INF/drools.default.rulebase.conf 文件中</li>
+<li>将规则包添加到KnowledgeBase</li>
+<li>为KnowledgeBase添加KnowledgeBaseEventListener，可以监控KnowledgeBase中的事件</li>
+</ol>
+
+
+<p>代码示例：</p>
+
+<div class="highlight"><pre><code class="java"> <span class="n">KnowledgeBase</span> <span class="nf">buildKBase</span><span class="o">(){</span>
+        
+        <span class="n">Resource</span> <span class="n">res</span> <span class="o">=</span> <span class="n">ResourceFactory</span><span class="o">.</span><span class="na">newClassPathResource</span><span class="o">(</span><span class="s">&quot;hello.drl&quot;</span><span class="o">,</span> <span class="n">Demo</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        
+        <span class="n">KnowledgeBuilder</span> <span class="n">kbuilder</span> <span class="o">=</span> <span class="n">KnowledgeBuilderFactory</span>
+                <span class="o">.</span><span class="na">newKnowledgeBuilder</span><span class="o">();</span>
+
+        <span class="n">kbuilder</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">res</span><span class="o">,</span><span class="n">ResourceType</span><span class="o">.</span><span class="na">DRL</span><span class="o">);</span>
+        
+        <span class="c1">//validate</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">kbuilder</span><span class="o">.</span><span class="na">hasErrors</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;规则中存在错误,错误消息如下:&quot;</span><span class="o">);</span>
+            <span class="n">KnowledgeBuilderErrors</span> <span class="n">kbuidlerErrors</span> <span class="o">=</span> <span class="n">kbuilder</span><span class="o">.</span><span class="na">getErrors</span><span class="o">();</span>
+            <span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">kbuidlerErrors</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">iter</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">iter</span><span class="o">.</span><span class="na">next</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        
+        <span class="n">Collection</span><span class="o">&lt;</span><span class="n">KnowledgePackage</span><span class="o">&gt;</span> <span class="n">kpackages</span> <span class="o">=</span> <span class="n">kbuilder</span><span class="o">.</span><span class="na">getKnowledgePackages</span><span class="o">();</span>
+        
+        <span class="n">KnowledgeBaseConfiguration</span> <span class="n">kbConf</span> <span class="o">=</span>
+                <span class="n">KnowledgeBaseFactory</span><span class="o">.</span><span class="na">newKnowledgeBaseConfiguration</span><span class="o">();</span> 
+        <span class="n">kbConf</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span> <span class="s">&quot;org.drools.sequential&quot;</span><span class="o">,</span> <span class="s">&quot;true&quot;</span><span class="o">);</span> 
+        
+        <span class="c1">//KnowledgeBase kbase=KnowledgeBaseFactory.newKnowledgeBase();</span>
+        <span class="n">KnowledgeBase</span> <span class="n">kbase</span> <span class="o">=</span>
+                <span class="n">KnowledgeBaseFactory</span><span class="o">.</span><span class="na">newKnowledgeBase</span><span class="o">(</span><span class="n">kbConf</span><span class="o">);</span>
+        
+        <span class="n">kbase</span><span class="o">.</span><span class="na">addKnowledgePackages</span><span class="o">(</span><span class="n">kpackages</span><span class="o">);</span>
+        
+        <span class="k">return</span> <span class="n">kbase</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div>
+
+
+<h1>Fact API</h1>
+
+<p>要操作Working Memory，首先要建立规则引擎的一个会话。Drools中的有状态会话和无状态会话分别为StatefulKnowledgeSession和StatelessKnowledgeSession，都可以由KnowledgeBase建立。</p>
+
+<p>通过会话可以进行操作Fact对象，执行规则等交互，例如：</p>
+
+<div class="highlight"><pre><code class="java"><span class="n">KnowledgeBase</span> <span class="n">kbase</span> <span class="o">=</span> <span class="n">buildKBase</span><span class="o">();</span>
+        
+<span class="n">StatefulKnowledgeSession</span> <span class="n">statefulKSession</span><span class="o">=</span><span class="n">kbase</span><span class="o">.</span><span class="na">newStatefulKnowledgeSession</span><span class="o">();</span>
+<span class="n">statefulKSession</span><span class="o">.</span><span class="na">setGlobal</span><span class="o">(</span><span class="s">&quot;globalTest&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Object</span><span class="o">());</span>
+
+<span class="n">statefulKSession</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="k">new</span> <span class="n">Object</span><span class="o">());</span> 
+<span class="n">statefulKSession</span><span class="o">.</span><span class="na">fireAllRules</span><span class="o">();</span> 
+<span class="n">statefulKSession</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+</code></pre></div>
+
+
+<p>StatefulKnowledgeSession中，insert()方法、fireAllRules()方法和 dispose()方法是分开执行的，这个过程中可以进行一定的控制，
+而StatelessKnowledgeSession不同，在无状态会话中，上述三个方法被合并为execute()方法，不能分开调用。如果要插入多个Fact对象，只能使用集合，比如：</p>
+
+<div class="highlight"><pre><code class="java"><span class="n">StatelessKnowledgeSession</span> <span class="n">statelessKSession</span><span class="o">=</span><span class="n">kbase</span><span class="o">.</span><span class="na">newStatelessKnowledgeSession</span><span class="o">();</span>
+<span class="n">ArrayList</span> <span class="n">list</span><span class="o">=</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span> 
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Object</span><span class="o">());</span> 
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Object</span><span class="o">());</span> 
+<span class="n">statelessKSession</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
+</code></pre></div>
+
+
+<p>这样的特点决定了，无状态会话适合推演和分析，需要事先知道所有的事实(Fact)；而有状态会话可以随时增加事实并进行批评，适合实际应用。</p>
+
+<p>无状态会话中还可以使用execute(Command cmd)方法。比如，如果要在无状态会话中插入一个List，可以用CommandFactory生成一个关于List的Command:</p>
+
+<div class="highlight"><pre><code class="java"><span class="n">statelessKSession</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">CommandFactory</span><span class="o">.</span><span class="na">newInsert</span><span class="o">(</span><span class="n">list</span><span class="o">));</span>
+</code></pre></div>
+
+
+<p>同样，无状态会话中如果要设置global，也需要使用Command:</p>
+
+<div class="highlight"><pre><code class="java"><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Command</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">=</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Command</span><span class="o">&gt;();</span> 
+
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">CommandFactory</span><span class="o">.</span><span class="na">newInsert</span><span class="o">(</span><span class="k">new</span> <span class="n">Object</span><span class="o">()));</span> 
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">CommandFactory</span><span class="o">.</span><span class="na">newInsert</span><span class="o">(</span><span class="k">new</span> <span class="n">Object</span><span class="o">()));</span> 
+
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">CommandFactory</span><span class="o">.</span><span class="na">newSetGlobal</span><span class="o">(</span><span class="s">&quot;key1&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Object</span><span class="o">()));</span> 
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">CommandFactory</span><span class="o">.</span><span class="na">newSetGlobal</span><span class="o">(</span><span class="s">&quot;key2&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Object</span><span class="o">()));</span>
+
+<span class="n">statelessKSession</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">CommandFactory</span><span class="o">.</span><span class="na">newBatchExecution</span><span class="o">(</span><span class="n">list</span><span class="o">))</span> <span class="o">;</span>
+</code></pre></div>
+
+
+<h1>Execution API</h1>
+
+<p>插入到WorkingMemory中的对象，并不是克隆，而是对原对象的引用。这就意味着引擎中可以改变外部的对象，这是引擎与外部数据交互的一个通道。</p>
+
+<p>此外，insert()方法还会返回一个FactHandler，作为引擎中该Fact对象的一个句柄。</p>
+
+<p>最后，session上可以注册AgendaEventListener、ProcessEventListener和WorkingMemoryEventListener，这也是常用的交互方式。
+比如WorkingMemoryEventListener可以监听Fact对象变化的事件：</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">WorkingMemoryEventListener</span>
+    <span class="kd">extends</span>
+    <span class="n">EventListener</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">objectInserted</span><span class="o">(</span><span class="n">ObjectInsertedEvent</span> <span class="n">event</span><span class="o">);</span>
+
+    <span class="kt">void</span> <span class="nf">objectUpdated</span><span class="o">(</span><span class="n">ObjectUpdatedEvent</span> <span class="n">event</span><span class="o">);</span>
+
+    <span class="kt">void</span> <span class="nf">objectRetracted</span><span class="o">(</span><span class="n">ObjectRetractedEvent</span> <span class="n">event</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
+
+
+  <!--百度分享 BEGIN-->
+<div class="bdsharebuttonbox" class="top_line">
+  <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--百度分享 END-->
+
+      <!--  评论  -->
+      <div class="row-fluid">
+        
+          <!-- UY BEGIN -->
+          <div id="uyan_frame"></div>
+          <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
+          <!-- UY END -->
+        
+      </div>
+      <!--  评论  END -->
+
+
+
+
+
+</article>
+
+ <!--上一篇，下一篇-->
+      <div class="row-fluid">
+      
+        <div class="span6">
+          <a href="/2013/12/21/Temporal_of_CEP.html" rel="bookmark">&laquo;&nbsp;下一篇：CEP中的时间推理(Temporal)</a>
+        </div>
+      
+
+      
+        <div class="span6">
+        <a class="pull-right" href="/2013/12/19/trading_strategy.html" rel="bookmark">上一篇：交易策略与规则引擎&nbsp;&raquo;</a>
+        </div>
+      
+      </div>
+      <!--上一篇，下一篇 END-->
+
+
+<!--wumii block-->
+          <script type="text/javascript" id="wumiiRelatedItems"></script>
+
+
+          <!--for wumii ， can be moved to footer-->
+         <script type="text/javascript">
+            var wumiiPermaLink = "http://thinkinside.tk/2013/12/20/drools_API.html"; //请用代码生成文章永久的链接
+            var wumiiTitle = "Drools规则引擎API概述"; //请用代码生成文章标题
+            var wumiiTags = "心内求法,规则引擎"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+            var wumiiCategories = ["软件开发"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+            var wumiiSitePrefix = "http://www.thinkinside.tk/";
+            var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+        </script>
+        <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget" async="true"></script>
+        <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+            <img src="http://static.wumii.cn/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+        </a>
+        <!--end of wumii-->
+
+
+    </div>
+    
+    <footer>
+       <div class="row">
+      <div class="col span_7">
+        <p><h4 class="footer-title">心内求法</h4>
+        制心一境，住心观性，澄心外照，摄心内证</p>
+        
+        <p>&copy; Copyright 2014  <a herf='mailto:wanghaikuo@gmail.com'>Holbrook Wong</a>. 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">署名-非商业性使用-相同方式共享</a> 
+        </p>
+        
+
+        <a rel="license nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="/public/images/footer_cc.png" /></a>
+
+        <a rel="nofollow" href="http://www.alexa.com/siteinfo/thinkinside.tk" target="_blank" class="AlexaSiteStatsWidget"></a>
+
+        <!-- Site Meter -->
+        <script type="text/javascript" src="http://s51.sitemeter.com/js/counter.js?site=s51thinkinside" async="true">
+        </script>
+        <noscript>
+        <a href="http://s51.sitemeter.com/stats.asp?site=s51thinkinside" target="_top">
+        <img src="http://s51.sitemeter.com/meter.asp?site=s51thinkinside" alt="Site Meter" border="0"/></a>
+        </noscript>
+      </div> <!-- /span8 -->
+
+      <div class="col span_5">
+          <h3>关于</h3>
+          <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1878878250&verifier=b193b9de&dpc=1"></iframe>
+          
+          <h5>我以前的博客</h5>
+          <a href="http://www.cnblogs.com/holbrook/" target="_blank">@博客园</a>(2012.2--2013.5)<br/>
+          <a href="http://blog.csdn.net/thinkinside/" target="_blank">@CSDN</a>(2007.7--2012.2)<br/>
+          <a href="http://www.blogjava.net/wanghaikuo" target="_blank">@blogjava</a>(2006.10--2007.7)
+        </div>
+      </div>
+    </div>
+ 
+    </footer>
+
+    <!-- scripts -->
+    <!--百度统计-->
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb942c9f7549938d471dbef766d4b4792' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
+    <script src="/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/public/js/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("article").fitVids();
+      });
+    </script>
+  </body>
+</html>
