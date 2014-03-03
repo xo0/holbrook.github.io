@@ -2,7 +2,7 @@ markdown:       rdiscount
 safe:           true
 lsi:            false
 pygments:       true
-permalink:      /:title.html
+permalink:      /:year/:month/:day/:title.html
 author:			Holbrook(wanghaikuo@gmail.com)
 title:          心内求法
 url:            http://thinkinside.tk
