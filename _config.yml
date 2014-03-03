@@ -2,7 +2,6 @@ markdown:       rdiscount
 safe:           true
 lsi:            false
 pygments:       true
-paginate:       10
 permalink:      /:title.html
 author:			Holbrook(wanghaikuo@gmail.com)
 title:          心内求法
@@ -15,11 +14,9 @@ menuitems:
       url:      /index.html
     - name:     归档
       url:      /pages/archive.html
-    - name:     分类
-      url:      /pages/categories.html
     - name:     标签
       url:      /pages/tags.html
+    - name:     关于
+      url:      /pages/about.html
     - name:     订阅
       url:      /feed.xml
-    - name:     手机版 
-      url:      http://www.wumii.com/auto_app/download/nbn2Kljo
