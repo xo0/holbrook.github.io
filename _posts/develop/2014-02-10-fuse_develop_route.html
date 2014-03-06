@@ -1,11 +1,11 @@
 ---
-title: 开发和部署JBoss FUSE中的路由(Route)
 tags:
   - SOA
   - OSGi
   - Maven
   - FUSE
 layout: post
+title: 开发和部署JBoss FUSE中的路由(Route)
 ---
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -27,18 +27,13 @@ layout: post
 </p>
 
 <p>
-[Camel提供了大量的开发工具(<a href="http://search.maven.org/#search|ga|1|org.apache.camel.archetypes">http://search.maven.org/#search|ga|1|org.apache.camel.archetypes</a>)，
-</p>
-
-<p>
-其中<a href="http://search.maven.org/#search|ga|1|a:%22camel-archetype-blueprint%22">camel-archetype-blueprint</a>
-是一个<a href="http://maven.apache.org/guides/introduction/introduction-to-archetypes.html">maven
-archetype</a>，
+<a href="http://search.maven.org/#search|ga|1|org.apache.camel.archetypes">Camel提供了大量的开发</a>工具 ，其中<a href="http://search.maven.org/#search|ga|1|a:%22camel-archetype-blueprint%22">camel-archetype-blueprint</a> 是一个<a href="http://maven.apache.org/guides/introduction/introduction-to-archetypes.html">maven archetype</a>，
 可以基于<a href="file:///2014/01/22/osgi_blueprint_container.html">Blueprint</a>，以依赖注入的方式配置CamelContext。下面快速创建一个demo:
 </p>
 
-<pre class="example">
-mvn archetype:generate  \
+<div class="org-src-container">
+
+<pre class="src src-bash">mvn archetype:generate  \
 -DarchetypeGroupId=org.apache.camel.archetypes \
 -DarchetypeArtifactId=camel-archetype-blueprint \
 -DarchetypeVersion=2.12.2 \
@@ -46,15 +41,20 @@ mvn archetype:generate  \
 -DartifactId=route-demo \
 -Dversion=1.0.0-SNAPSHOT
 </pre>
+</div>
 
 <p>
 会创建如下结构的一个工程：
 </p>
 
+
+<div class="figure">
+<p><img src="/./assets/images/fuse/route-demo-structure.png" alt="route-demo-structure.png" />
+</p>
+</div>
+
 <p>
-<img src="file:///images/fuse/route-demo-structure.png" alt="route-demo-structure.png" />
-从=pom.xml=来看，这是一个<a href="file:///2014/01/21/tycho_vs_maven_bundle_plugin.html">使用maven-bundle-plugin构建的OSGi
-bundle工程</a>。
+从 <code>pom.xml</code> 来看，这是一个<a href="file:///2014/01/21/tycho_vs_maven_bundle_plugin.html">使用maven-bundle-plugin构建的OSGibundle工程</a>。
 </p>
 </div>
 </div>
@@ -66,39 +66,40 @@ Context
 </p>
 
 <p>
-工程的`META-INF/blueprint/blueprint.xml'文件是一个Blueprint配置文件： 
+工程的`META-INF/blueprint/blueprint.xml'文件是一个Blueprint配置文件：
 </p>
 
-<pre class="example">
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:camel="http://camel.apache.org/schema/blueprint"
-       xsi:schemaLocation="
-       http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
-       http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd"&gt;
+<div class="org-src-container">
 
-  &lt;bean id="helloBean" class="thinkinside.demo.fuse.HelloBean"&gt;
-      &lt;property name="say" value="Hi from Camel"/&gt;
-  &lt;/bean&gt;
+<pre class="src src-xml">&lt;?<span style="color: #00bfff;">xml</span> <span style="color: #4eee94;">version</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">1.0</span><span style="color: #deb887;">"</span> <span style="color: #4eee94;">encoding</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">UTF-8</span><span style="color: #deb887;">"</span>?&gt;
+&lt;<span style="color: #daa520;">blueprint</span> <span style="color: #f08080;">xmlns</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">http://www.osgi.org/xmlns/blueprint/v1.0.0</span><span style="color: #deb887;">"</span>
+       <span style="color: #f08080;">xmlns</span>:<span style="color: #4eee94;">xsi</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">http://www.w3.org/2001/XMLSchema-instance</span><span style="color: #deb887;">"</span>
+       <span style="color: #f08080;">xmlns</span>:<span style="color: #4eee94;">camel</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">http://camel.apache.org/schema/blueprint</span><span style="color: #deb887;">"</span>
+       <span style="color: #f08080;">xsi</span>:<span style="color: #4eee94;">schemaLocation</span>=<span style="color: #deb887;">"</span>
+<span style="color: #deb887;">       http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd</span>
+<span style="color: #deb887;">       http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd</span><span style="color: #deb887;">"</span>&gt;
 
-  &lt;camelContext id="blueprintContext" trace="false" xmlns="http://camel.apache.org/schema/blueprint"&gt;
-    &lt;route id="timerToLog"&gt;
-      &lt;from uri="timer:foo?period=5000"/&gt;
-      &lt;setBody&gt;
-          &lt;method ref="helloBean" method="hello"/&gt;
-      &lt;/setBody&gt;
-      &lt;log message="The message contains ${body}"/&gt;
-      &lt;to uri="mock:result"/&gt;
-    &lt;/route&gt;
-  &lt;/camelContext&gt;
+  &lt;<span style="color: #daa520;">bean</span> <span style="color: #4eee94;">id</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">helloBean</span><span style="color: #deb887;">"</span> <span style="color: #4eee94;">class</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">thinkinside.demo.fuse.HelloBean</span><span style="color: #deb887;">"</span>&gt;
+      &lt;<span style="color: #daa520;">property</span> <span style="color: #4eee94;">name</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">say</span><span style="color: #deb887;">"</span> <span style="color: #4eee94;">value</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">Hi from Camel</span><span style="color: #deb887;">"</span>/&gt;
+  &lt;/<span style="color: #daa520;">bean</span>&gt;
 
-&lt;/blueprint&gt;
+  &lt;<span style="color: #daa520;">camelContext</span> <span style="color: #4eee94;">id</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">blueprintContext</span><span style="color: #deb887;">"</span> <span style="color: #4eee94;">trace</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">false</span><span style="color: #deb887;">"</span> <span style="color: #f08080;">xmlns</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">http://camel.apache.org/schema/blueprint</span><span style="color: #deb887;">"</span>&gt;
+    &lt;<span style="color: #daa520;">route</span> <span style="color: #4eee94;">id</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">timerToLog</span><span style="color: #deb887;">"</span>&gt;
+      &lt;<span style="color: #daa520;">from</span> <span style="color: #4eee94;">uri</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">timer:foo?period=5000</span><span style="color: #deb887;">"</span>/&gt;
+      &lt;<span style="color: #daa520;">setBody</span>&gt;
+          &lt;<span style="color: #daa520;">method</span> <span style="color: #4eee94;">ref</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">helloBean</span><span style="color: #deb887;">"</span> <span style="color: #4eee94;">method</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">hello</span><span style="color: #deb887;">"</span>/&gt;
+      &lt;/<span style="color: #daa520;">setBody</span>&gt;
+      &lt;<span style="color: #daa520;">log</span> <span style="color: #4eee94;">message</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">The message contains ${body}</span><span style="color: #deb887;">"</span>/&gt;
+      &lt;<span style="color: #daa520;">to</span> <span style="color: #4eee94;">uri</span>=<span style="color: #deb887;">"</span><span style="color: #deb887;">mock:result</span><span style="color: #deb887;">"</span>/&gt;
+    &lt;/<span style="color: #daa520;">route</span>&gt;
+  &lt;/<span style="color: #daa520;">camelContext</span>&gt;
+
+&lt;/<span style="color: #daa520;">blueprint</span>&gt;
 </pre>
+</div>
 
 <p>
-该配置文件中，定义了一个id为=blueprintContext=的Camel
-Context。这个Context中定义了一个路由：
+该配置文件中，定义了一个id为 <code>blueprintContext</code> 的Camel Context。这个Context中定义了一个路由：
 </p>
 
 <ol class="org-ol">
@@ -118,7 +119,7 @@ Context。这个Context中定义了一个路由：
 
 
 <div class="figure">
-<p><img src="file:///images/fuse/route-design.png" alt="route-design.png" />
+<p><img src="/./assets/images/fuse/route-design.png" alt="route-design.png" />
 </p>
 </div>
 </div>
@@ -128,12 +129,11 @@ Context。这个Context中定义了一个路由：
 <h2 id="sec-3"><span class="section-number-2">3</span> 部署到ServiceMix</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-执行=mvn package=后，得到=route-demo-1.0.0-SNAPSHOT.jar=，这是一个OSGi
-bundle。可以将jar文件部署到
+执行 <code>mvn package</code> 后，得到 <code>route-demo-1.0.0-SNAPSHOT.jar</code> ，这是一个OSGi bundle。可以将jar文件部署到
 </p>
 
 <p>
-=$SERVICEMIX<sub>HOME</sub>/deploy/=目录中。正常情况下，bundle的依赖关系被满足，该bundle会被自动启动。
+<code>$SERVICEMIX_HOME/deploy/</code> 目录中。正常情况下，bundle的依赖关系被满足，该bundle会被自动启动。
 </p>
 </div>
 </div>
@@ -145,24 +145,27 @@ bundle。可以将jar文件部署到
 </p>
 
 <p>
-但是Fuse对ServiceMix进行了再次封装，需要使用Fuse对应的版本。比如，=camel-archetype-blueprint=的版本可能要使用=2.10.0.redhat-60024=这样的“Fuse版本号”，否则在部署到Fuse是可能会发生版本不匹配的问题。
+但是Fuse对ServiceMix进行了再次封装，需要使用Fuse对应的版本。比如，=camel-archetype-blueprint= 的版本可能要使用
+<code>2.10.0.redhat-60024</code> 这样的“Fuse版本号”，否则在部署到Fuse是可能会发生版本不匹配的问题。
 </p>
 
 <p>
 Fuse提供了一个maven仓库，专门提供这种定制版本的组件，需要在maven中配置：
 </p>
 
-<pre class="example">
-&lt;repository&gt;
-    &lt;id&gt;fusesource&lt;/id&gt;
-    &lt;url&gt;http://repo.fusesource.com/nexus/content/groups/public/&lt;/url&gt;
-    &lt;snapshots&gt;
-        &lt;enabled&gt;false&lt;/enabled&gt;
-    &lt;/snapshots&gt;
-    &lt;releases&gt;
-         &lt;enabled&gt;true&lt;/enabled&gt;
-     &lt;/releases&gt;
-&lt;/repository&gt;
+<div class="org-src-container">
+
+<pre class="src src-xml">&lt;<span style="color: #daa520;">repository</span>&gt;
+    &lt;<span style="color: #daa520;">id</span>&gt;fusesource&lt;/<span style="color: #daa520;">id</span>&gt;
+    &lt;<span style="color: #daa520;">url</span>&gt;http://repo.fusesource.com/nexus/content/groups/public/&lt;/<span style="color: #daa520;">url</span>&gt;
+    &lt;<span style="color: #daa520;">snapshots</span>&gt;
+        &lt;<span style="color: #daa520;">enabled</span>&gt;false&lt;/<span style="color: #daa520;">enabled</span>&gt;
+    &lt;/<span style="color: #daa520;">snapshots</span>&gt;
+    &lt;<span style="color: #daa520;">releases</span>&gt;
+         &lt;<span style="color: #daa520;">enabled</span>&gt;true&lt;/<span style="color: #daa520;">enabled</span>&gt;
+     &lt;/<span style="color: #daa520;">releases</span>&gt;
+&lt;/<span style="color: #daa520;">repository</span>&gt;
 </pre>
+</div>
 </div>
 </div>
