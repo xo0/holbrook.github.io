@@ -16,6 +16,35 @@ layout: default
   border-bottom-color: rgb(179, 179, 179);
 }
 
+#table-of-contents {
+font-size: 10pt;
+position: fixed;
+right: 0em;
+top: 5px;
+background: white;
+line-height: 12pt;
+text-align: left;
+box-shadow: 0 0 1em #777777;
+-webkit-box-shadow: 0 0 1em #777777;
+-moz-box-shadow: 0 0 1em #777777;
+-webkit-border-bottom-left-radius: 5px;
+-moz-border-radius-bottomleft: 5px;
+max-height: 80%;
+overflow: auto;
+}
+
+.single-post{
+  margin-bottom:100px;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 0 1em #777777;
+  -webkit-box-shadow: 0 0 1em #777777;
+  -moz-box-shadow: 0 0 1em #777777;
+  -webkit-border-radius: 10px;
+-webkit-border-bottom-left-radius: 5px;
+-moz-border-radius-bottomleft: 5px;
+}
+
 </style>
 
 
@@ -26,27 +55,27 @@ layout: default
 
   <time class="published" datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%Y-%m-%d' }}
   
-&sdot; 分类：
-  {% for cat in page.categories %}
-    <a href="/pages/categories.html#{{cat}}-ref">{{cat}}</a>
-    <sup>{{ cat.size }}</sup>
-    &nbsp;
-  {% endfor %}
+  
 
-  &sdot; 标签： 
+  </time>
   {% for tag in page.tags %}
     <a href="/pages/tags.html#{{tag}}-ref">{{tag}}</a>
     <sup>{{ tag.size }}</sup>
     &nbsp;
   {% endfor %}
-
-  </time>
 </div>
 
   
 
   {{ content }}
-  <!--百度分享 BEGIN-->
+ 
+
+
+
+
+
+</article>
+ <!--百度分享 BEGIN-->
 <div class="bdsharebuttonbox" class="top_line">
   <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
 
@@ -63,12 +92,7 @@ layout: default
         
       </div>
       <!--  评论  END -->
-
-
-
-
-
-</article>
+      
 
  <!--上一篇，下一篇-->
       <div class="row-fluid">
