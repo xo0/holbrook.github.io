@@ -1,11 +1,3 @@
-# 配置基础
-
-    ~/.vimrc 
-    ~/.vim/
-
-
-
-# 基本配置
 
 ## 语法高亮
 
@@ -28,7 +20,9 @@
     ~/.vim/doc/
     ~/.vim/syntax/
 
-管理插件的Vim插件vundle：https://github.com/gmarik/vundle。vundle可以使得安装的插件的文件都放到同一个目录下，并且简单设置就可使用。安装方法如下：
+管理插件的Vim插件vundle：https://github.com/gmarik/vundle。
+
+vundle可以使得安装的插件的文件都放到同一个目录下，并且简单设置就可使用。安装方法如下：
         首先，在终端输入如下命令：
 
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle  
