@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 title: 标签
 ---
 
@@ -15,14 +15,14 @@ title: 标签
           maxFont = 36.0,
           diffFont = maxFont - minFont,
           size = 0;
-       
+
       {% assign max = 1.0 %}
       {% for tag in site.tags %}
          {% if tag[1].size > max %}
             {% assign max = tag[1].size %}
          {% endif %}
       {% endfor %}
-            
+
       {% for tag in site.tags %}
          size = (Math.log({{ tag[1].size }}) / Math.log({{ max }})) * diffFont + minFont;
          $("#{{ forloop.index }}").css("font-size", size + "px");
@@ -33,14 +33,14 @@ title: 标签
 
 <section class="post-archive">
 
-  {% for category in site.tags %} 
+  {% for category in site.tags %}
   <div class="year-bundle row gutters fadeInDown animated">
         <h2 class="post-year col span_2" id="{{ category[0] }}-ref">
           {{ category[0] | join: "/" }}
         </h2>
         <div class="posts-by-year col span_10">
           {% for post in category[1] %}
-            
+
             <div class="row gutters archive-entry">
               <a href="{{ post.url }}" title="{{ post.title }}" class="col span_8">{{ post.title }}</a>
               <div class="archive-date col span_4">

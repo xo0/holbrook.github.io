@@ -1,61 +1,17 @@
 ---
 layout: default
 ---
-<style>
-.top_line {
-  border-top: 1px solid #b3b3b3;
-  border-top-width: 1px;
-  border-top-style: solid;
-  border-top-color: rgb(179, 179, 179);
-}
-
-.bottom_line {
-  border-bottom: 1px solid #b3b3b3;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: rgb(179, 179, 179);
-}
-
-#table-of-contents {
-font-size: 10pt;
-position: fixed;
-right: 0em;
-top: 5px;
-background: white;
-line-height: 12pt;
-text-align: left;
-box-shadow: 0 0 1em #777777;
--webkit-box-shadow: 0 0 1em #777777;
--moz-box-shadow: 0 0 1em #777777;
--webkit-border-bottom-left-radius: 5px;
--moz-border-radius-bottomleft: 5px;
-max-height: 80%;
-overflow: auto;
-}
-
-.single-post{
-  margin-bottom:100px;
-  background: white;
-  padding: 20px;
-  box-shadow: 0 0 1em #777777;
-  -webkit-box-shadow: 0 0 1em #777777;
-  -moz-box-shadow: 0 0 1em #777777;
-  -webkit-border-radius: 10px;
--webkit-border-bottom-left-radius: 5px;
--moz-border-radius-bottomleft: 5px;
-}
-
-</style>
 
 
+<div class="content">
 <article class="single-post row gutters bottom_line">
   <div class="bottom_line">
   <h1 style="font-size: 2em;">{{ page.title }}</h1>
   {% if page.description %}<p>摘要：<br/>{{page.description}}</p>{% endif %}
 
   <time class="published" datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%Y-%m-%d' }}
-  
-  
+
+
 
   </time>
   {% for tag in page.tags %}
@@ -65,10 +21,10 @@ overflow: auto;
   {% endfor %}
 </div>
 
-  
+
 
   {{ content }}
- 
+
 
 
 
@@ -84,15 +40,15 @@ overflow: auto;
 
       <!--  评论  -->
       <div class="row-fluid">
-        
+
           <!-- UY BEGIN -->
           <div id="uyan_frame"></div>
           <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1784345" async="true"></script>
           <!-- UY END -->
-        
+
       </div>
       <!--  评论  END -->
-      
+
 
  <!--上一篇，下一篇-->
       <div class="row-fluid">
@@ -130,3 +86,39 @@ overflow: auto;
 </a>
 
 <!--end of wumii-->
+</div>
+
+
+<div class="sidebar1">
+<div class="sidebar1">
+<div class="Block">
+    <div class="Block-tl"></div>
+    <div class="Block-tr"><div></div></div>
+    <div class="Block-bl"><div></div></div>
+    <div class="Block-br"><div></div></div>
+    <div class="Block-tc"><div></div></div>
+    <div class="Block-bc"><div></div></div>
+    <div class="Block-cl"><div></div></div>
+    <div class="Block-cr"><div></div></div>
+    <div class="Block-cc"></div>
+    <div class="Block-body">
+<div class="BlockHeader">
+    <div class="header-tag-icon">
+        <div class="BlockHeader-text">目录</div>
+    </div>
+    <div class="l"></div>
+    <div class="r"><div></div></div>
+</div>
+<div class="BlockContent">
+    <div class="BlockContent-body">
+<ul>
+    <li class="cat-item cat-item-1"><a href="#">目录</a> (2)
+</li>
+</ul>
+    </div>
+</div>
+
+    </div>
+</div>
+</div>
+</div>
