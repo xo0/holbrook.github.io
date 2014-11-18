@@ -4,33 +4,37 @@ layout: default
 
 
 <div class="content">
-<article class="single-post row gutters bottom_line">
-  <div class="bottom_line">
-  <h1 style="font-size: 2em;">{{ page.title }}</h1>
-  {% if page.description %}<p>摘要：<br/>{{page.description}}</p>{% endif %}
 
-  <time class="published" datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%Y-%m-%d' }}
-
-
-
-  </time>
-  {% for tag in page.tags %}
+	<div class="Post">
+    <div class="Post-body">
+<div class="Post-inner article">
+<h2 class="PostHeaderIcon-wrapper">
+<span class="PostHeader"><a href="#" rel="bookmark">{{page.title}}</a></span>
+</h2>
+<div class="PostHeaderIcons metadata-icons"><br/>
+<img src="/images/PostDateIcon.png" width="14" height="13">{{ page.date | date: '%Y-%m-%d' }} | 
+<img src="/images/PostCategoryIcon.png" width="12" height="14"><a href="#">{{ page.categories }}</a> | 
+{% for tag in page.tags %}
+<img src="/images/PostTagIcon.png"/>
     <a href="/pages/tags.html#{{tag}}-ref">{{tag}}</a>
-    <sup>{{ tag.size }}</sup>
     &nbsp;
-  {% endfor %}
+{% endfor %}
+</div>
+
+  {% if page.description %}<p>摘要：<br/>{{page.description}}</p>{% endif %}
+  <hr/>
+<div class="PostContent">
+  {{ content }}
+</div>
+<div class="cleared"></div>
+
+</div>
+
+    </div>
 </div>
 
 
 
-  {{ content }}
-
-
-
-
-
-
-</article>
  <!--百度分享 BEGIN-->
 <div class="bdsharebuttonbox" class="top_line">
   <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
