@@ -4,30 +4,72 @@
     {% include head.html %}
   </head>
   <body>
-    <div class="container">
-      <header class="top row gutters{% if page.title == "Home" %} fadeInLeft animated{% endif %}">
-        <div class="col span_2" id="logo-container">
-          <a href="/" id="actual-logo" title="{{ site.title }}" style="background-image: url(/public/images/logo.png);"></a>
+    <div class="Main">
+<div class="Sheet">
+    <div class="Sheet-tl"></div>
+    <div class="Sheet-tr"><div></div></div>
+    <div class="Sheet-bl"><div></div></div>
+    <div class="Sheet-br"><div></div></div>
+    <div class="Sheet-tc"><div></div></div>
+    <div class="Sheet-bc"><div></div></div>
+    <div class="Sheet-cl"><div></div></div>
+    <div class="Sheet-cr"><div></div></div>
+    <div class="Sheet-cc"></div>
+    <div class="Sheet-body">
+<div class="nav">
+    <ul class="artmenu">
+      <li><a class="active" href="/"><span><span>首页</span></span></a></li>
+      <li class="page_item page-item-2"><a href="#"><span><span>分类</span></span></a></li>
+      <li class="page_item page-item-2"><a href="#"><span><span>归档</span></span></a></li>
+      <li class="page_item page-item-2"><a href="#"><span><span>标签</span></span></a></li>
+      <li class="page_item page-item-2"><a href="#"><span><span>关于</span></span></a></li>
+    </ul>    <div class="l">
+    </div>
+    <div class="r">
+        <div>
         </div>
-        {% include navigation.html %}
-      </header>
+    </div>
+</div>
+<div class="Header">
+    <div class="Header-jpeg"></div>
+<div class="logo">
+    <h1 id="name-text" class="logo-name">
+        <a href="/">心内求法</a></h1>
+    <div id="slogan-text" class="logo-text">制心一境，住心观性，澄心外照，摄心内证</div>
+</div>
+
+</div>
+
+
+
+<div class="contentLayout">
 
       {{ content }}
+</div>
 
-    </div>
-    
-    <footer>
-       {% include footer.html %} 
-    </footer>
 
-    <!-- scripts -->
+<div class="cleared"></div>
+<div id="footernav" style="text-align:left;">
+
+</div>
+<div class="cleared"></div>
+<div class="Footer">
+  {% include footer.html %}
+
+</div>
+
+
+
+  </body>
+
+  <script type="text/javascript" src="/js/script.js"></script>
     <!--百度统计-->
     <script type="text/javascript">
 var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
 document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F16d951e9b49ded5f2e821a0e61d77797' type='text/javascript'%3E%3C/script%3E"));
 </script>
 
-    
+
     <script src="/public/js/jquery-1.10.2.min.js"></script>
     <script src="/public/js/jquery.fitvids.min.js"></script>
     <script>
@@ -35,5 +77,4 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
         $("article").fitVids();
       });
     </script>
-  </body>
 </html>
