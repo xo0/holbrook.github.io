@@ -3,20 +3,20 @@ safe:           true
 lsi:            false
 pygments:       true
 permalink:      /:year/:month/:day/:title.html
-author:			Holbrook(wanghaikuo@gmail.com)
+author:		Holbrook(wanghaikuo@gmail.com)
 title:          心内求法
-url:            http://thinkinside.tk
+url:            http://holbrook.github.io
 description:    "Holbrook's blog"
 feed:           /atom.xml
 
 menuitems:
-    - name:     首页
+    - title:     首页
       url:      /index.html
-    - name:     归档
-      url:      /pages/archive.html
-    - name:     标签
+    - title:     分类 
+      url:      /categories.html
+    - title:     归档
+      url:      /pages/archives.html
+    - title:     标签
       url:      /pages/tags.html
-    - name:     关于
+    - title:     关于
       url:      /pages/about.html
-    - name:     订阅
-      url:      /feed.xml
