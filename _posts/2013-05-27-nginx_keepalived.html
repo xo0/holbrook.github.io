@@ -82,34 +82,37 @@ http://50.1.1.13:8080; http://50.1.1.14:8080
 <p>两台接入服务器公用一个虚拟IP（VIP）：50.1.1.2</p>
 <h2 id="安装"><span class="header-section-number">0.2</span> # 2 安装</h2>
 <p>两台接入服务器分别安装NginX和keepalived:</p>
-<p>{% highlight bash %} #准备依赖包： yum -y install gcc pcre-devel zlib-devel openssl-devel</p>
-<pre><code>#下载
-wget http://nginx.org/download/nginx-1.2.4.tar.gz 
-wget http://www.keepalived.org/software/keepalived-1.2.7.tar.gz
+<pre class="sourceCode bash"><code class="sourceCode bash">
+    <span class="co">#准备依赖包：</span>
+    <span class="kw">yum</span> -y install gcc pcre-devel zlib-devel openssl-devel
+    
+    <span class="co">#下载</span>
+    <span class="kw">wget</span> http://nginx.org/download/nginx-1.2.4.tar.gz 
+    <span class="kw">wget</span> http://www.keepalived.org/software/keepalived-1.2.7.tar.gz
+    
+    <span class="co">#安装NginX</span>
+    <span class="kw">tar</span> zxvf nginx-1.2.4.tar.gz
+    <span class="kw">cd</span> nginx-1.2.4
+    <span class="kw">./configure</span>
+    <span class="kw">make</span> <span class="kw">&amp;&amp;</span> <span class="kw">make</span> install
 
-#安装NginX
-tar zxvf nginx-1.2.4.tar.gz
-cd nginx-1.2.4
-./configure
-make &amp;&amp; make install
+    <span class="co">#安装keepalived</span>
+    <span class="kw">tar</span> zxvf keepalived-1.2.7.tar.gz
+    <span class="kw">cd</span> keepalived-1.2.7
+    <span class="kw">./configure</span>
+    <span class="kw">make</span> 
+    <span class="kw">make</span> install
 
-#安装keepalived
-tar zxvf keepalived-1.2.7.tar.gz
-cd keepalived-1.2.7
-./configure
-make 
-make install
+    <span class="kw">cp</span> /usr/local/etc/rc.d/init.d/keepalived /etc/rc.d/init.d/
+    <span class="kw">cp</span> /usr/local/etc/sysconfig/keepalived /etc/sysconfig/
+    <span class="kw">mkdir</span> /etc/keepalived
+    <span class="kw">cp</span> /usr/local/etc/keepalived/keepalived.conf /etc/keepalived/
+    <span class="kw">cp</span> /usr/local/sbin/keepalived /usr/sbin/
 
-cp /usr/local/etc/rc.d/init.d/keepalived /etc/rc.d/init.d/
-cp /usr/local/etc/sysconfig/keepalived /etc/sysconfig/
-mkdir /etc/keepalived
-cp /usr/local/etc/keepalived/keepalived.conf /etc/keepalived/
-cp /usr/local/sbin/keepalived /usr/sbin/
-
-#加入启动
-echo &quot;/usr/local/nginx/sbin/nginx&quot; &gt;&gt; /etc/rc.local
-echo &quot;/etc/init.d/keepalived start&quot; &gt;&gt; /etc/rc.local</code></pre>
-<p>{% endhighlight %}</p>
+    <span class="co">#加入启动</span>
+    <span class="kw">echo</span> <span class="st">&quot;/usr/local/nginx/sbin/nginx&quot;</span> <span class="kw">&gt;&gt;</span> /etc/rc.local
+    <span class="kw">echo</span> <span class="st">&quot;/etc/init.d/keepalived start&quot;</span> <span class="kw">&gt;&gt;</span> /etc/rc.local
+ </code></pre>
 <h1 id="配置"><span class="header-section-number">1</span> 3 配置</h1>
 <h2 id="配置nginx"><span class="header-section-number">1.1</span> 3.1 配置NginX</h2>
 <p>两台接入服务器的NginX的配置完全一样,主要是配置/usr/local/nginx/conf/nginx.conf的http。其中多域名指向是通过虚拟主机（配置http下面的server）实现；同一域名的不同虚拟目录通过每个server下面的不同location实现；到后端的服务器在http下面配置upstream,然后在server或location中通过proxypass引用。要实现前面规划的接入方式，http的配置如下：</p>
