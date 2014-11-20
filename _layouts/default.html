@@ -1,77 +1,78 @@
-<!DOCTYPE html>
-<html>
-  <head>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head profile="http://gmpg.org/xfn/11">
     {% include head.html %}
-  </head>
-  <body>
-    <div class="Main">
-<div class="Sheet">
-    <div class="Sheet-tl"></div>
-    <div class="Sheet-tr"><div></div></div>
-    <div class="Sheet-bl"><div></div></div>
-    <div class="Sheet-br"><div></div></div>
-    <div class="Sheet-tc"><div></div></div>
-    <div class="Sheet-bc"><div></div></div>
-    <div class="Sheet-cl"><div></div></div>
-    <div class="Sheet-cr"><div></div></div>
-    <div class="Sheet-cc"></div>
-    <div class="Sheet-body">
-<div class="nav">
-    <ul class="artmenu">
-      <li><a class="active" href="/"><span><span>首页</span></span></a></li>
-      <li class="page_item page-item-2"><a href="#"><span><span>分类</span></span></a></li>
-      <li class="page_item page-item-2"><a href="#"><span><span>归档</span></span></a></li>
-      <li class="page_item page-item-2"><a href="#"><span><span>标签</span></span></a></li>
-      <li class="page_item page-item-2"><a href="#"><span><span>关于</span></span></a></li>
-    </ul>    <div class="l">
-    </div>
-    <div class="r">
-        <div>
+</head>
+<body class="page page-id-9 page-template-default">
+<div id="nav">
+    <div class="nav-inside">
+        <div id="menus">
+            <ul id="menus-dt" class="menus-dt">
+                <li><a href="/">首页</a></li>
+                <li class="page_item page-item-9 current_page_item"><a href="/about.html">关于</a></li>
+            </ul>
+            <ul id="menus-m" class="menus-m">
+                <li>Menu</li>
+            </ul>
         </div>
+        <div id="search">
+            <form id="searchform" method="get" action="#">
+<input type="text" value="Search: type, hit enter" onfocus="if (this.value == 'Search: type, hit enter') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search: type, hit enter';}" size="35" maxlength="50" name="s" id="s" />
+<input type="submit" id="searchsubmit" value="搜索" />
+</form>     </div>
     </div>
 </div>
+<div id="header">
+        <div class="site_title">
+        <h1><a href="/">心内求法</a></h1>
+        <h2>制心一境，住心观性，澄心外照，摄心内证</h2>
+        <div class="clear"></div>
+    </div>
+    </div>
+<div id="wrapper">
+{{ content }}
+</div><!--wrapper-->
+<div class="clear"></div>
+<div id="footer">
+    {% include footer.html %}
+</div><!--footer-->
 
-<div class="Header">
-<div class="logo">
-    <h1 id="name-text" class="logo-name">
-        <a href="/">心内求法</a></h1>
-    <div id="slogan-text" class="logo-text">制心一境，住心观性，澄心外照，摄心内证</div>
-</div>
+<script type="text/javascript">
+    //////// Handles toggling the navigation menu for small screens
+    ( function() {
+        var nav = document.getElementById( 'menus' ), button = document.getElementById( 'menus-m' ), menu = document.getElementById( 'menus-dt' );
+        if ( ! nav ) {
+            return;
+        }
+        if ( ! button ) {
+            return;
+        }
+        // Hide button if menu is missing or empty.
+        if ( ! menu || ! menu.childNodes.length ) {
+            button.style.display = 'none';
+            return;
+        }
+        button.onclick = function() {
+            if ( -1 !== button.className.indexOf( 'b-toggled-on' ) ) {
+                button.className = button.className.replace( ' b-toggled-on', '' );
+                menu.className = menu.className.replace( ' toggled-on', '' );
+            } else {
+                button.className += ' b-toggled-on';
+                menu.className += ' toggled-on';
+            }
+        };
+    } )();
+</script>
 
-</div>
 
-<div class="contentLayout">
-      {{ content }}
-</div>
-
-
-<div class="cleared"></div>
-<div id="footernav" style="text-align:left;">
-
-</div>
-<div class="cleared"></div>
-<div class="Footer">
-  {% include footer.html %}
-
-</div>
-
-
-
-  </body>
-
-  <script type="text/javascript" src="/js/script.js"></script>
-    <!--百度统计-->
-    <script type="text/javascript">
+<!--百度统计-->
+<script type="text/javascript">
 var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
 document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F16d951e9b49ded5f2e821a0e61d77797' type='text/javascript'%3E%3C/script%3E"));
 </script>
 
 
-    <script src="/public/js/jquery-1.10.2.min.js"></script>
-    <script src="/public/js/jquery.fitvids.min.js"></script>
-    <script>
-      $(document).ready(function(){
-        $("article").fitVids();
-      });
-    </script>
+
+</body>
 </html>
