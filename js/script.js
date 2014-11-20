@@ -1,4 +1,3 @@
-/* begin Page */
 var artEventHelper = {
   'bind' : function (obj, evt, fn) {
     if (obj.addEventListener)
@@ -213,8 +212,13 @@ function Menu_IE6Setup() {
         };
       }
     }
-  }
+  
 }
 artLoadEvent.add(Menu_IE6Setup);
 /* end Menu */
 
+
+//toc
+$(document).ready(function(){
+    $('#TocBlockContent').append($('#TOC').children()[0]);
+});

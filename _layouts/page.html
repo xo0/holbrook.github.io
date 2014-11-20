@@ -2,144 +2,56 @@
 layout: default
 ---
 
+<div id="content">
+        <div class="post-9 page type-page status-publish hentry post post-page post-page-nocomment" id="post-9"><!-- post div -->
+        <h2 class="title">{{ page.title }}</h2>
+                <div class="post-info-top post-info-top-nocomment"></div>
+                <div class="clear"></div>
+        <div class="entry">
+            {{ content }}
+        </div><!-- END entry -->
+    </div><!-- END post -->
 
 
 
-<div class="content">
+    <script type="text/javascript">
+    /* <![CDATA[ */
+        function grin(tag) {
+            var myField;
+            tag = ' ' + tag + ' ';
+            if (document.getElementById('comment') && document.getElementById('comment').type == 'textarea') {
+                myField = document.getElementById('comment');
+            } else {
+                return false;
+            }
+            if (document.selection) {
+                myField.focus();
+                sel = document.selection.createRange();
+                sel.text = tag;
+                myField.focus();
+            }
+            else if (myField.selectionStart || myField.selectionStart == '0') {
+                var startPos = myField.selectionStart;
+                var endPos = myField.selectionEnd;
+                var cursorPos = endPos;
+                myField.value = myField.value.substring(0, startPos)
+                              + tag
+                              + myField.value.substring(endPos, myField.value.length);
+                cursorPos += tag.length;
+                myField.focus();
+                myField.selectionStart = cursorPos;
+                myField.selectionEnd = cursorPos;
+            }
+            else {
+                myField.value += tag;
+                myField.focus();
+            }
+        }
+    /* ]]> */
+    </script>
+            </div><!--content-->
 
-<div class="Post">
- {{ content }}
-</div>
 
-
-
-</div>
-<div class="sidebar1">
-<div class="sidebar1">
-<div class="Block">
-    <div class="Block-tl"></div>
-    <div class="Block-tr"><div></div></div>
-    <div class="Block-bl"><div></div></div>
-    <div class="Block-br"><div></div></div>
-    <div class="Block-tc"><div></div></div>
-    <div class="Block-bc"><div></div></div>
-    <div class="Block-cl"><div></div></div>
-    <div class="Block-cr"><div></div></div>
-    <div class="Block-cc"></div>
-    <div class="Block-body">
-<div class="BlockHeader">
-    <div class="header-tag-icon">
-        <div class="BlockHeader-text">搜索</div>
-    </div>
-    <div class="l"></div>
-    <div class="r"><div></div></div>
-</div>
-<div class="BlockContent">
-    <div class="BlockContent-body">
-<form method="get" id="searchform" action="#">
-<input type="text" value="" name="s" id="s" style="width: 95%;">
-<button class="Button" type="submit" name="search">
-        <span class="btn">
-            <span class="t">搜索</span>
-            <span class="r"><span></span></span>
-            <span class="l"></span>
-        </span>
-</button>
-
-</form>
-
-    </div>
-</div>
-
-    </div>
-</div>
-<div class="Block">
-    <div class="Block-tl"></div>
-    <div class="Block-tr"><div></div></div>
-    <div class="Block-bl"><div></div></div>
-    <div class="Block-br"><div></div></div>
-    <div class="Block-tc"><div></div></div>
-    <div class="Block-bc"><div></div></div>
-    <div class="Block-cl"><div></div></div>
-    <div class="Block-cr"><div></div></div>
-    <div class="Block-cc"></div>
-    <div class="Block-body">
-<div class="BlockHeader">
-    <div class="header-tag-icon">
-        <div class="BlockHeader-text">分类</div>
-    </div>
-    <div class="l"></div>
-    <div class="r"><div></div></div>
-</div>
-<div class="BlockContent">
-    <div class="BlockContent-body">
-<ul>
-    <li class="cat-item cat-item-1"><a href="#">类别1</a> (2)
-</li>
-</ul>
-    </div>
-</div>
-
-    </div>
-</div>
-<div class="Block">
-    <div class="Block-tl"></div>
-    <div class="Block-tr"><div></div></div>
-    <div class="Block-bl"><div></div></div>
-    <div class="Block-br"><div></div></div>
-    <div class="Block-tc"><div></div></div>
-    <div class="Block-bc"><div></div></div>
-    <div class="Block-cl"><div></div></div>
-    <div class="Block-cr"><div></div></div>
-    <div class="Block-cc"></div>
-    <div class="Block-body">
-<div class="BlockHeader">
-    <div class="header-tag-icon">
-        <div class="BlockHeader-text">归档</div>
-    </div>
-    <div class="l"></div>
-    <div class="r"><div></div></div>
-</div>
-<div class="BlockContent">
-    <div class="BlockContent-body">
-
-      <ul>
-        <li><a href="#">July 2009</a></li>
-      </ul>
-
-    </div>
-</div>
-
-    </div>
-</div>
-<div class="Block">
-    <div class="Block-tl"></div>
-    <div class="Block-tr"><div></div></div>
-    <div class="Block-bl"><div></div></div>
-    <div class="Block-br"><div></div></div>
-    <div class="Block-tc"><div></div></div>
-    <div class="Block-bc"><div></div></div>
-    <div class="Block-cl"><div></div></div>
-    <div class="Block-cr"><div></div></div>
-    <div class="Block-cc"></div>
-    <div class="Block-body">
-<div class="BlockHeader">
-    <div class="header-tag-icon">
-        <div class="BlockHeader-text">链接</div>
-    </div>
-    <div class="l"></div>
-    <div class="r"><div></div></div>
-</div>
-<div class="BlockContent">
-    <div class="BlockContent-body">
-<ul>
-      <li><a href="#" onclick="return false;">#1</a></li>
-      </ul>
-    </div>
-</div>
-
-    </div>
-</div>
-
-</div>
+<div>
+    {% include sidebar.html %}
 </div>
