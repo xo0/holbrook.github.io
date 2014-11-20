@@ -3,53 +3,8 @@ layout: default
 ---
 
 <div id="content">
-        <div class="post-9 page type-page status-publish hentry post post-page post-page-nocomment" id="post-9"><!-- post div -->
-        <h2 class="title">{{ page.title }}</h2>
-                <div class="post-info-top post-info-top-nocomment"></div>
-                <div class="clear"></div>
-        <div class="entry">
-            {{ content }}
-        </div><!-- END entry -->
-    </div><!-- END post -->
-
-
-
-    <script type="text/javascript">
-    /* <![CDATA[ */
-        function grin(tag) {
-            var myField;
-            tag = ' ' + tag + ' ';
-            if (document.getElementById('comment') && document.getElementById('comment').type == 'textarea') {
-                myField = document.getElementById('comment');
-            } else {
-                return false;
-            }
-            if (document.selection) {
-                myField.focus();
-                sel = document.selection.createRange();
-                sel.text = tag;
-                myField.focus();
-            }
-            else if (myField.selectionStart || myField.selectionStart == '0') {
-                var startPos = myField.selectionStart;
-                var endPos = myField.selectionEnd;
-                var cursorPos = endPos;
-                myField.value = myField.value.substring(0, startPos)
-                              + tag
-                              + myField.value.substring(endPos, myField.value.length);
-                cursorPos += tag.length;
-                myField.focus();
-                myField.selectionStart = cursorPos;
-                myField.selectionEnd = cursorPos;
-            }
-            else {
-                myField.value += tag;
-                myField.focus();
-            }
-        }
-    /* ]]> */
-    </script>
-            </div><!--content-->
+    {{ content }}
+</div><!--content-->
 
 
 <div>

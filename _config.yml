@@ -8,6 +8,8 @@ title:          心内求法
 url:            http://holbrook.github.io
 description:    "Holbrook's blog"
 feed:           /atom.xml
+paginate:       20
+paginate_path: "/:num"
 
 menuitems:
     - title:     首页
