@@ -3,19 +3,24 @@
         <div class="rss_border">
             <div id="rss_wrap">
                 <div class="rss_wrap">
-                                        <a class="rss rss_text" href="/rss.xml" rel="bookmark" title="RSS Feed">RSS Feed</a>
-                                                                                                                    </div>
+                    <a class="rss rss_text" href="/rss.xml" rel="bookmark" title="RSS Feed">订阅</a>
+                </div>
             </div>
         </div>
     </div>
     <div id="sidebar">
 
-        <div id="recent-posts-2" class="widget widget_recent_entries">      <h3 class="widgettitle">Recent Posts</h3>       <ul>
-                    <li><a href="#">xxxxxxx</a></li>
+        <div id="recent-posts-2" class="widget widget_recent_entries">      
+		<h3 class="widgettitle">最新文章</h3>
+	 	<ul>
+			{% for post in site.posts limit:10 %}
+
+			<li><a href="{{ post.url }}">{{ post.title }}</a></li>
+			{% endfor %}
                 </ul>
         </div>
 
-        <div id="categories-2" class="widget widget_categories"><h3 class="widgettitle">Categories</h3><ul>
+        <div id="categories-2" class="widget widget_categories"><h3 class="widgettitle">分类</h3><ul>
     <li class="cat-item cat-item-78"><a href="#">xxxxxxx</a></li>
 
         </ul>
