@@ -22,8 +22,8 @@
 
         <div id="categories-2" class="widget widget_categories"><h3 class="widgettitle">分类</h3><ul>
             {% for cat in site.categories %}
-            <li class="cat-item cat-item-78"><a href="#">{{ cat }}</a></li>
-
+            <li class="cat-item cat-item-78"><a href="#">{{ cat[0] }}</a></li>
+            {% endfor %}
         </ul>
 </div>
 

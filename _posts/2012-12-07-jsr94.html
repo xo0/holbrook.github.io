@@ -69,125 +69,143 @@ tags: [规则引擎, JSR, ]
 <h1 id="代码示例"><span class="header-section-number">5</span> 5 代码示例</h1>
 <p>下面是使用Drools作为规则引擎实例的一个例子，规则文件使用了Drools的drl格式：</p>
 <p>JSR94Sample.java</p>
-<p>{% highlight java %} package com.sample;</p>
-<p>import java.io.FileReader; import java.util.ArrayList; import java.util.HashMap; import java.util.List;</p>
-<p>import javax.rules.ConfigurationException; import javax.rules.RuleRuntime; import javax.rules.RuleServiceProvider; import javax.rules.RuleServiceProviderManager; import javax.rules.StatelessRuleSession; import javax.rules.admin.LocalRuleExecutionSetProvider; import javax.rules.admin.RuleAdministrator; import javax.rules.admin.RuleExecutionSet;</p>
-<p>import org.drools.jsr94.rules.RuleServiceProviderImpl;</p>
-<p>public class JSR94Sample { private static RuleServiceProvider ruleProvider;</p>
-<pre><code>private static void initProvider(){
-    String uri = RuleServiceProviderImpl.RULE_SERVICE_PROVIDER;
-    Class providerClass = RuleServiceProviderImpl.class;
+<pre class="sourceCode java"><code class="sourceCode java">
+<span class="kw">package com.sample;</span>
 
-    try{
-        //注册ruleProvider
-        RuleServiceProviderManager.registerRuleServiceProvider(uri, providerClass);
+<span class="kw">import java.io.FileReader;</span>
+<span class="kw">import java.util.ArrayList;</span>
+<span class="kw">import java.util.HashMap;</span>
+<span class="kw">import java.util.List;</span>
 
-        //从RuleServiceProviderManager获取ruleProvider
-        ruleProvider = RuleServiceProviderManager.getRuleServiceProvider(uri);
-    }catch(ConfigurationException e){
-        e.printStackTrace();
-    }
-}
+<span class="kw">import javax.rules.ConfigurationException;</span>
+<span class="kw">import javax.rules.RuleRuntime;</span>
+<span class="kw">import javax.rules.RuleServiceProvider;</span>
+<span class="kw">import javax.rules.RuleServiceProviderManager;</span>
+<span class="kw">import javax.rules.StatelessRuleSession;</span>
+<span class="kw">import javax.rules.admin.LocalRuleExecutionSetProvider;</span>
+<span class="kw">import javax.rules.admin.RuleAdministrator;</span>
+<span class="kw">import javax.rules.admin.RuleExecutionSet;</span>
 
-private static void adminSample(){
+<span class="kw">import org.drools.jsr94.rules.RuleServiceProviderImpl;</span>
 
+<span class="kw">public</span> <span class="kw">class</span> JSR94Sample {
+    <span class="kw">private</span> <span class="dt">static</span> RuleServiceProvider ruleProvider;
 
-    try{
-        //获取RuleAdministrator实例
-        RuleAdministrator admin = ruleProvider.getRuleAdministrator();
+    <span class="kw">private</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">initProvider</span>(){
+        String uri = RuleServiceProviderImpl.<span class="fu">RULE_SERVICE_PROVIDER</span>;
+        Class providerClass = RuleServiceProviderImpl.<span class="fu">class</span>;
 
-        //获取RuleExectuionSetProvider
-        HashMap properties = new HashMap();
-        properties.put(&quot;name&quot;, &quot;My Rules&quot;);
-        properties.put(&quot;description&quot;, &quot;A trivial rulebase&quot;);
+        <span class="kw">try</span>{
+            <span class="co">//注册ruleProvider</span>
+            RuleServiceProviderManager.<span class="fu">registerRuleServiceProvider</span>(uri, providerClass);
 
-        LocalRuleExecutionSetProvider ruleExecutionSetProvider = admin.getLocalRuleExecutionSetProvider(properties);
-
-        //创建RuleExecutionSet
-        FileReader reader = new FileReader(&quot;bin/sample.drl&quot;);
-        RuleExecutionSet reSet = ruleExecutionSetProvider.createRuleExecutionSet(reader, properties);
-
-        //注册RuleExecutionSet
-        admin.registerRuleExecutionSet(&quot;mysample&quot;,reSet,properties);
-    }catch(Exception e){
-        e.printStackTrace();
+            <span class="co">//从RuleServiceProviderManager获取ruleProvider</span>
+            ruleProvider = RuleServiceProviderManager.<span class="fu">getRuleServiceProvider</span>(uri);
+        }<span class="kw">catch</span>(ConfigurationException e){
+            e.<span class="fu">printStackTrace</span>();
+        }
     }
 
-}
+    <span class="kw">private</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">adminSample</span>(){
 
 
-private static void runtimeSampe(){
-    try{
-        //获取RuleRuntime, 创建会话
-        RuleRuntime runtime = ruleProvider.getRuleRuntime();
-        StatelessRuleSession ruleSession = (StatelessRuleSession)runtime.createRuleSession(&quot;mysample&quot;,null,RuleRuntime.STATELESS_SESSION_TYPE);
+        <span class="kw">try</span>{
+            <span class="co">//获取RuleAdministrator实例</span>
+            RuleAdministrator admin = ruleProvider.<span class="fu">getRuleAdministrator</span>();
 
-        //初始化输入数据
-        Message message1 = new Message();
-        message1.setMessage(&quot;Hello World&quot;);
-        message1.setStatus(Message.HELLO);
+            <span class="co">//获取RuleExectuionSetProvider</span>
+            HashMap properties = <span class="kw">new</span> HashMap();
+            properties.<span class="fu">put</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;My Rules&quot;</span>);
+            properties.<span class="fu">put</span>(<span class="st">&quot;description&quot;</span>, <span class="st">&quot;A trivial rulebase&quot;</span>);
 
-        Message message2 = new Message();
-        message2.setMessage(&quot;Goodbye World&quot;);
-        message2.setStatus(Message.GOODBYE);
+            LocalRuleExecutionSetProvider ruleExecutionSetProvider = admin.<span class="fu">getLocalRuleExecutionSetProvider</span>(properties);
 
+            <span class="co">//创建RuleExecutionSet</span>
+            FileReader reader = <span class="kw">new</span> FileReader(<span class="st">&quot;bin/sample.drl&quot;</span>);
+            RuleExecutionSet reSet = ruleExecutionSetProvider.<span class="fu">createRuleExecutionSet</span>(reader, properties);
 
-        List inputs = new ArrayList();
-        inputs.add(message1);
-        inputs.add(message2);
-
-        //执行规则
-        List&lt;Message&gt; results = ruleSession.executeRules(inputs);
-        for(int i=0;i&lt;results.size();i++){
-            Message msg = results.get(i);
-            System.out.println(msg.message);
+            <span class="co">//注册RuleExecutionSet</span>
+            admin.<span class="fu">registerRuleExecutionSet</span>(<span class="st">&quot;mysample&quot;</span>,reSet,properties);
+        }<span class="kw">catch</span>(Exception e){
+            e.<span class="fu">printStackTrace</span>();
         }
 
-
-        //释放会话资源
-        ruleSession.release();
-
-    }catch(Exception e){
-        e.printStackTrace();
-    }
-}
-
-
-public static void main(String[] args) {
-    // TODO Auto-generated method stub
-    initProvider();
-    adminSample();
-    runtimeSampe();
-}
-
-
-public static class Message {
-
-    public static final int HELLO = 0;
-    public static final int GOODBYE = 1;
-
-    private String message;
-
-    private int status;
-
-    public String getMessage() {
-        return this.message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+
+    <span class="kw">private</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">runtimeSampe</span>(){
+        <span class="kw">try</span>{
+            <span class="co">//获取RuleRuntime, 创建会话</span>
+            RuleRuntime runtime = ruleProvider.<span class="fu">getRuleRuntime</span>();
+            StatelessRuleSession ruleSession = (StatelessRuleSession)runtime.<span class="fu">createRuleSession</span>(<span class="st">&quot;mysample&quot;</span>,<span class="kw">null</span>,RuleRuntime.<span class="fu">STATELESS_SESSION_TYPE</span>);
+
+            <span class="co">//初始化输入数据</span>
+            Message message1 = <span class="kw">new</span> <span class="fu">Message</span>();
+            message1.<span class="fu">setMessage</span>(<span class="st">&quot;Hello World&quot;</span>);
+            message1.<span class="fu">setStatus</span>(Message.<span class="fu">HELLO</span>);
+
+            Message message2 = <span class="kw">new</span> <span class="fu">Message</span>();
+            message2.<span class="fu">setMessage</span>(<span class="st">&quot;Goodbye World&quot;</span>);
+            message2.<span class="fu">setStatus</span>(Message.<span class="fu">GOODBYE</span>);
+
+
+            List inputs = <span class="kw">new</span> ArrayList();
+            inputs.<span class="fu">add</span>(message1);
+            inputs.<span class="fu">add</span>(message2);
+
+            <span class="co">//执行规则</span>
+            List&lt;Message&gt; results = ruleSession.<span class="fu">executeRules</span>(inputs);
+            <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;results.<span class="fu">size</span>();i++){
+                Message msg = results.<span class="fu">get</span>(i);
+                System.<span class="fu">out</span>.<span class="fu">println</span>(msg.<span class="fu">message</span>);
+            }
+
+
+            <span class="co">//释放会话资源</span>
+            ruleSession.<span class="fu">release</span>();
+
+        }<span class="kw">catch</span>(Exception e){
+            e.<span class="fu">printStackTrace</span>();
+        }
     }
 
-    public int getStatus() {
-        return this.status;
+
+    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(String[] args) {
+        <span class="co">// TODO Auto-generated method stub</span>
+        <span class="fu">initProvider</span>();
+        <span class="fu">adminSample</span>();
+        <span class="fu">runtimeSampe</span>();
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+
+    <span class="kw">public</span> <span class="dt">static</span> <span class="kw">class</span> Message {
+
+        <span class="kw">public</span> <span class="dt">static</span> <span class="dt">final</span> <span class="dt">int</span> HELLO = <span class="dv">0</span>;
+        <span class="kw">public</span> <span class="dt">static</span> <span class="dt">final</span> <span class="dt">int</span> GOODBYE = <span class="dv">1</span>;
+
+        <span class="kw">private</span> String message;
+
+        <span class="kw">private</span> <span class="dt">int</span> status;
+
+        <span class="kw">public</span> String <span class="fu">getMessage</span>() {
+            <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">message</span>;
+        }
+
+        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setMessage</span>(String message) {
+            <span class="kw">this</span>.<span class="fu">message</span> = message;
+        }
+
+        <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getStatus</span>() {
+            <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">status</span>;
+        }
+
+        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setStatus</span>(<span class="dt">int</span> status) {
+            <span class="kw">this</span>.<span class="fu">status</span> = status;
+        }
+
     }
 
 }</code></pre>
-<p>} {% endhighlight %}</p>
 <p>规则文件使用的就是<a href="/2012/12/06/rule_language.html">这里</a>的例子。</p>
 <h1 id="实现jsr94的产品"><span class="header-section-number">6</span> 6 实现JSR94的产品</h1>
 <p>主要的一些实现了JSR94的规则引擎产品如下：</p>
