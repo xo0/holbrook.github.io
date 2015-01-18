@@ -26,12 +26,12 @@ title: 首页
       {% if paginator.previous_page == 1 %}
         <a href="/">&laquo;上一页</a>
       {% else %}
-        <a href="{{ paginator.previous_page_path }}">Previous</a>
+        <a href="{{ paginator.previous_page_path }}">&laquo;上一页</a>
       {% endif %}
     </p>
   {% else %}
     <p class="previous disabled">
-      <span>Previous</span>
+      <span>&laquo;上一页</span>
     </p>
   {% endif %}
 
@@ -49,7 +49,7 @@ title: 首页
         {% if count == paginator.page %}
           <span class="current-page">{{ count }}</span>
         {% else %}
-          <a href="/page{{ count }}">{{ count }}</a>
+          <a href="/{{ count }}">{{ count }}</a>
         {% endif %}
       </li>
     {% endfor %}
@@ -57,12 +57,11 @@ title: 首页
 
   {% if paginator.next_page %}
     <p class="next">
-      <a href="{{ paginator.next_page_path }}">Next</a>
+      <a href="{{ paginator.next_page_path }}">下一页 &raquo;</a>
     </p>
   {% else %}
     <p class="next disabled">
-      <span>Next</span>
+      <span>下一页 &raquo;</span>
     </p>
   {% endif %}
-  
-  <a href="http://ncona.com/page/2/" >Next page &raquo;</a></div>
+</div>
