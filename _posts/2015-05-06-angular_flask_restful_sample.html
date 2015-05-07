@@ -21,11 +21,13 @@ tags: [angularjs, flask, scrum, ]
 <li><a><span class="toc-section-number">5.4</span> 后端测试用例</a></li>
 </ul></li>
 <li><a><span class="toc-section-number">6</span> 前端开发</a><ul>
-<li><a><span class="toc-section-number">6.1</span> 脚手架</a></li>
-<li><a><span class="toc-section-number">6.2</span> 添加测试数据</a></li>
-<li><a><span class="toc-section-number">6.3</span> 实现RESTful API调用</a></li>
-<li><a><span class="toc-section-number">6.4</span> 编写html模板</a></li>
-<li><a><span class="toc-section-number">6.5</span> 前端测试</a></li>
+<li><a><span class="toc-section-number">6.1</span> 安装需要的插件</a></li>
+<li><a><span class="toc-section-number">6.2</span> 配置app.js</a></li>
+<li><a><span class="toc-section-number">6.3</span> 脚手架</a></li>
+<li><a><span class="toc-section-number">6.4</span> 实现RESTful API调用</a></li>
+<li><a><span class="toc-section-number">6.5</span> 添加测试数据</a></li>
+<li><a><span class="toc-section-number">6.6</span> 编写html模板</a></li>
+<li><a><span class="toc-section-number">6.7</span> 前端测试</a></li>
 </ul></li>
 <li><a><span class="toc-section-number">7</span> 集成测试</a></li>
 <li><a><span class="toc-section-number">8</span> 参考资料</a></li>
@@ -156,24 +158,101 @@ tags: [angularjs, flask, scrum, ]
 <h2><span class="header-section-number">5.4</span> 后端测试用例</h2>
 <p>(TODO)</p>
 <h1><span class="header-section-number">6</span> 前端开发</h1>
-<h2><span class="header-section-number">6.1</span> 脚手架</h2>
+<h2><span class="header-section-number">6.1</span> 安装需要的插件</h2>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> PROJ_ROOT/web
+<span class="kw">bower</span> install angular-bootstrap -S
+<span class="kw">bower</span> install restangular -S</code></pre>
+<h2><span class="header-section-number">6.2</span> 配置app.js</h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">angular
+  .<span class="fu">module</span>(<span class="st">'webApp'</span>, [
+    ...
+    <span class="st">'ui.bootstrap'</span>,
+    <span class="st">'restangular'</span>,
+    ...
+  ])
+  .<span class="fu">run</span>(<span class="kw">function</span> (){
+    <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">'app run'</span>);
+
+  })
+  .<span class="fu">config</span>(<span class="kw">function</span> ($routeProvider,RestangularProvider) {
+    <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">'app config'</span>);
+    <span class="ot">RestangularProvider</span>.<span class="fu">setBaseUrl</span>(<span class="st">'/api/'</span>);
+
+    $routeProvider
+      .<span class="fu">when</span>(
+    ...</code></pre>
+<h2><span class="header-section-number">6.3</span> 脚手架</h2>
 <pre class="example"><code>    yo angular:route host/list
 </code></pre>
 <p>会自动在=scripts/app.js=中增加路由，创建=scripts/host/list.js=、=views/host/list.html=文件，并在=index.html= 中增加=scripts/host/list.js=的引用。</p>
 <p>此时已经可以访问 <a href="http://0.0.0.0:9000/#/host/list" class="uri">http://0.0.0.0:9000/#/host/list</a> 了。</p>
-<h2><span class="header-section-number">6.2</span> 添加测试数据</h2>
+<h2><span class="header-section-number">6.4</span> 实现RESTful API调用</h2>
+<p>PROJ<sub>ROOT</sub>/web/app/scripts/host/list.js</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">
+<span class="ot">angular</span>.<span class="fu">module</span>(<span class="st">'webApp'</span>)
+  .<span class="fu">controller</span>(<span class="st">'HostListCtrl'</span>, <span class="kw">function</span> ($scope,Restangular) {
+    <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">'@HostListCtrl'</span>);
+
+    <span class="kw">var</span> url = <span class="ot">Restangular</span>.<span class="fu">all</span>(<span class="st">'resource/hosts'</span>);
+
+    <span class="ot">url</span>.<span class="fu">getList</span>().<span class="fu">then</span>(<span class="kw">function</span>(hosts) {
+        <span class="ot">$scope</span>.<span class="fu">hosts</span> = hosts;
+      });
+  });
+
+</code></pre>
+<h2><span class="header-section-number">6.5</span> 添加测试数据</h2>
 <p>根据前面的RESTful API约定，可以创建静态的json文件用于前端开发测试。</p>
 <ul>
-<li><code>/api/resource/hosts</code></li>
+<li>`PROJ<sub>ROOT</sub>/web/app/api/resource/hosts`</li>
 </ul>
-<p>=TODO=</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">[
+    {
+        <span class="st">&quot;comment&quot;</span>: <span class="st">&quot;comment1&quot;</span>,
+        <span class="st">&quot;hostname&quot;</span>: <span class="st">&quot;host1&quot;</span>,
+        <span class="st">&quot;id&quot;</span>: <span class="dv">1</span>,
+        <span class="st">&quot;keystate&quot;</span>: <span class="kw">null</span>,
+        <span class="st">&quot;minionid&quot;</span>: <span class="st">&quot;minion1&quot;</span>,
+    },
+    {
+        <span class="st">&quot;hostname&quot;</span>: <span class="st">&quot;host2&quot;</span>,
+        <span class="st">&quot;id&quot;</span>: <span class="dv">2</span>,
+        <span class="st">&quot;keystate&quot;</span>: <span class="st">&quot;Accepted&quot;</span>,
+        <span class="st">&quot;minionid&quot;</span>: <span class="st">&quot;minion2&quot;</span>,
+        <span class="st">&quot;virtual&quot;</span>: <span class="st">&quot;vmware&quot;</span>
+    }
+]</code></pre>
 <ul>
-<li><code>/api/resource/hosts/1</code></li>
+<li>`PROJ<sub>ROOT</sub>/web/app/api/resource/hosts/1`</li>
 </ul>
-<p>=TODO=</p>
-<h2><span class="header-section-number">6.3</span> 实现RESTful API调用</h2>
-<h2><span class="header-section-number">6.4</span> 编写html模板</h2>
-<h2><span class="header-section-number">6.5</span> 前端测试</h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">TODO</code></pre>
+<h2><span class="header-section-number">6.6</span> 编写html模板</h2>
+<p>`PROJ<sub>ROOT</sub>/web/app/views/host/list.html`</p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="ot"> ng-controller=</span><span class="st">&quot;HostListCtrl&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;ol</span><span class="ot"> class=</span><span class="st">&quot;breadcrumb&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;li</span> <span class="kw">&gt;&lt;strong&gt;</span>资源<span class="kw">&lt;/strong&gt;&lt;/li&gt;</span>
+        <span class="kw">&lt;li</span><span class="ot"> class=</span><span class="st">&quot;active&quot;</span><span class="kw">&gt;&lt;strong&gt;</span>主机<span class="kw">&lt;/strong&gt;&lt;/li&gt;</span>
+  <span class="kw">&lt;/ol&gt;</span>
+    <span class="kw">&lt;table</span><span class="ot"> class=</span><span class="st">&quot;table table-striped&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;tr&gt;&lt;th</span><span class="ot"> width=</span><span class="st">&quot;20%&quot;</span><span class="kw">&gt;</span>主机名<span class="kw">&lt;/th&gt;&lt;th</span><span class="ot"> width=</span><span class="st">&quot;20%&quot;</span><span class="kw">&gt;</span>minionid<span class="kw">&lt;/th&gt;&lt;th&gt;</span>key状态<span class="kw">&lt;/th&gt;&lt;th&gt;</span>虚拟化<span class="kw">&lt;/th&gt;&lt;th&gt;</span>操作<span class="kw">&lt;/th&gt;&lt;/tr&gt;</span>
+        <span class="kw">&lt;tr</span><span class="ot"> ng-repeat=</span><span class="st">&quot;host in hosts | orderBy: '-id'&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;td&gt;&lt;a</span><span class="ot"> ng-href=</span><span class="st">&quot;/#/{{host.id}}&quot;</span><span class="kw">&gt;</span>{{host.hostname}}<span class="kw">&lt;/td&gt;</span>
+            <span class="kw">&lt;td&gt;</span>{{host.minionid}}<span class="kw">&lt;/td&gt;</span>
+            <span class="kw">&lt;td&gt;</span>{{host.keystate}}<span class="kw">&lt;/td&gt;</span>
+            <span class="kw">&lt;td&gt;</span>{{host.virtual}}<span class="kw">&lt;/td&gt;</span>
+            <span class="kw">&lt;td&gt;</span>
+                <span class="kw">&lt;button</span><span class="ot"> type=</span><span class="st">&quot;button&quot;</span><span class="ot"> class=</span><span class="st">&quot;btn btn-primary btn-xs&quot;</span><span class="kw">&gt;</span>更新<span class="kw">&lt;/button&gt;</span>
+                <span class="kw">&lt;button</span><span class="ot"> type=</span><span class="st">&quot;button&quot;</span><span class="ot"> class=</span><span class="st">&quot;btn btn-danger btn-xs&quot;</span><span class="kw">&gt;</span>删除<span class="kw">&lt;/button&gt;</span>
+            <span class="kw">&lt;/td&gt;</span>
+        <span class="kw">&lt;/tr&gt;</span>
+        <span class="kw">&lt;tr&gt;</span>
+            <span class="kw">&lt;td&gt;&lt;button</span><span class="ot"> type=</span><span class="st">&quot;button&quot;</span><span class="ot"> class=</span><span class="st">&quot;btn btn-success&quot;</span><span class="kw">&gt;</span>增加主机<span class="kw">&lt;/button&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;</span>
+        <span class="kw">&lt;/tr&gt;</span>
+    <span class="kw">&lt;/table&gt;</span>
+<span class="kw">&lt;/div&gt;</span></code></pre>
+<h2><span class="header-section-number">6.7</span> 前端测试</h2>
+<p>此时，在 <a href="http://0.0.0.0:9000/#/host/list" class="uri">http://0.0.0.0:9000/#/host/list</a> 已经可以看到json文件中的数据了。</p>
+<p>但是，更严谨的做法是写单元测试。</p>
 <p>(TODO)</p>
 <h1><span class="header-section-number">7</span> 集成测试</h1>
 <p>(TODO)</p>
