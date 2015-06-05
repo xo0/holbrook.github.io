@@ -30,8 +30,7 @@ TAGS: python, 分布式, MQ
    是基于[Quartz](http://www.quartz-scheduler.org/)的一个Python定时任务框架。
    APScheduler实现了Quartz的所有功能，提供了基于日期、固定时间间隔以及crontab类型的任务，
    并且可以持久化任务。
-   但是 APScheduler
-   不是为了分布式的任务调度设计的，要实现分布式架构，需要与Gearman等配合使用。
+   但是 APScheduler不是为了分布式的任务调度设计的，要实现分布式架构，需要与Gearman等配合使用。
 2. RQ和Celery
    [RQ(Redis Queue)](http://python-rq.org/)，是一个简单的“任务队列”框架，
    而[Celery](https://github.com/celery/celery)则提供了更加强大的功能和扩展性。

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<!-- saved from url=(0084)chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html -->
+<html id="html" class="clipped"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+<link id="baseCSS" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/the_components/reformat/css/base__newsprint.css" rel="stylesheet" class="newsprint" type="text/css"><style type="text/css" id="optionsCSS">#body { font-family: "PT Serif"; font-size: 16px; line-height: 1.5em; color: #1f0909; text-align: left; } #text { padding-top: 4.5em;padding-bottom: 9em;} #background { background-color: #f3f2ee; } .setTextColorAsBackgroundColor { background-color: #1f0909; } .setBackgroundColorAsTextColor { color: #f3f2ee; } .setBackgroundColor { background-color: #f3f2ee; } .setTextColor { color: #1f0909; } #box, .setBoxWidth { width: 36em; } a { color: #065588; } a:visited { color: #1f0909; } @media print { body.footnote_links__on_print a, body.footnote_links__on_print a:hover { color: #1f0909 !important; text-decoration: none !important; } } body.footnote_links__always a, body.footnote_links__always a:hover { color: #1f0909 !important; text-decoration: none !important; } img { border-color: #1f0909; } a img { border-color: #065588; } a:visited img { border-color: #1f0909; } h1 a, h2 a, a h1, a h2 { color: #1f0909; } h1, h2, h3, h4, h5, h6 { font-family: "PT Serif"; } pre { background-color: #f3f2ee; } pre, code { font-family: Inconsolata; } hr { border-color: #1f0909; } html.rtl #body #text { text-align: right !important; } h1, h2, h3, h4, h5, h6 { text-align: left; } html.rtl h1, html.rtl h2, html.rtl h3, html.rtl h4, html.rtl h5, html.rtl h6 { text-align: right !important; } #text div.separatorLine, #text section::before { background:      -o-linear-gradient(0, #f3f2ee 1%, #1f0909 50%, #f3f2ee 99%); background:    -moz-linear-gradient(0, #f3f2ee 1%, #1f0909 50%, #f3f2ee 99%); background: -webkit-linear-gradient(0, #f3f2ee 1%, #1f0909 50%, #f3f2ee 99%); } </style><link id="customFileCSS" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/the_components/reformat/css/custom__newsprint.css" rel="stylesheet" type="text/css"><link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,bold,italic" rel="stylesheet" type="text/css"><link href="http://fonts.googleapis.com/css?family=Inconsolata:regular,bold,italic" rel="stylesheet" type="text/css"><style id="clearly_highlighting_css" type="text/css">/* selection */ html.clearly_highlighting_enabled ::-moz-selection { background: rgba(246, 238, 150, 0.99); } html.clearly_highlighting_enabled ::selection { background: rgba(246, 238, 150, 0.99); } /* cursor */ html.clearly_highlighting_enabled {    /* cursor and hot-spot position -- requires a default cursor, after the URL one */    cursor: url("chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/the_components/highlight/img/highlight--cursor.png") 14 16, text; } /* highlight tag */ em.clearly_highlight_element {    font-style: inherit !important; font-weight: inherit !important;    background-image: url("chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/the_components/highlight/img/highlight--yellow.png");    background-repeat: repeat-x; background-position: top left; background-size: 100% 100%; } /* the delete-buttons are positioned relative to this */ em.clearly_highlight_element.clearly_highlight_first { position: relative; } /* delete buttons */ em.clearly_highlight_element a.clearly_highlight_delete_element {    display: none; cursor: pointer;    padding: 0; margin: 0; line-height: 0;    position: absolute; width: 34px; height: 34px; left: -17px; top: -17px;    background-image: url("chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/the_components/highlight/img/highlight--delete-sprite.png"); background-repeat: no-repeat; background-position: 0px 0px; } em.clearly_highlight_element a.clearly_highlight_delete_element:hover { background-position: -34px 0px; } /* retina */ @media (min--moz-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {    em.clearly_highlight_element { background-image: url("chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/the_components/highlight/img/highlight--yellow@2x.png"); }    em.clearly_highlight_element a.clearly_highlight_delete_element { background-image: url("chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/the_components/highlight/img/highlight--delete-sprite@2x.png"); background-size: 68px 34px; } } </style></head>
+<body class="footnote_links__on_print large_graphics__do_nothing">
+    <div id="body"><div id="curtains"><div id="curtain__debug" class="curtain"><div class="setBoxWidth"><div class="setBoxWidthInner"><div class="curtainCanvas"><table id="debugOutput"></table></div></div></div><div class="curtainShading"></div><a href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#" class="curtainCloseButton"></a></div><div id="curtain__tips" class="curtain"><div class="setBoxWidth"><div class="setBoxWidthInner"><div class="curtainCanvas"><div id="curtain__tips__logo"></div><div id="curtain__tips__heading">blank_error__heading</div><div id="curtain__tips__body">blank_error__body</div></div></div></div><div class="curtainShading"></div><a href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#" class="curtainCloseButton"></a></div><div id="curtain__rtl" class="curtain"><div class="setBoxWidth"><div class="setBoxWidthInner"><div class="curtainCanvas">文本方向？<input id="curtain__rtl__radio__ltr" type="radio" name="curtain__rtl__radio_input" checked="checked"><label for="curtain__rtl__radio__ltr">从左到右</label><input id="curtain__rtl__radio__rtl" type="radio" name="curtain__rtl__radio_input"><label for="curtain__rtl__radio__rtl">从右到左</label></div></div></div><div class="curtainShading"></div><a href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#" class="curtainCloseButton"></a></div></div><div id="bodyContent"><div id="box" style="display: block;"><div id="box_inner"><div id="text"><div id="pages"><div class="page" id="page1"><div class="page_content"><div id="articleHeader"><h1 id="articleHeader__title">Performance of 52 Week Momentum in Factor Analysis</h1><div id="articleHeader__separator" class="separator"><div class="separatorLine setTextColorAsBackgroundColor"></div></div></div>
+        <p>Earlier I looked at PE ratios as a factor (<a href="http://www.eickonomics.com/posts/2013-11-26-pe-ratio-factor-backtest-statistics-review/" target="_blank"><strong>here</strong><sup class="readableLinkFootnote">[1]</sup></a>). Another well known and simple factor supported by academic research is to buy companies that have performed the best over the last 52 weeks or as part of a long/short strategy. </p>
+
+<p>I performed a factor backtest on 52 week total returns using the parameters below and took a closer look at the statistical properties of the strategy. </p>
+
+<h4 id="parameters">Parameters</h4>
+<p><b>Period of Test:</b> 1999-01-02 to 2013-12-31 <br>
+<b>Re-balancing Frequency:</b> Monthly <br>
+<b>Ranking Method:</b> Percentile into 5 buckets (0 to 20% (Lowest 52 week return), 20% to 40%, etc) <br>
+<b>Stock Universe:</b> Russell 3000 <br>
+<b>Factor:</b> Trailing 52 Week Returns </p>
+
+<p>Additionally, the long/short strategy is created by going long the stocks with highest 52 week returns (80 to 100) and going short the lowest 52 week returns (0 to 20). </p>
+
+<h4 id="annualized-return-statistics">Annualized Return Statistics</h4>
+
+<p>As expected, overall the top quantile of companies continued to outperform (12.05% annualized vs 3.21% annualized for the Russell 3000). Surprisingly, the overall long/short strategy did not perform very well as it’s performance was very weak coming off the market bottoms in 2003 and 2009, eliminating any positive returns generated in other years. </p>
+
+<div>
+
+
+<div>
+<a href="annualized_return_barplot.png" title="PE Factor Backtest: Annualized Return Barplot" target="_blank" class="readableLinkWithLargeImage"><div class="readableLargeImageContainer"><img src="annualized_return_barplot.png" alt="52 Week Return Backtest: Annualized Return Barplot"></div><sup class="readableLinkFootnote">[2]</sup></a>
+</div>
+</div>
+
+<h4 id="cumulative-return">Cumulative Return</h4>
+<p>On a cumulative and rolling basis the top performers outperform other quantile’s but the weakest quantile outperforms significantly coming off the bottoms of a bear market. This weak quantile out-performance post bear market can lead to a very poor period for a 52 week return long/short strategy. </p>
+
+<div>
+	<div>
+		<div>
+		<a href="historical_cummulative_returns.png" title="52 Week Return Backtest: Historical Cummulative Returns" target="_blank" class="readableLinkWithLargeImage"><div class="readableLargeImageContainer"><img src="historical_cummulative_returns.png" alt="52 Week Return Backtest: Historical Cummulative Returns"></div><sup class="readableLinkFootnote">[3]</sup></a> 
+		</div>
+		<div>
+
+		<a href="rolling_performance.png" title="52 Week Return Backtest: Rolling 12 Month Performance Chart" target="_blank" class="readableLinkWithLargeImage"><div class="readableLargeImageContainer"><img src="rolling_performance.png" alt="52 Week Return Backtest: Rolling 12 Month Performance Chart"></div><sup class="readableLinkFootnote">[4]</sup></a>
+		</div>
+	</div>
+</div>
+
+<h4 id="relative-performance-statistics">Relative Performance Statistics</h4>
+<p>Where the long/short strategy does outperform is during a market downturn, as seen in strong performances by the strategy from 2000 to 2003 and 2008. </p>
+
+<div>
+<a href="relative_performance.png" title="52 Week Return Backtest: Rolling 12 Month Relative Performance Chart" target="_blank" class="readableLinkWithLargeImage"><div class="readableLargeImageContainer"><img src="relative_performance.png" alt="52 Week Return Backtest: Rolling 12 Month Relative Performance Chart"></div><sup class="readableLinkFootnote">[5]</sup></a>
+</div>
+
+<table>
+ <thead>
+  <tr>
+   <th>Risk Metric   </th>
+   <th> 0 to 20 to Russell 3000 </th>
+   <th> 20 to 40 to Russell 3000 </th>
+   <th> 40 to 60 to Russell 3000 </th>
+   <th> 60 to 80 to Russell 3000 </th>
+   <th> 80 to 100 to Russell 3000 </th>
+   <th> Long/Short to Russell 3000 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td> Alpha (%) </td>
+   <td>  0.0000 </td>
+   <td> 0.3900 </td>
+   <td> 0.5100 </td>
+   <td> 0.6100 </td>
+   <td> 0.7400 </td>
+   <td>  0.7400 </td>
+  </tr>
+  <tr>
+   <td> Beta </td>
+   <td>  1.8450 </td>
+   <td> 1.2821 </td>
+   <td> 1.0081 </td>
+   <td> 0.9363 </td>
+   <td> 1.1346 </td>
+   <td> -0.7104 </td>
+  </tr>
+  <tr>
+   <td> Beta+ </td>
+   <td>  2.1713 </td>
+   <td> 1.4781 </td>
+   <td> 1.0423 </td>
+   <td> 0.8677 </td>
+   <td> 0.8849 </td>
+   <td> -1.2864 </td>
+  </tr>
+  <tr>
+   <td> Beta- </td>
+   <td>  1.4797 </td>
+   <td> 1.2342 </td>
+   <td> 1.0519 </td>
+   <td> 0.9954 </td>
+   <td> 1.2256 </td>
+   <td> -0.2541 </td>
+  </tr>
+  <tr>
+   <td> R-squared </td>
+   <td>  0.7071 </td>
+   <td> 0.8111 </td>
+   <td> 0.8485 </td>
+   <td> 0.8579 </td>
+   <td> 0.7315 </td>
+   <td>  0.1955 </td>
+  </tr>
+  <tr>
+   <td> Annualized Alpha (%) </td>
+   <td>  0.0300 </td>
+   <td> 4.7500 </td>
+   <td> 6.3300 </td>
+   <td> 7.5300 </td>
+   <td> 9.2300 </td>
+   <td>  9.2100 </td>
+  </tr>
+  <tr>
+   <td> Correlation </td>
+   <td>  0.8409 </td>
+   <td> 0.9006 </td>
+   <td> 0.9211 </td>
+   <td> 0.9263 </td>
+   <td> 0.8553 </td>
+   <td> -0.4422 </td>
+  </tr>
+  <tr>
+   <td> Information Ratio </td>
+   <td> -0.0670 </td>
+   <td> 0.3763 </td>
+   <td> 0.8135 </td>
+   <td> 1.0696 </td>
+   <td> 0.7075 </td>
+   <td> -0.0635 </td>
+  </tr>
+</tbody>
+</table>
+
+<div>
+<div>
+<a href="rolling_regression.png" title="52 Week Return Backtest: Rolling 12 Month Alpha/Beta Regression Chart" target="_blank" class="readableLinkWithLargeImage"><div class="readableLargeImageContainer"><img src="rolling_regression.png" alt="52 Week Return Backtest: Rolling 12 Month Alpha/Beta Regression Chart"></div><sup class="readableLinkFootnote">[6]</sup></a></div>
+
+<div>
+<a href="annualized_return_and_risk.png" title="52 Week Return Backtest: Annualized Return_and_Risk Scatterplot" target="_blank" class="readableLinkWithLargeImage"><div class="readableLargeImageContainer"><img src="annualized_return_and_risk.png" alt="52 Week Return Backtest: Annualized Return_and_Risk Scatterplot"></div><sup class="readableLinkFootnote">[7]</sup></a></div>
+</div>
+
+<h4 id="correlations-statistics">Correlations Statistics</h4>
+<p>This table shows the correlations of each of the strategies to the Russell 3000, including there p-value and confidence intervals. The long/short strategy shows a statistically significant negative return to the overall Russell 3000. </p>
+
+<table>
+ <thead>
+  <tr>
+   <th>Strategy </th>
+   <th> Correlation </th>
+   <th> p-value </th>
+   <th> Lower CI </th>
+   <th> Upper CI </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td> 0 to 20 to Russell </td>
+   <td>  0.84 </td>
+   <td> 0 </td>
+   <td>  0.79 </td>
+   <td>  0.88 </td>
+  </tr>
+  <tr>
+   <td> 20 to 40 to Russell </td>
+   <td>  0.90 </td>
+   <td> 0 </td>
+   <td>  0.87 </td>
+   <td>  0.92 </td>
+  </tr>
+  <tr>
+   <td> 40 to 60 to Russell </td>
+   <td>  0.92 </td>
+   <td> 0 </td>
+   <td>  0.90 </td>
+   <td>  0.94 </td>
+  </tr>
+  <tr>
+   <td> 60 to 80 to Russell </td>
+   <td>  0.93 </td>
+   <td> 0 </td>
+   <td>  0.90 </td>
+   <td>  0.94 </td>
+  </tr>
+  <tr>
+   <td> 80 to 100 to Russell </td>
+   <td>  0.86 </td>
+   <td> 0 </td>
+   <td>  0.81 </td>
+   <td>  0.89 </td>
+  </tr>
+  <tr>
+   <td> Long/Short to Russell </td>
+   <td> -0.44 </td>
+   <td> 0 </td>
+   <td> -0.55 </td>
+   <td> -0.32 </td>
+  </tr>
+</tbody>
+</table>
+
+<h4 id="risk-metrics-statistics">Risk Metrics Statistics</h4>
+
+<p>The long/short strategy exhibits a long negative tail of monthly returns. </p>
+
+<p><a href="strategy_boxplot.png" title="52 Week Return Backtest: Annualized Return Barplot" target="_blank" class="readableLinkWithLargeImage"><sup class="readableLinkFootnote">[8]</sup></a></p><div class="readableLargeImageContainer"><a href="strategy_boxplot.png" title="52 Week Return Backtest: Annualized Return Barplot" target="_blank" class="readableLinkWithLargeImage"><img src="strategy_boxplot.png" alt="52 Week Return Backtest: Annualized Return Barplot"><sup class="readableLinkFootnote">[9]</sup></a></div><p></p>
+
+<p>Looking at the overall risk metrics for the various strategies the 60 to 80% quantile shows the least volatile monthly returns. While again the long/short strategy has significant downside and max drawdown risk characteristics due to it’s performance in 2003 and 2009. </p>
+
+<table>
+ <thead>
+  <tr>
+   <th>Risk Metric</th>
+   <th> Russell 3000 </th>
+   <th> 0 to 20 </th>
+   <th> 20 to 40 </th>
+   <th> 40 to 60 </th>
+   <th> 60 to 80 </th>
+   <th> 80 to 100 </th>
+   <th> Long/Short </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td> Semi Deviation </td>
+   <td>   3.94 </td>
+   <td>   7.48 </td>
+   <td>   5.25 </td>
+   <td>   4.24 </td>
+   <td>   4.04 </td>
+   <td>   5.25 </td>
+   <td>   6.81 </td>
+  </tr>
+  <tr>
+   <td> Gain Deviation </td>
+   <td>   2.83 </td>
+   <td>   8.95 </td>
+   <td>   5.04 </td>
+   <td>   3.38 </td>
+   <td>   2.82 </td>
+   <td>   3.73 </td>
+   <td>   4.38 </td>
+  </tr>
+  <tr>
+   <td> Loss Deviation </td>
+   <td>   4.02 </td>
+   <td>   7.12 </td>
+   <td>   5.37 </td>
+   <td>   4.46 </td>
+   <td>   4.24 </td>
+   <td>   5.27 </td>
+   <td>   8.96 </td>
+  </tr>
+  <tr>
+   <td> Downside Deviation (MAR=10%) </td>
+   <td>   4.16 </td>
+   <td>   7.53 </td>
+   <td>   5.22 </td>
+   <td>   4.20 </td>
+   <td>   3.97 </td>
+   <td>   5.07 </td>
+   <td>   6.95 </td>
+  </tr>
+  <tr>
+   <td> Downside Deviation (Rf=0%) </td>
+   <td>   3.75 </td>
+   <td>   7.11 </td>
+   <td>   4.83 </td>
+   <td>   3.83 </td>
+   <td>   3.60 </td>
+   <td>   4.69 </td>
+   <td>   6.65 </td>
+  </tr>
+  <tr>
+   <td> Downside Deviation (0%) </td>
+   <td>   3.75 </td>
+   <td>   7.11 </td>
+   <td>   4.83 </td>
+   <td>   3.83 </td>
+   <td>   3.60 </td>
+   <td>   4.69 </td>
+   <td>   6.65 </td>
+  </tr>
+  <tr>
+   <td> Maximum Drawdown </td>
+   <td>  51.51 </td>
+   <td>  83.00 </td>
+   <td>  60.38 </td>
+   <td>  52.01 </td>
+   <td>  49.21 </td>
+   <td>  54.70 </td>
+   <td>  79.44 </td>
+  </tr>
+  <tr>
+   <td> Historical VaR (95%) </td>
+   <td>  -8.38 </td>
+   <td> -16.66 </td>
+   <td>  -9.49 </td>
+   <td>  -7.31 </td>
+   <td>  -8.01 </td>
+   <td> -10.70 </td>
+   <td> -12.53 </td>
+  </tr>
+  <tr>
+   <td> Historical ES (95%) </td>
+   <td> -12.19 </td>
+   <td> -22.49 </td>
+   <td> -15.43 </td>
+   <td> -12.24 </td>
+   <td> -11.57 </td>
+   <td> -15.44 </td>
+   <td> -24.74 </td>
+  </tr>
+  <tr>
+   <td> Modified VaR (95%) </td>
+   <td>  -8.78 </td>
+   <td> -14.25 </td>
+   <td> -10.82 </td>
+   <td>  -8.92 </td>
+   <td>  -8.51 </td>
+   <td> -11.14 </td>
+   <td> -15.74 </td>
+  </tr>
+  <tr>
+   <td> Modified ES (95%) </td>
+   <td> -14.91 </td>
+   <td> -14.83 </td>
+   <td> -19.11 </td>
+   <td> -19.67 </td>
+   <td> -16.95 </td>
+   <td> -17.42 </td>
+   <td> -34.98 </td>
+  </tr>
+</tbody>
+</table>
+
+<h4 id="overall-remarks">Overall Remarks</h4>
+
+<ul>
+  <li>Overall, those companies which performed the best over the last year are likely to continue to outperform over the next month. </li>
+  <li>During a market correction a long/short strategy based on 1 year returns is negatively correlated to the market, providing a hedge and will likely outperform. </li>
+  <li>As you come out of a bear market, the best performers in the previous year will under-perform (significantly in ‘09 case) those that performed the weakest. Additionally, continuing to allocate capital to a long/short 1 year return strategy immediately following a bear market can be very damaging to your portfolio. </li>
+</ul>
+
+
+    </div></div></div><div id="footnotedLinks" class="separateSection"><div id="footnotedLinks__separator" class="separator"><div class="separatorLine setTextColorAsBackgroundColor"></div><div class="separatorLabel setBackgroundColor">Links</div></div><ol id="footnotedLinks__list"><li><a href="http://www.eickonomics.com/posts/2013-11-26-pe-ratio-factor-backtest-statistics-review/">http://www.eickonomics.com/posts/2013-11-26-pe-ratio-factor-backtest-statistics-review/</a></li><li><a href="annualized_return_barplot.png">http://www.eickonomics.com/images/graphs/52_week_return_analysis/annualized_return_barplot.png</a></li><li><a href="historical_cummulative_returns.png">http://www.eickonomics.com/images/graphs/52_week_return_analysis/historical_cummulative_returns.png</a></li><li><a href="rolling_performance.png">http://www.eickonomics.com/images/graphs/52_week_return_analysis/rolling_performance.png</a></li><li><a href="relative_performance.png">http://www.eickonomics.com/images/graphs/52_week_return_analysis/relative_performance.png</a></li><li><a href="rolling_regression.png">http://www.eickonomics.com/images/graphs/52_week_return_analysis/rolling_regression.png</a></li><li><a href="annualized_return_and_risk.png">http://www.eickonomics.com/images/graphs/52_week_return_analysis/annualized_return_and_risk.png</a></li><li><a href="strategy_boxplot.png">http://www.eickonomics.com/images/graphs/52_week_return_analysis/strategy_boxplot.png</a></li><li><a href="strategy_boxplot.png">http://www.eickonomics.com/images/graphs/52_week_return_analysis/strategy_boxplot.png</a></li></ol></div><div id="measure__lineHeight">Measure</div><div id="measure__fontSize">Measure</div><div id="relatedNotes" class="bottom" style=""><div id="relatedNotes__injected">yup</div><div id="relatedNotes__separator" class="separator"><div class="separatorLine setTextColorAsBackgroundColor"></div><div class="separatorLabel setBackgroundColor">相关笔记<div id="relatedNotes__separator__buttons"><a id="relatedNotes__close" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#"></a><a id="relatedNotes__disable" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#">是否关闭？</a></div></div></div><div id="relatedNotes__notes"><div id="relatedNotes__first" class="note"><div class="title"><a target="" href="evernote:///view/77921/s10/9731df53-f363-4198-bd62-0c79bcda046e/9731df53-f363-4198-bd62-0c79bcda046e/?currentUSN=0">Performance of 1M Covered Call SPY Strategy</a></div><div class="snippet" style="height: 72px;"><a target="" href="evernote:///view/77921/s10/9731df53-f363-4198-bd62-0c79bcda046e/9731df53-f363-4198-bd62-0c79bcda046e/?currentUSN=0">Performance of 1M Covered Call SPY Strategy The covered call is the most basic of income strategies and is known for providing additional income as well as partially reducing drawdowns from owning the...</a></div><a class="image" target="" href="evernote:///view/77921/s10/9731df53-f363-4198-bd62-0c79bcda046e/9731df53-f363-4198-bd62-0c79bcda046e/?currentUSN=0" style="background-image: url(&#39;https://app.yinxiang.com/shard/s10/thm/note/9731df53-f363-4198-bd62-0c79bcda046e?auth=S%3Ds10%3AU%3D13061%3AE%3D15105d74cbc%3AC%3D149ae261df0%3AP%3D195%3AA%3Den-clearly-xauth-new%3AV%3D2%3AH%3D89a152dda38868885e1c1d7316913283&amp;size=75&#39;);"></a></div><div id="relatedNotes__second" class="note"><div class="title"><a target="" href="evernote:///view/77921/s10/1c352f49-74b0-4de2-a23e-92d7962ae578/1c352f49-74b0-4de2-a23e-92d7962ae578/?currentUSN=0">构建基于R的交易系统(4)boltter及相关工具</a></div><div class="snippet" style="height: 72px;"><a target="" href="evernote:///view/77921/s10/1c352f49-74b0-4de2-a23e-92d7962ae578/1c352f49-74b0-4de2-a23e-92d7962ae578/?currentUSN=0">（1）blotter基础 （c）.blotter 和 .instrument环境 blotter包创建了一个名为.blotter的环境（environment）可以为account对象和portfolio对象提供专用的存贮。在R当中，环境（environment）指的是创建函数时出现的对象集合。 library(blotter) s() ## character(0) ls(all = T) ##...</a></div><a class="image" target="" href="evernote:///view/77921/s10/1c352f49-74b0-4de2-a23e-92d7962ae578/1c352f49-74b0-4de2-a23e-92d7962ae578/?currentUSN=0" style="background-image: url(&#39;https://app.yinxiang.com/shard/s10/thm/note/1c352f49-74b0-4de2-a23e-92d7962ae578?auth=S%3Ds10%3AU%3D13061%3AE%3D15105d74cbc%3AC%3D149ae261df0%3AP%3D195%3AA%3Den-clearly-xauth-new%3AV%3D2%3AH%3D89a152dda38868885e1c1d7316913283&amp;size=75&#39;);"></a></div><div id="relatedNotes__third" class="note"><div class="title"><a target="" href="evernote:///view/77921/s10/3de3e584-3900-4bf0-8a00-13992d1abaf3/3de3e584-3900-4bf0-8a00-13992d1abaf3/?currentUSN=0">EICKnotes for Apr 08, 2014</a></div><div class="snippet" style="height: 72px;"><a target="" href="evernote:///view/77921/s10/3de3e584-3900-4bf0-8a00-13992d1abaf3/3de3e584-3900-4bf0-8a00-13992d1abaf3/?currentUSN=0">Links to stuff that caught my eye today: The high frequency finance debate continues and one of the best informational pieces I've read comes from Zero Hedge. Most interesting are two graphics, one s...</a></div><a class="image" target="" href="evernote:///view/77921/s10/3de3e584-3900-4bf0-8a00-13992d1abaf3/3de3e584-3900-4bf0-8a00-13992d1abaf3/?currentUSN=0" style="background-image: url(&#39;https://app.yinxiang.com/shard/s10/thm/note/3de3e584-3900-4bf0-8a00-13992d1abaf3?auth=S%3Ds10%3AU%3D13061%3AE%3D15105d74cbc%3AC%3D149ae261df0%3AP%3D195%3AA%3Den-clearly-xauth-new%3AV%3D2%3AH%3D89a152dda38868885e1c1d7316913283&amp;size=75&#39;);"></a></div></div></div><div id="accountFooter" class="separateSection"><div id="accountFooter__separator" class="separator"><div class="separatorLine setTextColorAsBackgroundColor"></div><div class="separatorLabel setBackgroundColor"><div id="accountFooter__logo"></div></div></div><div id="accountFooter__text">免费注册印象笔记帐户以保存文章，以后随时在手机、平板或电脑上阅读。</div><a id="accountFooter__button" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#" title="创建帐户">创建帐户</a></div></div></div></div><div id="background" style="right: 1276px;"><div id="background_shading"></div></div></div><link rel="stylesheet" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/the_components/reformat/css/style.css" type="text/css"><div id="extra__ui__basics"><div id="cover_everything" style="display: none;"></div><div id="loading" style="display: none;"><div id="loading_spinner"></div></div><div id="sidebar" class="belowBackground withoutShading" style="right: -100px;"><div id="sidebar_menu"><a id="sidebar_menu__close" title="隐藏覆盖 (Escape, Control + Command + Right Arrow)" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#"></a><div id="sidebar_menu__line_above"></div><a id="sidebar_menu__clip_to_evernote" title="剪藏至印象笔记 (Control + Command + Up Arrow)" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#"></a><a id="sidebar_menu__clipped_to_evernote" title="剪藏至印象笔记 (Control + Command + Up Arrow)" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#"></a><a id="sidebar_menu__clipping_to_evernote" title="剪藏至印象笔记" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#"><div id="sidebar_menu__clipping_to_evernote_spinner"></div></a><a id="sidebar_menu__highlight_to_evernote" title="高亮显示 (Control + Command + H)" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#"></a><a id="sidebar_menu__highlighting_to_evernote" title="高亮显示 (Control + Command + H)" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#"></a><a id="sidebar_menu__settings" title="显示主题" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#"></a><a id="sidebar_menu__settings_showing" title="显示主题" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#"></a><a id="sidebar_menu__print" title="打印 (Command P)" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#"></a><div id="sidebar_menu__line_below"></div></div><div id="sidebar_dialogs"><div class="dialog" id="dialog__clip__info"><div class="dialog_canvas theFont"><div id="filingInfo_injected">yup</div><div id="filingInfo_notebook">0.inbox</div><div id="filingInfo_notebook_default">默认笔记本</div><div id="filingInfo_tags"><span>NEW</span></div><div id="filingInfo_sentence">剪藏到[=notebook]笔记本，设置标签为[=tags]。</div><div id="filingInfo_sentence_no_tags">剪藏到[=notebook]笔记本。</div><div id="filingInfo_sentence_and">和</div><div id="filingInfo_sentence_show"></div><div id="filingInfo_links"><a id="filingInfo_edit" class="dialogButton" href="evernote:///view/77921/s10/485fbdc7-0743-4c50-9d12-5425173c3054/485fbdc7-0743-4c50-9d12-5425173c3054/?currentUSN=0" target="">编辑</a></div></div></div><div class="dialog" id="dialog__clip__failed"><div class="dialog_canvas"><div id="dialog__clip__failed__icon"></div><div id="dialog__clip__failed__label" class="theFont">剪辑失败</div></div><div class="dialog_cover"></div></div><div class="dialog" id="dialog__clip__login_request"><div class="dialog_canvas theFont"><div id="login_request_message">请点击Chrome工具栏上的印象笔记·悦读图标，以登录印象笔记。</div><div id="login_request_image"></div></div></div><div class="dialog" id="dialog__settings__4"><div class="dialog_canvas"><div id="settings__4"><a id="settings__4__1" class="themeBox selected"><div class="themeThumbnail"></div><div class="themeTitle">Newsprint</div></a><a id="settings__4__2" class="themeBox"><div class="themeThumbnail"></div><div class="themeTitle">Notable</div></a><a id="settings__4__3" class="themeBox"><div class="themeThumbnail"></div><div class="themeTitle">Night Owl</div></a><a id="settings__4__custom" class="themeBox"><div class="themeThumbnail"></div><div class="themeTitle">自定义</div></a><div id="settings__4__separator_1" class="settingsSeparator"></div><div class="fontSizeButtons" id="settings__4__fontSizeButtons"><a id="settings__4__fontSize__small" class="fontSizeButton fontSizeSmall"><div class="fontSizeLabel">小</div></a><a id="settings__4__fontSize__medium" class="fontSizeButton fontSizeMedium selected"><div class="fontSizeLabel">中</div></a><a id="settings__4__fontSize__large" class="fontSizeButton fontSizeLarge"><div class="fontSizeLabel">大</div></a></div><div id="settings__4__separator_2" class="settingsSeparator"></div><a href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#" id="settings__4__more_options">更多选项</a></div></div></div></div></div></div><div id="extra__ui"><div id="fitts" title="隐藏覆盖"></div><div id="dialogs_overlay"></div><div id="other_dialogs"><div class="dialog dynamic" id="dialog__eula"><div class="dialog_canvas theFont"><div id="dialog__eula__content"><div id="dialog__eula_container"><h1>End User License Agreement</h1><p>IMPORTANT NOTICE: THIS IS A LEGAL AGREEMENT BETWEEN EVERNOTE AND THE PARTY THAT DOWNLOADS, INSTALLS AND/OR USES THE SOFTWARE PROVIDED BY EVERNOTE, EACH OF WHOM ACCEPTS THE TERMS OF THIS AGREEMENT FOR HERSELF, HIMSELF OR ITSELF (AS APPLICABLE, "LICENSEE"). IF YOU RESIDE IN THE UNITED STATES OR CANADA, THIS CONTRACT WILL BE WITH EVERNOTE CORPORATION, AND, IF YOU RESIDE OUTSIDE OF THE UNITED STATES AND CANADA, THIS CONTRACT WILL BE WITH EVERNOTE GMBH, A WHOLLY-OWNED SUBSIDIARY OF EVERNOTE CORPORATION. (EVERNOTE CORPORATION AND EVERNOTE GMBH, AS APPLICABLE, MAY BE REFERRED TO IN THIS AGREEMENT AS "EVERNOTE"). EVERNOTE SOFTWARE IS LICENSED AND NOT SOLD AND THE RIGHTS TO USE THE SOFTWARE ARE SET FORTH IN THIS AGREEMENT. AS DESCRIBED BELOW, USING THE SOFTWARE ALSO OPERATES AS YOUR CONSENT TO THE TRANSMISSION OF CERTAIN INFORMATION AND DATA DURING ACTIVATION, USE, OBTAINING SOFTWARE UPDATES AND FOR INTERNET-BASED SERVICES.</p><p>CAREFULLY READ THE FOLLOWING TERMS APPLICABLE TO THE LICENSE OF THE EVERNOTE APPLICATION SOFTWARE AND ANY OTHER SOFTWARE PROVIDED TO LICENSEE BY EVERNOTE PURSUANT TO WARRANTY, MAINTENANCE AND SUPPORT OR OTHERWISE, ALL OF WHICH ARE INCLUDED WITHIN THE DEFINITION OF "SOFTWARE" BELOW. THESE TERMS AND CONDITIONS SHALL CONSTITUTE A LEGALLY BINDING AGREEMENT BY AND BETWEEN EVERNOTE AND LICENSEE. LICENSEE'S ACCEPTANCE ACCORDING TO THE TERMS HEREIN AND/OR LICENSEE'S INSTALLATION, REPRODUCTION OR USE OF THE SOFTWARE ALSO SIGNIFIES LICENSEE'S AGREEMENT TO BE LEGALLY BOUND BY THESE TERMS AND CONDITIONS.</p><p>PLEASE NOTE THAT YOU NEED NOT AGREE TO BE BOUND BY THIS AGREEMENT. HOWEVER, IF YOU DO NOT AGREE TO BE LEGALLY BOUND BY THE TERMS AND CONDITIONS SET FORTH HEREIN, YOU ARE NOT PERMITTED TO INSTALL, COPY, USE OR TRANSFER THE SOFTWARE AND SHALL NOT HAVE ANY RIGHTS HEREUNDER AS A "LICENSEE." IF YOU DO NOT AGREE TO BE BOUND BY THIS AGREEMENT, YOU SHOULD PROMPTLY UNINSTALL THE SOFTWARE. NO ADDITIONAL OR CONTRARY TERMS TO THIS AGREEMENT SHALL APPLY UNLESS AGREED TO IN A WRITTEN AGREEMENT BETWEEN LICENSEE AND EVERNOTE.</p><h2>1. DEFINITIONS.</h2><p>For the purposes of this Agreement, the following definitions shall apply:</p><p>1.1 "Derivative Work" means a work that is based upon or derived from the Software, such as a revision, modification, translation, abridgment, condensation or expansion, or any form in which Software may be recast, transformed or adapted, which, if prepared without the express written consent of Evernote, would constitute copyright infringement.</p><p>1.2 "Evernote Service" means the Evernote software service that enables Registered Users to store, organize, search and share text, documents, images and sounds, and upload and sync the same through one or more Certified Device(s).</p><p>1.3 "Evernote Site" means the Internet site(s) published by Evernote and applicable to the Software and/or Evernote Service, as they may change from time to time, including, without limitation, the site which is currently located at www.evernote.com.</p><p>1.4 "Evernote Terms of Service" means the then applicable terms and conditions governing the use of the Evernote Service, as published at the Evernote Site.</p><p>1.5 "Individual Computer" means any general-purpose computing device (desktop, laptop, netbook, tablet, smart phone) that is operated by one human user at a time for that user's benefit (e.g., not as a server or in any partition of a computer system). Licensee may access the Software operating on an Individual Computer through a remote device without any additional license.</p><p>1.6 "Object Code" means the form of computer program or portion thereof that can be executed by a computer without further modification.</p><p>1.7 "Registered User" means any individual who has registered at the Evernote Site for either a premium account or free account to use the Evernote Service.</p><p>1.8 "Software" means, collectively, (i) that version of the Evernote application software reflected in text accessed within the Evernote application software, (ii) all updates, upgrades, patches, bug fixes and modifications thereto that may be released by Evernote and made available to Licensee from time to time, if any, in Object Code form and (iii) all written information and materials provided to Licensee with and regarding the Evernote application software, including, without limitation, in the "About" tab or other settings information areas within the particular application (which information may be referred to herein as "Documentation").</p><p>1.9 "Source Code" means the human-readable form of the code and related system documentation for the Software, including all comments and any procedural code such as job control language.</p><p>1.10 "Supported Device" means the type of Individual Computer (e.g., iPad) or the Individual Computer running a certain operating system (e.g., Windows) for which the Software is designed and offered for use. Evernote identifies the Supported Device for the Software by name in connection with the link through which the Software is made available for download or on the written software application description in the materials provided by Evernote with the Software.</p><h2>2. SOFTWARE LICENSES; GENERAL RESTRICTIONS.</h2><h3>2.1 License Grants.</h3><p>(a) Subject to the terms and conditions contained herein, Licensee is hereby granted, and Licensee accepts, a non-exclusive, non-transferable, fully-paid license (i) to install and use the Software on one or more Supported Devices owned or controlled by Licensee and (ii) during such period of time that Licensee is a Registered User, use the Software to enable interaction between the Evernote Service and the Supported Device on which the Software is installed, subject to the Evernote Terms of Service.</p><p>(b) Subject to the terms and conditions contained herein, Evernote hereby grants Licensee a non-exclusive, non-transferable license to make a reasonable number of copies of the Software without modification for Licensee's personal use. Licensee agrees that this License Agreement applies to all such copies.</p><p>(c) Certain computer software components licensed by one or more third-parties may be provided with the Software. Evernote grants Licensee a non-exclusive, non-transferable, fully-paid license to use one copy of any third- party software provided by Evernote with the Software ("Third-Party Software") on the terms herein and such terms (if any) as may be set forth in the Documentation (including any additional terms therein), provided that: TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, ALL THIRD-PARTY SOFTWARE IS PROVIDED "AS IS" AND WITH ALL FAULTS. THE PROVISIONS REGARDING DISCLAIMER OF WARRANTIES, EXCLUSION OF CONSEQUENTIAL AND CERTAIN OTHER DAMAGES AND LIMITATION OF LIABILITY IN SECTIONS 6 AND 7 BELOW SHALL APPLY TO SUCH THIRD-PARTY SOFTWARE.</p><h3>2.2 General License Restrictions.</h3><p>Licensee shall only use the Software for Licensee's personal use on a Supported Device and, in connection with the Evernote Service, as permitted by the Evernote Terms of Service. Licensee shall not cause or permit the renting, leasing, sublicensing or selling, or any dissemination or other distribution of copies of, the Software by any means or in any form to any person, and shall not permit others to use the Software via a timesharing, outsourcing, service bureau, application service provider, managed service provider or similar arrangement. Licensee may not use the Software in any way that is intended to circumvent the Evernote Terms of Service or to otherwise violate any law or regulation. Licensee shall not use or distribute as a separate or stand alone executable file, product or server any Third-Party Software or use such Third-Party Software except as a component part of the Software. Licensee agrees not to, directly or indirectly, take any action to modify, translate, decompile, reverse engineer, reverse compile, convert to another programming language or otherwise attempt to derive Source Code from the Software or any internal data files generated by the Software, or perform any similar type of operation on any software or firmware acquired under this Agreement, in any fashion or for any purpose whatsoever, except to the extent the foregoing restriction is expressly prohibited by applicable law notwithstanding this limitation. Licensee also acknowledges and agrees any such works are Derivative Works and acknowledges that Evernote retains ownership of the copyright in any Derivative Works and is not granting any right to make, use, publish or distribute any Derivative Works of the Software. Licensee shall not modify or delete any Evernote or thirdparty proprietary rights notices appearing in the Software, or any Third-Party Software, and will implement any changes to such notices, if feasible, that Evernote may reasonably request. Licensee acknowledges and agrees that the technology manifested in the operation of the Software constitutes the valuable trade secrets and know-how of Evernote and its suppliers and, to the extent Licensee discovers any such trade secrets, Licensee will not disclose them to any third party. Licensee acknowledges and agrees that this Agreement in no way shall be construed to provide to Licensee any express or implied license to use or otherwise exploit the Software or any portion thereof except as specifically set forth in this Agreement, and all rights not expressly granted to Licensee are reserved by Evernote. Licensee has no right to transfer any interest in or to any Software, except as permitted by the express terms in this Agreement. The license granted herein is neither contingent on the delivery of any future functionality or features nor dependent on any oral or written public comments made by Evernote regarding future functionality or features.</p><h2>3. OWNERSHIP OF SOFTWARE.</h2><p>Evernote's ownership interests in the Software are protected by United States and other applicable copyright, patent and other laws and international treaty provisions. Except for the limited license rights specifically granted to Licensee in this Agreement, all rights, title and interests, including without limitation intellectual property rights, in and to the Software, including all Derivative Works thereof, (and all copies thereof and related materials that are produced or shipped to Licensee under this Agreement), belong to and shall be retained by Evernote or its suppliers, as applicable. Licensee acknowledges that the development of the Software is an ongoing process and that Licensee and other licensees of the Software benefit from the improvements resulting from such ongoing development. In order to facilitate such ongoing development, Licensee may provide certain suggestions, documentation, materials and other data to Evernote regarding the use, improvement or applications of the Software (the "Contributed Ideas"), and Licensee hereby acknowledges and agrees that all Contributed Ideas may be used by Evernote in the development of the Software and/or related products and services. Unless specifically provided in a writing signed by Evernote and Licensee and specifically relating to the disclosure of any Contributed Ideas, and notwithstanding any provision in this Agreement to the contrary, Licensee hereby grants to Evernote the irrevocable, perpetual, nonexclusive, worldwide, royalty-free right and license to disclose, use and incorporate the Contributed Ideas in connection with the development of the Software and/or related products and services, and the demonstration, display, license, reproduction, modification and distribution and sale of the Software and/or related products and services, without any obligation to provide any accounting or other reporting.</p><h2>4. SOFTWARE SUPPORT; INTERACTION WITH EVERNOTE.</h2><p>4.1 Support of Licensee. During the term of this Agreement, Evernote shall use its commercially reasonable efforts to provide technical support of the Software to Licensee according to its then applicable support policies. Such technical support shall be available by email communication in the English language, and any other language that may be available from time to time, during Evernote's regular business hours, subject to further restrictions, which may be set forth at the Evernote Site or otherwise published by Evernote and provided or made available to Licensee.</p><p>4.2 Information Sharing and Interactions. During installation of the Software and from time to time thereafter when Licensee uses the Software, the Software will send information about the Software and the Individual Computer on which the Software is installed to Evernote. This information includes the version of the Software, the language of the Software (e.g., English, Japanese, etc.), the Internet protocol address of the Individual Computer and the Individual Computer's hardware configuration. Evernote does not use this information to identify personal information regarding Licensee. Evernote does use this information to ensure that Licensee is operating the most current version of the Software and, if there is a newer release of the Software, enable Licensee to download and install the current version appropriate for the Individual Computer. Depending upon the settings in the Software, updates to the Software may be installed automatically without Licensee's separate consent. In addition, Evernote will use the information provided to Evernote to enable interaction of the Individual Computer with the Evernote Service, if Licensee is a Registered User. Licensee may customize the interactions with Evernote through the settings found within the Software to limit or, in certain cases, eliminate such interactions. Evernote will use digital certificates to confirm Licensee's identity for the purpose of enabling standard encryption of content transmitted between Licensee's Individual Computer and the Evernote Service. In an effort to protect the security of such transmissions, Licensee cannot disable the use of such digital certificates in connection with the use of the Evernote Service. By using the Software, Licensee consents to the sharing of the information and interactions described herein and, by using the Software with the Evernote Service, Licensee also consents to the use of information described in the then current Evernote Privacy Policy published at the Evernote Site.</p><h2>5. TERM AND TERMINATION.</h2><p>This Agreement shall commence on the earlier date of delivery or download of the Software, shall be confirmed upon and by the installation of the Software on any computer device and shall continue for so long as Licensee complies with the terms herein, subject to termination or expiration in accordance with the terms provided herein. This Agreement shall automatically terminate, without notice, upon any failure by Licensee to comply with the terms of this Agreement. Upon the termination of this Agreement, all licenses and other rights granted to Licensee hereunder shall immediately terminate. Notwithstanding any termination of this Agreement, the provisions of Sections 3 (Ownership of Software), 6.2 (Disclaimer of Warranties), 7 (Limitations on Liability), 11 (General Provisions) and this Section 5 shall survive and continue to be legally binding upon Licensee and Evernote.</p><h2>6. SOFTWARE WARRANTY AND DISCLAIMER OF WARRANTIES; SOFTWARE WARRANTY REMEDY.</h2><h3>6.1 Limited Warranty.</h3><p>Evernote hereby warrants to Licensee that the Software will perform substantially in accordance with the functional description applicable thereto at the Evernote Site if used in accordance with the terms of this Agreement and any applicable directions or requirements in the Documentation. The foregoing warranty is extended to the initial Licensee only, is not transferable and shall be in effect for thirty (30) days immediately following Licensee's receipt of the Software (the "Software Warranty Period"). Licensee's sole and exclusive remedy and the entire liability of Evernote and its suppliers and licensors for any breach of this limited warranty will be, at Evernote's option, repair or replacement of the Software, if such breach is reported prior to the expiration of the Warranty Period to Evernote or the Evernote authorized distributor that supplied the Software to Licensee (the "Software Warranty Remedy"). Evernote may require that Licensee return or certify the destruction of all copies of the Software to Evernote or to the authorized distributor in order to receive the designated remedy hereunder. Any replacement Software provided pursuant to this Section 6.1 will be covered by the warranty in this Section 6.1 for the remainder of the original Software Warranty Period or for 30 days from the date on which Licensee receives such repaired or replacement Software, whichever is longer.</p><h3>6.2 Disclaimer of Warranties.</h3><p>(a) EXCEPT AS EXPRESSLY PROVIDED IN SECTION 6.1, THE SOFTWARE IS BEING PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND AND EVERNOTE HEREBY DISCLAIMS ALL OTHER WARRANTIES, EXPRESS OR IMPLIED, ORAL OR WRITTEN, WITH RESPECT TO THE SOFTWARE, INCLUDING, WITHOUT LIMITATION, ANY AND ALL IMPLIED WARRANTIES AS TO THE CONDITION, NONINFRINGEMENT, MERCHANTABILITY, DESIGN, OPERATION OR FITNESS FOR ANY PARTICULAR PURPOSE. NO ORAL OR WRITTEN INFORMATION OR ADVICE GIVEN BY EVERNOTE, ITS RESELLERS AND/OR ITS OR THEIR AGENTS OR EMPLOYEES, SHALL CREATE A WARRANTY OR IN ANY WAY INCREASE OR MODIFY THE SCOPE OF THE WARRANTIES EXPRESSLY SET FORTH HEREIN. If Licensee's legal jurisdiction provides that a certain implied warranty may not be disclaimed, such implied warranty shall only apply to defects discovered during the period of the express Software Warranty Period provided herein. There is no implied warranty for defects discovered after the expiration of such Software Warranty Period. Some legal jurisdictions do not allow limitations on how long an implied warranty lasts, so these limitations may not apply to Licensee.</p><p>(b) EXCEPT AS EXPRESSLY PROVIDED IN SECTION 6.1, EVERNOTE DOES NOT WARRANT THAT THE SOFTWARE WILL MEET ALL REQUIREMENTS OF LICENSEE, OR THAT THE OPERATION OF THE SOFTWARE WILL BE UNINTERRUPTED OR ERROR FREE, OR THAT ALL SOFTWARE DEFECTS WILL BE CORRECTED. FURTHER, EVERNOTE IS NOT RESPONSIBLE FOR ANY DEFECT OR ERROR RESULTING FROM: (I) THE MODIFICATION, MISUSE OR DAMAGE OF THE SOFTWARE BY PARTIES OTHER THAN EVERNOTE OR PARTIES PERFORMING AS A CONTRACTOR TO, AND AT THE DIRECTION OF, EVERNOTE, (II) LICENSEE'S FAILURE TO IMPLEMENT ALL BUG FIXES OR OTHER DEFECT CORRECTIONS WHICH ARE MADE AVAILABLE BY EVERNOTE, (III) USE OF THE SOFTWARE IN A MANNER INCONSISTENT WITH THE DIRECTIONS PROVIDED IN THE DOCUMENTATION OR AS PERMITTED BY THIS AGREEMENT, (IV) ANY COMPUTER VIRUS OR (V) ANY DEFECT IN OR FAILURE OF ANY THIRD PARTY'S INDIVIDUAL COMPUTER, EQUIPMENT, NETWORK OR SOFTWARE, OR FOR ANY USER ERROR. EVERNOTE DOES NOT WARRANT AND SHALL HAVE NO LIABILITY WITH RESPECT TO NON-EVERNOTE PRODUCTS OR SERVICES INCLUDING, WITHOUT LIMITATION, THIRD-PARTY SOFTWARE OR HARDWARE, INTERNET CONNECTIONS OR CONNECTIVITY OR COMPUTER NETWORKS.</p><h2>7. LIMITATIONS ON LIABILITY.</h2><h3>7.1 Consequential Damages.</h3><p>IN NO EVENT SHALL EVERNOTE BE LIABLE TO LICENSEE FOR ANY LOSS OF OR DAMAGE TO DATA OR OTHER PERSONAL OR BUSINESS INFORMATION, LOST PROFITS OR USE OF THE SOFTWARE, OR FOR ANY SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES ARISING OUT OF OR IN CONNECTION WITH THIS AGREEMENT, INCLUDING THE INSTALLATION, USE OR PERFORMANCE, OR INABILITY TO USE, THE SOFTWARE, EVEN IF EVERNOTE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p><h3>7.2 Limitation.</h3><p>EVERNOTE PROVIDES THE SOFTWARE AT NO CHARGE TO LICENSEE. IN CONSIDERATION FOR, AND AS A FUNDAMENTAL AND EXPRESS CONDITION OF ENABLING USE OF THE SOFTWARE WITHOUT CHARGE, AND NOTWITHSTANDING ANY PROVISION IN THIS AGREEMENT TO THE CONTRARY, EVERNOTE SHALL NOT HAVE ANY LIABILITY FOR ANY MATTER ARISING OUT OF THE SUBJECT MATTER OF THIS AGREEMENT, WHETHER IN CONTRACT, TORT OR OTHERWISE, EXCEPT THE SOFTWARE WARRANTY REMEDY. THE LIMITATIONS HEREIN SHALL APPLY EVEN IF THE SOFTWARE WARRANTY REMEDY DOES NOT FULLY COMPENSATE LICENSEE FOR ANY OR ALL LOSSES, OR IF EVERNOTE KNEW OR SHOULD HAVE KNOWN ABOUT THE POSSIBILITY OF CONSEQUENTIAL DAMAGES. SOME LEGAL JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE ABOVE LIMITATION OR EXCLUSION MAY NOT APPLY TO LICENSEE IF LICENSEE RESIDES IN CERTAIN JURISDICTIONS.</p><h2>8. COMPLIANCE WITH EXPORT LAWS.</h2><p>Licensee acknowledges that the Software is subject to laws and regulations of the United States restricting the export thereof to foreign jurisdictions and agrees to comply with all applicable United States and foreign international laws, including, without limitation, the rules and regulations promulgated from time to time by the Bureau of Export Administration, United States Department of Commerce. Without limiting the foregoing, Licensee shall not download, and if downloaded shall not install or shall immediately uninstall and destroy, the Software if Licensee's download, installation or use of the Software is prohibited under applicable laws. By installing or using the Software, Licensee agrees to the foregoing and certifies that it is not located in, under the control of, or a national or resident of any country or on any list of countries to which the United States has embargoed goods or on the United States Treasury Department's list of Specially Designated Nations or the United States Commerce Department's Table of Denial Orders. Licensee shall not export, re-export, transfer or divert directly or indirectly, the Software, Documentation or other information or materials provided hereunder, or the output thereof, to any restricted place or person for which the United States or any other relevant jurisdiction requires any export license or other governmental approval at the time of export without first obtaining such license or approval. Evernote has no responsibility for compliance with such laws and regulations by Licensee. Licensee hereby agrees to indemnify and hold harmless Evernote from and against all claims, losses, damages, liabilities, costs and expenses, including reasonable attorneys' fees, to the extent such claims arise out of any breach of this Section 8.</p><h2>9. HIGH RISK ACTIVITIES.</h2><p>The Software is not fault-tolerant for, and is not designed or intended for use in, hazardous environments requiring fail-safe performance, including, without limitation, in the operation of nuclear facilities, aircraft navigation or communication systems, air traffic control, weapons systems, direct life-support machines or any other application in which the failure of the Software could lead directly to death, personal injury or severe physical or property damage (collectively, "High Risk Activities"). Evernote expressly disclaims any express or implied warranty of fitness for High Risk Activities.</p><h2>10. UNITED STATES GOVERNMENT.</h2><p>The Software and Documentation are "commercial computer software" and "commercial computer software documentation," respectively, pursuant to DFAR Section 227.7202 and FAR Section 12.212, as applicable. Any use, modification, reproduction, release, performance, display or disclosure of the Software by the United States Government shall be governed solely by the terms of this Agreement, except to the extent expressly permitted by the terms of this Agreement.</p><h2>11. GENERAL PROVISIONS.</h2><h3>11.1 Entire Agreement; Amendment.</h3><p>This Agreement constitutes the entire agreement with regard to the subject matter hereof. No waiver, consent, modification or change of terms of this Agreement shall bind any party unless in writing signed by such party, and then such waiver, consent, modification or change shall be effective only in the specific instance and for the specific purpose given.</p><h3>11.2 Relationship.</h3><p>No agency, partnership, joint venture or employment is created between the parties hereto as a result of this Agreement. Neither party is authorized to create any obligation, expressed or implied, on behalf of the other party, or to exercise any control over the other party's methods of operation, except as specifically provided herein.</p><h3>11.3 Governing Law.</h3><p>This Agreement shall be governed by and construed in accordance with the laws of the State of California, United States of America, without regard to its choice of law provisions, and shall not be governed by the provisions of the Convention on Contracts for the International Sale of Goods. If you are provided a translation of this Agreement in a language other than English, such translation is offered as a convenience and, if there is any conflict between such translation and the English language version, the English version of this Agreement shall govern, to the extent not expressly prohibited by the law in your jurisdiction. If you have not received the English version of this Agreement, you may find it at the Evernote Corporation web site (www.evernote.com) or by contacting Evernote and requesting a copy.</p><h3>11.4 Waiver.</h3><p>The waiver by any party hereto of a breach or a default of any provision of this Agreement by another party shall not be construed as a waiver of any succeeding breach of the same or any other provision, nor shall any delay or omission on the part of either party to exercise or avail itself of any right, power or privilege that it has, or may have hereunder, operate as a waiver of any right, power or privilege by such party.</p><h3>11.5 Headings.</h3><p>Captions and headings contained in this Agreement have been included for ease of reference and convenience and shall not be considered in interpreting or construing this Agreement.</p><h3>11.6 Assignment; Successors.</h3><p>The terms and conditions of this Agreement shall inure to the benefit of and be enforceable by the parties hereto and their permitted successors and assigns; provided, that the only permitted successor or assignee shall be a party that acquires all or substantially all of the business and assets of Evernote, whether by merger, sale of assets or otherwise by operation of law. Licensee shall not assign this Agreement or any right, interest or obligation under this Agreement, or in or relating to the Software. Any attempted assignment or delegation in contravention of this provision shall be void and ineffective.</p><h3>11.7 Notices.</h3><p>Any notice or communication from one party to the other required or permitted to be given hereunder shall be in writing and either personally delivered, sent by postal service or sent via courier (with evidence of delivery in any case). All notices shall be in English and shall be effective upon actual receipt, irrespective of the date appearing thereon. Unless otherwise requested, all notices to Evernote shall be to the attention of "Compliance."</p><h3>11.8 Contact.</h3><p>If you have any questions concerning these terms and conditions, you may do so at the following address:</p><table cellspacing="0" cellpadding="5" border="1"><tbody><tr><th>&nbsp;</th><th>In the USA or Canada</th><th>Outside the USA and Canada</th></tr><tr><th>Mail:</th><td>Evernote Corporation<br>305 Walnut Street<br>Redwood City, CA 94065<br>Attn: General Counsel</td><td>Evernote GmbH<br>Joseffstrasse 59<br>8005, Zurich, Switzerland<br>Attn: Legal Notice</td></tr><tr><th>Email:</th><td>legalnotice@evernote.com</td><td>legalnotice@evernote.com</td></tr><tr><th>Phone:</th><td>650.41.NOTES (650.416.6837)</td><td>+1.650.41.NOTES (650.416.6837)</td></tr></tbody></table><p>If you would like to contact Evernote for any other reason relating to use of the Software, you may do so at this address: us-support@evernote.com.</p></div><div class="dialog_close" id="dialog__eula__close2_container"><a href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#" class="dialogButton theFont">关闭</a></div></div><a class="dialog_close" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#"></a><div class="dialog_bottom"></div></div></div><div class="dialog dynamic" id="dialog__features"><div class="dialog_canvas theFont"><div id="dialog__features__content"><div class="features_title" id="dialog__features__title__all">欢迎使用全新的印象笔记·悦读</div><div class="features_title" id="dialog__features__title__new">有新版印象笔记·悦读可用</div><table id="dialog__features__table" cellspacing="0" cellpadding="0" border="0"><tbody><tr id="dialog__features__clipping"><td class="image"><div class="feature_image"></div></td><td class="text"><div class="feature_title">剪藏至印象笔记</div><div class="feature_text">点击一下，即可把你阅读的内容剪藏到印象笔记帐户，随时随地在任何设备上都可以读取印象笔记。</div></td></tr><tr id="dialog__features__highlighting"><td class="image"><div class="feature_image"></div></td><td class="text"><div class="feature_title">高亮</div><div class="feature_text">想记住的文字设成高亮显示，在印象笔记帐户中快速看到。在印象笔记·悦读中所作的高亮修改，将会自动更新到印象笔记帐户中。</div></td></tr><tr id="dialog__features__related_notes"><td class="image"><div class="feature_image"></div></td><td class="text"><div class="feature_title">相关笔记</div><div class="feature_text">让你神奇的重新发现印象笔记帐户里那些和你正在阅读的相关笔记。如果页面空间允许，相关笔记会显示在你正在阅读的文章底部或者右侧。</div></td></tr><tr id="dialog__features__smart_filing"><td class="image"><div class="feature_image"></div></td><td class="text"><div class="feature_title">智能归档</div><div class="feature_text">为保存的网页自动添加标签，并保存到恰当的笔记本。</div></td></tr></tbody></table><div id="dialog__features__eula_notice">使用印象笔记·悦读，表示你同意我们的<a href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#">最终用户许可协议</a>。</div><div class="dialog_close" id="dialog__features__close2_container"><a href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#" class="dialogButton theFont">关闭</a></div></div><a class="dialog_close" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/in_isolation/reformat.html#"></a><div class="dialog_bottom"></div></div></div></div></div></div>
+    <div id="stuff">
+        <link rel="stylesheet" href="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/css/reformat.css" type="text/css">
+        <script type="text/javascript" src="chrome-extension://iooicodkiihhpojmmeghjclgihfjdjhj/front/third_party/jquery/jquery.js"></script>
+    </div>    
+
+</body></html>
