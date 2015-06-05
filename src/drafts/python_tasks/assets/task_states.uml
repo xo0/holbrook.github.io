@@ -4,14 +4,15 @@ state contractor {
   [*] -down-> Suspended : create 
   Suspended -down-> Ready : schedule
   Ready -> Suspended : cancel 
-}
+t
 
 state worker {
   
-  Ready -> Running : dispatched
-  Running --> Waiting : block
+  Ready --> Running : dispatched
+  Ready --> Waiting : block 
+  Waiting --> Running : unblock
+
   Running --> Finished
-  Running --> Failer
   Waiting --> [*] : abort
 
 }
