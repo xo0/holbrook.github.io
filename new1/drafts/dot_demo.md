@@ -1,0 +1,21 @@
+
+~~~~ {.dot .Grankdir:LR}
+digraph {
+      A -> B -> C;
+        A -> C;
+}
+~~~~
+
+
+## Generated diagrams
+
+~~~~ {.dot .Grankdir:LR}
+digraph {
+      A -> B -> C;
+        A -> C;
+}
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@base <http://example.com/> .
+<alice> foaf:name "Alice" ;
+        foaf:knows [ foaf:name "Bob" ] .
+~~~~        
