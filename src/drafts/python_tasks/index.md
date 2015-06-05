@@ -84,7 +84,58 @@ demotask.demo.delay('some messages...')
 
 ## 任务监控
 
-# 模型和架构
+# 模型
+
+## 任务状态
+
+- 挂起(Suspended)
+  任务已经创建，但是还没有触发执行条件
+- 就绪(Ready)
+  任务已经被调度，等待worker执行 
+
+A task can exist in one of the following states:
+
+    Running
+
+        When a task is actually executing it is said to be in the Running
+        state. It is currently utilising the processor.
+
+            Ready
+
+                Ready tasks are those that are able to execute (they are not
+                blocked or suspended) but are not currently executing because a
+                different task of equal or higher priority is already in the
+                Running state.
+
+                    Blocked
+
+                        A task is said to be in the Blocked state if it is
+                        currently waiting for either a temporal or external
+                        event. For example, if a task calls vTaskDelay() it
+                        will block (be placed into the Blocked state) until the
+                        delay period has expired - a temporal event. Tasks can
+                        also block waiting for queue and semaphore events.
+                        Tasks in the Blocked state always have a 'timeout'
+                        period, after which the task will be unblocked. Blocked
+                        tasks are not available for scheduling.
+
+                            Suspended
+
+                                Tasks in the Suspended state are also not
+                                available for scheduling. Tasks will only enter
+                                or exit the suspended state when explicitly
+                                commanded to do so through the vTaskSuspend()
+                                and xTaskResume() API calls respectively. A
+                                'timeout' period cannot be specified. 
+
+
+running (only one unit per processor can be in this state)
+ready (just waiting in a queue for the processor to become available)
+blocked (waiting for some event to occur, and then moved to the "ready" queue)
+non-existent (not yet activated). 
+
+
+# 架构
 
 celery webhook
 http://docs.celeryproject.org/en/master/userguide/remote-tasks.html
