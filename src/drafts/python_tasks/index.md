@@ -42,8 +42,18 @@ TAGS: python, 分布式, MQ
 
 ![](celery-architecture.jpg)
 
-Celery的基本原理是`Publisher`将`Task`发布到`Message Broker`，`Worker`从`Message
-Broker`获取任务后，执行该任务。Broker可以有很多选择，Celery推荐的是`RabbitMQ`。
+Celery中，三个主要的架构角色为：
+
+- Celery Client
+  任务产生者。本文中的环境中，Celery Client内置于Flask App中。
+- Celery Workers
+  任务执行者, 可以是本地，也可以是远程的python进程。
+- Message Broker
+  在任务产生者和任务执行者之间传递消息，包括任务的发布和结果的反馈等。
+  Celery支持很多消息中间件甚至数据库作为Message
+  Broker，但是首推的是`RabbitMQ`。
+
+
 
 一个简单的例子：
 ```
@@ -78,10 +88,19 @@ demotask.demo.delay('some messages...')
 
 ```
 
+# 芹菜花Celery Flower
+
+Celery [Flower](https://github.com/mher/flower/)是Celery的一个Web监控和管理界面。
+对于本应用来说，有两个使用场景：
+
+1. 在应用中嵌入Flower的监控界面
+2. 使用Flower提供的[RESTful API](http://flower.readthedocs.org/en/latest/api.html)
+   管理任务，代替Celery Python API
+
+
 
 ## 任务组合
 
-## 任务监控
 
 # 模型
 
@@ -213,3 +232,4 @@ gevent容易阻塞？ threading更可靠？？？
 2. APScheduler + Gearman 构建分布式定时任务调度 http://blog.itpub.net/16582684/viewspace-776753/
 3. 使用多线程和gevent来提高celery性能及稳定性 http://xiaorui.cc/2014/09/11/%e5%b0%8f%e8%ae%a1%e4%bd%bf%e7%94%a8%e5%a4%9a%e7%ba%bf%e7%a8%8b%e5%92%8cgevent%e6%9d%a5%e6%8f%90%e9%ab%98celery%e6%80%a7%e8%83%bd%e5%8f%8a%e7%a8%b3%e5%ae%9a%e6%80%a7/
 4. 一个任务调度分发服务的架构  http://blog.sina.com.cn/s/blog_5921b17e0101ezfl.html
+5. 在Flask中使用Celery http://www.cnblogs.com/ifkite/p/4257721.html
