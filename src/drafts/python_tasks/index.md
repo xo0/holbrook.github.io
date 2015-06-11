@@ -99,8 +99,14 @@ Celery [Flower](https://github.com/mher/flower/)是Celery的一个Web监控和�
 
 
 
-## 任务组合
+# 任务组合
+subtask
+...
 
+
+# Celery交换机
+
+exchange，决定哪些任务发送到哪个队列
 
 # 模型
 
@@ -117,6 +123,17 @@ Celery [Flower](https://github.com/mher/flower/)是Celery的一个Web监控和�
 - 完成(Finished)
   worker已經執行任務。完成的結果可能是成功(sucess)或失敗(fail)
 
+Celery 中内置了几种任务状态：
+
+PENDING
+RECEIVED
+STARTED
+FAILURE
+RETRY
+SUCCESS
+REVOKED
+
+Celery也支持自定义状态。
 
 # 架构
 
