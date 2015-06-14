@@ -42,8 +42,18 @@ TAGS: python, 分布式, MQ
 
 ![](celery-architecture.jpg)
 
-Celery的基本原理是`Publisher`将`Task`发布到`Message Broker`，`Worker`从`Message
-Broker`获取任务后，执行该任务。Broker可以有很多选择，Celery推荐的是`RabbitMQ`。
+Celery中，三个主要的架构角色为：
+
+- Celery Client
+  任务产生者。本文中的环境中，Celery Client内置于Flask App中。
+- Celery Workers
+  任务执行者, 可以是本地，也可以是远程的python进程。
+- Message Broker
+  在任务产生者和任务执行者之间传递消息，包括任务的发布和结果的反馈等。
+  Celery支持很多消息中间件甚至数据库作为Message
+  Broker，但是首推的是`RabbitMQ`。
+
+
 
 一个简单的例子：
 ```
@@ -78,10 +88,25 @@ demotask.demo.delay('some messages...')
 
 ```
 
+# 芹菜花Celery Flower
 
-## 任务组合
+Celery [Flower](https://github.com/mher/flower/)是Celery的一个Web监控和管理界面。
+对于本应用来说，有两个使用场景：
 
-## 任务监控
+1. 在应用中嵌入Flower的监控界面
+2. 使用Flower提供的[RESTful API](http://flower.readthedocs.org/en/latest/api.html)
+   管理任务，代替Celery Python API
+
+
+
+# 任务组合
+subtask
+...
+
+
+# Celery交换机
+
+exchange，决定哪些任务发送到哪个队列
 
 # 模型
 
@@ -91,55 +116,37 @@ demotask.demo.delay('some messages...')
   任务已经创建，但是还没有触发执行条件
 - 就绪(Ready)
   任务已经被调度，等待worker执行 
+- 運行中(Running)
+  worker已經接受任務並開始執行
+- 阻塞(Blocked)
+  worker已經接受任務，但還需要等待資源才能開始執行
+- 完成(Finished)
+  worker已經執行任務。完成的結果可能是成功(sucess)或失敗(fail)
 
-A task can exist in one of the following states:
+Celery 中内置了几种任务状态：
 
-    Running
+PENDING
+RECEIVED
+STARTED
+FAILURE
+RETRY
+SUCCESS
+REVOKED
 
-        When a task is actually executing it is said to be in the Running
-        state. It is currently utilising the processor.
-
-            Ready
-
-                Ready tasks are those that are able to execute (they are not
-                blocked or suspended) but are not currently executing because a
-                different task of equal or higher priority is already in the
-                Running state.
-
-                    Blocked
-
-                        A task is said to be in the Blocked state if it is
-                        currently waiting for either a temporal or external
-                        event. For example, if a task calls vTaskDelay() it
-                        will block (be placed into the Blocked state) until the
-                        delay period has expired - a temporal event. Tasks can
-                        also block waiting for queue and semaphore events.
-                        Tasks in the Blocked state always have a 'timeout'
-                        period, after which the task will be unblocked. Blocked
-                        tasks are not available for scheduling.
-
-                            Suspended
-
-                                Tasks in the Suspended state are also not
-                                available for scheduling. Tasks will only enter
-                                or exit the suspended state when explicitly
-                                commanded to do so through the vTaskSuspend()
-                                and xTaskResume() API calls respectively. A
-                                'timeout' period cannot be specified. 
-
-
-running (only one unit per processor can be in this state)
-ready (just waiting in a queue for the processor to become available)
-blocked (waiting for some event to occur, and then moved to the "ready" queue)
-non-existent (not yet activated). 
-
+Celery也支持自定义状态。
 
 # 架构
 
-celery webhook
-http://docs.celeryproject.org/en/master/userguide/remote-tasks.html
 
-## 队列的选择
+## Broker的选择 
+
+Celery目前支持10种[Broker](http://docs.celeryproject.org/en/latest/getting-started/brokers/index.html)， 
+并且建议使用RabbitMQ和Redis。
+由于RabbitMQ比Redis更能实现可靠传输，并且这里对于性能没有很变态的要求， 
+所以选择RabbitMQ作为Broker。 
+
+
+celery webhook http://docs.celeryproject.org/en/master/userguide/remote-tasks.html
 
 消息队列
 
@@ -241,3 +248,5 @@ gevent容易阻塞？ threading更可靠？？？
 1. Python定时任务框架APScheduler http://blog.csdn.net/chosen0ne/article/details/7842421
 2. APScheduler + Gearman 构建分布式定时任务调度 http://blog.itpub.net/16582684/viewspace-776753/
 3. 使用多线程和gevent来提高celery性能及稳定性 http://xiaorui.cc/2014/09/11/%e5%b0%8f%e8%ae%a1%e4%bd%bf%e7%94%a8%e5%a4%9a%e7%ba%bf%e7%a8%8b%e5%92%8cgevent%e6%9d%a5%e6%8f%90%e9%ab%98celery%e6%80%a7%e8%83%bd%e5%8f%8a%e7%a8%b3%e5%ae%9a%e6%80%a7/
+4. 一个任务调度分发服务的架构  http://blog.sina.com.cn/s/blog_5921b17e0101ezfl.html
+5. 在Flask中使用Celery http://www.cnblogs.com/ifkite/p/4257721.html
