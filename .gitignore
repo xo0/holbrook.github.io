@@ -1,2 +1,8 @@
-/_posts
-/_site
+!bin
+!Makefile
+!publish
+!README.md
+!src
+!templates
+!themes
+!tools
