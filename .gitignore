@@ -1,8 +1,8 @@
-**/_site
-**/themes/**/_posts
-**/.DS_Store
-*.bak
-.DS_Store
-
-*.ini
-*.vpp~*
+bin
+Makefile
+publish
+README.md
+src
+templates
+themes
+tools
