@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.min.css"/>
+    <style type="text/css">code{white-space: pre;}</style>
+    <link rel="stylesheet" href="assets/beige.css"/>
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section class="slide level2">
+
+<p>程序化交易(做市)讨论</p>
+</section>
+<section><section id="前提和假设" class="titleslide slide level1"><h1>前提和假设</h1></section></section>
+<section><section id="做市要素" class="titleslide slide level1"><h1>做市要素</h1></section><section id="做市商风险和收益" class="slide level2">
+<h1>做市商风险和收益</h1>
+<ol type="1">
+<li>收益来源: 价差，反佣</li>
+<li>风险来源</li>
+</ol>
+<ul>
+<li>逆向选择导致均值回归</li>
+<li>库存风险</li>
+</ul>
+<p>价差spread = f(股票交易量, 股价波动型, 绝对价格, 做市商数量)</p>
+</section><section id="做市商行为模式" class="slide level2">
+<h1>做市商行为模式</h1>
+<ol type="1">
+<li>通过改变价差，控制库存，补偿逆向选择</li>
+<li>通过价差补偿做市义务所带来的资金损失</li>
+<li>做市商倾向于控制价格波动幅度</li>
+</ol>
+</section></section>
+<section><section id="策略模型类型" class="titleslide slide level1"><h1>策略模型类型</h1></section><section id="决策表模型思路" class="slide level2">
+<h1>决策表模型思路</h1>
+<p>根据一组条件，输出价差/ask,bid tick</p>
+</section><section id="统计回归模型思路" class="slide level2">
+<h1>统计回归模型思路</h1>
+<ul>
+<li>可以基于中间价或价差</li>
+<li>在随机过程基础上,计算概率密度,给出最优中间价/价差</li>
+<li>价格可以与历史价格无关，也可以相关</li>
+</ul>
+<figure>
+<img src="assets/random_process.png" />
+</figure>
+</section></section>
+<section><section id="框架和讨论" class="titleslide slide level1"><h1>框架和讨论</h1></section><section id="行情数据" class="slide level2">
+<h1>行情数据</h1>
+<ul>
+<li>Quotes Book(Limit Order Book)</li>
+<li>Market Order Book</li>
+</ul>
+</section><section id="做市商义务" class="slide level2">
+<h1>做市商义务</h1>
+<ul>
+<li>作为策略的约束条件</li>
+<li>具体内容?</li>
+</ul>
+</section><section id="参数设置" class="slide level2">
+<h1>参数设置</h1>
+<ol type="1">
+<li>(最大)持仓变动,(最大)资金变动</li>
+<li>净持仓每日变动幅度</li>
+</ol>
+</section></section>
+    </div>
+  </div>
+
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.min.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+    </body>
+</html>
