@@ -6,3 +6,9 @@
 !templates
 !themes
 !tools
+themes/**/node_modules
+themes/**/jkl
+themes/**/dist
+themes/**/.tmp
+themes/**/app/bower_components
+
