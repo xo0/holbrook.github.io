@@ -1,5 +1,5 @@
-node_modules
-jkl
+.*/
+_SpecRunner.html
+app/assets/_bower_components
 dist
-.tmp
-app/bower_components
+node_modules
