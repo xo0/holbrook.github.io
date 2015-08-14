@@ -1,0 +1,12 @@
+{
+  "name": "current",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery": "~2.1.0",
+    "modernizr": "~2.7.2",
+    "normalize.css": "~3.0.0"
+  },
+  "devDependencies": {
+    "jasmine": "~2.0.0"
+  }
+}
