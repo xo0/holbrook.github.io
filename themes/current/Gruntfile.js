@@ -271,14 +271,14 @@ module.exports = function (grunt) {
         ]);
     });
 
-    grunt.registerTask('test', [
-        'clean:server',
-        'recess',
-        'copy:server',
-        'jekyll',
-        'connect:test',
-        'mocha'
-    ]);
+//    grunt.registerTask('test', [
+//        'clean:server',
+//        'recess',
+//        'copy:server',
+//        'jekyll',
+//        'connect:test',
+//        'mocha'
+//    ]);
 
     grunt.registerTask('build', [
         'clean:dist',
@@ -297,7 +297,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', [
         //'jshint',
-        'test',
+        //'test',
         'build'
     ]);
 };
