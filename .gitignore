@@ -3,5 +3,6 @@ themes/**/jkl
 themes/**/dist
 themes/**/.tmp
 themes/**/app/bower_components
+src/**/*.html
 *~
 
