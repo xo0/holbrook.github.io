@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{{ page.title }}</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- build:css({app,.tmp}) /assets/stylesheets/app.css -->
+    <link rel="stylesheet" href="/assets/_bower_components/normalize.css/normalize.css">
+    <link rel="stylesheet" href="/assets/stylesheets/app.css">
+    <link rel="stylesheet" href="/assets/stylesheets/syntax.css">
+    <!-- endbuild -->
+
+    <!-- build:js(app) /assets/javascripts/modernizr.js -->
+    <script src="/assets/_bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+  </head>
+  <body>
+    <div class="site">
+      <div class="header">
+        <h1 class="title"><a href="/">{{ site.name }}</a></h1>
+        <a class="extra" href="/">home</a>
+      </div>
+
+      {{ content }}
+
+      <div class="footer">
+        <div class="contact">
+          <p>
+            Your Name<br />
+            What You Are<br />
+            you@example.com
+          </p>
+        </div>
+        <div class="contact">
+          <p>
+            <a href="https://github.com/yourusername">github.com/yourusername</a><br />
+            <a href="https://twitter.com/yourusername">twitter.com/yourusername</a><br />
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- build:js(app) /assets/javascripts/vendor.js -->
+    <script src="/assets/_bower_components/jquery/dist/jquery.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js(.tmp) /assets/javascripts/app.js -->
+    <script src="/assets/javascripts/app.js"></script>
+    <!-- endbuild -->
+
+    {% include analytics.html %}
+  </body>
+</html>
