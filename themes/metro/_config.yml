@@ -1,8 +1,0 @@
-name: metro
-markdown: kramdown
-permalink: pretty
-show_drafts: true
-kramdown:
-  input: GFM
-
-exclude: ['assets', '**.png', '**.jpg', '**.jpeg', '**.gif', '**.ico']

@@ -1,6 +1,7 @@
 themes/**/node_modules
 themes/**/jkl
 themes/**/dist
+themes/**/_site
 themes/**/.tmp
 themes/**/app/bower_components
 src/**/*.html
