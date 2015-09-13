@@ -1,0 +1,58 @@
+---
+layout: default
+---
+
+ <div id="jumbo">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-6">
+         <h2 style="margin: 0 0 20px 0">{{ page.title }}</h2>
+	 <p class="post-meta">
+	   {{ page.date | date: "%b %-d, %Y" }}
+	   {% if page.author %} • {{ page.author }}{% endif %}
+	 
+	 </p>
+         {% if page.meta %}
+	 <p style="font-size: 18px; margin-bottom: 0">
+	   {{ page.meta }}
+           <br />
+         </p>
+	 {% endif %}
+       </div>
+
+       <div class="col-md-6" style="text-align: right; padding-right: 0">
+	 <a href="#" class="btn btn btn-default">操作1</a>
+	 &nbsp;
+	 
+         <a href="#" class="btn btn- btn-success">操作2</a>
+	 <br /><br />
+	 <span class="label label-default">Default</span>
+<span class="label label-primary">Primary</span>
+<span class="label label-success">Success</span>
+<span class="label label-info">Info</span>
+<span class="label label-warning">Warning</span>
+<span class="label label-danger">Danger</span>
+
+	 
+       </div>
+     </div>
+   </div>
+</div>
+ 
+        <div class="container main">
+            <div class="row">
+
+                <div class="col-md-8">
+		  <article class="post-content">
+		    {{ content }}
+		  </article>
+		</div>
+
+                <div id="sidebar" class="col-md-4">
+		    sidebar
+		</div>
+	    </div>
+	</div>
+
+
+
