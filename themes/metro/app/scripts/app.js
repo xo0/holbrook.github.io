@@ -1,12 +1,4 @@
-'use strict';
-
-/**
- * @ngdoc overview
- * @name metroApp
- * @description
- * # metroApp
- *
- * Main module of the application.
- */
-angular
-  .module('metroApp', []);
+$("div#sidebar").append(
+    $("div#TOC").html()
+    );
+$("div#TOC").empty();

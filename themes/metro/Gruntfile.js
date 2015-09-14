@@ -185,12 +185,13 @@ module.exports = function (grunt) {
         src: ['<%= yeoman.app %>/_includes/head.html',
               '<%= yeoman.app %>/_includes/footer.html'
              ],
-        ignorePath:  /\.\.\//
+      //ignorePath:  /\.\.\//,
+        ignorePath:  /\.\./,
       },
       test: {
         devDependencies: true,
         src: '<%= karma.unit.configFile %>',
-        ignorePath:  /\.\.\//,
+        ignorePath:  /\.\./,
         fileTypes:{
           js: {
             block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
@@ -312,7 +313,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.dist %>',
-          src: ['*.html'],
+          src: ['{,*/}*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
