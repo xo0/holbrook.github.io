@@ -1,3 +1,4 @@
+_deploy
 themes/**/node_modules
 themes/**/jkl
 themes/**/dist
