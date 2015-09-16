@@ -222,7 +222,7 @@ module.exports = function (grunt) {
     // concat, minify and revision files. Creates configurations in memory so
     // additional tasks can operate on them
     useminPrepare: {
-      html: '<%= yeoman.app %>/index.html',
+      html: '<%= yeoman.app %>/{,*/}*.html',
       options: {
         dest: '<%= yeoman.dist %>',
         flow: {
@@ -351,7 +351,7 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
-            '*.html',
+            '{,*/}*.html',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*'
           ]
@@ -434,17 +434,18 @@ module.exports = function (grunt) {
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
-//    'autoprefixer',
+    'autoprefixer',
   //  'ngtemplates',
     'concat',
  //   'ngAnnotate',
     'copy:dist',
+            
    // 'cdnify',
     'cssmin',
     'uglify',
     'filerev',
-    'usemin',
-    'htmlmin'
+    'usemin'
+//    'htmlmin'
   ]);
 
   grunt.registerTask('default', [
