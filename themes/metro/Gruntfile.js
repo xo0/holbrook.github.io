@@ -1,5 +1,5 @@
 // Generated on 2015-09-11 using generator-angular 0.12.1
-'use strict';
+//'use strict';
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -385,7 +385,7 @@ module.exports = function (grunt) {
       ],
       dist: [
         'copy:styles',
-        'imagemin',
+    //    'imagemin',
         'svgmin'
       ]
     },

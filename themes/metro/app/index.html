@@ -3,10 +3,10 @@ layout: default
 ---
 
 <!--div class="home"-->
-<span> </span>
+<span>{{ paginator }} </span>
 <div class="container">
 
-{% for post in paginator.posts %}
+{% for post in site.posts %}
   <div id="ex3" name="ex3" class="row">
         <h3 class="title">
             <small>{{ post.date | date: "%Y-%m-%d" }}</small><br/>
@@ -36,11 +36,31 @@ layout: default
   </div>
 {% endfor %}
 
+<div id="pagination" class="row">
+<nav>
+      <ul class="pagination">
+              <li>
+                         <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                          </a>
+                                              </li>
+                                                  <li><a href="#">1</a></li>
+                                                      <li><a href="#">2</a></li>
+                                                          <li><a href="#">3</a></li>
+                                                              <li><a href="#">4</a></li>
+                                                                  <li><a href="#">5</a></li>
+                                                                      <li>
+                                                                                <a href="#" aria-label="Next">
+                                                                                            <span aria-hidden="true">&raquo;</span>
+                                                                                                  </a>
+                                                                                                      </li>
+                                                                                                        </ul>
+</nav>
+</div>
 
-
+</div>
   
 
-<div id="pagination" class="row">
 {% if paginator.previous_page %}
     <p class="previous">
       {% if paginator.previous_page == 1 %}
@@ -84,7 +104,5 @@ layout: default
       <span>下一页 &raquo;</span>
     </p>
   {% endif %}
-</div>
 
-ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>ifdasf<br/>
 </div>
