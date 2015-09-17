@@ -9,7 +9,7 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://holbrook.github.io" # the base hostname & protocol for your site
 
 # Build settings
-markdown:       rdiscount
+markdown:       kramdown 
 safe:           true
 lsi:            false
 highlighter:    pygments
