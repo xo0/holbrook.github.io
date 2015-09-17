@@ -1,42 +1,21 @@
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>{{ page.title }} &middot; {{ site.title }}</title>
-<meta name="author" content="{{ site.author }}">
-<meta name="description" {% if page.title == "Home" %}
-      content="{{ site.description }}" {% else %}
-      content="{{ page.content | strip_html | strip_newlines | truncate: 120 }}" {% endif %}>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="/css/style.css" type="text/css" media="all" />
+  <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
-<link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="/rss.xml" />
-<link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="/atom.xml" />
-
-
-<link rel='stylesheet' id='cptch_stylesheet-css'  href='/css/style.4.0.css' type='text/css' media='all' />
-<link rel='stylesheet' href='/css/jqcloud.min.css' type='text/css' media='all' />
-<style type="text/css">
-    .ads {
-        position: relative;
-        text-align: center;
-        clear: both;
-    }
-
-    .ssba {
-    }
-    .ssba img
-    {
-        width: 35px !important;
-        padding: 6px;
-        border:  0;
-        box-shadow: none !important;
-        display: inline !important;
-        vertical-align: middle;
-    }
-    .ssba, .ssba a
-    {
-        text-decoration:none;
-        background: none;
-        font-family: Indie Flower;
-        font-size:  20px;
-    }
-</style>
-<meta name="viewport" content="width=device-width"/><!-- for mobile -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/bower_components/font-awesome-bower/css/font-awesome.css" />
+    <link rel="stylesheet" href="/bower_components/highlight/src/styles/monokai_sublime.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="/styles/main.css" />
+    <!-- endbuild -->
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}" />
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl | prepend: site.url }}" />
+</head>

@@ -1,34 +1,72 @@
 ---
 layout: default
 ---
-<div id="content">
-        <div class="post-2398 post type-post status-publish format-standard hentry category-css tag-css-2 tag-web-design post-single" id="post-2398"><!-- post div -->
-        <h2 class="title">{{ page.title }}</h2>
-        {% if page.description %}<p>摘要：<br/>{{page.description}}</p>{% endif %}
-	<br/>
-        <div class="post-info-top">
-            <span class="post-info-date">{{ page.date | date: '%Y-%m-%d' }}</span>
-            <span class="gotocomments"><a href="#comments"  rel="nofollow" title="?">评论</a></span>
-        </div>
-        <div class="clear"></div>
-        <div class="entry">
-            {{content}}
-        </div><!-- END entry -->
-        <!--highlight -->
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
+
+ <div id="jumbo">
+   <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2 style="margin: 0 0 20px 0">{{ page.title }}</h2>
+    <p class="post-meta">
+      {{ page.date | date: "%b %-d, %Y" }}
+      {% if page.author %} • {{ page.author }}{% endif %}
+    
+    </p>
+        {% if page.meta %}
+    <p style="font-size: 18px; margin-bottom: 0">
+      {{ page.meta }}
+          <br />
+        </p>
+    {% endif %}
+      </div>
+
+      <div class="col-md-6" style="text-align: right; padding-right: 0">
+    <a href="#" class="btn btn btn-default">操作1</a>
+    &nbsp;
+    
+        <a href="#" class="btn btn- btn-success">操作2</a>
+    <br /><br />
+    <span class="label label-default">Default</span>
+<span class="label label-primary">Primary</span>
+<span class="label label-success">Success</span>
+<span class="label label-info">Info</span>
+<span class="label label-warning">Warning</span>
+<span class="label label-danger">Danger</span>
+
+    
+      </div>
+    </div>
+  </div>
+  </div>
+
+       <div class="container main">
+           <div class="row">
+
+               <div class="col-md-8">
+   	  <article class="post-content">
+   	    {{ content }}
+   	  </article>
+
+
         <!--百度分享-->
-        <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+        <div class="bdsharebuttonbox">
+	  <a href="#" class="bds_more" data-cmd="more"></a>
+	  <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	  <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	  <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+	  <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+	  <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+	</div>
         <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{},"image":{"viewList":["tsina","weixin","douban","tqq","renren"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","weixin","douban","tqq","renren"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
 
 
 
         <!--wumii block-->
-<script type="text/javascript" id="wumiiRelatedItems"></script>
-<!--for wumii ， can be moved to footer-->
-<script type="text/javascript">
+	<script type="text/javascript" id="wumiiRelatedItems"></script>
+
+	<!--for wumii ， can be moved to footer-->
+	<script type="text/javascript">
   var wumiiPermaLink = "{{site.url}}{{page.url}}"; //请用代码生成文章永久的链接
   var wumiiTitle = "{{page.title}}"; //请用代码生成文章标题
   var wumiiTags = "心内求法,{% for tag in page.tags %},{{tag}}{% endfor %}"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
@@ -42,48 +80,24 @@ layout: default
     <img src="http://static.wumii.cn/images/pixel.png" alt="无觅关联推荐，快速提升流量" style="border:0;padding:0;margin:0;" />
 </a>
 <!-- end of wumii -->
+   	</div>
+
+    <div id="sidebar" class="col-md-4">
+   	</div>
+       </div>
+   </div>
 
 
-
-
-        <div class="post-info-bottom">
-            <span class="post-info-category"><a href="#" rel="category tag">{{ page.categories }}</a></span>
-            <span class="post-info-tags">
-                {% for tag in page.tags %}<a href="#" rel="tag">{{tag}}</a>&nbsp;&nbsp;{% endfor %}
-            </span>
-        </div>
-        <div id="nav-below">
-            <div class="nav-previous">
-                {% if page.previous %}
-                <a href="{{ page.previous.url }}" rel="prev"><span class="meta-nav">&larr;</span>{{ page.previous.title | truncatewords:5 }}</a>
-                {% endif %}
-            </div>
-
-
-            <div class="nav-next">
-                {% if page.next %}
-                <a href="{{page.next.url}}" rel="next">{{ page.next.title | truncatewords:5 }}
-                <span class="meta-nav">&rarr;</span></a>
-                {% endif %}
-            </div>
-
-        </div><!-- #nav-below -->
-    </div><!-- END post -->
-    <!-- You can start editing here. -->
-
-                        <div id="comments">
-
-<!-- UY BEGIN -->
-<div id="uyan_frame"></div>
-<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1784345"></script>
-<!-- UY END -->
-
-
-
-                            </div><!-- #respond -->
-            </div><!--content-->
-
-
-<div>
-    {% include sidebar.html %}
+<div style="background-color: rgb(0, 159, 232);
+            padding: 10px 16px 6px; font-family: arial; 
+            font-size: 15px; font-weight: bold; 
+            color: rgb(255, 255, 255); text-decoration: none; 
+            border-top-right-radius: 6px; 
+            border-top-left-radius: 6px; 
+            position: fixed; 
+            bottom: 0px; display: block; 
+            cursor: pointer; margin: 0px; 
+            z-index: 50000; right: 2%;">
+    <i class="fa fa-envelope"></i>&nbsp; 评论
 </div>
+

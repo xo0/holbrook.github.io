@@ -1,67 +1,74 @@
 ---
-layout: page
-title: 首页
+layout: default
 ---
 
-{% for post in paginator.posts %}
-<div class="post-2398 post type-post status-publish format-standard hentry category-css tag-css-2 tag-web-design"><!-- post div -->
-    <h2 class="title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
-    <div class="post-info-top">
-        <span class="post-info-date">{{ post.date }}</span>
-        <span class="post-info-category"><a href="#" rel="category tag">{{ post.categories }}</a></span>
-        <span class="post-info-tags">
-            {% for tag in post.tags %}<a href="#" rel="tag">{{tag}}</a>&nbsp;&nbsp;{% endfor %}
-        </span>
-    </div>
-    <div class="clear"></div>
-    <div class="entry">
-	    {% if post.description %}<p>摘要：<br/>{{post.description}}</p>{% endif %}
-	    <p><span class="zbench-more-link"> <a href="{{ post.url }}" class="more-link">更多内容 &raquo;</a></span></p>
-    </div><!-- END entry -->
-</div><!-- END post -->
-{% endfor %}
-<div id="pagination">
-	{% if paginator.previous_page %}
-    <p class="previous">
-      {% if paginator.previous_page == 1 %}
-        <a href="/">&laquo;上一页</a>
-      {% else %}
-        <a href="{{ paginator.previous_page_path }}">&laquo;上一页</a>
-      {% endif %}
-    </p>
-  {% else %}
-    <p class="previous disabled">
-      <span>&laquo;上一页</span>
-    </p>
-  {% endif %}
+<!--div class="home"-->
+<div class="container">
 
-  <ul class="pages">
-    <li class="page">
-      {% if paginator.page == 1 %}
-        <span class="current-page">1</span>
-      {% else %}
-        <a href="/">1</a>
-      {% endif %}
+  {% for post in paginator.posts %}
+  {% include list.html %}
+  {% endfor %}
+
+<div id="pagination" class="row">
+<nav>
+  <ul class="pagination">
+
+    {% if paginator.previous_page %}
+    <li>
+      <a href="{{ paginator.previous_page_path }}" aria-label="Previous">
+	<span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% else %}
+    <li class="disabled">
+      <a href="#" aria-label="Previous">
+	<span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% endif %}
+
+    {% if paginator.page == 1 %}
+    <li class="active">
+      <a href="#">1</a>
+    </li>
+    
+    {% else %}
+    <li>
+      <a href="/">1</a>
+    </li>
+    {% endif %}
+    
+    {% for count in (2..paginator.total_pages) %}
+    {% if count == paginator.page %}
+    <li class="active">
+      <a href="#">{{count}}</a>
+    </li>
+    {% else %}
+    <li><a href="/{{count}}">{{count}}</a></li>
+    {% endif %}
+    {% endfor %}
+
+  {% if paginator.next_page %}    
+    <li>
+
+      <a href="{{ paginator.next_page_path }}" aria-label="Next">
+	<span aria-hidden="true">&raquo;</span>
+      </a>
     </li>
 
-    {% for count in (2..paginator.total_pages) %}
-      <li class="page">
-        {% if count == paginator.page %}
-          <span class="current-page">{{ count }}</span>
-        {% else %}
-          <a href="/{{ count }}">{{ count }}</a>
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+    {% else %}
+        <li class="disabled">
 
-  {% if paginator.next_page %}
-    <p class="next">
-      <a href="{{ paginator.next_page_path }}">下一页 &raquo;</a>
-    </p>
-  {% else %}
-    <p class="next disabled">
-      <span>下一页 &raquo;</span>
-    </p>
-  {% endif %}
+      <a href="#" aria-label="Next">
+	<span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+
+    {% endif %}
+  </ul>
+</nav>
+</div>
+
+</div>
+  
 </div>
