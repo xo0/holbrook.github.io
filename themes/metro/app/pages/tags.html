@@ -26,16 +26,16 @@ title: 标签
 
 <section class="post-archive">
 
-  {% for category in site.tags %}
-  <div class="year-bundle row gutters fadeInDown animated">
-        <h2 class="post-year col span_2" id="{{ category[0] }}-ref">
-          {{ category[0] | join: "/" }}
+  {% for tag in site.tags %}
+  <div class="row">
+        <h2 class="" id="{{ tag[0] }}-ref">
+          {{ tag[0] | join: "/" }}
         </h2>
-        <div class="posts-by-year col span_10">
-          {% for post in category[1] %}
+  </div>
+          {% for post in tag[1] %}
 	  {% include list.html %}
           {% endfor %}
-        </div>
-  </div>
+
+
 {% endfor %}
 </section>
