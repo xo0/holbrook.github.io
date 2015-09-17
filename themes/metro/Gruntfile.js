@@ -176,7 +176,10 @@ module.exports = function (grunt) {
 
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
-      html: ['<%= yeoman.dist %>/{,*/}*.html'],
+	html: ['<%= yeoman.dist %>/index.html',
+	       '<%= yeoman.dist %>/_includes/*.html',
+	       '<%= yeoman.dist %>/_layouts/*.html'
+	      ],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       js: ['<%= yeoman.dist %>/scripts/{,*/}*.js'],
       options: {
@@ -215,7 +218,7 @@ module.exports = function (grunt) {
     },
     concat: {
         dist: {
-	    src: ['vendors/**/*.js', 'scripts/**/*.js'],
+	    src: ['<%= yeoman.dist %>/scripts/**/*.js'],
 	    dest: '<%= yeoman.dist %>/scripts/scripts.js'
 	}
     },
@@ -231,16 +234,6 @@ module.exports = function (grunt) {
       }
     },
 
-    svgmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
 
     htmlmin: {
       dist: {
@@ -312,9 +305,9 @@ module.exports = function (grunt) {
         'copy:styles'
       ],
       dist: [
-        'copy:styles',
+        'copy:styles'
     //    'imagemin',
-        'svgmin'
+//        'svgmin'
       ]
     },
 
