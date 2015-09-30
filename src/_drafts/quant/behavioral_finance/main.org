@@ -1,3 +1,7 @@
+#+TITLE:
+#+DATE:
+#+DESCRIPTION:
+
 * 参考资料
 + [[http://wenku.baidu.com/view/fed7ceeb5ef7ba0d4a733b4d.html][金融复杂性与行为金融学理论]]
 + 饶育蕾《行为金融学》课件
