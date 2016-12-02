@@ -29,11 +29,10 @@ theme: minima
 gems:
   - jekyll-feed
   - jekyll-paginate
-  - src
 exclude:
   - Gemfile
   - Gemfile.lock
-
+  - src
 highlighter:    pygments
 permalink:      /:year/:month/:day/:title.html
 author:		Holbrook
