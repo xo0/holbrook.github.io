@@ -3,8 +3,8 @@ layout: post
 title: "从规则引擎到复杂事件处理(CEP)"
 description: "Drools Fusion既是规则引擎，又可以作为CEP。除了事件定义时间推理之外，对于引擎本身也会有一些不同的使用。主要体现在会话时钟、流模式、滑动窗口和对事件的内存管理。"
 category: 软件开发
-tags: [规则引擎, CEP]
-lastmod: 
+tags: CEP
+lastmod:
 ---
 
 Drools Fusion既是规则引擎，又可以作为CEP。除了[事件定义](/2013/12/21/event_in_CEP.html)和[时间推理](/2013/12/21/Temporal_of_CEP.html)之外，对于引擎本身也会有一些不同的使用。主要体现在会话时钟、流模式、滑动窗口和对事件的内存管理。
@@ -112,12 +112,12 @@ Drools定义了工作空间的多个入口点(WorkingMemoryEntryPoint)，每个�
     session.getWorkingMemoryEntryPoint( "ATM Stream" );
     // and start inserting your facts into the entry point
     atmStream.insert( aWithdrawRequest );
-    
+
   {% endhighlight %}
 
   除了这种手工插入事实的方式之外，Drools还提供了一系列的管道API和适配器，可以将其他流(如JMS、IO流、Socket等)之间接入到入口点上。
 
-	
+
 # 滑动窗口
 
 在流模式中，规则的[LHS部分](/2012/12/06/rule_language.html#menuIndex3)
@@ -129,13 +129,13 @@ Drools定义了工作空间的多个入口点(WorkingMemoryEntryPoint)，每个�
 StockTick() over window:time( 2m )
 
 Number( doubleValue > $max ) from accumulate(
-	SensorReading( $temp : temperature ) over window:time( 10m ), average( $temp ) 
+	SensorReading( $temp : temperature ) over window:time( 10m ), average( $temp )
 )
 
 StockTick( company == "IBM" ) over window:length( 10 )
 
 Number( doubleValue > $max ) from accumulate(
-	SensorReading( $temp : temperature ) over window:length( 100 ), average( $temp ) 
+	SensorReading( $temp : temperature ) over window:length( 100 ), average( $temp )
 )
 
 ```

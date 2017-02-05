@@ -1,11 +1,10 @@
----
-layout: post
-title: "Graphviz概述"
-description: ""
-category: 方法工具
-tags: [graph]
-lastmod:
----
+Title: Graphviz概述
+Date: 2014-02-17
+Category: 极限写作
+Tags: graph
+Summary:
+    Graphviz是一个强大的绘图工具，使用DOT语言描述图像。
+
 
 # Graphviz是什么
 

@@ -1,8 +1,15 @@
+Title: 在markdown中嵌入graphviz
+Date: 2014-02-17
+Category: 极限写作
+Tags: graph, markdown
+Summary:
+
 # 在markdown中嵌入graphviz
 
 
 ## gravizo.com
 
+```
 ![txt](http://g.gravizo.com/g?
   digraph G {
     aize ="4,4";
@@ -20,5 +27,6 @@
     execute -> compare;
   }
 )
+```
 
 ## abc

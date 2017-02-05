@@ -39,13 +39,13 @@ tags: [规则引擎]
 
 这种规则的运用过程叫做推理。如果由程序来处理推理过程，那么这个程序就叫做推理机/推理引擎（Inference Engine）。推理机是专家系统（专家系统是人工智能的一个分支）的核心模块。
 
-![](images/rule-engine/inference_engine.png)
+![推理机](images/rule-engine/inference_engine.png)
 
 推理引擎根据知识表示的不同采取的控制策略也是不同的，常见的类型包括基于神经网络、基于案例和基于规则的推理机。其中，基于规则的推理机易于理解、易于获取、易于管理，被广泛采用。这种推理引擎被称为“规则引擎”。
 
 在规则引擎中，将知识表达为规则（rules），要分析的情况定义为事实（facts）。二者在内存中的存储分别称为Production Memory和Working Memory，如下图：
 
-![](images/rule-engine/rule_engine.png)
+![规则引擎](images/rule-engine/rule_engine.png)
 
 rules和facts是规则引擎接受的输入参数，而规则引擎本身包括两个组成部分：Pattern Matcher和Agenda。Pattern Matcher根据facts找到匹配的rules，Agenda管理PatternMatcher挑选出来的规则的执行次序。在外围，还会有一个执行引擎（Execution Engine）负责根据Agenda输出的rules执行具体的操作。
 

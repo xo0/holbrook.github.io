@@ -9,9 +9,18 @@ SITEURL = ''
 PATH = 'content'
 
 TIMEZONE = 'Asia/Shanghai'
+DEFAULT_DATE_FORMAT = '%Y-%m-%d'
 
 PLUGIN_PATHS = ["plugins"]
 PLUGINS = ["tag_cloud"]
+
+
+#使用目录名作为文章的分类名
+#USE_FOLDER_AS_CATEGORY = True
+
+#使用文件名作为文章或页面的slug（url）
+#FILENAME_METADATA = '(?P<slug>.*)'
+
 
 THEME = 'themes/foundation-default-colours'
 

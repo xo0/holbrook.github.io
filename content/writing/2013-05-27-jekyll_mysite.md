@@ -222,7 +222,7 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
 {% endhighlight %}
 
 然后在模板的导航部分可以这样写：
-{% highlight html %}
+```
 <ul class="nav">
   {/% for item in site.menuitems %/}
     {/% if item.url == page.url %/}
@@ -234,7 +234,7 @@ jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头
     </li>
   {/% endfor %/}
 </ul>
-{% endhighlight %}
+```
 
 ## 分类、标签、归档和RSS
 

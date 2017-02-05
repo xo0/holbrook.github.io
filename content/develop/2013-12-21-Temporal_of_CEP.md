@@ -1,11 +1,10 @@
----
-layout: post
-title: "CEP中的时间推理(Temporal)"
-description: "时间推理(Temporal)是CEP中特有的条件判断(LHS)。本文介绍13种时间推理运算符及其DRL表示"
-category: 软件开发
-tags: [CEP]
-lastmod:
----
+Title: CEP中的时间推理(Temporal)
+Date: 2013-12-21
+Category: 软件开发
+Tags: CEP
+Summary:
+	时间推理(Temporal)是CEP中特有的条件判断(LHS)。本文介绍13种时间推理运算符及其DRL表示
+
 
 [CEP](/2012/11/06/about_cep.html)中的[事件(Event)](/2013/12/21/event_in_CEP.html)具有两个与时间相关的属性。一个是timestamp，标记事件发生的时间；另一个是duration，标记事件持续的时间间隔。
 
@@ -20,7 +19,7 @@ Allen在《An Interval-based Representation of Temporal Knowledge》中描述了
 
 # After 和 Before(之前和之后)
 
-  ![](images/rule-engine/temporal-after_and_before.png)
+  ![After 和 Before](images/rule-engine/temporal-after_and_before.png)
 
   ```
   // x∈[a,b]时，满足以下条件
@@ -37,7 +36,7 @@ Allen在《An Interval-based Representation of Temporal Knowledge》中描述了
 
 # Coincides（同时发生）
 
-  ![](images/rule-engine/temporal-coincides.png)
+  ![Coincides](images/rule-engine/temporal-coincides.png)
 
   ```
   // x∈[0,a]，且y∈[0,b]时，满足以下条件
@@ -52,7 +51,7 @@ Allen在《An Interval-based Representation of Temporal Knowledge》中描述了
 
 # During 和 Includes（包含）
 
-  ![](images/rule-engine/temporal-during.png)
+  ![During 和 Includes](images/rule-engine/temporal-during.png)
 
   ```
   // x∈[a,b]，且y∈[c,d]时，满足以下条件
@@ -71,7 +70,7 @@ Allen在《An Interval-based Representation of Temporal Knowledge》中描述了
 # Finishes 和 Finished by（同时结束）
 
 
-  ![](images/rule-engine/temporal-finishes.png)
+  ![Finishes 和 Finished by](images/rule-engine/temporal-finishes.png)
 
   ```
   // x∈[0,a]时，满足以下条件
@@ -88,7 +87,7 @@ Allen在《An Interval-based Representation of Temporal Knowledge》中描述了
 
 # Meets 和 Met by（相邻）
 
-  ![](images/rule-engine/temporal-after_and_before.png)
+  ![Meets 和 Met by](images/rule-engine/temporal-after_and_before.png)
 
   ```
   // x∈[0,a]时，满足以下条件
@@ -104,7 +103,7 @@ Allen在《An Interval-based Representation of Temporal Knowledge》中描述了
 
 # Overlaps 和 Overlappd by（相交）
 
-  ![](images/rule-engine/temporal-overlaps.png)
+  ![Overlaps 和 Overlappd by](images/rule-engine/temporal-overlaps.png)
 
   ```
   // x∈[a,b]时，满足以下条件
@@ -123,7 +122,7 @@ Allen在《An Interval-based Representation of Temporal Knowledge》中描述了
 # Starts 和 Started by（同时开始）
 
 
-  ![](images/rule-engine/temporal-starts.png)
+  ![Starts 和 Started by](images/rule-engine/temporal-starts.png)
 
   ```
   // x∈[0,a]时，满足以下条件
