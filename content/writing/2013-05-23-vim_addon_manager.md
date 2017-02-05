@@ -1,12 +1,9 @@
----
-layout: post
 title: "重拾vim"
-description: "从emacs切换回vim"
 date: 2013-05-23
-category: 杂七杂八
-tags: [vim , vundle]
-lastmod: 2013-06-17
----
+category: 极限写作
+tags: vim
+summary: 从emacs切换回vim
+
 
 以前在[博客园][1]时，用[emacs org-mode][2] 写博客，并且写了一系列[《emacs 学习笔记》][3]。
 emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是有些不适应：

@@ -1,7 +1,7 @@
 Title: Salt state实例解析
 Date: 2013-06-30
 Category: 软件开发
-Tags: devops, salt
+Tags: 运维
 Summary:
     在Salt的官方教程中，以apache和sshd的state配置作为例子。掌握这两个例子，就能够触类旁通，处理日常工作中大部分的配置管理问题。
     本文对这两个例子进行详细的分析和注释

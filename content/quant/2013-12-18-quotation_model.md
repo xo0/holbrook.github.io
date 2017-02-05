@@ -1,10 +1,9 @@
----
-layout: post
-title: "证券行情数据模型"
-description: ""
-category: 量化金融
-tags: [交易系统, 分析模式]
----
+Title: 证券行情数据模型
+Date: 2013-12-18
+Category: 量化交易
+Tags: 交易系统
+Summary:
+
 
 # 行情数据举例
 

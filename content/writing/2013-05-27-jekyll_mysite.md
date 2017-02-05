@@ -1,12 +1,9 @@
----
-layout: post
-title: "Jekyll建站过程"
-description: "本站建立过程中的一些经验，不断完善中..."
-category: 杂七杂八
-tags: [jekyll, github]
-lastmod: 2013-06-17
-imgroot: "/images/posts/tools/jekyll_mysite/"
----
+title: Jekyll建站过程
+date: 2013-05-27
+category: 极限写作
+tags: blog
+summary:
+    本站建立过程中的一些经验，不断完善中...
 
 
 

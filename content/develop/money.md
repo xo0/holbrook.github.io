@@ -1,11 +1,10 @@
----
-layout: post
-title: "你真的会数钱吗？"
-description: "货币，记账相关的领域模型，使用值对象"
+title: 你真的会数钱吗？
 date: 2013-01-01
 update: 2013-01-01
-category: 领域模型
-tags: [分析模式]
+category: 软件开发
+tags: 领域模型
+summary: 货币，记账相关的领域模型，使用值对象
+
 
 ---
 
@@ -13,7 +12,7 @@ tags: [分析模式]
 
 ---
 
- 
+
 快年底了，假如你们公司的美国总部给每个人发了一笔201212.21美元的特别奖金，作为程序员的你， 该如何把这笔钱收入囊中？
 
 
@@ -25,11 +24,11 @@ tags: [分析模式]
 
 账户(Account)记录了资金的往来，包含很多条目(Entry)。账户会记录结余，结余等于所有条目中金额的总和。
 
-我们不可能为每个币种设计一种条目，所以需要抽象出一个货币类——Money，适用于各种不同的币种： 
+我们不可能为每个币种设计一种条目，所以需要抽象出一个货币类——Money，适用于各种不同的币种：
 
 ![Money类](images/posts/domain/money/money.png)
 
- 
+
 
 Money类至少要记录金额和币种:
 
@@ -53,28 +52,28 @@ Money类至少要记录金额和币种:
       public class Money {
           private long amount;
           private Currency currency;
-      
+
           public double getAmount() {
               return BigDecimal.valueOf(amount, currency.getDefaultFractionDigits()).doubleValue();
-              
+
           }
-      
+
           public Currency getCurrency() {
               return currency;
           }
-      
+
           public Money(double amount, Currency currency) {
               this.currency = currency;
               this.amount = Math.round(amount * centFactor());
           }
-      
+
           public Money(long amount, Currency currency) {
               this.currency = currency;
               this.amount = amount * centFactor();
           }
-          
+
           private static final int[] cents = new int[] { 1, 10, 100, 1000,10000 };
-      
+
           private int centFactor() {
               return cents[currency.getDefaultFractionDigits()];
           }
@@ -84,7 +83,7 @@ Money类至少要记录金额和币种:
 用Money类表示我们的$201212.21奖金，就是：
 
     Money myMoney = new Money(201212.21,Currency.getInstance(Locale.US));
- 
+
 
 # 2.存入账户
 
@@ -102,19 +101,19 @@ Money类至少要记录金额和币种:
         Money result = new Money(value.doubleValue(),this.getCurrency());
         return result;
     }
-    
+
     public Money minus(Money money) throws Exception{
         if(!money.getCurrency().equals(this.currency)){
             throw(new Exception("different currency can't be minus"));
         }
-        
+
         BigDecimal value =this.getAmount().add(money.getAmount().negate());
         Money result = new Money(value.doubleValue(),this.getCurrency());
         return result;
-        
+
     }
 
- 
+
 
 # 3.收税
 
@@ -145,14 +144,14 @@ Money类至少要记录金额和币种:
     public static final int ROUND_HALF_DOWN = BigDecimal.ROUND_HALF_DOWN;
     public static final int ROUND_HALF_EVEN = BigDecimal.ROUND_HALF_EVEN;
     public static final int ROUND_UNNECESSARY = BigDecimal.ROUND_UNNECESSARY;
-    
-    
+
+
     public Money multiply(double multiplicand, int roundingMode) {
         BigDecimal amount = this.getAmount().multiply(new BigDecimal(multiplicand));
         amount = amount.divide(BigDecimal.ONE,roundingMode);
         return new Money(amount.doubleValue(),this.getCurrency());
     }
-    
+
     public Money divide(double divisor, int roundingMode) {
         BigDecimal amount = this.getAmount().divide(new BigDecimal(divisor),
                 roundingMode);
@@ -160,7 +159,7 @@ Money类至少要记录金额和币种:
         return result;
     }
 
- 
+
 
 # 4.转成人民币
 
@@ -177,20 +176,20 @@ Money类至少要记录金额和币种:
 这些复杂的问题处理如果直接放在Money类上会显得十分笨重，单独设计一个MoneyConverter类会比较好：
 
     import java.util.Currency;
-    
+
     public interface MoneyConverter {
         Money convertTo(Money money,Currency currency) throws Exception;
     }
- 
+
 
 我们实现一个最简单的转化器，使用固定的汇率值：
 
     import java.math.BigDecimal;
     import java.util.Currency;
     import java.util.Locale;
-        
+
     public class SimpleMoneyConverter implements MoneyConverter {
-    
+
         private static final BigDecimal DOLLAR_TO_CNY =  new BigDecimal(6.2365);
         private static final Currency DOLLAR = Currency.getInstance(Locale.US);
         private static final Currency CNY = Currency.getInstance(Locale.CHINA);
@@ -199,24 +198,24 @@ Money类至少要记录金额和币种:
             if(!known(money.getCurrency()) || !known(target)){
                 throw (new Exception("unknown currency"));
             }
-            
+
             BigDecimal factorSource =BigDecimal.ONE, factorTarget = BigDecimal.ONE;
             if(money.getCurrency().equals(DOLLAR))
                     factorSource = DOLLAR_TO_CNY;
             if(target.equals(DOLLAR))
                     factorTarget = DOLLAR_TO_CNY;
             BigDecimal value = money.getAmount().multiply(factorSource).divide(factorTarget);
-            
+
             return new Money(value.doubleValue(),target);
         }
-        
+
         private boolean known(Currency currency){
             return(currency.equals(DOLLAR) || currency.equals(CNY) );
         }
-    
+
     }
 
- 
+
 
 
 可以看到，即使是最简单的转换器，处理起来也比较麻烦。所以千万不要在Money类中做这件事情。
@@ -243,34 +242,34 @@ Money类至少要记录金额和币种:
         if(ratioes.length==0){
             throw (new Exception("there is no ratio"));
         }
-        
+
         double ratioTotal = 0;
         for(double ratio:ratioes){
             ratioTotal += ratio;
         }
-        
+
         if(0==ratioTotal){
             throw(new Exception("total of ratioes is zero"));
         }
-        
-        
+
+
         double total = this.getAmount().doubleValue();
         double delta = total;
         Money[] results = new Money[ratioes.length];
-        
+
         for(int i=0;i<ratioes.length;i++){
             double amount = total*ratioes[i]/ratioTotal;
             results[i] = new Money(amount,this.getCurrency());
             delta -= results[i].getAmount().doubleValue();
         }
-        
-        int i = (int)(Math.random() * ratioes.length); 
+
+        int i = (int)(Math.random() * ratioes.length);
         results[i] = results[i].minus(new Money(delta,this.getCurrency()));
         return results;
     }
 
 
- 
+
 
 # 6.记账
 
@@ -312,7 +311,7 @@ Money不能作为单独的实体。如果把Money当做实体来处理，就会�
 可以增加一些帮助显式的方法 使用currency的getSymbol(Locale locale)方法、和NumberFormat的format方法，比如：
 
     NumberFormat nf=NumberFormat.getCurrencyInstance(Locale.CHINA);
-    
+
     String s=nf.format(73084.803984);// result：￥73,084.80
 
 # 9.小结

@@ -1,10 +1,9 @@
----
-layout: post
-title: "使用Oracle Berkeley DB持久化股票行情数据"
-description: ""
-category: 量化金融
-tags: [交易系统, NoSQL]
----
+Title: 使用Oracle Berkeley DB持久化股票行情数据
+Date: 2013-12-19
+Category: 量化交易
+Tags: 交易系统
+Summary:
+
 
 # 关系数据库，数据文件 还是 NoSQL
 

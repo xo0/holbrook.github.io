@@ -1,12 +1,8 @@
----
-layout: post
-title: "Eclipse e4 概览"
-description: "尽管至今为止，仍然处于孵化器阶段(Incubation Phase)，但是e4代表了Eclipse的未来。e4提供的新特性包括：
-基于EMF的应用模型(Application Model)；依赖注入；基于CSS定义外观"
+title: Eclipse e4 概览
 category: 软件开发
-tags: [OSGi]
-lastmod:
----
+tags: GUI,java
+summary: 尽管至今为止，仍然处于孵化器阶段(Incubation Phase)，但是e4代表了Eclipse的未来。e4提供的新特性包括：
+基于EMF的应用模型(Application Model)；依赖注入；基于CSS定义外观
 
 尽管至今为止，[Eclipse e4](http://www.eclipse.org/e4/)仍然处于孵化器阶段(Incubation Phase)，但是e4代表了Eclipse的未来。
 

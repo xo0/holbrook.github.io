@@ -1,10 +1,9 @@
----
-layout: post
-title: "系统交易和交易系统"
-description: ""
-category: 量化金融
-tags: [交易系统]
----
+Title: 系统交易和交易系统
+Date: 2013-12-16
+Category: 量化交易
+Tags: 交易系统
+Summary:
+
 
 # 证券价格的随机性
 

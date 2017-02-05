@@ -3,7 +3,7 @@ layout: post
 title: "Eclipse e4中的平台服务"
 description: ""
 category: 软件开发
-tags: [OSGi]
+tags: GUI, java
 lastmod:
 ---
 
