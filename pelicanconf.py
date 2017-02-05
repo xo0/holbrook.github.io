@@ -39,7 +39,7 @@ DEFAULT_PAGINATION = 10
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
-
+MONTH_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%m}/index.html'
 FOUNDATION_FRONT_PAGE_FULL_ARTICLES = False
 FOUNDATION_ALTERNATE_FONTS = False
 FOUNDATION_TAGS_IN_MOBILE_SIDEBAR = False

@@ -1,11 +1,9 @@
----
-layout: post
-title: "Pillar：定义Salt配置管理的数据"
-date:  2013-07-07
-description: "State定义了Salt配置管理的内容，Pillar则定义了Salt配置管理的数据。Pillar使得同一个配置项在各个minion中可以使用不同的数据，从而不需要在State中定义大量的include, extend等关系。"
-category: 基础设施
-tags: [devops, salt]
----
+Title: Pillar：定义Salt配置管理的数据
+Date: 2013-07-07
+Category: 软件开发
+Tags: devops, salt
+Summary:
+    State定义了Salt配置管理的内容，Pillar则定义了Salt配置管理的数据。Pillar使得同一个配置项在各个minion中可以使用不同的数据，从而不需要在State中定义大量的include, extend等关系。
 
 # 为什么需要Pillar
 
@@ -29,7 +27,7 @@ tags: [devops, salt]
         'USER': 'root',
         'PASSWORD': 'password',
         'HOST': 'localhost',
-        'PORT': '3306', 
+        'PORT': '3306',
     }
    }
 
@@ -85,7 +83,7 @@ Pillar Tree定义在salt master的配置文件`/etc/salt/master`的`pillar_roots
  pillar_roots:
    base:
      - /srv/pillar
- 
+
    ext_pillar:
      - hiera: /etc/hiera.yaml
      - cmd_yaml: cat /etc/salt/yaml
@@ -109,7 +107,7 @@ users:
   thatch: 1000
   shouse: 1001
   utahdave: 1002
-  redbeard: 1003  
+  redbeard: 1003
 
 {% endhighlight %}
 
@@ -161,7 +159,7 @@ base:
     salt 'client2' pillar.data
     salt '*' pillar.data
     salt '*' pillar.raw key='roles'
-   {% endhighlight %} 
+   {% endhighlight %}
 
 更多的函数可以参考[pillar模块的文档](https://salt.readthedocs.org/en/latest/ref/modules/all/salt.modules.pillar.html)。
 

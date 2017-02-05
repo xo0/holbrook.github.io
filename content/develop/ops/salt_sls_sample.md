@@ -1,13 +1,11 @@
----
-layout: post
-title: "Salt state实例解析"
-date: 2013-06-30
-update: 2013-06-30
-description: "在Salt的官方教程中，以apache和sshd的state配置作为例子。掌握这两个例子，就能够触类旁通，处理日常工作中大部分的配置管理问题。
-本文对这两个例子进行详细的分析和注释"
-category: 基础设施
-tags: [salt]
----
+Title: Salt state实例解析
+Date: 2013-06-30
+Category: 软件开发
+Tags: devops, salt
+Summary:
+    在Salt的官方教程中，以apache和sshd的state配置作为例子。掌握这两个例子，就能够触类旁通，处理日常工作中大部分的配置管理问题。
+    本文对这两个例子进行详细的分析和注释
+
 
 在Salt的[官方教程](http://salt.readthedocs.org/en/latest/topics/tutorials/starting_states.html)中，以apache和sshd的state配置作为例子。掌握这两个例子，就能够触类旁通，处理日常工作中大部分的配置管理问题。
 本文对这两个例子进行详细的分析和注释。
@@ -54,7 +52,7 @@ tags: [salt]
       - gid: 87
       - require:
         - pkg: apache
- 
+
   /etc/httpd/conf/httpd.conf:
     file.managed:
       - source: salt://apache/httpd.conf
@@ -67,7 +65,7 @@ tags: [salt]
       - defaults:
         custom_var: "default value"
         other_var: 123
- 
+
 {% endhighlight %}
 
 说明：
@@ -114,7 +112,7 @@ tags: [salt]
 {% highlight yaml %}
  openssh-client:
     pkg.installed
- 
+
   /etc/ssh/ssh_config:
     file.managed:
       - user: root
@@ -135,7 +133,7 @@ tags: [salt]
 
  include:
     - ssh
- 
+
  openssh-server:
    pkg.installed
 
@@ -171,7 +169,7 @@ tags: [salt]
 说明：
 
 - include语句将别的state添加到当前文件中，使得state可以跨文件引用。
-   
+
   使用include相当于把被引用的内容文件添加到自身，可以require、watch或extend被引用的SLS中定义的内容。
 
   这里引用了`ssh`state。
