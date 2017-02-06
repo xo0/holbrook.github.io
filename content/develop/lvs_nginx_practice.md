@@ -1,12 +1,8 @@
----
-layout: post
-title: "lvs+nginx的负载均衡实验"
+title: lvs+nginx的负载均衡实验
 date: 2013-07-01
-update: 2013-07-03
-description: "LVS+NginX是构建大型B/S应用的典型方式。本文记录在实验环境搭建这样一个架构，并进行功能、可靠性、性能等方面的测试的过程。"
-category: 基础设施
-tags: [负载均衡, cluster, lvs, nginx]
----
+category: 软件开发
+tags: cluster
+summary: LVS+NginX是构建大型B/S应用的典型方式。本文记录在实验环境搭建这样一个架构，并进行功能、可靠性、性能等方面的测试的过程。
 
 # 准备环境
 

@@ -1,11 +1,9 @@
----
-layout: post
-title: "用Ganglia监控集群的性能"
+title: 用Ganglia监控集群的性能
 date: 2013-07-30
-description: "对基础设施的监控主要包括三个方面：状态，性能和可用性。通俗的讲就是：是否在干活，干了多少活，还能干多少。与Cacti、Nagios、Zabbix等工具相比，Ganglia更关注整个集群的性能和可用性。可以用于集群的性能监控、分析和优化。"
-category: 基础设施
-tags: [HA, nginx, keepalived, 负载均衡, cluster]
----
+category: 软件开发
+tags: 运维,  cluster
+summary: 对基础设施的监控主要包括三个方面：状态，性能和可用性。通俗的讲就是：是否在干活，干了多少活，还能干多少。与Cacti、Nagios、Zabbix等工具相比，Ganglia更关注整个集群的性能和可用性。可以用于集群的性能监控、分析和优化。
+
 
 
 # Ganglia简介
@@ -53,7 +51,7 @@ Ganglia的整体架构如下图所示：
 2. 组播模式 or 单播模式
 
    组播模式是ganglia的默认模式，同一集群的多个gmond之间互相交换数据，gmetad中可以指定集群中的任意一个或多个节点作为"data_source"；
-   
+
    组播模式可能会带来网络的 “抖动（Jitter）”。据说设置节点的时钟同步可以避免抖动的问题； 但如果网络环境不支持组播（比如Amazon’s AWS EC2），就需要使用单播模式。单播模式时，将大部分节点的gmond.conf中,global的deaf设置改为"yes"，则这些节点只发生数据，不接收其他节点的数据，同样也不能作为gmetad中的"data_source"。
 
    单播模式中还需要设置“send_metadata_interval”，比如30秒。以强制发送元数据。
