@@ -1,11 +1,9 @@
----
-layout: post
-title: "NoSQL数据库选型指引"
-date: 2013-12-18
-description: ""
-category: 基础设施
-tags: [NoSQL]
----
+title: NoSQL数据库选型指引
+date: 2012-11-06
+category: 软件开发
+tags: NoSQL
+summary:
+    从设计原则上，NoSQL不再强调ACID（酸），而是强调BASE（碱）。
 
 # 什么是NoSQL
 
@@ -47,7 +45,7 @@ NoSQL与关系数据库的原则不同：NoSQL牺牲高一致性，换取获得�
    - 对象数据库
 
 2. 是否持久化
-   
+
    有的NoSQL是纯内存存储，不支持持久化
 
 3. 是否支持嵌入式

@@ -1,6 +1,6 @@
 Title: CEP中的时间推理(Temporal)
 Date: 2013-12-21
-Category: 软件开发
+Category: 并发系统
 Tags: CEP
 Summary:
 	时间推理(Temporal)是CEP中特有的条件判断(LHS)。本文介绍13种时间推理运算符及其DRL表示

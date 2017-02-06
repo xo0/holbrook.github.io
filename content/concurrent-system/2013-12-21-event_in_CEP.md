@@ -1,7 +1,10 @@
-title: "CEP中的事件(Event)"
-description: ""
-category: 软件开发
+title: CEP中的事件(Event)
+category: 并发系统
 tags: CEP
+summary:
+    [CEP](/2012/11/06/about_cep.html)处理复杂事件。宽泛的事件，是指在应用程序域中的状态的一个有意义改变的一条记录。
+    而复杂事件处理关注[事件之间的相关性](/2013/12/21/Temporal_of_CEP.html),以及原子事件组合成的复杂(复合)事件。
+
 
 [CEP](/2012/11/06/about_cep.html)处理复杂事件。宽泛的事件，是指在应用程序域中的状态的一个有意义改变的一条记录。
 而复杂事件处理关注[事件之间的相关性](/2013/12/21/Temporal_of_CEP.html),以及原子事件组合成的复杂(复合)事件。

@@ -1,13 +1,10 @@
----
-layout: post
-title: "CEP：鱼与熊掌可以兼得"
+title: CEP：鱼与熊掌可以兼得
 date: 2012-11-06
 update: 2014-01-01
-description: "Spring支持用Java代码配置"
-category: 软件开发
+category: 并发系统
 tags: CEP
----
-
+summary:
+    简单的说，事件驱动模式包括三个参与者：事件产生者，事件分发器和事件处理器。
 
 从事件驱动编程（Event-driven Programming)开始
 =============================================
