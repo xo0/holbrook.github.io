@@ -1,12 +1,10 @@
----
 title: 搭建一个“现代化”的web开发环境
 date: 2015-05-04
-tags: [git, npm, grunt, bower, yoeman, flask, angularjs]
+tags: web
 category: 软件开发
-abstract: |
-    
-    
----
+summary:
+    使用yoeman, bower, grunt等工具开发web。
+
 
 #  目标
 
@@ -30,7 +28,7 @@ abstract: |
     [redmine的scrum插件](http://www.redminebacklogs.net/)
 - nodejs包管理器
     [npm](https://www.npmjs.com/)(node package manager)。
-    
+
     本文中，npm仅作为安装yoeman, bower，grunt等的基础工具。
 
 - js依赖管理: [bower](http://bower.io/)
@@ -61,13 +59,13 @@ abstract: |
     本文中仅给出MacOS下的安装方法，其他系统可以阅读官方文档或参考资料。
 
 ```bash
-#安装npm 
+#安装npm
 brew install npm
 
-#全局安装工具 
+#全局安装工具
 npm install -g yo grunt-cli grunt bower generator-angular
 
-#安装virtualenv 
+#安装virtualenv
 sudo easy_install pip
 sudo pip install virtualenv
 ```
@@ -100,44 +98,44 @@ cd PROJ\_ROOT/web yo angular \# 一些交互，按照自己的需要选择即可
 3. virtualenv
 
 ``` bash
-cd PROJ\_ROOT 
-virtualenv venv 
-source venv/bin/activate 
-pip install flask 
-pip install sqlalchemy 
-pip install flask-sqlalchemy 
-... 
-pip freeze > app/requirements.txt 
+cd PROJ\_ROOT
+virtualenv venv
+source venv/bin/activate
+pip install flask
+pip install sqlalchemy
+pip install flask-sqlalchemy
+...
+pip freeze > app/requirements.txt
 ```
 
 
 4. 构建Flask工程
 
-``` bash 
-mkdir -p PROJ\_ROOT/app/APP\_NAME/common 
-mkdir -p PROJ\_ROOT/app/APP\_NAME/models 
+``` bash
+mkdir -p PROJ\_ROOT/app/APP\_NAME/common
+mkdir -p PROJ\_ROOT/app/APP\_NAME/models
 mkdir -p PROJ\_ROOT/app/APP\_NAME/static
-mkdir -p PROJ\_ROOT/app/APP\_NAME/templates 
+mkdir -p PROJ\_ROOT/app/APP\_NAME/templates
 mkdir -p PROJ\_ROOT/app/APP\_NAME/views
 
-touch PROJ\_ROOT/app/APP\_NAME/common/__init__.py 
-touch PROJ\_ROOT/app/APP\_NAME/models/__init__.py 
+touch PROJ\_ROOT/app/APP\_NAME/common/__init__.py
+touch PROJ\_ROOT/app/APP\_NAME/models/__init__.py
 touch PROJ\_ROOT/app/APP\_NAME/views/__init__.py
 ```
 
 6. 配置git
 
-``` bash 
-cd PROJ\_ROOT 
-mv web/.gitattributes . 
-rm -f web/.gitignore 
-cat > .gitignore << EOF 
-web/node_modules 
+``` bash
+cd PROJ\_ROOT
+mv web/.gitattributes .
+rm -f web/.gitignore
+cat > .gitignore << EOF
+web/node_modules
 web/.tmp
-web/.sass-cache 
-web/bower_components 
-dist 
-venv 
+web/.sass-cache
+web/bower_components
+dist
+venv
 EOF
 ```
 
@@ -147,26 +145,26 @@ EOF
 
 ``` bash
 git clone xxxx cd PROJ_ROOT
-virtualenv venv 
-source venv/bin/activate 
+virtualenv venv
+source venv/bin/activate
 pip install -r app/requirements.txt
-cd web 
-npm install 
+cd web
+npm install
 bower install
 ```
 
 ## 启动前端
 
 ``` bash
-cd PROJ_ROOT/web 
+cd PROJ_ROOT/web
 grunt serve
 ```
 
   然后通过http://0.0.0.0:9000可以访问前端界面。
 
 ## 启动后端
-``` bash 
-cd PROJ\_ROOT/app 
+``` bash
+cd PROJ\_ROOT/app
 python run.py
 ```
 

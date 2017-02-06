@@ -1,12 +1,8 @@
----
-layout: post
-title: "开发和部署JBoss FUSE中的路由(Route)"
+title: 开发和部署JBoss FUSE中的路由(Route)
 date: 2012-04-14
-update: 2012-04-14
-description: ""
-category: 软件开发
-tags: [SOA, OSGi, Maven, FUSE]
----
+category: 并发系统
+tags:
+summary:
 
 快速开始
 ========

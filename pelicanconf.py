@@ -22,6 +22,13 @@ PLUGINS = ["tag_cloud"]
 #FILENAME_METADATA = '(?P<slug>.*)'
 
 
+#TAG_URL = 'tag/{slug}.html'     #The URL to use for a tag.
+#TAG_SAVE_AS = 'tag/{slug}.html'
+TAG_URL = ('tag/{slug}.html')     #The URL to use for a tag.
+TAG_SAVE_AS = ('tag/{slug}.html')  #The location to save the tag page.
+
+
+
 THEME = 'themes/foundation-default-colours'
 
 DEFAULT_LANG = 'zh'
