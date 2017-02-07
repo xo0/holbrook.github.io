@@ -1,10 +1,9 @@
----
-layout: post
-title: "规则引擎中常用的模式匹配算法"
-description: "规则引擎的核心是Pattern Matcher(模式匹配器)。不管是正向推理还是反向推理，首先要解决一个模式匹配的问题"
-category: 理论学习
-tags: [算法, 规则引擎]
----
+title: 规则引擎中常用的模式匹配算法
+date: 2012-12-05
+category: 软件开发
+tags: 规则引擎
+summary: 规则引擎的核心是Pattern Matcher(模式匹配器)。不管是正向推理还是反向推理，首先要解决一个模式匹配的问题。
+
 
 [前面](/2012/03/20/rule_engine_1.html)提到，规则引擎的核心是Pattern Matcher(模式匹配器)。不管是正向推理还是反向推理，首先要解决一个模式匹配的问题。
 

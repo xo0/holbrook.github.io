@@ -1,11 +1,7 @@
----
-layout: post
-title: "Blueprint: OSGi的依赖注入(DI)容器"
-description: "曾几何时，你在Spring和OSGi之间摇摆不定；曾几何时，你对SpringDM感到迷惑不解。你是否向往OSGi的动态特性，又为遗留代码（尤其是基于Spring的代码）感到不舍？现在，这些都不再是问题！"
+title: Blueprint: OSGi的依赖注入(DI)容器
 category: 软件开发
-tags: [OSGi, maven]
-lastmod:
----
+tags: OSGi, java
+summary: 曾几何时，你在Spring和OSGi之间摇摆不定；曾几何时，你对SpringDM感到迷惑不解。你是否向往OSGi的动态特性，又为遗留代码（尤其是基于Spring的代码）感到不舍？现在，这些都不再是问题！
 
 
 

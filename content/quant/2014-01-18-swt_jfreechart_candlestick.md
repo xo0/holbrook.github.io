@@ -1,11 +1,7 @@
----
-layout: post
-title: "在SWT中用JFreeChart实现K线图"
-description: ""
+title: 在SWT中用JFreeChart实现K线图
 category: 软件开发
-tags: [chart]
-lastmod:
----
+tags: 图表, GUI, java
+
 
 # 目标
 

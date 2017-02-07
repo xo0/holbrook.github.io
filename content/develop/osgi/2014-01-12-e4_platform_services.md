@@ -1,11 +1,6 @@
----
-layout: post
-title: "Eclipse e4中的平台服务"
-description: ""
+title: Eclipse e4中的平台服务
 category: 软件开发
-tags: GUI, java
-lastmod:
----
+tags: OSGi, java, GUI
 
 
 # 概述

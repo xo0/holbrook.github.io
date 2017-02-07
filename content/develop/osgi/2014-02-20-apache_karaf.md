@@ -1,10 +1,8 @@
----
-layout: post
-title: "Apache Karaf：OSGi中间件"
+title: Apache Karaf：OSGi中间件
 description: ""
 category: 软件开发
-tags: [OSGi, maven]
----
+tags: OSGi
+
 
 # 为什么需要“OSGi中间件”
 

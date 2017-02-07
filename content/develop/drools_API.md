@@ -1,11 +1,10 @@
----
-layout: post
-title: "Drools规则引擎API概述"
-description: "与此对应，规则引擎API也分成三个部分。在Drools中，分别叫做Knowledge API，Fact API和Execution API。"
+title: Drools规则引擎API概述
+date: 2013-12-20
 category: 软件开发
-tags: [规则引擎]
-lastmod:
----
+tags: 规则引擎
+summary:
+    规则引擎中，将知识表达为规则（rules），要分析的情况定义为事实（facts）。二者在内存中的存储分别称为Production Memory和Working Memory。在外围，还会有一个执行引擎（Execution Engine）。
+    与此对应，规则引擎API也分成三个部分。在Drools中，分别叫做Knowledge API，Fact API和Execution API。
 
 
 [如前所述](/2012/03/20/rule_engine_1.html)，

@@ -1,12 +1,9 @@
----
-layout: post
-title: "多线程的基本概念"
+title: 多线程的基本概念
 date: 2012-02-23
-update: 2013-07-05
-description: ""
-category: 软件开发
-tags: [多线程]
----
+category: 并发系统
+tags: 多线程
+summary:
+
 
 多线程编程必须理解的一些基本概念，适用于所有编程语言。内容：
 并发式编程
@@ -61,7 +58,7 @@ tags: [多线程]
 - Running运行。
 - Blocked阻塞。暂停运行，解除阻塞后进入Runnable状态重新等待调度。
 - Dead消亡。线程方法执行完毕返回或者异常终止。
- 
+
 
 可能有3种情况从Running进入Blocked：
 

@@ -1,11 +1,7 @@
----
-layout: post
-title: "Tycho：用Maven构建Eclipse Plugin项目"
-description: "Tycho以一组maven插件的形式，支持Eclipse的plug-ins, features, update sites (based on p2) 、products等类型工程的构建。"
+title: Tycho：用Maven构建Eclipse Plugin项目
 category: 软件开发
-tags: [OSGi, maven]
-lastmod: 
----
+tags: OSGi, java, GUI
+summary: Tycho以一组maven插件的形式，支持Eclipse的plug-ins, features, update sites (based on p2) 、products等类型工程的构建。
 
 
 
@@ -78,7 +74,7 @@ Tycho以一组maven插件的形式，支持Eclipse的plug-ins, features, update 
       <layout>p2</layout>
     </repository>
   </repositories>
-```  
+```
 
 ## 定义目标
 
@@ -122,7 +118,7 @@ Tycho提供了一个工具，可以为现有的Eclipse Plugin、Feature等工程
 生成的pom文件举例如下：
 
 ```
-  <?xml version="1.0" encoding="UTF-8"?>  
+  <?xml version="1.0" encoding="UTF-8"?>
   <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="  http://maven.apache.org/POM/4.0.0"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
@@ -168,7 +164,7 @@ Tycho的逻辑是以上述标准的配置文件优先。比如，在pom文件中
         <version>${tycho-version}</version>
         <executions>
           <execution>
-            <!-- install the product for all configured os/ws/arch environments 
+            <!-- install the product for all configured os/ws/arch environments
               using p2 director -->
             <id>materialize-products</id>
             <goals>

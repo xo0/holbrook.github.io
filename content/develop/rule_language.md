@@ -1,11 +1,12 @@
----
-layout: post
-title: "Drools规则描述语言快速手册"
+title: Drools规则描述语言快速手册
 date: 2012-12-06
-description: ""
 category: 软件开发
-tags: [规则引擎]
----
+tags: 规则引擎
+summary:
+    [在规则引擎中，通常会使用某种表述性的语言（而不是编程语言）来描述规则](/2012/03/20/rule_engine_1.html)。
+    所以规则描述语言也是规则引擎的一个重要组成部分。
+
+
 
 [在规则引擎中，通常会使用某种表述性的语言（而不是编程语言）来描述规则](/2012/03/20/rule_engine_1.html)。
 所以规则描述语言也是规则引擎的一个重要组成部分。
@@ -32,9 +33,9 @@ tags: [规则引擎]
 
 ```
 package com.sample
- 
+
 import com.sample.DroolsTest.Message;
- 
+
 rule "Hello World"
     when
         m : Message( status == Message.HELLO, myMessage : message )
@@ -75,11 +76,11 @@ end
 drl中，一个规则的标准结构如下：
 
 ```
-rule "name" 
+rule "name"
     attributes
-    when 
+    when
         LHS
-    then 
+    then
         RHS
 end
 ```
@@ -135,7 +136,7 @@ then
 ```
 when
     $order:Order();
-    $customer:Customer(age >20, orders contains $order); 
+    $customer:Customer(age >20, orders contains $order);
 then
     ……
 
@@ -179,31 +180,31 @@ RHS中可以使用宏函数对工作空间(Working Memory)进行操作。当调�
 when
     ……
 then
-    Customer cus=new Customer(); 
-    cus.setName("张三"); 
+    Customer cus=new Customer();
+    cus.setName("张三");
     insert(cus);
 
 
 when
-    $customer:Customer(name=="张三",age<10); 
+    $customer:Customer(name=="张三",age<10);
 then
-    $customer.setAge($customer.getAge()+1); 
+    $customer.setAge($customer.getAge()+1);
     update($customer);
 
 
 when
-    $customer:Customer(name=="张三",age<10); 
+    $customer:Customer(name=="张三",age<10);
 then
-    Customer customer=new Customer(); 
-    customer.setName("张三"); 
+    Customer customer=new Customer();
+    customer.setName("张三");
     customer.setAge($customer.getAge()+1);
 
     # 用新对象替换Working Memory中的旧对象
-    update(drools.getWorkingMemory().getFactHandleByIdentity($customer),customer);  
+    update(drools.getWorkingMemory().getFactHandleByIdentity($customer),customer);
 
 
 when
-    $customer:Customer(name=="张三"); 
+    $customer:Customer(name=="张三");
 then
     retract($customer);
 
@@ -220,10 +221,10 @@ modify(fact-expression){
 
 
 when
-    $customer:Customer(name=="张三",age==20); 
+    $customer:Customer(name=="张三",age==20);
 then
-    modify($customer){ 
-        setId("super man"), 
+    modify($customer){
+        setId("super man"),
         setAge(30)
     }
 
@@ -248,11 +249,11 @@ drools 宏对象的常用方法包括：
 例如：
 
 ```
-when 
+when
     eval(true);
 then
-    Customer cus=new Customer(); 
-    cus.setName("张三"); 
+    Customer cus=new Customer();
+    cus.setName("张三");
     drools.insert(cus)
 ```
 
@@ -320,20 +321,20 @@ kcontext 也是 Drools 提供的一个宏对象,它的作用主要是用来得�
     import org.drools.runtime.rule.Activation;
     import org.drools.runtime.rule.AgendaFilter;
 
-    public class TestAgendaFilter implements AgendaFilter { 
+    public class TestAgendaFilter implements AgendaFilter {
         private String startName;
         public TestAgendaFilter(String startName){
-            this.startName=startName; 
+            this.startName=startName;
         }
-        public boolean accept(Activation activation) { 
-            String ruleName=activation.getRule().getName(); 
+        public boolean accept(Activation activation) {
+            String ruleName=activation.getRule().getName();
             if(ruleName.startsWith(this.startName)){
-                return true; 
+                return true;
             }else{
-                return false; 
+                return false;
             }
-        } 
-    }  
+        }
+    }
   {% endhighlight %}
 
 - ruleflow-group
@@ -348,7 +349,7 @@ kcontext 也是 Drools 提供的一个宏对象,它的作用主要是用来得�
 
 ```
 rule "rule1"
-    salience 1 
+    salience 1
     when
     ……
 
@@ -366,9 +367,9 @@ Drools 当中注释的写法与编写 Java 类的注 释的写法完全相同,�
 /* 规则rule1的注释
 这是一个测试用规则
 */
-rule "rule1" 
+rule "rule1"
     when
-        eval(true) #没有条件判断 
+        eval(true) #没有条件判断
     then
         System.out.println("rule1 execute"); //仅仅是输出
 end
@@ -380,15 +381,15 @@ end
 可以在规则文件中定义Fact类型，而不需要编写Java类。比如：
 
 ```
-declare Address 
+declare Address
     city : String
     addressName : String
 end
 
-declare Person 
+declare Person
     name:String
     birthday:Date
-    address:Address //使用declare声明的对象作为address属性类型 
+    address:Address //使用declare声明的对象作为address属性类型
     order:Order //使用名为Order的JavaBean作为order属性类型
 end
 ```
@@ -398,8 +399,8 @@ end
 ```
 //获取规则文件当中定义的Address对象并对其进行实例化
 FactType addressType=knowledgeBase.getFactType("test","Address");
-Object add=addressType.newInstance(); 
-addressType.set(add, "city","Beijing"); 
+Object add=addressType.newInstance();
+addressType.set(add, "city","Beijing");
 addressType.set(add, "addressName","Capital");
 ```
 
@@ -409,8 +410,8 @@ addressType.set(add, "addressName","Capital");
 
 ```
 declare User
-    @createTime(2009-10-25) 
-    username : String @maxLenth(30) 
+    @createTime(2009-10-25)
+    username : String @maxLenth(30)
     userid : String @key
     birthday : java.util.Date
 end
@@ -431,7 +432,7 @@ end
 
 ```
 package test
-import java.util.List; 
+import java.util.List;
 import java.util.ArrayList;
 /*
 一个测试函数
@@ -439,7 +440,7 @@ import java.util.ArrayList;
 */
 
 function void setOrder(Customer customer,int orderSize) {
-    List ls=new ArrayList(); 
+    List ls=new ArrayList();
     for(int i=0;i< orderSize;i++){
         Order order=new Order();
         ls.add(order);
@@ -481,7 +482,7 @@ Drools 提供了一个特殊的 import 语句:import function,通过该 import �
 package test;
 public class RuleTools {
     public static void printInfo(String name){
-        System.out.println("your name is :"+name); 
+        System.out.println("your name is :"+name);
     }
 }
 {% endhighlight %}
@@ -492,9 +493,9 @@ import function test.RuleTools.printInfo;
 /*
 测试规则
 */
-rule "rule1" 
+rule "rule1"
     when
-        eval(true); 
+        eval(true);
     then
         printInfo("test import function");
 end
@@ -509,11 +510,11 @@ end
 如：
 
 ```
-query "testQuery" 
+query "testQuery"
     customer:Customer(age>30,orders.size >10)
 end
 
-query "testQuery2"(int $age,String $gender) 
+query "testQuery2"(int $age,String $gender)
     customer:Customer(age>$age,gender==$gender)
 end
 ```

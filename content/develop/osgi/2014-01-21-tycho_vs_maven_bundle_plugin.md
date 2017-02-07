@@ -1,11 +1,6 @@
----
-layout: post
-title: "OSGi构建工具：Tycho还是Maven-Bundle-Plugin？"
-description: ""
+title: OSGi构建工具：Tycho还是Maven-Bundle-Plugin？
 category: 软件开发
-tags: [OSGi, maven]
-lastmod:
----
+tags: OSGi, java
 
 # Tycho与Maven-Bundle-Plugin的对比
 
