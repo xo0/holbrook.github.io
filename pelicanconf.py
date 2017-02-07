@@ -19,7 +19,7 @@ PLUGINS = ["tag_cloud"]
 #USE_FOLDER_AS_CATEGORY = True
 
 #使用文件名作为文章或页面的slug（url）
-#FILENAME_METADATA = '(?P<slug>.*)'
+FILENAME_METADATA = '(?P<slug>.*)'
 
 
 #TAG_URL = 'tag/{slug}.html'     #The URL to use for a tag.
@@ -55,7 +55,7 @@ DEFAULT_PAGINATION = 10
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
-MONTH_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%m}/index.html'
+MONTH_ARCHIVE_SAVE_AS = '{date:%Y}/{date:%m}/index.html'
 FOUNDATION_FRONT_PAGE_FULL_ARTICLES = False
 FOUNDATION_ALTERNATE_FONTS = False
 FOUNDATION_TAGS_IN_MOBILE_SIDEBAR = False
