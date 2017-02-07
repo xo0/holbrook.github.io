@@ -73,7 +73,7 @@
 							<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
-							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
+							<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
 							<li ><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
 							<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
 
@@ -124,7 +124,7 @@
 								<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
-								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
+								<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
 								<li ><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
 								<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
 						</ul>
@@ -136,32 +136,50 @@
 					<div class="row">
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
-	<ul>
-		<li><a href="http://holbrook.github.io/tag/web.html">web</a></li>
-		<li><a href="http://holbrook.github.io/tag/osgi.html">OSGi</a></li>
-		<li><a href="http://holbrook.github.io/tag/graph.html">graph</a></li>
-		<li><a href="http://holbrook.github.io/tag/markdown.html">markdown</a></li>
-		<li><a href="http://holbrook.github.io/tag/cli.html">CLI</a></li>
-		<li><a href="http://holbrook.github.io/tag/java.html">java</a></li>
-		<li><a href="http://holbrook.github.io/tag/tu-biao.html">图表</a></li>
-		<li><a href="http://holbrook.github.io/tag/gui.html">GUI</a></li>
-		<li><a href="http://holbrook.github.io/tag/jiao-yi-xi-tong.html">交易系统</a></li>
-		<li><a href="http://holbrook.github.io/tag/cep.html">CEP</a></li>
-		<li><a href="http://holbrook.github.io/tag/gui-ze-yin-qing.html">规则引擎</a></li>
-		<li><a href="http://holbrook.github.io/tag/tong-ji-xue.html">统计学</a></li>
-		<li><a href="http://holbrook.github.io/tag/yun-wei.html">运维</a></li>
-		<li><a href="http://holbrook.github.io/tag/cluster.html">cluster</a></li>
-		<li><a href="http://holbrook.github.io/tag/xiao-xi-zhong-jian-jian.html">消息中间件</a></li>
-		<li><a href="http://holbrook.github.io/tag/blog.html">blog</a></li>
-		<li><a href="http://holbrook.github.io/tag/vim.html">vim</a></li>
-		<li><a href="http://holbrook.github.io/tag/ling-yu-mo-xing.html">领域模型</a></li>
-		<li><a href="http://holbrook.github.io/tag/nosql.html">NoSQL</a></li>
-		<li><a href="http://holbrook.github.io/tag/zhi-shi-guan-li.html">知识管理</a></li>
-		<li><a href="http://holbrook.github.io/tag/ce-shi.html">测试</a></li>
-		<li><a href="http://holbrook.github.io/tag/duo-xian-cheng.html">多线程</a></li>
-		<li><a href="http://holbrook.github.io/tag/python.html">python</a></li>
-		<li><a href="http://holbrook.github.io/tag/pelican.html">pelican</a></li>
-	</ul>
+<article>
+	<h2>Salt state 配置结构</h2>
+	<p>配置的目标是通过master管理多个mision的状态，最终配置的实现是使用文件夹和文件。而Salt state的设计就是在二者之间建立逻辑关系。</p>
+<p>Salt的state配置比较复杂，官方文档也比较零散。初学者不易掌握。但是如果把Salt的state配置看做是编写代码，就很容易掌握其脉络。</p>
+<p>下图是Salt state配置结构的逻辑图：</p>
+<p><img alt="salt_functions" src="images/2013/salt_usage/salt_state_config_structure.png"></p>
+<p>配置的目标是通过master管理多个mision的状态，最终配置的实现是使用文件夹和文件。而Salt state的设计就是在二者之间建立逻辑关系。</p>
+<h1>StateTree 和 Environment</h1>
+<p>每个master上面都会建立一棵state树，将各个state的配置分级管理。</p>
+<p>这棵树的第一层就是环境（environment)的划分。salt将环境分为base环境和自定义环境。base环境是必须存在的，其他的环境根据自己的需要进行定义。典型的可以划分开发环境(dev), 用户参与测试环境（uat)，生成环境(prod), 备份环境（backup)等等。</p>
+<p>Salt约定base环境必须存在，是其他环境的基础，base环境中定义的state可以在各个自定义环境中使用。</p>
+<p>显然，每个环境至少需要一个文件夹来保持多个state配置。事实上，Salt允许一个环境使用多个文件夹。</p>
+<p>Salt环境与目录的对应关系在salt master的配置文件<code>/etc/salt/master</code>的<code>file_roots</code>变量中定义。<code>/etc/salt/master</code>文件也是使用YAML格式。</p>
+<p>一个典型的配置如下：</p>
+<p _="%" endhighlight>{% highlight yaml %}
+ file_roots:
+   base:
+     - /srv/salt/
+   dev:
+     - /srv/salt/dev/services
+     - /srv/salt/dev/states
+   prod:
+     - /srv/salt/prod/services
+     - /srv/salt/prod/states</p>
+<h1>state定义</h1>
+<p>Salt state即可以使用单个的sls文件(single state)，也可以使用一个文件夹并在其中保持多个sls及其他配置文件（multi-state)。</p>
+<p>state之间还可以使用require, include, extend等关系进行关联。</p>
+<h1>minion 与 state之间的映射</h1>
+<p>一个salt master可以管理多个minion, 也可以定义很多个state。需要在minion和state之间建立一种多对多的映射关系。</p>
+<p>Salt在一个<code>top.sls</code>文件中定义这种映射关系。比如：</p>
+<p _="%" endhighlight>{% highlight yaml %}
+base:
+  '<em>':
+    - servers
+dev:
+  '</em>nodb*':
+    - mongodb</p>
+<h1>小结</h1>
+<p>按环境的不同划分state的存放目录；定义state文件/文件夹并在state之间使用关系实现复用；建立minion和state之间的多对多映射关系。</p>
+<p>掌握了这三点，就掌握了Salt state配置的脉络。</p>
+<p>实际上，Salt中<a href="/2013/07/07/salt_pillar.html">Pillar的配置</a>也使用了类似的结构。</p>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-07-01.</h6>
+</article>
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->

@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>心内求法 - 量化交易</title><link href="http://holbrook.github.io/" rel="alternate"></link><link href="http://holbrook.github.io/feeds/liang-hua-jiao-yi.atom.xml" rel="self"></link><id>http://holbrook.github.io/</id><updated>2014-01-05T00:00:00+08:00</updated><entry><title>交易策略的基本检验</title><link href="http://holbrook.github.io/jiao-yi-ce-lue-de-ji-ben-jian-yan.html" rel="alternate"></link><published>2014-01-05T00:00:00+08:00</published><updated>2014-01-05T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2014-01-05:/jiao-yi-ce-lue-de-ji-ben-jian-yan.html</id><summary type="html">&lt;p&gt;交易策略在其生命周期中要经历过多次检验。这些检验通常需要经过统计分析。最基本的检验是不考虑交易成本、指令类型、突发事件、涨跌停和跳空、回波效应等外部因素的影响，只考虑操作信号自身的统计分析指标。&lt;/p&gt;</summary><content type="html">&lt;h1&gt;前提和假设&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;信号发生时机&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通常，交易系统无法实时获取分笔数据，而是获取某一个时间段的&lt;a href="/2013/12/18/quotation_model.html#menuIndex1"&gt;成交数据&lt;/a&gt;。每个时间段（比如5分钟，1天）作为一个成交周期。
+   由于交易策略都是对成交数据进行事后分析，所以信号通常会滞后一个交易周期产生。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;成交价格&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;基本检验暂时不考虑”无法成交“（比如涨跌停）的情况，但是为了检验的严格性，需要采取”最不利“的价格作为成交价格。即如果是买入信号，取交易周期内的最高价作为成交价格；如果是卖出信号取交易周期内的最低价作为成交价格。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;样本量&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为了减小随机误差的影响，每个样本至少要包含30对买入/卖出的交易，即至少要涵盖30个交易周期。&lt;/p&gt;
+&lt;h1&gt;机会的度量&lt;/h1&gt;
+&lt;p&gt;交易策略最根本的指标就是获利的机会。统计学中，用&lt;a href="/2013/06/07/statistics_intro_4.html"&gt;概率和分布&lt;/a&gt;来度量机会。相应的，对交易策略的获利机会的度量需要确定以下几个指标：&lt;/p&gt;
+&lt;table style="border-collapse: collapse;" border="2" frame="hsides" rules="groups" cellspacing="0" cellpadding="6"&gt;
+&lt;thead&gt;
+&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;总量&lt;/th&gt;&lt;th&gt;比率&lt;/th&gt;&lt;th&gt;分布&lt;/th&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;金额类&lt;/td&gt;
+&lt;td&gt;净利，最大资本金损失程度&lt;/td&gt;
+&lt;td&gt;平均盈利额/平均亏损额&lt;/td&gt;
+&lt;td&gt;最大盈利/亏损额&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;次数类&lt;/td&gt;
+&lt;td&gt;交易周期&lt;/td&gt;
+&lt;td&gt;盈利（次数）比率&lt;/td&gt;
+&lt;td&gt;盈利次数分布，最大连续盈利/亏损次数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+&lt;li&gt;净利&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;净利 = 获利额 - 亏损额 - 交易成本（在基本分析中交易成本=0）&lt;/p&gt;
+&lt;p&gt;净利考察一个交易策略是否为盈利的策略。净利为负的策略一定不可用。但净利的大小不是最重要的指标。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;平均盈利额/平均亏损额&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;平均盈利额应大于平均亏损额，否则说明该策略不可用。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;盈利（次数）比率&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;盈利比率=盈利次数/交易周期数&lt;/p&gt;
+&lt;p&gt;盈利比率也叫”信号成功率“，反映了策略所对应的投资理念：是依赖于偶然的巨额获利，还是依赖于多次小额获利。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;盈利次数分布&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可以考察二项式分布、泊松(Poisson)分布或正态分布。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;盈利标准差&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;标准差越小，说明策略的稳定性越高，越不依赖于偶然的巨额获利。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;最大盈利/亏损额&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果最大盈利与平均盈利差距过大，则应视为偶然现象，去除该盈利后重新分析。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;如果最大亏损与平均亏损差距过大，则要慎重制定风险控制策略，避免突发事件风险（分析时 &lt;strong&gt;不&lt;/strong&gt; 去除！）&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果最大盈利/亏损所占比重过大，则应怀疑策略的盈利能力和稳定性&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;最大连续盈利/亏损次数&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;连续盈利/亏损会经常出现，这是因为策略是稳定的，但是市场会发生周期性的变化。
+  最大连续盈利/亏损次数可以与市场的周期性进行比对。&lt;/p&gt;
+&lt;p&gt;结合 &lt;strong&gt;当前&lt;/strong&gt; 盈利/亏损次数 和 &lt;strong&gt;最大&lt;/strong&gt; 盈利/亏损次数，可以决策某次交易的额度。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;最大资本金损失程度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;是指资本波峰、波谷间的差额。决定了需要准备的资本金。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;交易周期&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;交易周期决定了交易的频繁程度。交易越频繁则交易成本越高。&lt;/p&gt;
+&lt;h1&gt;样本的质量&lt;/h1&gt;
+&lt;p&gt;对一个交易策略用不同的时间、不同的交易对象反复多次验证，并根据抽样分布（即各样本的统计量，如均值、中位数、标准差等的分布）的特征，剔除一些不合格的样本，重新对交易策略进行综合评价。&lt;/p&gt;
+&lt;h1&gt;波长稳定性&lt;/h1&gt;
+&lt;p&gt;理论上来说，在各波长下（日线，5分钟线等），信号成功率应该保持稳定。&lt;/p&gt;</content><category term="交易系统"></category></entry><entry><title>交易策略与规则引擎</title><link href="http://holbrook.github.io/jiao-yi-ce-lue-yu-gui-ze-yin-qing.html" rel="alternate"></link><published>2013-12-19T00:00:00+08:00</published><updated>2013-12-19T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-19:/jiao-yi-ce-lue-yu-gui-ze-yin-qing.html</id><summary type="html"></summary><content type="html">&lt;h1&gt;交易策略的要点&lt;/h1&gt;
+&lt;p&gt;&lt;a href="/2013/12/16/trade_system.html"&gt;前面&lt;/a&gt;提到，交易策略是系统化交易的核心。但是要注意的是，风险管理比交易策略要重要10倍。&lt;/p&gt;
+&lt;p&gt;交易策略的一些要点整理如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;交易策略是一套完整的交易规则体系&lt;/li&gt;
+&lt;li&gt;这些规则对投资决策的各个环节做出明确规定&lt;/li&gt;
+&lt;li&gt;这些规则必须客观、唯一&lt;/li&gt;
+&lt;li&gt;所谓完整，至少要包括入场和出场两个规则——完成一个完整的交易周期，入场和出场信号必须确定会发生&lt;/li&gt;
+&lt;li&gt;出场策略比入场策略要重要10倍&lt;/li&gt;
+&lt;li&gt;越简单的策略越可靠&lt;/li&gt;
+&lt;li&gt;要有错误处理机制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;交易策略的种类&lt;/h1&gt;
+&lt;p&gt;所谓&lt;a href="/2012/03/20/rule_engine_1.html"&gt;规则，规定了一组确定的条件和此条件所产生的结果&lt;/a&gt;。根据条件的类别不同，可以把交易策略分成以下几种：&lt;/p&gt;
+&lt;h2&gt;基于技术指标&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;例1&lt;/li&gt;
+&lt;li&gt;规则定义&lt;ul&gt;
+&lt;li&gt;入场规则：短期均线上穿长期均线&lt;/li&gt;
+&lt;li&gt;出场规则：短期均线下穿长期均线&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;评价&lt;/p&gt;
+&lt;p&gt;简单但完整的交易策略&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;例2&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;规则定义&lt;ul&gt;
+&lt;li&gt;入场规则：RSI&amp;lt;10&lt;/li&gt;
+&lt;li&gt;出场规则：RSI&amp;gt;90&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;评价&lt;/p&gt;
+&lt;p&gt;有严重的设计缺陷。因为RSI可能长期不能趋近于某一极值，从而得不到对应的操作信号，长期无法完成完整的买卖周期。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;基于统计分析&lt;/h2&gt;
+&lt;p&gt;此类策略要研究市场数据的统计分布特征，需要较强的数学功底&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;例1&lt;/li&gt;
+&lt;li&gt;规则定义&lt;ul&gt;
+&lt;li&gt;入场规则：跳空高开若干&lt;/li&gt;
+&lt;li&gt;出场规则：利润达到x值或收盘价，或者损失达到y止损&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;评价&lt;/p&gt;
+&lt;p&gt;其思想是捕捉跳空开盘对后市的影响&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;例2&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;规则定义&lt;ul&gt;
+&lt;li&gt;入场规则：突破跳空&lt;/li&gt;
+&lt;li&gt;出场规则：衰竭跳空&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;评价
+     两个问题：1）跳空不一定会出现，从而导致交易周期不完整；2）过于主观随意&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;例3&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;规则定义&lt;ul&gt;
+&lt;li&gt;入场规则：迪马克波动系数终点&lt;/li&gt;
+&lt;li&gt;出场规则：反向迪马克波动系数终点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;评价&lt;/p&gt;
+&lt;p&gt;交易周期不完整&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;基于图形分析&lt;/h2&gt;
+&lt;p&gt;这类是最传统、最常见的交易策略&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;例1&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;规则定义&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;入场规则：维克多突破&lt;/li&gt;
+&lt;li&gt;出场规则：反向维克多突破&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;评价&lt;/p&gt;
+&lt;p&gt;简单但完整&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;例2&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;规则定义&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;入场规则：罗斯钩式突破&lt;/li&gt;
+&lt;li&gt;出场规则：反向罗斯钩式突破&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;评价&lt;/p&gt;
+&lt;p&gt;完整&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;例3&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;规则定义&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;入场规则：卡尔汉数突破&lt;/li&gt;
+&lt;li&gt;出场规则：反向卡尔汉数突破&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;评价&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;例4&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;规则定义&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;入场规则：W型反转&lt;/li&gt;
+&lt;li&gt;出场规则：M型反转&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;评价&lt;/p&gt;
+&lt;p&gt;不一定会发生，交易周期不完整&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;例5&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;规则定义&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;入场规则：晨星式&lt;/li&gt;
+&lt;li&gt;出场规则：昏星式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;评价&lt;/p&gt;
+&lt;p&gt;不一定会发生，交易周期不完整&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;基于数学理论&lt;/h2&gt;
+&lt;p&gt;需要较强的金融投资理论背景&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;例1：飞镖系统&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;规则定义&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;入场规则：飞镖击中的股票&lt;/li&gt;
+&lt;li&gt;出场规则：持有至规定期限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;评价&lt;/p&gt;
+&lt;p&gt;其收益战胜了华尔街股票分析家，验证了投资学术界的随机行走理论&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;例2：以满月为买入信号，以新月为卖出信号。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这是一个以金融占星术理论为基础的交易系统。该方法以月球引力场的变化来解释地球生态系统的周期性变比。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;例3：硬币法——以随机选择过程为基础&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;（略）&lt;/p&gt;
+&lt;h2&gt;基于基本分析&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;P/E小于某一值时买入，P/E大于某一值时卖出&lt;/li&gt;
+&lt;li&gt;收益增长率大于某一值时买入，收益增长率小于某一值时卖出&lt;/li&gt;
+&lt;li&gt;每年某月买入白糖合约，若干月后平仓（季节波动）&lt;/li&gt;
+&lt;li&gt;新建住房开工率持续上升若干月买入铜合约，若干月后平仓（因果关系）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;基于心理分析&lt;/h2&gt;
+&lt;p&gt;例： 传言开始是进场，传言证实后出场&lt;/p&gt;
+&lt;h2&gt;其他&lt;/h2&gt;
+&lt;p&gt;基于人工智能、神经网络、混沌理论（Chaos)等&lt;/p&gt;
+&lt;h1&gt;用规则引擎驱动交易策略&lt;/h1&gt;
+&lt;p&gt;尽管要求交易策略要尽可能简单，但是交易信号产生的条件可能五花八门。为了使交易系统具备更好的适应性，还是应该使用&lt;a href="/2012/03/20/rule_engine_1.html"&gt;规则引擎&lt;/a&gt;来驱动。这就需要将交易策略规则化。&lt;/p&gt;
+&lt;p&gt;一般来说，交易策略的规则化需要经过确定规则（定性）、确定参数（定量）以及用规则语言描述（实现）三个步骤。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;策略定性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;将交易策略表示为条件与交易信号。对于最简单的交易策略，可能只有入场信号和出场信号。但也会有一些稍复杂的情况需要处理：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于期货交易，入场信号可以区分为“做多”和“做空”，出场信号均为“平仓”&lt;/li&gt;
+&lt;li&gt;有些交易策略的入场、出场信号可能会划分出不同的风险级别——风险越高的信号，产生的时间越早，可能的获利越大，但判断失误的风险也更大&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;完善的交易系统，对于(正确入场,正确出场)、(正确入场,错误出场)、(错误入场,正确出场)、(错误入场,错误出场)  等情况都要考虑到，针对这些情况都要及时给出交易信号&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;确定参数&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;将策略中可变的部分定义为参数。这些参数可以在引擎中进行设置，以调整策略的具体行为。&lt;/p&gt;
+&lt;p&gt;参数可能要经过实际检验，才能得出最优的参数。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定义事件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;交易信号都是由某些数据触发，&lt;a href="#menuIndex1"&gt;如前&lt;/a&gt;所述，这些数据可能是行情、指标、基本面等。&lt;/p&gt;
+&lt;p&gt;不管是哪种数据，从规则引擎的角度，都需要定义为&lt;a href="/2013/12/21/event_in_CEP.html"&gt;事件(Event)&lt;/a&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定义操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;规则匹配的结果就是产生某种&lt;a href="/2012/12/06/rule_language.html#menuIndex4"&gt;操作&lt;/a&gt;。
+  考虑到交易策略要与后续的&lt;a href=""&gt;资金管理&lt;/a&gt;等策略结合，这里将操作也定义为事件，作为资金管理策略的输入。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;描述规则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;使用前面定义好的参数、事件和操作，用&lt;a href="http://thinkinside.tk/2012/12/06/rule_language.html"&gt;规则描述语言&lt;/a&gt;将定性的策略描述为定量的规则。&lt;/p&gt;
+&lt;h1&gt;实例&lt;/h1&gt;
+&lt;p&gt;以“简单算术平均线”策略为例，其实现过程如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;规则定性&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;规则1：当短期平均线向上穿越长期平均线时，买入&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;规则2：当短期平均线向下穿越长期平均线时，卖出&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;确定参数&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这个策略中，可以作为参数的变量包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;选用哪种价格，比如开盘价、收盘价、最高价、最低价等&lt;/li&gt;
+&lt;li&gt;短期和长期均线的长度&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为简单起见，这里只把均线的长度作为参数。&lt;/p&gt;
+&lt;p&gt;可以在DRL的global部分用全局变量定义规则的参数。这些参数将用于事件属性或规则条件中，用于调整策略的具体行为。如下：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;global java.lang.Integer SHORT_LENGTH;
+  global java.lang.Integer LONG_LENGTH;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;global参数可以使用在规则引擎会话中，使用&lt;a href="/2013/12/20/drools_API.html#menuIndex1"&gt;KnowledgeSession&lt;/a&gt;的&lt;code&gt;setGlobal()&lt;/code&gt;方法进行设置。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;事件定义&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;定义一个“均线事件”(MAEvent):&lt;/p&gt;
+&lt;p&gt;```
+  public class MAEvent {&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;public Date datetime;
+public long duration;
+
+public int length;
+public double average;
+public double price;
+
+
+
+public String toString(){
+  return &amp;quot;&amp;quot;+this.getDatetime().toLocaleString()+&amp;quot;:MA&amp;quot;+this.length+&amp;quot;=&amp;quot;+average+&amp;quot;\t(&amp;quot;+price+&amp;quot;)&amp;quot;;
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;}
+  ```&lt;/p&gt;
+&lt;p&gt;并在规则文件中进行声明：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;import my.package.MAEvent
+  ……
+  declare MAEvent
+    @role(event)
+    @timestamp( datetime )
+    @duration( duration )
+  end&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定义操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这里使用一个“操作信号事件”(SingalEvent)作为操作，符合条件时将该事件&lt;a href="/2012/12/06/rule_language.html#menuIndex4"&gt;insert&lt;/a&gt;到规则引擎：&lt;/p&gt;
+&lt;p&gt;```
+  public class SignalEvent extends AbstractEvent{&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;public enum SignalType{LONG,SHORT}
+
+public Date datetime;
+public long duration;
+
+
+public SignalType type;
+public String strategyName;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;}
+  ```&lt;/p&gt;
+&lt;p&gt;在规则文件中声明：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;declare SignalEvent
+    @role(event)
+    @timestamp(datetime)
+    @duration(duration)
+  end&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;描述规则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;```
+  rule "LONG SIGNAL"
+      when
+          $MA5_1:MAEvent(length==SHORT_LENGTH);
+          $MA5_0:MAEvent(length==SHORT_LENGTH,this meets[1d] $MA5_1);
+          $MA20_1:MAEvent(length==LONG_LENGTH,this coincides $MA5_1,average&amp;gt;=$MA5_1.average);
+          $MA20_0:MAEvent(length==LONG_LENGTH,this meets[1d] $MA20_1,this coincides $MA5_0,
+            average&amp;lt;=$MA5_0.average
+          );&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;  then&lt;/span&gt;
+
+&lt;span class="x"&gt;    SignalEvent e = new SignalEvent();&lt;/span&gt;
+&lt;span class="x"&gt;    e.datetime = &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;MA5_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;datetime&lt;/span&gt;&lt;span class="x"&gt;;&lt;/span&gt;
+&lt;span class="x"&gt;    e.strategyName = &amp;quot;简单移动平均线策略&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    e.type = SignalEvent.SignalType.LONG;&lt;/span&gt;
+&lt;span class="x"&gt;    e.price = &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;MA5_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;price&lt;/span&gt;&lt;span class="x"&gt;;&lt;/span&gt;
+&lt;span class="x"&gt;      insert(e);&lt;/span&gt;
+
+&lt;span class="x"&gt;  System.out.println(e);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;end&lt;/p&gt;
+&lt;p&gt;rule "SHORT SIGNAL"
+      when
+          $MA5_1:MAEvent(length==SHORT_LENGTH);
+          $MA5_0:MAEvent(length==SHORT_LENGTH,this meets[1d] $MA5_1);
+          $MA20_1:MAEvent(length==LONG_LENGTH,this coincides $MA5_1,average&amp;lt;=$MA5_1.average);
+          $MA20_0:MAEvent(length==LONG_LENGTH,this meets[1d] $MA20_1, this coincides $MA5_0,
+            average&amp;gt;=$MA5_0.average
+          );&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;  then&lt;/span&gt;
+&lt;span class="x"&gt;      SignalEvent e = new SignalEvent();&lt;/span&gt;
+&lt;span class="x"&gt;    e.datetime = &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;MA5_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;datetime&lt;/span&gt;&lt;span class="x"&gt;;&lt;/span&gt;
+&lt;span class="x"&gt;    e.strategyName = &amp;quot;简单移动平均线策略&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    e.type = SignalEvent.SignalType.SHORT;&lt;/span&gt;
+&lt;span class="x"&gt;    e.price = &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;MA5_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;price&lt;/span&gt;&lt;span class="x"&gt;;&lt;/span&gt;
+&lt;span class="x"&gt;      insert(e);&lt;/span&gt;
+
+&lt;span class="x"&gt;      System.out.println(e);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;end
+```&lt;/p&gt;</content><category term="交易系统"></category><category term="规则引擎"></category></entry><entry><title>使用Oracle Berkeley DB持久化股票行情数据</title><link href="http://holbrook.github.io/shi-yong-oracle-berkeley-dbchi-jiu-hua-gu-piao-xing-qing-shu-ju.html" rel="alternate"></link><published>2013-12-19T00:00:00+08:00</published><updated>2013-12-19T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-19:/shi-yong-oracle-berkeley-dbchi-jiu-hua-gu-piao-xing-qing-shu-ju.html</id><summary type="html"></summary><content type="html">&lt;h1&gt;关系数据库，数据文件 还是 NoSQL&lt;/h1&gt;
+&lt;p&gt;股票行情数据具有如下特点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;数据量大&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;对于分析来说，至少需要5分钟数据。如果每天交易时间为4小时，每年250个交易日，则一支股票一年的行情数据量为60/5&lt;em&gt;4&lt;/em&gt;250= 12k。20年则为240k。如果是1分钟数据，则20年的数据量为240k*5 = 1.2M。&lt;/p&gt;
+&lt;p&gt;所以，如果用于分析，行情数据将是百万量级。如果记录3000只股票/指数的数据，数据量会非常大。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;数据很少变化&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;由于都是历史数据，行情数据很少需要修改。主要的操作是查询和增加。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;数据结构简单&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;主要考虑&lt;a href="/2013/12/18/quotation_model.html#menuIndex2"&gt;成交数据&lt;/a&gt;，是一种简单的一维结构。价格数据只在发生交易信号时有一定的参考意义，不需要保留所有的历史记录。&lt;/p&gt;
+&lt;p&gt;由于行情数据的这些特点，通常不适合使用关系数据库。传统上一般采用数据文件进行存储。&lt;/p&gt;
+&lt;p&gt;但是用数据文件需要自己处理写入锁，随机读写，序列化等问题，比较麻烦。于是&lt;a href="/2013/12/18/nosql_list.html#menuIndex1"&gt;NoSQL&lt;/a&gt;成了比较好的一种选择。&lt;/p&gt;
+&lt;p&gt;对于单机的分析软件，&lt;a href="/2013/12/18/nosql_list.html#menuIndex2"&gt;NoSQL选型要素&lt;/a&gt;为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;key/value儲存&lt;/li&gt;
+&lt;li&gt;支持持久化&lt;/li&gt;
+&lt;li&gt;支持嵌入式&lt;/li&gt;
+&lt;li&gt;接口方便&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Oracle Berkeley DB&lt;/h1&gt;
+&lt;p&gt;&lt;a href="http://www.oracle.com/technetwork/cn/products/berkeleydb/overview/index.html"&gt;Berkeley DB&lt;/a&gt;是满足上述4点要求的比较好的一款产品。Berkeley DB分为BDB、BDB Java版和BDB XML版。其总体架构如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Berkeley DB" src="images/trade-system/berkeley-db.png"&gt;&lt;/p&gt;
+&lt;p&gt;BDB的三个版本的功能不完全相同。&lt;/p&gt;
+&lt;p&gt;我选择BDB Java版，不支持SQL API和XQuery API，可以使用底层的键/值API、Java 直接持久层 (DPL) API和Java 集合 API。三种API的应用场景如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当 Java 类是用来代表应用中的域对象(domain objects),也就是说,该模式是相对 稳定的,建议用直接持久层。&lt;/li&gt;
+&lt;li&gt;当在Berkeley DB和Berkeley DB Java 版之间移植应用程序时,或当实现自己的 动态模式(举例来说,一个 LDAP 服务器),那么建议用基础 API。您也可能喜欢使用这 个基础API如果您有极少数域类(domain class)。&lt;/li&gt;
+&lt;li&gt;集合API有利于和外部组件交互,因为它遵从Java集合框架标准。继而,和基础API 以及直接持久层结合后会很有用。您可能会喜欢这个 API,因为它提供了熟悉的 Java 集 合接口。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在行情数据的持久化中，可以选用直接持久层（DPL）。直接持久层API 可以持久化以及还原相互关联的 Java 对象，但是比ORM更加简单高效。&lt;/p&gt;
+&lt;h1&gt;实现过程&lt;/h1&gt;
+&lt;h2&gt;获取开发包&lt;/h2&gt;
+&lt;p&gt;可以从&lt;a href="http://www.oracle.com/technetwork/cn/products/berkeleydb/downloads/index.html"&gt;这里&lt;/a&gt;下载需要的jar包，也可以使用maven：&lt;/p&gt;
+&lt;p&gt;{% highlight xml %}&lt;/p&gt;
+&lt;p&gt;&lt;dependency&gt;
+      &lt;groupId&gt;com.sleepycat&lt;/groupId&gt;
+      &lt;artifactId&gt;je&lt;/artifactId&gt;
+      &lt;version&gt;5.0.73&lt;/version&gt;
+&lt;/dependency&gt;&lt;/p&gt;
+&lt;p&gt;{% endhighlight %}&lt;/p&gt;
+&lt;p&gt;如果要使用最新版（目前的最新版是5.0.97），需要引入oracle的maven库：&lt;/p&gt;
+&lt;p _="%" endhighlight&gt;{% highlight xml %}
+&lt;repositories&gt;
+    &lt;repository&gt;
+      &lt;id&gt;oracleReleases&lt;/id&gt;
+      &lt;name&gt;Oracle Released Java Packages&lt;/name&gt;
+      &lt;url&gt;http://download.oracle.com/maven&lt;/url&gt;
+      &lt;layout&gt;default&lt;/layout&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;&lt;/p&gt;
+&lt;h2&gt;定义持久化模型&lt;/h2&gt;
+&lt;h3&gt;实体和值对象&lt;/h3&gt;
+&lt;p&gt;Berkeley DB支持DDD(领域驱动设计)中的实体和值对象的持久化。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实体：拥有长期不变的标识符,可以被跟踪的对象。&lt;/li&gt;
+&lt;li&gt;值对象：没有标识符，主要关注其属性的对象。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在BDB中，分别使用 &lt;strong&gt;@Entity&lt;/strong&gt; 和 &lt;strong&gt;@Persistent&lt;/strong&gt; 来声明实体和值对象。
+声明了 &lt;strong&gt;@Persistent&lt;/strong&gt; 的对象可以直接作为 &lt;strong&gt;@Entity&lt;/strong&gt; 对象中的属性使用。&lt;/p&gt;
+&lt;p&gt;任何Java类一旦增加了持久化声明，其所有字段（任何作用域）都会被持久化。需要持久化的类需要缺省的无参数构造函数。&lt;/p&gt;
+&lt;p&gt;比如：&lt;/p&gt;
+&lt;p&gt;{% highlight java %}&lt;/p&gt;
+&lt;p&gt;@Entity
+public class Transaction {
+    ……
+    public OHLC ohlc;
+    ……
+}&lt;/p&gt;
+&lt;p&gt;@Persistent
+public class OHLC {
+    public float open,high,low,close;
+}&lt;/p&gt;
+&lt;p&gt;{% endhighlight %}&lt;/p&gt;
+&lt;h3&gt;主键和“次键”声明&lt;/h3&gt;
+&lt;p&gt;每个实体类(@Entity)可以定义一个主键(PrimaryKey)和多个次键(SecondaryKey)，从而可以按照主键或次键进行索引。例如：&lt;/p&gt;
+&lt;p&gt;{% highlight java %}&lt;/p&gt;
+&lt;p&gt;@Entity
+public class Security implements Instrument{
+    @PrimaryKey
+    private String code;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;@SecondaryKey(relate=Relationship.ONE_TO_ONE)
+private String name;
+……
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p _="%" endhighlight&gt;}&lt;/p&gt;
+&lt;h3&gt;关联关系&lt;/h3&gt;
+&lt;p&gt;关联关系也是通过次键(SecondaryKey)声明的。需要同时指定多重性（relate）和关联到的实体（relatedEntity）。
+relate可以是ONE_TO_ONE,ONE_TO_MANY,MANY_TO_ONE或MANY_TO_MANY(在com.sleepycat.persist.model.Relationship中定义)。&lt;/p&gt;
+&lt;p&gt;需要注意的是，次键的属性类型需要是relatedEntity指定的对端实体的主键类型，而不能直接使用对端实体。&lt;/p&gt;
+&lt;p&gt;如果relate是ONE_TO_MANY或MANY_TO_MANY，可以使用集合类型。比如（不属于股票行情数据模型，而是BDB官方例子）：&lt;/p&gt;
+&lt;p&gt;{% highlight java %}&lt;/p&gt;
+&lt;p&gt;@Entity
+class Employer {
+    @PrimaryKey(sequence="ID")
+    long id;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;@SecondaryKey(relate=ONE_TO_ONE) String name;
+……
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;}&lt;/p&gt;
+&lt;p&gt;@Entity
+class Person {
+    @PrimaryKey
+    String ssn;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;@SecondaryKey(relate=MANY_TO_ONE, relatedEntity=Person.class)
+String parentSsn;
+
+@SecondaryKey(relate=ONE_TO_MANY)
+Set&amp;lt;String&amp;gt; emailAddresses = new HashSet&amp;lt;String&amp;gt;();
+
+@SecondaryKey(relate=MANY_TO_MANY, relatedEntity=Employer.class, onRelatedEntityDelete=NULLIFY)
+Set&amp;lt;Long&amp;gt; employerIds = new HashSet&amp;lt;Long&amp;gt;();
+……
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;}&lt;/p&gt;
+&lt;p&gt;{% endhighlight %}&lt;/p&gt;
+&lt;h2&gt;使用DPL API&lt;/h2&gt;
+&lt;h3&gt;设计Accessor(TODO)&lt;/h3&gt;
+&lt;p&gt;类似于DAO，BDB中通常将对实体的访问封装到Accessor中。例如：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;EntityStore&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;获取索引&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CRUD&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;访问关联对象&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通过索引可以得到关联的对象，无论是单个关联对象还是集合。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;关联到单个对象&lt;/li&gt;
+&lt;li&gt;关联到集合&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p _="%" endhighlight&gt;{% highlight java %}
+EntityCursor&lt;Person&gt; employees = dao.personByEmployerIds.subIndex(gizmoInc.id).entities();
+try {
+    for (Person employee : employees) {
+System.out.println(employee.ssn + ' ' + employee.name); }
+} finally {
+    employees.close();
+}&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;等值连接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过 EntityJoin 类可以进行等值连 接(equality join)操作。&lt;/p&gt;
+&lt;p&gt;比如，以下代码查询所有Bob的孩子中为gizmo公司工作的 员工:&lt;/p&gt;
+&lt;p _="%" endhighlight&gt;{% highlight java %}
+EntityJoin&lt;String,Person&gt; join = new EntityJoin(dao.personBySsn);
+join.addCondition(dao.personByParentSsn, "111-11-1111"); join.addCondition(dao.personByEmployerIds, gizmoInc.id);
+ForwardCursor&lt;Person&gt; results = join.entities(); try {
+for (Person person : results) { System.out.println(person.ssn + ' ' + person.name);
+}
+} finally {
+    results.close();
+}&lt;/p&gt;
+&lt;h3&gt;建立连接&lt;/h3&gt;
+&lt;h3&gt;事务支持&lt;/h3&gt;
+&lt;p _="%" endhighlight&gt;{% highlight java %}
+Transaction txn = env.beginTransaction(null, null); dao.employerById.put(txn, gizmoInc); dao.employerById.put(txn, gadgetInc);
+txn.commit();&lt;/p&gt;
+&lt;h3&gt;模型变化&lt;/h3&gt;
+&lt;p&gt;对于增加实体或值对象的属性，改变属性类型等变化，一般不需要对BDB进行额外的处理，而是会自动适应。&lt;/p&gt;
+&lt;p&gt;对于一些特殊的、无法自动适应的变化，比如重命名字段或优化单个的类(如:使用通用类型,模块复用等改变),可以使用Mutations。&lt;/p&gt;
+&lt;p&gt;Mutations 操作是延迟的:只在存取数据时自动改变,故避免了软件升级时大型数据库转换导致的长时间停机。
+复杂的类优化可能涉及到多个类,使用 ConversionStore 进行。因而,无论持久化类作出何种 改变,直接持久层都始终提供可靠数据存取。&lt;/p&gt;
+&lt;h3&gt;性能选项&lt;/h3&gt;
+&lt;p&gt;Berkeley DB在API的很多地方提供了性能调优的选项。常见的包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DatabaseConfig参数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p _="%" endhighlight&gt;通过DatabaseConfig参数可以用来调整Berkeley DB引擎的性能。
+  比如,可指定内部B树节点的大小来调整性能,通过如下方式来指定:
+{% highlight java %}
+    DatabaseConfig config = store.getPrimaryConfig(Employer.class);
+    config.setNodeMaxEntries(64);
+    store.setPrimaryConfig(config);&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CRUD操作参数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如, “脏读”可通过LockMode参数实现:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Employer employer = employerByName.get(null, &amp;quot;Gizmo Inc&amp;quot;, LockMode.READ_UNCOMMITTED);
+&lt;/pre&gt;&lt;/div&gt;</content><category term="交易系统"></category></entry><entry><title>证券行情数据模型</title><link href="http://holbrook.github.io/zheng-quan-xing-qing-shu-ju-mo-xing.html" rel="alternate"></link><published>2013-12-18T00:00:00+08:00</published><updated>2013-12-18T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-18:/zheng-quan-xing-qing-shu-ju-mo-xing.html</id><summary type="html"></summary><content type="html">&lt;h1&gt;行情数据举例&lt;/h1&gt;
+&lt;p&gt;交易系统离不开行情数据。比如，如果访问新浪的股票数据接口：&lt;/p&gt;
+&lt;p&gt;http://hq.sinajs.cn/list=sh600133,sh601005&lt;/p&gt;
+&lt;p&gt;可能会得到如下的数据：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;var&lt;/span&gt; &lt;span class="nt"&gt;hq_str_sh600133&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;东湖高新,6.01,6.01,5.91,6.07,5.80,5.92,5.93,8947052,52872049,2000,5.92,57704,5.91,191500,5.90,75000,5.89,142800,5.88,19700,5.93,43750,5.94,51600,5.95,17299,5.96,11445,5.97,2013-12-18,13:56:49,00&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="nt"&gt;var&lt;/span&gt; &lt;span class="nt"&gt;hq_str_sh601005&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;重庆钢铁,2.50,2.50,2.49,2.51,2.48,2.49,2.50,1505600,3764816,448800,2.49,110600,2.48,132500,2.47,206500,2.46,150300,2.45,95501,2.50,447100,2.51,110600,2.52,110800,2.53,136400,2.54,2013-12-18,13:56:49,00&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;每只股票返回一组数据。以第一组数据为例，各数据项的含义如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;东湖高新     股票名称&lt;/li&gt;
+&lt;li&gt;6.01         今日开盘价（元）&lt;/li&gt;
+&lt;li&gt;6.01         昨日收盘价（元）&lt;/li&gt;
+&lt;li&gt;5.91         当前价格（元）&lt;/li&gt;
+&lt;li&gt;6.07         今日最高价（元）&lt;/li&gt;
+&lt;li&gt;5.80         今日最低价（元）&lt;/li&gt;
+&lt;li&gt;5.92         买一（元）&lt;/li&gt;
+&lt;li&gt;5.93         卖一（元）&lt;/li&gt;
+&lt;li&gt;8947052      成交量（股）&lt;/li&gt;
+&lt;li&gt;52872049    成交金额（元）&lt;/li&gt;
+&lt;li&gt;2000        买一申报量（股）&lt;/li&gt;
+&lt;li&gt;5.92        买一出价（元）&lt;/li&gt;
+&lt;li&gt;57704       买二申报量（股）&lt;/li&gt;
+&lt;li&gt;5.91        买二出价（元）&lt;/li&gt;
+&lt;li&gt;191500      买三申报量（股）&lt;/li&gt;
+&lt;li&gt;5.90        买三出价（元）&lt;/li&gt;
+&lt;li&gt;75000       买四申报量（股）&lt;/li&gt;
+&lt;li&gt;5.89        买四出价（元）&lt;/li&gt;
+&lt;li&gt;142800      买五申报量（股）&lt;/li&gt;
+&lt;li&gt;5.88        买五出价（元）&lt;/li&gt;
+&lt;li&gt;19700       卖一申报量（股）&lt;/li&gt;
+&lt;li&gt;5.93        卖一报价（元）&lt;/li&gt;
+&lt;li&gt;43750       卖二申报量（股）&lt;/li&gt;
+&lt;li&gt;5.94        卖二报价（元）&lt;/li&gt;
+&lt;li&gt;51600       卖三申报量（股）&lt;/li&gt;
+&lt;li&gt;5.95        卖三报价（元）&lt;/li&gt;
+&lt;li&gt;17299       卖四申报量（股）&lt;/li&gt;
+&lt;li&gt;5.96        卖四报价（元）&lt;/li&gt;
+&lt;li&gt;11445       卖五申报量（股）&lt;/li&gt;
+&lt;li&gt;5.97        卖五报价（元）&lt;/li&gt;
+&lt;li&gt;2013-12-18  日期&lt;/li&gt;
+&lt;li&gt;13:56:49,00 时间&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;价格和成交&lt;/h1&gt;
+&lt;p&gt;上述的查询结果包含了两种不同的数据：价格(Price)和成交（Transaction)。&lt;/p&gt;
+&lt;p&gt;价格是实时数据，记录了某一时点的当前价格（price）和一系列（上面的例子中是五组）的报价(Quote)数据；其中报价又包含了买方的出价（bid)和卖方的要价（offer），通常可能表示为“0.6712/5”、“0.2345/”，“/0.4352”等。&lt;/p&gt;
+&lt;p&gt;成交是阶段数据，记录了某一个时段（上面的例子中是一天）内的开盘价(open)，收盘价（close）,最高价（high），最低价（low）；
+以及该段时间内总的成交量（volume）和成交价格（amount）。由于(开盘价,收盘价,最高价,最低价）是很常用的一种结构，比如画蜡烛图时就会使用这种结构，所以将其封装为一个&lt;a href="/2013/01/01/money.html#menuIndex6"&gt;值对象&lt;/a&gt;： &lt;strong&gt;OHLC&lt;/strong&gt; 。&lt;/p&gt;
+&lt;p&gt;不管是价格信息还是成交信息，都关联到某一证券（Security）。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/analysis-pattern/price_and_transaction.png"&gt;&lt;/p&gt;
+&lt;h1&gt;场景&lt;/h1&gt;
+&lt;p&gt;在上面的模型中，价格和成交直接关联到时点。&lt;/p&gt;
+&lt;p&gt;实际应用中，经常会需要将一些价格或成交聚合在一起。比如，某个市场、某个板块的所有股票的价格。而这种聚合通常要指定到某个时间点才有意义。&lt;/p&gt;
+&lt;p&gt;可以把这种聚合叫做场景（Scenario），场景关联到某一时间点（TimePoint)。一个场景可以有多个场景元素（ScenarioElement），场景元素作为证券和其他因素之间的关联，聚合到与时点相关的场景中。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/analysis-pattern/scenario.png"&gt;&lt;/p&gt;
+&lt;p&gt;场景提供了一个把所有因素综合在一起的基础，从而可以很方便的在不同的情况之间进行比较。这就有较高的实用性。&lt;/p&gt;
+&lt;p&gt;比如，在跨市场套利中，可以针对不同的市场定义不同的场景，并将场景关联到指定的市场，从而在不同市场之间进行比较。&lt;/p&gt;
+&lt;p&gt;在比如在交易系统的风险管理中，可以在多种可能的情况之间进行对比分析。&lt;/p&gt;
+&lt;p&gt;有了场景和场景元素的定义，则价格和成交都是场景元素的一种实现：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/analysis-pattern/quotation.png"&gt;&lt;/p&gt;
+&lt;h1&gt;多数据源&lt;/h1&gt;
+&lt;p&gt;实际应用中，可能需要从多个数据源获取数据。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/analysis-pattern/multi_source.png"&gt;&lt;/p&gt;
+&lt;h1&gt;价格指标&lt;/h1&gt;
+&lt;p&gt;通过其他场景元素计算获取&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/analysis-pattern/indicator.png"&gt;&lt;/p&gt;</content><category term="交易系统"></category></entry><entry><title>系统交易和交易系统</title><link href="http://holbrook.github.io/xi-tong-jiao-yi-he-jiao-yi-xi-tong.html" rel="alternate"></link><published>2013-12-16T00:00:00+08:00</published><updated>2013-12-16T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-16:/xi-tong-jiao-yi-he-jiao-yi-xi-tong.html</id><summary type="html"></summary><content type="html">&lt;h1&gt;证券价格的随机性&lt;/h1&gt;
+&lt;p&gt;很多人都从股票投机中赚过钱，但是绝少人能够长期赚钱。甚至这些长期赚钱的人中，绝大部分人的成功次数少于50%。这意味着，证券价格的波动具有随机性。&lt;/p&gt;
+&lt;p&gt;投资理论界认为，价格的波动具备高度随机性；而投资实务界认为只是部分随机性。&lt;/p&gt;
+&lt;p&gt;如果价格的波动具备完全随机性，则意味着数据没有任何记忆性，完全无法通过过去的数据预测未来。就好像抛硬币，即使之前抛出了一千次正面，第一千零一次抛出正、反面的概率依然是各占50%。&lt;/p&gt;
+&lt;p&gt;不可否认，证券价格的变化比抛硬币游戏要复杂得多，目前无法证明其具备完全随机性，但是也无法准确发现其变化规律。&lt;/p&gt;
+&lt;p&gt;从实践来看，总有人能够从证券投资中稳定获利。尤其近几年一些量化投资方法的成功，又让人看到了通过数学模型获取稳定收益的希望。&lt;/p&gt;
+&lt;h1&gt;赌博还是投资？&lt;/h1&gt;
+&lt;p&gt;尽管人的天性中都厌恶风险（不确定性），但是又都或多或少喜欢赌博。&lt;/p&gt;
+&lt;p&gt;对于证券投机，可以说本质上也是一种赌博。区别在于大多数人仅仅是赌博，而少数人以数学家的方式参与赌博。&lt;/p&gt;
+&lt;p&gt;赌博之所以吸引人，在于其概率性。数学家经过思考和技术能够赢得赌博游戏，是因为其对概率和统计学的把握。&lt;/p&gt;
+&lt;p&gt;要进行科学的投资/投机，而不是以赌博的心态去进行交易，一定要明确以下几点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;投资的目标是持续稳定获利&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不要期望每次交易都是正确的，甚至不要期望成功交易的次数要大于失败的次数。据说，华尔街的顶尖交易员在十年中的平均正确率仅仅是35%左右&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;成功的交易，其收益率不一定高，不要追求单次交易的高回报率——这种事情发生的概率太小&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;失败的交易，一定要将其损失控制在合理的范围。失败是常态，但是一定不要把一次失败演变成灾难&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;符合上述行为的投资，就可以称为科学投资，而不是赌博。&lt;/p&gt;
+&lt;p&gt;科学投资的精髓就是捕捉高度随机变化中的非随机性。&lt;/p&gt;
+&lt;h1&gt;系统化交易&lt;/h1&gt;
+&lt;p&gt;要实现科学投资，需要将一段时间内的所有交易看做一系列整体性、系统化的行为，而不是一次次的“率性而为”。这就要求：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;首先要有一个交易策略，这个交易策略经过一系列的统计验证，期望值为正。并且明确知道其成功率、最高收益率、最大损失率等一系列关键性的指标&lt;/li&gt;
+&lt;li&gt;根据该交易策略的关键指标，结合自身资金情况，制定一个资金管理策略。资金管理策略保证你有足够的筹码将这个游戏玩下去，而不是中途出局&lt;/li&gt;
+&lt;li&gt;严格基于交易策略和资金管理策略，进行一系列的选股、择时、执行等操作&lt;/li&gt;
+&lt;li&gt;对于每一笔交易，分析其成功或失败的原因是由于概率、心理因素还是模型的缺陷。在一定的时间后根据最新的统计结果修正模型参数。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;能够做到这些，就可以称之为“系统化交易”。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/trade-system/trade.png"&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;选股：筛选交易对象&lt;/li&gt;
+&lt;li&gt;择时：对行情进行判断，选择合适的操作时机&lt;/li&gt;
+&lt;li&gt;战术：生成正向或反向交易指令&lt;/li&gt;
+&lt;li&gt;执行：记录交易结果&lt;/li&gt;
+&lt;li&gt;反馈：核算、评估&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;心理因素&lt;/h1&gt;
+&lt;p&gt;系统化交易中，最难克服的是心理障碍。请将手放在心口，听我说：&lt;/p&gt;
+&lt;p&gt;你能否承认交易策略和资金管理策略是指引你交易行为的唯一准则，爱他、安慰他、尊重他、保护他，像你爱自己一样，无论每次交易是成功、是失败，也无论你听到了市场上多么动听的传言，亦或你的交易遭到了何种的嘲讽？&lt;/p&gt;
+&lt;p&gt;先不要急着回答。人性是如此脆弱，以至于你很快就会释放心中的魔鬼，从而将上面的誓言抛之脑后。请问：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;两个选择：1）有75%的机会得到1000美元，但有25%的机会什么都得不到。2）确定可以得到700美元。 你会如何选择？&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;还是两个选择：1）75%的机会付出1000美元，但有25%的机会什么也不用付出。2）确定付出700美元。 你会如何选择？&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;可能多数人会在第1个问题中选择2），第二个问题中选择1）。实际上，如果计算了期望值，这两个选择都是错的。这就是你心中的魔鬼。&lt;/p&gt;
+&lt;p&gt;传言巴菲特有一次打高尔夫的时候球友们跟他打赌：在三天内如果巴菲特打出一次一杆进洞，就给他20000美元，否则巴菲特要付出10美元。但是巴菲特拒绝了。&lt;/p&gt;
+&lt;p&gt;关住内心的魔鬼，从概率的角度进行思考，绝不要心存侥幸。这才是科学交易的精神。&lt;/p&gt;
+&lt;p&gt;无论成败，恪守交易策略，才能从大量单个交易的偶然中获取总体期望值的必然；无原则，或者有原则而不遵守，就只能停留在一个个的偶然，并且总体结果也是偶然。&lt;/p&gt;
+&lt;h1&gt;交易系统的作用&lt;/h1&gt;
+&lt;p&gt;除了心理控制的难关，系统化交易过程中需要进行信息收集、信息处理、交易决策、交易计划、交易执行等大量琐碎耗时的事情，这些事情很可能影响你的心态，甚至由于信息的干扰影响决策的正确性。&lt;/p&gt;
+&lt;p&gt;此外，系统化交易需要不断对交易策略和资金管理策略不断进行统计分析、优化和参数调整，对于大多数人来说这也是一个难以胜任的工作。&lt;/p&gt;
+&lt;p&gt;上述种种，需要某种工具来辅助，姑且称之为“交易系统”。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/trade-system/goal.png"&gt;&lt;/p&gt;
+&lt;p&gt;如上图，交易的“铁三角”是交易者、交易资本和交易对象，而交易系统的主要作用是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;管理交易策略的生命周期，按照交易策略实施交易&lt;/li&gt;
+&lt;li&gt;根据风险控制策略进行资金管理&lt;/li&gt;
+&lt;li&gt;辅助交易者进行心理控制&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;交易系统的主要功能&lt;/h1&gt;
+&lt;h2&gt;交易策略的生命周期管理&lt;/h2&gt;
+&lt;p&gt;交易系统最重要的功能应该是对交易策略的整个生命周期进行管理。&lt;/p&gt;
+&lt;p&gt;一个交易策略提出后，要经过一系列的阶段，直到最终被废弃。交易策略的生命周期如下图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/trade-system/lifecycle.png"&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;公式化&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;交易策略中的所有规则，既包括买卖点的生成规则，也包括交易对象筛选的规则等，必须能够用公式/程序语言客观、准确的表示。&lt;/p&gt;
+&lt;p&gt;并提取出所有的变量/事件和参数。变量/事件用于客观事实的输入，参数用于优化。&lt;/p&gt;
+&lt;p&gt;当然，对于一些共性的规则，如检查交易对象的流动性和价格波动程度等规则，可以提取出公共的规则，在交易策略中进行引用。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;统计检验&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;使用历史数据对交易策略进行检验，得出交易策略的统计学参数和关键指标&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;外推检验&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;使用真实的外部数据，进行模拟盘的操作，检验效果，验证参数和指标的变化&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;实战检验&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;使用真实的外部数据，进行实盘操作，检验效果，验证交易策略与交易者之间是否契合&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;监控与维护&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;经过上述步骤的交易策略，可以用于实战。在实战过程中要不断监控策略的统计学参数和指标是否已经偏离&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;优化&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在任一环节，如果发现交易策略不能满足要求，可以对参数进行优化&lt;/p&gt;
+&lt;h2&gt;辅助决策&lt;/h2&gt;
+&lt;p&gt;经过验证的交易策略只是给出合适的交易信号：买入信号或卖出信号。根据交易信号、资金状况、策略的统计指标等因素来决定是否要交易、交易量是多少等等这些交易要素，是一个决策的过程。&lt;/p&gt;
+&lt;p&gt;交易系统应该能够为交易决策提供辅助。&lt;/p&gt;
+&lt;h2&gt;支持功能&lt;/h2&gt;
+&lt;p&gt;前面提到的交易过程中的其他环节，如信息收集、信息处理、交易日志、结果分析、指标计算等，也需要交易系统进行支持。&lt;/p&gt;
+&lt;h1&gt;交易策略与交易者&lt;/h1&gt;
+&lt;p&gt;同一套交易策略，在不同的交易员手中，效果截然不同。这里面没有对错，而是一个是否适合的问题。&lt;/p&gt;
+&lt;p&gt;交易策略仅仅规定了交易信号产生的规则，但是不同的交易员具有不同的交易周期长短、风险承受水平、投资理念等偏好，所以会适合不同的交易策略。&lt;/p&gt;
+&lt;p&gt;所谓最适合的就是最好的，对交易员来说，最重要的时期不是妄图找到“最好”的交易策略，而是应该找到最适合自己投资理念的交易策略。&lt;/p&gt;
+&lt;p&gt;在符合自己投资理念的前提下，交易过程中要尽量排除不必要的主观性。对于每对交易，不要关注是成功还是失败，而要关注是对的还是错的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;符合策略的成功交易是对的；更重要的是符合策略的失败交易也是对的&lt;/li&gt;
+&lt;li&gt;偏离策略的失败交易是错的；更重要的是偏离策略的成功交易也是错的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;最后的迷思&lt;/h1&gt;
+&lt;p&gt;尽管我们希望在有限的条件下建立一个科学的模型，从而获得一个正的“预期收益率”（该死的银行理财产品？），但是，我们还是将命运交给了未知：那冥冥中的概率。&lt;/p&gt;
+&lt;p&gt;尽管根据&lt;a href="http://wiki.mbalib.com/wiki/%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B"&gt;大数定律&lt;/a&gt;，随着交易次数的增多，总体结果会越来越接近事先计算出的期望值，但是&lt;a href="http://wiki.mbalib.com/wiki/%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86"&gt;中心极限定理&lt;/a&gt;指出，大量独立随机变量的平均数近似正态分布。&lt;/p&gt;
+&lt;p&gt;就我们有限而短暂的生命来说，我们不可能让交易次数达到无穷，去逼近那个理论中的“期望值“，而只能进行有限次数的交易。如果说一套交易策略，由不同的交易者去实践，则每个交易者的最终结果可以看做中心极限定理中的一个样本。&lt;/p&gt;
+&lt;p&gt;很遗憾，中心极限定理告诉我们，最终结果是近似正态分布的，也就是说：有限次的策略交易，最终的统计结果仍然是一个概率分布——正所谓谋事在人，成事在天。&lt;/p&gt;</content><category term="交易系统"></category></entry></feed>

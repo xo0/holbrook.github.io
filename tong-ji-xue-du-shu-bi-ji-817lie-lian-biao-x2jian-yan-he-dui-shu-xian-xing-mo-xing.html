@@ -70,7 +70,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
-							<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
+							<li class="active"><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -121,7 +121,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
-								<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
+								<li class="active"><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -136,32 +136,52 @@
 					<div class="row">
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
-	<ul>
-		<li><a href="http://holbrook.github.io/tag/web.html">web</a></li>
-		<li><a href="http://holbrook.github.io/tag/osgi.html">OSGi</a></li>
-		<li><a href="http://holbrook.github.io/tag/graph.html">graph</a></li>
-		<li><a href="http://holbrook.github.io/tag/markdown.html">markdown</a></li>
-		<li><a href="http://holbrook.github.io/tag/cli.html">CLI</a></li>
-		<li><a href="http://holbrook.github.io/tag/java.html">java</a></li>
-		<li><a href="http://holbrook.github.io/tag/tu-biao.html">图表</a></li>
-		<li><a href="http://holbrook.github.io/tag/gui.html">GUI</a></li>
-		<li><a href="http://holbrook.github.io/tag/jiao-yi-xi-tong.html">交易系统</a></li>
-		<li><a href="http://holbrook.github.io/tag/cep.html">CEP</a></li>
-		<li><a href="http://holbrook.github.io/tag/gui-ze-yin-qing.html">规则引擎</a></li>
-		<li><a href="http://holbrook.github.io/tag/tong-ji-xue.html">统计学</a></li>
-		<li><a href="http://holbrook.github.io/tag/yun-wei.html">运维</a></li>
-		<li><a href="http://holbrook.github.io/tag/cluster.html">cluster</a></li>
-		<li><a href="http://holbrook.github.io/tag/xiao-xi-zhong-jian-jian.html">消息中间件</a></li>
-		<li><a href="http://holbrook.github.io/tag/blog.html">blog</a></li>
-		<li><a href="http://holbrook.github.io/tag/vim.html">vim</a></li>
-		<li><a href="http://holbrook.github.io/tag/ling-yu-mo-xing.html">领域模型</a></li>
-		<li><a href="http://holbrook.github.io/tag/nosql.html">NoSQL</a></li>
-		<li><a href="http://holbrook.github.io/tag/zhi-shi-guan-li.html">知识管理</a></li>
-		<li><a href="http://holbrook.github.io/tag/ce-shi.html">测试</a></li>
-		<li><a href="http://holbrook.github.io/tag/duo-xian-cheng.html">多线程</a></li>
-		<li><a href="http://holbrook.github.io/tag/python.html">python</a></li>
-		<li><a href="http://holbrook.github.io/tag/pelican.html">pelican</a></li>
-	</ul>
+<article>
+	<h2>《统计学》读书笔记(8/17:列连表，x^2检验和对数线性模型)</h2>
+	<h1>列连表数据</h1>
+<p>列连表研究2个或以上的变量，每个变量的取值是离散的，取值的总数量称为该变量的“水平”。</p>
+<p>列连表记录这些变量的各种取值组合出现的次数，以研究这些变量之间的相关性。</p>
+<p>比如：</p>
+<p><img alt="sample-contingency-table" src="images/2013/statistics_intro/sample-contingency-table.png"></p>
+<p>上图记录了一个3x2x2的列连表，三个变量分别为收入（高、中、低）、观点（同意、反对）、性别（男，女）。</p>
+<p>软件处理时通常将列连表处理成二维表格，比如：</p>
+<p><img alt="sample-contingency-table1" src="images/2013/statistics_intro/sample-contingency-table1.png"></p>
+<h1>二维列连表的检验</h1>
+<p>比如以下的二维列连表：</p>
+<p><img alt="sample-contingency-table2" src="images/2013/statistics_intro/sample-contingency-table2.png"></p>
+<p>设定零假设和备选假设：</p>
+<p>H0:观点和收入不相关&lt;=&gt;H1:相关</p>
+<p>检验逻辑:</p>
+<p>检验统计量在零假设下有（大样本时）近似的x<sup>2</sup>分布。</p>
+<p>当该统计量很大时或p-值很小时，就可以拒绝零假设，认为两个变量相关。</p>
+<p>x<sup>2</sup>检验量还可以使用Pearson x^2统计量和似然比（likelihood ratio) x<sup>2</sup> 统计量</p>
+<p>(公式：略）</p>
+<h1>高维列联表和(多项分布)对数线性模型</h1>
+<p>高维列联表的检验和两维类似</p>
+<p>但高维列联表可以构造一个(多项分布)对数线性模型(loglinear model)来进行分析。</p>
+<p>好处：不仅可以直接进行预测，而且可以增加定量变量作为模型自变量的一部分。</p>
+<h2>对数线性模型</h2>
+<p>ln(m<sub>ij</sub>)= a<sub>i</sub> + b<sub>j</sub> + e<sub>ij</sub></p>
+<p>其中：</p>
+<ul>
+<li>a<sub>i</sub>： 行变量的第i个水平对ln(m<sub>ij</sub>)的影响</li>
+<li>b<sub>j</sub>：列变量的第j个水平对ln(m<sub>ij</sub>)的影响</li>
+<li>e<sub>ij</sub>: 随机误差。</li>
+</ul>
+<h2>（多项分布）对数线性模型</h2>
+<p>ln(m<sub>ij</sub>)= a<sub>i</sub> + b<sub>j</sub> + (ab)<sub>ij</sub> + e<sub>ij</sub></p>
+<p>增加了交叉效应(ab)<sub>ij</sub>，代表第一个变量的第i个水平和第二个变量的第j个水平对ln(m<sub>ij</sub>)的共同影响</p>
+<h1>Poisson对数线性模型</h1>
+<p>很多事件符合Poisson分布，需要使用 Poisson对数线性模型进行分析。</p>
+<p>ln(l) = u + a<sub>i</sub> + b<sub>j</sub> + gx</p>
+<p>其中：</p>
+<ul>
+<li>u: 常数项</li>
+</ul>
+<p>……</p>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-09-05.</h6>
+</article>
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->

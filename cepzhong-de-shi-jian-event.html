@@ -69,7 +69,7 @@
 					<ul class="off-canvas-list">
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
-							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li class="active"><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
 							<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
@@ -120,7 +120,7 @@
 
 					<section class="top-bar-section">
 						<ul class="left">
-								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li class="active"><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
 								<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
@@ -136,32 +136,70 @@
 					<div class="row">
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
-	<ul>
-		<li><a href="http://holbrook.github.io/tag/web.html">web</a></li>
-		<li><a href="http://holbrook.github.io/tag/osgi.html">OSGi</a></li>
-		<li><a href="http://holbrook.github.io/tag/graph.html">graph</a></li>
-		<li><a href="http://holbrook.github.io/tag/markdown.html">markdown</a></li>
-		<li><a href="http://holbrook.github.io/tag/cli.html">CLI</a></li>
-		<li><a href="http://holbrook.github.io/tag/java.html">java</a></li>
-		<li><a href="http://holbrook.github.io/tag/tu-biao.html">图表</a></li>
-		<li><a href="http://holbrook.github.io/tag/gui.html">GUI</a></li>
-		<li><a href="http://holbrook.github.io/tag/jiao-yi-xi-tong.html">交易系统</a></li>
-		<li><a href="http://holbrook.github.io/tag/cep.html">CEP</a></li>
-		<li><a href="http://holbrook.github.io/tag/gui-ze-yin-qing.html">规则引擎</a></li>
-		<li><a href="http://holbrook.github.io/tag/tong-ji-xue.html">统计学</a></li>
-		<li><a href="http://holbrook.github.io/tag/yun-wei.html">运维</a></li>
-		<li><a href="http://holbrook.github.io/tag/cluster.html">cluster</a></li>
-		<li><a href="http://holbrook.github.io/tag/xiao-xi-zhong-jian-jian.html">消息中间件</a></li>
-		<li><a href="http://holbrook.github.io/tag/blog.html">blog</a></li>
-		<li><a href="http://holbrook.github.io/tag/vim.html">vim</a></li>
-		<li><a href="http://holbrook.github.io/tag/ling-yu-mo-xing.html">领域模型</a></li>
-		<li><a href="http://holbrook.github.io/tag/nosql.html">NoSQL</a></li>
-		<li><a href="http://holbrook.github.io/tag/zhi-shi-guan-li.html">知识管理</a></li>
-		<li><a href="http://holbrook.github.io/tag/ce-shi.html">测试</a></li>
-		<li><a href="http://holbrook.github.io/tag/duo-xian-cheng.html">多线程</a></li>
-		<li><a href="http://holbrook.github.io/tag/python.html">python</a></li>
-		<li><a href="http://holbrook.github.io/tag/pelican.html">pelican</a></li>
-	</ul>
+<article>
+	<h2>CEP中的事件(Event)</h2>
+	<p><a href="/2012/11/06/about_cep.html">CEP</a>处理复杂事件。宽泛的事件，是指在应用程序域中的状态的一个有意义改变的一条记录。
+而复杂事件处理关注<a href="/2013/12/21/Temporal_of_CEP.html">事件之间的相关性</a>,以及原子事件组合成的复杂(复合)事件。</p>
+<p>CEP与规则引擎有类似之处，但CEP中的事件(Event)是一种特殊类型的事实(Fact)。其特殊性在于：</p>
+<ul>
+<li>不可改变</li>
+</ul>
+<p>事件记录了已经发生的事情，而“过去”是不可改变的。</p>
+<ul>
+<li>强时间约束</li>
+</ul>
+<p>事件有发生的时点，事件之间通常基于事件发生的时点进行关联。</p>
+<ul>
+<li>被管理的生命周期</li>
+</ul>
+<p>有效时间窗口之外的事件不再有意义，可以被引擎自动回收。</p>
+<ul>
+<li>可以通过时间聚合</li>
+</ul>
+<p>因为所有的事件都有与它们关联的时间戳,所以,对它们可以 定义和使用滑动窗口,允许在一个时间段上根据值的聚合创建规则,
+  例如, 整个 60 分钟的一个事件的值的平均值。</p>
+<p>复杂事件处理(CEP),本质上是一个事件处理概念,涉及处理多个事件的任务与在事件云内部识别有意义事件的目标。</p>
+<p>或者说，CEP从事件云/事件流中检测和选择感兴趣的事件, 找出它们之间的关系,根据它们和它们之间的关系推断新的数据。</p>
+<p>由于CEP与规则引擎类似之处，CEP通常基于规则引擎。比如，Drools Fusion即是规则引擎，也可以作为CEP。</p>
+<h1>事件声明</h1>
+<p>DRL中的<a href="/2012/12/06/rule_language.html#menuIndex7">declare</a>可以用于声明事件，只需要在declare中增加一条<code>@role(event)</code>
+的元数据。实际上，declare默认隐含了<code>@role(fact)</code>的元数据，表面声明的是事实(Fact)。</p>
+<p>比如：</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">some.package.StockTick</span>
+<span class="n">declare</span> <span class="n">StockTick</span>
+    <span class="nd">@role</span><span class="p">(</span> <span class="n">event</span> <span class="p">)</span>
+<span class="n">end</span>
+
+<span class="o">//</span><span class="err">或者使用内嵌的事件声明</span>
+<span class="n">declare</span> <span class="n">StockTick</span>
+    <span class="nd">@role</span><span class="p">(</span> <span class="n">event</span> <span class="p">)</span>
+    <span class="n">datetime</span> <span class="p">:</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">Date</span>
+    <span class="n">symbol</span> <span class="p">:</span> <span class="n">String</span>
+    <span class="n">price</span> <span class="p">:</span> <span class="n">double</span>
+<span class="n">end</span>
+</pre></div>
+
+
+<h1>事件元数据</h1>
+<p>除了<code>@role</code>之外，事件还有一些Fact不具备的元数据。可以在declare中指定。</p>
+<h2>@timestamp</h2>
+<p>事件默认的时间戳是在insert到工作空间时，由引擎从Session Clock 获取并分配给事件。如果要指定使用事件的某一个属性作为时间戳，
+  可以用<code>@timestamp</code>元数据指定。比如：</p>
+<p><code>declare StockTick
+      @role( event )
+      @timestamp( datetime )
+      datetime : java.util.Date
+      symbol : String
+      price : double
+  end</code></p>
+<h2>@duration</h2>
+<p>默认事件的期限为0，称为point-in-time 事件。有些事件具有期限性，称为interval-based 事件。</p>
+<p>要声明事件的期限，通过<code>@duration</code>指定事件的一个属性，该属性以 <strong>毫秒数</strong> 记录了事件的期限。</p>
+<h2>@expires</h2>
+<p>当引擎运行在流(STREAM)模式时，指定一个过期时间可以用于内存管理。其格式为<code>[#d][#h][#m][#s][#[ms]]</code>，比如：<code>@expires( 1h35m )</code></p>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-12-21.</h6>
+</article>
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->

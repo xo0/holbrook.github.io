@@ -1,0 +1,476 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>心内求法</title>
+		<meta name="description" content="">
+		<meta name="author" content="Holbrook">
+
+		<link rel="stylesheet" href="http://holbrook.github.io/theme/css/foundation.css" />
+		<link rel="stylesheet" href="http://holbrook.github.io/theme/css/pygment/monokai.css" />
+		<link rel="stylesheet" href="http://holbrook.github.io/theme/css/custom.css" />
+
+
+		<script src="http://holbrook.github.io/theme/js/modernizr.js"></script>
+
+		<!-- Feeds -->
+		<link href="http://holbrook.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="心内求法 Atom Feed" />
+
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'] ],
+				displayMath: [ ['$$', '$$']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<!-- 百度统计 -->
+		<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "https://hm.baidu.com/hm.js?16d951e9b49ded5f2e821a0e61d77797";
+		  var s = document.getElementsByTagName("script")[0];
+		  s.parentNode.insertBefore(hm, s);
+		})();
+		</script>
+	</head>
+	<body>
+		<div class="off-canvas-wrap">
+			<div class="inner-wrap">
+				<!-- mobile top bar to activate nav -->
+				<nav class="tab-bar show-for-small">
+					<section class="left-small">
+						<a class="left-off-canvas-toggle menu-icon" >
+							<span class="fa-stack">
+                    			<i class="fa fa-circle fa-stack-2x"></i>
+                    			<i class="fa fa-bank fa-stack-1x fa-inverse" style="color: #eee"></i>
+                			</span>
+            			</a>
+					</section>
+
+					<section class="middle tab-bar-section">
+						<h1 class="title">心内求法</h1>
+					</section>
+				</nav>
+
+				<!-- mobile side bar nav -->
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><a href="http://holbrook.github.io">Home</a></li>
+						<li><label>Categories</label></li>
+							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
+							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
+							<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
+							<li ><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
+							<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
+
+						<li><label>Places</label></li>
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+							<li><a href="#">You can modify those links in your config file</a></li>
+
+
+						<li><label>Monthly Archives</label></li>
+									<li><a href="/posts/2017/02/">二月 2017 (1)</a></li>
+									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
+									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
+									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
+									<li><a href="/posts/2013/12/">十二月 2013 (10)</a></li>
+									<li><a href="/posts/2013/09/">九月 2013 (1)</a></li>
+									<li><a href="/posts/2013/08/">八月 2013 (2)</a></li>
+									<li><a href="/posts/2013/07/">七月 2013 (7)</a></li>
+									<li><a href="/posts/2013/06/">六月 2013 (4)</a></li>
+									<li><a href="/posts/2013/05/">五月 2013 (6)</a></li>
+									<li><a href="/posts/2013/01/">一月 2013 (2)</a></li>
+									<li><a href="/posts/2012/12/">十二月 2012 (4)</a></li>
+									<li><a href="/posts/2012/11/">十一月 2012 (3)</a></li>
+									<li><a href="/posts/2012/10/">十月 2012 (2)</a></li>
+									<li><a href="/posts/2012/04/">四月 2012 (1)</a></li>
+									<li><a href="/posts/2012/03/">三月 2012 (1)</a></li>
+									<li><a href="/posts/2012/02/">二月 2012 (2)</a></li>
+									<li><a href="/posts/2010/12/">十二月 2010 (1)</a></li>
+
+						<li><label>Links</label></li>
+							<li><a href="#">Another social link</a></li>
+							<li><a href="#">You can add links in your config file</a></li>
+					</ul>
+				</aside>
+
+				<!-- top bar nav -->
+				<nav class="top-bar hide-for-small-only" data-topbar>
+					<ul class="title-area">
+						<li class="name">
+							<h1><a href="http://holbrook.github.io/">心内求法</a></h1>
+						</li>
+					</ul>
+
+					<section class="top-bar-section">
+						<ul class="left">
+								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
+								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
+								<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
+								<li ><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
+								<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
+						</ul>
+					</section>
+				</nav>
+
+				<!-- Main Page Content and Sidebar -->
+				<section class="main-section">
+					<div class="row">
+						<!-- Main Content -->
+						<div class="medium-9 small-12 columns" role="content">
+<article>
+	<h2>salt的主要功能及使用</h2>
+	<p>掌握了这些内容，可以使用Salt极大提高运维的效率（事实上，Salt对于开发阶段也能提供很大的帮助，开发和运维的界限正在逐渐模糊）。</p>
+<p><a href="/2013/06/24/salt_intro.html">Salt的介绍</a>中提到了Salt支持变更操作、配置管理、状态监控所需的一些功能，如下图：</p>
+<p><img alt="salt_functions" src="images/2013/salt_usage/salt_functions.png"></p>
+<p>本文详细介绍如何使用这些功能。</p>
+<p>如果想对Salt的功能和使用有一个初步的了解，最好参考官方文档：<a href="http://salt.readthedocs.org/en/latest/topics/tutorials/walkthrough.html">Salt Stack Walkthrough</a>。</p>
+<h1>批量操作(targeting)</h1>
+<p>再回顾一下<a href="http://thinkinside.tk/2013/06/24/salt_intro.html#测试-ref">前文中的例子</a>:</p>
+<p>{% highlight bash %}</p>
+<p># 测试连通性
+ salt '*' test.ping</p>
+<p># 查询主机运行了多长时间
+ sudo salt '*' cmd.run "uptime"</p>
+<p># 批量重启服务
+ salt '*' cmd.run "service httpd restart"</p>
+<p># 让多台机器一起，使用Apache Bench进行压力测试
+ salt '*' cmd.run "ab -n 10 -c 2 http://www.google.com/"</p>
+<p>{% endhighlight %}</p>
+<p>上面的例子都是对多个节点进行批量操作：使用通配符"'*'"对所有注册的节点进行操作。Salt支持多种方式对节点id(minion id)进行匹配。包括：</p>
+<ul>
+<li>默认：<a href="http://en.wikipedia.org/wiki/Glob_(programming)">通配符(globbing)</a></li>
+<li>E：<a href="http://zh.wikipedia.org/zh-hans/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F">正则表达式(Regular Expression)</a></li>
+<li>L：列表</li>
+<li>N: 分组(group)</li>
+<li>C：复合匹配</li>
+</ul>
+<p>先看一下通配符、正则表达式和列表的例子：</p>
+<p>{% highlight bash %}</p>
+<p># 通配符是最常用的匹配方式。Salt使用<a href="http://docs.python.org/2/library/fnmatch.html">linux风格的通配符</a>
+ salt '<em>' test.ping
+ salt '</em>.example.net' test.ping
+ salt '<em>.example.</em>' test.ping
+ salt 'web?.example.net' test.ping
+ salt 'web[1-5]' test.ping
+ salt 'web-[x-z]' test.ping</p>
+<p># 正则表达式可以适应更复杂的情况。使用<a href="http://docs.python.org/2/library/re.html#module-re">python的re模块</a>进行匹配
+ salt -E 'web1-(prod|devel)' test.ping</p>
+<p># 最直接的方式是自己指定多个minion，即列表
+ salt -L 'web1,web2,web3' test.ping</p>
+<p>{% endhighlight %}</p>
+<p><a href="http://docs.saltstack.com/topics/targeting/compound.html">复合匹配(Compound matchers)</a>有点复杂，后续会在其他文章中专门介绍。</p>
+<p>分组匹配见本文的下一节。</p>
+<h1>节点分组（nodegroups）</h1>
+<p>好吧，批量操作确实很爽。但是每次都输入匹配规则有点麻烦，对于复杂的匹配规则更是如此。
+salt的 [nodegroups功能]((http://docs.saltstack.com/topics/targeting/nodegroups.html)可以将常用的匹配规则保存下来（称之为minion的分组）。批量操作是，只需要使用L标记指定要操作的group名字即可。
+groups定义在master的配置文件<code>/etc/salt/master</code>中。</p>
+<p>group 的定义可以使用各种匹配规则，比如：</p>
+<p>{% highlight bash %}</p>
+<p>group1: 'L@foo.domain.com, bar.domain.com,baz.domain.com or bl*.domain.com'
+group2: 'G@os:Debian and foo.domain.com'</p>
+<p>{% endhighlight %}</p>
+<p>同样的，使用复合匹配(Compound matchers)定义group的内容不在本文范围之内。</p>
+<h1>命令编排（execution）</h1>
+<p>Salt生来就有命令编排的功能。据说，Salt最先实现的是远程执行技术，然后才添加的配置管理功能。Salt使用ZeroMQ来处理命令执行的请求和响应消息，安装配置简单，并且性能非常高。</p>
+<p>Salt即可以批量执行命令，也可以单机执行。通常单机执行用于测试：</p>
+<ul>
+<li>单机（立即）执行。 使用<a href="http://docs.saltstack.com/topics/tutorials/quickstart.html">salt-call</a>命令单机执行操作</li>
+<li>批量(立即)执行。最常用的操作。使用salt命令，对匹配的minion节点执行操作</li>
+</ul>
+<p>Salt可以执行的命令也可以分为两种：</p>
+<ul>
+<li>系统命令，使用<code>cmd.run</code>执行</li>
+<li>Salt模块，将常用的命令/批处理封装到内置的Salt模块(module)，使用<code>模块名.功能名</code>的方式执行。</li>
+</ul>
+<p>比如：</p>
+<p>{% highlight bash %}</p>
+<p># 执行系统命令
+ salt '*' cmd.run 'hostname'</p>
+<p># 执行Salt模块
+ salt '*' disk.usage</p>
+<p>{% endhighlight %}</p>
+<p>使用Salt模块的好处是能够做到一致。比如同样是查看磁盘使用情况，<code>salt '*' cmd.run "df -h"</code>只能用于<em>NIX节点，而<code>salt '*' disk.usage</code>对</em>NIX和Windows都适用，并且采用相同结构返回数据，便于批量处理。</p>
+<p>Salt已经内置了<a href="http://docs.saltstack.com/ref/modules/all/index.html">大量的模块</a>，这些模块涵盖了日常管理任务的主要任务，包括：</p>
+<ul>
+<li>通用的管理任务，比如apt, at, cp, cron, disk, extfs, file, grains, hosts, iptables, mount, network, pam, parted, pkg, ps, selinux, shadow, ssh, test等</li>
+<li>针对特定软件的任务，比如apache, cassandra, djangomod, git, mongodb, mysql, nginx, nova, postgres, solr, sqlite3, 和tomcat</li>
+</ul>
+<p>而且，自己开发Salt模块也非常简单，很容易将实际管理操作中的一些经验通过自定义的模块固化下来，并方便分享。</p>
+<p>在开发和调试模块的时候，可以使用<code>test=True</code>参数进行模拟执行(Dry run)。比如：</p>
+<div class="highlight"><pre><span></span>salt &#39;minion1.example.com&#39; state.highstate -v test=True
+</pre></div>
+
+
+<h1>节点信息(grains)</h1>
+<p><a href="http://docs.saltstack.com/topics/targeting/grains.html">grains</a>是Salt内置的一个非常有用的模块。在用salt进行管理客户端的时候或者写state的时候都可以引用grains的变量。</p>
+<p>grains的基本使用举例如下：</p>
+<p>{% highlight bash %}</p>
+<p># 查看grains分类
+ salt '*' grains.ls</p>
+<p># 查看grains所有信息
+ salt '*' grains.items</p>
+<p># 查看grains某个信息
+ salt '*' grains.item osrelease</p>
+<p>{% endhighlight %}</p>
+<h1>配置管理（state)</h1>
+<p>配置管理是Salt中非常重要的内容之一。Salt通过内置的state模块支持配置管理所需的功能。关于这部分内容，官方文档有很详细的描述，可以参考
+<a href="http://salt.readthedocs.org/en/latest/topics/tutorials/states_pt1.html">part 1</a>，
+<a href="http://salt.readthedocs.org/en/latest/topics/tutorials/states_pt2.html">part 2</a>和
+<a href="http://salt.readthedocs.org/en/latest/topics/tutorials/states_pt3.html">part 3</a>。</p>
+<p>Salt中可以定义节点的目标状态，称之为state。state对应配置管理中的配置，可以对其进行标识、变更控制、变更识别、状态报告、跟踪和归档以及审计等一些的管理行为。</p>
+<h2>状态描述</h2>
+<p>Salt使用SLS文件（SaLt State file）描述状态。SLS使用<a href="http://yaml.org/spec/1.1/">YAML</a>格式进行数据序列化，因此简单明了，可读性也很高。</p>
+<h3>基本描述(yaml)</h3>
+<p>下边是一个简单的SLS文件例子:</p>
+<p>{% highlight yaml %}</p>
+<p>apache:
+   pkg:
+     - installed
+   service:
+     - running
+     - require:
+       - pkg: apache</p>
+<p>{% endhighlight %}</p>
+<p>该文件描述一个ID为<code>apache</code>的配置状态：</p>
+<ul>
+<li>软件包（pkg)已经安装</li>
+<li>服务应该处于运行中</li>
+<li>服务的运行依赖于<code>apache</code>软件包的安装</li>
+</ul>
+<p>state文件中的所有YAML变量名来自Salt的state模块。</p>
+<p>Salt内置了大量的state模块，比如cron, cmd, file, group, host, mount, pkg, service, ssh_auth，user等。
+详细清单参考<a href="http://docs.saltstack.com/ref/states/all/index.html">这里</a>。</p>
+<p>还可以开发自己的state模块。</p>
+<h3>扩展描述(jinja)</h3>
+<p>state可以使用<a href="http://jinja.pocoo.org/">jinja</a>模板引擎进行扩展，其语法可以参考<a href="http://jinja.pocoo.org/docs/templates/">这里</a>。</p>
+<p>下面是一个更复杂的例子：</p>
+<p>{% highlight html+jinja %}</p>
+<p>vim:
+  pkg:
+    { % if grains['os_family'] == 'RedHat' % }
+    - name: vim-enhanced
+    { % elif grains['os'] == 'Debian' % }
+    - name: vim-nox
+    { % elif grains['os'] == 'Ubuntu' % }
+    - name: vim-nox
+    { % endif % }
+    - installed</p>
+<p>{% endhighlight %}</p>
+<p>该state增加了判断逻辑：如果是redhard系列的就安装 vim-enhanced，如果系统是Debian或者Ubuntu就安装vim-nox。</p>
+<h3>逻辑关系</h3>
+<p>state之间可以有<a href="http://docs.saltstack.com/ref/states/ordering.html">逻辑关系</a>。常见的关系举例如下：</p>
+<ul>
+<li>require：依赖某个state，在运行此state前，先运行依赖的state，依赖可以有多个</li>
+</ul>
+<p _="%" endhighlight>{% highlight yaml %}
+ httpd:
+   pkg:
+     - installed
+   file.managed:
+     - name: /etc/httpd/conf/httpd.conf
+     - source: salt://httpd/httpd.conf
+     - require:
+       - pkg: httpd</p>
+<ul>
+<li>watch：在某个state变化时运行此模块</li>
+</ul>
+<p _="%" endhighlight>{% highlight yaml %}
+redis:
+  pkg:
+    - latest
+  file.managed:
+    - source: salt://redis/redis.conf
+    - name: /etc/redis.conf
+    - require:
+      - pkg: redis
+    service.running:
+      - enable: True
+      - watch:
+      - file: /etc/redis.conf
+      - pkg: redis</p>
+<p>watch除具备require功能外，还增了关注状态的功能</p>
+<ul>
+<li>order：优先级比require和watch低，有order指定的state比没有order指定的优先级高</li>
+</ul>
+<p _="%" endhighlight>{% highlight yaml %}
+vim:
+  pkg.installed:
+    - order: 1</p>
+<p>想让某个state最后一个运行，可以用last</p>
+<h2>保存状态</h2>
+<p>状态描述文件(SLS)要保存在master节点中，并通过指令分发到minion节点。</p>
+<ol>
+<li>路径设置</li>
+</ol>
+<p>Salt master的配置文件(<code>/etc/salt/master</code>)中可以通过<code>file_roots</code>参数指定状态文件的保存路径。可以为不同的环境（如开发环境、UAT环境、生产环境、灾备环境等）分别指定路径，如下所示：</p>
+<p>{% highlight yaml %}</p>
+<p>file_roots:
+  base:
+    - /srv/salt/
+  dev:
+    - /srv/salt/dev/services
+    - /srv/salt/dev/states
+  prod:
+    - /srv/salt/prod/services
+    - /srv/salt/prod/states</p>
+<p>{% endhighlight %}</p>
+<p>其中,base环境是必须的。</p>
+<ol>
+<li>入口文件</li>
+</ol>
+<p><code>file_roots</code>中必须指定“base”环境的路径，因为该路径中存在Salt state的<a href="http://docs.saltstack.com/ref/states/highstate.html">入口文件: top.sls</a>。</p>
+<p>Top文件建立配置环境、节点和状态配置之间的映射关系。比如一个简单的top.sls文件：</p>
+<p>{% highlight yaml %}</p>
+<p>base:
+  '<em>':
+    - servers
+dev:
+  '</em>nodb*':
+    - mongodb</p>
+<p>{% endhighlight %}</p>
+<p>该文件指定了：
+- 所有节点使用base环境的servers配置
+- <em>nodb</em>节点使用dev环境的mongodb配置</p>
+<p>结合第一部分的file_roots配置，该top配置意味存在以下的配置文件：</p>
+<ul>
+<li>/srv/salt/servers.sls</li>
+<li>/srv/salt/dev/mongodb.sls</li>
+</ul>
+<p>注：这里也可以使用文件夹<code>/srv/salt/servers/</code>和<code>/srv/salt/dev/mongodb/</code>，在文件夹中放置一组状态文件和配置文件，便于建立复杂的状态配置。</p>
+<p>top.sls中的可配置内容非常丰富，具体内容可以参考<a href="http://docs.saltstack.com/ref/states/highstate.html">官方文档</a>。</p>
+<h2>状态生效（State Enforcement）</h2>
+<p>master上对状态进行定义，最终这些状态要传递到minion节点上。在本节的例子中，如果定义好了状态文件<code>/srv/salt/dev/mongodb.sls</code>：</p>
+<p>{% highlight yaml %}</p>
+<p>mongodb:
+  pkg:
+    - installed</p>
+<p>{% endhighlight %}</p>
+<p>可以使用命令<code>salt "minion1" state.highstate -v</code>使得所有针对"minion1"的state生效；</p>
+<p>在执行状态之前先进行测试是个好主意，需要指定参数<code>test=True</code>。比如，<code>salt "minion1" state.highstate -v test=True</code>。</p>
+<p>关于state模块的更多用法，可以参考<a href="https://salt.readthedocs.org/en/latest/ref/modules/all/salt.modules.state.html">state模块说明</a>，或<a href="http://docs.saltstack.com/ref/states/index.html#state-enforcement">官方文档</a>。</p>
+<h2>更多</h2>
+<p>Salt的state模块的功能不仅如此，还可以使用模板和变量，以及定义状态的定时自动生效。</p>
+<h1>小结</h1>
+<p>本文介绍Salt的主要功能和基本使用，包括minion节点的管理，批量操作，以及非常重要的配置管理。
+掌握了这些内容，可以使用Salt极大提高运维的效率（事实上，Salt对于开发阶段也能提供很大的帮助，开发和运维的界限正在逐渐模糊）。</p>
+<p>后续会介绍一些使用案例以及Salt的高级功能。</p>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-06-25.</h6>
+</article>
+
+						</div>
+						<!-- End Main Content -->
+						<!-- Sidebar -->
+						<aside class="medium-3 hide-for-small-only columns">
+							<!-- <div class="panel">
+								<h5>Places</h5>
+								<ul class="side-nav">
+									<li><a href="http://getpelican.com/">Pelican</a></li>
+									<li><a href="http://python.org/">Python.org</a></li>
+									<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+									<li><a href="#">You can modify those links in your config file</a></li>
+								</ul>
+							</div> -->
+
+							<div class="panel">
+								<h5>Tags</h5>
+								<ul class="tag-cloud">
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/python.html" class="tag-4">python</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/pelican.html" class="tag-4">pelican</a></li>
+								</ul>
+							</div>
+
+							<div class="panel">
+								<h5>Monthly Archives</h5>
+								<ul class="side-nav">
+											<li><a href="/posts/2017/02/">2017-02  (1)</a></li>
+											<li><a href="/posts/2015/05/">2015-05  (1)</a></li>
+											<li><a href="/posts/2014/02/">2014-02  (4)</a></li>
+											<li><a href="/posts/2014/01/">2014-01  (9)</a></li>
+											<li><a href="/posts/2013/12/">2013-12  (10)</a></li>
+											<li><a href="/posts/2013/09/">2013-09  (1)</a></li>
+											<li><a href="/posts/2013/08/">2013-08  (2)</a></li>
+											<li><a href="/posts/2013/07/">2013-07  (7)</a></li>
+											<li><a href="/posts/2013/06/">2013-06  (4)</a></li>
+											<li><a href="/posts/2013/05/">2013-05  (6)</a></li>
+											<li><a href="/posts/2013/01/">2013-01  (2)</a></li>
+											<li><a href="/posts/2012/12/">2012-12  (4)</a></li>
+											<li><a href="/posts/2012/11/">2012-11  (3)</a></li>
+											<li><a href="/posts/2012/10/">2012-10  (2)</a></li>
+											<li><a href="/posts/2012/04/">2012-04  (1)</a></li>
+											<li><a href="/posts/2012/03/">2012-03  (1)</a></li>
+											<li><a href="/posts/2012/02/">2012-02  (2)</a></li>
+											<li><a href="/posts/2010/12/">2010-12  (1)</a></li>
+								</ul>
+							</div>
+
+							<div class="panel">
+								<h5>Links</h5>
+								<ul class="side-nav">
+									<li><a href="#">Another social link</a></li>
+									<li><a href="#">You can add links in your config file</a></li>
+								</ul>
+							</div>
+						</aside>
+						<!-- End Sidebar -->
+					</div>
+
+					<!-- Footer -->
+					<footer class="row">
+						<div class="medium-9 small-12">
+							<p class="text-center">Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.</p>
+						</div>
+					</footer>
+					<!-- End Footer -->
+				</section>
+				<a class="exit-off-canvas"></a>
+			</div><!--off-canvas inner-->
+		</div><!--off-canvas wrap-->
+
+		<script src="http://holbrook.github.io/theme/js/jquery.js"></script>
+		<script src="http://holbrook.github.io/theme/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
+</html>

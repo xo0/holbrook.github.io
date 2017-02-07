@@ -85,24 +85,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (1)</a></li>
-									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
-									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
-									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
-									<li><a href="/posts/2013/12/">十二月 2013 (10)</a></li>
-									<li><a href="/posts/2013/09/">九月 2013 (1)</a></li>
-									<li><a href="/posts/2013/08/">八月 2013 (2)</a></li>
-									<li><a href="/posts/2013/07/">七月 2013 (7)</a></li>
-									<li><a href="/posts/2013/06/">六月 2013 (4)</a></li>
-									<li><a href="/posts/2013/05/">五月 2013 (6)</a></li>
-									<li><a href="/posts/2013/01/">一月 2013 (2)</a></li>
-									<li><a href="/posts/2012/12/">十二月 2012 (4)</a></li>
-									<li><a href="/posts/2012/11/">十一月 2012 (3)</a></li>
-									<li><a href="/posts/2012/10/">十月 2012 (2)</a></li>
-									<li><a href="/posts/2012/04/">四月 2012 (1)</a></li>
-									<li><a href="/posts/2012/03/">三月 2012 (1)</a></li>
-									<li><a href="/posts/2012/02/">二月 2012 (2)</a></li>
-									<li><a href="/posts/2010/12/">十二月 2010 (1)</a></li>
+									<li><a href="/posts/2014/01/">一月 2014 (1)</a></li>
 
 						<li><label>Links</label></li>
 							<li><a href="#">Another social link</a></li>
@@ -136,32 +119,43 @@
 					<div class="row">
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
-	<ul>
-		<li><a href="http://holbrook.github.io/tag/web.html">web</a></li>
-		<li><a href="http://holbrook.github.io/tag/osgi.html">OSGi</a></li>
-		<li><a href="http://holbrook.github.io/tag/graph.html">graph</a></li>
-		<li><a href="http://holbrook.github.io/tag/markdown.html">markdown</a></li>
-		<li><a href="http://holbrook.github.io/tag/cli.html">CLI</a></li>
-		<li><a href="http://holbrook.github.io/tag/java.html">java</a></li>
-		<li><a href="http://holbrook.github.io/tag/tu-biao.html">图表</a></li>
-		<li><a href="http://holbrook.github.io/tag/gui.html">GUI</a></li>
-		<li><a href="http://holbrook.github.io/tag/jiao-yi-xi-tong.html">交易系统</a></li>
-		<li><a href="http://holbrook.github.io/tag/cep.html">CEP</a></li>
-		<li><a href="http://holbrook.github.io/tag/gui-ze-yin-qing.html">规则引擎</a></li>
-		<li><a href="http://holbrook.github.io/tag/tong-ji-xue.html">统计学</a></li>
-		<li><a href="http://holbrook.github.io/tag/yun-wei.html">运维</a></li>
-		<li><a href="http://holbrook.github.io/tag/cluster.html">cluster</a></li>
-		<li><a href="http://holbrook.github.io/tag/xiao-xi-zhong-jian-jian.html">消息中间件</a></li>
-		<li><a href="http://holbrook.github.io/tag/blog.html">blog</a></li>
-		<li><a href="http://holbrook.github.io/tag/vim.html">vim</a></li>
-		<li><a href="http://holbrook.github.io/tag/ling-yu-mo-xing.html">领域模型</a></li>
-		<li><a href="http://holbrook.github.io/tag/nosql.html">NoSQL</a></li>
-		<li><a href="http://holbrook.github.io/tag/zhi-shi-guan-li.html">知识管理</a></li>
-		<li><a href="http://holbrook.github.io/tag/ce-shi.html">测试</a></li>
-		<li><a href="http://holbrook.github.io/tag/duo-xian-cheng.html">多线程</a></li>
-		<li><a href="http://holbrook.github.io/tag/python.html">python</a></li>
-		<li><a href="http://holbrook.github.io/tag/pelican.html">pelican</a></li>
-	</ul>
+							<div class="row">
+								<div class="small-12 columns">
+									<h2>Posts Tagged With '图表'</h2>
+								</div>
+							</div>
+
+<article>
+	<h3><a href="http://holbrook.github.io/zai-swtzhong-yong-jfreechartshi-xian-kxian-tu.html">在SWT中用JFreeChart实现K线图</a></h3>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a> on 2014-01-18. Tags: <a href="http://holbrook.github.io/tag/tu-biao.html">图表</a>, <a href="http://holbrook.github.io/tag/gui.html">GUI</a>, <a href="http://holbrook.github.io/tag/java.html">java</a>, </h6>
+	<h1>目标</h1>
+<p>在<a href="/2013/05/03/r_notes_1_what.html">R学习笔记</a>中，展示了这样一张图表：</p>
+<p><img alt="" src="images/2013/r_notes/2.png"></p>
+<p>现在需要在Eclipse e4应用中实现这样的图表。</p>
+<h1>SWT图表组件的选择</h1>
+<p>在RCP/JFace/SWT中，可以选择的图表组件包括：</p>
+<ul>
+<li>Eclipse BIRT</li>
+</ul>
+<p><a href="http://www.eclipse.org/birt/phoenix/">Eclipse BIRT</a>是Eclipse平台下的报表框架。其中的图表组件可以单独使用。
+  由于BIRT依赖于GEF、EMF等Eclipse插件，所以非常重，不适合简单轻量的应用。</p>
+<ul>
+<li>SWT Chart</li>
+</ul>
+<p>从名字就可以看出，<a href="http://www.swtchart.org/">SWT Chart</a>是专为SWT环境开发的报表组件。设计很清晰，使用起来也方便。但是目前支持的图表类型比较少。</p>
+<ul>
+<li>JFreeChart</li>
+</ul>
+<p><a href="http://www.jfree.org/jfreechart/">JFreeChart</a>是Java世界的老牌图表组件，其强大无以言表。JFreeChart支持AWT、Swing等
+GUI环境，也可以生成图片在Web环境中使用。后来又增加了对SWT环境的支持，从此不再需要SWT_AWT的桥接方式。</p>
+<p>综上所述，这里选择JFreeChart作为绘图组件。</p>
+<h1>获取股票数据</h1>
+<p>由于需要的数据量比较大，不能再使用<a href="">前面</a>的模拟数据方法了。这里使用<a href="http://finance.yahoo.com/">雅虎财经 …</a></p>
+		<p class="continue"><a href="http://holbrook.github.io/zai-swtzhong-yong-jfreechartshi-xian-kxian-tu.html">Continue reading &raquo;</a></p>
+</article>
+<hr />
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -209,24 +203,7 @@
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/posts/2017/02/">2017-02  (1)</a></li>
-											<li><a href="/posts/2015/05/">2015-05  (1)</a></li>
-											<li><a href="/posts/2014/02/">2014-02  (4)</a></li>
-											<li><a href="/posts/2014/01/">2014-01  (9)</a></li>
-											<li><a href="/posts/2013/12/">2013-12  (10)</a></li>
-											<li><a href="/posts/2013/09/">2013-09  (1)</a></li>
-											<li><a href="/posts/2013/08/">2013-08  (2)</a></li>
-											<li><a href="/posts/2013/07/">2013-07  (7)</a></li>
-											<li><a href="/posts/2013/06/">2013-06  (4)</a></li>
-											<li><a href="/posts/2013/05/">2013-05  (6)</a></li>
-											<li><a href="/posts/2013/01/">2013-01  (2)</a></li>
-											<li><a href="/posts/2012/12/">2012-12  (4)</a></li>
-											<li><a href="/posts/2012/11/">2012-11  (3)</a></li>
-											<li><a href="/posts/2012/10/">2012-10  (2)</a></li>
-											<li><a href="/posts/2012/04/">2012-04  (1)</a></li>
-											<li><a href="/posts/2012/03/">2012-03  (1)</a></li>
-											<li><a href="/posts/2012/02/">2012-02  (2)</a></li>
-											<li><a href="/posts/2010/12/">2010-12  (1)</a></li>
+											<li><a href="/posts/2014/01/">2014-01  (1)</a></li>
 								</ul>
 							</div>
 

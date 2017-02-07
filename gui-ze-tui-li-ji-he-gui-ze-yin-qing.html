@@ -73,7 +73,7 @@
 							<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
-							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
+							<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
 							<li ><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
 							<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
 
@@ -124,7 +124,7 @@
 								<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
-								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
+								<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
 								<li ><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
 								<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
 						</ul>
@@ -136,32 +136,49 @@
 					<div class="row">
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
-	<ul>
-		<li><a href="http://holbrook.github.io/tag/web.html">web</a></li>
-		<li><a href="http://holbrook.github.io/tag/osgi.html">OSGi</a></li>
-		<li><a href="http://holbrook.github.io/tag/graph.html">graph</a></li>
-		<li><a href="http://holbrook.github.io/tag/markdown.html">markdown</a></li>
-		<li><a href="http://holbrook.github.io/tag/cli.html">CLI</a></li>
-		<li><a href="http://holbrook.github.io/tag/java.html">java</a></li>
-		<li><a href="http://holbrook.github.io/tag/tu-biao.html">图表</a></li>
-		<li><a href="http://holbrook.github.io/tag/gui.html">GUI</a></li>
-		<li><a href="http://holbrook.github.io/tag/jiao-yi-xi-tong.html">交易系统</a></li>
-		<li><a href="http://holbrook.github.io/tag/cep.html">CEP</a></li>
-		<li><a href="http://holbrook.github.io/tag/gui-ze-yin-qing.html">规则引擎</a></li>
-		<li><a href="http://holbrook.github.io/tag/tong-ji-xue.html">统计学</a></li>
-		<li><a href="http://holbrook.github.io/tag/yun-wei.html">运维</a></li>
-		<li><a href="http://holbrook.github.io/tag/cluster.html">cluster</a></li>
-		<li><a href="http://holbrook.github.io/tag/xiao-xi-zhong-jian-jian.html">消息中间件</a></li>
-		<li><a href="http://holbrook.github.io/tag/blog.html">blog</a></li>
-		<li><a href="http://holbrook.github.io/tag/vim.html">vim</a></li>
-		<li><a href="http://holbrook.github.io/tag/ling-yu-mo-xing.html">领域模型</a></li>
-		<li><a href="http://holbrook.github.io/tag/nosql.html">NoSQL</a></li>
-		<li><a href="http://holbrook.github.io/tag/zhi-shi-guan-li.html">知识管理</a></li>
-		<li><a href="http://holbrook.github.io/tag/ce-shi.html">测试</a></li>
-		<li><a href="http://holbrook.github.io/tag/duo-xian-cheng.html">多线程</a></li>
-		<li><a href="http://holbrook.github.io/tag/python.html">python</a></li>
-		<li><a href="http://holbrook.github.io/tag/pelican.html">pelican</a></li>
-	</ul>
+<article>
+	<h2>规则，推理机和规则引擎</h2>
+	<h1>什么是规则</h1>
+<p>在现实生活中，规则无处不在。我们最长接触的是法律、法规和各种制度；对于企业级应用来说，第一步的业务调研中很重要的内容就是了解业务规则。在企业流程再造中，可能还会接触到流程规则。</p>
+<p>在IT技术领域，很多地方也应用了规则，比如路由表，防火墙策略，乃至角色权限控制(RBAC)，或者Web框架中的URL匹配。</p>
+<p>不管是哪种种规则，都规定了一组确定的条件和此条件所产生的结果。</p>
+<p>举一个例子，是纷繁复杂的保险费率计算中的一条规则：</p>
+<ul>
+<li>IF</li>
+<li>汽车是红色</li>
+<li>车是运动型的</li>
+<li>驾驶员是男性</li>
+<li>驾驶员在16-25岁之间</li>
+<li>THEN</li>
+<li>保险费用增加20%</li>
+</ul>
+<p>从这个例子可以看出：</p>
+<ul>
+<li>每条规则都是一组条件决定的一系列结果</li>
+<li>一条规则可能与其他规则共同决定最终结果。比如例子中的规则只产生了增量，还需要与确定基数的规则共同作用才能决定最终的费率</li>
+<li>可能存在条件互相交叉的规则，此时有必要规定规则的优先级</li>
+</ul>
+<h1>推理机与规则引擎</h1>
+<p>规则作为一种知识，其典型运用就是通过实际情况，根据给定的一组规则，得出结论。这个结论可能是某种静态的结果，也可能是需要进行的一组操作。
+这种规则的运用过程叫做推理。如果由程序来处理推理过程，那么这个程序就叫做推理机/推理引擎（Inference Engine）。推理机是专家系统（专家系统是人工智能的一个分支）的核心模块。</p>
+<p><img alt="推理机" src="images/rule-engine/inference_engine.png"></p>
+<p>推理引擎根据知识表示的不同采取的控制策略也是不同的，常见的类型包括基于神经网络、基于案例和基于规则的推理机。其中，基于规则的推理机易于理解、易于获取、易于管理，被广泛采用。这种推理引擎被称为“规则引擎”。</p>
+<p>在规则引擎中，将知识表达为规则（rules），要分析的情况定义为事实（facts）。二者在内存中的存储分别称为Production Memory和Working Memory，如下图：</p>
+<p><img alt="规则引擎" src="images/rule-engine/rule_engine.png"></p>
+<p>rules和facts是规则引擎接受的输入参数，而规则引擎本身包括两个组成部分：Pattern Matcher和Agenda。Pattern Matcher根据facts找到匹配的rules，Agenda管理PatternMatcher挑选出来的规则的执行次序。在外围，还会有一个执行引擎（Execution Engine）负责根据Agenda输出的rules执行具体的操作。</p>
+<p>其中Pattern Matcher是规则引擎负责推理的核心。和人类的思维相对应，规则引擎中也存在两种推理方式：正向推理（Forward-Chaining）和反向推理（Backward-Chaining）。</p>
+<p>正向推理也叫演绎法，由事实驱动，从 一个初始的事实出发，不断地应用规则得出结论。首先在候选队列中选择一条规则作为启用规则进行推理，记录其结论作为下一步推理时的证据。如此重复这个过程，直到再无可用规则可被选用或者求得了所要求的解为止。</p>
+<p>反向推理也叫归纳法，由目标驱动，首先提出某个假设，然后寻找支持该假设的证据，若所需的证据都能找到，说明原假设是正确的；若无论如何都找不到所需要的证据，则说明原假设不成立，此时需要另做新的假设。</p>
+<h1>规则引擎的作用</h1>
+<p>规则引擎可以将规则的定义从代码中分离出来，将推理过程封装到规则引擎内部进行处理，这带来几个好处：</p>
+<ol>
+<li>规则外部化，即有利于规则知识的复用，也可避免改变规则时带来的代码变更问题</li>
+<li>由规则引擎使用某种算法进行推理过程，不需要编写复杂晦涩的逻辑判断代码</li>
+<li>开发人员的不需要过多关注逻辑判断，可以专注于逻辑处理</li>
+</ol>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2012-03-20.</h6>
+</article>
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->

@@ -70,7 +70,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
-							<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
+							<li class="active"><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -121,7 +121,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
-								<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
+								<li class="active"><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -136,32 +136,40 @@
 					<div class="row">
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
-	<ul>
-		<li><a href="http://holbrook.github.io/tag/web.html">web</a></li>
-		<li><a href="http://holbrook.github.io/tag/osgi.html">OSGi</a></li>
-		<li><a href="http://holbrook.github.io/tag/graph.html">graph</a></li>
-		<li><a href="http://holbrook.github.io/tag/markdown.html">markdown</a></li>
-		<li><a href="http://holbrook.github.io/tag/cli.html">CLI</a></li>
-		<li><a href="http://holbrook.github.io/tag/java.html">java</a></li>
-		<li><a href="http://holbrook.github.io/tag/tu-biao.html">图表</a></li>
-		<li><a href="http://holbrook.github.io/tag/gui.html">GUI</a></li>
-		<li><a href="http://holbrook.github.io/tag/jiao-yi-xi-tong.html">交易系统</a></li>
-		<li><a href="http://holbrook.github.io/tag/cep.html">CEP</a></li>
-		<li><a href="http://holbrook.github.io/tag/gui-ze-yin-qing.html">规则引擎</a></li>
-		<li><a href="http://holbrook.github.io/tag/tong-ji-xue.html">统计学</a></li>
-		<li><a href="http://holbrook.github.io/tag/yun-wei.html">运维</a></li>
-		<li><a href="http://holbrook.github.io/tag/cluster.html">cluster</a></li>
-		<li><a href="http://holbrook.github.io/tag/xiao-xi-zhong-jian-jian.html">消息中间件</a></li>
-		<li><a href="http://holbrook.github.io/tag/blog.html">blog</a></li>
-		<li><a href="http://holbrook.github.io/tag/vim.html">vim</a></li>
-		<li><a href="http://holbrook.github.io/tag/ling-yu-mo-xing.html">领域模型</a></li>
-		<li><a href="http://holbrook.github.io/tag/nosql.html">NoSQL</a></li>
-		<li><a href="http://holbrook.github.io/tag/zhi-shi-guan-li.html">知识管理</a></li>
-		<li><a href="http://holbrook.github.io/tag/ce-shi.html">测试</a></li>
-		<li><a href="http://holbrook.github.io/tag/duo-xian-cheng.html">多线程</a></li>
-		<li><a href="http://holbrook.github.io/tag/python.html">python</a></li>
-		<li><a href="http://holbrook.github.io/tag/pelican.html">pelican</a></li>
-	</ul>
+<article>
+	<h2>《统计学》读书笔记(7/17:相关和回归分析)</h2>
+	<h1>7.1 问题的提出</h1>
+<p>统计实践的最终目的：发现变量之间的统计关系并帮助决策</p>
+<p>变量关系的模型：Y=f(x)</p>
+<p>则：</p>
+<ul>
+<li>Y: 因变量</li>
+<li>x: 自变量</li>
+<li>建立f的过程成为回归(regression)</li>
+</ul>
+<p>回归模型的作用：</p>
+<ol>
+<li>对相关性进行定量</li>
+<li>根据自变量预测因变量</li>
+</ol>
+<p>注意：自变量和因变量不一定有因果关系</p>
+<h1>7.2 定量变量的相关</h1>
+<p>确定两个定量变量是否有关系：最简单的办法是散点图</p>
+<p>对于相关程度的度量：</p>
+<ol>
+<li>Pearson相关系数r, 取值区间为 [-1,1]。适合描述线性相关程度</li>
+<li>Kendall 相关系数</li>
+<li>Spearman秩相关系数</li>
+</ol>
+<h1>7.3 定量变量的线性回归分析（略）</h1>
+<h1>7.4 自变量中有定性变量的回归</h1>
+<p>将相关模型表示为分段函数</p>
+<h1>7.5 Logistic回归</h1>
+<p>适合因变量为定性变量的相关性分析</p>
+<h1>7.6 小结</h1>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-08-05.</h6>
+</article>
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
