@@ -1,0 +1,41 @@
+---
+layout: page
+title: 标签
+---
+<div class="row">
+   <div class="col-md-6 col-md-offset-3">
+
+{% assign tags = site.tags %}
+{% for tag in tags %}
+ <span class="site-tag">
+    <a href="#{{ tag[0] }}-ref"
+        style="font-size: {{ tag | last | size  |  times: 16 | plus: 80  }}%">
+            {{ tag[0] | replace:'-', ' ' }} <small>({{ tag | last | size }})</small>
+    </a>
+</span>
+ {% endfor %}
+ </div>
+</div>
+
+
+<div class="row">
+  {% for post in site.posts %}
+{% endfor %}
+
+</div>
+
+<section class="post-archive">
+
+  {% for tag in site.tags %}
+  <div class="row">
+        <h2 class="" id="{{ tag[0] }}-ref">
+          {{ tag[0] | join: "/" }}
+        </h2>
+  </div>
+          {% for post in tag[1] %}
+	  {% include list.html %}
+          {% endfor %}
+
+
+{% endfor %}
+</section>
