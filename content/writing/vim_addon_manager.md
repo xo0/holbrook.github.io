@@ -1,4 +1,4 @@
-title: "重拾vim"
+title: 重拾vim
 date: 2013-05-23
 category: 极限写作
 tags: vim

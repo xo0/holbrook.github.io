@@ -9,6 +9,11 @@ SITEURL = ''
 PATH = 'content'
 
 TIMEZONE = 'Asia/Shanghai'
+DATE_FORMATS = {
+    'en': ('en_US','%a, %d %b %Y'),
+    'cn': ('zh_CN','%Y-%m-%d'),
+}
+
 DEFAULT_DATE_FORMAT = '%Y-%m-%d'
 
 PLUGIN_PATHS = ["plugins"]
@@ -21,9 +26,9 @@ PLUGINS = ["tag_cloud"]
 #使用文件名作为文章或页面的slug（url）
 FILENAME_METADATA = '(?P<slug>.*)'
 
+ARTICLE_URL = '{date:%Y}/{date:%m}/{date:%d}/{slug}.html'
+ARTICLE_SAVE_AS = '{date:%Y}/{date:%m}/{date:%d}/{slug}.html'
 
-#TAG_URL = 'tag/{slug}.html'     #The URL to use for a tag.
-#TAG_SAVE_AS = 'tag/{slug}.html'
 TAG_URL = ('tag/{slug}.html')     #The URL to use for a tag.
 TAG_SAVE_AS = ('tag/{slug}.html')  #The location to save the tag page.
 
