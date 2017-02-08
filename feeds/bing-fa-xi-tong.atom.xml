@@ -100,7 +100,101 @@
 
 
 &lt;h1&gt;FUSE Mediation Router: 企业级Camel&lt;/h1&gt;
-&lt;p&gt;FuseSource提供Camel的经测试、认证并提供支持的企业级版本，称作&lt;a href="http://fusesource.com/products/enterprise-camel/"&gt;FUSE Mediation Router&lt;/a&gt;。&lt;/p&gt;</content></entry><entry><title>CEP中的时间推理(Temporal)</title><link href="http://holbrook.github.io/2013/12/21/2013-12-21-Temporal_of_CEP.html" rel="alternate"></link><published>2013-12-21T00:00:00+08:00</published><updated>2013-12-21T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-21:/2013/12/21/2013-12-21-Temporal_of_CEP.html</id><summary type="html">&lt;p&gt;时间推理(Temporal)是CEP中特有的条件判断(LHS)。本文介绍13种时间推理运算符及其DRL表示&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="/2012/11/06/about_cep.html"&gt;CEP&lt;/a&gt;中的&lt;a href="/2013/12/21/event_in_CEP.html"&gt;事件(Event)&lt;/a&gt;具有两个与时间相关的属性。一个是timestamp，标记事件发生的时间；另一个是duration，标记事件持续的时间间隔。&lt;/p&gt;
+&lt;p&gt;FuseSource提供Camel的经测试、认证并提供支持的企业级版本，称作&lt;a href="http://fusesource.com/products/enterprise-camel/"&gt;FUSE Mediation Router&lt;/a&gt;。&lt;/p&gt;</content></entry><entry><title>从规则引擎到复杂事件处理(CEP)</title><link href="http://holbrook.github.io/2013/12/22/from_rule_to_cep.html" rel="alternate"></link><published>2013-12-22T00:00:00+08:00</published><updated>2013-12-22T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-22:/2013/12/22/from_rule_to_cep.html</id><summary type="html">&lt;p&gt;Drools Fusion既是规则引擎，又可以作为CEP。除了&lt;a href="/2013/12/21/event_in_CEP.html"&gt;事件定义&lt;/a&gt;和&lt;a href="/2013/12/21/Temporal_of_CEP.html"&gt;时间推理&lt;/a&gt;之外，对于引擎本身也会有一些不同的使用。主要体现在会话时钟、流模式、滑动窗口和对事件的内存管理。&lt;/p&gt;</summary><content type="html">&lt;p&gt;Drools Fusion既是规则引擎，又可以作为CEP。除了&lt;a href="/2013/12/21/event_in_CEP.html"&gt;事件定义&lt;/a&gt;和&lt;a href="/2013/12/21/Temporal_of_CEP.html"&gt;时间推理&lt;/a&gt;之外，对于引擎本身也会有一些不同的使用。主要体现在会话时钟、流模式、滑动窗口和对事件的内存管理。&lt;/p&gt;
+&lt;h1&gt;会话时钟&lt;/h1&gt;
+&lt;p&gt;由于事件的时间性，处理事件时需要一个参考时钟。
+这个参考时钟在会话配置(KnowledgeSessionConfiguration)中指定，所以称为会话时钟(Session Clock)。&lt;/p&gt;
+&lt;p&gt;有很多种场景需要对时钟进行控制，比如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;规则测试&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;测试总是需要一个可控的环境,并且当测试包含了带有时间约束的 规则时,不仅需要控制输入规则和事实,而且也需要时间流。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定期(regular)执行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通常,在运行生产规则时,应用程序需要一个实时时 钟,允许引擎对时间的行进立即作出反应。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;特殊环境&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;特殊环境可以对时间的控制有特殊的要求。群集环境可能需要在心 跳中的时钟同步,或 JEE 环境可能需要使用一个应用服务器提供的时钟,等 等。
+- 规则重演或模拟&lt;/p&gt;
+&lt;p&gt;要重演场景或模拟场景也需要应用程序控制时间流。&lt;/p&gt;
+&lt;p&gt;Drools中默认使用基于系统时钟的实时时钟(realtime)，也可以使用能被应用程序控制的伪时钟(pseudo)。设置伪时钟的方法如下：&lt;/p&gt;
+&lt;p&gt;{% highlight java %}
+KnowledgeSessionConfiguration conf = KnowledgeBaseFactory.newKnowledgeSessionConfiguration();
+conf.setOption( ClockTypeOption.get( "pseudo" ) );&lt;/p&gt;
+&lt;p&gt;StatefulKnowledgeSession session =kbase.newStatefulKnowledgeSession( conf, null );&lt;/p&gt;
+&lt;p&gt;SessionPseudoClock clock = session.getSessionClock();&lt;/p&gt;
+&lt;p&gt;// then, while inserting facts, advance the clock as necessary:
+FactHandle handle1 = session.insert( tick1 );
+clock.advanceTime( 10, TimeUnit.SECONDS );
+FactHandle handle2 = session.insert( tick2 );
+clock.advanceTime( 30, TimeUnit.SECONDS );
+FactHandle handle3 = session.insert( tick3 );&lt;/p&gt;
+&lt;p&gt;{% endhighlight %}&lt;/p&gt;
+&lt;h1&gt;流模式&lt;/h1&gt;
+&lt;p&gt;Drools默认运行在云(Cloud)模式下。云模式下没有时间流的概念，引擎知道所有的事实(Fact)和事件(Event)。此时引擎将所有的事实/事件看做是一个无序的云。&lt;/p&gt;
+&lt;p&gt;由于云模式下引擎没有“现在”的概念，尽管事件具有时间戳、期限等元数据，这些数据也仅仅作为事件的属性，
+不代表事件发生的顺序，也不能进行&lt;a href="/2013/12/21/Temporal_of_CEP.html"&gt;时间推理&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;如果需要处理实时/准实时事件(Event)，需要&lt;a href="/2013/12/21/Temporal_of_CEP.html"&gt;时间推理&lt;/a&gt;，Drools必须工作在流(Stream)模式下。
+此时要求每个流中的事件必须按照时间顺序插入。&lt;/p&gt;
+&lt;h2&gt;启用流模式&lt;/h2&gt;
+&lt;p&gt;Drools默认运行在云模式下，可以通过以下方式启用流模式：&lt;/p&gt;
+&lt;p _="%" endhighlight&gt;{% highlight java %}
+KnowledgeBaseConfiguration config =
+KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
+config.setOption( EventProcessingOption.STREAM );&lt;/p&gt;
+&lt;p&gt;也可以使用属性文件定义：&lt;code&gt;drools.eventProcessingMode = stream&lt;/code&gt;。&lt;/p&gt;
+&lt;h2&gt;入口点&lt;/h2&gt;
+&lt;p&gt;Drools定义了工作空间的多个入口点(WorkingMemoryEntryPoint)，每个入口点可以看做是一个事件流，可以将事件通过不同的入口点插入到工作空间中。&lt;/p&gt;
+&lt;p&gt;来自同一个入口点的事件通过时间戳被排序。每个流既可以包含单一类型的事件，也可以包含多种类型的事件。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;声明入口点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;入口点不需要显式声明，在规则中引用的入口点都会在规则编译期间被自动识别和创建。比如：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;rule "authorize withdraw"
+      when
+          WithdrawRequest( $ai : accountId, $am : amount ) from entry-point "ATM Stream"
+          CheckingAccount( accountId == $ai, balance &amp;gt; $am )
+      then
+          // authorize withdraw
+  end&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;规则编译器会识别"ATM Stream"入口点，并在规则库中创建该入口点。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用入口点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;举例如下：&lt;/p&gt;
+&lt;p&gt;{% highlight java %}
+    // create your rulebase and your session as usual
+    StatefulKnowledgeSession session = ...
+    // get a reference to the entry point
+    WorkingMemoryEntryPoint atmStream =
+    session.getWorkingMemoryEntryPoint( "ATM Stream" );
+    // and start inserting your facts into the entry point
+    atmStream.insert( aWithdrawRequest );&lt;/p&gt;
+&lt;p&gt;{% endhighlight %}&lt;/p&gt;
+&lt;p&gt;除了这种手工插入事实的方式之外，Drools还提供了一系列的管道API和适配器，可以将其他流(如JMS、IO流、Socket等)之间接入到入口点上。&lt;/p&gt;
+&lt;h1&gt;滑动窗口&lt;/h1&gt;
+&lt;p&gt;在流模式中，规则的&lt;a href="/2012/12/06/rule_language.html#menuIndex3"&gt;LHS部分&lt;/a&gt;
+可以使用滑动窗口限定只关注一定范围内的事件。这个范围可以是时间或事件的个数，分别成为滑动时间窗口和滑动长度窗口。&lt;/p&gt;
+&lt;p&gt;比如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;StockTick() over window:time( 2m )&lt;/span&gt;
+
+&lt;span class="x"&gt;Number( doubleValue &amp;gt; &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;max&lt;/span&gt;&lt;span class="x"&gt; ) from accumulate(&lt;/span&gt;
+&lt;span class="x"&gt;    SensorReading( &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;temp&lt;/span&gt;&lt;span class="x"&gt; : temperature ) over window:time( 10m ), average( &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;temp&lt;/span&gt;&lt;span class="x"&gt; )&lt;/span&gt;
+&lt;span class="x"&gt;)&lt;/span&gt;
+
+&lt;span class="x"&gt;StockTick( company == &amp;quot;IBM&amp;quot; ) over window:length( 10 )&lt;/span&gt;
+
+&lt;span class="x"&gt;Number( doubleValue &amp;gt; &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;max&lt;/span&gt;&lt;span class="x"&gt; ) from accumulate(&lt;/span&gt;
+&lt;span class="x"&gt;    SensorReading( &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;temp&lt;/span&gt;&lt;span class="x"&gt; : temperature ) over window:length( 100 ), average( &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;temp&lt;/span&gt;&lt;span class="x"&gt; )&lt;/span&gt;
+&lt;span class="x"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;内存管理&lt;/h1&gt;
+&lt;p&gt;在流模式下，引擎自动执行事件的内存管理。对于不可能再被匹配的事件自动释放。&lt;/p&gt;
+&lt;p&gt;引擎会关注事件的@expires中指定的到期时间，并分析规则中隐含的到期时间，进行自动释放。&lt;/p&gt;</content><category term="CEP"></category></entry><entry><title>CEP中的时间推理(Temporal)</title><link href="http://holbrook.github.io/2013/12/21/Temporal_of_CEP.html" rel="alternate"></link><published>2013-12-21T00:00:00+08:00</published><updated>2013-12-21T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-21:/2013/12/21/Temporal_of_CEP.html</id><summary type="html">&lt;p&gt;时间推理(Temporal)是CEP中特有的条件判断(LHS)。本文介绍13种时间推理运算符及其DRL表示&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="/2012/11/06/about_cep.html"&gt;CEP&lt;/a&gt;中的&lt;a href="/2013/12/21/event_in_CEP.html"&gt;事件(Event)&lt;/a&gt;具有两个与时间相关的属性。一个是timestamp，标记事件发生的时间；另一个是duration，标记事件持续的时间间隔。&lt;/p&gt;
 &lt;p&gt;由这两个时间属性，还可以计算出事件结束的事件。&lt;/p&gt;
 &lt;p&gt;时间推理(Temporal)是CEP中特有的条件判断(&lt;a href="/2012/12/06/rule_language.html#menuIndex3"&gt;LHS&lt;/a&gt;)，其判断的要素正是基于事件的上述时间属性。&lt;/p&gt;
 &lt;p&gt;Allen在《An Interval-based Representation of Temporal Knowledge》中描述了13种时间推理的运算符。&lt;/p&gt;
@@ -191,7 +285,66 @@
 &lt;p&gt;```&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;如果不给出参数，则a=+∞&lt;/li&gt;
-&lt;/ul&gt;</content><category term="CEP"></category></entry><entry><title>ZeroMQ简介</title><link href="http://holbrook.github.io/2013/07/03/zeromq_intro.html" rel="alternate"></link><published>2013-07-03T00:00:00+08:00</published><updated>2013-07-03T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-07-03:/2013/07/03/zeromq_intro.html</id><summary type="html">&lt;p&gt;zeroMQ不是TCP，不是socket，也不是消息队列，而是这些的综合体。&lt;/p&gt;</summary><content type="html">&lt;p&gt;zeroMQ不是TCP，不是socket，也不是消息队列，而是这些的综合体。&lt;/p&gt;
+&lt;/ul&gt;</content><category term="CEP"></category></entry><entry><title>CEP中的事件(Event)</title><link href="http://holbrook.github.io/2013/12/21/event_in_CEP.html" rel="alternate"></link><published>2013-12-21T00:00:00+08:00</published><updated>2013-12-21T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-21:/2013/12/21/event_in_CEP.html</id><summary type="html">&lt;p&gt;&lt;a href="/2012/11/06/about_cep.html"&gt;CEP&lt;/a&gt;处理复杂事件。宽泛的事件，是指在应用程序域中的状态的一个有意义改变的一条记录。
+而复杂事件处理关注&lt;a href="/2013/12/21/Temporal_of_CEP.html"&gt;事件之间的相关性&lt;/a&gt;,以及原子事件组合成的复杂(复合)事件。&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="/2012/11/06/about_cep.html"&gt;CEP&lt;/a&gt;处理复杂事件。宽泛的事件，是指在应用程序域中的状态的一个有意义改变的一条记录。
+而复杂事件处理关注&lt;a href="/2013/12/21/Temporal_of_CEP.html"&gt;事件之间的相关性&lt;/a&gt;,以及原子事件组合成的复杂(复合)事件。&lt;/p&gt;
+&lt;p&gt;CEP与规则引擎有类似之处，但CEP中的事件(Event)是一种特殊类型的事实(Fact)。其特殊性在于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不可改变&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;事件记录了已经发生的事情，而“过去”是不可改变的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;强时间约束&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;事件有发生的时点，事件之间通常基于事件发生的时点进行关联。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;被管理的生命周期&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;有效时间窗口之外的事件不再有意义，可以被引擎自动回收。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以通过时间聚合&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;因为所有的事件都有与它们关联的时间戳,所以,对它们可以 定义和使用滑动窗口,允许在一个时间段上根据值的聚合创建规则,
+  例如, 整个 60 分钟的一个事件的值的平均值。&lt;/p&gt;
+&lt;p&gt;复杂事件处理(CEP),本质上是一个事件处理概念,涉及处理多个事件的任务与在事件云内部识别有意义事件的目标。&lt;/p&gt;
+&lt;p&gt;或者说，CEP从事件云/事件流中检测和选择感兴趣的事件, 找出它们之间的关系,根据它们和它们之间的关系推断新的数据。&lt;/p&gt;
+&lt;p&gt;由于CEP与规则引擎类似之处，CEP通常基于规则引擎。比如，Drools Fusion即是规则引擎，也可以作为CEP。&lt;/p&gt;
+&lt;h1&gt;事件声明&lt;/h1&gt;
+&lt;p&gt;DRL中的&lt;a href="/2012/12/06/rule_language.html#menuIndex7"&gt;declare&lt;/a&gt;可以用于声明事件，只需要在declare中增加一条&lt;code&gt;@role(event)&lt;/code&gt;
+的元数据。实际上，declare默认隐含了&lt;code&gt;@role(fact)&lt;/code&gt;的元数据，表面声明的是事实(Fact)。&lt;/p&gt;
+&lt;p&gt;比如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;some.package.StockTick&lt;/span&gt;
+&lt;span class="n"&gt;declare&lt;/span&gt; &lt;span class="n"&gt;StockTick&lt;/span&gt;
+    &lt;span class="nd"&gt;@role&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;end&lt;/span&gt;
+
+&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="err"&gt;或者使用内嵌的事件声明&lt;/span&gt;
+&lt;span class="n"&gt;declare&lt;/span&gt; &lt;span class="n"&gt;StockTick&lt;/span&gt;
+    &lt;span class="nd"&gt;@role&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;datetime&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;java&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;util&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Date&lt;/span&gt;
+    &lt;span class="n"&gt;symbol&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt;
+    &lt;span class="n"&gt;price&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt;
+&lt;span class="n"&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;事件元数据&lt;/h1&gt;
+&lt;p&gt;除了&lt;code&gt;@role&lt;/code&gt;之外，事件还有一些Fact不具备的元数据。可以在declare中指定。&lt;/p&gt;
+&lt;h2&gt;@timestamp&lt;/h2&gt;
+&lt;p&gt;事件默认的时间戳是在insert到工作空间时，由引擎从Session Clock 获取并分配给事件。如果要指定使用事件的某一个属性作为时间戳，
+  可以用&lt;code&gt;@timestamp&lt;/code&gt;元数据指定。比如：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;declare StockTick
+      @role( event )
+      @timestamp( datetime )
+      datetime : java.util.Date
+      symbol : String
+      price : double
+  end&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;@duration&lt;/h2&gt;
+&lt;p&gt;默认事件的期限为0，称为point-in-time 事件。有些事件具有期限性，称为interval-based 事件。&lt;/p&gt;
+&lt;p&gt;要声明事件的期限，通过&lt;code&gt;@duration&lt;/code&gt;指定事件的一个属性，该属性以 &lt;strong&gt;毫秒数&lt;/strong&gt; 记录了事件的期限。&lt;/p&gt;
+&lt;h2&gt;@expires&lt;/h2&gt;
+&lt;p&gt;当引擎运行在流(STREAM)模式时，指定一个过期时间可以用于内存管理。其格式为&lt;code&gt;[#d][#h][#m][#s][#[ms]]&lt;/code&gt;，比如：&lt;code&gt;@expires( 1h35m )&lt;/code&gt;&lt;/p&gt;</content><category term="CEP"></category></entry><entry><title>ZeroMQ简介</title><link href="http://holbrook.github.io/2013/07/03/zeromq_intro.html" rel="alternate"></link><published>2013-07-03T00:00:00+08:00</published><updated>2013-07-03T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-07-03:/2013/07/03/zeromq_intro.html</id><summary type="html">&lt;p&gt;zeroMQ不是TCP，不是socket，也不是消息队列，而是这些的综合体。&lt;/p&gt;</summary><content type="html">&lt;p&gt;zeroMQ不是TCP，不是socket，也不是消息队列，而是这些的综合体。&lt;/p&gt;
 &lt;p&gt;&lt;img alt="ZeroMQ" src="images/2013/zeromq/logo.gif"&gt;&lt;/p&gt;
 &lt;h1&gt;ZeroMQ是什么&lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://www.zeromq.org/"&gt;ZeroMQ&lt;/a&gt;以嵌入式网络编程库的形式实现了一个并行开发框架（concurrency framework），

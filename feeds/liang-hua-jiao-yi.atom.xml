@@ -86,7 +86,7 @@
 &lt;h1&gt;样本的质量&lt;/h1&gt;
 &lt;p&gt;对一个交易策略用不同的时间、不同的交易对象反复多次验证，并根据抽样分布（即各样本的统计量，如均值、中位数、标准差等的分布）的特征，剔除一些不合格的样本，重新对交易策略进行综合评价。&lt;/p&gt;
 &lt;h1&gt;波长稳定性&lt;/h1&gt;
-&lt;p&gt;理论上来说，在各波长下（日线，5分钟线等），信号成功率应该保持稳定。&lt;/p&gt;</content><category term="交易系统"></category></entry><entry><title>使用Oracle Berkeley DB持久化股票行情数据</title><link href="http://holbrook.github.io/2013/12/19/2013-12-19-Berkeley_DB.html" rel="alternate"></link><published>2013-12-19T00:00:00+08:00</published><updated>2013-12-19T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-19:/2013/12/19/2013-12-19-Berkeley_DB.html</id><summary type="html"></summary><content type="html">&lt;h1&gt;关系数据库，数据文件 还是 NoSQL&lt;/h1&gt;
+&lt;p&gt;理论上来说，在各波长下（日线，5分钟线等），信号成功率应该保持稳定。&lt;/p&gt;</content><category term="交易系统"></category></entry><entry><title>使用Oracle Berkeley DB持久化股票行情数据</title><link href="http://holbrook.github.io/2013/12/19/Berkeley_DB.html" rel="alternate"></link><published>2013-12-19T00:00:00+08:00</published><updated>2013-12-19T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-19:/2013/12/19/Berkeley_DB.html</id><summary type="html"></summary><content type="html">&lt;h1&gt;关系数据库，数据文件 还是 NoSQL&lt;/h1&gt;
 &lt;p&gt;股票行情数据具有如下特点：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;数据量大&lt;/li&gt;
@@ -282,7 +282,7 @@ txn.commit();&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;例如, “脏读”可通过LockMode参数实现:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Employer employer = employerByName.get(null, &amp;quot;Gizmo Inc&amp;quot;, LockMode.READ_UNCOMMITTED);
-&lt;/pre&gt;&lt;/div&gt;</content><category term="交易系统"></category></entry><entry><title>交易策略与规则引擎</title><link href="http://holbrook.github.io/2013/12/19/2013-12-19-trading_strategy.html" rel="alternate"></link><published>2013-12-19T00:00:00+08:00</published><updated>2013-12-19T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-19:/2013/12/19/2013-12-19-trading_strategy.html</id><summary type="html"></summary><content type="html">&lt;h1&gt;交易策略的要点&lt;/h1&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="交易系统"></category></entry><entry><title>交易策略与规则引擎</title><link href="http://holbrook.github.io/2013/12/19/trading_strategy.html" rel="alternate"></link><published>2013-12-19T00:00:00+08:00</published><updated>2013-12-19T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-19:/2013/12/19/trading_strategy.html</id><summary type="html"></summary><content type="html">&lt;h1&gt;交易策略的要点&lt;/h1&gt;
 &lt;p&gt;&lt;a href="/2013/12/16/trade_system.html"&gt;前面&lt;/a&gt;提到，交易策略是系统化交易的核心。但是要注意的是，风险管理比交易策略要重要10倍。&lt;/p&gt;
 &lt;p&gt;交易策略的一些要点整理如下：&lt;/p&gt;
 &lt;ul&gt;
@@ -631,7 +631,7 @@ public String strategyName;
 
 
 &lt;p&gt;end
-```&lt;/p&gt;</content><category term="交易系统"></category><category term="规则引擎"></category></entry><entry><title>证券行情数据模型</title><link href="http://holbrook.github.io/2013/12/18/2013-12-18-quotation_model.html" rel="alternate"></link><published>2013-12-18T00:00:00+08:00</published><updated>2013-12-18T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-18:/2013/12/18/2013-12-18-quotation_model.html</id><summary type="html"></summary><content type="html">&lt;h1&gt;行情数据举例&lt;/h1&gt;
+```&lt;/p&gt;</content><category term="交易系统"></category><category term="规则引擎"></category></entry><entry><title>证券行情数据模型</title><link href="http://holbrook.github.io/2013/12/18/quotation_model.html" rel="alternate"></link><published>2013-12-18T00:00:00+08:00</published><updated>2013-12-18T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-18:/2013/12/18/quotation_model.html</id><summary type="html"></summary><content type="html">&lt;h1&gt;行情数据举例&lt;/h1&gt;
 &lt;p&gt;交易系统离不开行情数据。比如，如果访问新浪的股票数据接口：&lt;/p&gt;
 &lt;p&gt;http://hq.sinajs.cn/list=sh600133,sh601005&lt;/p&gt;
 &lt;p&gt;可能会得到如下的数据：&lt;/p&gt;
@@ -697,7 +697,7 @@ public String strategyName;
 &lt;p&gt;&lt;img alt="" src="images/analysis-pattern/multi_source.png"&gt;&lt;/p&gt;
 &lt;h1&gt;价格指标&lt;/h1&gt;
 &lt;p&gt;通过其他场景元素计算获取&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/analysis-pattern/indicator.png"&gt;&lt;/p&gt;</content><category term="交易系统"></category></entry><entry><title>系统交易和交易系统</title><link href="http://holbrook.github.io/2013/12/16/2013-12-16-trade_system.html" rel="alternate"></link><published>2013-12-16T00:00:00+08:00</published><updated>2013-12-16T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-16:/2013/12/16/2013-12-16-trade_system.html</id><summary type="html"></summary><content type="html">&lt;h1&gt;证券价格的随机性&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="" src="images/analysis-pattern/indicator.png"&gt;&lt;/p&gt;</content><category term="交易系统"></category></entry><entry><title>系统交易和交易系统</title><link href="http://holbrook.github.io/2013/12/16/trade_system.html" rel="alternate"></link><published>2013-12-16T00:00:00+08:00</published><updated>2013-12-16T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-16:/2013/12/16/trade_system.html</id><summary type="html"></summary><content type="html">&lt;h1&gt;证券价格的随机性&lt;/h1&gt;
 &lt;p&gt;很多人都从股票投机中赚过钱，但是绝少人能够长期赚钱。甚至这些长期赚钱的人中，绝大部分人的成功次数少于50%。这意味着，证券价格的波动具有随机性。&lt;/p&gt;
 &lt;p&gt;投资理论界认为，价格的波动具备高度随机性；而投资实务界认为只是部分随机性。&lt;/p&gt;
 &lt;p&gt;如果价格的波动具备完全随机性，则意味着数据没有任何记忆性，完全无法通过过去的数据预测未来。就好像抛硬币，即使之前抛出了一千次正面，第一千零一次抛出正、反面的概率依然是各占50%。&lt;/p&gt;

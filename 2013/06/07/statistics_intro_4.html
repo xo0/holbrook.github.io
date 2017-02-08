@@ -71,10 +71,10 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
-							<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
+							<li class="active"><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
-							<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
+							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
 							<li ><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
 							<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
 
@@ -88,19 +88,21 @@
 						<li><label>Monthly Archives</label></li>
 									<li><a href="/posts/2017/02/">二月 2017 (1)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
-									<li><a href="/posts/2014/02/">二月 2014 (3)</a></li>
-									<li><a href="/posts/2014/01/">一月 2014 (2)</a></li>
-									<li><a href="/posts/2013/12/">十二月 2013 (7)</a></li>
-									<li><a href="/posts/2013/07/">七月 2013 (6)</a></li>
-									<li><a href="/posts/2013/06/">六月 2013 (3)</a></li>
-									<li><a href="/posts/2013/05/">五月 2013 (4)</a></li>
+									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
+									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
+									<li><a href="/posts/2013/12/">十二月 2013 (10)</a></li>
+									<li><a href="/posts/2013/09/">九月 2013 (1)</a></li>
+									<li><a href="/posts/2013/08/">八月 2013 (2)</a></li>
+									<li><a href="/posts/2013/07/">七月 2013 (7)</a></li>
+									<li><a href="/posts/2013/06/">六月 2013 (4)</a></li>
+									<li><a href="/posts/2013/05/">五月 2013 (6)</a></li>
 									<li><a href="/posts/2013/01/">一月 2013 (2)</a></li>
-									<li><a href="/posts/2012/12/">十二月 2012 (3)</a></li>
+									<li><a href="/posts/2012/12/">十二月 2012 (4)</a></li>
 									<li><a href="/posts/2012/11/">十一月 2012 (3)</a></li>
-									<li><a href="/posts/2012/10/">十月 2012 (1)</a></li>
+									<li><a href="/posts/2012/10/">十月 2012 (2)</a></li>
 									<li><a href="/posts/2012/04/">四月 2012 (1)</a></li>
 									<li><a href="/posts/2012/03/">三月 2012 (1)</a></li>
-									<li><a href="/posts/2012/02/">二月 2012 (1)</a></li>
+									<li><a href="/posts/2012/02/">二月 2012 (2)</a></li>
 									<li><a href="/posts/2010/12/">十二月 2010 (1)</a></li>
 
 						<li><label>Links</label></li>
@@ -120,10 +122,10 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
-								<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
+								<li class="active"><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
-								<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
+								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
 								<li ><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
 								<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
 						</ul>
@@ -136,74 +138,116 @@
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
 <article>
-	<h2>QQ 餐厅与系统性能模型(续)：如何评价系统的性能</h2>
-	<p>作为QQ餐厅的客人，对餐厅效率的评价就是供餐“快”或者“慢”。但是对于餐厅的经营者，这样简单的考虑问题显然是不够的。</p>
-<p>在<a href="/2012/10/23/whats_performance.html">《QQ餐厅与系统性能模型》</a> 中提到了系统性能的很多指标，而客人感觉“快”或者“慢”仅仅对应其中的 <em>响应时间</em> 这一指标。</p>
-<p>对于QQ餐厅的经营者，应该如何考虑呢？</p>
-<p>在《QQ餐厅与系统性能模型》 中已经描述了客人数量增加时餐厅中发生的一系列“故事”，让我们回顾一下：</p>
-<ul>
-<li>资源利用率与负载</li>
-</ul>
-<p>资源利用率随负载的增加而增加，最终达到100%。此时再增加负载，资源利用率也不会增加。当然，这是对单一资源来说，现实中总是有某种资源最先达到100%而其他的资源仍有空闲。</p>
-<p>资源利用率达到100%时对应的并发用户数称为 <strong>最佳并发用户数</strong> 。</p>
-<ul>
-<li>响应时间与负载</li>
-</ul>
-<p>当并发用户数小于前面定义的“最大并发用户数”时，系统的响应时间是一个固定的值。如果继续增加系统的负载，用户等待时间就会增加从而延长响应时 间。假设用户有一个能容忍的最长等待时间，则负载增加到一定程度时系统对某些请求的响应时间就会超过用户的容忍度。在临界状态的负载称为 最大并发用户数 。</p>
-<p>在最大并发用户数的情况下，系统的吞吐量应该达到最大值。超过最大并发用户数的负载会导致资源浪费在超时的请求上，从而使吞吐量下降。</p>
-<p>（在系统负载略高于最大并发用户数时，可能吞吐量会有一定程度的增加，但此时的吞吐量已经没有意义。所以应该考量最大并发用户数下系统的吞吐量）</p>
-<h1>评价系统的性能</h1>
-<p>从系统建设者的角度来说，系统性能不仅仅是”快“或者”慢“，而是应该有一个全面的描述。比如对于”QQ餐厅系统“，至少要有如下的描述才能评价其性能：</p>
-<ul>
-<li>QQ餐厅的可用资源包括：2位厨师，6名服务员，30套座位</li>
-<li>QQ餐厅最理想情况是同时接待25位客人，此时2名厨师工作量饱和，服务员空闲1人，座位空闲5套</li>
-<li>在25人就餐的情况下，没小时可以卖出8道菜，客人评价就餐时间为10分钟，99%的客人可以在30分钟完成内用餐</li>
-<li>假设 客人能容忍的最长用餐时间为60分钟，则QQ餐厅最多能容纳35人就餐</li>
-<li>在35人就餐的情况下，每小时可以卖出10道菜，客人平均就餐时间为20分钟，99%的客人可以在50分钟内完成用餐</li>
-</ul>
-<h1>提高系统的性能</h1>
-<p>有了前面比较系统的性能描述，就很容易知道如何提高系统的性能。提高系统性能的目标有两个级别：</p>
-<ul>
-<li>在现有的响应时间基础上，提高最佳并发用户数和最大并发用户数。</li>
-</ul>
-<p>这两个指标的现实意义在于：最佳并发用户数要不小于系统的平均负载，最大并发用户数要不小于系统的峰值负载（通常应该达到峰值的1.5–2倍）。</p>
-<p>实现这个级别的目标通常比较容易，主要是增加系统的可用资源。必要时还可以横向扩展（增加服务器数量）。比如对于前面的QQ餐厅性能情况，增加厨师数量就能够有效提高最佳并发数和最大并发数。</p>
-<p>当然，如果能够说服用户增加所能容忍的等待时间，也可以提高最大并发数。</p>
-<ul>
-<li>增加系统整体的响应速度</li>
-</ul>
-<p>用户感受到的整体响应时间=请求传输时间+等待时间+处理时间+响应返回时间。针对这些不同的时间片段可以分别想办法提高速度。比如：</p>
-<p>提高网络带宽可以减小请求传输时间和响应返回时间； 增加处理单元可以减小等待时间； 优化算法可以减小处理时间。</p>
-<p>上面的几种办法实现起来难度都比较大，所以提高系统性能应该优先考虑第一个级别的办法。</p>
-<h1>最精简的性能测试的例子</h1>
-<p>使用Apache ab进行性能测试，访问NginX上面部署的静态页面。在不同并发下测试100万次请求，结果如下：</p>
-<blockquote>
-<p>并发数 失败请求数 每秒完成请求  平均响应时间ms  99%请求响应时间ms 吞吐量(kb/s)</p>
-<p>100 0 13005.97  7.689 10  24132.19</p>
-<p>500 0 24132.19  36.193  232 25632.78</p>
-<p>600 0 13948.85  43.014  296 25881.7</p>
-<p>700 0 14317.11  48.893  232 25632.78</p>
-<p>800 288 14264.21  56.084  2570  26461.06</p>
-<p>1000  390 14752.1 67.787  3013  27363.46</p>
-</blockquote>
-<p>在各轮测试中，Nginx均没有发生故障切换。</p>
-<p>从测试数据中可以得出以下结论：</p>
-<ul>
-<li>当前的性能瓶颈在于网络带宽</li>
-<li>当前系统的最佳并发数为500，最大并发为700</li>
-<li>在最佳并发下，系统每秒可以处理2.4万个请求，平均响应时间36ms，99%的请求在232ms内完成</li>
-<li>在最大并发下，系统每秒可以处理1.4万个请求，平均响应时间48ms，99%的请求在232ms内完成</li>
-</ul>
-<h1>负载均衡器的性能指标</h1>
-<p>对于负载均衡器，需要的性能指标与具体的应用服务器不太一样。更关注如下指标：</p>
-<ul>
-<li>每秒的会话处理数，要区分4层和7层</li>
-<li>最多保持的连接数</li>
-<li>吞吐量，要区分4层和7层</li>
-<li>支持的虚拟服务器的个数</li>
-<li>支持的后端真实服务器的个数</li>
-</ul>
-	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2012-10-29.</h6>
+	<h2>《统计学》读书笔记(4/17:机会的度量：概率和分布)</h2>
+	<p>@<a href="http://book.douban.com/subject/2193810/">豆瓣</a></p>
+<p>概率：0--1之间的一个数目，表示事情发生的可能性/经常性。</p>
+<h1>得到概率的几种途径</h1>
+<ol>
+<li>利用等可能事件</li>
+</ol>
+<p>在机会均等的情况下，概率 = 要计算概率的情况的组合数 / 全部可能情况的组合数</p>
+<ol>
+<li>根据长期相对频率</li>
+</ol>
+<p>如果出现的机会不等，而且未知，可以用观测数据估计概率， 此时 概率 = 观测到的发生次数k / 重复实验的次数n</p>
+<p>只适用于可以重复实验的情况</p>
+<ol>
+<li>主观概率</li>
+</ol>
+<p>不可计算、不可实验的、主要取决于主观因素的一次性事件，其发生的概率称为主观概率。</p>
+<h1>概率的运算</h1>
+<p>事件相当于集合</p>
+<p>概率的运算可以从集合运算的角度考虑</p>
+<ol>
+<li>互补事件的概率</li>
+</ol>
+<p>互补事件/互余事件/对立事件：相当于补集的概念。互补事件的概率之和为1</p>
+<p>优势/赔率：两个互补事件概率的比值</p>
+<ol>
+<li>概率的加法</li>
+</ol>
+<p>两个不可能发生的事件，发生其中之一的概率，等于两个事件概率之和，相当于并集的概念</p>
+<ol>
+<li>
+<p>概率的乘法</p>
+<p>两个事件同时发生的概率，等于两个事件概率之积，相当于交集的概念</p>
+<p>仅当两个事件独立时才成立。如果不独立，需要引入条件概率</p>
+</li>
+</ol>
+<h1>概率的分布</h1>
+<div class="highlight"><pre><span></span>概率-变量值 的函数称为概率分布。可以用图或公式表示。
+
+概率分布与总体/样本空间相关
+</pre></div>
+
+
+<ol>
+<li>离散随机变量的分布</li>
+</ol>
+<p>对于变量的每一个离散的值，对应着一个概率。全部概率的和为1</p>
+<p>这样的关系称为该离散随机变量的概率分布</p>
+<ol>
+<li>二项分布</li>
+</ol>
+<p>最简单的离散分布，变量只能有两个值（如硬币的正反面），两个事件互补</p>
+<p>TODO: 更详细的说明</p>
+<ol>
+<li>多项分布</li>
+</ol>
+<p>二项分布的扩展</p>
+<ol>
+<li>泊松(Poisson)分布</li>
+</ol>
+<p>衡量某种事件在一定期间内出现的次数的概率</p>
+<ol>
+<li>超几何分布</li>
+</ol>
+<p>研究有限总体的不放回抽样（检查样品后不放回，避免重复检查）</p>
+<p>比如抽取样品进行质检</p>
+<p>TODO: 公式和理解</p>
+<ol>
+<li>连续随机变量的分布</li>
+</ol>
+<p>与离散变量的分布相对</p>
+<p>表现为概率密度函数。所有区间概率的积分为1</p>
+<ol>
+<li>正态分布/高斯分布</li>
+</ol>
+<p>一个对称的钟形曲线，最高点对应均值</p>
+<p>TODO: 更多的变量和参数</p>
+<ol>
+<li>x^2-分布/卡方分布</li>
+</ol>
+<p>n个独立标准正态变量的平方和，称为有n个自由度的x^2-分布</p>
+<ol>
+<li>t-分布/学生分布</li>
+</ol>
+<p>正态分布的变换</p>
+<p>TODO：图形</p>
+<ol>
+<li>
+<p>F-分布</p>
+<p>两个独立x^2-分布变量的比，称为F-分布变量</p>
+<p>F-分布有两个自由度</p>
+<p>TODO: 图形</p>
+</li>
+<li>
+<p>均匀分布/矩形分布</p>
+<p>最简单的连续型分布，取值范围是一个区间。形状是一个矩形</p>
+</li>
+<li>
+<p>累积分布函数</p>
+<p>为了便于计算某个区间的概率，对概率函数进行积分后得到的函数</p>
+</li>
+</ol>
+<h1>抽样分布、中心极限定理</h1>
+<p>抽样分布：样本的统计量（均值、中位数、标准差等）随着样本的不同也是随机的，其分布称为抽样分布</p>
+<p>抽样分布的特征可以帮助判断抽样是否合理</p>
+<h1>用小概率事件进行判断</h1>
+<p>如果对某种（统计）结论进行验证，可以抽取一定的样本进行检验，并得出一个概率。</p>
+<p>如果该结果与事先的结论不符，可以根据事先结论计算得到实验结果的概率。</p>
+<p>如果得到实验结果的概率非常低，可以认为结论不正确。</p>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-06-07.</h6>
 </article>
 
 <hr/>
@@ -236,6 +280,14 @@
 		<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2124868"></script>
 		<!-- UY END -->
 	</div>
+
+	<!-- UJian Button BEGIN -->
+	<div class="ujian-hook"></div>
+	<script type="text/javascript">var ujian_config = {num:8,showType:3};</script>
+	<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js"></script>
+	<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+	<!-- UJian Button END -->
+
 </div>
 						</div>
 						<!-- End Main Content -->
@@ -254,26 +306,30 @@
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-2">graph</a></li>
 									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-0">规则引擎</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-0">运维</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
 									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/tong-ji-xue.html" class="tag-4">统计学</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/python.html" class="tag-4">python</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 									<li><a href="/tag/pelican.html" class="tag-4">pelican</a></li>
 									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/java.html" class="tag-2">Java</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/cluster.html" class="tag-1">cluster</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-4">测试</a></li>
-									<li><a href="/tag/blog.html" class="tag-2">blog</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
 								</ul>
 							</div>
 
@@ -282,19 +338,21 @@
 								<ul class="side-nav">
 											<li><a href="/2017/02/">2017-02  (1)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
-											<li><a href="/2014/02/">2014-02  (3)</a></li>
-											<li><a href="/2014/01/">2014-01  (2)</a></li>
-											<li><a href="/2013/12/">2013-12  (7)</a></li>
-											<li><a href="/2013/07/">2013-07  (6)</a></li>
-											<li><a href="/2013/06/">2013-06  (3)</a></li>
-											<li><a href="/2013/05/">2013-05  (4)</a></li>
+											<li><a href="/2014/02/">2014-02  (4)</a></li>
+											<li><a href="/2014/01/">2014-01  (9)</a></li>
+											<li><a href="/2013/12/">2013-12  (10)</a></li>
+											<li><a href="/2013/09/">2013-09  (1)</a></li>
+											<li><a href="/2013/08/">2013-08  (2)</a></li>
+											<li><a href="/2013/07/">2013-07  (7)</a></li>
+											<li><a href="/2013/06/">2013-06  (4)</a></li>
+											<li><a href="/2013/05/">2013-05  (6)</a></li>
 											<li><a href="/2013/01/">2013-01  (2)</a></li>
-											<li><a href="/2012/12/">2012-12  (3)</a></li>
+											<li><a href="/2012/12/">2012-12  (4)</a></li>
 											<li><a href="/2012/11/">2012-11  (3)</a></li>
-											<li><a href="/2012/10/">2012-10  (1)</a></li>
+											<li><a href="/2012/10/">2012-10  (2)</a></li>
 											<li><a href="/2012/04/">2012-04  (1)</a></li>
 											<li><a href="/2012/03/">2012-03  (1)</a></li>
-											<li><a href="/2012/02/">2012-02  (1)</a></li>
+											<li><a href="/2012/02/">2012-02  (2)</a></li>
 											<li><a href="/2010/12/">2010-12  (1)</a></li>
 								</ul>
 							</div>

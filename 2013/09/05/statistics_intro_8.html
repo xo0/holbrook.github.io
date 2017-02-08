@@ -71,9 +71,9 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
-							<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
+							<li class="active"><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
-							<li class="active"><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
+							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
 							<li ><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
 							<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
@@ -88,19 +88,21 @@
 						<li><label>Monthly Archives</label></li>
 									<li><a href="/posts/2017/02/">二月 2017 (1)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
-									<li><a href="/posts/2014/02/">二月 2014 (3)</a></li>
-									<li><a href="/posts/2014/01/">一月 2014 (2)</a></li>
-									<li><a href="/posts/2013/12/">十二月 2013 (7)</a></li>
-									<li><a href="/posts/2013/07/">七月 2013 (6)</a></li>
-									<li><a href="/posts/2013/06/">六月 2013 (3)</a></li>
-									<li><a href="/posts/2013/05/">五月 2013 (4)</a></li>
+									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
+									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
+									<li><a href="/posts/2013/12/">十二月 2013 (10)</a></li>
+									<li><a href="/posts/2013/09/">九月 2013 (1)</a></li>
+									<li><a href="/posts/2013/08/">八月 2013 (2)</a></li>
+									<li><a href="/posts/2013/07/">七月 2013 (7)</a></li>
+									<li><a href="/posts/2013/06/">六月 2013 (4)</a></li>
+									<li><a href="/posts/2013/05/">五月 2013 (6)</a></li>
 									<li><a href="/posts/2013/01/">一月 2013 (2)</a></li>
-									<li><a href="/posts/2012/12/">十二月 2012 (3)</a></li>
+									<li><a href="/posts/2012/12/">十二月 2012 (4)</a></li>
 									<li><a href="/posts/2012/11/">十一月 2012 (3)</a></li>
-									<li><a href="/posts/2012/10/">十月 2012 (1)</a></li>
+									<li><a href="/posts/2012/10/">十月 2012 (2)</a></li>
 									<li><a href="/posts/2012/04/">四月 2012 (1)</a></li>
 									<li><a href="/posts/2012/03/">三月 2012 (1)</a></li>
-									<li><a href="/posts/2012/02/">二月 2012 (1)</a></li>
+									<li><a href="/posts/2012/02/">二月 2012 (2)</a></li>
 									<li><a href="/posts/2010/12/">十二月 2010 (1)</a></li>
 
 						<li><label>Links</label></li>
@@ -120,9 +122,9 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
-								<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
+								<li class="active"><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
-								<li class="active"><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
+								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
 								<li ><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
 								<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
@@ -136,75 +138,49 @@
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
 <article>
-	<h2>证券行情数据模型</h2>
-	<h1>行情数据举例</h1>
-<p>交易系统离不开行情数据。比如，如果访问新浪的股票数据接口：</p>
-<p>http://hq.sinajs.cn/list=sh600133,sh601005</p>
-<p>可能会得到如下的数据：</p>
-<div class="highlight"><pre><span></span><span class="nt">var</span> <span class="nt">hq_str_sh600133</span><span class="o">=</span><span class="s2">&quot;东湖高新,6.01,6.01,5.91,6.07,5.80,5.92,5.93,8947052,52872049,2000,5.92,57704,5.91,191500,5.90,75000,5.89,142800,5.88,19700,5.93,43750,5.94,51600,5.95,17299,5.96,11445,5.97,2013-12-18,13:56:49,00&quot;</span><span class="o">;</span>
-<span class="nt">var</span> <span class="nt">hq_str_sh601005</span><span class="o">=</span><span class="s2">&quot;重庆钢铁,2.50,2.50,2.49,2.51,2.48,2.49,2.50,1505600,3764816,448800,2.49,110600,2.48,132500,2.47,206500,2.46,150300,2.45,95501,2.50,447100,2.51,110600,2.52,110800,2.53,136400,2.54,2013-12-18,13:56:49,00&quot;</span><span class="o">;</span>
-</pre></div>
-
-
-<p>每只股票返回一组数据。以第一组数据为例，各数据项的含义如下：</p>
-<ol>
-<li>东湖高新     股票名称</li>
-<li>6.01         今日开盘价（元）</li>
-<li>6.01         昨日收盘价（元）</li>
-<li>5.91         当前价格（元）</li>
-<li>6.07         今日最高价（元）</li>
-<li>5.80         今日最低价（元）</li>
-<li>5.92         买一（元）</li>
-<li>5.93         卖一（元）</li>
-<li>8947052      成交量（股）</li>
-<li>52872049    成交金额（元）</li>
-<li>2000        买一申报量（股）</li>
-<li>5.92        买一出价（元）</li>
-<li>57704       买二申报量（股）</li>
-<li>5.91        买二出价（元）</li>
-<li>191500      买三申报量（股）</li>
-<li>5.90        买三出价（元）</li>
-<li>75000       买四申报量（股）</li>
-<li>5.89        买四出价（元）</li>
-<li>142800      买五申报量（股）</li>
-<li>5.88        买五出价（元）</li>
-<li>19700       卖一申报量（股）</li>
-<li>5.93        卖一报价（元）</li>
-<li>43750       卖二申报量（股）</li>
-<li>5.94        卖二报价（元）</li>
-<li>51600       卖三申报量（股）</li>
-<li>5.95        卖三报价（元）</li>
-<li>17299       卖四申报量（股）</li>
-<li>5.96        卖四报价（元）</li>
-<li>11445       卖五申报量（股）</li>
-<li>5.97        卖五报价（元）</li>
-<li>2013-12-18  日期</li>
-<li>13:56:49,00 时间</li>
-</ol>
-<h1>价格和成交</h1>
-<p>上述的查询结果包含了两种不同的数据：价格(Price)和成交（Transaction)。</p>
-<p>价格是实时数据，记录了某一时点的当前价格（price）和一系列（上面的例子中是五组）的报价(Quote)数据；其中报价又包含了买方的出价（bid)和卖方的要价（offer），通常可能表示为“0.6712/5”、“0.2345/”，“/0.4352”等。</p>
-<p>成交是阶段数据，记录了某一个时段（上面的例子中是一天）内的开盘价(open)，收盘价（close）,最高价（high），最低价（low）；
-以及该段时间内总的成交量（volume）和成交价格（amount）。由于(开盘价,收盘价,最高价,最低价）是很常用的一种结构，比如画蜡烛图时就会使用这种结构，所以将其封装为一个<a href="/2013/01/01/money.html#menuIndex6">值对象</a>： <strong>OHLC</strong> 。</p>
-<p>不管是价格信息还是成交信息，都关联到某一证券（Security）。</p>
-<p><img alt="" src="images/analysis-pattern/price_and_transaction.png"></p>
-<h1>场景</h1>
-<p>在上面的模型中，价格和成交直接关联到时点。</p>
-<p>实际应用中，经常会需要将一些价格或成交聚合在一起。比如，某个市场、某个板块的所有股票的价格。而这种聚合通常要指定到某个时间点才有意义。</p>
-<p>可以把这种聚合叫做场景（Scenario），场景关联到某一时间点（TimePoint)。一个场景可以有多个场景元素（ScenarioElement），场景元素作为证券和其他因素之间的关联，聚合到与时点相关的场景中。</p>
-<p><img alt="" src="images/analysis-pattern/scenario.png"></p>
-<p>场景提供了一个把所有因素综合在一起的基础，从而可以很方便的在不同的情况之间进行比较。这就有较高的实用性。</p>
-<p>比如，在跨市场套利中，可以针对不同的市场定义不同的场景，并将场景关联到指定的市场，从而在不同市场之间进行比较。</p>
-<p>在比如在交易系统的风险管理中，可以在多种可能的情况之间进行对比分析。</p>
-<p>有了场景和场景元素的定义，则价格和成交都是场景元素的一种实现：</p>
-<p><img alt="" src="images/analysis-pattern/quotation.png"></p>
-<h1>多数据源</h1>
-<p>实际应用中，可能需要从多个数据源获取数据。</p>
-<p><img alt="" src="images/analysis-pattern/multi_source.png"></p>
-<h1>价格指标</h1>
-<p>通过其他场景元素计算获取</p>
-<p><img alt="" src="images/analysis-pattern/indicator.png"></p>
-	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-12-18.</h6>
+	<h2>《统计学》读书笔记(8/17:列连表，x^2检验和对数线性模型)</h2>
+	<h1>列连表数据</h1>
+<p>列连表研究2个或以上的变量，每个变量的取值是离散的，取值的总数量称为该变量的“水平”。</p>
+<p>列连表记录这些变量的各种取值组合出现的次数，以研究这些变量之间的相关性。</p>
+<p>比如：</p>
+<p><img alt="sample-contingency-table" src="images/2013/statistics_intro/sample-contingency-table.png"></p>
+<p>上图记录了一个3x2x2的列连表，三个变量分别为收入（高、中、低）、观点（同意、反对）、性别（男，女）。</p>
+<p>软件处理时通常将列连表处理成二维表格，比如：</p>
+<p><img alt="sample-contingency-table1" src="images/2013/statistics_intro/sample-contingency-table1.png"></p>
+<h1>二维列连表的检验</h1>
+<p>比如以下的二维列连表：</p>
+<p><img alt="sample-contingency-table2" src="images/2013/statistics_intro/sample-contingency-table2.png"></p>
+<p>设定零假设和备选假设：</p>
+<p>H0:观点和收入不相关&lt;=&gt;H1:相关</p>
+<p>检验逻辑:</p>
+<p>检验统计量在零假设下有（大样本时）近似的x<sup>2</sup>分布。</p>
+<p>当该统计量很大时或p-值很小时，就可以拒绝零假设，认为两个变量相关。</p>
+<p>x<sup>2</sup>检验量还可以使用Pearson x^2统计量和似然比（likelihood ratio) x<sup>2</sup> 统计量</p>
+<p>(公式：略）</p>
+<h1>高维列联表和(多项分布)对数线性模型</h1>
+<p>高维列联表的检验和两维类似</p>
+<p>但高维列联表可以构造一个(多项分布)对数线性模型(loglinear model)来进行分析。</p>
+<p>好处：不仅可以直接进行预测，而且可以增加定量变量作为模型自变量的一部分。</p>
+<h2>对数线性模型</h2>
+<p>ln(m<sub>ij</sub>)= a<sub>i</sub> + b<sub>j</sub> + e<sub>ij</sub></p>
+<p>其中：</p>
+<ul>
+<li>a<sub>i</sub>： 行变量的第i个水平对ln(m<sub>ij</sub>)的影响</li>
+<li>b<sub>j</sub>：列变量的第j个水平对ln(m<sub>ij</sub>)的影响</li>
+<li>e<sub>ij</sub>: 随机误差。</li>
+</ul>
+<h2>（多项分布）对数线性模型</h2>
+<p>ln(m<sub>ij</sub>)= a<sub>i</sub> + b<sub>j</sub> + (ab)<sub>ij</sub> + e<sub>ij</sub></p>
+<p>增加了交叉效应(ab)<sub>ij</sub>，代表第一个变量的第i个水平和第二个变量的第j个水平对ln(m<sub>ij</sub>)的共同影响</p>
+<h1>Poisson对数线性模型</h1>
+<p>很多事件符合Poisson分布，需要使用 Poisson对数线性模型进行分析。</p>
+<p>ln(l) = u + a<sub>i</sub> + b<sub>j</sub> + gx</p>
+<p>其中：</p>
+<ul>
+<li>u: 常数项</li>
+</ul>
+<p>……</p>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-09-05.</h6>
 </article>
 
 <hr/>
@@ -237,6 +213,14 @@
 		<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2124868"></script>
 		<!-- UY END -->
 	</div>
+
+	<!-- UJian Button BEGIN -->
+	<div class="ujian-hook"></div>
+	<script type="text/javascript">var ujian_config = {num:8,showType:3};</script>
+	<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js"></script>
+	<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+	<!-- UJian Button END -->
+
 </div>
 						</div>
 						<!-- End Main Content -->
@@ -255,26 +239,30 @@
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-2">graph</a></li>
 									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-0">规则引擎</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-0">运维</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
 									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/tong-ji-xue.html" class="tag-4">统计学</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/python.html" class="tag-4">python</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 									<li><a href="/tag/pelican.html" class="tag-4">pelican</a></li>
 									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/java.html" class="tag-2">Java</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/cluster.html" class="tag-1">cluster</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-4">测试</a></li>
-									<li><a href="/tag/blog.html" class="tag-2">blog</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
 								</ul>
 							</div>
 
@@ -283,19 +271,21 @@
 								<ul class="side-nav">
 											<li><a href="/2017/02/">2017-02  (1)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
-											<li><a href="/2014/02/">2014-02  (3)</a></li>
-											<li><a href="/2014/01/">2014-01  (2)</a></li>
-											<li><a href="/2013/12/">2013-12  (7)</a></li>
-											<li><a href="/2013/07/">2013-07  (6)</a></li>
-											<li><a href="/2013/06/">2013-06  (3)</a></li>
-											<li><a href="/2013/05/">2013-05  (4)</a></li>
+											<li><a href="/2014/02/">2014-02  (4)</a></li>
+											<li><a href="/2014/01/">2014-01  (9)</a></li>
+											<li><a href="/2013/12/">2013-12  (10)</a></li>
+											<li><a href="/2013/09/">2013-09  (1)</a></li>
+											<li><a href="/2013/08/">2013-08  (2)</a></li>
+											<li><a href="/2013/07/">2013-07  (7)</a></li>
+											<li><a href="/2013/06/">2013-06  (4)</a></li>
+											<li><a href="/2013/05/">2013-05  (6)</a></li>
 											<li><a href="/2013/01/">2013-01  (2)</a></li>
-											<li><a href="/2012/12/">2012-12  (3)</a></li>
+											<li><a href="/2012/12/">2012-12  (4)</a></li>
 											<li><a href="/2012/11/">2012-11  (3)</a></li>
-											<li><a href="/2012/10/">2012-10  (1)</a></li>
+											<li><a href="/2012/10/">2012-10  (2)</a></li>
 											<li><a href="/2012/04/">2012-04  (1)</a></li>
 											<li><a href="/2012/03/">2012-03  (1)</a></li>
-											<li><a href="/2012/02/">2012-02  (1)</a></li>
+											<li><a href="/2012/02/">2012-02  (2)</a></li>
 											<li><a href="/2010/12/">2010-12  (1)</a></li>
 								</ul>
 							</div>
