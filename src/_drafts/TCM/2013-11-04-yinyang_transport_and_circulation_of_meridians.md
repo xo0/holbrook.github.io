@@ -2,18 +2,18 @@
 layout: post
 title: 经脉流注次序的推导
 description: "经脉流注次序完全可以从阴阳学说的一些观点中推导出来，无需死记硬背。"
-category: 中医学 
+category: 中医学
 tags: [经络]
 ---
 
 在中医教材中，很容易看到这样的经脉流注次序图：
 
-![](/images/TCM/channels/circulation1.jpg)
+![](images/TCM/channels/circulation1.jpg)
 
 在此基础上，有人制作了这样的图：
 
 
-![](/images/TCM/channels/circulation2.jpg)
+![](images/TCM/channels/circulation2.jpg)
 
 
 这张图很漂亮，信息量也很大，但是更加难以记忆，更适合作为挂图。
@@ -26,21 +26,21 @@ tags: [经络]
 
 阴阳的六个阶段在手足分别对应一条经脉，就形成了十二经脉。
 
-![](/images/TCM/yinyang.jpg)
+![](images/TCM/yinyang.jpg)
 
 如果孤立的看待阴阳变化，可以得到这样一张图：
 
-![](/images/TCM/yinyang_single.jpg)
+![](images/TCM/yinyang_single.jpg)
 
 但是阴阳总是同时存在的，所谓“孤阴不生，独阳不长”。将阴阳放在一起更能代表事物的状态：
 
-![](/images/TCM/yinyang_dead.jpg)
+![](images/TCM/yinyang_dead.jpg)
 
 上图中虽然阴阳都有，但是阴阳永远相等，缺乏变化，仍然是一个死寂的世界。
 
 如果再加上阴阳学说中的“先阴后阳”，整个世界就变得生动起来：
 
-![](/images/TCM/yinyang_lived.jpg)
+![](images/TCM/yinyang_lived.jpg)
 
 有这张图，我们可以得到三个有序的状态对：
 

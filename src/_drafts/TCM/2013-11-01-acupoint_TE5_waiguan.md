@@ -2,7 +2,7 @@
 layout: post
 title: "手少阳三焦经——外关"
 description: ""
-category: 中医学 
+category: 中医学
 tags: [腧穴]
 ---
 
@@ -12,7 +12,7 @@ tags: [腧穴]
 小臂外侧，腕横纹上3寸，与[内关](/2013/11/01/acupoint_PC6_neiguan.html)相对。
 
 
-![](/images/TCM/channels/TE5-7.png)
+![](images/TCM/channels/TE5-7.png)
 
 ## 主治
 
@@ -39,15 +39,15 @@ tags: [腧穴]
 
 ### 图示
 
-![](/images/TCM/topography/forearm_lower.png)
+![](images/TCM/topography/forearm_lower.png)
 
 小臂前段解剖图（右侧)
 
-![](/images/TCM/acupoint/PC6_TE5.png)
+![](images/TCM/acupoint/PC6_TE5.png)
 
 腧穴示意图（右侧）
 
-![](/images/TCM/acupoint/PC6_TE5_model.jpg)
+![](images/TCM/acupoint/PC6_TE5_model.jpg)
 
 腧穴模型图(左侧)
 

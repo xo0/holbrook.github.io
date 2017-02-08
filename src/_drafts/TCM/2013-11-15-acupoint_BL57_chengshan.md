@@ -2,12 +2,12 @@
 layout: post
 title: "足太阳膀胱经——承山"
 description: ""
-category: 中医学 
+category: 中医学
 tags: [腧穴]
 ---
 
 ## 名称由来
- 
+
 别名：鱼腹，肉柱，伤山，鱼肠，肠山，鱼腹山，玉柱，鱼腰穴。
 
 1. 承山。承，承受、承托也。山，土石之大堆也，此指穴内物质为脾土。承山名意指随膀胱经经水下行的脾土微粒在此固化。本穴物质为随膀胱经经水上行而来的脾土与水液的混合物，行至本穴后，水液气化而干燥的脾土微粒则沉降穴周，沉降的脾土堆积如大山之状，故名承山。
@@ -25,7 +25,7 @@ tags: [腧穴]
 
 
 
-![](/images/TCM/channels/SI1-6.png)
+![](images/TCM/channels/SI1-6.png)
 
 ## 主治
 
@@ -44,7 +44,7 @@ tags: [腧穴]
 ### 图示
 
 
-![](/images/TCM/acupoint/SI6_model.jpg)
+![](images/TCM/acupoint/SI6_model.jpg)
 
 腧穴模型图
 
