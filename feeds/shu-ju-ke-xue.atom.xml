@@ -1,93 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>心内求法 - 数据科学</title><link href="http://holbrook.github.io/" rel="alternate"></link><link href="http://holbrook.github.io/feeds/shu-ju-ke-xue.atom.xml" rel="self"></link><id>http://holbrook.github.io/</id><updated>2017-02-05T00:00:00+08:00</updated><entry><title>数据科学的知识体系</title><link href="http://holbrook.github.io/2017/02/05/index.html" rel="alternate"></link><published>2017-02-05T00:00:00+08:00</published><updated>2017-02-05T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2017-02-05:/2017/02/05/index.html</id><summary type="html">&lt;p&gt;数据科学是利用计算机的运算能力对数据进行处理，从数据中提取信息，进而形成“知识”。
-数据科学已经在IT、金融、医学、自动驾驶等领域得到广泛使用。&lt;/p&gt;</summary><content type="html">&lt;p&gt;传统意义上的数据处理是用统计方法实现的，而概率论是统计的基础。
-随着计算机处理能力的增强，一些需要大量运算的数据分析方法得到快速发展。
-机器学习实际上是一个混合体，包括一些在计算机领域中发展的算法，也包括一些传统统计中已经存在，但受限于计算能力的统计方法。
-另一方面，从数据中提炼知识是机器学习的主要目的，这与统计推断密切相关。
-因此，从传统的概率和统计出发，更容易理解机器学习的内涵。&lt;/p&gt;
-&lt;p&gt;数据科学必备的知识包括：&lt;/p&gt;
+然而要实现这一点并不容易。Swami Chandrasekaran在他的&lt;a href="http://nirvacana.com/thoughts/becoming-a-data-scientist/"&gt;《Becoming a Data Scientist》&lt;/a&gt;中，规划了“数据科学家”之路，让我们共勉。&lt;/p&gt;</summary><content type="html">&lt;p&gt;数据科学是利用计算机的运算能力对数据进行处理，从数据中提取信息，进而形成“知识”。
+然而要实现这一点并不容易。Swami Chandrasekaran在他的&lt;a href="http://nirvacana.com/thoughts/becoming-a-data-scientist/"&gt;《Becoming a Data Scientist》&lt;/a&gt;中，规划了“数据科学家”之路，让我们共勉。&lt;/p&gt;
+&lt;p&gt;先上图片：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="MetroMap to Data Scientist" src="/images/long-road-to-data-scientist.png"&gt;&lt;/p&gt;
+&lt;h1&gt;1.基本原理(Fundamentals)&lt;/h1&gt;
+&lt;h2&gt;矩阵和线性代数(Matrices &amp;amp; Linear Algebra)&lt;/h2&gt;
+&lt;h2&gt;数据存储和处理&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;概率论&lt;/li&gt;
-&lt;li&gt;计数&lt;/li&gt;
+&lt;li&gt;哈希函数，二叉树，时间复杂度(Hash Functions,Binary Tree,O(n))&lt;/li&gt;
+&lt;li&gt;关系代数和数据库基础(Relational Algebra,DB Basic)&lt;/li&gt;
+&lt;li&gt;内连接、外连接、交叉连接、θ连接(Inner、Outer、Cross、Theta Join)&lt;/li&gt;
+&lt;li&gt;CAP定理（CAP Theorem）&lt;/li&gt;
+&lt;li&gt;列表数据(tabular data)&lt;/li&gt;
+&lt;li&gt;数据帧和序列(DataFrames &amp;amp; Series)&lt;/li&gt;
+&lt;li&gt;分片(Sharding)&lt;/li&gt;
+&lt;li&gt;联机分析处理（OLAP, Online Analytical Processing）&lt;/li&gt;
+&lt;li&gt;多维数据模型(Multidimensional Data Model)&lt;/li&gt;
+&lt;li&gt;ETL&lt;/li&gt;
+&lt;li&gt;报表，商业智能与分析(Reporting vs BI vs Analytics)&lt;/li&gt;
+&lt;li&gt;JSON &amp;amp; XML&lt;/li&gt;
+&lt;li&gt;NoSQL&lt;/li&gt;
+&lt;li&gt;正则表达式（Regex, Regular Expression）&lt;/li&gt;
+&lt;li&gt;业务背景知识(Vendor Landscape)&lt;/li&gt;
+&lt;li&gt;安装环境(Env Setup)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;2.统计学(Statistics)&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;获取数据(Pick a Dataset)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;UCI Repo: UCI数据库。是加州大学欧文分校(University of CaliforniaIrvine)
+  提出的用于机器学习的数据库，有大量的数据集。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;描述性统计Descriptive Statistics&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;均值，中位数，极差，标准差，方差(（mean, median, range, SD, Var）&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;概率公理&lt;/p&gt;
+&lt;p&gt;探索性数据分析(Exploratory Data Analysis)&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;条件概率&lt;/p&gt;
+&lt;p&gt;直方图(Histograms)&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;随机变量&lt;/p&gt;
+&lt;p&gt;百分位数和极值(Percentiles &amp;amp; Outliers)&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;离散分布&lt;/p&gt;
+&lt;p&gt;概率论(Probability Theory)&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;连续分布&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;联合分布&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;随机变量的函数&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;期望&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;方差与标准差&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;协方差与相关系数&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;矩与矩生成函数&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;中心极限定律&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;数学与编程：“概率论”总结&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;统计基础&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;统计Go, Go, Go&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;数据描述&lt;/li&gt;
-&lt;li&gt;参数估计&lt;/li&gt;
-&lt;li&gt;区间估计&lt;/li&gt;
-&lt;li&gt;假设检验&lt;/li&gt;
-&lt;li&gt;线性回归&lt;/li&gt;
-&lt;li&gt;ANOVA&lt;/li&gt;
-&lt;li&gt;无参估计&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;贝叶斯方法&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;多变量数据&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;线性代数基础&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;PCA分析&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;时序分析&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;信号与频谱&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;机器学习&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;监督学习&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;无监督学习&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;工具&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;python&lt;/li&gt;
-&lt;li&gt;numpy&lt;/li&gt;
-&lt;li&gt;matplotlib&lt;/li&gt;
-&lt;/ul&gt;</content></entry></feed>
+&lt;li&gt;贝叶斯定理(Bayes Theorem)&lt;/li&gt;
+&lt;li&gt;随机变量(Random Variables)&lt;/li&gt;
+&lt;li&gt;累计分布函数（CDF, Cumulative Distribution Function)&lt;/li&gt;
+&lt;li&gt;连续分布(Continuos Distributions)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;正态分布、泊松分布、高斯分布(Normal, Poisson, Gaussian)
+- 偏度(Skewness)
+- 方差分析(ANOVA)
+- 概率密度函数(PDF,Prob Den Fn)
+- 中心极限定理(Central Limit THeorem)
+- 蒙特卡罗方法(Monte Carlo Method)
+- 假设检验(Hypothesis Testing)
+- P值(p-Value)
+- 卡方检验(Chi2 Test)
+- 估计(Estimation)
+- 置信区间(CI,Confid Int)
+- 极大似然估计(MLE)
+- 核密度估计(Kernel Density Estimate)
+- 回归(Regression)
+- 协方差(Convariance)
+- 相关性(Correlation)
+- 皮尔逊相关系数(Pearson Coeff)
+- 因果性(Causation)
+- 最小二乘法(Least2 fit)
+- 欧氏距离(Eculidean Distance)&lt;/p&gt;
+&lt;h1&gt;3.编程(Programming)&lt;/h1&gt;
+&lt;p&gt;//TODO:&lt;/p&gt;
+&lt;h1&gt;4.机器学习&lt;/h1&gt;
+&lt;h1&gt;5.文本挖掘/自然语言处理&lt;/h1&gt;
+&lt;h1&gt;6.可视化&lt;/h1&gt;
+&lt;h1&gt;7.大数据&lt;/h1&gt;
+&lt;h1&gt;8.数据摄取(ingestion)&lt;/h1&gt;
+&lt;h1&gt;9.数据清洗(munging)&lt;/h1&gt;
+&lt;h1&gt;10.工具集&lt;/h1&gt;</content></entry></feed>

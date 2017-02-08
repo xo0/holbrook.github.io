@@ -139,97 +139,88 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h2>数据科学的知识体系</h2>
-	<p>传统意义上的数据处理是用统计方法实现的，而概率论是统计的基础。
-随着计算机处理能力的增强，一些需要大量运算的数据分析方法得到快速发展。
-机器学习实际上是一个混合体，包括一些在计算机领域中发展的算法，也包括一些传统统计中已经存在，但受限于计算能力的统计方法。
-另一方面，从数据中提炼知识是机器学习的主要目的，这与统计推断密切相关。
-因此，从传统的概率和统计出发，更容易理解机器学习的内涵。</p>
-<p>数据科学必备的知识包括：</p>
+	<p>数据科学是利用计算机的运算能力对数据进行处理，从数据中提取信息，进而形成“知识”。
+然而要实现这一点并不容易。Swami Chandrasekaran在他的<a href="http://nirvacana.com/thoughts/becoming-a-data-scientist/">《Becoming a Data Scientist》</a>中，规划了“数据科学家”之路，让我们共勉。</p>
+<p>先上图片：</p>
+<p><img alt="MetroMap to Data Scientist" src="/images/long-road-to-data-scientist.png"></p>
+<h1>1.基本原理(Fundamentals)</h1>
+<h2>矩阵和线性代数(Matrices &amp; Linear Algebra)</h2>
+<h2>数据存储和处理</h2>
 <ul>
-<li>概率论</li>
-<li>计数</li>
-<li>
-<p>概率公理</p>
-</li>
-<li>
-<p>条件概率</p>
-</li>
-<li>
-<p>随机变量</p>
-</li>
-<li>
-<p>离散分布</p>
-</li>
-<li>
-<p>连续分布</p>
-</li>
-<li>
-<p>联合分布</p>
-</li>
-<li>
-<p>随机变量的函数</p>
-</li>
-<li>
-<p>期望</p>
-</li>
-<li>
-<p>方差与标准差</p>
-</li>
-<li>
-<p>协方差与相关系数</p>
-</li>
-<li>
-<p>矩与矩生成函数</p>
-</li>
-<li>
-<p>中心极限定律</p>
-</li>
-<li>
-<p>数学与编程：“概率论”总结</p>
-</li>
-<li>
-<p>统计基础</p>
-</li>
-<li>
-<p>统计Go, Go, Go</p>
-</li>
-<li>数据描述</li>
-<li>参数估计</li>
-<li>区间估计</li>
-<li>假设检验</li>
-<li>线性回归</li>
-<li>ANOVA</li>
-<li>无参估计</li>
-<li>
-<p>贝叶斯方法</p>
-</li>
-<li>
-<p>多变量数据</p>
-</li>
-<li>线性代数基础</li>
-<li>
-<p>PCA分析</p>
-</li>
-<li>
-<p>时序分析</p>
-</li>
-<li>
-<p>信号与频谱</p>
-</li>
-<li>
-<p>机器学习</p>
-</li>
-<li>监督学习</li>
-<li>
-<p>无监督学习</p>
-</li>
-<li>
-<p>工具</p>
-</li>
-<li>python</li>
-<li>numpy</li>
-<li>matplotlib</li>
+<li>哈希函数，二叉树，时间复杂度(Hash Functions,Binary Tree,O(n))</li>
+<li>关系代数和数据库基础(Relational Algebra,DB Basic)</li>
+<li>内连接、外连接、交叉连接、θ连接(Inner、Outer、Cross、Theta Join)</li>
+<li>CAP定理（CAP Theorem）</li>
+<li>列表数据(tabular data)</li>
+<li>数据帧和序列(DataFrames &amp; Series)</li>
+<li>分片(Sharding)</li>
+<li>联机分析处理（OLAP, Online Analytical Processing）</li>
+<li>多维数据模型(Multidimensional Data Model)</li>
+<li>ETL</li>
+<li>报表，商业智能与分析(Reporting vs BI vs Analytics)</li>
+<li>JSON &amp; XML</li>
+<li>NoSQL</li>
+<li>正则表达式（Regex, Regular Expression）</li>
+<li>业务背景知识(Vendor Landscape)</li>
+<li>安装环境(Env Setup)</li>
 </ul>
+<h1>2.统计学(Statistics)</h1>
+<ul>
+<li>获取数据(Pick a Dataset)</li>
+</ul>
+<p>UCI Repo: UCI数据库。是加州大学欧文分校(University of CaliforniaIrvine)
+  提出的用于机器学习的数据库，有大量的数据集。</p>
+<ul>
+<li>描述性统计Descriptive Statistics</li>
+</ul>
+<p>均值，中位数，极差，标准差，方差(（mean, median, range, SD, Var）</p>
+<ul>
+<li>
+<p>探索性数据分析(Exploratory Data Analysis)</p>
+</li>
+<li>
+<p>直方图(Histograms)</p>
+</li>
+<li>
+<p>百分位数和极值(Percentiles &amp; Outliers)</p>
+</li>
+<li>
+<p>概率论(Probability Theory)</p>
+</li>
+<li>贝叶斯定理(Bayes Theorem)</li>
+<li>随机变量(Random Variables)</li>
+<li>累计分布函数（CDF, Cumulative Distribution Function)</li>
+<li>连续分布(Continuos Distributions)</li>
+</ul>
+<p>正态分布、泊松分布、高斯分布(Normal, Poisson, Gaussian)
+- 偏度(Skewness)
+- 方差分析(ANOVA)
+- 概率密度函数(PDF,Prob Den Fn)
+- 中心极限定理(Central Limit THeorem)
+- 蒙特卡罗方法(Monte Carlo Method)
+- 假设检验(Hypothesis Testing)
+- P值(p-Value)
+- 卡方检验(Chi2 Test)
+- 估计(Estimation)
+- 置信区间(CI,Confid Int)
+- 极大似然估计(MLE)
+- 核密度估计(Kernel Density Estimate)
+- 回归(Regression)
+- 协方差(Convariance)
+- 相关性(Correlation)
+- 皮尔逊相关系数(Pearson Coeff)
+- 因果性(Causation)
+- 最小二乘法(Least2 fit)
+- 欧氏距离(Eculidean Distance)</p>
+<h1>3.编程(Programming)</h1>
+<p>//TODO:</p>
+<h1>4.机器学习</h1>
+<h1>5.文本挖掘/自然语言处理</h1>
+<h1>6.可视化</h1>
+<h1>7.大数据</h1>
+<h1>8.数据摄取(ingestion)</h1>
+<h1>9.数据清洗(munging)</h1>
+<h1>10.工具集</h1>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-02-05.</h6>
 </article>
 
@@ -289,30 +280,30 @@
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-4">python</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
 									<li><a href="/tag/pelican.html" class="tag-4">pelican</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
 									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
 									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
 									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
 									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
 									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/python.html" class="tag-4">python</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
 								</ul>
 							</div>
 
