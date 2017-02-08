@@ -1,4 +1,5 @@
 title: 《统计学》读书笔记(4/17:机会的度量：概率和分布)
+date: 2013-06-07
 category: 读书笔记
 tags: 统计学
 summary: 统计学：从数据到结论，ISBN：9787503749964，作者：吴喜之 @[豆瓣](http://book.douban.com/subject/2193810/)

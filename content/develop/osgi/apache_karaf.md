@@ -1,5 +1,5 @@
 title: Apache Karaf：OSGi中间件
-description: ""
+date: 2014-02-20
 category: 软件开发
 tags: OSGi
 

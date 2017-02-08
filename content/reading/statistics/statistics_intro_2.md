@@ -1,4 +1,5 @@
 title: 《统计学》读书笔记(2/17:数据的收集)
+date: 2013-05-19
 category: 读书笔记
 tags: 统计学
 summary: 统计学：从数据到结论，ISBN：9787503749964，作者：吴喜之 @[豆瓣](http://book.douban.com/subject/2193810/)

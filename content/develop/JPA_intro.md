@@ -1,4 +1,5 @@
 title: JPA概要
+date: 2012-12-30
 category: 软件开发
 tags: java
 summary:

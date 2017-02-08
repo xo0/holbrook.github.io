@@ -1,4 +1,5 @@
 title: Python之禅(The Zen of Python)
+date: 2012-02-12
 category: 软件开发
 tags: python
 summary: Python之禅, 中英对照

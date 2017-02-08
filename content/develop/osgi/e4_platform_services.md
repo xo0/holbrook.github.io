@@ -1,4 +1,5 @@
 title: Eclipse e4中的平台服务
+date: 2014-01-12
 category: 软件开发
 tags: OSGi, java, GUI
 

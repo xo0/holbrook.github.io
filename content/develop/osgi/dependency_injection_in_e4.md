@@ -1,4 +1,5 @@
 title: Eclipse e4：从OSGi-DS到依赖注入
+date: 2014-01-12
 category: 软件开发
 tags: OSGi, java, GUI
 summary: e4开始，可以不使用代码或xml进行服务注册和寻找，而使用依赖注入进行装配
