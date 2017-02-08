@@ -2,12 +2,12 @@
 layout: post
 title: "手太阳小肠经——养老(郄穴)"
 description: ""
-category: 中医学 
+category: 中医学
 tags: [腧穴, 郄穴]
 ---
 
 ## 名称由来
- 
+
 养老。养，生养、养护也。老，与少、小相对，为长为尊也。养老名意指本穴的气血物质为同合于头之天部的纯阳之气。本穴物质为阳谷穴传来的炎热之气，出本穴后胀散并化为水湿成份更少的纯阳之气，与天部头之阳气性同，故名养老。
 
 
@@ -19,7 +19,7 @@ tags: [腧穴, 郄穴]
 体表标志定位法：屈腕，掌心向胸。手腕尺侧隆起高骨处向桡侧推，触及骨缝处。
 
 
-![](/images/TCM/channels/SI1-6.png)
+![](images/TCM/channels/SI1-6.png)
 
 ## 主治
 
@@ -38,7 +38,7 @@ tags: [腧穴, 郄穴]
 ### 图示
 
 
-![](/images/TCM/acupoint/SI6_model.jpg)
+![](images/TCM/acupoint/SI6_model.jpg)
 
 腧穴模型图
 

@@ -2,7 +2,7 @@
 layout: post
 title: "足阳明胃经——解溪"
 description: ""
-category: 中医学 
+category: 中医学
 tags: [腧穴]
 ---
 
@@ -15,7 +15,7 @@ tags: [腧穴]
 位于小腿与足背交界处的横纹中央凹陷处，或在足背与小腿交界处的横纹中央凹陷处，当足拇长伸肌腱与趾长伸肌腱之间。
 
 
-![](/images/TCM/channels/ST41-45.png)
+![](images/TCM/channels/ST41-45.png)
 
 ## 主治
 
@@ -31,15 +31,15 @@ tags: [腧穴]
 
 ### 图示
 
-![](/images/TCM/topography/ankle.png)
+![](images/TCM/topography/ankle.png)
 
 踝关节解剖图（左侧）
 
-![](/images/TCM/acupoint/ST41_BL60.png)
+![](images/TCM/acupoint/ST41_BL60.png)
 
 腧穴示意图（右侧）
 
-![](/images/TCM/acupoint/GB40_GB41_K16_BL62_model.jpg)
+![](images/TCM/acupoint/GB40_GB41_K16_BL62_model.jpg)
 
 腧穴模型图(左侧)
 

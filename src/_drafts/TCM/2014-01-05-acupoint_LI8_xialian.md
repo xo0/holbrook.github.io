@@ -2,12 +2,12 @@
 layout: post
 title: "手阳明大肠经——下廉"
 description: ""
-category: 中医学 
+category: 中医学
 tags: [腧穴]
 ---
 
 ## 名称由来
- 
+
 下廉、手下廉。下，与上相对，指下部或下方。廉，廉洁清明也。手，指本穴位于手部。下廉、手下廉名意指本穴下部层次的气血物质洁静清明。本穴物质为温溜穴传来的水湿云系，此水湿云气在本穴所处的位置是在天之天部，而天之下部的气血物质相对处于廉洁清静，故名。
 
 ## 定位及取穴
@@ -17,7 +17,7 @@ tags: [腧穴]
 取穴时，侧腕曲肘，阳溪与曲池连线上，肘横纹下4寸处取穴。
 
 
-![](/images/TCM/channels/LI1-20.png)
+![](images/TCM/channels/LI1-20.png)
 
 ## 主治
 
@@ -37,12 +37,12 @@ tags: [腧穴]
 
 ### 图示
 
-![](/images/TCM/topography/forearm_upper.png)
+![](images/TCM/topography/forearm_upper.png)
 
 小臂上段解剖图（右侧)
 
 
-![](/images/TCM/acupoint/LI8_model.jpg)
+![](images/TCM/acupoint/LI8_model.jpg)
 
 腧穴模型图(左侧)
 

@@ -2,7 +2,7 @@
 layout: post
 title: "足太阴脾经——三阴交"
 description: ""
-category: 中医学 
+category: 中医学
 tags: [腧穴]
 ---
 
@@ -17,7 +17,7 @@ tags: [腧穴]
 小腿内侧下部，内踝骨间高点向上三寸，胫骨内侧一寸（骨下陷处）。
 
 
-![三阴交](/images/TCM/channels/SP6-9.png)
+![三阴交](images/TCM/channels/SP6-9.png)
 
 ## 主治
 
@@ -39,15 +39,15 @@ tags: [腧穴]
 
 ### 图示
 
-![三阴交](/images/TCM/topography/lower_crus.png)
+![三阴交](images/TCM/topography/lower_crus.png)
 
 小腿下段解剖图（左侧）
 
-![三阴交](/images/TCM/acupoint/SP6_GB38.png)
+![三阴交](images/TCM/acupoint/SP6_GB38.png)
 
 腧穴示意图（右侧）
 
-![三阴交](/images/TCM/acupoint/SP6_GB38_model.jpg)
+![三阴交](images/TCM/acupoint/SP6_GB38_model.jpg)
 
 腧穴模型图(左侧)
 

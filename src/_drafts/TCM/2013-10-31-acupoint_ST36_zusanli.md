@@ -2,7 +2,7 @@
 layout: post
 title: "足阳明胃经——足三里(合穴)"
 description: ""
-category: 中医学 
+category: 中医学
 tags: [腧穴, 合穴]
 lastmod: 2013-10-31
 ---
@@ -16,7 +16,7 @@ lastmod: 2013-10-31
 犊鼻（ST35）下三寸，胫骨前嵴外一横指，胫骨前肌中。
 
 
-![](/images/TCM/channels/ST35-40.png)
+![](images/TCM/channels/ST35-40.png)
 
 ## 主治
 
@@ -32,15 +32,15 @@ lastmod: 2013-10-31
 
 ### 图示
 
-![](/images/TCM/topography/upper_crus.png)
+![](images/TCM/topography/upper_crus.png)
 
 小腿上段解剖图（左侧）
 
-![](/images/TCM/acupoint/ST36.png)
+![](images/TCM/acupoint/ST36.png)
 
 腧穴示意图（右侧）
 
-![](/images/TCM/acupoint/ST36_model.jpg)
+![](images/TCM/acupoint/ST36_model.jpg)
 
 腧穴模型图(左侧)
 

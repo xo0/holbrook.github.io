@@ -2,7 +2,7 @@
 layout: post
 title: "任脉——中脘(胃募穴，腑会穴)"
 description: ""
-category: 中医学 
+category: 中医学
 tags: [腧穴, 募穴, 八会穴]
 ---
 
@@ -13,7 +13,7 @@ tags: [腧穴, 募穴, 八会穴]
 腹正中线，脐上4寸。
 
 
-![](/images/TCM/channels/CV3-17.png)
+![](images/TCM/channels/CV3-17.png)
 
 ## 主治
 
@@ -32,11 +32,11 @@ tags: [腧穴, 募穴, 八会穴]
 ### 图示
 
 
-![](/images/TCM/acupoint/CV6_CV12_GV3_GV4.png)
+![](images/TCM/acupoint/CV6_CV12_GV3_GV4.png)
 
 腧穴示意图
 
-![](/images/TCM/acupoint/CV12_KI19_ST21-model.jpg)
+![](images/TCM/acupoint/CV12_KI19_ST21-model.jpg)
 
 腧穴模型图
 

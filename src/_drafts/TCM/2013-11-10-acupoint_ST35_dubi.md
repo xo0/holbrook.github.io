@@ -2,12 +2,12 @@
 layout: post
 title: "足阳明胃经——犊鼻"
 description: ""
-category: 中医学 
+category: 中医学
 tags: [腧穴]
 ---
 
 ## 名称由来
- 
+
 犊鼻穴，又名外膝眼穴。
 
 犊，小牛也，脾土也。鼻，牵牛而行的上扪之处。该穴名意指流过的胃经经水带走本穴的地部脾土微粒。本穴物质为梁丘穴传来的地部经水，为从梁丘穴的高位流落本穴的低位，经水的运行如瀑布跌落，本穴的地部脾土微粒被经水承运而行，如被牵之牛顺从而行，故名。
@@ -20,7 +20,7 @@ tags: [腧穴]
 体表标志定位法：屈膝成直角，髌韧带外侧约一横指处的凹陷中取穴。
 
 
-![](/images/TCM/channels/ST35-40.png)
+![](images/TCM/channels/ST35-40.png)
 
 ## 主治
 
@@ -38,15 +38,15 @@ tags: [腧穴]
 
 ### 图示
 
-![](/images/TCM/topography/knee.png)
+![](images/TCM/topography/knee.png)
 
 膝关节解剖图
 
-![](/images/TCM/acupoint/ST35-BL40-LR8.png)
+![](images/TCM/acupoint/ST35-BL40-LR8.png)
 
 腧穴示意图
 
-![](/images/TCM/acupoint/LR8-KI10-ST35_EXLE4-BL39-BL40-model.jpg)
+![](images/TCM/acupoint/LR8-KI10-ST35_EXLE4-BL39-BL40-model.jpg)
 
 腧穴模型图
 
