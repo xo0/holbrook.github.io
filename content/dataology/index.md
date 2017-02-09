@@ -118,19 +118,25 @@ Summary:
 - 偏差和方差(Bias & Variance)
 - 树分类(Trees & Classification)
 - 分类问题(Classification)
+
   + 分类正确率(Classification Rate)
   + 决策树(Decision Trees)
   + 提升方法(Boosting)
   + 朴素贝叶斯分类(Naive Bayes Classifiers)
   + K近邻分类(K-Nearest Neighbour)
+
 - 回归问题(Regression)
+
   + 逻辑回归(Logistic Regression)
   + 排序(Ranking)
   + 线性回归(Linear Regression)
   + 感知机(Perceptron)
+
 - 聚类问题(Clustering)
+
   + 层次聚类(Hierarchical Clustering)
   + K聚类(K-means Clusterning)
+
 - 神经网络(Neural Networks)
 - 情感分析(Sentiment Analysis)
 - 协同过滤(Collaborative Fitering)
