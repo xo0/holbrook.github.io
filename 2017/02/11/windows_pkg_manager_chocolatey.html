@@ -74,7 +74,7 @@
 							<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
-							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
+							<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
 							<li ><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
 							<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
 
@@ -86,7 +86,24 @@
 
 
 						<li><label>Monthly Archives</label></li>
+									<li><a href="/posts/2017/02/">二月 2017 (2)</a></li>
+									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
+									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
+									<li><a href="/posts/2013/12/">十二月 2013 (10)</a></li>
+									<li><a href="/posts/2013/09/">九月 2013 (1)</a></li>
+									<li><a href="/posts/2013/08/">八月 2013 (2)</a></li>
+									<li><a href="/posts/2013/07/">七月 2013 (7)</a></li>
+									<li><a href="/posts/2013/06/">六月 2013 (4)</a></li>
+									<li><a href="/posts/2013/05/">五月 2013 (6)</a></li>
+									<li><a href="/posts/2013/01/">一月 2013 (2)</a></li>
+									<li><a href="/posts/2012/12/">十二月 2012 (4)</a></li>
+									<li><a href="/posts/2012/11/">十一月 2012 (3)</a></li>
+									<li><a href="/posts/2012/10/">十月 2012 (2)</a></li>
+									<li><a href="/posts/2012/04/">四月 2012 (1)</a></li>
+									<li><a href="/posts/2012/03/">三月 2012 (1)</a></li>
+									<li><a href="/posts/2012/02/">二月 2012 (2)</a></li>
+									<li><a href="/posts/2010/12/">十二月 2010 (1)</a></li>
 
 						<li><label>Links</label></li>
 							<li><a href="#">Another social link</a></li>
@@ -108,7 +125,7 @@
 								<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
-								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
+								<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
 								<li ><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
 								<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
 						</ul>
@@ -120,28 +137,104 @@
 					<div class="row">
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
-<h1>Archives for 一月 2014</h1>
+<article>
+	<h1 style="font-size: 2.75rem;">windows下面的包管理器：Chocolatey</h1>
+	<h1>系统级别的包管理器</h1>
+<p>开发人员一般都喜欢命令行操作，因为效率更高。在管理系统上的软件时，更喜欢用包管理器(<code>package manager</code>)。
+Linux 下面我们已经熟悉了 <code>yum</code>, <code>apt</code>等，在 Mac OS 下面，<code>Homebrew</code> 最终战胜了 <code>MacPort</code>。
+但是有时候我们不得不使用 windows，比如 万德。</p>
+<p>Windows 的软件管理，以前是一些第三方的“软件仓库”，比如 百度软件管理等，但是难保上面没有地雷。
+Windows 10 自己提供了“软件商店”，安全性应该大有改观，但是使用仍很受限制，尤其是开发用的软件很不全。</p>
+<p>我们需要一个 Windows 下面的包管理器。所幸，现在有了 <a href="https://chocolatey.org/">Chocolatey</a>。
+使用包管理的好处不仅仅是提高效率，更重要的是使得 Windows 的自动运维成为可能。
+比如，原来 <code>SaltStack</code>的很多脚本在 Windows 下很难实现，但有了 Chocolatey ，
+用 SaltStack 管理Windows 服务器的难度大大降低。</p>
+<h1>原理</h1>
+<p><a href="https://chocolatey.org/">Chocolatey</a>使用 Nuget 协议，将软件的官方链接封装到描述文件中。
+可以查看 <a href="https://chocolatey.org/packages">软件包列表</a>。</p>
+<h1>安装</h1>
+<p><a href="https://chocolatey.org/">Chocolatey</a>需要的环境为：</p>
+<ul>
+<li>Windows 7+ / Windows Server 2003+</li>
+<li>PowerShell v2+</li>
+<li>.NET Framework 4+</li>
+<li>管理员权限</li>
+</ul>
+<p>以管理员的权限安装。可以使用 <code>PowerShell</code>，但先要修改 PowerShell的执行策略：</p>
+<div class="highlight"><pre><span></span>Set-ExecutionPolicy unrestricted
+iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
+</pre></div>
 
-<dl>
-    <dt>2014-01-30</dt>
-    <dd><a href="http://holbrook.github.io/2014/01/30/cli_design.html">命令行界面设计</a></dd>
-    <dt>2014-01-22</dt>
-    <dd><a href="http://holbrook.github.io/2014/01/22/osgi_blueprint_container.html">Blueprint: OSGi的依赖注入(DI)容器</a></dd>
-    <dt>2014-01-21</dt>
-    <dd><a href="http://holbrook.github.io/2014/01/21/tycho_vs_maven_bundle_plugin.html">OSGi构建工具：Tycho还是Maven-Bundle-Plugin？</a></dd>
-    <dt>2014-01-18</dt>
-    <dd><a href="http://holbrook.github.io/2014/01/18/swt_jfreechart_candlestick.html">在SWT中用JFreeChart实现K线图</a></dd>
-    <dt>2014-01-12</dt>
-    <dd><a href="http://holbrook.github.io/2014/01/12/dependency_injection_in_e4.html">Eclipse e4：从OSGi-DS到依赖注入</a></dd>
-    <dt>2014-01-12</dt>
-    <dd><a href="http://holbrook.github.io/2014/01/12/e4_platform_services.html">Eclipse e4中的平台服务</a></dd>
-    <dt>2014-01-08</dt>
-    <dd><a href="http://holbrook.github.io/2014/01/08/build_osgi_bundle_with_tycho_maven_plugin.html">Tycho：用Maven构建Eclipse Plugin项目</a></dd>
-    <dt>2014-01-07</dt>
-    <dd><a href="http://holbrook.github.io/2014/01/07/eclipse_e4_RCP_quickstart.html">Eclipse e4 概览</a></dd>
-    <dt>2014-01-05</dt>
-    <dd><a href="http://holbrook.github.io/2014/01/05/verificating_a_trade_system.html">交易策略的基本检验</a></dd>
-</dl>
+
+<p>也可以使用<code>Cmd</code> 、<code>CygWin</code>、。。。 等命令行工具：</p>
+<div class="highlight"><pre><span></span><span class="k">@powershell</span> <span class="nt">-NoProfile</span> <span class="nt">-ExecutionPolicy</span> <span class="nt">Bypass</span> <span class="nt">-Command</span> <span class="s2">&quot;iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;))&quot;</span> <span class="o">&amp;&amp;</span> <span class="nt">SET</span> <span class="s2">&quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;</span>
+</pre></div>
+
+
+<h1>使用</h1>
+<p>安装好 Chocolatey 后，可以通过如下命令查看使用帮助：</p>
+<div class="highlight"><pre><span></span>choco help
+</pre></div>
+
+
+<p>Chocolatey 的命令一般提供两种格式，比如安装软件可以使用长格式 <code>choco install</code> , 或者短格式 <code>cinst</code>。
+可以根据需要选择。但我个人更喜欢长格式，因为跟其他包管理器的命令更接近。</p>
+<p>Chocolatey 的常用命令包括：</p>
+<ul>
+<li>搜索: <code>choco search</code>，用 <code>-all</code>参数会显示所有可用的版本</li>
+<li>安装: <code>choco install</code>, 用 <code>-version</code> 参数可以安装指定版本</li>
+<li>查找更新: <code>choco version</code></li>
+<li>升级: <code>choco upgrade</code></li>
+<li>卸载: <code>choco uninstall</code></li>
+</ul>
+<h1>小结</h1>
+<p>使用 Chocolatey 可以管理很多软件包，比如 Linux 下面常用的 ~curl~, 一些小工具如 ~7zip~，
+各种开发环境和工具如 ~git~, ~nodejs~, 甚至一些大型 GUI程序如
+ ~SublimeText3~, ~virtualbox~, ~VisualStudio2013Ultimate~.
+通过命令行的方式，可以将按照操作纳入到 SaltStack 的管理中。</p>
+<p>相信通过深入挖掘，Chocolatey 能够发挥很大的作用。</p>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-02-11.</h6>
+</article>
+
+<hr/>
+<div class="row">
+
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_weixin">微信</a>
+		<a class="jiathis_button_email">邮件</a>
+		<a class="jiathis_button_douban">豆瓣</a>
+		<a class="jiathis_button_hi">百度空间</a>
+		<a class="jiathis_button_xqw">雪球</a>
+		<a class="jiathis_button_tsina">新浪微博</a>
+		<a class="jiathis_button_ishare">一键分享</a>
+		<a href="http://www.jiathis.com/share?uid=2124868" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+		<a class="jiathis_counter_style"></a>
+	</div>
+	<script type="text/javascript">
+	var jiathis_config = {data_track_clickback:'true'};
+	</script>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2124868" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+
+
+	<div class="small-12 columns">
+		<h3>Comments</h3>
+		<!-- UY BEGIN -->
+		<div id="uyan_frame"></div>
+		<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2124868"></script>
+		<!-- UY END -->
+	</div>
+
+	<!-- UJian Button BEGIN -->
+	<div class="ujian-hook"></div>
+	<script type="text/javascript">var ujian_config = {num:8,showType:3};</script>
+	<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js"></script>
+	<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+	<!-- UJian Button END -->
+
+</div>
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -190,7 +283,24 @@
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
+											<li><a href="/2017/02/">2017-02  (2)</a></li>
+											<li><a href="/2015/05/">2015-05  (1)</a></li>
+											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>
+											<li><a href="/2013/12/">2013-12  (10)</a></li>
+											<li><a href="/2013/09/">2013-09  (1)</a></li>
+											<li><a href="/2013/08/">2013-08  (2)</a></li>
+											<li><a href="/2013/07/">2013-07  (7)</a></li>
+											<li><a href="/2013/06/">2013-06  (4)</a></li>
+											<li><a href="/2013/05/">2013-05  (6)</a></li>
+											<li><a href="/2013/01/">2013-01  (2)</a></li>
+											<li><a href="/2012/12/">2012-12  (4)</a></li>
+											<li><a href="/2012/11/">2012-11  (3)</a></li>
+											<li><a href="/2012/10/">2012-10  (2)</a></li>
+											<li><a href="/2012/04/">2012-04  (1)</a></li>
+											<li><a href="/2012/03/">2012-03  (1)</a></li>
+											<li><a href="/2012/02/">2012-02  (2)</a></li>
+											<li><a href="/2010/12/">2010-12  (1)</a></li>
 								</ul>
 							</div>
 

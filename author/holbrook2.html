@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (1)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (2)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,6 +138,35 @@
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
 
+<article>
+	<h3><a href="http://holbrook.github.io/2014/01/18/swt_jfreechart_candlestick.html">在SWT中用JFreeChart实现K线图</a></h3>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a> on 2014-01-18. Tags: <a href="http://holbrook.github.io/tag/tu-biao.html">图表</a>, <a href="http://holbrook.github.io/tag/gui.html">GUI</a>, <a href="http://holbrook.github.io/tag/java.html">java</a>, </h6>
+	<h1>目标</h1>
+<p>在<a href="/2013/05/03/r_notes_1_what.html">R学习笔记</a>中，展示了这样一张图表：</p>
+<p><img alt="" src="images/2013/r_notes/2.png"></p>
+<p>现在需要在Eclipse e4应用中实现这样的图表。</p>
+<h1>SWT图表组件的选择</h1>
+<p>在RCP/JFace/SWT中，可以选择的图表组件包括：</p>
+<ul>
+<li>Eclipse BIRT</li>
+</ul>
+<p><a href="http://www.eclipse.org/birt/phoenix/">Eclipse BIRT</a>是Eclipse平台下的报表框架。其中的图表组件可以单独使用。
+  由于BIRT依赖于GEF、EMF等Eclipse插件，所以非常重，不适合简单轻量的应用。</p>
+<ul>
+<li>SWT Chart</li>
+</ul>
+<p>从名字就可以看出，<a href="http://www.swtchart.org/">SWT Chart</a>是专为SWT环境开发的报表组件。设计很清晰，使用起来也方便。但是目前支持的图表类型比较少。</p>
+<ul>
+<li>JFreeChart</li>
+</ul>
+<p><a href="http://www.jfree.org/jfreechart/">JFreeChart</a>是Java世界的老牌图表组件，其强大无以言表。JFreeChart支持AWT、Swing等
+GUI环境，也可以生成图片在Web环境中使用。后来又增加了对SWT环境的支持，从此不再需要SWT_AWT的桥接方式。</p>
+<p>综上所述，这里选择JFreeChart作为绘图组件。</p>
+<h1>获取股票数据</h1>
+<p>由于需要的数据量比较大，不能再使用<a href="">前面</a>的模拟数据方法了。这里使用<a href="http://finance.yahoo.com/">雅虎财经 …</a></p>
+		<p class="continue"><a href="http://holbrook.github.io/2014/01/18/swt_jfreechart_candlestick.html">Continue reading &raquo;</a></p>
+</article>
+<hr />
 <article>
 	<h3><a href="http://holbrook.github.io/2014/01/12/dependency_injection_in_e4.html">Eclipse e4：从OSGi-DS到依赖注入</a></h3>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a> on 2014-01-12. Tags: <a href="http://holbrook.github.io/tag/osgi.html">OSGi</a>, <a href="http://holbrook.github.io/tag/java.html">java</a>, <a href="http://holbrook.github.io/tag/gui.html">GUI</a>, </h6>
@@ -229,14 +258,6 @@
 		<p class="continue"><a href="http://holbrook.github.io/2013/12/21/event_in_CEP.html">Continue reading &raquo;</a></p>
 </article>
 <hr />
-<article>
-	<h3><a href="http://holbrook.github.io/2013/12/20/drools_API.html">Drools规则引擎API概述</a></h3>
-	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a> on 2013-12-20. Tags: <a href="http://holbrook.github.io/tag/gui-ze-yin-qing.html">规则引擎</a>, </h6>
-	<p>规则引擎中，将知识表达为规则（rules），要分析的情况定义为事实（facts）。二者在内存中的存储分别称为Production Memory和Working Memory。在外围，还会有一个执行引擎（Execution Engine）。
-与此对应，规则引擎API也分成三个部分。在Drools中，分别叫做Knowledge API，Fact API和Execution API。</p>
-		<p class="continue"><a href="http://holbrook.github.io/2013/12/20/drools_API.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
 
 <div class="row">
 	<div class="small-12 columns text-center">
@@ -273,37 +294,38 @@
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/pelican.html" class="tag-4">pelican</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
 									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
 									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/python.html" class="tag-4">python</a></li>
-									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
 									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/pelican.html" class="tag-4">pelican</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/python.html" class="tag-4">python</a></li>
+									<li><a href="/tag/env.html" class="tag-3">env</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
+									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (1)</a></li>
+											<li><a href="/2017/02/">2017-02  (2)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>
