@@ -35,7 +35,7 @@ TAG_SAVE_AS = ('tag/{slug}.html')  #The location to save the tag page.
 
 
 THEME = 'themes/foundation-default-colours'
-
+#THEME = 'themes/pelican-alchemy/alchemy'
 DEFAULT_LANG = 'zh'
 
 # Feed generation is usually not desired when developing
