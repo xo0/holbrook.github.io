@@ -12,7 +12,7 @@ Summary:
 然而要实现这一点并不容易。Swami Chandrasekaran在他的[《Becoming a Data Scientist》](http://nirvacana.com/thoughts/becoming-a-data-scientist/)中，规划了“数据科学家”之路，让我们共勉。
 
 
-先上图片：
+先上图：
 
 ![MetroMap to Data Scientist](/images/long-road-to-data-scientist.png)
 
