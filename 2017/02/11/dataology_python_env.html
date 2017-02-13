@@ -72,10 +72,10 @@
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
 							<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
-							<li class="active"><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
-							<li ><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
+							<li class="active"><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
 							<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
 
 						<li><label>Places</label></li>
@@ -123,10 +123,10 @@
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
 								<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
-								<li class="active"><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
-								<li ><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
+								<li class="active"><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
 								<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
 						</ul>
 					</section>
@@ -138,31 +138,171 @@
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
 <article>
-	<h1 style="font-size: 2.75rem;">在markdown中嵌入graphviz</h1>
-	<h1>在markdown中嵌入graphviz</h1>
-<h2>gravizo.com</h2>
-<div class="highlight"><pre><span></span>![txt](http://g.gravizo.com/g?
-  digraph G {
-    aize =&quot;4,4&quot;;
-    main [shape=box];
-    main -&gt; parse [weight=8];
-    parse -&gt; execute;
-    main -&gt; init [style=dotted];
-    main -&gt; cleanup;
-    execute -&gt; { make_string; printf}
-    init -&gt; make_string;
-    edge [color=red];
-    main -&gt; printf [style=bold,label=&quot;100 times&quot;];
-    make_string [label=&quot;make a string&quot;];
-    node [shape=box,style=filled,color=&quot;.7 .3 1.0&quot;];
-    execute -&gt; compare;
-  }
-)
+	<h1 style="font-size: 2.75rem;">基于Python的数据科学环境</h1>
+	<p>在<a href="http://holbrook.github.io/2017/02/05/index.html">《数据科学的知识体系》</a>中，
+列出了进行数据科学研究所需的知识。但Swami Chandrasekaran明显更喜欢 R 。
+我个人更倾向于 python。至于为什么不是 R 或 Matlib，可以参考
+<a href="https://futures.io/matlab-r-project-python/33828-r-vs-python-vs-matlab-quant-language-war.html">《R vs Python vs matlab: the quant language war》</a>和
+<a href="http://nbviewer.jupyter.org/gist/xccds/d692e468e21aeca6748a">《R和Python的相遇》</a>。</p>
+<p>其实，R 和 python 的边界也不是那么的无法逾越，
+可以使用<a href="https://rpy2.bitbucket.io/">rpy2</a>在 python 中调用 R，
+也可以使用<a href="http://rpython.r-forge.r-project.org/">rPython</a>在 R 中调用 python。</p>
+<h1>运行环境</h1>
+<h2>Anaconda</h2>
+<p>尽管 Linux 和 Mac OS 自带了 python 环境，但还是推荐安装 <a href="https://www.continuum.io">Anaconda</a>。</p>
+<p>Anaconda是python的一个科学计算发行版，包含了众多流行的科学、数学、工程、数据分析的Python包<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup>。</p>
+<p>从官方网站下载有点慢。如果用安装包进行安装，
+可以从<a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">清华大学开源软件镜像站(TUNA)</a>下载。
+但还是建议<a href="http://holbrook.github.io/2017/02/11/windows_pkg_manager_chocolatey.html">使用包管理器</a>
+进行安装，安装后再配置TNUA 上Anaconda 仓库的镜像作为源：</p>
+<div class="highlight"><pre><span></span>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --set show_channel_urls yes
 </pre></div>
 
 
-<h2>abc</h2>
-	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2014-02-17.</h6>
+<p>安装和配置完 Anaconda 后，可以使用其自带的 python 包管理器安装 python 模块，也可以使用常用的 <code>pip</code>。
+但要注意环境的配置。比如：</p>
+<div class="highlight"><pre><span></span>conda --version  # 查看版本
+conda install seaborn #
+</pre></div>
+
+
+<h2>ipython, jupyter 和 spyder</h2>
+<p>python 本身提供了类似shell的交互式解释器，但是并不好用， <a href="http://ipython.org/">IPython</a> 对其进行了极大加强。</p>
+<p>不仅如此，IPython 还提供了 web 方式的 IPython notebook(现在叫做<a href="https://jupyter.org/">jupyter</a>)，
+已经成为Python科学计算界的标准配置。</p>
+<p>如果你喜欢像 R 一样的 GUI 程序，可以使用命令<code>jupyter qtconsole</code>打开一个图形界面。</p>
+<p>如果喜欢 RStudio，可以使用 <code>spyder</code>.</p>
+<p>（附：可能是 IPython notebook 太好用了，
+RStudio 现在也实现了一个类似的 web 交互工具 <a href="https://www.rstudio.com/products/shiny/">shiny</a>)。</p>
+<h2>Cython</h2>
+<p>编译Python程序，提高性能。</p>
+<h1>底层库</h1>
+<h2>NumPy</h2>
+<p>python 中本来提供了 列表(list) 和 数组(array), 可以用来构建矩阵。
+但是这些都是通用数据结构，对于纯数值运算来说效率不高。而且没有矩阵运算的函数。</p>
+<p><a href="http://www.numpy.org/">NumPy</a> 弥补了这些不足，为线性代数的计算提供了极大帮助。
+NumPy 定义了ndarray(N维数组对象，N-dimensional array object)和
+ufunc(通用函数对象, universal function object)，
+分别用于多维数组的存储和处理。
+其中，ufunc 是一种能对数组的每个元素进行操作的函数。</p>
+<p>Numpy是下面很多模块的基础模块。</p>
+<h1>SciPy</h1>
+<p><a href="http://www.scipy.org/">SciPy</a>在NumPy的基础上增加了众多的数学、科学以及工程计算中常用的模块。
+通过不同的子模块，SciPy 提供了线性代数、拟合与优化、差值、数值积分、图像处理、系数矩阵处理等函数。</p>
+<p>Numpy 已经提供了线性代数函数库，但是SciPy的线性代数库比NumPy更加全面。</p>
+<h1>matplotlib</h1>
+<p><a href="http://matplotlib.org/">Matplotlib</a>为 python 提供了一整套和MATLAB类似的绘图函数集。
+Matplotlib 很强大，但是比较底层。高级的python 数据处理模块会调用 Matplotlib 实现更简单的绘图函数，
+比如后面要提到的 Pandas, Seaborn等。
+但是要对图表进行精细的、个性化的调整时，还是需要掌握 Matplotlib 的函数。</p>
+<h1>数据分析和处理</h1>
+<h2>Pandas</h2>
+<p><a href="http://pandas.pydata.org/">Pandas</a>, Python Data Analysis Library,
+是 python 数据分析领域里程碑式的一个重要工具。</p>
+<p>Pandas 基于 NumPy, 实现了<code>Series(序列)</code>和类似 R的 <code>DataFrame</code> 对象，
+提供了大量能使我们快速便捷地处理数据的函数和方法。</p>
+<p>Pandas 很好的解决了数据分析的大部分任务，是所有中等规模数据分析的最有效的工具。</p>
+<h2>Statsmodels</h2>
+<p><a href="http://statsmodels.sourceforge.net/">Statsmodels</a>
+是 Python 中一个强大的统计分析包，包含了描述统计、回归分析、时间序列分析、假设检验等等的功能。</p>
+<p>一些主要的功能包括：</p>
+<ul>
+<li>Linear regression models</li>
+<li>Generalized linear models</li>
+<li>Discrete choice models</li>
+<li>Robust linear models</li>
+<li>Many models and functions for time series analysis</li>
+<li>Nonparametric estimators</li>
+<li>A collection of datasets for examples</li>
+<li>A wide range of statistical tests</li>
+<li>Input-output tools for producing tables in a number of formats (Text, LaTex, HTML) and for reading Stata files -into NumPy and Pandas.</li>
+<li>Plotting functions</li>
+<li>Extensive unit tests to ensure correctness of results</li>
+<li>Many more models and extensions in development</li>
+</ul>
+<h2>SymPy</h2>
+<p><a href="">SymPy</a>是Python的数学符号计算库，目标是成为一个全功能的代数系统。
+SymPy支持符号计算、高精度计算、模式匹配、绘图、解方程、微积分、组合数学、离散数学、几何学、概率与统计、物理学等方面的功能。</p>
+<h1>可视化</h1>
+<h2>Seaborn</h2>
+<p><a href="http://seaborn.pydata.org/">Seaborn</a>
+是基于 Matplotlib 的高级统计绘图工具（类似 Pandas 与 NumPy 的关系），其功能类似 R 中的 lattice。
+Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。</p>
+<h2>Bokeh</h2>
+<p><a href="http://bokeh.pydata.org/en/latest/docs/user_guide.html">Bokeh(Bokeh.js)</a>
+是一个 Python 交互式可视化库，支持现代化 Web 浏览器，提供非常完美的展示功能。</p>
+<p>Bokeh 的目标是使用 D3.js 样式提供优雅，简洁新颖的图形化风格，同时提供大型数据集的高性能交互功能。</p>
+<p>Boken 可以快速的创建交互式的绘图，仪表盘和数据应用。</p>
+<h2>TVTK</h2>
+<p>数据的三维可视化</p>
+<h2>VPython</h2>
+<p>制作3D演示动画</p>
+<h2>OpenCV</h2>
+<p>图像处理和计算机视觉</p>
+<h1>机器学习</h1>
+<h2>scikit-learn</h2>
+<p>For machine learning and artificial intelligence algorithms</p>
+<h2>PyTorch</h2>
+<p>深度学习</p>
+<h1>Enthought Tool Suite</h1>
+<p><a href="http://code.enthought.com/projects/index.php">Enthought Tool Suite</a>是
+<a href="http://code.enthought.com/">Enthought公司</a>开发的开源科学计算一套应用程序开发包。
+包含了大量的工具。主要的工具包括：</p>
+<h2>Traits</h2>
+<p>Explicit type declarations; validation; initialization; delegation; notification; visualization.</p>
+<h2>TraitsUI</h2>
+<p>A UI layer that supports the visualization features of Traits. Implementations using wxWidgets and Qt are provided by the TraitsBackendWX and TraitsBackendQt projects.</p>
+<h2>Chaco</h2>
+<p>交互式 2D 图表</p>
+<h2>Mayavi</h2>
+<p>交互式 3D 图表</p>
+<h2>其他</h2>
+<ul>
+<li>Enaml
+  Library for creating professional quality user interfaces combining a domain specific declarative language with a constraints based layout.</li>
+<li>Envisage
+  Python-based framework for building extensible (plugin-based) applications.</li>
+<li>Pyface
+  toolkit-independent GUI abstraction layer, which is used to support the "visualization" features of the Traits package.</li>
+<li>BlockCanvas
+  Visual environment for creating simulation experiments, where function and data are separated using CodeTools.</li>
+<li>GraphCanvas
+  library for interacting with visualizations of complex graphs.</li>
+<li>Enable
+  Object drawing library and PDF vector drawing engine.</li>
+<li>SciMath
+  Convenience libraries for math, interpolation, and units</li>
+<li>Casuarius
+  supports constraints based layout in Enaml by wrapping Cassowary.</li>
+<li>AppTools
+  General tools for ETS application development: scripting, logging, preferences, ...</li>
+<li>EnCore
+  Core tools for application development (only depends on the Standard library).</li>
+<li>and more...</li>
+</ul>
+<h1>参考资料</h1>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn-1">
+<p><a href="http://www.cnblogs.com/super-d2/p/4725818.html">Python科学计算发行版—Anaconda</a>&#160;<a class="footnote-backref" href="#fnref-1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn-2">
+<p><a href="http://hyry.dip.jp/tech/book/page/scipy/index.html">用Python做科学计算</a>&#160;<a class="footnote-backref" href="#fnref-2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn-3">
+<p><a href="http://hyry.dip.jp/tech/book/page/scipynew/index.html">用Python做科学计算(第二版)</a>&#160;<a class="footnote-backref" href="#fnref-3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn-4">
+<p><a href="https://www.analyticsvidhya.com/learning-paths-data-science-business-analytics-business-intelligence-big-data/learning-path-data-science-python/">Comprehensive learning path – Data Science in Python</a>&#160;<a class="footnote-backref" href="#fnref-4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn-5">
+<p><a href="http://aliquote.org/memos/2011/02/07/python-for-statistical-computing">Python for statistical computing</a>&#160;<a class="footnote-backref" href="#fnref-5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-02-11.</h6>
 </article>
 
 <hr/>
