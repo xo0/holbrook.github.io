@@ -15,8 +15,14 @@ Summary:
 [《R vs Python vs matlab: the quant language war》](https://futures.io/matlab-r-project-python/33828-r-vs-python-vs-matlab-quant-language-war.html)和
 [《R和Python的相遇》](http://nbviewer.jupyter.org/gist/xccds/d692e468e21aeca6748a)。
 
+其实，R 和 python 的边界也不是那么的无法逾越，
+可以使用[rpy2](https://rpy2.bitbucket.io/)在 python 中调用 R，
+也可以使用[rPython](http://rpython.r-forge.r-project.org/)在 R 中调用 python。
 
-# Anaconda
+
+# 运行环境
+
+## Anaconda
 
 尽管 Linux 和 Mac OS 自带了 python 环境，但还是推荐安装 [Anaconda](https://www.continuum.io)。
 
@@ -40,7 +46,7 @@ conda --version  # 查看版本
 conda install seaborn #
 ```
 
-# ipython, jupyter 和 spyder
+## ipython, jupyter 和 spyder
 
 python 本身提供了类似shell的交互式解释器，但是并不好用， [IPython](http://ipython.org/) 对其进行了极大加强。
 
@@ -55,7 +61,14 @@ python 本身提供了类似shell的交互式解释器，但是并不好用， [
 RStudio 现在也实现了一个类似的 web 交互工具 [shiny](https://www.rstudio.com/products/shiny/))。
 
 
-# NumPy
+## Cython
+
+编译Python程序，提高性能。
+
+
+# 底层库
+
+## NumPy
 
 python 中本来提供了 列表(list) 和 数组(array), 可以用来构建矩阵。
 但是这些都是通用数据结构，对于纯数值运算来说效率不高。而且没有矩阵运算的函数。
@@ -75,137 +88,143 @@ Numpy是下面很多模块的基础模块。
 
 Numpy 已经提供了线性代数函数库，但是SciPy的线性代数库比NumPy更加全面。
 
-# SymPy
-
--符号运算好帮手
-
-    从例子开始
-    数学表达式
-    符号运算
-    其它功能
-
 # matplotlib
 
-- 绘制精美的图表
+[Matplotlib](http://matplotlib.org/)为 python 提供了一整套和MATLAB类似的绘图函数集。
+Matplotlib 很强大，但是比较底层。高级的python 数据处理模块会调用 Matplotlib 实现更简单的绘图函数，
+比如后面要提到的 Pandas, Seaborn等。
+但是要对图表进行精细的、个性化的调整时，还是需要掌握 Matplotlib 的函数。
 
-    快速绘图
-    Artist对象
-    坐标变换和注释
-    绘图函数简介
+# 数据分析和处理
 
-# Traits
+## Pandas
 
-- 为Python添加类型定义
+[Pandas](http://pandas.pydata.org/), Python Data Analysis Library,
+是 python 数据分析领域里程碑式的一个重要工具。
 
-    开发背景
-    Trait属性的功能
-    Trait类型对象
-    Trait的元数据
-    预定义的Trait类型
-    Property属性
-    Trait属性监听
-    Event和Button属性
-    Trait属性的从属关系
-    动态添加Trait属性
-    创建自己的Trait类型
+Pandas 基于 NumPy, 实现了`Series(序列)`和类似 R的 `DataFrame` 对象，
+提供了大量能使我们快速便捷地处理数据的函数和方法。
 
-# TraitsUI
-- 轻松制作用户界面
+Pandas 很好的解决了数据分析的大部分任务，是所有中等规模数据分析的最有效的工具。
 
-    缺省界面
-    用View定义界面
-    用Handler控制界面和模型
-    属性编辑器
-    菜单、工具条和状态栏
-    设计自己的编辑器
+## Statsmodels
 
-# Chaco
+[Statsmodels](http://statsmodels.sourceforge.net/)
+是 Python 中一个强大的统计分析包，包含了描述统计、回归分析、时间序列分析、假设检验等等的功能。
 
-- 交互式图表
+一些主要的功能包括：
 
-    面向脚本绘图
-    面向应用绘图
-    添加交互工具
-    二次开发
 
-# TVTK
-
-- 数据的三维可视化
-
-    流水线(Pipeline)
-    数据集(Dataset)
-    可视化实例
-    TVTK的改进
-
-# Mayavi
-
-- 更方便的可视化
-
-    用mlab快速绘图
-    Mayavi和TVTK的关系
-    Mayavi应用程序
-    将Mayavi嵌入到界面中
-
-# VPython
-
-- 制作3D演示动画
-
-    场景、物体和照相机
-    制作动画演示
-    与场景交互
-    用界面控制场景
-    创建复杂模型
-
-# OpenCV
-
-- 图像处理和计算机视觉
-
-    储存图像数据的Mat对象
-    图像处理
-    图像变换
-    图像识别
-
-# matplotlib
-
-- 绘制精美的图表
-
-    绘图后台
-    事件、动画与控件
-
-# Pandas
-
-- 方便的数据分析库
-
-    分析Pandas项目的提交历史
-    兼并数组和字典功能的Series
-
-# Cython
-
-- 编译Python程序
-
-    计算矢量集的距离矩阵
-    Cython是如何编译的
-    使用Python标准对象和API
-    扩展类型(cdef类)
+- Linear regression models
+- Generalized linear models
+- Discrete choice models
+- Robust linear models
+- Many models and functions for time series analysis
+- Nonparametric estimators
+- A collection of datasets for examples
+- A wide range of statistical tests
+- Input-output tools for producing tables in a number of formats (Text, LaTex, HTML) and for reading Stata files -into NumPy and Pandas.
+- Plotting functions
+- Extensive unit tests to ensure correctness of results
+- Many more models and extensions in development
 
 
 
+## SymPy
+
+[SymPy]()是Python的数学符号计算库，目标是成为一个全功能的代数系统。
+SymPy支持符号计算、高精度计算、模式匹配、绘图、解方程、微积分、组合数学、离散数学、几何学、概率与统计、物理学等方面的功能。
+
+# 可视化
+
+## Seaborn
+
+[Seaborn](http://seaborn.pydata.org/)
+是基于 Matplotlib 的高级统计绘图工具（类似 Pandas 与 NumPy 的关系），其功能类似 R 中的 lattice。
+Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。
+
+## Bokeh
+
+[Bokeh(Bokeh.js)](http://bokeh.pydata.org/en/latest/docs/user_guide.html)
+是一个 Python 交互式可视化库，支持现代化 Web 浏览器，提供非常完美的展示功能。
+
+Bokeh 的目标是使用 D3.js 样式提供优雅，简洁新颖的图形化风格，同时提供大型数据集的高性能交互功能。
+
+Boken 可以快速的创建交互式的绘图，仪表盘和数据应用。
+
+## TVTK
+
+数据的三维可视化
 
 
+## VPython
 
-- matplotlib - For graphical visualisation of data
-- pandas - For data "wrangling" and time series analysis
-- scikit-learn - For machine learning and artificial intelligence algorithms
+制作3D演示动画
 
-Pandas 数据分析
-Statsmodels 统计包
-Matplotlib 绘图
-scikit-learn机器学习
-seaborn绘图
-statsmodels统计分析
 
-深度学习:
-    PyTorch
+## OpenCV
+
+图像处理和计算机视觉
+
+
+# 机器学习
+
+## scikit-learn
+
+For machine learning and artificial intelligence algorithms
+
+## PyTorch
+
+深度学习
+
+
+# Enthought Tool Suite
+
+[Enthought Tool Suite](http://code.enthought.com/projects/index.php)是
+[Enthought公司](http://code.enthought.com/)开发的开源科学计算一套应用程序开发包。
+包含了大量的工具。主要的工具包括：
+
+## Traits
+
+Explicit type declarations; validation; initialization; delegation; notification; visualization.
+
+## TraitsUI
+
+A UI layer that supports the visualization features of Traits. Implementations using wxWidgets and Qt are provided by the TraitsBackendWX and TraitsBackendQt projects.
+
+
+## Chaco
+
+交互式 2D 图表
+
+## Mayavi
+
+交互式 3D 图表
+
+
+## 其他
+
+- Enaml
+  Library for creating professional quality user interfaces combining a domain specific declarative language with a constraints based layout.
+- Envisage
+  Python-based framework for building extensible (plugin-based) applications.
+- Pyface
+  toolkit-independent GUI abstraction layer, which is used to support the "visualization" features of the Traits package.
+- BlockCanvas
+  Visual environment for creating simulation experiments, where function and data are separated using CodeTools.
+- GraphCanvas
+  library for interacting with visualizations of complex graphs.
+- Enable
+  Object drawing library and PDF vector drawing engine.
+- SciMath
+  Convenience libraries for math, interpolation, and units
+- Casuarius
+  supports constraints based layout in Enaml by wrapping Cassowary.
+- AppTools
+  General tools for ETS application development: scripting, logging, preferences, ...
+- EnCore
+  Core tools for application development (only depends on the Standard library).
+- and more...
 
 
 # 参考资料
@@ -214,3 +233,4 @@ statsmodels统计分析
 [^2]: [用Python做科学计算](http://hyry.dip.jp/tech/book/page/scipy/index.html)
 [^3]: [用Python做科学计算(第二版)](http://hyry.dip.jp/tech/book/page/scipynew/index.html)
 [^4]: [Comprehensive learning path – Data Science in Python](https://www.analyticsvidhya.com/learning-paths-data-science-business-analytics-business-intelligence-big-data/learning-path-data-science-python/)
+[^5]: [Python for statistical computing](http://aliquote.org/memos/2011/02/07/python-for-statistical-computing)
