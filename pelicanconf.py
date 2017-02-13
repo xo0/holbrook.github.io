@@ -16,8 +16,11 @@ DATE_FORMATS = {
 
 DEFAULT_DATE_FORMAT = '%Y-%m-%d'
 
-PLUGIN_PATHS = ["plugins"]
-PLUGINS = ["tag_cloud"]
+MARKUP = ('md', 'ipynb')
+#PLUGIN_PATHS = ['./plugins']
+PLUGIN_PATH = './plugins'
+
+PLUGINS = ['tag_cloud','pelican-ipynb.markup']
 
 
 #使用目录名作为文章的分类名
@@ -67,5 +70,7 @@ FOUNDATION_TAGS_IN_MOBILE_SIDEBAR = False
 FOUNDATION_NEW_ANALYTICS = False
 FOUNDATION_ANALYTICS_DOMAIN = ''
 FOUNDATION_FOOTER_TEXT = 'Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.'
-FOUNDATION_PYGMENT_THEME = 'monokai'
+# FOUNDATION_PYGMENT_THEME = 'monokai'
+
+FOUNDATION_PYGMENT_THEME = 'friendly'
 
