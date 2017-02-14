@@ -49,6 +49,8 @@ conda install seaborn #
 ## ipython, jupyter 和 spyder
 
 python 本身提供了类似shell的交互式解释器，但是并不好用， [IPython](http://ipython.org/) 对其进行了极大加强。
+IPython是一个增强的 Python Shell，目的是提高编写、测试、调试 Python 代码的速度。
+主要用于交互式数据处理和利用matplotlib 对数据进行可视化处理。
 
 不仅如此，IPython 还提供了 web 方式的 IPython notebook(现在叫做[jupyter](https://jupyter.org/))，
 已经成为Python科学计算界的标准配置。
@@ -78,6 +80,7 @@ NumPy 定义了ndarray(N维数组对象，N-dimensional array object)和
 ufunc(通用函数对象, universal function object)，
 分别用于多维数组的存储和处理。
 其中，ufunc 是一种能对数组的每个元素进行操作的函数。
+Numpy 还支持线性代数运算和随机数生成。
 
 Numpy是下面很多模块的基础模块。
 
@@ -87,6 +90,18 @@ Numpy是下面很多模块的基础模块。
 通过不同的子模块，SciPy 提供了线性代数、拟合与优化、差值、数值积分、图像处理、系数矩阵处理等函数。
 
 Numpy 已经提供了线性代数函数库，但是SciPy的线性代数库比NumPy更加全面。
+
+SciPy 的主要子模块包括：
+
+- scipy.integrate: 数值积分例程和微分方程求解器
+- scipy.linalg: 扩展了由 numpy.linalg 提供的线性代数例程和矩阵分解功能
+- scipy.optimize: 函数优化器以及根查找算法
+- scipy.signal: 信号处理工具
+- scipy.sparse: 稀疏矩阵和稀疏线性系统求解器
+- scipy.special: SPECFUN（这是一个实现了许多常用数学函数的 Fortran 库）的包装器
+- scipy.stats: 标准连续和离散概率分布、各种统计检验方法和更好的描述统计法
+- scipy.weave: 利用内联 C++ 代码加速数组计算的工具
+
 
 # matplotlib
 
