@@ -8,7 +8,7 @@
 &lt;p&gt;《&lt;a href="https://book.douban.com/subject/25779298/"&gt;利用Python进行数据分析&lt;/a&gt;》
 作者: Wes McKinney
 译者: 唐学韬&lt;/p&gt;
-&lt;h1 id="利用Python进行数据分析(1)：简单介绍"&gt;利用Python进行数据分析(1)：简单介绍&lt;a class="anchor-link" href="#利用Python进行数据分析(1)：简单介绍"&gt;¶&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;大部分问题在&lt;a href="http://holbrook.github.io/2017/02/11/dataology_python_env.html"&gt;这里&lt;/a&gt; 都有介绍。
+&lt;h3 id="补充说明"&gt;补充说明&lt;a class="anchor-link" href="#补充说明"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;大部分问题在&lt;a href="http://holbrook.github.io/2017/02/11/dataology_python_env.html"&gt;这里&lt;/a&gt; 都有介绍。
 两点补充：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;书中推荐 &lt;a href="http://code.enthought.com/"&gt;Enthought公司&lt;/a&gt;的 
@@ -1006,7 +1006,7 @@ h6:hover .anchor-link {
 &lt;p&gt;《&lt;a href="https://book.douban.com/subject/25779298/"&gt;利用Python进行数据分析&lt;/a&gt;》
 作者: Wes McKinney
 译者: 唐学韬&lt;/p&gt;
-&lt;h1 id="利用Python进行数据分析(1)：简单介绍"&gt;利用Python进行数据分析(1)：简单介绍&lt;a class="anchor-link" href="#利用Python进行数据分析(1)：简单介绍"&gt;¶&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;大部分问题在&lt;a href="http://holbrook.github.io/2017/02/11/dataology_python_env.html"&gt;这里&lt;/a&gt; 都有介绍。
+&lt;h3 id="补充说明"&gt;补充说明&lt;a class="anchor-link" href="#补充说明"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;大部分问题在&lt;a href="http://holbrook.github.io/2017/02/11/dataology_python_env.html"&gt;这里&lt;/a&gt; 都有介绍。
 两点补充：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;书中推荐 &lt;a href="http://code.enthought.com/"&gt;Enthought公司&lt;/a&gt;的 
@@ -1208,17 +1208,6 @@ yATSgJeBFm5cN/Aqtb+HqKL2f3Czv2udwN2+fMsCrqjvfvXKWBERl2vMp25EROQ0KOhFRFxOQS8i
 4nIKehERl1PQi4i4nIJeRMTlFPQiIi6noBcRcbn/B8h3mZ8GiONfAAAAAElFTkSuQmCC
 "&gt;
 &lt;/img&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; 
-&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
