@@ -37,3 +37,5 @@ Summary:
 
 - [分析网站的用户访问数据](/2017/02/14/python_data_analysis2-1.html)
 
+- [电影评分数据分析](/2017/02/15/python_data_analysis2-2.html)
+
