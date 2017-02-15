@@ -71,11 +71,11 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
-							<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
+							<li class="active"><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
-							<li class="active"><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
+							<li ><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
 							<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
 
 						<li><label>Places</label></li>
@@ -121,11 +121,11 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
-								<li ><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
+								<li class="active"><a href="http://holbrook.github.io/category/du-shu-bi-ji.html">读书笔记</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
-								<li class="active"><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
+								<li ><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
 								<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
 						</ul>
 					</section>
@@ -137,7 +137,7 @@
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
 <article>
-	<h1 style="font-size: 2.75rem;">ipynb demo</h1>
+	<h1 style="font-size: 2.75rem;">利用Python进行数据分析(2.2)：电影评分数据分析</h1>
 	<style type="text/css">/*!
 *
 * IPython notebook
@@ -1110,32 +1110,488 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Populating the interactive namespace from numpy and matplotlib
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="First-post!">First post!<a class="anchor-link" href="#First-post!">¶</a></h1><p>This will be the first post in our new Pelican blog! You can add any code or markdown cells to this Jupyter notebook, and they will be rendered on your blog.</p>
+<p>《<a href="https://book.douban.com/subject/25779298/">利用Python进行数据分析</a>》读书笔记。
+    <a href="/2017/02/14/python_data_analysis2.html">第2章</a>中的例子：电影评分数据分析。</p>
+<h4 id="1.--将数据加载到-DataFrame">1.  将数据加载到 DataFrame<a class="anchor-link" href="#1.--将数据加载到-DataFrame">¶</a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [2]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 定义列名</span>
+<span class="n">unames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'user_id'</span><span class="p">,</span><span class="s1">'gender'</span><span class="p">,</span><span class="s1">'age'</span><span class="p">,</span><span class="s1">'occupation'</span><span class="p">,</span><span class="s1">'zip'</span><span class="p">]</span>
+<span class="n">rnames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'user_id'</span><span class="p">,</span><span class="s1">'movie_id'</span><span class="p">,</span><span class="s1">'rating'</span><span class="p">,</span><span class="s1">'timestamp'</span><span class="p">]</span>
+<span class="n">mnames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'movie_id'</span><span class="p">,</span><span class="s1">'title'</span><span class="p">,</span><span class="s1">'genres'</span><span class="p">]</span>
 
-<span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1"># 读取数据</span>
+<span class="n">users</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">'ml-1m/users.dat'</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">'::'</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">names</span><span class="o">=</span><span class="n">unames</span><span class="p">,</span><span class="n">engine</span><span class="o">=</span><span class="s1">'python'</span><span class="p">)</span>
+<span class="n">ratings</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">'ml-1m/ratings.dat'</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">'::'</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">names</span><span class="o">=</span><span class="n">rnames</span><span class="p">,</span><span class="n">engine</span><span class="o">=</span><span class="s1">'python'</span><span class="p">)</span>
+<span class="n">movies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">'ml-1m/movies.dat'</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">'::'</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">names</span><span class="o">=</span><span class="n">mnames</span><span class="p">,</span><span class="n">engine</span><span class="o">=</span><span class="s1">'python'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 检验数据</span>
+<span class="n">users</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">ratings</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">movies</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>4</pre>
+<div class="output_area"><div class="prompt output_prompt">Out[15]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>movie_id</th>
+<th>title</th>
+<th>genres</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>1</td>
+<td>Toy Story (1995)</td>
+<td>Animation|Children's|Comedy</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2</td>
+<td>Jumanji (1995)</td>
+<td>Adventure|Children's|Fantasy</td>
+</tr>
+<tr>
+<th>2</th>
+<td>3</td>
+<td>Grumpier Old Men (1995)</td>
+<td>Comedy|Romance</td>
+</tr>
+<tr>
+<th>3</th>
+<td>4</td>
+<td>Waiting to Exhale (1995)</td>
+<td>Comedy|Drama</td>
+</tr>
+<tr>
+<th>4</th>
+<td>5</td>
+<td>Father of the Bride Part II (1995)</td>
+<td>Comedy</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="2.--合并数据">2.  合并数据<a class="anchor-link" href="#2.--合并数据">¶</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 先合并 users 到ratings,  再合并movies</span>
+<span class="c1"># pandas 会根据列名进行连接</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">ratings</span><span class="p">,</span><span class="n">users</span><span class="p">),</span><span class="n">movies</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[17]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>user_id</th>
+<th>movie_id</th>
+<th>rating</th>
+<th>timestamp</th>
+<th>gender</th>
+<th>age</th>
+<th>occupation</th>
+<th>zip</th>
+<th>title</th>
+<th>genres</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>1</td>
+<td>1193</td>
+<td>5</td>
+<td>978300760</td>
+<td>F</td>
+<td>1</td>
+<td>10</td>
+<td>48067</td>
+<td>One Flew Over the Cuckoo's Nest (1975)</td>
+<td>Drama</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2</td>
+<td>1193</td>
+<td>5</td>
+<td>978298413</td>
+<td>M</td>
+<td>56</td>
+<td>16</td>
+<td>70072</td>
+<td>One Flew Over the Cuckoo's Nest (1975)</td>
+<td>Drama</td>
+</tr>
+<tr>
+<th>2</th>
+<td>12</td>
+<td>1193</td>
+<td>4</td>
+<td>978220179</td>
+<td>M</td>
+<td>25</td>
+<td>12</td>
+<td>32793</td>
+<td>One Flew Over the Cuckoo's Nest (1975)</td>
+<td>Drama</td>
+</tr>
+<tr>
+<th>3</th>
+<td>15</td>
+<td>1193</td>
+<td>4</td>
+<td>978199279</td>
+<td>M</td>
+<td>25</td>
+<td>7</td>
+<td>22903</td>
+<td>One Flew Over the Cuckoo's Nest (1975)</td>
+<td>Drama</td>
+</tr>
+<tr>
+<th>4</th>
+<td>17</td>
+<td>1193</td>
+<td>5</td>
+<td>978158471</td>
+<td>M</td>
+<td>50</td>
+<td>1</td>
+<td>95350</td>
+<td>One Flew Over the Cuckoo's Nest (1975)</td>
+<td>Drama</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="3.数据转换">3.数据转换<a class="anchor-link" href="#3.数据转换">¶</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [30]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  按性别统计每部电影的得分</span>
+<span class="c1"># pivot_table, 透视表, 是一个很常用的工具</span>
+<span class="n">mean_ratings</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="s1">'rating'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">'title'</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'gender'</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">'mean'</span><span class="p">)</span>
+
+<span class="c1"># 另一种写法</span>
+<span class="c1">#mean_ratings = pd.pivot_table(data,values=['rating'], index='title',columns=['gender'], aggfunc='mean')</span>
+
+<span class="n">mean_ratings</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[30]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>gender</th>
+<th>F</th>
+<th>M</th>
+</tr>
+<tr>
+<th>title</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>$1,000,000 Duck (1971)</th>
+<td>3.375000</td>
+<td>2.761905</td>
+</tr>
+<tr>
+<th>'Night Mother (1986)</th>
+<td>3.388889</td>
+<td>3.352941</td>
+</tr>
+<tr>
+<th>'Til There Was You (1997)</th>
+<td>2.675676</td>
+<td>2.733333</td>
+</tr>
+<tr>
+<th>'burbs, The (1989)</th>
+<td>2.793478</td>
+<td>2.962085</td>
+</tr>
+<tr>
+<th>...And Justice for All (1979)</th>
+<td>3.828571</td>
+<td>3.689024</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="4.-数据筛选">4. 数据筛选<a class="anchor-link" href="#4.-数据筛选">¶</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [32]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 筛选评分数据>250 条的电影</span>
+<span class="n">ratings_by_title</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'title'</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="c1"># 按照title对data分组并计数</span>
+<span class="n">active_titles</span> <span class="o">=</span> <span class="n">ratings_by_title</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">ratings_by_title</span> <span class="o">>=</span> <span class="mi">251</span><span class="p">]</span>  <span class="c1"># index返回的下标</span>
+<span class="n">mean_ratings</span> <span class="o">=</span> <span class="n">mean_ratings</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">active_titles</span><span class="p">]</span>  <span class="c1">#  进行筛选。注意，这里原表和透视表的排序相同</span>
+<span class="n">mean_ratings</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[32]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>gender</th>
+<th>F</th>
+<th>M</th>
+</tr>
+<tr>
+<th>title</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>'burbs, The (1989)</th>
+<td>2.793478</td>
+<td>2.962085</td>
+</tr>
+<tr>
+<th>10 Things I Hate About You (1999)</th>
+<td>3.646552</td>
+<td>3.311966</td>
+</tr>
+<tr>
+<th>101 Dalmatians (1961)</th>
+<td>3.791444</td>
+<td>3.500000</td>
+</tr>
+<tr>
+<th>101 Dalmatians (1996)</th>
+<td>3.240000</td>
+<td>2.911215</td>
+</tr>
+<tr>
+<th>12 Angry Men (1957)</th>
+<td>4.184397</td>
+<td>4.328421</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="5.-结果展示">5. 结果展示<a class="anchor-link" href="#5.-结果展示">¶</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [35]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  女性观众最喜欢的 TOP10 电影</span>
+<span class="n">top_female_ratings</span> <span class="o">=</span> <span class="n">mean_ratings</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'F'</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">top_female_ratings</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[35]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>gender</th>
+<th>F</th>
+<th>M</th>
+</tr>
+<tr>
+<th>title</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>Close Shave, A (1995)</th>
+<td>4.644444</td>
+<td>4.473795</td>
+</tr>
+<tr>
+<th>Wrong Trousers, The (1993)</th>
+<td>4.588235</td>
+<td>4.478261</td>
+</tr>
+<tr>
+<th>Sunset Blvd. (a.k.a. Sunset Boulevard) (1950)</th>
+<td>4.572650</td>
+<td>4.464589</td>
+</tr>
+<tr>
+<th>Wallace & Gromit: The Best of Aardman Animation (1996)</th>
+<td>4.563107</td>
+<td>4.385075</td>
+</tr>
+<tr>
+<th>Schindler's List (1993)</th>
+<td>4.562602</td>
+<td>4.491415</td>
+</tr>
+<tr>
+<th>Shawshank Redemption, The (1994)</th>
+<td>4.539075</td>
+<td>4.560625</td>
+</tr>
+<tr>
+<th>Grand Day Out, A (1992)</th>
+<td>4.537879</td>
+<td>4.293255</td>
+</tr>
+<tr>
+<th>To Kill a Mockingbird (1962)</th>
+<td>4.536667</td>
+<td>4.372611</td>
+</tr>
+<tr>
+<th>Creature Comforts (1990)</th>
+<td>4.513889</td>
+<td>4.272277</td>
+</tr>
+<tr>
+<th>Usual Suspects, The (1995)</th>
+<td>4.513317</td>
+<td>4.518248</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -1143,92 +1599,238 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [4]:</div>
+<div class="prompt input_prompt">In [37]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 分歧最大的电影</span>
 
-<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">mean_ratings</span><span class="p">[</span><span class="s1">'diff'</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_ratings</span><span class="p">[</span><span class="s1">'M'</span><span class="p">]</span> <span class="o">-</span> <span class="n">mean_ratings</span><span class="p">[</span><span class="s1">'F'</span><span class="p">]</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="c1">#  分歧最大且女性更喜欢的电影</span>
+<span class="n">mean_ratings</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'diff'</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[37]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>gender</th>
+<th>F</th>
+<th>M</th>
+<th>diff</th>
+</tr>
+<tr>
+<th>title</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>Dirty Dancing (1987)</th>
+<td>3.790378</td>
+<td>2.959596</td>
+<td>-0.830782</td>
+</tr>
+<tr>
+<th>Jumpin' Jack Flash (1986)</th>
+<td>3.254717</td>
+<td>2.578358</td>
+<td>-0.676359</td>
+</tr>
+<tr>
+<th>Grease (1978)</th>
+<td>3.975265</td>
+<td>3.367041</td>
+<td>-0.608224</td>
+</tr>
+<tr>
+<th>Little Women (1994)</th>
+<td>3.870588</td>
+<td>3.321739</td>
+<td>-0.548849</td>
+</tr>
+<tr>
+<th>Steel Magnolias (1989)</th>
+<td>3.901734</td>
+<td>3.365957</td>
+<td>-0.535777</td>
+</tr>
+<tr>
+<th>Anastasia (1997)</th>
+<td>3.800000</td>
+<td>3.281609</td>
+<td>-0.518391</td>
+</tr>
+<tr>
+<th>Rocky Horror Picture Show, The (1975)</th>
+<td>3.673016</td>
+<td>3.160131</td>
+<td>-0.512885</td>
+</tr>
+<tr>
+<th>Color Purple, The (1985)</th>
+<td>4.158192</td>
+<td>3.659341</td>
+<td>-0.498851</td>
+</tr>
+<tr>
+<th>Age of Innocence, The (1993)</th>
+<td>3.827068</td>
+<td>3.339506</td>
+<td>-0.487561</td>
+</tr>
+<tr>
+<th>Free Willy (1993)</th>
+<td>2.921348</td>
+<td>2.438776</td>
+<td>-0.482573</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [39]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  分歧最大且男性更喜欢的电影</span>
+<span class="n">mean_ratings</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'diff'</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[39]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>gender</th>
+<th>F</th>
+<th>M</th>
+<th>diff</th>
+</tr>
+<tr>
+<th>title</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>Good, The Bad and The Ugly, The (1966)</th>
+<td>3.494949</td>
+<td>4.221300</td>
+<td>0.726351</td>
+</tr>
+<tr>
+<th>Kentucky Fried Movie, The (1977)</th>
+<td>2.878788</td>
+<td>3.555147</td>
+<td>0.676359</td>
+</tr>
+<tr>
+<th>Dumb & Dumber (1994)</th>
+<td>2.697987</td>
+<td>3.336595</td>
+<td>0.638608</td>
+</tr>
+<tr>
+<th>Longest Day, The (1962)</th>
+<td>3.411765</td>
+<td>4.031447</td>
+<td>0.619682</td>
+</tr>
+<tr>
+<th>Cable Guy, The (1996)</th>
+<td>2.250000</td>
+<td>2.863787</td>
+<td>0.613787</td>
+</tr>
+<tr>
+<th>Evil Dead II (Dead By Dawn) (1987)</th>
+<td>3.297297</td>
+<td>3.909283</td>
+<td>0.611985</td>
+</tr>
+<tr>
+<th>Hidden, The (1987)</th>
+<td>3.137931</td>
+<td>3.745098</td>
+<td>0.607167</td>
+</tr>
+<tr>
+<th>Rocky III (1982)</th>
+<td>2.361702</td>
+<td>2.943503</td>
+<td>0.581801</td>
+</tr>
+<tr>
+<th>Caddyshack (1980)</th>
+<td>3.396135</td>
+<td>3.969737</td>
+<td>0.573602</td>
+</tr>
+<tr>
+<th>For a Few Dollars More (1965)</th>
+<td>3.409091</td>
+<td>3.953795</td>
+<td>0.544704</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [50]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  分歧最大的电影</span>
+
+<span class="n">rating_std_by_title</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'title'</span><span class="p">)[</span><span class="s1">'rating'</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">rating_std_by_title</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[50]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>(array([ 2.,  1.,  1.,  0.,  2.,  0.,  1.,  0.,  0.,  2.]),
- array([  1. ,   1.9,   2.8,   3.7,   4.6,   5.5,   6.4,   7.3,   8.2,
-          9.1,  10. ]),
- <a list of 10 patch objects>)</pre>
+<pre>title
+Foreign Student (1994)                                             2.828427
+Criminal Lovers (Les Amants Criminels) (1999)                      2.309401
+Identification of a Woman (Identificazione di una donna) (1982)    2.121320
+Sunset Park (1996)                                                 2.121320
+Eaten Alive (1976)                                                 2.121320
+Neon Bible, The (1995)                                             2.121320
+Talk of Angels (1998)                                              2.121320
+Tokyo Fist (1995)                                                  2.121320
+Paralyzing Fear: The Story of Polio in America, A (1998)           2.121320
+Better Living (1998)                                               2.121320
+Name: rating, dtype: float64</pre>
 </div>
-</div>
-<div class="output_area"><div class="prompt"></div>
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-">
-</img></div>
 </div>
 </div>
 </div>
@@ -1272,7 +1874,7 @@ l6SGjLskNWTcJakh4y5JDf0vZB9FlJ1A1boAAAAASUVORK5CYII=
 }
 </script>
 
-	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-02-13.</h6>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-02-15.</h6>
 </article>
 
 <hr/>
@@ -1331,30 +1933,30 @@ l6SGjLskNWTcJakh4y5JDf0vZB9FlJ1A1boAAAAASUVORK5CYII=
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
 									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
 									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
 									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
 									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
 								</ul>
 							</div>
 
