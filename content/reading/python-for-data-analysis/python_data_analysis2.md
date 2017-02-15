@@ -7,6 +7,13 @@ Summary:
     第 2 章：引言
     介绍数据分析的一般步骤，并用三个实例说明如何用 python 进行数据分析。
 
+
+《[利用Python进行数据分析](https://book.douban.com/subject/25779298/)》读书笔记。
+第 2 章：引言
+介绍数据分析的一般步骤，并用三个实例说明如何用 python 进行数据分析。
+
+所有用到的数据可以从[作者的 github](https://github.com/wesm/pydata-book)下载。
+
 # 数据分析的一般步骤
 
 - 数据加载
