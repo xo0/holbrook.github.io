@@ -46,3 +46,4 @@ Summary:
 
 - [电影评分数据分析](/2017/02/15/python_data_analysis2-2.html)
 
+- [全美婴儿姓名分析](/2017/02/16/python_data_analysis2-3.html)
