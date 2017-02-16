@@ -4621,7 +4621,7 @@ jupyter notebook --pylab inline
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;ipython notebook 还可以远程运行，可以参考资料[^1]。&lt;/p&gt;
+&lt;p&gt;ipython notebook 还可以远程运行，可以参考资料1&lt;sup id="fnref-1"&gt;&lt;a class="footnote-ref" href="#fn-1"&gt;1&lt;/a&gt;&lt;/sup&gt;。&lt;/p&gt;
 &lt;h1&gt;使用技巧&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;用 Tab 建可以自动补全&lt;/li&gt;
@@ -4644,7 +4644,14 @@ jupyter notebook --pylab inline
 &lt;h1&gt;与操作系统交互&lt;/h1&gt;
 &lt;p&gt;ipython 提供了很多魔术命令，用于与操作系统交互。&lt;/p&gt;
 &lt;h1&gt;参考资料&lt;/h1&gt;
-&lt;p&gt;[^1] &lt;a href="http://mindonmind.github.io/2013/02/08/ipython-notebook-interactive-computing-new-era/"&gt;IPython Notebook: 交互计算新时代&lt;/a&gt;&lt;/p&gt;</content><category term="python"></category></entry><entry><title>利用Python进行数据分析(2.2)：电影评分数据分析</title><link href="http://holbrook.github.io/2017/02/15/python_data_analysis2-2.html" rel="alternate"></link><published>2017-02-15T00:00:00+08:00</published><updated>2017-02-15T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2017-02-15:/2017/02/15/python_data_analysis2-2.html</id><summary type="html">
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn-1"&gt;
+&lt;p&gt;&lt;a href="http://mindonmind.github.io/2013/02/08/ipython-notebook-interactive-computing-new-era/"&gt;IPython Notebook: 交互计算新时代&lt;/a&gt;&amp;#160;&lt;a class="footnote-backref" href="#fnref-1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</content><category term="python"></category></entry><entry><title>利用Python进行数据分析(2.2)：电影评分数据分析</title><link href="http://holbrook.github.io/2017/02/15/python_data_analysis2-2.html" rel="alternate"></link><published>2017-02-15T00:00:00+08:00</published><updated>2017-02-15T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2017-02-15:/2017/02/15/python_data_analysis2-2.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
