@@ -137,60 +137,55 @@
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
 <article>
-	<h1 style="font-size: 2.75rem;">《统计学》读书笔记(6/17:简单统计推断：总体参数的假设检验)</h1>
-	<h1>假设检验</h1>
-<p>证明一件事情比较难，证伪一件事情比较容易</p>
-<p>科学研究的一个基本方法就是假设检验：</p>
-<ol>
-<li>提出一个可以被推翻的假设；</li>
-<li>如果还没有发现不符合该假设的实例，则该假设成为猜想；</li>
-<li>如果该猜想能够从理论上推导证明，则该猜想也成为定理/定律</li>
-</ol>
-<p>统计学中的假设检验方法也是一样，只不过关注点是统计量之间关系的假设</p>
-<p>注意：假设不能被推翻，也仅仅是假设。因为无法证明其能覆盖所有的情况。对于统计学领域尤其如此</p>
-<h1>6.1 假设检验的过程和逻辑</h1>
-<p>比如检查商品的份量是否充足：进行抽样后检验。单个商品的称量结果有多有少，
-如何判断总体的份量是否足够？仅用样本的平价重量进行评价是不科学的！</p>
-<h2>提出假设</h2>
+	<h1 style="font-size: 2.75rem;">利用Python进行数据分析(3)：IPython</h1>
+	<p>《<a href="https://book.douban.com/subject/25779298/">利用Python进行数据分析</a>》读书笔记。
+第 3 章：IPython——一种交互式计算和开发环境。
+介绍 IPython 及其使用。</p>
+<p>IPython 的设计哲学是鼓励一种“执行-探索”(execute explore)的工作模式，而不是传统编程的“编辑-编译-运行”(edit-complie-run)模式。
+由于大部分的数据分析工作都需要“探索式操作”(试误法和迭代法)，可以说 IPython 就是为了用 python 进行数据分析而生的。</p>
+<p>可能 IPython 的设计灵感来自 R 等软件，但是在 python 的强大能力下，IPython 系已经形成了一整套的数据分析工具链，
+已经有一些数据分析工作者转移到了 python 生态下。</p>
+<h1>IPython基础</h1>
+<p>类似于 python解释器，使用命令 <code>ipython</code>可以打开一个交互式控制台。如果需要使用 Matplotlib 库，增加参数：<code>ipython --pylab</code>。</p>
+<p>更吸引人的使用方式是基于 web 的 ipython notebook。
+可以使用命令：</p>
+<div class="highlight"><pre><span></span># ipython notebook
+jupyter notebook
+</pre></div>
+
+
+<p>该命令会自动打开浏览器并访问 notebook。</p>
+<p>通常我们需要在页面中直接嵌入显示图片，此时使用命令：</p>
+<div class="highlight"><pre><span></span># ipython notebook --pylab inline
+jupyter notebook --pylab inline
+</pre></div>
+
+
+<p>ipython notebook 还可以远程运行，可以参考资料[^1]。</p>
+<h1>使用技巧</h1>
 <ul>
-<li>首先提出假设，比如总体的平价质量充足（u&gt;=u0），称为零假设（null hypothesis)，记为<code>H0</code></li>
-<li>同时提出备选假设(alternative hypothesis)，总体的平价质量不充足（u&lt;u0)，记为<code>H1</code></li>
-<li>命题： <code>H0:u&gt;=u0 &lt;=&gt; H1:u&lt;u0</code> 。其中<code>&lt;=&gt;</code>相当于“versus”</li>
-<li>通常，选择更接近实际情况的假设作为备选假设，相反的作为零假设。检验的目地就是判断H1是否显著。所以假设检验也成为“显著性检验（significant test）”</li>
+<li>用 Tab 建可以自动补全</li>
+<li>内省：在变量的前面或后面加上<code>?</code>，可以显示该对象的信息</li>
+<li>用 <code>%run</code>命令可以执行外部 py 脚本</li>
+<li>用 <code>%paste</code>可以按 python 缩进粘贴代码</li>
+<li>IPython 提供了一些方便的快捷键，常用的包括：</li>
+<li><code>Ctrl+F</code> 光标前移1个字符</li>
+<li><code>Ctrl+B</code> 光标后移1个字符</li>
+<li><code>Ctrl+A</code> 光标移至行首</li>
+<li><code>Ctrl+E</code> 光标移至行尾</li>
+<li><code>Ctrl+U</code> 删除此行光标之前的所有内容</li>
+<li><code>Ctrl+K</code> 删除此行光标之后的所有内容</li>
+<li><code>Ctrl+L</code> 清屏（Mac 下 Cmd+K 也可以）</li>
+<li>IPython 支持调试和跟踪</li>
+<li><code>%</code>开头的命令称为“魔术命令（Magic Command）”，能够实现一些“神奇”的功能</li>
 </ul>
-<h2>判断逻辑</h2>
-<ul>
-<li>被检验的统计量成为“检验统计量（test statistic）”</li>
-<li>根据 <em>H0(注意，不是H1)</em> 得到检验统计量的分布</li>
-<li>看看该统计量的数据实现值（realization)是否为小概率事件</li>
-<li>如果是小概率事件，则拒绝零假设（检验显著）</li>
-</ul>
-<p>该逻辑中，H0和H1的地位不对称：按照H0推导分布，只要不符合就可以推翻H0</p>
-<h2>判断结果</h2>
-<p>上面的逻辑并不严谨：</p>
-<p>小概率事件也有可能真实发生！</p>
-<p>所以统计结论也有可能犯错误。两种错误情况：</p>
-<ul>
-<li>
-<p>第一类错误（type I error)： 按照H0假设，样本数据为小概率事件，于是拒绝H0。但总体的真实情况是符合H0</p>
-</li>
-<li>
-<p>第二类错误（type II error）：按照H0假设，样本数据的概率很大，于是接受H0。但总体的真实情况是不符合H0</p>
-</li>
-</ul>
-<h2>势(power）和临界值（critical value) （TODO)</h2>
-<h1>6.2 对于正态总体均值的检验</h1>
-<ul>
-<li>单个总体单个样本：单边检验</li>
-<li>两个总体两个样本：双边检验</li>
-<li>一个总体一对样本（如事件发生前后的对照）：单边、双边相结合</li>
-</ul>
-<h1>6.3 对于比例的检验</h1>
-<p>(略）</p>
-<h1>6.4 从一个例子说明“接受零假设”的说法不妥</h1>
-<p>结论：不能说“接受零假设”，更严谨的说法是“不拒绝零假设”</p>
-<h1>6.5 小结</h1>
-	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-08-02.</h6>
+<h1>GUI 方式</h1>
+<p>使用命令<code>ipython qtconsole --pylab=inline</code>，可以打开一个类似 R 的GUI 程序。</p>
+<h1>与操作系统交互</h1>
+<p>ipython 提供了很多魔术命令，用于与操作系统交互。</p>
+<h1>参考资料</h1>
+<p>[^1] <a href="http://mindonmind.github.io/2013/02/08/ipython-notebook-interactive-computing-new-era/">IPython Notebook: 交互计算新时代</a></p>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-02-16.</h6>
 </article>
 
 <hr/>
