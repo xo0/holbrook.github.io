@@ -8,17 +8,6 @@
 		<title>
 			OSGi构建工具：Tycho还是Maven-Bundle-Plugin？
 		</title>
-		<meta name="description" content="
-			<h1>Tycho与Maven-Bundle-Plugin的对比</h1>
-<p>Maven与OSGi天生就是冤家：Maven通过<code>pom.xml</code>描述一个产物的全部，而OSGi将这项工作交给了<code>MANIFEST.MF</code>。</p>
-<p>如果仅仅是一些定义信息还好说，但是Maven和OSGi都希望能够描述产物的依赖关系，在使用Maven开发OSGi bundle的时候，就导致了一个问题：</p>
-<p>依赖关系到底是在<code>pom.xml</code>中描述，还是在<code>MANIFEST.MF</code>中描述？</p>
-<p><a href="/2014/01/08/build_osgi_bundle_with_tycho_maven_plugin.html">前面提到的Tycho</a>的思路是由<code>MANIFEST.MF</code>自行管理bundle的依赖关系，<code>pom.xml</code>只记录使用maven进行构建时需要的信息，比如maven工程的父子关系、打包时需要的bundle仓库及要发布的目标平台等。</p>
-<p>Tycho的这种机制对Eclipse IDE比较友好，在开发期间完全使用IDE的机制进行开发和调试，只有在打包部署时才依赖maven。</p>
-<p><a href="http://felix.apache.org/site/apache-felix-maven-bundle-plugin-bnd.html">Apache Felix Maven-Bundle-Plugin</a>
-则使用另一套机制：使用Maven-Bundle-Plugin，在开发时可以没有<code>MANIFEST.MF</code>文件！Maven-Bundle-Plugin在<code>pom.xml</code>中复制了一套<code>MANIFEST …</code></p>
-		">
-		<meta name="author" content="Holbrook">
 
 		<link rel="stylesheet" href="http://holbrook.github.io/theme/css/foundation.css" />
 		<link rel="stylesheet" href="http://holbrook.github.io/theme/css/pygment/friendly.css" />
@@ -410,29 +399,29 @@ org.osgi.framework.storage.clean=onFirstInit
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
 									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
 									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
 									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
 									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
 									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
 									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
 									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
 								</ul>
 							</div>
 
