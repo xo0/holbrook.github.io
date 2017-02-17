@@ -38,7 +38,7 @@ jupyter notebook
 jupyter notebook --pylab inline
 ```
 
-ipython notebook 还可以远程运行，可以参考资料[^1]。
+ipython notebook 还可以远程运行，可以参考资料1[^1]。
 
 # 使用技巧
 
@@ -68,7 +68,7 @@ ipython 提供了很多魔术命令，用于与操作系统交互。
 
 # 参考资料
 
-[^1] [IPython Notebook: 交互计算新时代](http://mindonmind.github.io/2013/02/08/ipython-notebook-interactive-computing-new-era/)
+[^1]: [IPython Notebook: 交互计算新时代](http://mindonmind.github.io/2013/02/08/ipython-notebook-interactive-computing-new-era/)
 
 
 
