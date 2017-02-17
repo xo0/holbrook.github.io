@@ -5,8 +5,18 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<title>{% block windowtitle %}{{ SITENAME }}{% endblock %}</title>
-		<meta name="description" content="">
+		<title>
+			{% if article %}
+			{{ article.title }}
+			{% else %}
+			{% block windowtitle %}{{ SITENAME }}{% endblock %}
+			{% endif %}
+		</title>
+		<meta name="description" content="
+		{% if article %}
+			{{ article.content if FOUNDATION_FRONT_PAGE_FULL_ARTICLES else article.summary }}
+		{% endif %}
+		">
 		<meta name="author" content="{{ AUTHOR }}">
 
 		<link rel="stylesheet" href="{{ SITEURL }}/theme/css/foundation.css" />
