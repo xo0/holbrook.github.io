@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,7 +138,16 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">规则，推理机和规则引擎</h1>
-	<h1>什么是规则</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="规则，推理机和规则引擎">规则，推理机和规则引擎</a><ul><li><a class="toc-href" href="#shi-yao-shi-gui-ze" title="什么是规则">什么是规则</a></li><li><a class="toc-href" href="#tui-li-ji-yu-gui-ze-yin-qing" title="推理机与规则引擎">推理机与规则引擎</a></li><li><a class="toc-href" href="#gui-ze-yin-qing-de-zuo-yong" title="规则引擎的作用">规则引擎的作用</a></li></ul></li></ul></div>
+	</div>
+
+
+
+	<h1 id="shi-yao-shi-gui-ze">什么是规则</h1>
 <p>在现实生活中，规则无处不在。我们最长接触的是法律、法规和各种制度；对于企业级应用来说，第一步的业务调研中很重要的内容就是了解业务规则。在企业流程再造中，可能还会接触到流程规则。</p>
 <p>在IT技术领域，很多地方也应用了规则，比如路由表，防火墙策略，乃至角色权限控制(RBAC)，或者Web框架中的URL匹配。</p>
 <p>不管是哪种种规则，都规定了一组确定的条件和此条件所产生的结果。</p>
@@ -158,18 +167,18 @@
 <li>一条规则可能与其他规则共同决定最终结果。比如例子中的规则只产生了增量，还需要与确定基数的规则共同作用才能决定最终的费率</li>
 <li>可能存在条件互相交叉的规则，此时有必要规定规则的优先级</li>
 </ul>
-<h1>推理机与规则引擎</h1>
+<h1 id="tui-li-ji-yu-gui-ze-yin-qing">推理机与规则引擎</h1>
 <p>规则作为一种知识，其典型运用就是通过实际情况，根据给定的一组规则，得出结论。这个结论可能是某种静态的结果，也可能是需要进行的一组操作。
 这种规则的运用过程叫做推理。如果由程序来处理推理过程，那么这个程序就叫做推理机/推理引擎（Inference Engine）。推理机是专家系统（专家系统是人工智能的一个分支）的核心模块。</p>
-<p><img alt="推理机" src="images/rule-engine/inference_engine.png"></p>
-<p>推理引擎根据知识表示的不同采取的控制策略也是不同的，常见的类型包括基于神经网络、基于案例和基于规则的推理机。其中，基于规则的推理机易于理解、易于获取、易于管理，被广泛采用。这种推理引擎被称为“规则引擎”。</p>
+<p><img alt="推理机" src="images/rule-engine/inference_engine.png"/></p>
+<p>推理引擎根据知识表示的不同采取的控制策略也是不同的，常见的类型包括基于神经网络、基于案例和基于规则的推理机。其中，基于规则的推理机易于理解、易于获取、易于管理，被广泛采用。这种推理引擎被称为&ldquo;规则引擎&rdquo;。</p>
 <p>在规则引擎中，将知识表达为规则（rules），要分析的情况定义为事实（facts）。二者在内存中的存储分别称为Production Memory和Working Memory，如下图：</p>
-<p><img alt="规则引擎" src="images/rule-engine/rule_engine.png"></p>
+<p><img alt="规则引擎" src="images/rule-engine/rule_engine.png"/></p>
 <p>rules和facts是规则引擎接受的输入参数，而规则引擎本身包括两个组成部分：Pattern Matcher和Agenda。Pattern Matcher根据facts找到匹配的rules，Agenda管理PatternMatcher挑选出来的规则的执行次序。在外围，还会有一个执行引擎（Execution Engine）负责根据Agenda输出的rules执行具体的操作。</p>
 <p>其中Pattern Matcher是规则引擎负责推理的核心。和人类的思维相对应，规则引擎中也存在两种推理方式：正向推理（Forward-Chaining）和反向推理（Backward-Chaining）。</p>
 <p>正向推理也叫演绎法，由事实驱动，从 一个初始的事实出发，不断地应用规则得出结论。首先在候选队列中选择一条规则作为启用规则进行推理，记录其结论作为下一步推理时的证据。如此重复这个过程，直到再无可用规则可被选用或者求得了所要求的解为止。</p>
 <p>反向推理也叫归纳法，由目标驱动，首先提出某个假设，然后寻找支持该假设的证据，若所需的证据都能找到，说明原假设是正确的；若无论如何都找不到所需要的证据，则说明原假设不成立，此时需要另做新的假设。</p>
-<h1>规则引擎的作用</h1>
+<h1 id="gui-ze-yin-qing-de-zuo-yong">规则引擎的作用</h1>
 <p>规则引擎可以将规则的定义从代码中分离出来，将推理过程封装到规则引擎内部进行处理，这带来几个好处：</p>
 <ol>
 <li>规则外部化，即有利于规则知识的复用，也可避免改变规则时带来的代码变更问题</li>
@@ -177,9 +186,24 @@
 <li>开发人员的不需要过多关注逻辑判断，可以专注于逻辑处理</li>
 </ol>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2012-03-20.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2013/12/20/drools_API.html">Drools规则引擎API概述</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/19/trading_strategy.html">交易策略与规则引擎</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/07/jsr94.html">Java规则引擎规范：JSR94</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/06/rule_language.html">Drools规则描述语言快速手册</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/05/algorithm_of_pattern_match.html">规则引擎中常用的模式匹配算法</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -218,6 +242,8 @@
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -235,37 +261,37 @@
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

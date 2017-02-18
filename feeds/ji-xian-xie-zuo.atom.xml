@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>心内求法 - 极限写作</title><link href="http://holbrook.github.io/" rel="alternate"></link><link href="http://holbrook.github.io/feeds/ji-xian-xie-zuo.atom.xml" rel="self"></link><id>http://holbrook.github.io/</id><updated>2014-02-17T00:00:00+08:00</updated><entry><title>在markdown中嵌入graphviz</title><link href="http://holbrook.github.io/2014/02/17/graphviz_in_markdown.html" rel="alternate"></link><published>2014-02-17T00:00:00+08:00</published><updated>2014-02-17T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2014-02-17:/2014/02/17/graphviz_in_markdown.html</id><summary type="html"></summary><content type="html">&lt;h1&gt;在markdown中嵌入graphviz&lt;/h1&gt;
-&lt;h2&gt;gravizo.com&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>心内求法 - 极限写作</title><link href="http://holbrook.github.io/" rel="alternate"></link><link href="http://holbrook.github.io/feeds/ji-xian-xie-zuo.atom.xml" rel="self"></link><id>http://holbrook.github.io/</id><updated>2014-02-17T00:00:00+08:00</updated><entry><title>在markdown中嵌入graphviz</title><link href="http://holbrook.github.io/2014/02/17/graphviz_in_markdown.html" rel="alternate"></link><published>2014-02-17T00:00:00+08:00</published><updated>2014-02-17T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2014-02-17:/2014/02/17/graphviz_in_markdown.html</id><summary type="html"></summary><content type="html">&lt;h1 id="zai-markdownzhong-qian-ru-graphviz"&gt;在markdown中嵌入graphviz&lt;/h1&gt;
+&lt;h2 id="gravizocom"&gt;gravizo.com&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;![txt](http://g.gravizo.com/g?
   digraph G {
-    aize =&amp;quot;4,4&amp;quot;;
+    aize ="4,4";
     main [shape=box];
     main -&amp;gt; parse [weight=8];
     parse -&amp;gt; execute;
@@ -12,16 +12,14 @@
     execute -&amp;gt; { make_string; printf}
     init -&amp;gt; make_string;
     edge [color=red];
-    main -&amp;gt; printf [style=bold,label=&amp;quot;100 times&amp;quot;];
-    make_string [label=&amp;quot;make a string&amp;quot;];
-    node [shape=box,style=filled,color=&amp;quot;.7 .3 1.0&amp;quot;];
+    main -&amp;gt; printf [style=bold,label="100 times"];
+    make_string [label="make a string"];
+    node [shape=box,style=filled,color=".7 .3 1.0"];
     execute -&amp;gt; compare;
   }
 )
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h2&gt;abc&lt;/h2&gt;</content><category term="graph"></category><category term="markdown"></category></entry><entry><title>Graphviz概述</title><link href="http://holbrook.github.io/2014/02/17/graphviz_intro.html" rel="alternate"></link><published>2014-02-17T00:00:00+08:00</published><updated>2014-02-17T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2014-02-17:/2014/02/17/graphviz_intro.html</id><summary type="html">&lt;p&gt;Graphviz是一个强大的绘图工具，使用DOT语言描述图像。&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Graphviz是什么&lt;/h1&gt;
+&lt;h2 id="abc"&gt;abc&lt;/h2&gt;</content><category term="graph"></category><category term="markdown"></category></entry><entry><title>Graphviz概述</title><link href="http://holbrook.github.io/2014/02/17/graphviz_intro.html" rel="alternate"></link><published>2014-02-17T00:00:00+08:00</published><updated>2014-02-17T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2014-02-17:/2014/02/17/graphviz_intro.html</id><summary type="html">&lt;p&gt;Graphviz是一个强大的绘图工具，使用DOT语言描述图像。&lt;/p&gt;</summary><content type="html">&lt;h1 id="graphvizshi-shi-yao"&gt;Graphviz是什么&lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://www.graphviz.org/"&gt;Graphviz&lt;/a&gt;是基于dot语言的绘图工具，可以画有向图、无向图、关系图、目录图、流程图等各种你知道的或不知道的图形。可以欣赏Graphviz的&lt;a href="http://www.graphviz.org/Gallery.php"&gt;Gallery&lt;/a&gt;，以及Yifan Hu的&lt;a href="http://www2.research.att.com/~yifanhu/GALLERY/GRAPHS/index1.html"&gt;gallery of large graphs&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;Graphviz使用&lt;a href="http://zh.wikipedia.org/wiki/DOT%E8%AF%AD%E8%A8%80"&gt;DOT语言&lt;/a&gt;描述图形，并提供一组工具：&lt;/p&gt;
 &lt;ul&gt;
@@ -59,12 +57,12 @@
 &lt;/ul&gt;
 &lt;p&gt;有一些强大的工具依赖或支持Graphviz，比如&lt;a href="http://www.omnigroup.com/omnigraffle"&gt;OmniGraffle&lt;/a&gt;
 和&lt;a href="http://plantuml.sourceforge.net/index.html"&gt;PlantUML&lt;/a&gt;。&lt;/p&gt;
-&lt;h1&gt;DOT语言简介&lt;/h1&gt;
+&lt;h1 id="dotyu-yan-jian-jie"&gt;DOT语言简介&lt;/h1&gt;
 &lt;p&gt;DOT语言使用离散数学中的Graph描述图形，包括三个基本元素：grahp,node,edge。下面是一个例子：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;example.dot&lt;/code&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;digraph G {
-main -&amp;gt; parse -&amp;gt; execute[label=&amp;quot;edge label2&amp;quot;];
-main -&amp;gt; init[label=&amp;quot;edge label1&amp;quot;];
+main -&amp;gt; parse -&amp;gt; execute[label="edge label2"];
+main -&amp;gt; init[label="edge label1"];
 main -&amp;gt; cleanup;
 execute -&amp;gt; make_string;
 execute -&amp;gt; printf;
@@ -73,25 +71,21 @@ main -&amp;gt; printf;
 execute -&amp;gt; compare;
 }
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;执行命令&lt;code&gt;dot -Tpng example.dot -o example.png&lt;/code&gt;，就可以生成如下的图形：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/graphviz/example.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/graphviz/example.png"/&gt;&lt;/p&gt;
 &lt;p&gt;DOT通过属性可以设置node和edge的样式，比如：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;graph graphname {
      // label属性可以改变节点的显示名称
-     a [label=&amp;quot;Foo&amp;quot;];     // 节点形状被改变了
+     a [label="Foo"];     // 节点形状被改变了
      b [shape=box];     // a-b边和b-c边有相同的属性
      a -- b -- c [color=blue];
-     b -- d [style=dotted, label=&amp;quot;无向图&amp;quot;];
+     b -- d [style=dotted, label="无向图"];
 }
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;生成的图形如下：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/graphviz/a.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/graphviz/a.png"/&gt;&lt;/p&gt;
 &lt;p&gt;更多的属性设置可以参考&lt;a href="http://www.graphviz.org/content/attrs"&gt;官方文档&lt;/a&gt;。&lt;/p&gt;
-&lt;h1&gt;应用场景&lt;/h1&gt;
+&lt;h1 id="ying-yong-chang-jing"&gt;应用场景&lt;/h1&gt;
 &lt;p&gt;Graphviz可以有很多玩法，常见的比如：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://gashero.iteye.com/blog/1748795"&gt;直接使用Graphviz绘图&lt;/a&gt;，以代替Visio等绘图工具&lt;/li&gt;
@@ -107,9 +101,9 @@ execute -&amp;gt; compare;
 &lt;li&gt;进阶篇：一些个性化定制的选项&lt;/li&gt;
 &lt;li&gt;推广篇：博客推广的一些手段和方法&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;基础篇&lt;/h1&gt;
-&lt;h2&gt;关于Jekyll&lt;/h2&gt;
-&lt;p&gt;&lt;img alt="Jekyll" src="images/posts/tools/jekyll_mysite/jekyll.jpg"&gt;&lt;/p&gt;
+&lt;h1 id="ji-chu-pian"&gt;基础篇&lt;/h1&gt;
+&lt;h2 id="guan-yu-jekyll"&gt;关于Jekyll&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="Jekyll" src="images/posts/tools/jekyll_mysite/jekyll.jpg"/&gt;&lt;/p&gt;
 &lt;p&gt;已经有太多的文章介绍了&lt;a href="http://jekyllrb.com/"&gt;Jekyll&lt;/a&gt;(/'dʒiːk əl/)。
 简单的说，Jekyll是用ruby语言实现的一个静态网站生成器，可以将&lt;a href="https://help.github.com/articles/my-custom-domain-isn-t-working"&gt;Markdown&lt;/a&gt; (或者&lt;a href="http://textile.sitemonks.com/"&gt;Textile&lt;/a&gt;)编辑的文档生成html。
 当然也可以用来生成博客。
@@ -117,12 +111,12 @@ execute -&amp;gt; compare;
 &lt;p&gt;Jekyll支持&lt;a href="http://wiki.shopify.com/Liquid"&gt;Liquid&lt;/a&gt;模板语言，写文档时的感觉很像是在写Django模板。Jekyll定义了一些&lt;a href="http://jekyllrb.com/docs/variables/"&gt;内置的变量&lt;/a&gt;，包括全局变量、页面变量等。
 &lt;a href="http://jekyllrb.com/docs/frontmatter/"&gt;在文档中可以设置页面变量的值&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;与RoR类似，Jekyll也可以通过插件来增加额外的功能。&lt;/p&gt;
-&lt;h2&gt;关于github Pages&lt;/h2&gt;
+&lt;h2 id="guan-yu-github-pages"&gt;关于github Pages&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://github.com/"&gt;github&lt;/a&gt;是程序员的facebook。&lt;a href="http://pages.github.com/"&gt;github Pages&lt;/a&gt;是github提供的静态网页托管。可以为用户或者项目创建站点。
 有意思的是，github Pages对于上传的静态文件会通过Jekyll进行处理后再发布出来。&lt;/p&gt;
-&lt;p&gt;于是，一些”不务正业“的程序员就开始使用github Pages建立博客，现在这股风潮已经愈演愈烈，一些程序员聚集的博客站点可能要小心应对了。&lt;/p&gt;
-&lt;h2&gt;使用github Pages写博客的好处&lt;/h2&gt;
-&lt;p&gt;为什么说”一些程序员聚集的博客站点可能要小心应对了“呢？ 因为github Pages简直是为程序员量身定制的博客系统。
+&lt;p&gt;于是，一些&amp;rdquo;不务正业&amp;ldquo;的程序员就开始使用github Pages建立博客，现在这股风潮已经愈演愈烈，一些程序员聚集的博客站点可能要小心应对了。&lt;/p&gt;
+&lt;h2 id="shi-yong-github-pagesxie-bo-ke-de-hao-chu"&gt;使用github Pages写博客的好处&lt;/h2&gt;
+&lt;p&gt;为什么说&amp;rdquo;一些程序员聚集的博客站点可能要小心应对了&amp;ldquo;呢？ 因为github Pages简直是为程序员量身定制的博客系统。
 （当然，估计也只有程序员会愿意折腾这些事情）。&lt;/p&gt;
 &lt;p&gt;对我来说，使用github Pages写博客的好处主要体现在以下方面：
 1. 自由，随意定制
@@ -131,10 +125,10 @@ execute -&amp;gt; compare;
 4. 直接，只需提交，不需要先导出再提交，让人愿意持续更新文章
 5. 高效，使用markdown语言能提高写作的效率（但是个人觉得不如org-mode)
 6. 免费，无限流量，无限空间&lt;/p&gt;
-&lt;h2&gt;关于Jekyll Bootstrap&lt;/h2&gt;
+&lt;h2 id="guan-yu-jekyll-bootstrap"&gt;关于Jekyll Bootstrap&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://jekyllbootstrap.com/"&gt;jekyll-bootstrap&lt;/a&gt;是用Jekyll建立博客的一套模板，提供了主题（themes)、评论、。。等功能，&lt;/p&gt;
-&lt;p&gt;对于Jekyll的初学者能提供很大的帮助，其网站上号称“基于GitHub Pages建博客的最快方式”，可以“用3分钟就建立一个博客”。&lt;/p&gt;
-&lt;h2&gt;3分钟建立博客&lt;/h2&gt;
+&lt;p&gt;对于Jekyll的初学者能提供很大的帮助，其网站上号称&amp;ldquo;基于GitHub Pages建博客的最快方式&amp;rdquo;，可以&amp;ldquo;用3分钟就建立一个博客&amp;rdquo;。&lt;/p&gt;
+&lt;h2 id="3fen-zhong-jian-li-bo-ke"&gt;3分钟建立博客&lt;/h2&gt;
 &lt;p&gt;让我们看看上述工具的组合如何用3分钟建立博客。假设你已经有git的基础，在github上托管过项目。并且使用的不是windows。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 检查ruby版本
 ruby -v
@@ -164,10 +158,8 @@ git push origin master
 
 好了，等上几分钟，你的主页就发布在了https://USERNAME.github.com。
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h2&gt;其他操作&lt;/h2&gt;
-&lt;h3&gt;jekyll命令&lt;/h3&gt;
+&lt;h2 id="qi-ta-cao-zuo"&gt;其他操作&lt;/h2&gt;
+&lt;h3 id="jekyllming-ling"&gt;jekyll命令&lt;/h3&gt;
 &lt;p&gt;安装jekyll会产生一个命令行工具：jekyll，提供以下功能：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;build&lt;/span&gt;                &lt;span class="n"&gt;Build&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;site&lt;/span&gt;
 &lt;span class="n"&gt;doctor&lt;/span&gt;               &lt;span class="n"&gt;Search&lt;/span&gt; &lt;span class="n"&gt;site&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;specific&lt;/span&gt; &lt;span class="n"&gt;deprecation&lt;/span&gt; &lt;span class="n"&gt;warnings&lt;/span&gt;
@@ -176,9 +168,7 @@ git push origin master
 &lt;span class="n"&gt;new&lt;/span&gt;                  &lt;span class="n"&gt;Creates&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Jekyll&lt;/span&gt; &lt;span class="n"&gt;site&lt;/span&gt; &lt;span class="n"&gt;scaffold&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;PATH&lt;/span&gt;
 &lt;span class="n"&gt;serve&lt;/span&gt;                &lt;span class="n"&gt;Serve&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;site&lt;/span&gt; &lt;span class="n"&gt;locally&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h3&gt;Rakefile&lt;/h3&gt;
+&lt;h3 id="rakefile"&gt;Rakefile&lt;/h3&gt;
 &lt;p&gt;Jekyll-Bootstrap提供了一个Rakefile（ruby的makefile），包含一些博客相关的任务（task），包括：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ rake -T
 rake page           &lt;span class="c1"&gt;# Create a new page.&lt;/span&gt;
@@ -188,31 +178,27 @@ rake theme:install  &lt;span class="c1"&gt;# Install theme&lt;/span&gt;
 rake theme:package  &lt;span class="c1"&gt;# Package theme&lt;/span&gt;
 rake theme:switch   &lt;span class="c1"&gt;# Switch between Jekyll-bootstrap themes.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h1&gt;进阶篇&lt;/h1&gt;
-&lt;h2&gt;放弃Jekyll bootstrap&lt;/h2&gt;
+&lt;h1 id="jin-jie-pian_2"&gt;进阶篇&lt;/h1&gt;
+&lt;h2 id="fang-qi-jekyll-bootstrap"&gt;放弃Jekyll bootstrap&lt;/h2&gt;
 &lt;p&gt;Jekyll bootstrap确实能带来一些变量，但是和RoR一样，充满了各种puzzle。
-更加让中国人不爽的是，作者将其缩写定义为“JB”。&lt;/p&gt;
+更加让中国人不爽的是，作者将其缩写定义为&amp;ldquo;JB&amp;rdquo;。&lt;/p&gt;
 &lt;p&gt;经过初步的尝试后，我决定放弃JB，也不想尝试&lt;a href="http://octopress.org/"&gt;Octopress&lt;/a&gt;。我的选择是用原生的Jekyll来构建博客，让一切都在掌控之中。&lt;/p&gt;
-&lt;h2&gt;Jekyll的目录结构&lt;/h2&gt;
+&lt;h2 id="jekyllde-mu-lu-jie-gou"&gt;Jekyll的目录结构&lt;/h2&gt;
 &lt;p&gt;使用Jekyll创建一个干净的站点：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ jekyll new clearly
 $ tree clearly/
 clearly/
 ├── _config.yml
 ├── _layouts
-│   ├── default.html
-│   └── post.html
+│&amp;nbsp;&amp;nbsp; ├── default.html
+│&amp;nbsp;&amp;nbsp; └── post.html
 ├── _posts
-│   └── 2013-05-29-welcome-to-jekyll.markdown
+│&amp;nbsp;&amp;nbsp; └── 2013-05-29-welcome-to-jekyll.markdown
 ├── css
-│   ├── main.css
-│   └── syntax.css
+│&amp;nbsp;&amp;nbsp; ├── main.css
+│&amp;nbsp;&amp;nbsp; └── syntax.css
 └── index.html
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;其中，博客文章放在_posts目录中，可以使用子目录。
 博客文章必须使用
     YEAR-MONTH-DAY-title.MARKUP
@@ -220,27 +206,25 @@ clearly/
     2011-12-31-new-years-eve-is-awesome.md&lt;/p&gt;
 &lt;p&gt;_layouts目录存放页面模板，其他还可以使用html、css、image等静态资源。&lt;/p&gt;
 &lt;p&gt;Jekyll会把任何不以下划线开头的文件和目录都复制/生成到网站（在本地是生成到_site/目录)。&lt;/p&gt;
-&lt;h2&gt;设计模板&lt;/h2&gt;
+&lt;h2 id="she-ji-mo-ban"&gt;设计模板&lt;/h2&gt;
 &lt;p&gt;jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头部变量声明中指定了layout：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;---
 layout: post
 ...
 ---
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;则Jekyll在生成页面时会使用该模板进行渲染，用文档的内容替换模板中的{{ content }}部分。&lt;/p&gt;
 &lt;p&gt;模板本身也是文档，所以一个模板也可以用layout变量指定使用一个模板作为布局，这就是模板的继承。&lt;/p&gt;
 &lt;p&gt;此外，在设计模板时，利用好Liquid语言的include语法能够带来很大的变量。被包含的页面部件需要放在_includes文件夹中。&lt;/p&gt;
 &lt;p&gt;因为Jekyll生成的是静态站点，可能会需要大量的js以增加动态特性，在设计模板时要遵循&lt;a href="http://dev.opera.com/articles/view/the-seven-rules-of-unobtrusive-javascrip/"&gt;Unobtrusive JavaScript原则&lt;/a&gt;。&lt;/p&gt;
-&lt;h2&gt;灵活的导航&lt;/h2&gt;
+&lt;h2 id="ling-huo-de-dao-hang"&gt;灵活的导航&lt;/h2&gt;
 &lt;p&gt;使用静态的导航菜单会带来两个问题：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;文档过长&lt;/li&gt;
-&lt;li&gt;“当前项”的高亮不好处理&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;当前项&amp;rdquo;的高亮不好处理&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;可以在_config.yml中设置一个导航菜单的变量：&lt;/p&gt;
-&lt;p _="%" endhighlight&gt;{% highlight yaml %}
+&lt;p _="%" endhighlight=""&gt;{% highlight yaml %}
     menuitems:
     - name:         首页
       url:          /index.html
@@ -257,21 +241,19 @@ layout: post
     - name:         关于
       url:          /about.html&lt;/p&gt;
 &lt;p&gt;然后在模板的导航部分可以这样写：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;ul&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;nav&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;ul&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"nav"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
   {/% for item in site.menuitems %/}
     {/% if item.url == page.url %/}
-    &lt;span class="nt"&gt;&amp;lt;li&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;active&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;li&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"active"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
     {/% else %/}
     &lt;span class="nt"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;
     {/% endif %/}
-    &lt;span class="nt"&gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;item.url&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;item.name&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;item.url&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;item.name&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
   {/% endfor %/}
 &lt;span class="nt"&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h2&gt;分类、标签、归档和RSS&lt;/h2&gt;
+&lt;h2 id="fen-lei-biao-qian-gui-dang-he-rss"&gt;分类、标签、归档和RSS&lt;/h2&gt;
 &lt;p&gt;这些都是博客站点必须有的元素。分类、标签和归档可以安装不同的方式检索博客文章；RSS可以订阅博客。&lt;/p&gt;
 &lt;p&gt;用Jekyll的变量和模板很容易实现这些元素。&lt;/p&gt;
 &lt;p&gt;注意：不管文件的扩展名是md、html还是xml、txt，只要文件的头部包含变量声明，Jekyll的模板引擎就会对其进行处理。
@@ -279,15 +261,15 @@ layout: post
 &lt;p&gt;但如果不是写文档，最好不要使用md，否则会按照markdown语法进行渲染，带来一些意想不到的麻烦。&lt;/p&gt;
 &lt;p&gt;具体的例子可以参考JB中的代码。&lt;/p&gt;
 &lt;p&gt;你可能需要对每个分类、每个标签建立单独的索引页面，这个活手工做比较麻烦，可以使用Jekyll插件或者自己写脚本生成文件，
-但这不符合“KISS”原则，这里不进行探讨。&lt;/p&gt;
+但这不符合&amp;ldquo;KISS&amp;rdquo;原则，这里不进行探讨。&lt;/p&gt;
 &lt;p&gt;对于标签云(tag cloud)，在不使用插件的情况下，可以使用js实现，参考如下代码：
 {% highlight html %}
     &lt;div class="tag-cloud"&gt;
        {/% for tag in site.tags %/}
-          &lt;a href="/pages/tags.html#{/{ tag[0] }/}-ref" id="{/{ forloop.index }/}" class="__tag" style="margin: 5px"&gt;{/{ tag[0] }/}&lt;/a&gt;
+          &lt;a class="__tag" href="/pages/tags.html#{/{ tag[0] }/}-ref" id="{/{ forloop.index }/}" style="margin: 5px"&gt;{/{ tag[0] }/}&lt;/a&gt;
        {/% endfor %/}
     &lt;/div&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;script&lt;/span&gt; &lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;script&lt;/span&gt; &lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;"text/javascript"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
    $(function() {
       var minFont = 15.0,
           maxFont = 40.0,
@@ -303,19 +285,17 @@ layout: post
 
       {/% for tag in site.tags %/}
          size = (Math.log(&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;tag&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="nv"&gt;.size&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;) / Math.log(&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;max&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;)) * diffFont + minFont;
-         $(&amp;quot;#&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nb"&gt;forloop&lt;/span&gt;&lt;span class="nv"&gt;.index&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&amp;quot;).css(&amp;quot;font-size&amp;quot;, size + &amp;quot;px&amp;quot;);
+         $("#&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nb"&gt;forloop&lt;/span&gt;&lt;span class="nv"&gt;.index&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;").css("font-size", size + "px");
       {/% endfor %/}
    });
 &lt;span class="nt"&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;{% endhighlight %}&lt;/p&gt;
 &lt;p&gt;关于分类和标签的设计，可以参考&lt;a href="http://thinkinside.tk/2012/11/05/blog_design_categories_and_tags.html"&gt;这篇文章&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;分页&lt;/h2&gt;
+&lt;h2 id="fen-ye"&gt;分页&lt;/h2&gt;
 &lt;p&gt;TODO: ajax分页
 TODO: 浮动标题 on paginator&lt;/p&gt;
-&lt;h2&gt;语法高亮&lt;/h2&gt;
+&lt;h2 id="yu-fa-gao-liang"&gt;语法高亮&lt;/h2&gt;
 &lt;p&gt;对于程序员，博客中难免会包含一些代码。实现代码高亮可以有几种方法：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;利用外部资源，比如&lt;a href="https://gist.github.com/"&gt;GitHub Gist&lt;/a&gt;&lt;/li&gt;
@@ -330,9 +310,9 @@ TODO: 浮动标题 on paginator&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;推荐方式。支持&lt;a href="http://pygments.org/languages/"&gt;100多种语言&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;~~~本站采取js的方式。只需要在post的模板中进行配置，就可以为所有博文的代码进行渲染~~~&lt;/p&gt;
-&lt;p&gt;~~~Jekyll在编译markdown时，会将符合“代码格式”的内容放到一个&amp;lt; pre&amp;gt;&amp;lt; code&amp;gt;&lt;/ code&gt;&amp;lt; /pre&amp;gt;标签中。~~~
-~~~而prettify提供的js会对html中的所有&amp;lt; pre&amp;gt;&amp;lt; /pre&amp;gt;或&amp;lt; code&amp;gt;&lt;/ code&gt;区块进行处理，甚至会自动判断使用的语言。~~~&lt;/p&gt;
-&lt;p _="%" endhighlight&gt;~~~在post模板的合适位置中增加以下内容：~~~
+&lt;p&gt;~~~Jekyll在编译markdown时，会将符合&amp;ldquo;代码格式&amp;rdquo;的内容放到一个&amp;lt; pre&amp;gt;&amp;lt; code&amp;gt;&lt;/p&gt;&amp;lt; /pre&amp;gt;标签中。~~~
+~~~而prettify提供的js会对html中的所有&amp;lt; pre&amp;gt;&amp;lt; /pre&amp;gt;或&amp;lt; code&amp;gt;区块进行处理，甚至会自动判断使用的语言。~~~
+&lt;p _="%" endhighlight=""&gt;~~~在post模板的合适位置中增加以下内容：~~~
 {% highlight html %}
 &lt;link href="/js/google-code-prettify/prettify.css" rel="stylesheet"&gt;
 &lt;script src="/js/google-code-prettify/prettify.js"&gt;&lt;/script&gt;
@@ -340,7 +320,7 @@ TODO: 浮动标题 on paginator&lt;/p&gt;
 $(document).ready(function(){
      prettyPrint();
 });
-&lt;/script&gt;&lt;/p&gt;
+&lt;/script&gt;&lt;/link&gt;&lt;/p&gt;
 &lt;p&gt;~~~如果要更改配色方案，只需要修改css文件。~~~&lt;/p&gt;
 &lt;p&gt;本站采用pygments的方式：&lt;/p&gt;
 &lt;ul&gt;
@@ -359,7 +339,7 @@ $(document).ready(function(){
 &lt;li&gt;在代码的前后增加过滤器：&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;{% highlight ruby linenos %}&lt;/p&gt;
-&lt;p _="%/" endhighlight&gt;{/% highlight ruby linenos %/}
+&lt;p _="%/" endhighlight=""&gt;{/% highlight ruby linenos %/}
 def foo
   puts 'foo'
 end&lt;/p&gt;
@@ -368,21 +348,21 @@ end&lt;/p&gt;
 &lt;li&gt;更改样式&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;从&lt;a href="https://github.com/mojombo/tpw/blob/master/css/syntax.css"&gt;这里&lt;/a&gt;获取css样例，并自行更改。&lt;/p&gt;
-&lt;h2&gt;文档目录(TODO)&lt;/h2&gt;
+&lt;h2 id="wen-dang-mu-lu-todo"&gt;文档目录(TODO)&lt;/h2&gt;
 &lt;p&gt;如果写比较长的文章，提供一个类似于developerworks上的文档目录进行导航可以方便阅读。&lt;/p&gt;
-&lt;h2&gt;使用公式&lt;/h2&gt;
+&lt;h2 id="shi-yong-gong-shi"&gt;使用公式&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://www.mathjax.org/"&gt;MathJax&lt;/a&gt; is an open source JavaScript display engine for mathematics that works in all modern browsers.&lt;/p&gt;
 &lt;p&gt;使用maruku来解析markdown文件，可以把LaTeX解析成图片，&lt;/p&gt;
 &lt;p&gt;优点是网页加载速度快。但是在windows下安装复杂，且需要安装有LaTeX
         Mathjax  &lt;a href="http://www.mathjax.org/"&gt;http://www.mathjax.org/&lt;/a&gt;，缺点是动态加载，速度慢。&lt;/p&gt;
 &lt;p&gt;参考：http://chen.yanping.me/cn/blog/2012/03/10/octopress-with-latex/&lt;/p&gt;
-&lt;h2&gt;处理图片&lt;/h2&gt;
+&lt;h2 id="chu-li-tu-pian"&gt;处理图片&lt;/h2&gt;
 &lt;p&gt;设置一个IMAGE_ROOT变量，可以可以在post中设置，也可以在post的模板中通过指定的规则capture（或者assign）。&lt;/p&gt;
 &lt;p&gt;则引可以使用{{page.IMAGE_ROOT}}/xxx.png的形式插入图片，便于以后的调整和管理。&lt;/p&gt;
 &lt;p&gt;{{page.url}}
 page_url&lt;/p&gt;
-&lt;h2&gt;处理表格(TODO)&lt;/h2&gt;
-&lt;h2&gt;博客搬家（TODO）&lt;/h2&gt;
+&lt;h2 id="chu-li-biao-ge-todo"&gt;处理表格(TODO)&lt;/h2&gt;
+&lt;h2 id="bo-ke-ban-jia-todo"&gt;博客搬家（TODO）&lt;/h2&gt;
 &lt;p&gt;用Jekyll写博客的，通常不会是新博主，会存在博客搬家的需求。&lt;/p&gt;
 &lt;p&gt;Jekyll提供了一个import的子命令(需要插件jekyll-import），可以将旧的博客导入到Jekyll。&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/thomasf/exitwp"&gt;exitwp&lt;/a&gt;是一个用python开发的工具，号称是将wordpress的博客导出并转换成markdown，但实际上
@@ -394,10 +374,8 @@ wget http://your/atom/file/xml
 cd ..
 python exitwp.py
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h1&gt;推广篇&lt;/h1&gt;
-&lt;h2&gt;使用域名&lt;/h2&gt;
+&lt;h1 id="tui-yan-pian_1"&gt;推广篇&lt;/h1&gt;
+&lt;h2 id="shi-yong-yu-ming"&gt;使用域名&lt;/h2&gt;
 &lt;p&gt;Github Pages会为站点分配类似"USERNAME.github.com"的二级域名。你也可以使用自己的域名。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;申请域名&lt;/li&gt;
@@ -421,7 +399,7 @@ python exitwp.py
 &lt;li&gt;如果使用顶级域名，在域名解析服务提供商那里将A记录指向&lt;a href="1"&gt;204.232.175.78&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;如果使用二级域名，在域名解析服务提供商那里增加CNAME记录，指向&lt;a href="1"&gt;204.232.175.78&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2&gt;社会化网络&lt;/h2&gt;
+&lt;h2 id="she-hui-hua-wang-luo"&gt;社会化网络&lt;/h2&gt;
 &lt;p&gt;Jekyll生成的是静态网站，诸如评论、推荐、关注之类的功能就无法实现了。&lt;/p&gt;
 &lt;p&gt;不过好在现在有很多社会化网络应用，通过混搭(marshup) 可以把各种各样第三方的功能部件（widgets）加到你的博客中。&lt;/p&gt;
 &lt;p&gt;与博客相关的Widget主要有几类：&lt;/p&gt;
@@ -446,7 +424,7 @@ python exitwp.py
 &lt;/ol&gt;
 &lt;p&gt;可以发布简短的动态。比如Twitter, Facebook, Google Plus, 新浪微博等网站。与博客的联动可以是自己发布博客动态，
    也可以是由别人推荐（这种方式即为社会化推荐）。&lt;/p&gt;
-&lt;p&gt;如果是自己发布动态，需要让别人能够方便的“关注/Follow”你，最好提供“一键关注的按钮”，或者提供连接能够让别人在这些网上方便的找到你。&lt;/p&gt;
+&lt;p&gt;如果是自己发布动态，需要让别人能够方便的&amp;ldquo;关注/Follow&amp;rdquo;你，最好提供&amp;ldquo;一键关注的按钮&amp;rdquo;，或者提供连接能够让别人在这些网上方便的找到你。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;社会化登录&lt;/li&gt;
 &lt;/ol&gt;
@@ -465,7 +443,7 @@ python exitwp.py
 &lt;li&gt;分享功能&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;只选一个，还是选择&lt;a href="http://share.baidu.com/"&gt;百度分享&lt;/a&gt;吧，与&lt;a href="http://tongji.baidu.com/web/welcome/login"&gt;百度统计&lt;/a&gt;可以勾搭在一起，而且据说有利于百度的SEO。&lt;/p&gt;
-&lt;h2&gt;流量分析和统计&lt;/h2&gt;
+&lt;h2 id="liu-liang-fen-xi-he-tong-ji"&gt;流量分析和统计&lt;/h2&gt;
 &lt;p&gt;第三方的流量分析和统计工具可以说是最古老的marshup，尽管没有社会化网络的功能。&lt;/p&gt;
 &lt;p&gt;可以选择的有国外的&lt;a href="http://www.google.cn/intl/zh-CN_ALL/analytics/"&gt;Google Analysis&lt;/a&gt;、&lt;a href="http://www.sitemeter.com"&gt;SiteMeter&lt;/a&gt;和国内的&lt;a href="http://tongji.baidu.com/web/welcome/login"&gt;百度统计&lt;/a&gt;、
    &lt;a href="http://linezing.com"&gt;量子恒道统计&lt;/a&gt;等。&lt;/p&gt;
@@ -490,7 +468,7 @@ emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;经过艰难的取舍，还是决定在个人工作领域也回到vim。保护手指，保护大脑。&lt;/p&gt;
-&lt;h1&gt;插件管理器(Vundle)&lt;/h1&gt;
+&lt;h1 id="cha-jian-guan-li-qi-vundle"&gt;插件管理器(Vundle)&lt;/h1&gt;
 &lt;p&gt;重新关注vim后，首先发现了一系列插件管理器。主要有：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href="https://github.com/gmarik/vundle"&gt;Vundle&lt;/a&gt;&lt;/li&gt;
@@ -506,98 +484,78 @@ emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是
 &lt;li&gt;支持插件搜索功能&lt;/li&gt;
 &lt;li&gt;自动管理插件依赖关系&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2&gt;安装Vundle&lt;/h2&gt;
+&lt;h2 id="an-zhuang-vundle"&gt;安装Vundle&lt;/h2&gt;
 &lt;p&gt;安装Vundle只需要一条命令：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;如果你使用git管理vim配置，还可以使用git submodule：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git submodule add https://github.com/gmarik/vundle.git vim/bundle/vundle
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;会在.gitmodule中增加如下配置：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[submodule &amp;quot;vim/bundle/vundle&amp;quot;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[submodule "vim/bundle/vundle"]&lt;/span&gt;
     &lt;span class="na"&gt;path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;vim/bundle/vundle&lt;/span&gt;
 &lt;span class="s"&gt;    url = https://github.com/gmarik/vundle.git&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;之后运行git命令：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git submodule init
 git submodule update
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;即可。&lt;/p&gt;
-&lt;h2&gt;配置插件&lt;/h2&gt;
+&lt;h2 id="pei-zhi-cha-jian"&gt;配置插件&lt;/h2&gt;
 &lt;p&gt;在.vimrc中配置需要的插件，作者给出了一个例子：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;set nocompatible               &amp;quot; be iMproved
-filetype off                   &amp;quot; required!
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;set nocompatible               " be iMproved
+filetype off                   " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 
-&amp;quot; let Vundle manage Vundle
-&amp;quot; required!
-Bundle &amp;#39;gmarik/vundle&amp;#39;
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
 
 
-&amp;quot; My Bundles here:
-&amp;quot;
-&amp;quot; original repos on github
-Bundle &amp;#39;tpope/vim-fugitive&amp;#39;
-Bundle &amp;#39;Lokaltog/vim-easymotion&amp;#39;
-Bundle &amp;#39;rstacruz/sparkup&amp;#39;, {&amp;#39;rtp&amp;#39;: &amp;#39;vim/&amp;#39;}
-Bundle &amp;#39;tpope/vim-rails.git&amp;#39;
-&amp;quot; vim-scripts repos
-Bundle &amp;#39;L9&amp;#39;
-Bundle &amp;#39;FuzzyFinder&amp;#39;
-&amp;quot; non github repos
-Bundle &amp;#39;git://git.wincent.com/command-t.git&amp;#39;
-&amp;quot; ...
+" My Bundles here:
+"
+" original repos on github
+Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Bundle 'tpope/vim-rails.git'
+" vim-scripts repos
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+" non github repos
+Bundle 'git://git.wincent.com/command-t.git'
+" ...
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;注意：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;对于重名的Vim插件，需要在插件后面加上作者的姓氏， 比如 Bundle 'Javascript-Indentation'&lt;/li&gt;
 &lt;li&gt;对于插件名称中包含空格和斜杠的情况， 需要将空格和斜杠替换为 -&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2&gt;安装插件&lt;/h2&gt;
+&lt;h2 id="an-zhuang-cha-jian"&gt;安装插件&lt;/h2&gt;
 &lt;p&gt;只需要在启动vim后，运行命令：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;:BundleInstall
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;Vbundle就会自动安装或更新前面配置好的插件&lt;/p&gt;
-&lt;h2&gt;其他操作&lt;/h2&gt;
+&lt;h2 id="qi-ta-cao-zuo"&gt;其他操作&lt;/h2&gt;
 &lt;p&gt;使用帮助：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;:h vundle
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;查看插件清单：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;:BundleList
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;搜索插件：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;:BundleSearch markdown
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;清理不用的插件：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;:BundleClean
 #或者
 :BundleClean markdown
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h1&gt;必备插件（TODO）&lt;/h1&gt;
+&lt;h1 id="bi-bei-cha-jian-todo_1"&gt;必备插件（TODO）&lt;/h1&gt;
 &lt;p&gt;下面是我使用的一些vim插件，直接在.vimrc中配置。可以在 &lt;a href="https://github.com/holbrook/macENV/blob/master/vimrc"&gt;github&lt;/a&gt; 查看。&lt;/p&gt;
-&lt;h2&gt;编辑器增强&lt;/h2&gt;
+&lt;h2 id="bian-ji-qi-zeng-qiang"&gt;编辑器增强&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href="https://github.com/scrooloose/nerdtree"&gt;NERDTree&lt;/a&gt;（Bundle 'The-NERD-tree'）可以在窗口左侧打开文件浏览器&lt;/p&gt;
@@ -608,16 +566,16 @@ Bundle &amp;#39;git://git.wincent.com/command-t.git&amp;#39;
 &lt;li&gt;Bundle 'winmanager'&lt;/li&gt;
 &lt;li&gt;Bundle 'SuperTab'&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;语法高亮&lt;/h2&gt;
+&lt;h2 id="yu-fa-gao-liang"&gt;语法高亮&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Markdown（Bundle 'Markdown'） markdown文件的语法高亮&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;vim基本操作&lt;/h1&gt;
+&lt;h1 id="vimji-ben-cao-zuo_1"&gt;vim基本操作&lt;/h1&gt;
 &lt;p&gt;以前整理过一个 &lt;a href="http://www.cnblogs.com/holbrook/archive/2009/05/13/2357377.html"&gt;vim 常用命令备忘&lt;/a&gt;, 如下：&lt;/p&gt;
 &lt;p&gt;&lt;a href="images/2013/vim_addon_manager/vim_cheet_sheet.xlsx"&gt;vim_cheet_sheet.xlsx&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;别人的一个更详细的版本：&lt;/p&gt;
 &lt;p&gt;&lt;a href="images/2013/vim_addon_manager/vi-vim-cheat-sheet-list.png"&gt;vi-vim-cheat-sheet-list&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;如果已经有一定的基础，还可以使用vim cheat sheet。下面的图分别可以用于打印版或者桌面背景。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="打印版，Eng" src="images/2013/vim_addon_manager/vi-vim-cheat-sheet.gif"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="打印版，Chs" src="images/2013/vim_addon_manager/vi-vim-cheat-sheet-sch.gif"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="桌面版，Eng" src="images/2013/vim_addon_manager/vi-vim_cheat_sheet_dark.png"&gt;&lt;/p&gt;</content><category term="vim"></category></entry><entry><title>如何规划blog的分类和标签</title><link href="http://holbrook.github.io/2012/11/05/2012-11-05-blog_design_categories_and_tags.html" rel="alternate"></link><published>2012-11-05T00:00:00+08:00</published><updated>2012-11-05T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2012-11-05:/2012/11/05/2012-11-05-blog_design_categories_and_tags.html</id><summary type="html">&lt;p&gt;使用知识地图的思想规划博客的标签(tags)和分类(categories)&lt;/p&gt;</summary><content type="html">&lt;p&gt;一篇旧的博文，原文发表在&lt;a href="http://www.cnblogs.com/holbrook/archive/2012/11/05/2755268.html"&gt;博客园&lt;/a&gt;。&lt;/p&gt;</content><category term="blog"></category><category term="知识管理"></category></entry></feed>
+&lt;p&gt;&lt;img alt="打印版，Eng" src="images/2013/vim_addon_manager/vi-vim-cheat-sheet.gif"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="打印版，Chs" src="images/2013/vim_addon_manager/vi-vim-cheat-sheet-sch.gif"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="桌面版，Eng" src="images/2013/vim_addon_manager/vi-vim_cheat_sheet_dark.png"/&gt;&lt;/p&gt;</content><category term="vim"></category></entry><entry><title>如何规划blog的分类和标签</title><link href="http://holbrook.github.io/2012/11/05/2012-11-05-blog_design_categories_and_tags.html" rel="alternate"></link><published>2012-11-05T00:00:00+08:00</published><updated>2012-11-05T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2012-11-05:/2012/11/05/2012-11-05-blog_design_categories_and_tags.html</id><summary type="html">&lt;p&gt;使用知识地图的思想规划博客的标签(tags)和分类(categories)&lt;/p&gt;</summary><content type="html">&lt;p&gt;一篇旧的博文，原文发表在&lt;a href="http://www.cnblogs.com/holbrook/archive/2012/11/05/2755268.html"&gt;博客园&lt;/a&gt;。&lt;/p&gt;</content><category term="blog"></category><category term="知识管理"></category></entry></feed>

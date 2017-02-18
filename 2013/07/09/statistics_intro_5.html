@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,6 +138,15 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">《统计学》读书笔记(5/17:简单统计推断：总体参数的估计)</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="《统计学》读书笔记(5/17:简单统计推断：总体参数的估计)">《统计学》读书笔记(5/17:简单统计推断：总体参数的估计)</a><ul><li><a class="toc-href" href="#51-yong-gu-ji-liang-gu-ji-zong-ti-can-shu" title="5.1 用估计量估计总体参数">5.1 用估计量估计总体参数</a><ul><li><a class="toc-href" href="#jia-ding-fen-bu-zu" title="假定分布族">假定分布族</a></li><li><a class="toc-href" href="#que-ding-ju-ti-fen-bu" title="确定具体分布">确定具体分布</a></li></ul></li><li><a class="toc-href" href="#52-dian-gu-ji_1" title="5.2 点估计">5.2 点估计</a></li><li><a class="toc-href" href="#53-qu-jian-gu-ji" title="5.3 区间估计">5.3 区间估计</a></li><li><a class="toc-href" href="#54-guan-yu-zhi-xin-qu-jian-de-zhu-yi-dian" title="5.4 关于置信区间的注意点">5.4 关于置信区间的注意点</a></li><li><a class="toc-href" href="#55-xiao-jie-lue" title="5.5 小结（略）">5.5 小结（略）</a></li></ul></li></ul></div>
+	</div>
+
+
+
 	<p>统计推断(statistical inference)：从数据得到关于现实世界的结论的过程。</p>
 <p>由于统计学的研究对象是不可能穷举的大量个体，通常需要通过抽样方法得到样本，再用样本去推断总体的情况，
 所以统计推断得出的不是一个精确的结论，而是近似结果。</p>
@@ -147,15 +156,15 @@
 <li>假设检验(hypothesis testing)</li>
 </ul>
 <p>本章介绍估计，下一章介绍假设检验</p>
-<h1>5.1 用估计量估计总体参数</h1>
-<h2>假定分布族</h2>
+<h1 id="51-yong-gu-ji-liang-gu-ji-zong-ti-can-shu">5.1 用估计量估计总体参数</h1>
+<h2 id="jia-ding-fen-bu-zu">假定分布族</h2>
 <p>在通过样本信息推断总体情况之前，先假设总体的属性复合某种分布特征（分布族）。比如：</p>
 <ul>
 <li>假设身高符合正态分布族</li>
 <li>假设对某个观点的认同与否符合二项分布族</li>
 </ul>
 <p>这些假设一半是通过经验获得，无法明确的证明。</p>
-<h2>确定具体分布</h2>
+<h2 id="que-ding-ju-ti-fen-bu">确定具体分布</h2>
 <p>一个分布族下面的各种分布只是参数不同，通过研究样本确定这些参数，也就确定了具体分布。</p>
 <p>常见的分布参数：</p>
 <ul>
@@ -173,7 +182,7 @@ Bernoulli分布由概率一个参数决定</p>
 <li>点估计(point estimation)：用一个估计值来近似总体参数</li>
 <li>区间估计(interval estimation)：用一个包括估计值在内的区间表示总体参数很可能处于的范围</li>
 </ul>
-<h1>5.2 点估计</h1>
+<h1 id="52-dian-gu-ji_1">5.2 点估计</h1>
 <p>任何统计量都可以作为估计量。</p>
 <p>估计量的命名可以来自：</p>
 <ul>
@@ -188,7 +197,7 @@ Bernoulli分布由概率一个参数决定</p>
 </ul>
 <p>无偏估计量(unblased estimator)：多个样本产生的估计量的期望等于要估计的总体参数，这样的估计量称为无偏估计量。</p>
 <p>上述三种估计量都是无偏估计量。</p>
-<h1>5.3 区间估计</h1>
+<h1 id="53-qu-jian-gu-ji">5.3 区间估计</h1>
 <p>为了更准确的表达估算量，通常采用点估计和区间估计结合的说法。比如：</p>
 <p>估计值+置信区间+置信度</p>
 <p>其中：</p>
@@ -197,14 +206,32 @@ Bernoulli分布由概率一个参数决定</p>
 <li>置信区间(confidence interval)是以估计值为中心的区间估计，包括上限(upper bound)和下限(lower bound)</li>
 <li>置信度（confidence level）是抽取大量样本时，该区间会覆盖样本估计值的比例</li>
 </ul>
-<h1>5.4 关于置信区间的注意点</h1>
+<h1 id="54-guan-yu-zhi-xin-qu-jian-de-zhu-yi-dian">5.4 关于置信区间的注意点</h1>
 <p>置信度描述的是统计量覆盖总体参数的概率，而不是置信区间覆盖总体参数的概率</p>
 <p>置信度越低，则置信区间越窄</p>
-<h1>5.5 小结（略）</h1>
+<h1 id="55-xiao-jie-lue">5.5 小结（略）</h1>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-07-09.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2013/12/11/statistics_intro_9.html">《统计学》读书笔记(9/17:方差分析)</a></li>
+        <li><a href="http://holbrook.github.io/2013/09/05/statistics_intro_8.html">《统计学》读书笔记(8/17:列连表，x^2检验和对数线性模型)</a></li>
+        <li><a href="http://holbrook.github.io/2013/08/05/statistics_intro_7.html">《统计学》读书笔记(7/17:相关和回归分析)</a></li>
+        <li><a href="http://holbrook.github.io/2013/08/02/statistics_intro_6.html">《统计学》读书笔记(6/17:简单统计推断：总体参数的假设检验)</a></li>
+        <li><a href="http://holbrook.github.io/2013/06/07/statistics_intro_4.html">《统计学》读书笔记(4/17:机会的度量：概率和分布)</a></li>
+        <li><a href="http://holbrook.github.io/2013/05/31/statistics_intro_3.html">《统计学》读书笔记(3/17:数据的描述)</a></li>
+        <li><a href="http://holbrook.github.io/2013/05/19/statistics_intro_2.html">《统计学》读书笔记(2/17:数据的收集)</a></li>
+        <li><a href="http://holbrook.github.io/2013/05/12/statistics_intro_1.html">《统计学》读书笔记(1/17:一些基本概念)</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -243,6 +270,8 @@ Bernoulli分布由概率一个参数决定</p>
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -260,37 +289,37 @@ Bernoulli分布由概率一个参数决定</p>
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

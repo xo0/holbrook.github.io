@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,18 +138,27 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">《统计学》读书笔记(9/17:方差分析)</h1>
-	<h1>问题的提出</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="《统计学》读书笔记(9/17:方差分析)">《统计学》读书笔记(9/17:方差分析)</a><ul><li><a class="toc-href" href="#wen-ti-de-ti-chu" title="问题的提出">问题的提出</a></li><li><a class="toc-href" href="#fang-chai-fen-xi-gai-shu" title="方差分析概述">方差分析概述</a></li><li><a class="toc-href" href="#zhi-kao-lu-zhu-xiao-ying-de-fang-chai-fen-xi" title="只考虑主效应的方差分析">只考虑主效应的方差分析</a></li><li><a class="toc-href" href="#kao-lu-zhu-xiao-ying-he-jiao-hu-xiao-ying" title="考虑主效应和交互效应">考虑主效应和交互效应</a></li><li><a class="toc-href" href="#kao-lu-xie-bian-liang" title="考虑协变量">考虑协变量</a></li></ul></li></ul></div>
+	</div>
+
+
+
+	<h1 id="wen-ti-de-ti-chu">问题的提出</h1>
 <p>对于一个模型，需要调整其各个因子(factor)，以使模型达到最好的效果。</p>
 <p>每个因子的取值是离散的，称为该因子的水平(level)</p>
 <p>需要对各个因子的不同水平进行组合实验，才能得出一组最佳的因子水平</p>
 <p>如何设置因子的不同水平，以及如何进行组合实验，属于实验设计的范畴，实验设计模型可以说是回归模型的一种。</p>
 <p>这里探讨的不是如何设计实验，而是如何对实验的结果进行分析</p>
-<h1>方差分析概述</h1>
+<h1 id="fang-chai-fen-xi-gai-shu">方差分析概述</h1>
 <p>方差分析（analysis of variance, ANOVA），分析各个自变量对因变量的影响的一种方法。</p>
 <p>自变量包括：</p>
 <ul>
-<li>因子——定性变量</li>
-<li>协变量（convariate）——定量变量</li>
+<li>因子&mdash;&mdash;定性变量</li>
+<li>协变量（convariate）&mdash;&mdash;定量变量</li>
 </ul>
 <p>分析的结果是一个方差分析表</p>
 <p>原理：</p>
@@ -161,27 +170,45 @@
 <li>判断出自变量的不同水平/值是否对因变量的变化有显著贡献</li>
 <li>最终结果：F检验的一些p-值</li>
 </ul>
-<h1>只考虑主效应的方差分析</h1>
+<h1 id="zhi-kao-lu-zhu-xiao-ying-de-fang-chai-fen-xi">只考虑主效应的方差分析</h1>
 <p>对因变量的影响包括各个因素的主效应(main effect)、交互效应(interaction)和协变量</p>
 <p>对于两个自变量（水平分别为3个和4个）的一个模型，如果只考虑主效应，其线性模型为：</p>
-<p><img alt="" src="images/statistics/9-1.png"></p>
+<p><img alt="" src="images/statistics/9-1.png"/></p>
 <p>其中：</p>
 <ul>
 <li>i,j分别为两个自变量的各个水平</li>
 <li>k为每个(i,j)组合的多个观测值的编号</li>
 <li>最后一项为误差项，方差分析中假定误差项是独立的，并且符合正态分布</li>
 </ul>
-<h1>考虑主效应和交互效应</h1>
+<h1 id="kao-lu-zhu-xiao-ying-he-jiao-hu-xiao-ying">考虑主效应和交互效应</h1>
 <p>此时的线性模型增加了交叉项：</p>
-<p><img alt="" src="images/statistics/9-2.png"></p>
-<h1>考虑协变量</h1>
+<p><img alt="" src="images/statistics/9-2.png"/></p>
+<h1 id="kao-lu-xie-bian-liang">考虑协变量</h1>
 <p>此时的模型变成：</p>
-<p><img alt="" src="images/statistics/9-3.png"></p>
+<p><img alt="" src="images/statistics/9-3.png"/></p>
 <p>加上了一个自变量x，及其相关系数。</p>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-12-11.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2013/09/05/statistics_intro_8.html">《统计学》读书笔记(8/17:列连表，x^2检验和对数线性模型)</a></li>
+        <li><a href="http://holbrook.github.io/2013/08/05/statistics_intro_7.html">《统计学》读书笔记(7/17:相关和回归分析)</a></li>
+        <li><a href="http://holbrook.github.io/2013/08/02/statistics_intro_6.html">《统计学》读书笔记(6/17:简单统计推断：总体参数的假设检验)</a></li>
+        <li><a href="http://holbrook.github.io/2013/07/09/statistics_intro_5.html">《统计学》读书笔记(5/17:简单统计推断：总体参数的估计)</a></li>
+        <li><a href="http://holbrook.github.io/2013/06/07/statistics_intro_4.html">《统计学》读书笔记(4/17:机会的度量：概率和分布)</a></li>
+        <li><a href="http://holbrook.github.io/2013/05/31/statistics_intro_3.html">《统计学》读书笔记(3/17:数据的描述)</a></li>
+        <li><a href="http://holbrook.github.io/2013/05/19/statistics_intro_2.html">《统计学》读书笔记(2/17:数据的收集)</a></li>
+        <li><a href="http://holbrook.github.io/2013/05/12/statistics_intro_1.html">《统计学》读书笔记(1/17:一些基本概念)</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -220,6 +247,8 @@
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -237,37 +266,37 @@
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

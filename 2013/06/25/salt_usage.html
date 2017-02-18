@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,12 +138,21 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">salt的主要功能及使用</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="salt的主要功能及使用">salt的主要功能及使用</a><ul><li><a class="toc-href" href="#pi-liang-cao-zuo-targeting" title="批量操作(targeting)">批量操作(targeting)</a></li><li><a class="toc-href" href="#jie-dian-fen-zu-nodegroups" title="节点分组（nodegroups）">节点分组（nodegroups）</a></li><li><a class="toc-href" href="#ming-ling-bian-pai-execution" title="命令编排（execution）">命令编排（execution）</a></li><li><a class="toc-href" href="#jie-dian-xin-xi-grains" title="节点信息(grains)">节点信息(grains)</a></li><li><a class="toc-href" href="#pei-zhi-guan-li-state" title="配置管理（state)">配置管理（state)</a><ul><li><a class="toc-href" href="#zhuang-tai-miao-shu" title="状态描述">状态描述</a><ul><li><a class="toc-href" href="#ji-ben-miao-shu-yaml" title="基本描述(yaml)">基本描述(yaml)</a></li><li><a class="toc-href" href="#kuo-zhan-miao-shu-jinja" title="扩展描述(jinja)">扩展描述(jinja)</a></li><li><a class="toc-href" href="#luo-ji-guan-xi" title="逻辑关系">逻辑关系</a></li></ul></li><li><a class="toc-href" href="#bao-cun-zhuang-tai_1" title="保存状态">保存状态</a></li><li><a class="toc-href" href="#zhuang-tai-sheng-xiao-state-enforcement" title="状态生效（State Enforcement）">状态生效（State Enforcement）</a></li><li><a class="toc-href" href="#geng-duo" title="更多">更多</a></li></ul></li><li><a class="toc-href" href="#xiao-jie_1" title="小结">小结</a></li></ul></li></ul></div>
+	</div>
+
+
+
 	<p>掌握了这些内容，可以使用Salt极大提高运维的效率（事实上，Salt对于开发阶段也能提供很大的帮助，开发和运维的界限正在逐渐模糊）。</p>
 <p><a href="/2013/06/24/salt_intro.html">Salt的介绍</a>中提到了Salt支持变更操作、配置管理、状态监控所需的一些功能，如下图：</p>
-<p><img alt="salt_functions" src="images/2013/salt_usage/salt_functions.png"></p>
+<p><img alt="salt_functions" src="images/2013/salt_usage/salt_functions.png"/></p>
 <p>本文详细介绍如何使用这些功能。</p>
 <p>如果想对Salt的功能和使用有一个初步的了解，最好参考官方文档：<a href="http://salt.readthedocs.org/en/latest/topics/tutorials/walkthrough.html">Salt Stack Walkthrough</a>。</p>
-<h1>批量操作(targeting)</h1>
+<h1 id="pi-liang-cao-zuo-targeting">批量操作(targeting)</h1>
 <p>再回顾一下<a href="http://thinkinside.tk/2013/06/24/salt_intro.html#测试-ref">前文中的例子</a>:</p>
 <p>{% highlight bash %}</p>
 <p># 测试连通性
@@ -179,7 +188,7 @@
 <p>{% endhighlight %}</p>
 <p><a href="http://docs.saltstack.com/topics/targeting/compound.html">复合匹配(Compound matchers)</a>有点复杂，后续会在其他文章中专门介绍。</p>
 <p>分组匹配见本文的下一节。</p>
-<h1>节点分组（nodegroups）</h1>
+<h1 id="jie-dian-fen-zu-nodegroups">节点分组（nodegroups）</h1>
 <p>好吧，批量操作确实很爽。但是每次都输入匹配规则有点麻烦，对于复杂的匹配规则更是如此。
 salt的 [nodegroups功能]((http://docs.saltstack.com/topics/targeting/nodegroups.html)可以将常用的匹配规则保存下来（称之为minion的分组）。批量操作是，只需要使用L标记指定要操作的group名字即可。
 groups定义在master的配置文件<code>/etc/salt/master</code>中。</p>
@@ -189,7 +198,7 @@ groups定义在master的配置文件<code>/etc/salt/master</code>中。</p>
 group2: 'G@os:Debian and foo.domain.com'</p>
 <p>{% endhighlight %}</p>
 <p>同样的，使用复合匹配(Compound matchers)定义group的内容不在本文范围之内。</p>
-<h1>命令编排（execution）</h1>
+<h1 id="ming-ling-bian-pai-execution">命令编排（execution）</h1>
 <p>Salt生来就有命令编排的功能。据说，Salt最先实现的是远程执行技术，然后才添加的配置管理功能。Salt使用ZeroMQ来处理命令执行的请求和响应消息，安装配置简单，并且性能非常高。</p>
 <p>Salt即可以批量执行命令，也可以单机执行。通常单机执行用于测试：</p>
 <ul>
@@ -216,11 +225,9 @@ group2: 'G@os:Debian and foo.domain.com'</p>
 </ul>
 <p>而且，自己开发Salt模块也非常简单，很容易将实际管理操作中的一些经验通过自定义的模块固化下来，并方便分享。</p>
 <p>在开发和调试模块的时候，可以使用<code>test=True</code>参数进行模拟执行(Dry run)。比如：</p>
-<div class="highlight"><pre><span></span>salt &#39;minion1.example.com&#39; state.highstate -v test=True
+<div class="highlight"><pre><span></span>salt 'minion1.example.com' state.highstate -v test=True
 </pre></div>
-
-
-<h1>节点信息(grains)</h1>
+<h1 id="jie-dian-xin-xi-grains">节点信息(grains)</h1>
 <p><a href="http://docs.saltstack.com/topics/targeting/grains.html">grains</a>是Salt内置的一个非常有用的模块。在用salt进行管理客户端的时候或者写state的时候都可以引用grains的变量。</p>
 <p>grains的基本使用举例如下：</p>
 <p>{% highlight bash %}</p>
@@ -231,15 +238,15 @@ group2: 'G@os:Debian and foo.domain.com'</p>
 <p># 查看grains某个信息
  salt '*' grains.item osrelease</p>
 <p>{% endhighlight %}</p>
-<h1>配置管理（state)</h1>
+<h1 id="pei-zhi-guan-li-state">配置管理（state)</h1>
 <p>配置管理是Salt中非常重要的内容之一。Salt通过内置的state模块支持配置管理所需的功能。关于这部分内容，官方文档有很详细的描述，可以参考
 <a href="http://salt.readthedocs.org/en/latest/topics/tutorials/states_pt1.html">part 1</a>，
 <a href="http://salt.readthedocs.org/en/latest/topics/tutorials/states_pt2.html">part 2</a>和
 <a href="http://salt.readthedocs.org/en/latest/topics/tutorials/states_pt3.html">part 3</a>。</p>
 <p>Salt中可以定义节点的目标状态，称之为state。state对应配置管理中的配置，可以对其进行标识、变更控制、变更识别、状态报告、跟踪和归档以及审计等一些的管理行为。</p>
-<h2>状态描述</h2>
+<h2 id="zhuang-tai-miao-shu">状态描述</h2>
 <p>Salt使用SLS文件（SaLt State file）描述状态。SLS使用<a href="http://yaml.org/spec/1.1/">YAML</a>格式进行数据序列化，因此简单明了，可读性也很高。</p>
-<h3>基本描述(yaml)</h3>
+<h3 id="ji-ben-miao-shu-yaml">基本描述(yaml)</h3>
 <p>下边是一个简单的SLS文件例子:</p>
 <p>{% highlight yaml %}</p>
 <p>apache:
@@ -260,7 +267,7 @@ group2: 'G@os:Debian and foo.domain.com'</p>
 <p>Salt内置了大量的state模块，比如cron, cmd, file, group, host, mount, pkg, service, ssh_auth，user等。
 详细清单参考<a href="http://docs.saltstack.com/ref/states/all/index.html">这里</a>。</p>
 <p>还可以开发自己的state模块。</p>
-<h3>扩展描述(jinja)</h3>
+<h3 id="kuo-zhan-miao-shu-jinja">扩展描述(jinja)</h3>
 <p>state可以使用<a href="http://jinja.pocoo.org/">jinja</a>模板引擎进行扩展，其语法可以参考<a href="http://jinja.pocoo.org/docs/templates/">这里</a>。</p>
 <p>下面是一个更复杂的例子：</p>
 <p>{% highlight html+jinja %}</p>
@@ -276,12 +283,12 @@ group2: 'G@os:Debian and foo.domain.com'</p>
     - installed</p>
 <p>{% endhighlight %}</p>
 <p>该state增加了判断逻辑：如果是redhard系列的就安装 vim-enhanced，如果系统是Debian或者Ubuntu就安装vim-nox。</p>
-<h3>逻辑关系</h3>
+<h3 id="luo-ji-guan-xi">逻辑关系</h3>
 <p>state之间可以有<a href="http://docs.saltstack.com/ref/states/ordering.html">逻辑关系</a>。常见的关系举例如下：</p>
 <ul>
 <li>require：依赖某个state，在运行此state前，先运行依赖的state，依赖可以有多个</li>
 </ul>
-<p _="%" endhighlight>{% highlight yaml %}
+<p _="%" endhighlight="">{% highlight yaml %}
  httpd:
    pkg:
      - installed
@@ -293,7 +300,7 @@ group2: 'G@os:Debian and foo.domain.com'</p>
 <ul>
 <li>watch：在某个state变化时运行此模块</li>
 </ul>
-<p _="%" endhighlight>{% highlight yaml %}
+<p _="%" endhighlight="">{% highlight yaml %}
 redis:
   pkg:
     - latest
@@ -311,12 +318,12 @@ redis:
 <ul>
 <li>order：优先级比require和watch低，有order指定的state比没有order指定的优先级高</li>
 </ul>
-<p _="%" endhighlight>{% highlight yaml %}
+<p _="%" endhighlight="">{% highlight yaml %}
 vim:
   pkg.installed:
     - order: 1</p>
 <p>想让某个state最后一个运行，可以用last</p>
-<h2>保存状态</h2>
+<h2 id="bao-cun-zhuang-tai_1">保存状态</h2>
 <p>状态描述文件(SLS)要保存在master节点中，并通过指令分发到minion节点。</p>
 <ol>
 <li>路径设置</li>
@@ -337,7 +344,7 @@ vim:
 <ol>
 <li>入口文件</li>
 </ol>
-<p><code>file_roots</code>中必须指定“base”环境的路径，因为该路径中存在Salt state的<a href="http://docs.saltstack.com/ref/states/highstate.html">入口文件: top.sls</a>。</p>
+<p><code>file_roots</code>中必须指定&ldquo;base&rdquo;环境的路径，因为该路径中存在Salt state的<a href="http://docs.saltstack.com/ref/states/highstate.html">入口文件: top.sls</a>。</p>
 <p>Top文件建立配置环境、节点和状态配置之间的映射关系。比如一个简单的top.sls文件：</p>
 <p>{% highlight yaml %}</p>
 <p>base:
@@ -357,7 +364,7 @@ dev:
 </ul>
 <p>注：这里也可以使用文件夹<code>/srv/salt/servers/</code>和<code>/srv/salt/dev/mongodb/</code>，在文件夹中放置一组状态文件和配置文件，便于建立复杂的状态配置。</p>
 <p>top.sls中的可配置内容非常丰富，具体内容可以参考<a href="http://docs.saltstack.com/ref/states/highstate.html">官方文档</a>。</p>
-<h2>状态生效（State Enforcement）</h2>
+<h2 id="zhuang-tai-sheng-xiao-state-enforcement">状态生效（State Enforcement）</h2>
 <p>master上对状态进行定义，最终这些状态要传递到minion节点上。在本节的例子中，如果定义好了状态文件<code>/srv/salt/dev/mongodb.sls</code>：</p>
 <p>{% highlight yaml %}</p>
 <p>mongodb:
@@ -367,16 +374,31 @@ dev:
 <p>可以使用命令<code>salt "minion1" state.highstate -v</code>使得所有针对"minion1"的state生效；</p>
 <p>在执行状态之前先进行测试是个好主意，需要指定参数<code>test=True</code>。比如，<code>salt "minion1" state.highstate -v test=True</code>。</p>
 <p>关于state模块的更多用法，可以参考<a href="https://salt.readthedocs.org/en/latest/ref/modules/all/salt.modules.state.html">state模块说明</a>，或<a href="http://docs.saltstack.com/ref/states/index.html#state-enforcement">官方文档</a>。</p>
-<h2>更多</h2>
+<h2 id="geng-duo">更多</h2>
 <p>Salt的state模块的功能不仅如此，还可以使用模板和变量，以及定义状态的定时自动生效。</p>
-<h1>小结</h1>
+<h1 id="xiao-jie_1">小结</h1>
 <p>本文介绍Salt的主要功能和基本使用，包括minion节点的管理，批量操作，以及非常重要的配置管理。
 掌握了这些内容，可以使用Salt极大提高运维的效率（事实上，Salt对于开发阶段也能提供很大的帮助，开发和运维的界限正在逐渐模糊）。</p>
 <p>后续会介绍一些使用案例以及Salt的高级功能。</p>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-06-25.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2013/07/30/ganglia.html">用Ganglia监控集群的性能</a></li>
+        <li><a href="http://holbrook.github.io/2013/07/07/salt_pillar.html">Pillar：定义Salt配置管理的数据</a></li>
+        <li><a href="http://holbrook.github.io/2013/07/01/salt_state_config_structure.html">Salt state 配置结构</a></li>
+        <li><a href="http://holbrook.github.io/2013/06/30/salt_sls_sample.html">Salt state实例解析</a></li>
+        <li><a href="http://holbrook.github.io/2013/06/24/salt_intro.html">用salt管理成千上万的服务器</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -415,6 +437,8 @@ dev:
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -432,37 +456,37 @@ dev:
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

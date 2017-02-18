@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,7 +138,16 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">QQ餐厅与系统性能模型</h1>
-	<h1>QQ餐厅”系统“</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="QQ餐厅与系统性能模型">QQ餐厅与系统性能模型</a><ul><li><a class="toc-href" href="#qqcan-ting-xi-tong" title="QQ餐厅&rdquo;系统&ldquo;">QQ餐厅&rdquo;系统&ldquo;</a></li><li><a class="toc-href" href="#xi-tong-xing-neng-zhi-biao" title="系统性能指标">系统性能指标</a></li><li><a class="toc-href" href="#xiao-jie" title="小结">小结</a></li></ul></li></ul></div>
+	</div>
+
+
+
+	<h1 id="qqcan-ting-xi-tong">QQ餐厅&rdquo;系统&ldquo;</h1>
 <p>QQ餐厅是一个系统。 其中包括各种资源：</p>
 <ul>
 <li>厨师是 <em>CPU</em></li>
@@ -147,11 +156,11 @@
 </ul>
 <p>这个系统中只运行一个 <em>应用</em> ，该应用只提供一个 <em>服务</em> ：就餐服务。显然，系统的所有资源都会用于这个服务。 QQ餐厅当然会有很多客人，称之为 并发用户数 ，或者叫 <em>负载</em> 。</p>
 <p>开始的时候客人不多，桌椅板凳或厨师、服务员都可能空闲，叫做 <em>资源闲置</em> ，已经使用的资源比例叫做 <em>资源利用率</em> 。</p>
-<p>随着资源和人的增加，资源利用率也会逐渐增长，并最终达到100%。此时餐厅已经”全速运转“，这是的并发用户数叫做 <em>最佳并发数</em> ， 所谓”最佳“是指资源已经充分利用，并且每个请求没有额外的等待。</p>
+<p>随着资源和人的增加，资源利用率也会逐渐增长，并最终达到100%。此时餐厅已经&rdquo;全速运转&ldquo;，这是的并发用户数叫做 <em>最佳并发数</em> ， 所谓&rdquo;最佳&ldquo;是指资源已经充分利用，并且每个请求没有额外的等待。</p>
 <p>如果某些资源不足，就会发生该资源的利用率已经达到100%，但是其他资源仍有空闲的情况。此时该项资源成为 <em>性能瓶颈</em> 。为避免性能瓶颈，最理想的情况是使得所有资源的利用率同时达到100%，此时各种资源的比例叫做 <em>最佳资源配比</em> 。 QQ餐厅玩家很重要的一项任务就是在餐厅的不断扩建过程中，始终维持各资源的最佳配比。</p>
-<p>当客人的数量超过”最佳并发数“时，就会产生额外的等待。也就是说， <em>等待时间</em> 会随着并发用户数的增加而增长。而从客人的角度来说，等待时间+供餐所需的固有时间（服务员点菜、传菜、结账和厨师做菜等需要的，不可减少的时间）= 响应时间 ，所以等待时间的延长会导致响应时间的延长。而客人的耐心是有限的，如果响应时间过长，客人就会愤然离去，这叫做 <em>响应超时</em> 。</p>
+<p>当客人的数量超过&rdquo;最佳并发数&ldquo;时，就会产生额外的等待。也就是说， <em>等待时间</em> 会随着并发用户数的增加而增长。而从客人的角度来说，等待时间+供餐所需的固有时间（服务员点菜、传菜、结账和厨师做菜等需要的，不可减少的时间）= 响应时间 ，所以等待时间的延长会导致响应时间的延长。而客人的耐心是有限的，如果响应时间过长，客人就会愤然离去，这叫做 <em>响应超时</em> 。</p>
 <p>由于响应超时会导致客人的离去，我们应该区分满意离开的客人和因为超时而离开的客人。我们把餐厅在单位时间接待的客人叫做 <em>吞吐量</em> ，并发用户数-吞吐量=超时的请求。不发生超时情况下的最大并发用户数成为 <em>最大并发数</em> 。 此时系统的吞吐量达到最大。</p>
-<h1>系统性能指标</h1>
+<h1 id="xi-tong-xing-neng-zhi-biao">系统性能指标</h1>
 <p>在QQ餐厅中，涉及到了很多系统性能指标，让我们来回顾一下：</p>
 <ul>
 <li>系统，应用，服务</li>
@@ -171,12 +180,23 @@
 <li>吞吐量的计量</li>
 </ul>
 <p>前面把餐厅在单位时间接待的客人数量作为吞吐量，这是因为QQ餐厅进行了简化，假设每位顾客只点一种套餐（一道菜+一份饮料）并且只点一次。更复杂 的情况是根据粒度的不同，分别用每秒完成菜品的数量（流量）、完成点餐的数量（请求）、用餐次数（事务）作为吞吐量的计量，根据需要选择一个或者多个指 标。</p>
-<h1>小结</h1>
+<h1 id="xiao-jie">小结</h1>
 <p>综上所述，QQ餐厅是一个系统，玩QQ餐厅就是考虑如何优化系统的性能。 而需要分析系统的哪些性能指标、如何分析决定能否对系统性能进行有效的优化。 这些内容可以继续围观<a href="/2012/10/29/performance_test.html">《QQ餐厅与系统性能模型(续)：如何评价系统的性能》</a>。</p>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2012-10-23.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2012/10/29/performance_test.html">QQ 餐厅与系统性能模型(续)：如何评价系统的性能</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -215,6 +235,8 @@
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -232,37 +254,37 @@
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

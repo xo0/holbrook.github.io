@@ -10,8 +10,8 @@
 &lt;p&gt;其实，R 和 python 的边界也不是那么的无法逾越，
 可以使用&lt;a href="https://rpy2.bitbucket.io/"&gt;rpy2&lt;/a&gt;在 python 中调用 R，
 也可以使用&lt;a href="http://rpython.r-forge.r-project.org/"&gt;rPython&lt;/a&gt;在 R 中调用 python。&lt;/p&gt;
-&lt;h1&gt;运行环境&lt;/h1&gt;
-&lt;h2&gt;Anaconda&lt;/h2&gt;
+&lt;h1 id="yun-xing-huan-jing"&gt;运行环境&lt;/h1&gt;
+&lt;h2 id="anaconda"&gt;Anaconda&lt;/h2&gt;
 &lt;p&gt;尽管 Linux 和 Mac OS 自带了 python 环境，但还是推荐安装 &lt;a href="https://www.continuum.io"&gt;Anaconda&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;Anaconda是python的一个科学计算发行版，包含了众多流行的科学、数学、工程、数据分析的Python包&lt;sup id="fnref-1"&gt;&lt;a class="footnote-ref" href="#fn-1"&gt;1&lt;/a&gt;&lt;/sup&gt;。&lt;/p&gt;
 &lt;p&gt;从官方网站下载有点慢。如果用安装包进行安装，
@@ -21,16 +21,12 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 conda config --set show_channel_urls yes
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;安装和配置完 Anaconda 后，可以使用其自带的 python 包管理器安装 python 模块，也可以使用常用的 &lt;code&gt;pip&lt;/code&gt;。
 但要注意环境的配置。比如：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;conda --version  # 查看版本
 conda install seaborn #
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h2&gt;ipython, jupyter 和 spyder&lt;/h2&gt;
+&lt;h2 id="ipython-jupyter-he-spyder"&gt;ipython, jupyter 和 spyder&lt;/h2&gt;
 &lt;p&gt;python 本身提供了类似shell的交互式解释器，但是并不好用， &lt;a href="http://ipython.org/"&gt;IPython&lt;/a&gt; 对其进行了极大加强。
 IPython是一个增强的 Python Shell，目的是提高编写、测试、调试 Python 代码的速度。
 主要用于交互式数据处理和利用matplotlib 对数据进行可视化处理。&lt;/p&gt;
@@ -40,10 +36,10 @@ IPython是一个增强的 Python Shell，目的是提高编写、测试、调试
 &lt;p&gt;如果喜欢 RStudio，可以使用 &lt;code&gt;spyder&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;（附：可能是 IPython notebook 太好用了，
 RStudio 现在也实现了一个类似的 web 交互工具 &lt;a href="https://www.rstudio.com/products/shiny/"&gt;shiny&lt;/a&gt;)。&lt;/p&gt;
-&lt;h2&gt;Cython&lt;/h2&gt;
+&lt;h2 id="cython"&gt;Cython&lt;/h2&gt;
 &lt;p&gt;编译Python程序，提高性能。&lt;/p&gt;
-&lt;h1&gt;底层库&lt;/h1&gt;
-&lt;h2&gt;NumPy&lt;/h2&gt;
+&lt;h1 id="di-ceng-ku_1"&gt;底层库&lt;/h1&gt;
+&lt;h2 id="numpy"&gt;NumPy&lt;/h2&gt;
 &lt;p&gt;python 中本来提供了 列表(list) 和 数组(array), 可以用来构建矩阵。
 但是这些都是通用数据结构，对于纯数值运算来说效率不高。而且没有矩阵运算的函数。&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.numpy.org/"&gt;NumPy&lt;/a&gt; 弥补了这些不足，为线性代数的计算提供了极大帮助。
@@ -53,7 +49,7 @@ ufunc(通用函数对象, universal function object)，
 其中，ufunc 是一种能对数组的每个元素进行操作的函数。
 Numpy 还支持线性代数运算和随机数生成。&lt;/p&gt;
 &lt;p&gt;Numpy是下面很多模块的基础模块。&lt;/p&gt;
-&lt;h1&gt;SciPy&lt;/h1&gt;
+&lt;h1 id="scipy_1"&gt;SciPy&lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://www.scipy.org/"&gt;SciPy&lt;/a&gt;在NumPy的基础上增加了众多的数学、科学以及工程计算中常用的模块。
 通过不同的子模块，SciPy 提供了线性代数、拟合与优化、差值、数值积分、图像处理、系数矩阵处理等函数。&lt;/p&gt;
 &lt;p&gt;Numpy 已经提供了线性代数函数库，但是SciPy的线性代数库比NumPy更加全面。&lt;/p&gt;
@@ -68,19 +64,19 @@ Numpy 还支持线性代数运算和随机数生成。&lt;/p&gt;
 &lt;li&gt;scipy.stats: 标准连续和离散概率分布、各种统计检验方法和更好的描述统计法&lt;/li&gt;
 &lt;li&gt;scipy.weave: 利用内联 C++ 代码加速数组计算的工具&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;matplotlib&lt;/h1&gt;
+&lt;h1 id="matplotlib"&gt;matplotlib&lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://matplotlib.org/"&gt;Matplotlib&lt;/a&gt;为 python 提供了一整套和MATLAB类似的绘图函数集。
 Matplotlib 很强大，但是比较底层。高级的python 数据处理模块会调用 Matplotlib 实现更简单的绘图函数，
 比如后面要提到的 Pandas, Seaborn等。
 但是要对图表进行精细的、个性化的调整时，还是需要掌握 Matplotlib 的函数。&lt;/p&gt;
-&lt;h1&gt;数据分析和处理&lt;/h1&gt;
-&lt;h2&gt;Pandas&lt;/h2&gt;
+&lt;h1 id="shu-ju-fen-xi-he-chu-li"&gt;数据分析和处理&lt;/h1&gt;
+&lt;h2 id="pandas"&gt;Pandas&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://pandas.pydata.org/"&gt;Pandas&lt;/a&gt;, Python Data Analysis Library,
 是 python 数据分析领域里程碑式的一个重要工具。&lt;/p&gt;
 &lt;p&gt;Pandas 基于 NumPy, 实现了&lt;code&gt;Series(序列)&lt;/code&gt;和类似 R的 &lt;code&gt;DataFrame&lt;/code&gt; 对象，
 提供了大量能使我们快速便捷地处理数据的函数和方法。&lt;/p&gt;
 &lt;p&gt;Pandas 很好的解决了数据分析的大部分任务，是所有中等规模数据分析的最有效的工具。&lt;/p&gt;
-&lt;h2&gt;Statsmodels&lt;/h2&gt;
+&lt;h2 id="statsmodels"&gt;Statsmodels&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://statsmodels.sourceforge.net/"&gt;Statsmodels&lt;/a&gt;
 是 Python 中一个强大的统计分析包，包含了描述统计、回归分析、时间序列分析、假设检验等等的功能。&lt;/p&gt;
 &lt;p&gt;一些主要的功能包括：&lt;/p&gt;
@@ -98,43 +94,43 @@ Matplotlib 很强大，但是比较底层。高级的python 数据处理模块�
 &lt;li&gt;Extensive unit tests to ensure correctness of results&lt;/li&gt;
 &lt;li&gt;Many more models and extensions in development&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;SymPy&lt;/h2&gt;
+&lt;h2 id="sympy"&gt;SymPy&lt;/h2&gt;
 &lt;p&gt;&lt;a href=""&gt;SymPy&lt;/a&gt;是Python的数学符号计算库，目标是成为一个全功能的代数系统。
 SymPy支持符号计算、高精度计算、模式匹配、绘图、解方程、微积分、组合数学、离散数学、几何学、概率与统计、物理学等方面的功能。&lt;/p&gt;
-&lt;h1&gt;可视化&lt;/h1&gt;
-&lt;h2&gt;Seaborn&lt;/h2&gt;
+&lt;h1 id="ke-shi-hua_1"&gt;可视化&lt;/h1&gt;
+&lt;h2 id="seaborn"&gt;Seaborn&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://seaborn.pydata.org/"&gt;Seaborn&lt;/a&gt;
 是基于 Matplotlib 的高级统计绘图工具（类似 Pandas 与 NumPy 的关系），其功能类似 R 中的 lattice。
 Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。&lt;/p&gt;
-&lt;h2&gt;Bokeh&lt;/h2&gt;
+&lt;h2 id="bokeh"&gt;Bokeh&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://bokeh.pydata.org/en/latest/docs/user_guide.html"&gt;Bokeh(Bokeh.js)&lt;/a&gt;
 是一个 Python 交互式可视化库，支持现代化 Web 浏览器，提供非常完美的展示功能。&lt;/p&gt;
 &lt;p&gt;Bokeh 的目标是使用 D3.js 样式提供优雅，简洁新颖的图形化风格，同时提供大型数据集的高性能交互功能。&lt;/p&gt;
 &lt;p&gt;Boken 可以快速的创建交互式的绘图，仪表盘和数据应用。&lt;/p&gt;
-&lt;h2&gt;TVTK&lt;/h2&gt;
+&lt;h2 id="tvtk"&gt;TVTK&lt;/h2&gt;
 &lt;p&gt;数据的三维可视化&lt;/p&gt;
-&lt;h2&gt;VPython&lt;/h2&gt;
+&lt;h2 id="vpython"&gt;VPython&lt;/h2&gt;
 &lt;p&gt;制作3D演示动画&lt;/p&gt;
-&lt;h2&gt;OpenCV&lt;/h2&gt;
+&lt;h2 id="opencv"&gt;OpenCV&lt;/h2&gt;
 &lt;p&gt;图像处理和计算机视觉&lt;/p&gt;
-&lt;h1&gt;机器学习&lt;/h1&gt;
-&lt;h2&gt;scikit-learn&lt;/h2&gt;
+&lt;h1 id="ji-qi-xue-xi_1"&gt;机器学习&lt;/h1&gt;
+&lt;h2 id="scikit-learn"&gt;scikit-learn&lt;/h2&gt;
 &lt;p&gt;For machine learning and artificial intelligence algorithms&lt;/p&gt;
-&lt;h2&gt;PyTorch&lt;/h2&gt;
+&lt;h2 id="pytorch"&gt;PyTorch&lt;/h2&gt;
 &lt;p&gt;深度学习&lt;/p&gt;
-&lt;h1&gt;Enthought Tool Suite&lt;/h1&gt;
+&lt;h1 id="enthought-tool-suite_1"&gt;Enthought Tool Suite&lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://code.enthought.com/projects/index.php"&gt;Enthought Tool Suite&lt;/a&gt;是
 &lt;a href="http://code.enthought.com/"&gt;Enthought公司&lt;/a&gt;开发的开源科学计算一套应用程序开发包。
 包含了大量的工具。主要的工具包括：&lt;/p&gt;
-&lt;h2&gt;Traits&lt;/h2&gt;
+&lt;h2 id="traits"&gt;Traits&lt;/h2&gt;
 &lt;p&gt;Explicit type declarations; validation; initialization; delegation; notification; visualization.&lt;/p&gt;
-&lt;h2&gt;TraitsUI&lt;/h2&gt;
+&lt;h2 id="traitsui"&gt;TraitsUI&lt;/h2&gt;
 &lt;p&gt;A UI layer that supports the visualization features of Traits. Implementations using wxWidgets and Qt are provided by the TraitsBackendWX and TraitsBackendQt projects.&lt;/p&gt;
-&lt;h2&gt;Chaco&lt;/h2&gt;
+&lt;h2 id="chaco"&gt;Chaco&lt;/h2&gt;
 &lt;p&gt;交互式 2D 图表&lt;/p&gt;
-&lt;h2&gt;Mayavi&lt;/h2&gt;
+&lt;h2 id="mayavi"&gt;Mayavi&lt;/h2&gt;
 &lt;p&gt;交互式 3D 图表&lt;/p&gt;
-&lt;h2&gt;其他&lt;/h2&gt;
+&lt;h2 id="qi-ta"&gt;其他&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Enaml
   Library for creating professional quality user interfaces combining a domain specific declarative language with a constraints based layout.&lt;/li&gt;
@@ -158,38 +154,38 @@ Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。
   Core tools for application development (only depends on the Standard library).&lt;/li&gt;
 &lt;li&gt;and more...&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;参考资料&lt;/h1&gt;
+&lt;h1 id="can-kao-zi-liao_1"&gt;参考资料&lt;/h1&gt;
 &lt;div class="footnote"&gt;
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id="fn-1"&gt;
-&lt;p&gt;&lt;a href="http://www.cnblogs.com/super-d2/p/4725818.html"&gt;Python科学计算发行版—Anaconda&lt;/a&gt;&amp;#160;&lt;a class="footnote-backref" href="#fnref-1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.cnblogs.com/super-d2/p/4725818.html"&gt;Python科学计算发行版&amp;mdash;Anaconda&lt;/a&gt;&amp;nbsp;&lt;a class="footnote-backref" href="#fnref-1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn-2"&gt;
-&lt;p&gt;&lt;a href="http://hyry.dip.jp/tech/book/page/scipy/index.html"&gt;用Python做科学计算&lt;/a&gt;&amp;#160;&lt;a class="footnote-backref" href="#fnref-2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://hyry.dip.jp/tech/book/page/scipy/index.html"&gt;用Python做科学计算&lt;/a&gt;&amp;nbsp;&lt;a class="footnote-backref" href="#fnref-2" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn-3"&gt;
-&lt;p&gt;&lt;a href="http://hyry.dip.jp/tech/book/page/scipynew/index.html"&gt;用Python做科学计算(第二版)&lt;/a&gt;&amp;#160;&lt;a class="footnote-backref" href="#fnref-3" title="Jump back to footnote 3 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://hyry.dip.jp/tech/book/page/scipynew/index.html"&gt;用Python做科学计算(第二版)&lt;/a&gt;&amp;nbsp;&lt;a class="footnote-backref" href="#fnref-3" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn-4"&gt;
-&lt;p&gt;&lt;a href="https://www.analyticsvidhya.com/learning-paths-data-science-business-analytics-business-intelligence-big-data/learning-path-data-science-python/"&gt;Comprehensive learning path – Data Science in Python&lt;/a&gt;&amp;#160;&lt;a class="footnote-backref" href="#fnref-4" title="Jump back to footnote 4 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.analyticsvidhya.com/learning-paths-data-science-business-analytics-business-intelligence-big-data/learning-path-data-science-python/"&gt;Comprehensive learning path &amp;ndash; Data Science in Python&lt;/a&gt;&amp;nbsp;&lt;a class="footnote-backref" href="#fnref-4" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn-5"&gt;
-&lt;p&gt;&lt;a href="http://aliquote.org/memos/2011/02/07/python-for-statistical-computing"&gt;Python for statistical computing&lt;/a&gt;&amp;#160;&lt;a class="footnote-backref" href="#fnref-5" title="Jump back to footnote 5 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://aliquote.org/memos/2011/02/07/python-for-statistical-computing"&gt;Python for statistical computing&lt;/a&gt;&amp;nbsp;&lt;a class="footnote-backref" href="#fnref-5" title="Jump back to footnote 5 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</content><category term="python"></category><category term="env"></category></entry><entry><title>数据科学的知识体系</title><link href="http://holbrook.github.io/2017/02/05/index.html" rel="alternate"></link><published>2017-02-05T00:00:00+08:00</published><updated>2017-02-05T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2017-02-05:/2017/02/05/index.html</id><summary type="html">&lt;p&gt;数据科学是利用计算机的运算能力对数据进行处理，从数据中提取信息，进而形成“知识”。
-然而要实现这一点并不容易。Swami Chandrasekaran在他的&lt;a href="http://nirvacana.com/thoughts/becoming-a-data-scientist/"&gt;《Becoming a Data Scientist》&lt;/a&gt;中，规划了“数据科学家”之路，让我们共勉。&lt;/p&gt;</summary><content type="html">&lt;p&gt;数据科学是利用计算机的运算能力对数据进行处理，从数据中提取信息，进而形成“知识”。
-然而要实现这一点并不容易。Swami Chandrasekaran在他的&lt;a href="http://nirvacana.com/thoughts/becoming-a-data-scientist/"&gt;《Becoming a Data Scientist》&lt;/a&gt;中，规划了“数据科学家”之路，让我们共勉。&lt;/p&gt;
+&lt;/hr&gt;&lt;/div&gt;</content><category term="python"></category><category term="env"></category></entry><entry><title>数据科学的知识体系</title><link href="http://holbrook.github.io/2017/02/05/index.html" rel="alternate"></link><published>2017-02-05T00:00:00+08:00</published><updated>2017-02-05T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2017-02-05:/2017/02/05/index.html</id><summary type="html">&lt;p&gt;数据科学是利用计算机的运算能力对数据进行处理，从数据中提取信息，进而形成“知识”。
+然而要实现这一点并不容易。Swami Chandrasekaran在他的&lt;a href="http://nirvacana.com/thoughts/becoming-a-data-scientist/"&gt;《Becoming a Data Scientist》&lt;/a&gt;中，规划了“数据科学家”之路，让我们共勉。&lt;/p&gt;</summary><content type="html">&lt;p&gt;数据科学是利用计算机的运算能力对数据进行处理，从数据中提取信息，进而形成&amp;ldquo;知识&amp;rdquo;。
+然而要实现这一点并不容易。Swami Chandrasekaran在他的&lt;a href="http://nirvacana.com/thoughts/becoming-a-data-scientist/"&gt;《Becoming a Data Scientist》&lt;/a&gt;中，规划了&amp;ldquo;数据科学家&amp;rdquo;之路，让我们共勉。&lt;/p&gt;
 &lt;p&gt;先上图：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="MetroMap to Data Scientist" src="/images/long-road-to-data-scientist.png"&gt;&lt;/p&gt;
-&lt;h1&gt;1.基本原理(Fundamentals)&lt;/h1&gt;
-&lt;h2&gt;矩阵和线性代数(Matrices &amp;amp; Linear Algebra)&lt;/h2&gt;
-&lt;h2&gt;数据存储和处理&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="MetroMap to Data Scientist" src="/images/long-road-to-data-scientist.png"/&gt;&lt;/p&gt;
+&lt;h1 id="1ji-ben-yuan-li-fundamentals"&gt;1.基本原理(Fundamentals)&lt;/h1&gt;
+&lt;h2 id="ju-zhen-he-xian-xing-dai-shu-matrices-linear-algebra"&gt;矩阵和线性代数(Matrices &amp;amp; Linear Algebra)&lt;/h2&gt;
+&lt;h2 id="shu-ju-cun-chu-he-chu-li"&gt;数据存储和处理&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;哈希函数，二叉树，时间复杂度(Hash Functions,Binary Tree,O(n))&lt;/li&gt;
 &lt;li&gt;关系代数和数据库基础(Relational Algebra,DB Basic)&lt;/li&gt;
-&lt;li&gt;内连接、外连接、交叉连接、θ连接(Inner、Outer、Cross、Theta Join)&lt;/li&gt;
+&lt;li&gt;内连接、外连接、交叉连接、&amp;theta;连接(Inner、Outer、Cross、Theta Join)&lt;/li&gt;
 &lt;li&gt;CAP定理（CAP Theorem）&lt;/li&gt;
 &lt;li&gt;列表数据(tabular data)&lt;/li&gt;
 &lt;li&gt;数据框和序列(DataFrames &amp;amp; Series)&lt;/li&gt;
@@ -204,7 +200,7 @@ Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。
 &lt;li&gt;业务背景知识(Vendor Landscape)&lt;/li&gt;
 &lt;li&gt;安装环境(Env Setup)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;2.统计学(Statistics)&lt;/h1&gt;
+&lt;h1 id="2tong-ji-xue-statistics_1"&gt;2.统计学(Statistics)&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;获取数据(Pick a Dataset)&lt;/li&gt;
 &lt;/ul&gt;
@@ -254,7 +250,7 @@ Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。
 &lt;li&gt;最小二乘法(Least2 fit)&lt;/li&gt;
 &lt;li&gt;欧氏距离(Eculidean Distance)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;3.编程(Programming)&lt;/h1&gt;
+&lt;h1 id="3bian-cheng-programming"&gt;3.编程(Programming)&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;python基础(Python Basics)&lt;/li&gt;
 &lt;li&gt;R&lt;/li&gt;
@@ -273,7 +269,7 @@ Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。
 &lt;li&gt;列表(Lists)&lt;/li&gt;
 &lt;li&gt;数据框(Data Frames)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;4.机器学习(Machine Learning)&lt;/h1&gt;
+&lt;h1 id="4ji-qi-xue-xi-machine-learning"&gt;4.机器学习(Machine Learning)&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;机器学习与数据挖掘的区别(What is ML?)&lt;/li&gt;
 &lt;li&gt;数值变量(Numerical Var)&lt;/li&gt;
@@ -327,7 +323,7 @@ Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。
 &lt;li&gt;协同过滤(Collaborative Fitering)&lt;/li&gt;
 &lt;li&gt;标签(Tagging)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;5.文本挖掘/自然语言处理(Text Mining / NLP)&lt;/h1&gt;
+&lt;h1 id="5wen-ben-wa-jue-zi-ran-yu-yan-chu-li-text-mining-nlp"&gt;5.文本挖掘/自然语言处理(Text Mining / NLP)&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;语料库(Corpus)&lt;/li&gt;
 &lt;li&gt;命名实体识别(Named Entity Recognition)&lt;/li&gt;
@@ -346,7 +342,7 @@ Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。
 &lt;li&gt;文本分类(Classify Text)&lt;/li&gt;
 &lt;li&gt;词汇映射(Vocabulary Mapping)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;6.数据可视化&lt;/h1&gt;
+&lt;h1 id="6shu-ju-ke-shi-hua"&gt;6.数据可视化&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;单变量、双变量和多变量可视化(Uni, Bi &amp;amp; Multivariate Viz)&lt;/li&gt;
 &lt;li&gt;ggplot2(R中的一个可视化包，python中使用pyplotlib)&lt;/li&gt;
@@ -362,7 +358,7 @@ Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。
 &lt;li&gt;IBM ManyEyes(IBM的一款在线可视化处理工具)&lt;/li&gt;
 &lt;li&gt;Tableau(国外知名的商用BI)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;7.大数据(Big Data)&lt;/h1&gt;
+&lt;h1 id="7da-shu-ju-big-data"&gt;7.大数据(Big Data)&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;MapReduce框架(Map Reduce Fundamentals)&lt;/li&gt;
 &lt;li&gt;Hadoop组件(Hadoop Components)&lt;/li&gt;
@@ -386,7 +382,7 @@ Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。
 &lt;li&gt;MongoDB&lt;/li&gt;
 &lt;li&gt;Neo4j&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;8.数据摄取(ingestion)&lt;/h1&gt;
+&lt;h1 id="8shu-ju-she-qu-ingestion"&gt;8.数据摄取(ingestion)&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;数据格式概要(Summary of Data Formats)&lt;/li&gt;
 &lt;li&gt;数据发现(Data Discovery)&lt;/li&gt;
@@ -399,7 +395,7 @@ Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。
 &lt;li&gt;数据量级(How much Data)&lt;/li&gt;
 &lt;li&gt;ETL&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;9.数据清洗(munging)&lt;/h1&gt;
+&lt;h1 id="9shu-ju-qing-xi-munging"&gt;9.数据清洗(munging)&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;维度与数值归约(Dimensionality &amp;amp; Numerosity Reduction)&lt;/li&gt;
 &lt;li&gt;数据规范化(Normalization)&lt;/li&gt;
@@ -413,7 +409,7 @@ Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。
 &lt;li&gt;分层抽样(Stratified Sampling)&lt;/li&gt;
 &lt;li&gt;主成分分析(PCA,Principal Component Analysis)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;10.工具集&lt;/h1&gt;
+&lt;h1 id="10gong-ju-ji"&gt;10.工具集&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;微软的Excel及其自带的分析工具库(MS Excel / Analysis ToolPak)&lt;/li&gt;
 &lt;li&gt;Java, Python&lt;/li&gt;
@@ -442,7 +438,7 @@ Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。
 &lt;li&gt;IBM Languageware: IBM的自然语言处理&lt;/li&gt;
 &lt;li&gt;Cassandra, MongoDB: 2种NoSql数据库&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;参考资料&lt;/h1&gt;
+&lt;h1 id="can-kao-zi-liao"&gt;参考资料&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.zhihu.com/question/21592677/answer/142800018"&gt;知乎上面秦路的回答&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.cnblogs.com/vamei/p/3178534.html"&gt;Vamei对数据科学的理解&lt;/a&gt;&lt;/li&gt;

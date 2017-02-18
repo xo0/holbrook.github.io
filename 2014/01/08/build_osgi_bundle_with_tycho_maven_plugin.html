@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,6 +138,15 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">Tycho：用Maven构建Eclipse Plugin项目</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="Tycho：用Maven构建Eclipse Plugin项目">Tycho：用Maven构建Eclipse Plugin项目</a><ul><li><a class="toc-href" href="#fu-gong-cheng" title="父工程">父工程</a><ul><li><a class="toc-href" href="#zeng-jia-tychocha-jian" title="增加Tycho插件">增加Tycho插件</a></li><li><a class="toc-href" href="#ding-yi-bundlecang-ku" title="定义bundle仓库">定义bundle仓库</a></li><li><a class="toc-href" href="#ding-yi-mu-biao" title="定义目标">定义目标</a></li></ul></li><li><a class="toc-href" href="#wei-xian-you-gong-cheng-sheng-cheng-pom_1" title="为现有工程生成pom">为现有工程生成pom</a></li><li><a class="toc-href" href="#mu-biao-ding-yi-zi-gong-cheng" title='"目标定义"子工程'>"目标定义"子工程</a></li><li><a class="toc-href" href="#testgong-cheng" title="Test工程">Test工程</a></li><li><a class="toc-href" href="#dui-bi-maven-bundle-plugin" title="对比Maven-Bundle-Plugin">对比Maven-Bundle-Plugin</a></li></ul></li></ul></div>
+	</div>
+
+
+
 	<p><a href="http://www.sonatype.org/tycho">Tycho</a>是一个Maven插件，目标是使用Maven构建Eclipse插件，OSGI Bundle等工程。</p>
 <p>如果说<a href="http://maven.apache.org/">Maven</a>的出现是一群Java程序员受不了繁琐的插件依赖管理，受不了冗长的ant build.xml文件而创造出来的，
 那Tycho则是一群Eclipse、OSGi插件开发人员受不了重复地配置类似的Maven pom.xml而创造出来的。</p>
@@ -150,10 +159,10 @@
 <li>eclipse-repository</li>
 <li>eclipse-target-definition</li>
 </ul>
-<h1>父工程</h1>
+<h1 id="fu-gong-cheng">父工程</h1>
 <p>基于OSGi的工程通常会划分很多模块，对于Maven来说，一般通过一个父工程（parent）来管理所有模块的构建。父工程的<code>packaging</code>类型为<code>pom</code>.</p>
 <p>为了使用Tycho，需要在父工程的pom文件中增加一些配置。</p>
-<h2>增加Tycho插件</h2>
+<h2 id="zeng-jia-tychocha-jian">增加Tycho插件</h2>
 <p>父工程中定义的插件可以在所有子工程中使用：</p>
 <div class="highlight"><pre><span></span>  <span class="nt">&lt;properties&gt;</span>
     <span class="nt">&lt;tycho</span><span class="err">-version</span><span class="nt">&gt;</span>0.16.0<span class="nt">&lt;/tycho-version&gt;</span>
@@ -170,9 +179,7 @@
     <span class="nt">&lt;/plugins&gt;</span>
   <span class="nt">&lt;/build&gt;</span>
 </pre></div>
-
-
-<h2>定义bundle仓库</h2>
+<h2 id="ding-yi-bundlecang-ku">定义bundle仓库</h2>
 <p>比如，基于Eclipse 4.3(Kepler)的RCP应用，使用了Texo、GeminiJPA等插件，需要如下的仓库定义：</p>
 <div class="highlight"><pre><span></span>  <span class="nt">&lt;repositories&gt;</span>
     <span class="nt">&lt;repository&gt;</span>
@@ -197,9 +204,7 @@
     <span class="nt">&lt;/repository&gt;</span>
   <span class="nt">&lt;/repositories&gt;</span>
 </pre></div>
-
-
-<h2>定义目标</h2>
+<h2 id="ding-yi-mu-biao">定义目标</h2>
 <p>定义不同的目标平台：</p>
 <div class="highlight"><pre><span></span>  <span class="nt">&lt;plugin&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.eclipse.tycho<span class="nt">&lt;/groupId&gt;</span>
@@ -220,20 +225,16 @@
     <span class="nt">&lt;/configuration&gt;</span>
   <span class="nt">&lt;/plugin&gt;</span>
 </pre></div>
-
-
 <p>如果要发布比较复杂的目标，比如Eclipse Product的发布，需要单独构建<code>eclipse-target-definition</code>类型的子工程。</p>
-<h1>为现有工程生成pom</h1>
+<h1 id="wei-xian-you-gong-cheng-sheng-cheng-pom_1">为现有工程生成pom</h1>
 <p>Tycho提供了一个工具，可以为现有的Eclipse Plugin、Feature等工程生成pom文件，从而将其整合到Tycho的管理之下。</p>
 <p>该工具也是基于maven的，只需要在工程文件夹执行命令：</p>
 <div class="highlight"><pre><span></span>    mvn org.eclipse.tycho:tycho-pomgenerator-plugin:generate-poms -DgroupId=thinkinside.tangle
 </pre></div>
-
-
 <p>生成的pom文件举例如下：</p>
-<div class="highlight"><pre><span></span>  <span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-  <span class="nt">&lt;project</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;  http://maven.apache.org/POM/4.0.0&quot;</span>
-      <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span>  <span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span> <span class="na">xmlns=</span><span class="s">"  http://maven.apache.org/POM/4.0.0"</span>
+      <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>thinkinside.tangle<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>tangle-app<span class="nt">&lt;/artifactId&gt;</span>
@@ -241,8 +242,6 @@
     <span class="nt">&lt;packaging&gt;</span>eclipse-plugin<span class="nt">&lt;/packaging&gt;</span>
   <span class="nt">&lt;/project&gt;</span>
 </pre></div>
-
-
 <p>由于种种原因，Eclipse Plugin工程的配置内容分散在多个文件中，包括：</p>
 <ul>
 <li>OSGi的配置文件：MANIFEST.MF</li>
@@ -256,9 +255,7 @@
 <p>如果现有工程已经有了pom文件，还可以使用Tycho进行更新：</p>
 <div class="highlight"><pre><span></span>  mvn org.eclipse.tycho:tycho-versions-plugin:update-pom -Dtycho.mode=maven
 </pre></div>
-
-
-<h1>"目标定义"子工程</h1>
+<h1 id="mu-biao-ding-yi-zi-gong-cheng">"目标定义"子工程</h1>
 <p>前面提到，如果要发布比较复杂的目标，比如Eclipse Product的发布，需要单独构建<code>eclipse-target-definition</code>类型的子工程。</p>
 <p>在"目标定义"子工程中创建<code>.product</code>文件，然后在pom文件中添加：</p>
 <div class="highlight"><pre><span></span>  <span class="nt">&lt;build&gt;</span>
@@ -291,19 +288,37 @@
     <span class="nt">&lt;/plugins&gt;</span>
   <span class="nt">&lt;/build&gt;</span>
 </pre></div>
-
-
-<p>"目标定义"子工程中还可以使用”目标定义文件（Target Definition, *.target）“进行复杂的配置。
+<p>"目标定义"子工程中还可以使用&rdquo;目标定义文件（Target Definition, *.target）&ldquo;进行复杂的配置。
 可以参考<a href="http://wiki.eclipse.org/Tycho/Target_Platform">这里</a>的说明，也可以查看<a href="https://github.com/toedter/e4-tutorial">GitHub上的例子</a>的例子。</p>
-<h1>Test工程</h1>
+<h1 id="testgong-cheng">Test工程</h1>
 <p>与专门的测试工具<a href="">Pax Exam</a>相比，Tycho test使用起来会更简单。当然前提是测试由Tycho构建的OSGi应用。</p>
 <p>Tycho将一个"Fragment"工程包装成Maven工程，可以在其中编写测试代码，然后使用"JUnit Plug-in Test"执行测试。</p>
-<h1>对比Maven-Bundle-Plugin</h1>
+<h1 id="dui-bi-maven-bundle-plugin">对比Maven-Bundle-Plugin</h1>
 <p>Maven-Bundle-Plugin提供了与Tycho不同风格的另一种构建OSGi的maven插件。关于二者的对比，可以参考<a href="/2014/01/21/tycho_vs_maven_bundle_plugin.html">这里</a></p>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2014-01-08.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2014/01/12/dependency_injection_in_e4.html">Eclipse e4：从OSGi-DS到依赖注入</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/12/e4_platform_services.html">Eclipse e4中的平台服务</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/22/osgi_blueprint_container.html">Blueprint: OSGi的依赖注入(DI)容器</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/21/tycho_vs_maven_bundle_plugin.html">OSGi构建工具：Tycho还是Maven-Bundle-Plugin？</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/18/swt_jfreechart_candlestick.html">在SWT中用JFreeChart实现K线图</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/07/eclipse_e4_RCP_quickstart.html">Eclipse e4 概览</a></li>
+        <li><a href="http://holbrook.github.io/2014/02/20/apache_karaf.html">Apache Karaf：OSGi中间件</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/31/jsr330.html">Java依赖注入规范：JSR330</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/30/JPA_intro.html">JPA概要</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/07/jsr94.html">Java规则引擎规范：JSR94</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -342,6 +357,8 @@
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -359,37 +376,37 @@
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

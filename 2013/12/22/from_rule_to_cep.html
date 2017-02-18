@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,8 +138,17 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">从规则引擎到复杂事件处理(CEP)</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="从规则引擎到复杂事件处理(CEP)">从规则引擎到复杂事件处理(CEP)</a><ul><li><a class="toc-href" href="#hui-hua-shi-zhong" title="会话时钟">会话时钟</a></li><li><a class="toc-href" href="#liu-mo-shi" title="流模式">流模式</a><ul><li><a class="toc-href" href="#qi-yong-liu-mo-shi" title="启用流模式">启用流模式</a></li><li><a class="toc-href" href="#ru-kou-dian" title="入口点">入口点</a></li></ul></li><li><a class="toc-href" href="#hua-dong-chuang-kou_1" title="滑动窗口">滑动窗口</a></li><li><a class="toc-href" href="#nei-cun-guan-li" title="内存管理">内存管理</a></li></ul></li></ul></div>
+	</div>
+
+
+
 	<p>Drools Fusion既是规则引擎，又可以作为CEP。除了<a href="/2013/12/21/event_in_CEP.html">事件定义</a>和<a href="/2013/12/21/Temporal_of_CEP.html">时间推理</a>之外，对于引擎本身也会有一些不同的使用。主要体现在会话时钟、流模式、滑动窗口和对事件的内存管理。</p>
-<h1>会话时钟</h1>
+<h1 id="hui-hua-shi-zhong">会话时钟</h1>
 <p>由于事件的时间性，处理事件时需要一个参考时钟。
 这个参考时钟在会话配置(KnowledgeSessionConfiguration)中指定，所以称为会话时钟(Session Clock)。</p>
 <p>有很多种场景需要对时钟进行控制，比如：</p>
@@ -170,20 +179,20 @@ FactHandle handle2 = session.insert( tick2 );
 clock.advanceTime( 30, TimeUnit.SECONDS );
 FactHandle handle3 = session.insert( tick3 );</p>
 <p>{% endhighlight %}</p>
-<h1>流模式</h1>
+<h1 id="liu-mo-shi">流模式</h1>
 <p>Drools默认运行在云(Cloud)模式下。云模式下没有时间流的概念，引擎知道所有的事实(Fact)和事件(Event)。此时引擎将所有的事实/事件看做是一个无序的云。</p>
-<p>由于云模式下引擎没有“现在”的概念，尽管事件具有时间戳、期限等元数据，这些数据也仅仅作为事件的属性，
+<p>由于云模式下引擎没有&ldquo;现在&rdquo;的概念，尽管事件具有时间戳、期限等元数据，这些数据也仅仅作为事件的属性，
 不代表事件发生的顺序，也不能进行<a href="/2013/12/21/Temporal_of_CEP.html">时间推理</a>。</p>
 <p>如果需要处理实时/准实时事件(Event)，需要<a href="/2013/12/21/Temporal_of_CEP.html">时间推理</a>，Drools必须工作在流(Stream)模式下。
 此时要求每个流中的事件必须按照时间顺序插入。</p>
-<h2>启用流模式</h2>
+<h2 id="qi-yong-liu-mo-shi">启用流模式</h2>
 <p>Drools默认运行在云模式下，可以通过以下方式启用流模式：</p>
-<p _="%" endhighlight>{% highlight java %}
+<p _="%" endhighlight="">{% highlight java %}
 KnowledgeBaseConfiguration config =
 KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
 config.setOption( EventProcessingOption.STREAM );</p>
 <p>也可以使用属性文件定义：<code>drools.eventProcessingMode = stream</code>。</p>
-<h2>入口点</h2>
+<h2 id="ru-kou-dian">入口点</h2>
 <p>Drools定义了工作空间的多个入口点(WorkingMemoryEntryPoint)，每个入口点可以看做是一个事件流，可以将事件通过不同的入口点插入到工作空间中。</p>
 <p>来自同一个入口点的事件通过时间戳被排序。每个流既可以包含单一类型的事件，也可以包含多种类型的事件。</p>
 <ul>
@@ -212,7 +221,7 @@ config.setOption( EventProcessingOption.STREAM );</p>
     atmStream.insert( aWithdrawRequest );</p>
 <p>{% endhighlight %}</p>
 <p>除了这种手工插入事实的方式之外，Drools还提供了一系列的管道API和适配器，可以将其他流(如JMS、IO流、Socket等)之间接入到入口点上。</p>
-<h1>滑动窗口</h1>
+<h1 id="hua-dong-chuang-kou_1">滑动窗口</h1>
 <p>在流模式中，规则的<a href="/2012/12/06/rule_language.html#menuIndex3">LHS部分</a>
 可以使用滑动窗口限定只关注一定范围内的事件。这个范围可以是时间或事件的个数，分别成为滑动时间窗口和滑动长度窗口。</p>
 <p>比如：</p>
@@ -222,21 +231,32 @@ config.setOption( EventProcessingOption.STREAM );</p>
 <span class="x">    SensorReading( </span><span class="p">$</span><span class="nv">temp</span><span class="x"> : temperature ) over window:time( 10m ), average( </span><span class="p">$</span><span class="nv">temp</span><span class="x"> )</span>
 <span class="x">)</span>
 
-<span class="x">StockTick( company == &quot;IBM&quot; ) over window:length( 10 )</span>
+<span class="x">StockTick( company == "IBM" ) over window:length( 10 )</span>
 
 <span class="x">Number( doubleValue &gt; </span><span class="p">$</span><span class="nv">max</span><span class="x"> ) from accumulate(</span>
 <span class="x">    SensorReading( </span><span class="p">$</span><span class="nv">temp</span><span class="x"> : temperature ) over window:length( 100 ), average( </span><span class="p">$</span><span class="nv">temp</span><span class="x"> )</span>
 <span class="x">)</span>
 </pre></div>
-
-
-<h1>内存管理</h1>
+<h1 id="nei-cun-guan-li">内存管理</h1>
 <p>在流模式下，引擎自动执行事件的内存管理。对于不可能再被匹配的事件自动释放。</p>
 <p>引擎会关注事件的@expires中指定的到期时间，并分析规则中隐含的到期时间，进行自动释放。</p>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-12-22.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2013/12/21/Temporal_of_CEP.html">CEP中的时间推理(Temporal)</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/21/event_in_CEP.html">CEP中的事件(Event)</a></li>
+        <li><a href="http://holbrook.github.io/2012/11/06/cep_about.html">CEP：鱼与熊掌可以兼得</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -275,6 +295,8 @@ config.setOption( EventProcessingOption.STREAM );</p>
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -292,37 +314,37 @@ config.setOption( EventProcessingOption.STREAM );</p>
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

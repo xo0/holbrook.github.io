@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,28 +138,37 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">CEP中的时间推理(Temporal)</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="CEP中的时间推理(Temporal)">CEP中的时间推理(Temporal)</a><ul><li><a class="toc-href" href="#after-he-beforezhi-qian-he-zhi-hou" title="After 和 Before(之前和之后)">After 和 Before(之前和之后)</a></li><li><a class="toc-href" href="#coincidestong-shi-fa-sheng" title="Coincides（同时发生）">Coincides（同时发生）</a></li><li><a class="toc-href" href="#during-he-includesbao-han" title="During 和 Includes（包含）">During 和 Includes（包含）</a></li><li><a class="toc-href" href="#finishes-he-finished-bytong-shi-jie-shu" title="Finishes 和 Finished by（同时结束）">Finishes 和 Finished by（同时结束）</a></li><li><a class="toc-href" href="#meets-he-met-byxiang-lin" title="Meets 和 Met by（相邻）">Meets 和 Met by（相邻）</a></li><li><a class="toc-href" href="#overlaps-he-overlappd-byxiang-jiao" title="Overlaps 和 Overlappd by（相交）">Overlaps 和 Overlappd by（相交）</a></li><li><a class="toc-href" href="#starts-he-started-bytong-shi-kai-shi" title="Starts 和 Started by（同时开始）">Starts 和 Started by（同时开始）</a></li></ul></li></ul></div>
+	</div>
+
+
+
 	<p><a href="/2012/11/06/about_cep.html">CEP</a>中的<a href="/2013/12/21/event_in_CEP.html">事件(Event)</a>具有两个与时间相关的属性。一个是timestamp，标记事件发生的时间；另一个是duration，标记事件持续的时间间隔。</p>
 <p>由这两个时间属性，还可以计算出事件结束的事件。</p>
 <p>时间推理(Temporal)是CEP中特有的条件判断(<a href="/2012/12/06/rule_language.html#menuIndex3">LHS</a>)，其判断的要素正是基于事件的上述时间属性。</p>
 <p>Allen在《An Interval-based Representation of Temporal Knowledge》中描述了13种时间推理的运算符。</p>
 <p>下面用DRL语言介绍这13种运算符。其中，运算符的参数格式均为<code>[#d][#h][#m][#s][#[ms]]</code>。比如<code>3m30s</code>、<code>4m</code>等。</p>
-<h1>After 和 Before(之前和之后)</h1>
-<p><img alt="After 和 Before" src="images/rule-engine/temporal-after_and_before.png"></p>
+<h1 id="after-he-beforezhi-qian-he-zhi-hou">After 和 Before(之前和之后)</h1>
+<p><img alt="After 和 Before" src="images/rule-engine/temporal-after_and_before.png"/></p>
 <p>```
-  // x∈[a,b]时，满足以下条件
+  // x&isin;[a,b]时，满足以下条件
   //A发生在B之前
   $eventA : EventA( this before[a,b] $eventB )
   //B发生在A之后
   $eventB : EventB( this after[a,b] $eventA )</p>
 <p>```</p>
 <ul>
-<li>如果没有给出参数，则a=1ms, b=+∞</li>
-<li>如果只给出一个参数a,则b=+∞</li>
+<li>如果没有给出参数，则a=1ms, b=+&infin;</li>
+<li>如果只给出一个参数a,则b=+&infin;</li>
 </ul>
-<h1>Coincides（同时发生）</h1>
-<p><img alt="Coincides" src="images/rule-engine/temporal-coincides.png"></p>
+<h1 id="coincidestong-shi-fa-sheng">Coincides（同时发生）</h1>
+<p><img alt="Coincides" src="images/rule-engine/temporal-coincides.png"/></p>
 <p>```
-  // x∈[0,a]，且y∈[0,b]时，满足以下条件
+  // x&isin;[0,a]，且y&isin;[0,b]时，满足以下条件
   $eventA : EventA( this coincides[a,b] $eventB )
   $eventB : EventB( this coincides[a,b] $eventA )</p>
 <p>```</p>
@@ -167,10 +176,10 @@
 <li>如果只给出一个参数a,则b=a</li>
 <li>如果不给出参数，则a=0,b=0</li>
 </ul>
-<h1>During 和 Includes（包含）</h1>
-<p><img alt="During 和 Includes" src="images/rule-engine/temporal-during.png"></p>
+<h1 id="during-he-includesbao-han">During 和 Includes（包含）</h1>
+<p><img alt="During 和 Includes" src="images/rule-engine/temporal-during.png"/></p>
 <p>```
-  // x∈[a,b]，且y∈[c,d]时，满足以下条件
+  // x&isin;[a,b]，且y&isin;[c,d]时，满足以下条件
   //A在B期间发生
   $eventA : EventA( this during[a,b,c,d] $eventB )
   //B包含A
@@ -179,12 +188,12 @@
 <ul>
 <li>如果只给出二个参数a,b,则c=a,d=b</li>
 <li>如果只给出一个参数b,则a=0,c=0,d=b</li>
-<li>如果不给出参数，则a=0,b=+∞, c=0,d=+∞</li>
+<li>如果不给出参数，则a=0,b=+&infin;, c=0,d=+&infin;</li>
 </ul>
-<h1>Finishes 和 Finished by（同时结束）</h1>
-<p><img alt="Finishes 和 Finished by" src="images/rule-engine/temporal-finishes.png"></p>
+<h1 id="finishes-he-finished-bytong-shi-jie-shu">Finishes 和 Finished by（同时结束）</h1>
+<p><img alt="Finishes 和 Finished by" src="images/rule-engine/temporal-finishes.png"/></p>
 <p>```
-  // x∈[0,a]时，满足以下条件
+  // x&isin;[0,a]时，满足以下条件
   //A在B之后开始，和B同时结束
   $eventA : EventA( this finishes[a] $eventB )
   //B在A之前开始，和B同时结束
@@ -193,10 +202,10 @@
 <ul>
 <li>如果不给出参数，则a=0</li>
 </ul>
-<h1>Meets 和 Met by（相邻）</h1>
-<p><img alt="Meets 和 Met by" src="images/rule-engine/temporal-after_and_before.png"></p>
+<h1 id="meets-he-met-byxiang-lin">Meets 和 Met by（相邻）</h1>
+<p><img alt="Meets 和 Met by" src="images/rule-engine/temporal-after_and_before.png"/></p>
 <p>```
-  // x∈[0,a]时，满足以下条件
+  // x&isin;[0,a]时，满足以下条件
   //A结束时B开始
   $eventA : EventA( this meets[a] $eventB )
   //A结束时B开始
@@ -205,10 +214,10 @@
 <ul>
 <li>如果没有给出参数，则a=0</li>
 </ul>
-<h1>Overlaps 和 Overlappd by（相交）</h1>
-<p><img alt="Overlaps 和 Overlappd by" src="images/rule-engine/temporal-overlaps.png"></p>
+<h1 id="overlaps-he-overlappd-byxiang-jiao">Overlaps 和 Overlappd by（相交）</h1>
+<p><img alt="Overlaps 和 Overlappd by" src="images/rule-engine/temporal-overlaps.png"/></p>
 <p>```
-  // x∈[a,b]时，满足以下条件
+  // x&isin;[a,b]时，满足以下条件
   //A在B之前开始，在B之后结束
   $eventA : EventA( this overlaps[a,b] $eventB )
   //B在A之后开始，在A之前结束
@@ -218,22 +227,35 @@
 <li>如果只给出一个参数b,则a=0</li>
 <li>如果不给出参数，则a=0,b=0</li>
 </ul>
-<h1>Starts 和 Started by（同时开始）</h1>
-<p><img alt="Starts 和 Started by" src="images/rule-engine/temporal-starts.png"></p>
+<h1 id="starts-he-started-bytong-shi-kai-shi">Starts 和 Started by（同时开始）</h1>
+<p><img alt="Starts 和 Started by" src="images/rule-engine/temporal-starts.png"/></p>
 <p>```
-  // x∈[0,a]时，满足以下条件
+  // x&isin;[0,a]时，满足以下条件
   //A和B同时开始，A先结束
   $eventA : EventA( this starts[a] $eventB )
   //B和A同时开始，B后结束
   $eventB : EventB( this startedby[a] $eventA )</p>
 <p>```</p>
 <ul>
-<li>如果不给出参数，则a=+∞</li>
+<li>如果不给出参数，则a=+&infin;</li>
 </ul>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-12-21.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2013/12/22/from_rule_to_cep.html">从规则引擎到复杂事件处理(CEP)</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/21/event_in_CEP.html">CEP中的事件(Event)</a></li>
+        <li><a href="http://holbrook.github.io/2012/11/06/cep_about.html">CEP：鱼与熊掌可以兼得</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -272,6 +294,8 @@
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -289,37 +313,37 @@
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,16 +138,25 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">Drools规则引擎API概述</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="Drools规则引擎API概述">Drools规则引擎API概述</a><ul><li><a class="toc-href" href="#knowledge-api" title="Knowledge API">Knowledge API</a></li><li><a class="toc-href" href="#fact-api" title="Fact API">Fact API</a></li><li><a class="toc-href" href="#execution-api" title="Execution API">Execution API</a></li></ul></li></ul></div>
+	</div>
+
+
+
 	<p><a href="/2012/03/20/rule_engine_1.html">如前所述</a>，
 规则引擎中，将知识表达为规则（rules），要分析的情况定义为事实（facts）。二者在内存中的存储分别称为Production Memory和Working Memory。在外围，还会有一个执行引擎（Execution Engine）。</p>
 <p>与此对应，规则引擎API也分成三个部分。在Drools中，分别叫做Knowledge API，Fact API和Execution API。</p>
-<h1>Knowledge API</h1>
+<h1 id="knowledge-api">Knowledge API</h1>
 <p>Drools将知识库(KnowledgeBase)作为<a href="/2012/12/07/jsr94.html">JSR94</a>中的规则执行集(RuleExecutionSet)。知识库中的知识以包(KnowledgePackage)为单位组合而成。每个包中聚合多个规则(Rule)。</p>
 <p>通常，一个包中的内容会在一个或多个资源(Resource)中保存。资源的类型可以有很多种,如.drl 文件、.dslr 文件或 xls 文件等。</p>
 <p>规则包还可以从规则流(rule flow) 文件中获取。</p>
-<p><img alt="KnowledgeBase" src="images/rule-engine/KnowledgeBase.png"></p>
+<p><img alt="KnowledgeBase" src="images/rule-engine/KnowledgeBase.png"/></p>
 <p>与此对应，Drools定义了一组Knowledge API来操作知识库。</p>
-<p><img alt="KnowledgeBase" src="images/rule-engine/KnowledgeAPI.png"></p>
+<p><img alt="KnowledgeBase" src="images/rule-engine/KnowledgeAPI.png"/></p>
 <p>构建知识库的一般过程为：</p>
 <ol>
 <li>通过ResourceFactory获取资源。可以从Classpath、URL、File、ByteArray、Reader等输入源中获取</li>
@@ -161,7 +170,7 @@
 <p>{% highlight java %}</p>
 <div class="highlight"><pre><span></span><span class="nt">KnowledgeBase</span> <span class="nt">buildKBase</span><span class="o">()</span><span class="p">{</span>
 
-    <span class="n">Resource</span> <span class="n">res</span> <span class="o">=</span> <span class="n">ResourceFactory</span><span class="o">.</span><span class="n">newClassPathResource</span><span class="p">(</span><span class="s2">&quot;hello.drl&quot;</span><span class="o">,</span> <span class="n">Demo</span><span class="o">.</span><span class="n">class</span><span class="p">);</span>
+    <span class="n">Resource</span> <span class="n">res</span> <span class="o">=</span> <span class="n">ResourceFactory</span><span class="o">.</span><span class="n">newClassPathResource</span><span class="p">(</span><span class="s2">"hello.drl"</span><span class="o">,</span> <span class="n">Demo</span><span class="o">.</span><span class="n">class</span><span class="p">);</span>
 
     <span class="n">KnowledgeBuilder</span> <span class="n">kbuilder</span> <span class="o">=</span> <span class="n">KnowledgeBuilderFactory</span>
             <span class="o">.</span><span class="n">newKnowledgeBuilder</span><span class="p">();</span>
@@ -170,7 +179,7 @@
 
     <span class="o">//</span><span class="n">validate</span>
     <span class="n">if</span> <span class="p">(</span><span class="n">kbuilder</span><span class="o">.</span><span class="n">hasErrors</span><span class="p">())</span> <span class="err">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;规则中存在错误,错误消息如下:&quot;</span><span class="p">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"规则中存在错误,错误消息如下:"</span><span class="p">);</span>
         <span class="n">KnowledgeBuilderErrors</span> <span class="n">kbuidlerErrors</span> <span class="o">=</span> <span class="n">kbuilder</span><span class="o">.</span><span class="n">getErrors</span><span class="p">();</span>
         <span class="n">for</span> <span class="p">(</span><span class="n">Iterator</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">kbuidlerErrors</span><span class="o">.</span><span class="n">iterator</span><span class="p">();</span> <span class="n">iter</span><span class="o">.</span><span class="n">hasNext</span><span class="p">();)</span> <span class="err">{</span>
             <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="n">iter</span><span class="o">.</span><span class="n">next</span><span class="p">());</span>
@@ -181,7 +190,7 @@
 
     <span class="nt">KnowledgeBaseConfiguration</span> <span class="nt">kbConf</span> <span class="o">=</span>
             <span class="nt">KnowledgeBaseFactory</span><span class="nc">.newKnowledgeBaseConfiguration</span><span class="o">();</span>
-    <span class="nt">kbConf</span><span class="nc">.setProperty</span><span class="o">(</span> <span class="s2">&quot;org.drools.sequential&quot;</span><span class="o">,</span> <span class="s2">&quot;true&quot;</span><span class="o">);</span>
+    <span class="nt">kbConf</span><span class="nc">.setProperty</span><span class="o">(</span> <span class="s2">"org.drools.sequential"</span><span class="o">,</span> <span class="s2">"true"</span><span class="o">);</span>
 
     <span class="o">//</span><span class="nt">KnowledgeBase</span> <span class="nt">kbase</span><span class="o">=</span><span class="nt">KnowledgeBaseFactory</span><span class="nc">.newKnowledgeBase</span><span class="o">();</span>
     <span class="nt">KnowledgeBase</span> <span class="nt">kbase</span> <span class="o">=</span>
@@ -192,10 +201,8 @@
     <span class="nt">return</span> <span class="nt">kbase</span><span class="o">;</span>
 <span class="err">}</span>
 </pre></div>
-
-
 <p>{% endhighlight %}</p>
-<h1>Fact API</h1>
+<h1 id="fact-api">Fact API</h1>
 <p>要操作Working Memory，首先要建立规则引擎的一个会话。Drools中的有状态会话和无状态会话分别为StatefulKnowledgeSession和StatelessKnowledgeSession，都可以由KnowledgeBase建立。</p>
 <p>通过会话可以进行操作Fact对象，执行规则等交互，例如：</p>
 <p>{% highlight java %}</p>
@@ -217,17 +224,17 @@ statelessKSession.execute(list);</p>
 <p>{% endhighlight %}</p>
 <p>这样的特点决定了，无状态会话适合推演和分析，需要事先知道所有的事实(Fact)；而有状态会话可以随时增加事实并进行批评，适合实际应用。</p>
 <p>无状态会话中还可以使用execute(Command cmd)方法。比如，如果要在无状态会话中插入一个List，可以用CommandFactory生成一个关于List的Command:</p>
-<p _="%" endhighlight>{% highlight java %}
+<p _="%" endhighlight="">{% highlight java %}
 statelessKSession.execute(CommandFactory.newInsert(list));</p>
 <p>同样，无状态会话中如果要设置global，也需要使用Command:</p>
 <p>{% highlight java %}
-ArrayList<Command> list=new ArrayList<Command>();</p>
+ArrayList<command> list=new ArrayList<command>();</command></command></p>
 <p>list.add(CommandFactory.newInsert(new Object()));
 list.add(CommandFactory.newInsert(new Object()));</p>
 <p>list.add(CommandFactory.newSetGlobal("key1", new Object()));
 list.add(CommandFactory.newSetGlobal("key2", new Object()));</p>
-<p _="%" endhighlight>statelessKSession.execute(CommandFactory.newBatchExecution(list)) ;</p>
-<h1>Execution API</h1>
+<p _="%" endhighlight="">statelessKSession.execute(CommandFactory.newBatchExecution(list)) ;</p>
+<h1 id="execution-api">Execution API</h1>
 <p>插入到WorkingMemory中的对象，并不是克隆，而是对原对象的引用。这就意味着引擎中可以改变外部的对象，这是引擎与外部数据交互的一个通道。</p>
 <p>此外，insert()方法还会返回一个FactHandler，作为引擎中该Fact对象的一个句柄。</p>
 <p>最后，session上可以注册AgendaEventListener、ProcessEventListener和WorkingMemoryEventListener，这也是常用的交互方式。
@@ -241,14 +248,27 @@ public interface WorkingMemoryEventListener
 
 void objectRetracted(ObjectRetractedEvent event);
 </pre></div>
-
-
 <p>}</p>
 <p>{% endhighlight %}</p>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-12-20.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2013/12/19/trading_strategy.html">交易策略与规则引擎</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/07/jsr94.html">Java规则引擎规范：JSR94</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/06/rule_language.html">Drools规则描述语言快速手册</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/05/algorithm_of_pattern_match.html">规则引擎中常用的模式匹配算法</a></li>
+        <li><a href="http://holbrook.github.io/2012/03/20/rule_engine_1.html">规则，推理机和规则引擎</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -287,6 +307,8 @@ void objectRetracted(ObjectRetractedEvent event);
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -304,37 +326,37 @@ void objectRetracted(ObjectRetractedEvent event);
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

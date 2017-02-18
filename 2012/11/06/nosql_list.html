@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,11 +138,20 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">NoSQL数据库选型指引</h1>
-	<h1>什么是NoSQL</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="NoSQL数据库选型指引">NoSQL数据库选型指引</a><ul><li><a class="toc-href" href="#shi-yao-shi-nosql" title="什么是NoSQL">什么是NoSQL</a></li><li><a class="toc-href" href="#nosqlxuan-xing-yao-su" title="NoSQL选型要素">NoSQL选型要素</a></li><li><a class="toc-href" href="#chang-jian-de-nosqlshu-ju-ku" title="常见的NoSQL数据库">常见的NoSQL数据库</a></li></ul></li></ul></div>
+	</div>
+
+
+
+	<h1 id="shi-yao-shi-nosql">什么是NoSQL</h1>
 <p>NoSQL可以有两种解释：</p>
 <ul>
-<li>No SQL：“不使用SQL查询语言”。强调其轻量的特点</li>
-<li>Not Only SQL：”不仅仅是查询“。强调其高性能，分布式，大容量等传统关系数据库所不具备的特性</li>
+<li>No SQL：&ldquo;不使用SQL查询语言&rdquo;。强调其轻量的特点</li>
+<li>Not Only SQL：&rdquo;不仅仅是查询&ldquo;。强调其高性能，分布式，大容量等传统关系数据库所不具备的特性</li>
 </ul>
 <p>从设计原则上，NoSQL不再强调ACID（酸），而是强调BASE（碱）。</p>
 <p>ACID是指：</p>
@@ -159,7 +168,7 @@
 <li>Eventually Consistent（最终一致性）</li>
 </ul>
 <p>NoSQL与关系数据库的原则不同：NoSQL牺牲高一致性，换取获得可用性或可靠性。软状态意味着状态是异步的，在某些时段状态是不一致的；但最终一致保证数据早晚会一致。</p>
-<h1>NoSQL选型要素</h1>
+<h1 id="nosqlxuan-xing-yao-su">NoSQL选型要素</h1>
 <ol>
 <li>存储结构</li>
 </ol>
@@ -182,7 +191,7 @@
 <li>是否支持集群部署</li>
 <li>操作接口的丰富程度</li>
 </ol>
-<h1>常见的NoSQL数据库</h1>
+<h1 id="chang-jian-de-nosqlshu-ju-ku">常见的NoSQL数据库</h1>
 <ul>
 <li>文档数据库</li>
 </ul>
@@ -194,7 +203,6 @@
 <tr><td>BaseX</td><td></td><td></td><td></td><td>XQuery, Java</td><td></td></tr>
 <tr><td>MongoDB</td><td></td><td>服务，集群</td><td>PHP，Python，Perl，Ruby，JavaScript，C++等</td><td>JSON数据库，支持全文索引，自动分片，跨LAN或WAN扩展</td></tr>
 </table>
-
 <ul>
 <li>图形数据库</li>
 </ul>
@@ -205,7 +213,6 @@
 <tr><td>AllegroGraph</td><td></td><td></td><td>SPARQL</td><td></td></tr>
 <tr><td>FlockDB</td><td></td><td></td><td>Scala</td><td></td></tr>
 </table>
-
 <ul>
 <li>key/value数据库</li>
 </ul>
@@ -216,7 +223,6 @@
 <tr><td>Redis</td><td></td><td></td><td></td><td></td></tr>
 <tr><td>Oracle Berkeley DB</td><td></td><td></td><td></td><td></td></tr>
 </table>
-
 <ul>
 <li>列数据库</li>
 </ul>
@@ -226,7 +232,6 @@
 <tr><td>HBase</td><td></td><td></td><td></td><td></td></tr>
 <tr><td>Hypertable</td><td></td><td></td><td></td><td></td></tr>
 </table>
-
 <ul>
 <li>对象数据库</li>
 </ul>
@@ -239,9 +244,16 @@
 <tr><td>ObjectStore</td><td></td><td></td><td></td><td></td></tr>
 </table>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2012-11-06.</h6>
+
+
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -280,6 +292,8 @@
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -297,37 +311,37 @@
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

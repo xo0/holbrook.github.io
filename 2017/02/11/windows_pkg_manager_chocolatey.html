@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,20 +138,29 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">windows下面的包管理器：Chocolatey</h1>
-	<h1>系统级别的包管理器</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="windows下面的包管理器：Chocolatey">windows下面的包管理器：Chocolatey</a><ul><li><a class="toc-href" href="#xi-tong-ji-bie-de-bao-guan-li-qi" title="系统级别的包管理器">系统级别的包管理器</a></li><li><a class="toc-href" href="#yuan-li" title="原理">原理</a></li><li><a class="toc-href" href="#an-zhuang" title="安装">安装</a></li><li><a class="toc-href" href="#shi-yong" title="使用">使用</a></li><li><a class="toc-href" href="#xiao-jie" title="小结">小结</a></li></ul></li></ul></div>
+	</div>
+
+
+
+	<h1 id="xi-tong-ji-bie-de-bao-guan-li-qi">系统级别的包管理器</h1>
 <p>开发人员一般都喜欢命令行操作，因为效率更高。在管理系统上的软件时，更喜欢用包管理器(<code>package manager</code>)。
 Linux 下面我们已经熟悉了 <code>yum</code>, <code>apt</code>等，在 Mac OS 下面，<code>Homebrew</code> 最终战胜了 <code>MacPort</code>。
 但是有时候我们不得不使用 windows，比如 万德。</p>
-<p>Windows 的软件管理，以前是一些第三方的“软件仓库”，比如 百度软件管理等，但是难保上面没有地雷。
-Windows 10 自己提供了“软件商店”，安全性应该大有改观，但是使用仍很受限制，尤其是开发用的软件很不全。</p>
+<p>Windows 的软件管理，以前是一些第三方的&ldquo;软件仓库&rdquo;，比如 百度软件管理等，但是难保上面没有地雷。
+Windows 10 自己提供了&ldquo;软件商店&rdquo;，安全性应该大有改观，但是使用仍很受限制，尤其是开发用的软件很不全。</p>
 <p>我们需要一个 Windows 下面的包管理器。所幸，现在有了 <a href="https://chocolatey.org/">Chocolatey</a>。
 使用包管理的好处不仅仅是提高效率，更重要的是使得 Windows 的自动运维成为可能。
 比如，原来 <code>SaltStack</code>的很多脚本在 Windows 下很难实现，但有了 Chocolatey ，
 用 SaltStack 管理Windows 服务器的难度大大降低。</p>
-<h1>原理</h1>
+<h1 id="yuan-li">原理</h1>
 <p><a href="https://chocolatey.org/">Chocolatey</a>使用 Nuget 协议，将软件的官方链接封装到描述文件中。
 可以查看 <a href="https://chocolatey.org/packages">软件包列表</a>。</p>
-<h1>安装</h1>
+<h1 id="an-zhuang">安装</h1>
 <p><a href="https://chocolatey.org/">Chocolatey</a>需要的环境为：</p>
 <ul>
 <li>Windows 7+ / Windows Server 2003+</li>
@@ -163,19 +172,13 @@ Windows 10 自己提供了“软件商店”，安全性应该大有改观，但
 <div class="highlight"><pre><span></span>Set-ExecutionPolicy unrestricted
 iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 </pre></div>
-
-
 <p>也可以使用<code>Cmd</code> 、<code>CygWin</code>、。。。 等命令行工具：</p>
-<div class="highlight"><pre><span></span><span class="k">@powershell</span> <span class="nt">-NoProfile</span> <span class="nt">-ExecutionPolicy</span> <span class="nt">Bypass</span> <span class="nt">-Command</span> <span class="s2">&quot;iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;))&quot;</span> <span class="o">&amp;&amp;</span> <span class="nt">SET</span> <span class="s2">&quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;</span>
+<div class="highlight"><pre><span></span><span class="k">@powershell</span> <span class="nt">-NoProfile</span> <span class="nt">-ExecutionPolicy</span> <span class="nt">Bypass</span> <span class="nt">-Command</span> <span class="s2">"iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"</span> <span class="o">&amp;&amp;</span> <span class="nt">SET</span> <span class="s2">"PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"</span>
 </pre></div>
-
-
-<h1>使用</h1>
+<h1 id="shi-yong">使用</h1>
 <p>安装好 Chocolatey 后，可以通过如下命令查看使用帮助：</p>
 <div class="highlight"><pre><span></span>choco help
 </pre></div>
-
-
 <p>Chocolatey 的命令一般提供两种格式，比如安装软件可以使用长格式 <code>choco install</code> , 或者短格式 <code>cinst</code>。
 可以根据需要选择。但我个人更喜欢长格式，因为跟其他包管理器的命令更接近。</p>
 <p>Chocolatey 的常用命令包括：</p>
@@ -186,16 +189,29 @@ iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 <li>升级: <code>choco upgrade</code></li>
 <li>卸载: <code>choco uninstall</code></li>
 </ul>
-<h1>小结</h1>
+<h1 id="xiao-jie">小结</h1>
 <p>使用 Chocolatey 可以管理很多软件包，比如 Linux 下面常用的 ~curl~, 一些小工具如 ~7zip~，
 各种开发环境和工具如 ~git~, ~nodejs~, 甚至一些大型 GUI程序如
  ~SublimeText3~, ~virtualbox~, ~VisualStudio2013Ultimate~.
 通过命令行的方式，可以将按照操作纳入到 SaltStack 的管理中。</p>
 <p>相信通过深入挖掘，Chocolatey 能够发挥很大的作用。</p>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-02-11.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2017/02/14/python_data_analysis1.html">利用Python进行数据分析(1)：简单介绍</a></li>
+        <li><a href="http://holbrook.github.io/2017/02/11/dataology_python_env.html">基于Python的数据科学环境</a></li>
+        <li><a href="http://holbrook.github.io/2015/05/04/modern_web_dev_env.html">搭建一个“现代化”的web开发环境</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -234,6 +250,8 @@ iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -251,37 +269,37 @@ iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

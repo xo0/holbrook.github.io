@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,7 +138,16 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">用Ganglia监控集群的性能</h1>
-	<h1>Ganglia简介</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="用Ganglia监控集群的性能">用Ganglia监控集群的性能</a><ul><li><a class="toc-href" href="#gangliajian-jie" title="Ganglia简介">Ganglia简介</a></li><li><a class="toc-href" href="#gangliajia-gou" title="Ganglia架构">Ganglia架构</a></li><li><a class="toc-href" href="#gangliagui-hua" title="Ganglia规划">Ganglia规划</a></li><li><a class="toc-href" href="#an-zhuang-he-pei-zhi" title="安装和配置">安装和配置</a><ul><li><a class="toc-href" href="#an-zhuang" title="安装">安装</a></li><li><a class="toc-href" href="#pei-zhi-fang-huo-qiang-gui-ze" title="配置防火墙规则">配置防火墙规则</a></li><li><a class="toc-href" href="#pei-zhi-bei-jian-kong-jie-dian-etcgangliagmondconf" title="配置被监控节点(/etc/ganglia/gmond.conf)">配置被监控节点(/etc/ganglia/gmond.conf)</a></li><li><a class="toc-href" href="#pei-zhi-zhong-xin-jie-dian-etcgangliagmetadconf" title="配置中心节点(/etc/ganglia/gmetad.conf)">配置中心节点(/etc/ganglia/gmetad.conf)</a></li><li><a class="toc-href" href="#pei-zhi-web" title="配置web">配置web</a></li></ul></li><li><a class="toc-href" href="#kuo-zhan-jian-kong-gong-neng_1" title="扩展监控功能">扩展监控功能</a><ul><li><a class="toc-href" href="#cha-jian-ji-zhi" title="插件机制">插件机制</a></li><li><a class="toc-href" href="#bu-shu-nginxcha-jian" title="部署NginX插件">部署NginX插件</a></li></ul></li><li><a class="toc-href" href="#todoyu-nagiosjie-he-shi-yong_1" title="TODO：与Nagios结合使用">TODO：与Nagios结合使用</a></li></ul></li></ul></div>
+	</div>
+
+
+
+	<h1 id="gangliajian-jie">Ganglia简介</h1>
 <p>对基础设施的监控主要包括三个方面：状态，性能和可用性。通俗的讲就是：是否在干活，干了多少活，还能干多少。</p>
 <p>有很多开源的强大工具可以用于监控，比如
 <a href="http://www.cacti.net/">Cacti</a>，
@@ -146,14 +155,14 @@
 以及比较新的
 <a href="http://www.shinken-monitoring.org/">Shinken</a>和
 <a href="http://www.zabbix.com">Zabbix</a>。
-这些工具的主要功能是状态监控和报警——就像一个合格的监工，随时掌握基础设施是否在干活，发现谁没干活马上报告。</p>
+这些工具的主要功能是状态监控和报警&mdash;&mdash;就像一个合格的监工，随时掌握基础设施是否在干活，发现谁没干活马上报告。</p>
 <p>如果是传统的运维工作，有这些工具就足够强大了。但是对于分布式系统的开发+运维人员（DevOps?），更关心的是掌握分布式系统的性能和可用性，根据数据做出性能调整、升级、扩容等的决策，从而保证基础设施服务能够满足不断增长的业务需求。</p>
 <p><a href="http://ganglia.sourceforge.net/">Ganglia</a>就是这样一种工具。Ganglia 是 UC Berkeley 发起的一个开源监视项目，设计用于测量数以千计的节点。Ganglia主要监控集群的性能指标，如cpu 、mem、硬盘利用率， I/O负载、网络流量情况等，
 也可以监控自定义的性能指标。通过Ganglia绘制的曲线很容易见到每个节点的工作状态，对合理调整、分配系统资源，提高系统整体性能起到重要作用。</p>
 <p>gmond 带来的系统负载非常少，这使得它成为在集群中各台计算机上运行的一段代码，而不会影响用户性能。</p>
-<h1>Ganglia架构</h1>
+<h1 id="gangliajia-gou">Ganglia架构</h1>
 <p>Ganglia的整体架构如下图所示：</p>
-<p><img alt="Ganglia-architecture" src="images/2013/ganglia/ganglia_architecture.gif"></p>
+<p><img alt="Ganglia-architecture" src="images/2013/ganglia/ganglia_architecture.gif"/></p>
 <ol>
 <li>每个被检测的节点或集群运行一个gmond进程，进行监控数据的收集、汇总和发送。gmond即可以作为发送者（收集本机数据），也可以作为接收者（汇总多个节点的数据）。</li>
 <li>通常在整个监控体系中只有一个gmetad进程。该进程定期检查所有的gmonds，主动收集数据，并存储在RRD存储引擎中。</li>
@@ -161,7 +170,7 @@
 </ol>
 <p>其中，<a href="http://oss.oetiker.ch/rrdtool/">RRDtool</a>(Round Robin Database tool,环状数据库工具)是一组操作RRD数据的API，支持数据图形化。RRD是一种环状数据库技术，只存储固定数量的数据，新的数据会覆盖最旧的数据。
 更多信息可以参考<a href="http://bbs.chinaunix.net/forum.php?mod=viewthread&amp;tid=864861&amp;page=1">RRDtool简体中文教程 v1.01</a>。</p>
-<h1>Ganglia规划</h1>
+<h1 id="gangliagui-hua">Ganglia规划</h1>
 <p>在动手部署Ganglia之前，首先要对监控体系进行初步的规划。主要考虑两方面的问题：</p>
 <ol>
 <li>单集群 or 多集群</li>
@@ -172,11 +181,11 @@
 <li>组播模式 or 单播模式</li>
 </ol>
 <p>组播模式是ganglia的默认模式，同一集群的多个gmond之间互相交换数据，gmetad中可以指定集群中的任意一个或多个节点作为"data_source"；</p>
-<p>组播模式可能会带来网络的 “抖动（Jitter）”。据说设置节点的时钟同步可以避免抖动的问题； 但如果网络环境不支持组播（比如Amazon’s AWS EC2），就需要使用单播模式。单播模式时，将大部分节点的gmond.conf中,global的deaf设置改为"yes"，则这些节点只发生数据，不接收其他节点的数据，同样也不能作为gmetad中的"data_source"。</p>
-<p>单播模式中还需要设置“send_metadata_interval”，比如30秒。以强制发送元数据。</p>
+<p>组播模式可能会带来网络的 &ldquo;抖动（Jitter）&rdquo;。据说设置节点的时钟同步可以避免抖动的问题； 但如果网络环境不支持组播（比如Amazon&rsquo;s AWS EC2），就需要使用单播模式。单播模式时，将大部分节点的gmond.conf中,global的deaf设置改为"yes"，则这些节点只发生数据，不接收其他节点的数据，同样也不能作为gmetad中的"data_source"。</p>
+<p>单播模式中还需要设置&ldquo;send_metadata_interval&rdquo;，比如30秒。以强制发送元数据。</p>
 <p>ganglia将一个gmetad覆盖的所有集群/节点称为一个grid。可以在/etc/ganglia/gmetad.conf中通过<code>gridname</code>指定其名称。多个grid的数据也可以聚合到一个上级gmetad中。</p>
-<h1>安装和配置</h1>
-<h2>安装</h2>
+<h1 id="an-zhuang-he-pei-zhi">安装和配置</h1>
+<h2 id="an-zhuang">安装</h2>
 <p>在RHEL/CentOS上如果配置了EPEL源，则安装变得非常简单。用yum可以查到如下软件包：</p>
 <ul>
 <li>ganglia.i686 : Ganglia Distributed Monitoring System</li>
@@ -189,9 +198,9 @@
 <li>ganglia-web.x86_64 : Ganglia Web Frontend</li>
 </ul>
 <p>在不同的节点选择对应的软件包安装即可。</p>
-<h2>配置防火墙规则</h2>
+<h2 id="pei-zhi-fang-huo-qiang-gui-ze">配置防火墙规则</h2>
 <p>gmond和gmetad之间默认使用UDP的8649端口进行通信，如果配置多个集群，还会有其他端口。要保证这些端口畅通。</p>
-<h2>配置被监控节点(/etc/ganglia/gmond.conf)</h2>
+<h2 id="pei-zhi-bei-jian-kong-jie-dian-etcgangliagmondconf">配置被监控节点(/etc/ganglia/gmond.conf)</h2>
 <p>最重要的配置是集群名称(cluster.name)。</p>
 <p>如果要配置多个集群，每个集群要使用不同的端口。共三个地方：</p>
 <ul>
@@ -199,29 +208,25 @@
 <li>udp_recv_channel.port</li>
 <li>tcp_accept_channel.port</li>
 </ul>
-<h2>配置中心节点(/etc/ganglia/gmetad.conf)</h2>
+<h2 id="pei-zhi-zhong-xin-jie-dian-etcgangliagmetadconf">配置中心节点(/etc/ganglia/gmetad.conf)</h2>
 <p>最重要的是配置数据源。比如：</p>
-<div class="highlight"><pre><span></span>data_source &quot;NginX&quot; a.a.a.101:8661 a.a.a.102:8661
-data_source &quot;LVS&quot;   b.b.b.101 b.b.b.102
+<div class="highlight"><pre><span></span>data_source "NginX" a.a.a.101:8661 a.a.a.102:8661
+data_source "LVS"   b.b.b.101 b.b.b.102
 </pre></div>
-
-
-<h2>配置web</h2>
+<h2 id="pei-zhi-web">配置web</h2>
 <p>默认启动httpd服务后，就可以通过<code>http://IP/ganglia</code>访问。如果提示权限问题，需要检查：</p>
 <ol>
 <li>selinux设置</li>
 <li>防火墙设置</li>
 <li>/etc/httpd/conf.d/ganglia.conf中的<code>Deny from all</code>限制</li>
 </ol>
-<h1>扩展监控功能</h1>
+<h1 id="kuo-zhan-jian-kong-gong-neng_1">扩展监控功能</h1>
 <p>Ganglia默认只监控一些通用的性能指标，如果要监控自定义的指标，就需要对Ganglia进行扩展。</p>
-<h2>插件机制</h2>
+<h2 id="cha-jian-ji-zhi">插件机制</h2>
 <p>从Ganglia 3.1开始，可以使用python开发的插件对Ganglia进行扩展。</p>
 <p><code>/etc/ganglia/gmond.conf</code>配置中通常会包含：</p>
-<div class="highlight"><pre><span></span>include (&#39;/etc/ganglia/conf.d/*.conf&#39;)
+<div class="highlight"><pre><span></span>include ('/etc/ganglia/conf.d/*.conf')
 </pre></div>
-
-
 <p>如果安装了<code>ganglia-gmond-python</code>软件包，会创建一个<code>/etc/ganglia/conf.d/modpython.conf</code>文件：</p>
 <p>{% highlight nginx %}
 modules {
@@ -231,10 +236,10 @@ modules {
     params = "/usr/lib64/ganglia/python_modules"
   }
 }</p>
-<p _="%" endhighlight>include ('/etc/ganglia/conf.d/*.pyconf')</p>
+<p _="%" endhighlight="">include ('/etc/ganglia/conf.d/*.pyconf')</p>
 <p>这样，就可以用python编写自定义的插件。</p>
 <p>Ganglia 在 GitHub 上已经收集了一些<a href="https://github.com/ganglia/gmond_python_modules">常用的python插件</a>。</p>
-<h2>部署NginX插件</h2>
+<h2 id="bu-shu-nginxcha-jian">部署NginX插件</h2>
 <p>在<a href="https://github.com/ganglia/gmond_python_modules">常用的python插件</a>中包含了
 <a href="https://github.com/ganglia/gmond_python_modules/tree/master/nginx_status">nginx_status插件</a>，
 该插件利用<a href="/nginx_keepalived.html#menuIndex9">NginX的状态监控功能</a>获取数据。</p>
@@ -246,14 +251,32 @@ modules {
 <li>将graph.d/目录下的文件复制到gmetad节点的<code>/usr/share/ganglia/graph.d</code>目录。这些文件定义了如何绘制metric的图形</li>
 <li>重启gmetad，在对应的nginx节点详细信息中可以看到nginx metric对应的7个图表。</li>
 </ol>
-<p><img alt="Ganglia-nginx" src="images/2013/ganglia/ganglia_nginx.png"></p>
+<p><img alt="Ganglia-nginx" src="images/2013/ganglia/ganglia_nginx.png"/></p>
 <p>理解了NginX插件，基本上能够自己开发Ganglia插件了。</p>
-<h1>TODO：与Nagios结合使用</h1>
+<h1 id="todoyu-nagiosjie-he-shi-yong_1">TODO：与Nagios结合使用</h1>
 <p>Nagios提供了很好的报警机制，将Ganglia与Nagios结合使用是常见的方式。</p>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-07-30.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2013/07/07/salt_pillar.html">Pillar：定义Salt配置管理的数据</a></li>
+        <li><a href="http://holbrook.github.io/2013/07/01/salt_state_config_structure.html">Salt state 配置结构</a></li>
+        <li><a href="http://holbrook.github.io/2013/06/30/salt_sls_sample.html">Salt state实例解析</a></li>
+        <li><a href="http://holbrook.github.io/2013/06/25/salt_usage.html">salt的主要功能及使用</a></li>
+        <li><a href="http://holbrook.github.io/2013/06/24/salt_intro.html">用salt管理成千上万的服务器</a></li>
+        <li><a href="http://holbrook.github.io/2013/07/16/ha_keepalived.html">keepalived实现双机互备</a></li>
+        <li><a href="http://holbrook.github.io/2013/07/01/lvs_nginx_practice.html">lvs+nginx的负载均衡实验</a></li>
+        <li><a href="http://holbrook.github.io/2013/05/27/nginx_keepalived.html">用nginX+keepalived实现高可用的负载均衡</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -292,6 +315,8 @@ modules {
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -309,37 +334,37 @@ modules {
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

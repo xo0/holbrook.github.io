@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,7 +138,16 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">《统计学》读书笔记(6/17:简单统计推断：总体参数的假设检验)</h1>
-	<h1>假设检验</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="《统计学》读书笔记(6/17:简单统计推断：总体参数的假设检验)">《统计学》读书笔记(6/17:简单统计推断：总体参数的假设检验)</a><ul><li><a class="toc-href" href="#jia-she-jian-yan" title="假设检验">假设检验</a></li><li><a class="toc-href" href="#61-jia-she-jian-yan-de-guo-cheng-he-luo-ji" title="6.1 假设检验的过程和逻辑">6.1 假设检验的过程和逻辑</a><ul><li><a class="toc-href" href="#ti-chu-jia-she" title="提出假设">提出假设</a></li><li><a class="toc-href" href="#pan-duan-luo-ji" title="判断逻辑">判断逻辑</a></li><li><a class="toc-href" href="#pan-duan-jie-guo" title="判断结果">判断结果</a></li><li><a class="toc-href" href="#shi-powerhe-lin-jie-zhi-critical-value-todo" title="势(power）和临界值（critical value) （TODO)">势(power）和临界值（critical value) （TODO)</a></li></ul></li><li><a class="toc-href" href="#62-dui-yu-zheng-tai-zong-ti-jun-zhi-de-jian-yan_1" title="6.2 对于正态总体均值的检验">6.2 对于正态总体均值的检验</a></li><li><a class="toc-href" href="#63-dui-yu-bi-li-de-jian-yan" title="6.3 对于比例的检验">6.3 对于比例的检验</a></li><li><a class="toc-href" href="#64-cong-yi-ge-li-zi-shuo-ming-jie-shou-ling-jia-she-de-shuo-fa-bu-tuo" title="6.4 从一个例子说明&ldquo;接受零假设&rdquo;的说法不妥">6.4 从一个例子说明&ldquo;接受零假设&rdquo;的说法不妥</a></li><li><a class="toc-href" href="#65-xiao-jie" title="6.5 小结">6.5 小结</a></li></ul></li></ul></div>
+	</div>
+
+
+
+	<h1 id="jia-she-jian-yan">假设检验</h1>
 <p>证明一件事情比较难，证伪一件事情比较容易</p>
 <p>科学研究的一个基本方法就是假设检验：</p>
 <ol>
@@ -148,25 +157,25 @@
 </ol>
 <p>统计学中的假设检验方法也是一样，只不过关注点是统计量之间关系的假设</p>
 <p>注意：假设不能被推翻，也仅仅是假设。因为无法证明其能覆盖所有的情况。对于统计学领域尤其如此</p>
-<h1>6.1 假设检验的过程和逻辑</h1>
+<h1 id="61-jia-she-jian-yan-de-guo-cheng-he-luo-ji">6.1 假设检验的过程和逻辑</h1>
 <p>比如检查商品的份量是否充足：进行抽样后检验。单个商品的称量结果有多有少，
 如何判断总体的份量是否足够？仅用样本的平价重量进行评价是不科学的！</p>
-<h2>提出假设</h2>
+<h2 id="ti-chu-jia-she">提出假设</h2>
 <ul>
 <li>首先提出假设，比如总体的平价质量充足（u&gt;=u0），称为零假设（null hypothesis)，记为<code>H0</code></li>
 <li>同时提出备选假设(alternative hypothesis)，总体的平价质量不充足（u&lt;u0)，记为<code>H1</code></li>
-<li>命题： <code>H0:u&gt;=u0 &lt;=&gt; H1:u&lt;u0</code> 。其中<code>&lt;=&gt;</code>相当于“versus”</li>
-<li>通常，选择更接近实际情况的假设作为备选假设，相反的作为零假设。检验的目地就是判断H1是否显著。所以假设检验也成为“显著性检验（significant test）”</li>
+<li>命题： <code>H0:u&gt;=u0 &lt;=&gt; H1:u&lt;u0</code> 。其中<code>&lt;=&gt;</code>相当于&ldquo;versus&rdquo;</li>
+<li>通常，选择更接近实际情况的假设作为备选假设，相反的作为零假设。检验的目地就是判断H1是否显著。所以假设检验也成为&ldquo;显著性检验（significant test）&rdquo;</li>
 </ul>
-<h2>判断逻辑</h2>
+<h2 id="pan-duan-luo-ji">判断逻辑</h2>
 <ul>
-<li>被检验的统计量成为“检验统计量（test statistic）”</li>
+<li>被检验的统计量成为&ldquo;检验统计量（test statistic）&rdquo;</li>
 <li>根据 <em>H0(注意，不是H1)</em> 得到检验统计量的分布</li>
 <li>看看该统计量的数据实现值（realization)是否为小概率事件</li>
 <li>如果是小概率事件，则拒绝零假设（检验显著）</li>
 </ul>
 <p>该逻辑中，H0和H1的地位不对称：按照H0推导分布，只要不符合就可以推翻H0</p>
-<h2>判断结果</h2>
+<h2 id="pan-duan-jie-guo">判断结果</h2>
 <p>上面的逻辑并不严谨：</p>
 <p>小概率事件也有可能真实发生！</p>
 <p>所以统计结论也有可能犯错误。两种错误情况：</p>
@@ -178,22 +187,40 @@
 <p>第二类错误（type II error）：按照H0假设，样本数据的概率很大，于是接受H0。但总体的真实情况是不符合H0</p>
 </li>
 </ul>
-<h2>势(power）和临界值（critical value) （TODO)</h2>
-<h1>6.2 对于正态总体均值的检验</h1>
+<h2 id="shi-powerhe-lin-jie-zhi-critical-value-todo">势(power）和临界值（critical value) （TODO)</h2>
+<h1 id="62-dui-yu-zheng-tai-zong-ti-jun-zhi-de-jian-yan_1">6.2 对于正态总体均值的检验</h1>
 <ul>
 <li>单个总体单个样本：单边检验</li>
 <li>两个总体两个样本：双边检验</li>
 <li>一个总体一对样本（如事件发生前后的对照）：单边、双边相结合</li>
 </ul>
-<h1>6.3 对于比例的检验</h1>
+<h1 id="63-dui-yu-bi-li-de-jian-yan">6.3 对于比例的检验</h1>
 <p>(略）</p>
-<h1>6.4 从一个例子说明“接受零假设”的说法不妥</h1>
-<p>结论：不能说“接受零假设”，更严谨的说法是“不拒绝零假设”</p>
-<h1>6.5 小结</h1>
+<h1 id="64-cong-yi-ge-li-zi-shuo-ming-jie-shou-ling-jia-she-de-shuo-fa-bu-tuo">6.4 从一个例子说明&ldquo;接受零假设&rdquo;的说法不妥</h1>
+<p>结论：不能说&ldquo;接受零假设&rdquo;，更严谨的说法是&ldquo;不拒绝零假设&rdquo;</p>
+<h1 id="65-xiao-jie">6.5 小结</h1>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-08-02.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2013/12/11/statistics_intro_9.html">《统计学》读书笔记(9/17:方差分析)</a></li>
+        <li><a href="http://holbrook.github.io/2013/09/05/statistics_intro_8.html">《统计学》读书笔记(8/17:列连表，x^2检验和对数线性模型)</a></li>
+        <li><a href="http://holbrook.github.io/2013/08/05/statistics_intro_7.html">《统计学》读书笔记(7/17:相关和回归分析)</a></li>
+        <li><a href="http://holbrook.github.io/2013/07/09/statistics_intro_5.html">《统计学》读书笔记(5/17:简单统计推断：总体参数的估计)</a></li>
+        <li><a href="http://holbrook.github.io/2013/06/07/statistics_intro_4.html">《统计学》读书笔记(4/17:机会的度量：概率和分布)</a></li>
+        <li><a href="http://holbrook.github.io/2013/05/31/statistics_intro_3.html">《统计学》读书笔记(3/17:数据的描述)</a></li>
+        <li><a href="http://holbrook.github.io/2013/05/19/statistics_intro_2.html">《统计学》读书笔记(2/17:数据的收集)</a></li>
+        <li><a href="http://holbrook.github.io/2013/05/12/statistics_intro_1.html">《统计学》读书笔记(1/17:一些基本概念)</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -232,6 +259,8 @@
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -249,37 +278,37 @@
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

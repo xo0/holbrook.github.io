@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,13 +138,22 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">CEP中的事件(Event)</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="CEP中的事件(Event)">CEP中的事件(Event)</a><ul><li><a class="toc-href" href="#shi-jian-sheng-ming" title="事件声明">事件声明</a></li><li><a class="toc-href" href="#shi-jian-yuan-shu-ju" title="事件元数据">事件元数据</a><ul><li><a class="toc-href" href="#timestamp" title="@timestamp">@timestamp</a></li><li><a class="toc-href" href="#duration" title="@duration">@duration</a></li><li><a class="toc-href" href="#expires" title="@expires">@expires</a></li></ul></li></ul></li></ul></div>
+	</div>
+
+
+
 	<p><a href="/2012/11/06/about_cep.html">CEP</a>处理复杂事件。宽泛的事件，是指在应用程序域中的状态的一个有意义改变的一条记录。
 而复杂事件处理关注<a href="/2013/12/21/Temporal_of_CEP.html">事件之间的相关性</a>,以及原子事件组合成的复杂(复合)事件。</p>
 <p>CEP与规则引擎有类似之处，但CEP中的事件(Event)是一种特殊类型的事实(Fact)。其特殊性在于：</p>
 <ul>
 <li>不可改变</li>
 </ul>
-<p>事件记录了已经发生的事情，而“过去”是不可改变的。</p>
+<p>事件记录了已经发生的事情，而&ldquo;过去&rdquo;是不可改变的。</p>
 <ul>
 <li>强时间约束</li>
 </ul>
@@ -161,7 +170,7 @@
 <p>复杂事件处理(CEP),本质上是一个事件处理概念,涉及处理多个事件的任务与在事件云内部识别有意义事件的目标。</p>
 <p>或者说，CEP从事件云/事件流中检测和选择感兴趣的事件, 找出它们之间的关系,根据它们和它们之间的关系推断新的数据。</p>
 <p>由于CEP与规则引擎类似之处，CEP通常基于规则引擎。比如，Drools Fusion即是规则引擎，也可以作为CEP。</p>
-<h1>事件声明</h1>
+<h1 id="shi-jian-sheng-ming">事件声明</h1>
 <p>DRL中的<a href="/2012/12/06/rule_language.html#menuIndex7">declare</a>可以用于声明事件，只需要在declare中增加一条<code>@role(event)</code>
 的元数据。实际上，declare默认隐含了<code>@role(fact)</code>的元数据，表面声明的是事实(Fact)。</p>
 <p>比如：</p>
@@ -178,11 +187,9 @@
     <span class="n">price</span> <span class="p">:</span> <span class="n">double</span>
 <span class="n">end</span>
 </pre></div>
-
-
-<h1>事件元数据</h1>
+<h1 id="shi-jian-yuan-shu-ju">事件元数据</h1>
 <p>除了<code>@role</code>之外，事件还有一些Fact不具备的元数据。可以在declare中指定。</p>
-<h2>@timestamp</h2>
+<h2 id="timestamp">@timestamp</h2>
 <p>事件默认的时间戳是在insert到工作空间时，由引擎从Session Clock 获取并分配给事件。如果要指定使用事件的某一个属性作为时间戳，
   可以用<code>@timestamp</code>元数据指定。比如：</p>
 <p><code>declare StockTick
@@ -192,15 +199,28 @@
       symbol : String
       price : double
   end</code></p>
-<h2>@duration</h2>
+<h2 id="duration">@duration</h2>
 <p>默认事件的期限为0，称为point-in-time 事件。有些事件具有期限性，称为interval-based 事件。</p>
 <p>要声明事件的期限，通过<code>@duration</code>指定事件的一个属性，该属性以 <strong>毫秒数</strong> 记录了事件的期限。</p>
-<h2>@expires</h2>
+<h2 id="expires">@expires</h2>
 <p>当引擎运行在流(STREAM)模式时，指定一个过期时间可以用于内存管理。其格式为<code>[#d][#h][#m][#s][#[ms]]</code>，比如：<code>@expires( 1h35m )</code></p>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-12-21.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2013/12/22/from_rule_to_cep.html">从规则引擎到复杂事件处理(CEP)</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/21/Temporal_of_CEP.html">CEP中的时间推理(Temporal)</a></li>
+        <li><a href="http://holbrook.github.io/2012/11/06/cep_about.html">CEP：鱼与熊掌可以兼得</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -239,6 +259,8 @@
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -256,37 +278,37 @@
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,9 +138,18 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">Salt state实例解析</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="Salt state实例解析">Salt state实例解析</a><ul><li><a class="toc-href" href="#mu-lu-jie-gou" title="目录结构">目录结构</a></li><li><a class="toc-href" href="#apacheinitsls" title="apache/init.sls">apache/init.sls</a></li><li><a class="toc-href" href="#sshinitsls" title="ssh/init.sls">ssh/init.sls</a></li><li><a class="toc-href" href="#sshserversls" title="ssh/server.sls">ssh/server.sls</a></li><li><a class="toc-href" href="#sshcustom-serversls" title="ssh/custom-server.sls">ssh/custom-server.sls</a></li></ul></li></ul></div>
+	</div>
+
+
+
 	<p>在Salt的<a href="http://salt.readthedocs.org/en/latest/topics/tutorials/starting_states.html">官方教程</a>中，以apache和sshd的state配置作为例子。掌握这两个例子，就能够触类旁通，处理日常工作中大部分的配置管理问题。
 本文对这两个例子进行详细的分析和注释。</p>
-<h1>目录结构</h1>
+<h1 id="mu-lu-jie-gou">目录结构</h1>
 <p><a href="http://salt.readthedocs.org/en/latest/topics/tutorials/starting_states.html">文档</a>
 中的例子包含了多个文件。这些文件之间互相引用和关联。目录结构及文件清单如下：</p>
 <ul>
@@ -158,7 +167,7 @@
 <li>ssh/custom-server.sls</li>
 </ul>
 <p>两个配置分别放在了<code>apache</code>和<code>ssh</code>文件夹。一个Salt状态可以使用单个的SLS文件，或者使用一个文件夹。后者更加灵活方便。</p>
-<h1>apache/init.sls</h1>
+<h1 id="apacheinitsls">apache/init.sls</h1>
 <p>{% highlight yaml %}</p>
 <p>apache:
     pkg:
@@ -240,7 +249,7 @@
 </ol>
 </li>
 </ol>
-<h1>ssh/init.sls</h1>
+<h1 id="sshinitsls">ssh/init.sls</h1>
 <p>{% highlight yaml %}
  openssh-client:
     pkg.installed</p>
@@ -254,7 +263,7 @@
         - pkg: openssh-client</p>
 <p>{% endhighlight %}</p>
 <p>说明：</p>
-<h1>ssh/server.sls</h1>
+<h1 id="sshserversls">ssh/server.sls</h1>
 <p>{% highlight yaml %}</p>
 <p>include:
     - ssh</p>
@@ -297,11 +306,11 @@
 <li><code>/etc/ssh/sshd_config</code>配置项</li>
 <li><code>/etc/ssh/banner</code>配置项</li>
 </ul>
-<h1>ssh/custom-server.sls</h1>
+<h1 id="sshcustom-serversls">ssh/custom-server.sls</h1>
 <p>{% highlight yaml %}
  include:
    - ssh.server</p>
-<p _="%" endhighlight>extend:
+<p _="%" endhighlight="">extend:
    /etc/ssh/banner:
      file:
        - source: salt://ssh/custom-banner</p>
@@ -312,9 +321,24 @@
 <li>将<code>/etc/ssh/banner</code>配置项的文件修改为<code>salt://ssh/custom-banner</code></li>
 </ul>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-06-30.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2013/07/30/ganglia.html">用Ganglia监控集群的性能</a></li>
+        <li><a href="http://holbrook.github.io/2013/07/07/salt_pillar.html">Pillar：定义Salt配置管理的数据</a></li>
+        <li><a href="http://holbrook.github.io/2013/07/01/salt_state_config_structure.html">Salt state 配置结构</a></li>
+        <li><a href="http://holbrook.github.io/2013/06/25/salt_usage.html">salt的主要功能及使用</a></li>
+        <li><a href="http://holbrook.github.io/2013/06/24/salt_intro.html">用salt管理成千上万的服务器</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -353,6 +377,8 @@
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -370,37 +396,37 @@
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

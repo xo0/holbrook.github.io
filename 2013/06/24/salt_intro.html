@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,16 +138,25 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">用salt管理成千上万的服务器</h1>
-	<h1>引言：一个”非专职运维人员“的烦恼</h1>
-<p>加入到某证券公司的IT部门，尽管所在的部门挂了一个“研发部”的名字，但是我发现有大概40%的时间是在做运维工作。</p>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="用salt管理成千上万的服务器">用salt管理成千上万的服务器</a><ul><li><a class="toc-href" href="#yin-yan-yi-ge-fei-zhuan-zhi-yun-wei-ren-yuan-de-fan-nao" title="引言：一个&rdquo;非专职运维人员&ldquo;的烦恼">引言：一个&rdquo;非专职运维人员&ldquo;的烦恼</a></li><li><a class="toc-href" href="#saltkuai-su-ru-men" title="Salt快速入门">Salt快速入门</a><ul><li><a class="toc-href" href="#an-zhuang-pei-zhi" title="安装配置">安装配置</a><ul><li><a class="toc-href" href="#an-zhuang-guan-li-duan-master" title="安装管理端(master)">安装管理端(master)</a></li><li><a class="toc-href" href="#an-zhuang-bei-guan-li-duan-minion" title="安装被管理端(minion)">安装被管理端(minion)</a></li><li><a class="toc-href" href="#jie-shou-minionde-tuo-guan-qing-qiu" title="接受minion的托管请求">接受minion的托管请求</a></li></ul></li><li><a class="toc-href" href="#ce-shi_1" title="测试">测试</a></li></ul></li><li><a class="toc-href" href="#saltde-qiang-da-gong-neng_1" title="Salt的强大功能">Salt的强大功能</a></li><li><a class="toc-href" href="#saltde-wang-luo-zi-yuan" title="Salt的网络资源">Salt的网络资源</a><ul><li><a class="toc-href" href="#wang-zhan" title="网站">网站</a></li><li><a class="toc-href" href="#dai-ma" title="代码">代码</a></li></ul></li></ul></li></ul></div>
+	</div>
+
+
+
+	<h1 id="yin-yan-yi-ge-fei-zhuan-zhi-yun-wei-ren-yuan-de-fan-nao">引言：一个&rdquo;非专职运维人员&ldquo;的烦恼</h1>
+<p>加入到某证券公司的IT部门，尽管所在的部门挂了一个&ldquo;研发部&rdquo;的名字，但是我发现有大概40%的时间是在做运维工作。</p>
 <p>这来自两种情况：</p>
 <ul>
 <li>自主开发的应用，需要持续的改进，不断的更新、发布、部署、调整配置，这不是运维部门喜欢的状态。</li>
-<li>软件商提供的“产品”无法满足运维部门的要求：无法通过简单的 <a href="http://en.wikipedia.org/wiki/Q%26A">Q&amp;A</a> 文档保证系统的正常运行，经常需要有一定技术能力的人员解决系统运行过程中各种稀奇古怪的问题。</li>
+<li>软件商提供的&ldquo;产品&rdquo;无法满足运维部门的要求：无法通过简单的 <a href="http://en.wikipedia.org/wiki/Q%26A">Q&amp;A</a> 文档保证系统的正常运行，经常需要有一定技术能力的人员解决系统运行过程中各种稀奇古怪的问题。</li>
 </ul>
-<p>这种情况下只能自己做一个“非专职运维人员”，需要频繁的登录各种服务器，执行一些命令来查看状态或者更改配置（包括配置文件的变更和软件包的安装部署）。很多操作都是不断的重复，日复一日，让人厌烦。</p>
-<p>”重复的工作应该交给程序去做“，所以我自己写过一些脚本。为了避免将脚本上传到几十台服务器并且不时进行更改，我使用<a href="https://github.com/fabric/fabric">Fabric</a>来进行服务器的批量操作。</p>
-<p>尽管避免了”批量的人工操作“，但我还是在进行”人工的批量操作“。远远没有实现自动管理。将有限的生命解放出来，投入到更有意义的编码工作是一个奔四程序员应有的追求，所以我又睁大红肿的眼睛，迷茫的搜索这个世界。</p>
+<p>这种情况下只能自己做一个&ldquo;非专职运维人员&rdquo;，需要频繁的登录各种服务器，执行一些命令来查看状态或者更改配置（包括配置文件的变更和软件包的安装部署）。很多操作都是不断的重复，日复一日，让人厌烦。</p>
+<p>&rdquo;重复的工作应该交给程序去做&ldquo;，所以我自己写过一些脚本。为了避免将脚本上传到几十台服务器并且不时进行更改，我使用<a href="https://github.com/fabric/fabric">Fabric</a>来进行服务器的批量操作。</p>
+<p>尽管避免了&rdquo;批量的人工操作&ldquo;，但我还是在进行&rdquo;人工的批量操作&ldquo;。远远没有实现自动管理。将有限的生命解放出来，投入到更有意义的编码工作是一个奔四程序员应有的追求，所以我又睁大红肿的眼睛，迷茫的搜索这个世界。</p>
 <p>我发现了<a href="https://puppetlabs.com/">Puppet</a>，<a href="">Chef</a>和<a href="">CFEngine</a>，但是并不满意。直到我发现了<a href="http://saltstack.org/">Salt</a>,我的眼前一亮：这正是我所需要的东西。</p>
 <p>如果说Salt有什么独特之处打动了我，那就是：</p>
 <ul>
@@ -157,7 +166,7 @@
 </ul>
 <p>尽管<a href="http://www.twitter.com">twitter</a>、<a href="http://www.douban.com/">豆瓣</a>、<a href="http://www.oracle.com">oracle</a>、等著名网站的运维团队都在使用puppet，但是我相信，他们切换到salt只是一个时间问题。毕竟不是所有的人都喜欢操纵傀儡(puppet)，但是谁又能离开盐(salt)呢？</p>
 <p>关于Salt和Puppet的对比，可以参考<a href="http://www.opencredo.com/blog/a-dive-into-salt-stack">这里</a>，或者看看<a href="http://wiki.saltstack.cn/reproduction/dive-into-saltstack">中文版</a>。</p>
-<h1>Salt快速入门</h1>
+<h1 id="saltkuai-su-ru-men">Salt快速入门</h1>
 <p>Salt的体系结构中将节点区分为: master, minion, syndic。</p>
 <ul>
 <li>master: 老大，管理端</li>
@@ -165,7 +174,7 @@
 <li>syndic: 头目，对于老大来说是马仔，对于马仔来说是老大</li>
 </ul>
 <p>在入门阶段，先不考虑syndic。</p>
-<h2>安装配置</h2>
+<h2 id="an-zhuang-pei-zhi">安装配置</h2>
 <p>如果将操作系统区分为：</p>
 <ul>
 <li>*NIX</li>
@@ -188,7 +197,7 @@
 <p>对于windows，只能安装minion（windows只适合做马仔）。从<a href="http://saltstack.com/downloads/">官方网站</a>下载合适的安装包。安装过程中可以指定master地址和本机名称。
 安装后需要自己启动Salt服务。配置文件在C:\salt\conf\minion。</p>
 <p>具体的各操作系统下的安装可以参考<a href="http://docs.saltstack.com/topics/installation/index.html">官方文档</a>。这里为了简单，只考虑常用的RHEL/CentOS 和 windows。 在下面的例子中，使用一台RHEL/CentOS作为master， 另外一台RHEL/CentOS和一台windows 2003 Server作为 minion。</p>
-<h3>安装管理端(master)</h3>
+<h3 id="an-zhuang-guan-li-duan-master">安装管理端(master)</h3>
 <p>{% highlight bash %}</p>
 <p># 安装EPEL,注意选择合适的版本
  rpm -ivh http://mirrors.sohu.com/fedora-epel/6/x86_64/epel-release-6-8.noarch.rpm
@@ -205,7 +214,7 @@
  /etc/init.d/salt-master start
  service salt-master start</p>
 <p>{% endhighlight %}</p>
-<h3>安装被管理端(minion)</h3>
+<h3 id="an-zhuang-bei-guan-li-duan-minion">安装被管理端(minion)</h3>
 <p>{% highlight bash %}</p>
 <p># 安装EPEL,注意选择合适的版本
  rpm -ivh http://mirrors.sohu.com/fedora-epel/6/x86_64/epel-release-6-8.noarch.rpm
@@ -223,8 +232,8 @@
  /etc/init.d/salt-minion start
  service salt-minion start</p>
 <p>{% endhighlight %}</p>
-<h3>接受minion的托管请求</h3>
-<p>minion向master投诚后，还需要master接受才行。这个过程叫做“授信”。</p>
+<h3 id="jie-shou-minionde-tuo-guan-qing-qiu">接受minion的托管请求</h3>
+<p>minion向master投诚后，还需要master接受才行。这个过程叫做&ldquo;授信&rdquo;。</p>
 <p>Salt底层使用公钥-私钥证书来保证通信信道的安全。具体的机制可以参考ZeroMQ的相关内容。Salt已经屏蔽了底层的细节，只需要使用封装好的命令：</p>
 <p>{% highlight bash %}</p>
 <p># 在master上运行
@@ -242,7 +251,7 @@
 <p>#其中Unaccepted Keys是未许可的minion。可以使用下面的命令通过认证：
  salt-key -a minion1</p>
 <p>{% endhighlight %}</p>
-<h2>测试</h2>
+<h2 id="ce-shi_1">测试</h2>
 <p>安装配置好之后，首先要测试一下联通性：<code>salt '*' test.ping</code>。salt会列出每个认证过的minion的联通状态(true 或 false)。</p>
 <p>再举一些例子：</p>
 <p>{% highlight bash %}</p>
@@ -259,25 +268,25 @@
 <li>4506(ret_port):salt客户端与服务端通信的端口</li>
 </ul>
 <p>网络的设置需要保证这些端口可以访问。</p>
-<h1>Salt的强大功能</h1>
+<h1 id="saltde-qiang-da-gong-neng_1">Salt的强大功能</h1>
 <p>上面的例子都是用Salt进行批量操作。但是Salt的功能不仅如此。</p>
-<p>认真分析一下我的“非专职运维工作”的内容，发现可以分为以下三个方面：</p>
+<p>认真分析一下我的&ldquo;非专职运维工作&rdquo;的内容，发现可以分为以下三个方面：</p>
 <ul>
 <li>变更操作：根据需要对节点中某个资源的某种状态进行调整，并检验变更的结果</li>
-<li>配置管理：让上述行为变得“可管理”，支持“有关人士”对上述行为的标记、控制、识别、报告、跟踪和归档甚至审批和审计</li>
+<li>配置管理：让上述行为变得&ldquo;可管理&rdquo;，支持&ldquo;有关人士&rdquo;对上述行为的标记、控制、识别、报告、跟踪和归档甚至审批和审计</li>
 <li>状态监控：随时掌握状态，发现异常。尽量在系统用户发现问题之前解决麻烦</li>
 </ul>
 <p>Salt对上述三个方面提供了完美的支持，事实上，Salt提供的功能比我需要的还要多。下图是Salt的主要功能：</p>
-<p><img alt="salt_functions" src="images/2013/salt_usage/salt_functions.png"></p>
+<p><img alt="salt_functions" src="images/2013/salt_usage/salt_functions.png"/></p>
 <p>具体的功能使用在<a href="/2013/06/25/salt_usage.html">这篇文章</a>中详细说明。</p>
-<h1>Salt的网络资源</h1>
-<h2>网站</h2>
+<h1 id="saltde-wang-luo-zi-yuan">Salt的网络资源</h1>
+<h2 id="wang-zhan">网站</h2>
 <ul>
 <li><a href="http://saltstack.org/">salt官方网站</a>，</li>
 <li><a href="http://saltstack.cn/">中国SaltStack用户组(CSSUG)网站</a></li>
 <li><a href="http://intothesaltmine.org/blog/html/index.html">Into The Salt Mine,关于Salt的各种安装、配置、使用的博客</a></li>
 </ul>
-<h2>代码</h2>
+<h2 id="dai-ma">代码</h2>
 <ul>
 <li><a href="https://github.com/saltstack">saltstack将代码托管在github上</a>,包括：</li>
 <li><a href="https://github.com/saltstack/salt">salt主工程</a></li>
@@ -292,7 +301,7 @@
 <li><a href="https://github.com/saltstack/sublime-text"> sublime-text</a>, Salt-related syntax highlighting and snippets for Sublime Text </li>
 <li><a href="https://github.com/saltstack/formulae"> formulae</a>, </li>
 <li><a href="https://github.com/saltstack/salt-vim"> salt-vim</a>, Vim files for editing Salt files </li>
-<li><a href="https://github.com/saltstack/salt-ci"> salt-ci</a>, Salt-CI — Salt Continuous Integration </li>
+<li><a href="https://github.com/saltstack/salt-ci"> salt-ci</a>, Salt-CI &mdash; Salt Continuous Integration </li>
 <li><a href="https://github.com/saltstack/salt-genesis"> salt-genesis</a>,</li>
 <li><a href="https://github.com/saltstack/salt-qa"> salt-qa</a>,</li>
 <li><a href="https://github.com/saltstack/saltstack_org"> saltstack_org</a>,</li>
@@ -306,9 +315,24 @@
 <li><a href="https://github.com/cssug/salt-dashboard">salt的web管理界面</a>，基于Django。</li>
 </ul>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-06-24.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2013/07/30/ganglia.html">用Ganglia监控集群的性能</a></li>
+        <li><a href="http://holbrook.github.io/2013/07/07/salt_pillar.html">Pillar：定义Salt配置管理的数据</a></li>
+        <li><a href="http://holbrook.github.io/2013/07/01/salt_state_config_structure.html">Salt state 配置结构</a></li>
+        <li><a href="http://holbrook.github.io/2013/06/30/salt_sls_sample.html">Salt state实例解析</a></li>
+        <li><a href="http://holbrook.github.io/2013/06/25/salt_usage.html">salt的主要功能及使用</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -347,6 +371,8 @@
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -364,37 +390,37 @@
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

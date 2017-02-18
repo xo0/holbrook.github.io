@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,19 +138,28 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">Salt state 配置结构</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="Salt state 配置结构">Salt state 配置结构</a><ul><li><a class="toc-href" href="#statetree-he-environment" title="StateTree 和 Environment">StateTree 和 Environment</a></li><li><a class="toc-href" href="#stateding-yi" title="state定义">state定义</a></li><li><a class="toc-href" href="#minion-yu-statezhi-jian-de-ying-she" title="minion 与 state之间的映射">minion 与 state之间的映射</a></li><li><a class="toc-href" href="#xiao-jie" title="小结">小结</a></li></ul></li></ul></div>
+	</div>
+
+
+
 	<p>配置的目标是通过master管理多个mision的状态，最终配置的实现是使用文件夹和文件。而Salt state的设计就是在二者之间建立逻辑关系。</p>
 <p>Salt的state配置比较复杂，官方文档也比较零散。初学者不易掌握。但是如果把Salt的state配置看做是编写代码，就很容易掌握其脉络。</p>
 <p>下图是Salt state配置结构的逻辑图：</p>
-<p><img alt="salt_functions" src="images/2013/salt_usage/salt_state_config_structure.png"></p>
+<p><img alt="salt_functions" src="images/2013/salt_usage/salt_state_config_structure.png"/></p>
 <p>配置的目标是通过master管理多个mision的状态，最终配置的实现是使用文件夹和文件。而Salt state的设计就是在二者之间建立逻辑关系。</p>
-<h1>StateTree 和 Environment</h1>
+<h1 id="statetree-he-environment">StateTree 和 Environment</h1>
 <p>每个master上面都会建立一棵state树，将各个state的配置分级管理。</p>
 <p>这棵树的第一层就是环境（environment)的划分。salt将环境分为base环境和自定义环境。base环境是必须存在的，其他的环境根据自己的需要进行定义。典型的可以划分开发环境(dev), 用户参与测试环境（uat)，生成环境(prod), 备份环境（backup)等等。</p>
 <p>Salt约定base环境必须存在，是其他环境的基础，base环境中定义的state可以在各个自定义环境中使用。</p>
 <p>显然，每个环境至少需要一个文件夹来保持多个state配置。事实上，Salt允许一个环境使用多个文件夹。</p>
 <p>Salt环境与目录的对应关系在salt master的配置文件<code>/etc/salt/master</code>的<code>file_roots</code>变量中定义。<code>/etc/salt/master</code>文件也是使用YAML格式。</p>
 <p>一个典型的配置如下：</p>
-<p _="%" endhighlight>{% highlight yaml %}
+<p _="%" endhighlight="">{% highlight yaml %}
  file_roots:
    base:
      - /srv/salt/
@@ -160,27 +169,42 @@
    prod:
      - /srv/salt/prod/services
      - /srv/salt/prod/states</p>
-<h1>state定义</h1>
+<h1 id="stateding-yi">state定义</h1>
 <p>Salt state即可以使用单个的sls文件(single state)，也可以使用一个文件夹并在其中保持多个sls及其他配置文件（multi-state)。</p>
 <p>state之间还可以使用require, include, extend等关系进行关联。</p>
-<h1>minion 与 state之间的映射</h1>
+<h1 id="minion-yu-statezhi-jian-de-ying-she">minion 与 state之间的映射</h1>
 <p>一个salt master可以管理多个minion, 也可以定义很多个state。需要在minion和state之间建立一种多对多的映射关系。</p>
 <p>Salt在一个<code>top.sls</code>文件中定义这种映射关系。比如：</p>
-<p _="%" endhighlight>{% highlight yaml %}
+<p _="%" endhighlight="">{% highlight yaml %}
 base:
   '<em>':
     - servers
 dev:
   '</em>nodb*':
     - mongodb</p>
-<h1>小结</h1>
+<h1 id="xiao-jie">小结</h1>
 <p>按环境的不同划分state的存放目录；定义state文件/文件夹并在state之间使用关系实现复用；建立minion和state之间的多对多映射关系。</p>
 <p>掌握了这三点，就掌握了Salt state配置的脉络。</p>
 <p>实际上，Salt中<a href="/2013/07/07/salt_pillar.html">Pillar的配置</a>也使用了类似的结构。</p>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-07-01.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2013/07/30/ganglia.html">用Ganglia监控集群的性能</a></li>
+        <li><a href="http://holbrook.github.io/2013/07/07/salt_pillar.html">Pillar：定义Salt配置管理的数据</a></li>
+        <li><a href="http://holbrook.github.io/2013/06/30/salt_sls_sample.html">Salt state实例解析</a></li>
+        <li><a href="http://holbrook.github.io/2013/06/25/salt_usage.html">salt的主要功能及使用</a></li>
+        <li><a href="http://holbrook.github.io/2013/06/24/salt_intro.html">用salt管理成千上万的服务器</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -219,6 +243,8 @@ dev:
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -236,37 +262,37 @@ dev:
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

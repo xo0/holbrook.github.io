@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,13 +138,22 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">Java规则引擎规范：JSR94</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="Java规则引擎规范：JSR94">Java规则引擎规范：JSR94</a><ul><li><a class="toc-href" href="#gai-shu" title="概述">概述</a></li><li><a class="toc-href" href="#gui-ze-guan-li-api" title="规则管理API">规则管理API</a></li><li><a class="toc-href" href="#yun-xing-shi-api" title="运行时API">运行时API</a></li><li><a class="toc-href" href="#yi-chang-ding-yi" title="异常定义">异常定义</a></li><li><a class="toc-href" href="#dai-ma-shi-li" title="代码示例">代码示例</a></li><li><a class="toc-href" href="#shi-xian-jsr94de-chan-pin" title="实现JSR94的产品">实现JSR94的产品</a></li><li><a class="toc-href" href="#xiao-jie" title="小结">小结</a></li></ul></li></ul></div>
+	</div>
+
+
+
 	<p>Java World似乎总会出现一些接口规范，这样做的好处是可以面向接口编程，可以在实现了该接口的产品/组件之间自由切换，避免被厂商绑架。 本文要介绍的<a href="http://jcp.org/aboutJava/communityprocess/final/jsr094/index.html">JSR94:Java Rule Engine API</a>，
 Java规则引擎API规范。</p>
-<h1>概述</h1>
+<h1 id="gai-shu">概述</h1>
 <p>JSR-94是JCP(Java Community Process)制定的关于Java规则引擎API的规范，包括接口定义和示例代码。于2004年8月发布。 JSR-94定义了javax.rules和javax.rules.admin,前者包含了Java规则引擎运行时（Rumtime)API及异常（Exception）定义，后者包含了规则管理相关的API和异常定义。</p>
-<h1>规则管理API</h1>
+<h1 id="gui-ze-guan-li-api">规则管理API</h1>
 <p>规则管理API在javax.rules.admin中定义,主要包括以下类/接口：</p>
-<p><img alt="javax.rules.admin" src="images/rule-engine/javax.rules.admin.png"></p>
+<p><img alt="javax.rules.admin" src="images/rule-engine/javax.rules.admin.png"/></p>
 <ul>
 <li>Rule：规则实体</li>
 <li>RuleExecutionSet：执行集，某个规则对应的动作</li>
@@ -157,9 +166,9 @@ Java规则引擎API规范。</p>
 <li>装载规则（Rule）和执行集（RuleExecutionSet)</li>
 <li>执行集的注册/注销,只有注册的执行集对应的规则才能被客户访问</li>
 </ol>
-<h1>运行时API</h1>
+<h1 id="yun-xing-shi-api">运行时API</h1>
 <p>运行时API在javax.rules中定义，主要包括以下类/接口：</p>
-<p><img alt="javax.rules" src="images/rule-engine/javax.rules.png"></p>
+<p><img alt="javax.rules" src="images/rule-engine/javax.rules.png"/></p>
 <ul>
 <li>RuleServiceProviderManager: 通过URL注册/注销RuleServiceProvider</li>
 <li>RuleServiceProvider: 提供对RuleRuntime和RuleAdministrator的访问</li>
@@ -177,10 +186,10 @@ Java规则引擎API规范。</p>
 <li>从Runtime创建会话，包括有状态和无状态两种会话</li>
 <li>通过会话执行规则</li>
 </ol>
-<h1>异常定义</h1>
+<h1 id="yi-chang-ding-yi">异常定义</h1>
 <p>除了前面提到的主要类/接口外，JSR94还规定了规则引擎运行时及管理的一些异常，如下：</p>
-<p><img alt="javax.rules.exceptions" src="images/rule-engine/javax.rules.exceptions.png"></p>
-<h1>代码示例</h1>
+<p><img alt="javax.rules.exceptions" src="images/rule-engine/javax.rules.exceptions.png"/></p>
+<h1 id="dai-ma-shi-li">代码示例</h1>
 <p>下面是使用Drools作为规则引擎实例的一个例子，规则文件使用了Drools的drl格式：</p>
 <p>JSR94Sample.java</p>
 <div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">com.sample</span><span class="o">;</span>
@@ -228,17 +237,17 @@ Java规则引擎API规范。</p>
 
             <span class="c1">//获取RuleExectuionSetProvider</span>
             <span class="n">HashMap</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">();</span>
-            <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">,</span> <span class="s">&quot;My Rules&quot;</span><span class="o">);</span>
-            <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;description&quot;</span><span class="o">,</span> <span class="s">&quot;A trivial rulebase&quot;</span><span class="o">);</span>
+            <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"My Rules"</span><span class="o">);</span>
+            <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"description"</span><span class="o">,</span> <span class="s">"A trivial rulebase"</span><span class="o">);</span>
 
             <span class="n">LocalRuleExecutionSetProvider</span> <span class="n">ruleExecutionSetProvider</span> <span class="o">=</span> <span class="n">admin</span><span class="o">.</span><span class="na">getLocalRuleExecutionSetProvider</span><span class="o">(</span><span class="n">properties</span><span class="o">);</span>
 
             <span class="c1">//创建RuleExecutionSet</span>
-            <span class="n">FileReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">&quot;bin/sample.drl&quot;</span><span class="o">);</span>
+            <span class="n">FileReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"bin/sample.drl"</span><span class="o">);</span>
             <span class="n">RuleExecutionSet</span> <span class="n">reSet</span> <span class="o">=</span> <span class="n">ruleExecutionSetProvider</span><span class="o">.</span><span class="na">createRuleExecutionSet</span><span class="o">(</span><span class="n">reader</span><span class="o">,</span> <span class="n">properties</span><span class="o">);</span>
 
             <span class="c1">//注册RuleExecutionSet</span>
-            <span class="n">admin</span><span class="o">.</span><span class="na">registerRuleExecutionSet</span><span class="o">(</span><span class="s">&quot;mysample&quot;</span><span class="o">,</span><span class="n">reSet</span><span class="o">,</span><span class="n">properties</span><span class="o">);</span>
+            <span class="n">admin</span><span class="o">.</span><span class="na">registerRuleExecutionSet</span><span class="o">(</span><span class="s">"mysample"</span><span class="o">,</span><span class="n">reSet</span><span class="o">,</span><span class="n">properties</span><span class="o">);</span>
         <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
             <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
         <span class="o">}</span>
@@ -250,15 +259,15 @@ Java规则引擎API规范。</p>
         <span class="k">try</span><span class="o">{</span>
             <span class="c1">//获取RuleRuntime, 创建会话</span>
             <span class="n">RuleRuntime</span> <span class="n">runtime</span> <span class="o">=</span> <span class="n">ruleProvider</span><span class="o">.</span><span class="na">getRuleRuntime</span><span class="o">();</span>
-            <span class="n">StatelessRuleSession</span> <span class="n">ruleSession</span> <span class="o">=</span> <span class="o">(</span><span class="n">StatelessRuleSession</span><span class="o">)</span><span class="n">runtime</span><span class="o">.</span><span class="na">createRuleSession</span><span class="o">(</span><span class="s">&quot;mysample&quot;</span><span class="o">,</span><span class="kc">null</span><span class="o">,</span><span class="n">RuleRuntime</span><span class="o">.</span><span class="na">STATELESS_SESSION_TYPE</span><span class="o">);</span>
+            <span class="n">StatelessRuleSession</span> <span class="n">ruleSession</span> <span class="o">=</span> <span class="o">(</span><span class="n">StatelessRuleSession</span><span class="o">)</span><span class="n">runtime</span><span class="o">.</span><span class="na">createRuleSession</span><span class="o">(</span><span class="s">"mysample"</span><span class="o">,</span><span class="kc">null</span><span class="o">,</span><span class="n">RuleRuntime</span><span class="o">.</span><span class="na">STATELESS_SESSION_TYPE</span><span class="o">);</span>
 
             <span class="c1">//初始化输入数据</span>
             <span class="n">Message</span> <span class="n">message1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Message</span><span class="o">();</span>
-            <span class="n">message1</span><span class="o">.</span><span class="na">setMessage</span><span class="o">(</span><span class="s">&quot;Hello World&quot;</span><span class="o">);</span>
+            <span class="n">message1</span><span class="o">.</span><span class="na">setMessage</span><span class="o">(</span><span class="s">"Hello World"</span><span class="o">);</span>
             <span class="n">message1</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="n">Message</span><span class="o">.</span><span class="na">HELLO</span><span class="o">);</span>
 
             <span class="n">Message</span> <span class="n">message2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Message</span><span class="o">();</span>
-            <span class="n">message2</span><span class="o">.</span><span class="na">setMessage</span><span class="o">(</span><span class="s">&quot;Goodbye World&quot;</span><span class="o">);</span>
+            <span class="n">message2</span><span class="o">.</span><span class="na">setMessage</span><span class="o">(</span><span class="s">"Goodbye World"</span><span class="o">);</span>
             <span class="n">message2</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="n">Message</span><span class="o">.</span><span class="na">GOODBYE</span><span class="o">);</span>
 
 
@@ -320,10 +329,8 @@ Java规则引擎API规范。</p>
 
 <span class="o">}</span>
 </pre></div>
-
-
 <p>规则文件使用的就是<a href="/2012/12/06/rule_language.html">这里</a>的例子。</p>
-<h1>实现JSR94的产品</h1>
+<h1 id="shi-xian-jsr94de-chan-pin">实现JSR94的产品</h1>
 <p>主要的一些实现了JSR94的规则引擎产品如下：</p>
 <ul>
 <li><a href="http://www.jboss.org/drools/">Drools</a>:   开源  DRL,xDRL,DSL,Decision Table ReteOO  Eclipse,excel   文件系统    jar</li>
@@ -334,12 +341,32 @@ Java规则引擎API规范。</p>
 <li><a href="http://www-01.ibm.com/software/integration/business-rule-management/jrules-family/">WebSphere ILOG JRules</a>:  商业</li>
 <li><a href="http://herzberg.ca.sandia.gov/">JESS</a>:   商业</li>
 </ul>
-<h1>小结</h1>
+<h1 id="xiao-jie">小结</h1>
 <p>JSR94为规则引擎提供了公用标准API,为实现规则管理API和运行时API提供了指导规范, 目前已经获得很多开源/商业规则引擎产品的支持。 但是JSR94没有对<a href="/2012/12/06/rule_language.html">规则的描述语言</a>进行规范，导致各规则引擎产品大多采用自己私有的描述语言。</p>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2012-12-07.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2013/12/20/drools_API.html">Drools规则引擎API概述</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/19/trading_strategy.html">交易策略与规则引擎</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/06/rule_language.html">Drools规则描述语言快速手册</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/05/algorithm_of_pattern_match.html">规则引擎中常用的模式匹配算法</a></li>
+        <li><a href="http://holbrook.github.io/2012/03/20/rule_engine_1.html">规则，推理机和规则引擎</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/22/osgi_blueprint_container.html">Blueprint: OSGi的依赖注入(DI)容器</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/21/tycho_vs_maven_bundle_plugin.html">OSGi构建工具：Tycho还是Maven-Bundle-Plugin？</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/18/swt_jfreechart_candlestick.html">在SWT中用JFreeChart实现K线图</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/12/dependency_injection_in_e4.html">Eclipse e4：从OSGi-DS到依赖注入</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/12/e4_platform_services.html">Eclipse e4中的平台服务</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -378,6 +405,8 @@ Java规则引擎API规范。</p>
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -395,37 +424,37 @@ Java规则引擎API规范。</p>
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

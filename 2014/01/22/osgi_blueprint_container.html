@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,6 +138,15 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">Blueprint: OSGi的依赖注入(DI)容器</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="Blueprint: OSGi的依赖注入(DI)容器">Blueprint: OSGi的依赖注入(DI)容器</a><ul><li><a class="toc-href" href="#yi-lai-zhu-ru" title="依赖注入">依赖注入</a></li><li><a class="toc-href" href="#blueprint-xml" title="Blueprint XML">Blueprint XML</a></li><li><a class="toc-href" href="#gong-zuo-yuan-li" title="工作原理">工作原理</a></li><li><a class="toc-href" href="#zai-eclipsezhong-yun-xing-he-diao-shi" title="在Eclipse中运行和调试">在Eclipse中运行和调试</a></li><li><a class="toc-href" href="#shi-yong-apache-felix-karaf" title="使用Apache Felix Karaf">使用Apache Felix Karaf</a></li></ul></li></ul></div>
+	</div>
+
+
+
 	<p>曾几何时，你在Spring和OSGi之间摇摆不定；曾几何时，你对SpringDM感到迷惑不解。
 你是否向往OSGi的动态特性，又为遗留代码（尤其是基于Spring的代码）感到不舍？</p>
 <p>现在，这些都不再是问题！</p>
@@ -145,96 +154,96 @@
 提到了很多的<a href="http://www.osgi.org/download/r4v42/r4.enterprise.pdf">企业级规范(Enterprise Specification)</a>，
 其中包括了规范121：Blueprint容器规范(Container Specification)。</p>
 <p>Buleprint容器规范规定了一个OSGi容器(不是OSGi rumtime)的方方面面：</p>
-<p><img alt="" src="images/fuse/Blueprint_Container_Specification_list.png"></p>
+<p><img alt="" src="images/fuse/Blueprint_Container_Specification_list.png"/></p>
 <p>Buleprint(或者说，OSGi Enterprise)目前有两个主要的实现：<a href="http://www.eclipse.org/gemini/">Eclipse Gemini</a>和<a href="http://aries.apache.org/">Apache Aries</a>。</p>
 <p>其中Gemini的代码最初来自Spring DM，其实Blueprint规范的最早版本也来自Spring；而Aries已经用在Apache的众多企业级产品中。</p>
 <p>在本文中，使用Aries Blueprint。</p>
-<h1>依赖注入</h1>
+<h1 id="yi-lai-zhu-ru">依赖注入</h1>
 <p>Blueprint Container 规范为 OSGi 定义了一个 依赖性注入（DI,Dependency Injection）框架，可以处理OSGi 的动态特性。
 与<a href="/2014/01/12/dependency_injection_in_e4.html#menuIndex2">OSGi服务</a>或<a href="/2014/01/12/dependency_injection_in_e4.html#menuIndex3">OSGi Declarative Service</a>，不同，Blueprint依赖注入可以处理POJO对象的装配，使得POJO能够在OSGi中跨bundle访问。</p>
 <p>这与<a href="http://thinkinside.tk/2013/12/31/jsr330.html">JSR330:Java依赖注入规范</a>很像，是该规范在OSGi环境下的扩展。
 这也就是Spring DM(Spring Dynamic Modules)干的事情。实际上，Buleprint容器规范最初就来自于Spring，
 而其Gemini实现更是来自SpringDM的捐赠。</p>
 <p>无奈，如今<a href="http://www.infoq.com/cn/news/2012/11/spring-osgi-gradle">Spring已经宣布放弃OSGi</a>正所谓造化弄人，让人唏嘘不已。</p>
-<h1>Blueprint XML</h1>
+<h1 id="blueprint-xml">Blueprint XML</h1>
 <p>Blueprint使用XML文件描述装配关系，下面是一个例子：</p>
-<div class="highlight"><pre><span></span> <span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;</span>
- <span class="nt">&lt;blueprint</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.osgi.org/xmlns/blueprint/v1.0.0&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span> <span class="cp">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;</span>
+ <span class="nt">&lt;blueprint</span> <span class="na">xmlns=</span><span class="s">"http://www.osgi.org/xmlns/blueprint/v1.0.0"</span><span class="nt">&gt;</span>
 
    <span class="c">&lt;!-- Bean Manager Examples --&gt;</span>
 
-   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;accountOne&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.aries.samples.Account&quot;</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
-       <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;description&quot;</span> <span class="na">value=</span><span class="s">&quot;#1 account&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"accountOne"</span> <span class="na">class=</span><span class="s">"org.apache.aries.samples.Account"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">/&gt;</span>
+       <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"description"</span> <span class="na">value=</span><span class="s">"#1 account"</span><span class="nt">/&gt;</span>
    <span class="nt">&lt;/bean&gt;</span>
 
-   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;accountTwo&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.aries.samples.StaticAccountFactory&quot;</span>
-         <span class="na">factory-method=</span><span class="s">&quot;createAccount&quot;</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">&quot;2&quot;</span><span class="nt">/&gt;</span>
-       <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;description&quot;</span> <span class="na">value=</span><span class="s">&quot;#2 account&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"accountTwo"</span> <span class="na">class=</span><span class="s">"org.apache.aries.samples.StaticAccountFactory"</span>
+         <span class="na">factory-method=</span><span class="s">"createAccount"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">"2"</span><span class="nt">/&gt;</span>
+       <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"description"</span> <span class="na">value=</span><span class="s">"#2 account"</span><span class="nt">/&gt;</span>
    <span class="nt">&lt;/bean&gt;</span>
 
-   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;accountFactory&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.aries.samples.AccountFactory&quot;</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">&quot;account factory&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"accountFactory"</span> <span class="na">class=</span><span class="s">"org.apache.aries.samples.AccountFactory"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">"account factory"</span><span class="nt">/&gt;</span>
    <span class="nt">&lt;/bean&gt;</span>
 
-   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;accountThree&quot;</span>
-         <span class="na">factory-ref=</span><span class="s">&quot;accountFactory&quot;</span>
-         <span class="na">factory-method=</span><span class="s">&quot;createAccount&quot;</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">&quot;3&quot;</span><span class="nt">/&gt;</span>
-       <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;description&quot;</span> <span class="na">value=</span><span class="s">&quot;#3 account&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"accountThree"</span>
+         <span class="na">factory-ref=</span><span class="s">"accountFactory"</span>
+         <span class="na">factory-method=</span><span class="s">"createAccount"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">"3"</span><span class="nt">/&gt;</span>
+       <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"description"</span> <span class="na">value=</span><span class="s">"#3 account"</span><span class="nt">/&gt;</span>
    <span class="nt">&lt;/bean&gt;</span>
 
-   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;prototypeAccount&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.aries.samples.Account&quot;</span>
-         <span class="na">scope=</span><span class="s">&quot;prototype&quot;</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">&quot;4&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"prototypeAccount"</span> <span class="na">class=</span><span class="s">"org.apache.aries.samples.Account"</span>
+         <span class="na">scope=</span><span class="s">"prototype"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">"4"</span><span class="nt">/&gt;</span>
    <span class="nt">&lt;/bean&gt;</span>
 
-   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;singletonAccount&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.aries.samples.Account&quot;</span>
-         <span class="na">scope=</span><span class="s">&quot;singleton&quot;</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">&quot;5&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"singletonAccount"</span> <span class="na">class=</span><span class="s">"org.apache.aries.samples.Account"</span>
+         <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">"5"</span><span class="nt">/&gt;</span>
    <span class="nt">&lt;/bean&gt;</span>
 
-   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;accountFour&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.aries.samples.Account&quot;</span>
-         <span class="na">init-method=</span><span class="s">&quot;init&quot;</span> <span class="na">destroy-method=</span><span class="s">&quot;destroy&quot;</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">&quot;6&quot;</span><span class="nt">/&gt;</span>
-       <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;description&quot;</span> <span class="na">value=</span><span class="s">&quot;#6 account&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"accountFour"</span> <span class="na">class=</span><span class="s">"org.apache.aries.samples.Account"</span>
+         <span class="na">init-method=</span><span class="s">"init"</span> <span class="na">destroy-method=</span><span class="s">"destroy"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">"6"</span><span class="nt">/&gt;</span>
+       <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"description"</span> <span class="na">value=</span><span class="s">"#6 account"</span><span class="nt">/&gt;</span>
    <span class="nt">&lt;/bean&gt;</span>
 
 
 
    <span class="c">&lt;!-- Service Manager Examples --&gt;</span>
 
-   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;myAccount&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.aries.samples.MyAccount&quot;</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">&quot;7&quot;</span><span class="nt">/&gt;</span>
-       <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;description&quot;</span> <span class="na">value=</span><span class="s">&quot;MyAccount&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"myAccount"</span> <span class="na">class=</span><span class="s">"org.apache.aries.samples.MyAccount"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">"7"</span><span class="nt">/&gt;</span>
+       <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"description"</span> <span class="na">value=</span><span class="s">"MyAccount"</span><span class="nt">/&gt;</span>
    <span class="nt">&lt;/bean&gt;</span>
 
-   <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;serviceOne&quot;</span> <span class="na">ref=</span><span class="s">&quot;myAccount&quot;</span> <span class="na">interface=</span><span class="s">&quot;java.io.Serializable&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">"serviceOne"</span> <span class="na">ref=</span><span class="s">"myAccount"</span> <span class="na">interface=</span><span class="s">"java.io.Serializable"</span><span class="nt">/&gt;</span>
 
-   <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;serviceTwo&quot;</span> <span class="na">ref=</span><span class="s">&quot;myAccount&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">"serviceTwo"</span> <span class="na">ref=</span><span class="s">"myAccount"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;interfaces&gt;</span>
           <span class="nt">&lt;value&gt;</span>java.io.Serializable<span class="nt">&lt;/value&gt;</span>
       <span class="nt">&lt;/interfaces&gt;</span>
    <span class="nt">&lt;/service&gt;</span>
 
-   <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;serviceThree&quot;</span> <span class="na">ref=</span><span class="s">&quot;myAccount&quot;</span> <span class="na">auto-export=</span><span class="s">&quot;all-classes&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">"serviceThree"</span> <span class="na">ref=</span><span class="s">"myAccount"</span> <span class="na">auto-export=</span><span class="s">"all-classes"</span><span class="nt">/&gt;</span>
 
-   <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;serviceFour&quot;</span> <span class="na">ref=</span><span class="s">&quot;myAccount&quot;</span> <span class="na">auto-export=</span><span class="s">&quot;all-classes&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">"serviceFour"</span> <span class="na">ref=</span><span class="s">"myAccount"</span> <span class="na">auto-export=</span><span class="s">"all-classes"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;service-properties&gt;</span>
-          <span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&quot;mode&quot;</span> <span class="na">value=</span><span class="s">&quot;shared&quot;</span><span class="nt">/&gt;</span>
-          <span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&quot;active&quot;</span><span class="nt">&gt;</span>
-              <span class="nt">&lt;value</span> <span class="na">type=</span><span class="s">&quot;java.lang.Boolean&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/value&gt;</span>
+          <span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">"mode"</span> <span class="na">value=</span><span class="s">"shared"</span><span class="nt">/&gt;</span>
+          <span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">"active"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;value</span> <span class="na">type=</span><span class="s">"java.lang.Boolean"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/value&gt;</span>
           <span class="nt">&lt;/entry&gt;</span>
       <span class="nt">&lt;/service-properties&gt;</span>
    <span class="nt">&lt;/service&gt;</span>
 
-   <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;serviceFive&quot;</span> <span class="na">ref=</span><span class="s">&quot;myAccount&quot;</span> <span class="na">auto-export=</span><span class="s">&quot;all-classes&quot;</span> <span class="na">ranking=</span><span class="s">&quot;3&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">"serviceFive"</span> <span class="na">ref=</span><span class="s">"myAccount"</span> <span class="na">auto-export=</span><span class="s">"all-classes"</span> <span class="na">ranking=</span><span class="s">"3"</span><span class="nt">/&gt;</span>
 
-   <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;serviceSix&quot;</span> <span class="na">ref=</span><span class="s">&quot;myAccount&quot;</span> <span class="na">auto-export=</span><span class="s">&quot;all-classes&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">"serviceSix"</span> <span class="na">ref=</span><span class="s">"myAccount"</span> <span class="na">auto-export=</span><span class="s">"all-classes"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;registration-listener</span>
-              <span class="na">registration-method=</span><span class="s">&quot;register&quot;</span> <span class="na">unregistration-method=</span><span class="s">&quot;unregister&quot;</span><span class="nt">&gt;</span>
-          <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">&quot;org.apache.aries.samples.RegistrationListener&quot;</span><span class="nt">/&gt;</span>
+              <span class="na">registration-method=</span><span class="s">"register"</span> <span class="na">unregistration-method=</span><span class="s">"unregister"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.apache.aries.samples.RegistrationListener"</span><span class="nt">/&gt;</span>
       <span class="nt">&lt;/registration-listener&gt;</span>
    <span class="nt">&lt;/service&gt;</span>
 
@@ -242,11 +251,11 @@
 
    <span class="c">&lt;!-- Service Reference Manager Examples --&gt;</span>
 
-   <span class="nt">&lt;reference-list</span> <span class="na">id=</span><span class="s">&quot;serviceReferenceListTwo&quot;</span> <span class="na">interface=</span><span class="s">&quot;java.io.Serializable&quot;</span>
-                   <span class="na">availability=</span><span class="s">&quot;optional&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;reference-list</span> <span class="na">id=</span><span class="s">"serviceReferenceListTwo"</span> <span class="na">interface=</span><span class="s">"java.io.Serializable"</span>
+                   <span class="na">availability=</span><span class="s">"optional"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;reference-listener</span>
-              <span class="na">bind-method=</span><span class="s">&quot;bind&quot;</span> <span class="na">unbind-method=</span><span class="s">&quot;unbind&quot;</span><span class="nt">&gt;</span>
-          <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">&quot;org.apache.aries.samples.ReferenceListener&quot;</span><span class="nt">/&gt;</span>
+              <span class="na">bind-method=</span><span class="s">"bind"</span> <span class="na">unbind-method=</span><span class="s">"unbind"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.apache.aries.samples.ReferenceListener"</span><span class="nt">/&gt;</span>
       <span class="nt">&lt;/reference-listener&gt;</span>
    <span class="nt">&lt;/reference-list&gt;</span>
 
@@ -254,31 +263,31 @@
 
    <span class="c">&lt;!-- Environmental Manager Example --&gt;</span>
 
-   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;accountManagerOne&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.aries.samples.AccountManager&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;managerBundle&quot;</span> <span class="na">ref=</span><span class="s">&quot;blueprintBundle&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"accountManagerOne"</span> <span class="na">class=</span><span class="s">"org.apache.aries.samples.AccountManager"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"managerBundle"</span> <span class="na">ref=</span><span class="s">"blueprintBundle"</span><span class="nt">/&gt;</span>
    <span class="nt">&lt;/bean&gt;</span>
 
 
 
    <span class="c">&lt;!-- Object Values Examples --&gt;</span>
 
-   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;accountManagerTwo&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.aries.samples.AccountManager&quot;</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;managedAccount&quot;</span><span class="nt">&gt;</span>
-           <span class="nt">&lt;ref</span> <span class="na">component-id=</span><span class="s">&quot;accountOne&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"accountManagerTwo"</span> <span class="na">class=</span><span class="s">"org.apache.aries.samples.AccountManager"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"managedAccount"</span><span class="nt">&gt;</span>
+           <span class="nt">&lt;ref</span> <span class="na">component-id=</span><span class="s">"accountOne"</span><span class="nt">/&gt;</span>
        <span class="nt">&lt;/property&gt;</span>
    <span class="nt">&lt;/bean&gt;</span>
 
-   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;accountManagerThree&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.aries.samples.AccountManager&quot;</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;managedAccount&quot;</span><span class="nt">&gt;</span>
-           <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">&quot;org.apache.aries.samples.Account&quot;</span><span class="nt">&gt;</span>
-               <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
-               <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;description&quot;</span> <span class="na">value=</span><span class="s">&quot;Inlined Account&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"accountManagerThree"</span> <span class="na">class=</span><span class="s">"org.apache.aries.samples.AccountManager"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"managedAccount"</span><span class="nt">&gt;</span>
+           <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.apache.aries.samples.Account"</span><span class="nt">&gt;</span>
+               <span class="nt">&lt;argument</span> <span class="na">value=</span><span class="s">"10"</span><span class="nt">/&gt;</span>
+               <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"description"</span> <span class="na">value=</span><span class="s">"Inlined Account"</span><span class="nt">/&gt;</span>
            <span class="nt">&lt;/bean&gt;</span>
        <span class="nt">&lt;/property&gt;</span>
    <span class="nt">&lt;/bean&gt;</span>
 
-   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;accountManagerFour&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.aries.samples.AccountManager&quot;</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;accountNumbers&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"accountManagerFour"</span> <span class="na">class=</span><span class="s">"org.apache.aries.samples.AccountManager"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"accountNumbers"</span><span class="nt">&gt;</span>
            <span class="nt">&lt;list&gt;</span>
                <span class="nt">&lt;value&gt;</span>123<span class="nt">&lt;/value&gt;</span>
                <span class="nt">&lt;value&gt;</span>456<span class="nt">&lt;/value&gt;</span>
@@ -289,11 +298,9 @@
 
  <span class="nt">&lt;/blueprint&gt;</span>
 </pre></div>
-
-
 <p>可以看出，这个文件与Spring的配置文件非常类似。</p>
 <p>Blueprint XML中可以标记<code>bean</code>，<code>service</code>、<code>reference-list</code>等元素，用于bean管理、service管理和service引用管理。</p>
-<p><img alt="" src="images/fuse/blueprint_config.png"></p>
+<p><img alt="" src="images/fuse/blueprint_config.png"/></p>
 <ul>
 <li>Bean管理</li>
 </ul>
@@ -310,12 +317,12 @@
 <p>一个bundle可以有一个或多个xml配置，通常位于<code>OSGI-INF/blueprint/</code>目录下，也可以在<code>META-INF/MANIFEST.MF</code>文件中通过
 <code>Bundle-Blueprint</code>属性进行指定。</p>
 <p>更多关于Blueprint XML配置的内容和例子，可以参考<a href="http://aries.apache.org/documentation/tutorials/blueprinthelloworldtutorial.html">Apache Aries官方的例子</a>，以及<a href="https://www.ibm.com/developerworks/cn/opensource/os-osgiblueprint/">developerWorks上的这篇文章</a></p>
-<h1>工作原理</h1>
+<h1 id="gong-zuo-yuan-li">工作原理</h1>
 <p>Blueprint Container 使用扩展器（extender）模式，监视OSGi框架中的bundle的状态。当新的bundle被激活时，
 Blueprint根据该bundle是否有Blueprint XML配置文件判断是否需要容器进行处理。</p>
 <p>处理的过程是为该bundle创建一个容器，通过容器解析XML文件，并将组件装配到一起。如果bundle中的服务依赖得到满足，容器还会调用<a href="/2014/01/12/dependency_injection_in_e4.html#menuIndex3">OSGi DS</a>发布服务。</p>
 <p>在停止bundle时，也会进行相反的销毁过程。</p>
-<h1>在Eclipse中运行和调试</h1>
+<h1 id="zai-eclipsezhong-yun-xing-he-diao-shi">在Eclipse中运行和调试</h1>
 <p>可以在前面<a href="/2014/01/21/tycho_vs_maven_bundle_plugin.html#menuIndex2">通过maven手工创建Felix运行环境</a>的基础上，
 增加Blueprint需要的bundle:</p>
 <div class="highlight"><pre><span></span>    <span class="c">&lt;!-- for aries blueprint --&gt;</span>
@@ -350,9 +357,7 @@ Blueprint根据该bundle是否有Blueprint XML配置文件判断是否需要容�
         <span class="nt">&lt;version&gt;</span>1.4<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;/artifactItem&gt;</span>
 </pre></div>
-
-
-<h1>使用Apache Felix Karaf</h1>
+<h1 id="shi-yong-apache-felix-karaf">使用Apache Felix Karaf</h1>
 <p>自己搭建的Felix+Blueprint环境功能很有限，比如缺失了很多必要的基础组件和管理功能。更好的选择是使用<a href="http://karaf.apache.org/">Apache Felix Karaf</a>。</p>
 <p>Karaf在Felix和Blueprint的基础上，还增加了一些插件，以提供认证和登录、热部署、动态配置、控制台以及一些管理功能。</p>
 <p>更贴心的是，Karaf还提供了Eclipse插件：<a href="http://karaf.apache.org/index/subprojects/eik.html">Eclipse Integration for Karaf (EIK)</a>，从而可以：</p>
@@ -372,9 +377,29 @@ Blueprint根据该bundle是否有Blueprint XML配置文件判断是否需要容�
 <li>all Eclipse plugins are presented as an OBR</li>
 </ul>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2014-01-22.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2014/01/21/tycho_vs_maven_bundle_plugin.html">OSGi构建工具：Tycho还是Maven-Bundle-Plugin？</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/12/dependency_injection_in_e4.html">Eclipse e4：从OSGi-DS到依赖注入</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/12/e4_platform_services.html">Eclipse e4中的平台服务</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/08/build_osgi_bundle_with_tycho_maven_plugin.html">Tycho：用Maven构建Eclipse Plugin项目</a></li>
+        <li><a href="http://holbrook.github.io/2014/02/20/apache_karaf.html">Apache Karaf：OSGi中间件</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/18/swt_jfreechart_candlestick.html">在SWT中用JFreeChart实现K线图</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/07/eclipse_e4_RCP_quickstart.html">Eclipse e4 概览</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/31/jsr330.html">Java依赖注入规范：JSR330</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/30/JPA_intro.html">JPA概要</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/07/jsr94.html">Java规则引擎规范：JSR94</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -413,6 +438,8 @@ Blueprint根据该bundle是否有Blueprint XML配置文件判断是否需要容�
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -430,37 +457,37 @@ Blueprint根据该bundle是否有Blueprint XML配置文件判断是否需要容�
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

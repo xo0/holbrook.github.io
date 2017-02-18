@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,7 +138,16 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">交易策略的基本检验</h1>
-	<h1>前提和假设</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="交易策略的基本检验">交易策略的基本检验</a><ul><li><a class="toc-href" href="#qian-ti-he-jia-she" title="前提和假设">前提和假设</a></li><li><a class="toc-href" href="#ji-hui-de-du-liang" title="机会的度量">机会的度量</a></li><li><a class="toc-href" href="#yang-ben-de-zhi-liang" title="样本的质量">样本的质量</a></li><li><a class="toc-href" href="#bo-chang-wen-ding-xing" title="波长稳定性">波长稳定性</a></li></ul></li></ul></div>
+	</div>
+
+
+
+	<h1 id="qian-ti-he-jia-she">前提和假设</h1>
 <ol>
 <li>信号发生时机</li>
 </ol>
@@ -147,14 +156,14 @@
 <ol>
 <li>成交价格</li>
 </ol>
-<p>基本检验暂时不考虑”无法成交“（比如涨跌停）的情况，但是为了检验的严格性，需要采取”最不利“的价格作为成交价格。即如果是买入信号，取交易周期内的最高价作为成交价格；如果是卖出信号取交易周期内的最低价作为成交价格。</p>
+<p>基本检验暂时不考虑&rdquo;无法成交&ldquo;（比如涨跌停）的情况，但是为了检验的严格性，需要采取&rdquo;最不利&ldquo;的价格作为成交价格。即如果是买入信号，取交易周期内的最高价作为成交价格；如果是卖出信号取交易周期内的最低价作为成交价格。</p>
 <ol>
 <li>样本量</li>
 </ol>
 <p>为了减小随机误差的影响，每个样本至少要包含30对买入/卖出的交易，即至少要涵盖30个交易周期。</p>
-<h1>机会的度量</h1>
+<h1 id="ji-hui-de-du-liang">机会的度量</h1>
 <p>交易策略最根本的指标就是获利的机会。统计学中，用<a href="/2013/06/07/statistics_intro_4.html">概率和分布</a>来度量机会。相应的，对交易策略的获利机会的度量需要确定以下几个指标：</p>
-<table style="border-collapse: collapse;" border="2" frame="hsides" rules="groups" cellspacing="0" cellpadding="6">
+<table border="2" cellpadding="6" cellspacing="0" frame="hsides" rules="groups" style="border-collapse: collapse;">
 <thead>
 <tr><th></th><th>总量</th><th>比率</th><th>分布</th></tr>
 </thead>
@@ -173,7 +182,6 @@
 </tr>
 </tbody>
 </table>
-
 <ul>
 <li>净利</li>
 </ul>
@@ -187,7 +195,7 @@
 <li>盈利（次数）比率</li>
 </ul>
 <p>盈利比率=盈利次数/交易周期数</p>
-<p>盈利比率也叫”信号成功率“，反映了策略所对应的投资理念：是依赖于偶然的巨额获利，还是依赖于多次小额获利。</p>
+<p>盈利比率也叫&rdquo;信号成功率&ldquo;，反映了策略所对应的投资理念：是依赖于偶然的巨额获利，还是依赖于多次小额获利。</p>
 <ul>
 <li>盈利次数分布</li>
 </ul>
@@ -222,14 +230,28 @@
 <li>交易周期</li>
 </ul>
 <p>交易周期决定了交易的频繁程度。交易越频繁则交易成本越高。</p>
-<h1>样本的质量</h1>
+<h1 id="yang-ben-de-zhi-liang">样本的质量</h1>
 <p>对一个交易策略用不同的时间、不同的交易对象反复多次验证，并根据抽样分布（即各样本的统计量，如均值、中位数、标准差等的分布）的特征，剔除一些不合格的样本，重新对交易策略进行综合评价。</p>
-<h1>波长稳定性</h1>
+<h1 id="bo-chang-wen-ding-xing">波长稳定性</h1>
 <p>理论上来说，在各波长下（日线，5分钟线等），信号成功率应该保持稳定。</p>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2014-01-05.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2013/12/19/Berkeley_DB.html">使用Oracle Berkeley DB持久化股票行情数据</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/19/trading_strategy.html">交易策略与规则引擎</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/18/quotation_model.html">证券行情数据模型</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/16/trade_system.html">系统交易和交易系统</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -268,6 +290,8 @@
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -285,37 +309,37 @@
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

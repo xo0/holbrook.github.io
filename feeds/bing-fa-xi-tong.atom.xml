@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>心内求法 - 并发系统</title><link href="http://holbrook.github.io/" rel="alternate"></link><link href="http://holbrook.github.io/feeds/bing-fa-xi-tong.atom.xml" rel="self"></link><id>http://holbrook.github.io/</id><updated>2014-02-10T00:00:00+08:00</updated><entry><title>Apache Camel的核心概念</title><link href="http://holbrook.github.io/2014/02/10/apache_camel.html" rel="alternate"></link><published>2014-02-10T00:00:00+08:00</published><updated>2014-02-10T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2014-02-10:/2014/02/10/apache_camel.html</id><summary type="html"></summary><content type="html">&lt;h1&gt;Apache Camel的整体架构&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>心内求法 - 并发系统</title><link href="http://holbrook.github.io/" rel="alternate"></link><link href="http://holbrook.github.io/feeds/bing-fa-xi-tong.atom.xml" rel="self"></link><id>http://holbrook.github.io/</id><updated>2014-02-10T00:00:00+08:00</updated><entry><title>Apache Camel的核心概念</title><link href="http://holbrook.github.io/2014/02/10/apache_camel.html" rel="alternate"></link><published>2014-02-10T00:00:00+08:00</published><updated>2014-02-10T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2014-02-10:/2014/02/10/apache_camel.html</id><summary type="html"></summary><content type="html">&lt;h1 id="apache-camelde-zheng-ti-jia-gou"&gt;Apache Camel的整体架构&lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://camel.apache.org/"&gt;Apache Camel&lt;/a&gt;是一个消息处理引擎，实现了EIP(Enterprise Integration Patterns,企业整合模式)。&lt;/p&gt;
 &lt;p&gt;Camel能够用来处理来自于不同源的事件和信息，定义规则进行消息的传递和转换等处理，以实现基于消息的应用整合。其整体架构如下图所示：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/camel/camel-architecture.png"&gt;&lt;/p&gt;
-&lt;h1&gt;Message 和 Exchange&lt;/h1&gt;
-&lt;p&gt;&lt;code&gt;org.apache.camel.Message&lt;/code&gt;接口是对“消息”的抽象。消息由head、body、attachment等部分组成。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/camel/message.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/camel/camel-architecture.png"/&gt;&lt;/p&gt;
+&lt;h1 id="message-he-exchange"&gt;Message 和 Exchange&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;org.apache.camel.Message&lt;/code&gt;接口是对&amp;ldquo;消息&amp;rdquo;的抽象。消息由head、body、attachment等部分组成。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/camel/message.png"/&gt;&lt;/p&gt;
 &lt;p&gt;Camel中提供了一个默认的实现：&lt;code&gt;org.apache.camel.impl.DefaultMessage&lt;/code&gt;，可以适应大部分的应用场景。&lt;/p&gt;
 &lt;p&gt;不管是请求、响应，或者异常，都可以作为消息在上下文(CamelContext)的消息处理器(Processor)之间进行交换(Exchange)。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;org.apache.camel.Exchange&lt;/code&gt;接口就是对“消息交换”的抽象。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/camel/exchange.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;org.apache.camel.Exchange&lt;/code&gt;接口就是对&amp;ldquo;消息交换&amp;rdquo;的抽象。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/camel/exchange.png"/&gt;&lt;/p&gt;
 &lt;p&gt;其中：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Exchange ID : 区分每次消息交换的标识&lt;/li&gt;
@@ -20,10 +20,10 @@
 &lt;/ul&gt;
 &lt;p&gt;Camel提供了默认的&lt;code&gt;org.apache.camel.impl.DefaultExchange&lt;/code&gt;实现。&lt;/p&gt;
 &lt;p&gt;Camel处理消息时，每个节点都在处理&lt;code&gt;Exchange&lt;/code&gt;。&lt;/p&gt;
-&lt;h1&gt;Endpoint 和 Component&lt;/h1&gt;
+&lt;h1 id="endpoint-he-component"&gt;Endpoint 和 Component&lt;/h1&gt;
 &lt;p&gt;Endpoint(端点)，接收或发送消息的通道。通过&lt;a href="http://zh.wikipedia.org/wiki/%E7%BB%9F%E4%B8%80%E8%B5%84%E6%BA%90%E6%A0%87%E5%BF%97%E7%AC%A6"&gt;URI&lt;/a&gt;连接消息源或目标。&lt;/p&gt;
 &lt;p&gt;为了适应各种不同的URI协议，如http,ftp,JMS,smtp等，Camel中提供了多种Endpoint，也支持扩展自己的Endpoint。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/camel/endpoints.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/camel/endpoints.png"/&gt;&lt;/p&gt;
 &lt;p&gt;Component(不应该叫做组件，而应该是连接器connector)。&lt;code&gt;org.apache.camel.Component&lt;/code&gt;接口只定义了两个方法：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;createConfiguration(String)&lt;/code&gt;&lt;/li&gt;
@@ -31,21 +31,19 @@
 &lt;/ul&gt;
 &lt;p&gt;通常，客户代码不会直接调用&lt;code&gt;createEndoint()&lt;/code&gt;方法，而是由&lt;code&gt;CamelContext&lt;/code&gt;对象进行调用。&lt;/p&gt;
 &lt;p&gt;Camel中提供了大量的Component的实现：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/camel/components.png"&gt;&lt;/p&gt;
-&lt;h1&gt;Processor&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="" src="images/camel/components.png"/&gt;&lt;/p&gt;
+&lt;h1 id="processor"&gt;Processor&lt;/h1&gt;
 &lt;p&gt;不管是消息路由(Message Routing)、消息转换(Message Transformation)还是消息过滤(Message Filter)，都是对消息的某种处理(Process)。&lt;/p&gt;
 &lt;p&gt;Camel中，抽象出&lt;code&gt;org.apache.camel.Processor&lt;/code&gt;接口，表示对消息的处理。该接口只定义了一个方法：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    void process(Exchange exchange) throws Exception;
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;从接口定义可以看出，Camel中认为可以处理消息交换(Exchange)的类都是消息处理器(Processor)。&lt;/p&gt;
 &lt;p&gt;基于Camle的应用可以开发自己的Processor实现，同时Camel提供了大量的内置Processor，以支持&lt;a href="http://camel.apache.org/enterprise-integration-patterns.html"&gt;EIP(Enterprise Integration Patterns)&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/camel/processor.png"&gt;&lt;/p&gt;
-&lt;h1&gt;CamelContext&lt;/h1&gt;
-&lt;p&gt;&lt;img alt="" src="images/camel/camel_context.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/camel/processor.png"/&gt;&lt;/p&gt;
+&lt;h1 id="camelcontext"&gt;CamelContext&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="" src="images/camel/camel_context.jpg"/&gt;&lt;/p&gt;
 &lt;p&gt;CamelContext是对Camel运行时的抽象，提供了API用于管理Component、Endpoint、Processor等节点：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/camel/context.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/camel/context.png"/&gt;&lt;/p&gt;
 &lt;p&gt;一般来说，使用Camel的步骤如下：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;创建一个CamelContext对象。&lt;/li&gt;
@@ -55,53 +53,49 @@
 &lt;li&gt;通过Endpoint发送或接收消息&lt;/li&gt;
 &lt;li&gt;调用CamelContext的stop()方法时&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h1&gt;定义路由(Route)&lt;/h1&gt;
+&lt;h1 id="ding-yi-lu-you-route"&gt;定义路由(Route)&lt;/h1&gt;
 &lt;p&gt;每个消息处理流程是由一系列的&lt;code&gt;Processor&lt;/code&gt;连接而成的图(Graph)，每个图称为一个路由(Route)。&lt;/p&gt;
 &lt;p&gt;在开始使用Camel之前，需要在CamelContext中定义一个或多个路由。Camel支持使用DSL或者Spring XML进行配置。比如：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;        &lt;span class="nt"&gt;RouteBuilder&lt;/span&gt; &lt;span class="nt"&gt;builder&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nt"&gt;new&lt;/span&gt; &lt;span class="nt"&gt;RouteBuilder&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
             &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;void&lt;/span&gt; &lt;span class="n"&gt;configure&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
-                &lt;span class="n"&gt;from&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;queue:a&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;foo&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isEqualTo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;bar&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-                        &lt;span class="s2"&gt;&amp;quot;queue:b&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-                &lt;span class="n"&gt;from&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;queue:c&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;choice&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;when&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;foo&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isEqualTo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;bar&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-                        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;queue:d&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;when&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;foo&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isEqualTo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;cheese&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-                        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;queue:e&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;otherwise&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;queue:f&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+                &lt;span class="n"&gt;from&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"queue:a"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"foo"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isEqualTo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"bar"&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                        &lt;span class="s2"&gt;"queue:b"&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+                &lt;span class="n"&gt;from&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"queue:c"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;choice&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;when&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"foo"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isEqualTo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"bar"&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+                        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"queue:d"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;when&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"foo"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isEqualTo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"cheese"&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+                        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"queue:e"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;otherwise&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"queue:f"&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
             &lt;span class="p"&gt;}&lt;/span&gt;
         &lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 
         &lt;span class="nt"&gt;CamelContext&lt;/span&gt; &lt;span class="nt"&gt;myCamelContext&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nt"&gt;new&lt;/span&gt; &lt;span class="nt"&gt;DefaultCamelContext&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
         &lt;span class="nt"&gt;myCamelContext&lt;/span&gt;&lt;span class="nc"&gt;.addRoutes&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;builder&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;或者：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  &lt;span class="nt"&gt;&amp;lt;beans&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://www.springframework.org/schema/beans&amp;quot;&lt;/span&gt;
-       &lt;span class="na"&gt;xmlns:xsi=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;&lt;/span&gt;
-       &lt;span class="na"&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  &lt;span class="nt"&gt;&amp;lt;beans&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;"http://www.springframework.org/schema/beans"&lt;/span&gt;
+       &lt;span class="na"&gt;xmlns:xsi=&lt;/span&gt;&lt;span class="s"&gt;"http://www.w3.org/2001/XMLSchema-instance"&lt;/span&gt;
+       &lt;span class="na"&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;
 &lt;span class="s"&gt;       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&lt;/span&gt;
 &lt;span class="s"&gt;       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd&lt;/span&gt;
-&lt;span class="s"&gt;    &amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="s"&gt;    "&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
 
     &lt;span class="c"&gt;&amp;lt;!-- this is an included XML file where we only the the routeContext --&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;routeContext&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;myCoolRoutes&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://camel.apache.org/schema/spring&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;routeContext&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;"myCoolRoutes"&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;"http://camel.apache.org/schema/spring"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
         &lt;span class="c"&gt;&amp;lt;!-- we can have a route --&amp;gt;&lt;/span&gt;
-        &lt;span class="nt"&gt;&amp;lt;route&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;cool&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-            &lt;span class="nt"&gt;&amp;lt;from&lt;/span&gt; &lt;span class="na"&gt;uri=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;direct:start&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
-            &lt;span class="nt"&gt;&amp;lt;to&lt;/span&gt; &lt;span class="na"&gt;uri=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;mock:result&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;route&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;"cool"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;from&lt;/span&gt; &lt;span class="na"&gt;uri=&lt;/span&gt;&lt;span class="s"&gt;"direct:start"&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;to&lt;/span&gt; &lt;span class="na"&gt;uri=&lt;/span&gt;&lt;span class="s"&gt;"mock:result"&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
         &lt;span class="nt"&gt;&amp;lt;/route&amp;gt;&lt;/span&gt;
         &lt;span class="c"&gt;&amp;lt;!-- and another route, you can have as many your like --&amp;gt;&lt;/span&gt;
-        &lt;span class="nt"&gt;&amp;lt;route&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;bar&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-            &lt;span class="nt"&gt;&amp;lt;from&lt;/span&gt; &lt;span class="na"&gt;uri=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;direct:bar&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
-            &lt;span class="nt"&gt;&amp;lt;to&lt;/span&gt; &lt;span class="na"&gt;uri=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;mock:bar&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;route&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;"bar"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;from&lt;/span&gt; &lt;span class="na"&gt;uri=&lt;/span&gt;&lt;span class="s"&gt;"direct:bar"&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;to&lt;/span&gt; &lt;span class="na"&gt;uri=&lt;/span&gt;&lt;span class="s"&gt;"mock:bar"&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
         &lt;span class="nt"&gt;&amp;lt;/route&amp;gt;&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;lt;/routeContext&amp;gt;&lt;/span&gt;
 
   &lt;span class="nt"&gt;&amp;lt;/beans&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h1&gt;FUSE Mediation Router: 企业级Camel&lt;/h1&gt;
+&lt;h1 id="fuse-mediation-router-qi-ye-ji-camel"&gt;FUSE Mediation Router: 企业级Camel&lt;/h1&gt;
 &lt;p&gt;FuseSource提供Camel的经测试、认证并提供支持的企业级版本，称作&lt;a href="http://fusesource.com/products/enterprise-camel/"&gt;FUSE Mediation Router&lt;/a&gt;。&lt;/p&gt;</content></entry><entry><title>从规则引擎到复杂事件处理(CEP)</title><link href="http://holbrook.github.io/2013/12/22/from_rule_to_cep.html" rel="alternate"></link><published>2013-12-22T00:00:00+08:00</published><updated>2013-12-22T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-22:/2013/12/22/from_rule_to_cep.html</id><summary type="html">&lt;p&gt;Drools Fusion既是规则引擎，又可以作为CEP。除了&lt;a href="/2013/12/21/event_in_CEP.html"&gt;事件定义&lt;/a&gt;和&lt;a href="/2013/12/21/Temporal_of_CEP.html"&gt;时间推理&lt;/a&gt;之外，对于引擎本身也会有一些不同的使用。主要体现在会话时钟、流模式、滑动窗口和对事件的内存管理。&lt;/p&gt;</summary><content type="html">&lt;p&gt;Drools Fusion既是规则引擎，又可以作为CEP。除了&lt;a href="/2013/12/21/event_in_CEP.html"&gt;事件定义&lt;/a&gt;和&lt;a href="/2013/12/21/Temporal_of_CEP.html"&gt;时间推理&lt;/a&gt;之外，对于引擎本身也会有一些不同的使用。主要体现在会话时钟、流模式、滑动窗口和对事件的内存管理。&lt;/p&gt;
-&lt;h1&gt;会话时钟&lt;/h1&gt;
+&lt;h1 id="hui-hua-shi-zhong"&gt;会话时钟&lt;/h1&gt;
 &lt;p&gt;由于事件的时间性，处理事件时需要一个参考时钟。
 这个参考时钟在会话配置(KnowledgeSessionConfiguration)中指定，所以称为会话时钟(Session Clock)。&lt;/p&gt;
 &lt;p&gt;有很多种场景需要对时钟进行控制，比如：&lt;/p&gt;
@@ -132,20 +126,20 @@ FactHandle handle2 = session.insert( tick2 );
 clock.advanceTime( 30, TimeUnit.SECONDS );
 FactHandle handle3 = session.insert( tick3 );&lt;/p&gt;
 &lt;p&gt;{% endhighlight %}&lt;/p&gt;
-&lt;h1&gt;流模式&lt;/h1&gt;
+&lt;h1 id="liu-mo-shi"&gt;流模式&lt;/h1&gt;
 &lt;p&gt;Drools默认运行在云(Cloud)模式下。云模式下没有时间流的概念，引擎知道所有的事实(Fact)和事件(Event)。此时引擎将所有的事实/事件看做是一个无序的云。&lt;/p&gt;
-&lt;p&gt;由于云模式下引擎没有“现在”的概念，尽管事件具有时间戳、期限等元数据，这些数据也仅仅作为事件的属性，
+&lt;p&gt;由于云模式下引擎没有&amp;ldquo;现在&amp;rdquo;的概念，尽管事件具有时间戳、期限等元数据，这些数据也仅仅作为事件的属性，
 不代表事件发生的顺序，也不能进行&lt;a href="/2013/12/21/Temporal_of_CEP.html"&gt;时间推理&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;如果需要处理实时/准实时事件(Event)，需要&lt;a href="/2013/12/21/Temporal_of_CEP.html"&gt;时间推理&lt;/a&gt;，Drools必须工作在流(Stream)模式下。
 此时要求每个流中的事件必须按照时间顺序插入。&lt;/p&gt;
-&lt;h2&gt;启用流模式&lt;/h2&gt;
+&lt;h2 id="qi-yong-liu-mo-shi"&gt;启用流模式&lt;/h2&gt;
 &lt;p&gt;Drools默认运行在云模式下，可以通过以下方式启用流模式：&lt;/p&gt;
-&lt;p _="%" endhighlight&gt;{% highlight java %}
+&lt;p _="%" endhighlight=""&gt;{% highlight java %}
 KnowledgeBaseConfiguration config =
 KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
 config.setOption( EventProcessingOption.STREAM );&lt;/p&gt;
 &lt;p&gt;也可以使用属性文件定义：&lt;code&gt;drools.eventProcessingMode = stream&lt;/code&gt;。&lt;/p&gt;
-&lt;h2&gt;入口点&lt;/h2&gt;
+&lt;h2 id="ru-kou-dian"&gt;入口点&lt;/h2&gt;
 &lt;p&gt;Drools定义了工作空间的多个入口点(WorkingMemoryEntryPoint)，每个入口点可以看做是一个事件流，可以将事件通过不同的入口点插入到工作空间中。&lt;/p&gt;
 &lt;p&gt;来自同一个入口点的事件通过时间戳被排序。每个流既可以包含单一类型的事件，也可以包含多种类型的事件。&lt;/p&gt;
 &lt;ul&gt;
@@ -174,7 +168,7 @@ config.setOption( EventProcessingOption.STREAM );&lt;/p&gt;
     atmStream.insert( aWithdrawRequest );&lt;/p&gt;
 &lt;p&gt;{% endhighlight %}&lt;/p&gt;
 &lt;p&gt;除了这种手工插入事实的方式之外，Drools还提供了一系列的管道API和适配器，可以将其他流(如JMS、IO流、Socket等)之间接入到入口点上。&lt;/p&gt;
-&lt;h1&gt;滑动窗口&lt;/h1&gt;
+&lt;h1 id="hua-dong-chuang-kou_1"&gt;滑动窗口&lt;/h1&gt;
 &lt;p&gt;在流模式中，规则的&lt;a href="/2012/12/06/rule_language.html#menuIndex3"&gt;LHS部分&lt;/a&gt;
 可以使用滑动窗口限定只关注一定范围内的事件。这个范围可以是时间或事件的个数，分别成为滑动时间窗口和滑动长度窗口。&lt;/p&gt;
 &lt;p&gt;比如：&lt;/p&gt;
@@ -184,38 +178,36 @@ config.setOption( EventProcessingOption.STREAM );&lt;/p&gt;
 &lt;span class="x"&gt;    SensorReading( &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;temp&lt;/span&gt;&lt;span class="x"&gt; : temperature ) over window:time( 10m ), average( &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;temp&lt;/span&gt;&lt;span class="x"&gt; )&lt;/span&gt;
 &lt;span class="x"&gt;)&lt;/span&gt;
 
-&lt;span class="x"&gt;StockTick( company == &amp;quot;IBM&amp;quot; ) over window:length( 10 )&lt;/span&gt;
+&lt;span class="x"&gt;StockTick( company == "IBM" ) over window:length( 10 )&lt;/span&gt;
 
 &lt;span class="x"&gt;Number( doubleValue &amp;gt; &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;max&lt;/span&gt;&lt;span class="x"&gt; ) from accumulate(&lt;/span&gt;
 &lt;span class="x"&gt;    SensorReading( &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;temp&lt;/span&gt;&lt;span class="x"&gt; : temperature ) over window:length( 100 ), average( &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;temp&lt;/span&gt;&lt;span class="x"&gt; )&lt;/span&gt;
 &lt;span class="x"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h1&gt;内存管理&lt;/h1&gt;
+&lt;h1 id="nei-cun-guan-li"&gt;内存管理&lt;/h1&gt;
 &lt;p&gt;在流模式下，引擎自动执行事件的内存管理。对于不可能再被匹配的事件自动释放。&lt;/p&gt;
 &lt;p&gt;引擎会关注事件的@expires中指定的到期时间，并分析规则中隐含的到期时间，进行自动释放。&lt;/p&gt;</content><category term="CEP"></category></entry><entry><title>CEP中的时间推理(Temporal)</title><link href="http://holbrook.github.io/2013/12/21/Temporal_of_CEP.html" rel="alternate"></link><published>2013-12-21T00:00:00+08:00</published><updated>2013-12-21T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-21:/2013/12/21/Temporal_of_CEP.html</id><summary type="html">&lt;p&gt;时间推理(Temporal)是CEP中特有的条件判断(LHS)。本文介绍13种时间推理运算符及其DRL表示&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="/2012/11/06/about_cep.html"&gt;CEP&lt;/a&gt;中的&lt;a href="/2013/12/21/event_in_CEP.html"&gt;事件(Event)&lt;/a&gt;具有两个与时间相关的属性。一个是timestamp，标记事件发生的时间；另一个是duration，标记事件持续的时间间隔。&lt;/p&gt;
 &lt;p&gt;由这两个时间属性，还可以计算出事件结束的事件。&lt;/p&gt;
 &lt;p&gt;时间推理(Temporal)是CEP中特有的条件判断(&lt;a href="/2012/12/06/rule_language.html#menuIndex3"&gt;LHS&lt;/a&gt;)，其判断的要素正是基于事件的上述时间属性。&lt;/p&gt;
 &lt;p&gt;Allen在《An Interval-based Representation of Temporal Knowledge》中描述了13种时间推理的运算符。&lt;/p&gt;
 &lt;p&gt;下面用DRL语言介绍这13种运算符。其中，运算符的参数格式均为&lt;code&gt;[#d][#h][#m][#s][#[ms]]&lt;/code&gt;。比如&lt;code&gt;3m30s&lt;/code&gt;、&lt;code&gt;4m&lt;/code&gt;等。&lt;/p&gt;
-&lt;h1&gt;After 和 Before(之前和之后)&lt;/h1&gt;
-&lt;p&gt;&lt;img alt="After 和 Before" src="images/rule-engine/temporal-after_and_before.png"&gt;&lt;/p&gt;
+&lt;h1 id="after-he-beforezhi-qian-he-zhi-hou"&gt;After 和 Before(之前和之后)&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="After 和 Before" src="images/rule-engine/temporal-after_and_before.png"/&gt;&lt;/p&gt;
 &lt;p&gt;```
-  // x∈[a,b]时，满足以下条件
+  // x&amp;isin;[a,b]时，满足以下条件
   //A发生在B之前
   $eventA : EventA( this before[a,b] $eventB )
   //B发生在A之后
   $eventB : EventB( this after[a,b] $eventA )&lt;/p&gt;
 &lt;p&gt;```&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;如果没有给出参数，则a=1ms, b=+∞&lt;/li&gt;
-&lt;li&gt;如果只给出一个参数a,则b=+∞&lt;/li&gt;
+&lt;li&gt;如果没有给出参数，则a=1ms, b=+&amp;infin;&lt;/li&gt;
+&lt;li&gt;如果只给出一个参数a,则b=+&amp;infin;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;Coincides（同时发生）&lt;/h1&gt;
-&lt;p&gt;&lt;img alt="Coincides" src="images/rule-engine/temporal-coincides.png"&gt;&lt;/p&gt;
+&lt;h1 id="coincidestong-shi-fa-sheng"&gt;Coincides（同时发生）&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="Coincides" src="images/rule-engine/temporal-coincides.png"/&gt;&lt;/p&gt;
 &lt;p&gt;```
-  // x∈[0,a]，且y∈[0,b]时，满足以下条件
+  // x&amp;isin;[0,a]，且y&amp;isin;[0,b]时，满足以下条件
   $eventA : EventA( this coincides[a,b] $eventB )
   $eventB : EventB( this coincides[a,b] $eventA )&lt;/p&gt;
 &lt;p&gt;```&lt;/p&gt;
@@ -223,10 +215,10 @@ config.setOption( EventProcessingOption.STREAM );&lt;/p&gt;
 &lt;li&gt;如果只给出一个参数a,则b=a&lt;/li&gt;
 &lt;li&gt;如果不给出参数，则a=0,b=0&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;During 和 Includes（包含）&lt;/h1&gt;
-&lt;p&gt;&lt;img alt="During 和 Includes" src="images/rule-engine/temporal-during.png"&gt;&lt;/p&gt;
+&lt;h1 id="during-he-includesbao-han"&gt;During 和 Includes（包含）&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="During 和 Includes" src="images/rule-engine/temporal-during.png"/&gt;&lt;/p&gt;
 &lt;p&gt;```
-  // x∈[a,b]，且y∈[c,d]时，满足以下条件
+  // x&amp;isin;[a,b]，且y&amp;isin;[c,d]时，满足以下条件
   //A在B期间发生
   $eventA : EventA( this during[a,b,c,d] $eventB )
   //B包含A
@@ -235,12 +227,12 @@ config.setOption( EventProcessingOption.STREAM );&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;如果只给出二个参数a,b,则c=a,d=b&lt;/li&gt;
 &lt;li&gt;如果只给出一个参数b,则a=0,c=0,d=b&lt;/li&gt;
-&lt;li&gt;如果不给出参数，则a=0,b=+∞, c=0,d=+∞&lt;/li&gt;
+&lt;li&gt;如果不给出参数，则a=0,b=+&amp;infin;, c=0,d=+&amp;infin;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;Finishes 和 Finished by（同时结束）&lt;/h1&gt;
-&lt;p&gt;&lt;img alt="Finishes 和 Finished by" src="images/rule-engine/temporal-finishes.png"&gt;&lt;/p&gt;
+&lt;h1 id="finishes-he-finished-bytong-shi-jie-shu"&gt;Finishes 和 Finished by（同时结束）&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="Finishes 和 Finished by" src="images/rule-engine/temporal-finishes.png"/&gt;&lt;/p&gt;
 &lt;p&gt;```
-  // x∈[0,a]时，满足以下条件
+  // x&amp;isin;[0,a]时，满足以下条件
   //A在B之后开始，和B同时结束
   $eventA : EventA( this finishes[a] $eventB )
   //B在A之前开始，和B同时结束
@@ -249,10 +241,10 @@ config.setOption( EventProcessingOption.STREAM );&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;如果不给出参数，则a=0&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;Meets 和 Met by（相邻）&lt;/h1&gt;
-&lt;p&gt;&lt;img alt="Meets 和 Met by" src="images/rule-engine/temporal-after_and_before.png"&gt;&lt;/p&gt;
+&lt;h1 id="meets-he-met-byxiang-lin"&gt;Meets 和 Met by（相邻）&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="Meets 和 Met by" src="images/rule-engine/temporal-after_and_before.png"/&gt;&lt;/p&gt;
 &lt;p&gt;```
-  // x∈[0,a]时，满足以下条件
+  // x&amp;isin;[0,a]时，满足以下条件
   //A结束时B开始
   $eventA : EventA( this meets[a] $eventB )
   //A结束时B开始
@@ -261,10 +253,10 @@ config.setOption( EventProcessingOption.STREAM );&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;如果没有给出参数，则a=0&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;Overlaps 和 Overlappd by（相交）&lt;/h1&gt;
-&lt;p&gt;&lt;img alt="Overlaps 和 Overlappd by" src="images/rule-engine/temporal-overlaps.png"&gt;&lt;/p&gt;
+&lt;h1 id="overlaps-he-overlappd-byxiang-jiao"&gt;Overlaps 和 Overlappd by（相交）&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="Overlaps 和 Overlappd by" src="images/rule-engine/temporal-overlaps.png"/&gt;&lt;/p&gt;
 &lt;p&gt;```
-  // x∈[a,b]时，满足以下条件
+  // x&amp;isin;[a,b]时，满足以下条件
   //A在B之前开始，在B之后结束
   $eventA : EventA( this overlaps[a,b] $eventB )
   //B在A之后开始，在A之前结束
@@ -274,17 +266,17 @@ config.setOption( EventProcessingOption.STREAM );&lt;/p&gt;
 &lt;li&gt;如果只给出一个参数b,则a=0&lt;/li&gt;
 &lt;li&gt;如果不给出参数，则a=0,b=0&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;Starts 和 Started by（同时开始）&lt;/h1&gt;
-&lt;p&gt;&lt;img alt="Starts 和 Started by" src="images/rule-engine/temporal-starts.png"&gt;&lt;/p&gt;
+&lt;h1 id="starts-he-started-bytong-shi-kai-shi"&gt;Starts 和 Started by（同时开始）&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="Starts 和 Started by" src="images/rule-engine/temporal-starts.png"/&gt;&lt;/p&gt;
 &lt;p&gt;```
-  // x∈[0,a]时，满足以下条件
+  // x&amp;isin;[0,a]时，满足以下条件
   //A和B同时开始，A先结束
   $eventA : EventA( this starts[a] $eventB )
   //B和A同时开始，B后结束
   $eventB : EventB( this startedby[a] $eventA )&lt;/p&gt;
 &lt;p&gt;```&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;如果不给出参数，则a=+∞&lt;/li&gt;
+&lt;li&gt;如果不给出参数，则a=+&amp;infin;&lt;/li&gt;
 &lt;/ul&gt;</content><category term="CEP"></category></entry><entry><title>CEP中的事件(Event)</title><link href="http://holbrook.github.io/2013/12/21/event_in_CEP.html" rel="alternate"></link><published>2013-12-21T00:00:00+08:00</published><updated>2013-12-21T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-21:/2013/12/21/event_in_CEP.html</id><summary type="html">&lt;p&gt;&lt;a href="/2012/11/06/about_cep.html"&gt;CEP&lt;/a&gt;处理复杂事件。宽泛的事件，是指在应用程序域中的状态的一个有意义改变的一条记录。
 而复杂事件处理关注&lt;a href="/2013/12/21/Temporal_of_CEP.html"&gt;事件之间的相关性&lt;/a&gt;,以及原子事件组合成的复杂(复合)事件。&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="/2012/11/06/about_cep.html"&gt;CEP&lt;/a&gt;处理复杂事件。宽泛的事件，是指在应用程序域中的状态的一个有意义改变的一条记录。
 而复杂事件处理关注&lt;a href="/2013/12/21/Temporal_of_CEP.html"&gt;事件之间的相关性&lt;/a&gt;,以及原子事件组合成的复杂(复合)事件。&lt;/p&gt;
@@ -292,7 +284,7 @@ config.setOption( EventProcessingOption.STREAM );&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;不可改变&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;事件记录了已经发生的事情，而“过去”是不可改变的。&lt;/p&gt;
+&lt;p&gt;事件记录了已经发生的事情，而&amp;ldquo;过去&amp;rdquo;是不可改变的。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;强时间约束&lt;/li&gt;
 &lt;/ul&gt;
@@ -309,7 +301,7 @@ config.setOption( EventProcessingOption.STREAM );&lt;/p&gt;
 &lt;p&gt;复杂事件处理(CEP),本质上是一个事件处理概念,涉及处理多个事件的任务与在事件云内部识别有意义事件的目标。&lt;/p&gt;
 &lt;p&gt;或者说，CEP从事件云/事件流中检测和选择感兴趣的事件, 找出它们之间的关系,根据它们和它们之间的关系推断新的数据。&lt;/p&gt;
 &lt;p&gt;由于CEP与规则引擎类似之处，CEP通常基于规则引擎。比如，Drools Fusion即是规则引擎，也可以作为CEP。&lt;/p&gt;
-&lt;h1&gt;事件声明&lt;/h1&gt;
+&lt;h1 id="shi-jian-sheng-ming"&gt;事件声明&lt;/h1&gt;
 &lt;p&gt;DRL中的&lt;a href="/2012/12/06/rule_language.html#menuIndex7"&gt;declare&lt;/a&gt;可以用于声明事件，只需要在declare中增加一条&lt;code&gt;@role(event)&lt;/code&gt;
 的元数据。实际上，declare默认隐含了&lt;code&gt;@role(fact)&lt;/code&gt;的元数据，表面声明的是事实(Fact)。&lt;/p&gt;
 &lt;p&gt;比如：&lt;/p&gt;
@@ -326,11 +318,9 @@ config.setOption( EventProcessingOption.STREAM );&lt;/p&gt;
     &lt;span class="n"&gt;price&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt;
 &lt;span class="n"&gt;end&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h1&gt;事件元数据&lt;/h1&gt;
+&lt;h1 id="shi-jian-yuan-shu-ju"&gt;事件元数据&lt;/h1&gt;
 &lt;p&gt;除了&lt;code&gt;@role&lt;/code&gt;之外，事件还有一些Fact不具备的元数据。可以在declare中指定。&lt;/p&gt;
-&lt;h2&gt;@timestamp&lt;/h2&gt;
+&lt;h2 id="timestamp"&gt;@timestamp&lt;/h2&gt;
 &lt;p&gt;事件默认的时间戳是在insert到工作空间时，由引擎从Session Clock 获取并分配给事件。如果要指定使用事件的某一个属性作为时间戳，
   可以用&lt;code&gt;@timestamp&lt;/code&gt;元数据指定。比如：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;declare StockTick
@@ -340,13 +330,13 @@ config.setOption( EventProcessingOption.STREAM );&lt;/p&gt;
       symbol : String
       price : double
   end&lt;/code&gt;&lt;/p&gt;
-&lt;h2&gt;@duration&lt;/h2&gt;
+&lt;h2 id="duration"&gt;@duration&lt;/h2&gt;
 &lt;p&gt;默认事件的期限为0，称为point-in-time 事件。有些事件具有期限性，称为interval-based 事件。&lt;/p&gt;
 &lt;p&gt;要声明事件的期限，通过&lt;code&gt;@duration&lt;/code&gt;指定事件的一个属性，该属性以 &lt;strong&gt;毫秒数&lt;/strong&gt; 记录了事件的期限。&lt;/p&gt;
-&lt;h2&gt;@expires&lt;/h2&gt;
+&lt;h2 id="expires"&gt;@expires&lt;/h2&gt;
 &lt;p&gt;当引擎运行在流(STREAM)模式时，指定一个过期时间可以用于内存管理。其格式为&lt;code&gt;[#d][#h][#m][#s][#[ms]]&lt;/code&gt;，比如：&lt;code&gt;@expires( 1h35m )&lt;/code&gt;&lt;/p&gt;</content><category term="CEP"></category></entry><entry><title>ZeroMQ简介</title><link href="http://holbrook.github.io/2013/07/03/zeromq_intro.html" rel="alternate"></link><published>2013-07-03T00:00:00+08:00</published><updated>2013-07-03T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-07-03:/2013/07/03/zeromq_intro.html</id><summary type="html">&lt;p&gt;zeroMQ不是TCP，不是socket，也不是消息队列，而是这些的综合体。&lt;/p&gt;</summary><content type="html">&lt;p&gt;zeroMQ不是TCP，不是socket，也不是消息队列，而是这些的综合体。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="ZeroMQ" src="images/2013/zeromq/logo.gif"&gt;&lt;/p&gt;
-&lt;h1&gt;ZeroMQ是什么&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="ZeroMQ" src="images/2013/zeromq/logo.gif"/&gt;&lt;/p&gt;
+&lt;h1 id="zeromqshi-shi-yao"&gt;ZeroMQ是什么&lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://www.zeromq.org/"&gt;ZeroMQ&lt;/a&gt;以嵌入式网络编程库的形式实现了一个并行开发框架（concurrency framework），
 能够提供进程内(inproc)、进程间(IPC)、网络(TCP)和广播方式的消息信道，
 并支持扇出(fan-out)、发布-订阅(pub-sub)、任务分发（task distribution）、请求/响应（request-reply）等通信模式。
@@ -354,45 +344,45 @@ ZeroMQ的性能足以用来构建集群产品，
 其异步I/O模型能够为多核消息系统提供足够的扩展性。
 ZeroMQ支持30多种语言的API，可以用于绝大多数操作系统。
 在提供这些优秀特性的同时，ZeroMQ是开源的，遵循LGPLv3许可。&lt;/p&gt;
-&lt;p&gt;ZeroMQ的明确目标是“成为标准网络协议栈的一部分，之后进入Linux内核”。&lt;/p&gt;
-&lt;h1&gt;Zero 之禅（The Zen of Zero）&lt;/h1&gt;
+&lt;p&gt;ZeroMQ的明确目标是&amp;ldquo;成为标准网络协议栈的一部分，之后进入Linux内核&amp;rdquo;。&lt;/p&gt;
+&lt;h1 id="zero-zhi-shan-the-zen-of-zero"&gt;Zero 之禅（The Zen of Zero）&lt;/h1&gt;
 &lt;p&gt;ZeroMQ是一个很有个性的项目，其名称也暗合禅意：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Ø 是一种权衡：让一些丹麦人恼火，但是“Ø”本身也降低了google搜索的命中率以及twitter上的关注度&lt;/li&gt;
-&lt;li&gt;Ø 暗合“零代理(broker)”、“零延迟”&lt;/li&gt;
-&lt;li&gt;Ø 的目标是“零管理、零消耗、零浪费”&lt;/li&gt;
-&lt;li&gt;Ø 符合简约主义：力量的源泉是降低复杂度，而不是增加新功能&lt;/li&gt;
+&lt;li&gt;&amp;Oslash; 是一种权衡：让一些丹麦人恼火，但是&amp;ldquo;&amp;Oslash;&amp;rdquo;本身也降低了google搜索的命中率以及twitter上的关注度&lt;/li&gt;
+&lt;li&gt;&amp;Oslash; 暗合&amp;ldquo;零代理(broker)&amp;rdquo;、&amp;ldquo;零延迟&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&amp;Oslash; 的目标是&amp;ldquo;零管理、零消耗、零浪费&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&amp;Oslash; 符合简约主义：力量的源泉是降低复杂度，而不是增加新功能&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;ZeroMQ对socket API的封装&lt;/h1&gt;
+&lt;h1 id="zeromqdui-socket-apide-feng-zhuang"&gt;ZeroMQ对socket API的封装&lt;/h1&gt;
 &lt;p&gt;与libevent, ACE等项目不同，使用ZeroMQ时可以不关注网络细节。
 ZeroMQ的API提供了对于传统socket API的封装，对于套接字类型、连接处理、帧、甚至路由的底层细节都进行了抽象，
 使得一套API可以用于进程内通讯、IPC、TCP和广播等多种消息信道。&lt;/p&gt;
-&lt;p&gt;ZeroMQ自己定位为“智能传输层”（The Intelligent Transport Layer），位于网络层和应用层之间。
-ZeroMQ使得构建大型并发应用时，可以将基本单元随意的“组装”，由ZeroMQ解决通信的弹性伸缩，&lt;/p&gt;
+&lt;p&gt;ZeroMQ自己定位为&amp;ldquo;智能传输层&amp;rdquo;（The Intelligent Transport Layer），位于网络层和应用层之间。
+ZeroMQ使得构建大型并发应用时，可以将基本单元随意的&amp;ldquo;组装&amp;rdquo;，由ZeroMQ解决通信的弹性伸缩，&lt;/p&gt;
 &lt;p&gt;ZeroMQ的这种设计大大简化了应用程序消息通信的实现，使得在多种场景下重用相同的交互模式成为可能。
 使用ZeroMQ可以让编写高性能网络应用程序极为简单和有趣。&lt;/p&gt;
 &lt;p&gt;与socket相比，ZeroMQ API的特征如下：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;在后台线程中异步地处理IO。后台线程使用无需锁的数据结构与应用线程通信，所以ZeroMQ应用程序不需要锁、信号量，或者其他等待状态。&lt;/li&gt;
-&lt;li&gt;组件可以动态地加入和退出，ZeroMQ会自动重新连接。这意味着可以以任何次序启动组件。可以创建“面向服务架构（service-oriented architectures)”，其中的服务可以在任何时候加入或者退出网络。&lt;/li&gt;
+&lt;li&gt;组件可以动态地加入和退出，ZeroMQ会自动重新连接。这意味着可以以任何次序启动组件。可以创建&amp;ldquo;面向服务架构（service-oriented architectures)&amp;rdquo;，其中的服务可以在任何时候加入或者退出网络。&lt;/li&gt;
 &lt;li&gt;在需要的时候自动对消息排队。这种处理是智能的，在排队前会尽量让消息靠近接收者。&lt;/li&gt;
-&lt;li&gt;有处理队列溢出的方法（“高水位标记”）。队列满的时候，ZeroMQ会自动阻塞发送者，或者丢弃消息，取决于你正在使用的消息传递类型（模式）。&lt;/li&gt;
+&lt;li&gt;有处理队列溢出的方法（&amp;ldquo;高水位标记&amp;rdquo;）。队列满的时候，ZeroMQ会自动阻塞发送者，或者丢弃消息，取决于你正在使用的消息传递类型（模式）。&lt;/li&gt;
 &lt;li&gt;ZeroMQ让应用程序可以使用传输端点相互交流：TCP、多播、进程内、进程间。使用不同的传输端点时不用修改代码。&lt;/li&gt;
 &lt;li&gt;根据消息传递模式的不同，使用不同的策略来安全地处理慢速/阻塞的接收者。&lt;/li&gt;
 &lt;li&gt;使用请求-应答、发布-订阅等多种模式来路由消息。这些模式定义了如何创建网络拓扑结构。&lt;/li&gt;
-&lt;li&gt;需要降低互联的各部分间的复杂性的时候，可以在网络中放置模式扩展的“设备”（小的代理）。&lt;/li&gt;
+&lt;li&gt;需要降低互联的各部分间的复杂性的时候，可以在网络中放置模式扩展的&amp;ldquo;设备&amp;rdquo;（小的代理）。&lt;/li&gt;
 &lt;li&gt;通过在线路中使用简单的帧，可以精确地传递整个消息。发送10K的消息，则会收到10K的消息。&lt;/li&gt;
 &lt;li&gt;不对消息格式做任何假定。消息是从零到数G字节的块。需要在高层使用其他产品来表示数据，如Google的Protocol Buffers、XDR等等。&lt;/li&gt;
 &lt;li&gt;智能地处理网络错误。有时候重试，有时候告诉你操作失败。&lt;/li&gt;
 &lt;li&gt;降低能耗。使用较少的CPU时间来做更多事情意味着使用更少的能源，而且较老的机器可以使用更长的时间。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;ZeroMQ的通信协议&lt;/h1&gt;
+&lt;h1 id="zeromqde-tong-xin-xie-yi"&gt;ZeroMQ的通信协议&lt;/h1&gt;
 &lt;p&gt;ZeroMQ定义了&lt;a href="http://rfc.zeromq.org/spec:13"&gt;ZMTP（ZeroMQ Message Transport Protocol, ZeroMQ消息传输协议）&lt;/a&gt;，在TCP协议之上定义了向后兼容性的规则，可扩展的安全机制，命令和消息分帧，连接元数据，以及其他传输层功能。&lt;/p&gt;
 &lt;p&gt;相对于其他的消息传输协议/通信协议，ZeroMQ有明显的优势：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;TCP：ZeroMQ基于消息，使用消息模式而不是字节流。&lt;/li&gt;
-&lt;li&gt;XMPP：ZeroMQ更简单、快速、更底层。Jabber可建在ØMQ之上。&lt;/li&gt;
-&lt;li&gt;AMQP：完成相同的工作，ZeroMQ要快100倍，而且不需要代理（规范更简洁——比AMQP的规范文档少278页）&lt;/li&gt;
+&lt;li&gt;XMPP：ZeroMQ更简单、快速、更底层。Jabber可建在&amp;Oslash;MQ之上。&lt;/li&gt;
+&lt;li&gt;AMQP：完成相同的工作，ZeroMQ要快100倍，而且不需要代理（规范更简洁&amp;mdash;&amp;mdash;比AMQP的规范文档少278页）&lt;/li&gt;
 &lt;li&gt;IPC：ZeroMQ可以跨主机通信&lt;/li&gt;
 &lt;li&gt;CORBA：ZeroMQ不会将复杂到恐怖的消息格式强加于你。&lt;/li&gt;
 &lt;li&gt;RPC：ZeroMQ完全是异步的，你可以随时增加/删除参与者。&lt;/li&gt;
@@ -401,8 +391,8 @@ ZeroMQ使得构建大型并发应用时，可以将基本单元随意的“组�
 &lt;li&gt;IBM Low-latency：ZeroMQ是自由软件！&lt;/li&gt;
 &lt;li&gt;Tibco：ZeroMQ仍然是自由软件！&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;ZeroMQ不是消息队列&lt;/h1&gt;
-&lt;p&gt;在摩尔定律的魔咒下，“分布式处理”逐渐成为主流，随之而来的是关于消息通讯、消息中间件的项目层出不穷。&lt;/p&gt;
+&lt;h1 id="zeromqbu-shi-xiao-xi-dui-lie"&gt;ZeroMQ不是消息队列&lt;/h1&gt;
+&lt;p&gt;在摩尔定律的魔咒下，&amp;ldquo;分布式处理&amp;rdquo;逐渐成为主流，随之而来的是关于消息通讯、消息中间件的项目层出不穷。&lt;/p&gt;
 &lt;p&gt;其中最有名的应该是ZeroMQ和RabbitMQ，Thrift。
 &lt;a href="http://www.rabbitmq.com/"&gt;RabbitMQ&lt;/a&gt;是符合&lt;a href="http://www.amqp.org/"&gt;AMQP(Advanced Message Queuing Protocol, 高级消息队列协议)&lt;/a&gt;的消息中间件，
 而&lt;a href="http://thrift.apache.org/"&gt;Thrift&lt;/a&gt;是出自于Facebook的跨语言服务访问的框架。&lt;/p&gt;
@@ -416,11 +406,11 @@ YAMI4，
 &lt;a href="http://zh.wikipedia.org/w/index.php?title=Run-Time_Infrastructure_(simulation)&amp;amp;action=edit&amp;amp;redlink=1"&gt;RTI&lt;/a&gt;和
 &lt;a href="http://zh.wikipedia.org/w/index.php?title=Apache_Qpid&amp;amp;action=edit&amp;amp;redlink=1"&gt;Qpid/AMQP&lt;/a&gt;，
 ZeroMQ得到了最高的分数。&lt;/p&gt;
-&lt;p&gt;但ZeroMQ最大的特点不在性能，而是机制。尽管名字中包含了"MQ"，但ZeroMQ并不是“消息队列/消息中间件”。ZeroMQ是一个传输层API库，
+&lt;p&gt;但ZeroMQ最大的特点不在性能，而是机制。尽管名字中包含了"MQ"，但ZeroMQ并不是&amp;ldquo;消息队列/消息中间件&amp;rdquo;。ZeroMQ是一个传输层API库，
 更关注消息的传输。与消息队列相比，ZeroMQ有以下一些特点：&lt;/p&gt;
-&lt;p&gt;1 点对点无中间节点&lt;/p&gt;
+&lt;p&gt;1&amp;nbsp;点对点无中间节点&lt;/p&gt;
 &lt;p&gt;传统的消息队列都需要一个消息服务器来存储转发消息。而ZeroMQ则放弃了这个模式，把侧重点放在了点对点的消息传输上，并且（试图）做到极致。以为消息服务器最终还是转化为服务器对其他节点的点对点消息传输上。ZeroMQ能缓存消息，但是是在发送端缓存。ZeroMQ里有水位设置的相关接口来控制缓存量。当然，ZeroMQ也支持传统的消息队列（通过zmq_device来实现）。&lt;/p&gt;
-&lt;p&gt;2 强调消息收发模式&lt;/p&gt;
+&lt;p&gt;2&amp;nbsp;强调消息收发模式&lt;/p&gt;
 &lt;p&gt;在点对点的消息传输上ZeroMQ将通信的模式做了归纳，比如常见的订阅模式（一个消息发多个客户），分发模式（N个消息平均分给X个客户）等等。下面是目前支持的消息模式配对，任何一方都可以做为服务端。
   - PUB and SUB
   - REQ and REP
@@ -431,28 +421,28 @@ ZeroMQ得到了最高的分数。&lt;/p&gt;
   - XREP and XREP
   - PUSH and PULL
   - PAIR and PAIR&lt;/p&gt;
-&lt;p&gt;3 以统一接口支持多种底层通信方式&lt;/p&gt;
+&lt;p&gt;3&amp;nbsp;以统一接口支持多种底层通信方式&lt;/p&gt;
 &lt;p&gt;不管是线程间通信，进程间通信还是跨主机通信，ZeroMQ都使用同一套API进行调用，只需要更改通信协议名称（如，从"ipc:///xxx"改为"tcp://&lt;em&gt;.&lt;/em&gt;.&lt;em&gt;.&lt;/em&gt;:****"）即可。&lt;/p&gt;
-&lt;p&gt;4 异步，强调性能&lt;/p&gt;
+&lt;p&gt;4&amp;nbsp;异步，强调性能&lt;/p&gt;
 &lt;p&gt;ZeroMQ设计之初就是为了高性能的消息发送而服务的，所以其设计追求简洁高效。它发送消息是异步模式，通过单独出一个IO线程来实现，所以消息发送调用之后不要立刻释放相关资源哦，会出错的（以为还没发送完），要把资源释放函数交给ZeroMQ让ZeroMQ发完消息自己释放。&lt;/p&gt;
-&lt;h1&gt;ZeroMQ的应用案例&lt;/h1&gt;
+&lt;h1 id="zeromqde-ying-yong-an-li"&gt;ZeroMQ的应用案例&lt;/h1&gt;
 &lt;p&gt;ZeroMQ如何拯救世界&lt;/p&gt;
 &lt;p&gt;由于ZeroMQ的强大，我们可以用ZeroMQ搭建出非常强悍的应用。比如：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="/2013/06/24/salt_intro.html"&gt;Salt&lt;/a&gt;的底层就使用了ZeroMQ作为通信机制&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://mongrel2.org/home"&gt;Mongrel2&lt;/a&gt;是使用ZeroMQ开发的一个Web服务器&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Mongrel2是应用ZeroMQ的一个有趣的案例：所有入站消息通过“Push”套接字路由到Mongrel2，套接字可以自动实现负载均衡，将消息分发到连接处理器。反过来，连接处理器处理入站消息（通过Pull套接字），然后将处理结果发布到一个“Pub”套接字，Mongrel2服务器本身已订阅了该套接字，并且通过主题（topic）过滤器监听该套接字的进程号。如下图：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="zmq-mongrel2" src="images/2013/zeromq/zmq-mongrel2.png"&gt;&lt;/p&gt;
+&lt;p&gt;Mongrel2是应用ZeroMQ的一个有趣的案例：所有入站消息通过&amp;ldquo;Push&amp;rdquo;套接字路由到Mongrel2，套接字可以自动实现负载均衡，将消息分发到连接处理器。反过来，连接处理器处理入站消息（通过Pull套接字），然后将处理结果发布到一个&amp;ldquo;Pub&amp;rdquo;套接字，Mongrel2服务器本身已订阅了该套接字，并且通过主题（topic）过滤器监听该套接字的进程号。如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="zmq-mongrel2" src="images/2013/zeromq/zmq-mongrel2.png"/&gt;&lt;/p&gt;
 &lt;p&gt;ZeroMQ带来了一种新的分布式应用架构的思考方式。善用ZeroMQ，可以为应用带来非常强大的特性。&lt;/p&gt;
-&lt;h1&gt;参考资料&lt;/h1&gt;
+&lt;h1 id="can-kao-zi-liao"&gt;参考资料&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://zguide.zeromq.org/page:all"&gt;官方指南&lt;/a&gt;，这篇巨长的文档不仅介绍了ZeroMQ的主要方面，网络编程，还融入了ZeroMQ作者对于编程的理念，很值得精读&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://www.infoq.com/news/2010/09/introduction-zero-mq"&gt;An Introduction to ØMQ (ZeroMQ)&lt;/a&gt;,InfoQ上面对于ZeroMQ的一篇介绍性文章&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.infoq.com/news/2010/09/introduction-zero-mq"&gt;An Introduction to &amp;Oslash;MQ (ZeroMQ)&lt;/a&gt;,InfoQ上面对于ZeroMQ的一篇介绍性文章&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.zeromq.org/community"&gt;ZeroMQ社区&lt;/a&gt;，&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://hi.baidu.com/ah__fu/item/bdff1d88d236f8c299255f65"&gt;ZeroMQ：云计算时代最好的通讯库&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.codingnow.com/2011/02/zeromq_message_patterns.html"&gt;ZeroMQ 的模式&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><category term="消息中间件"></category></entry><entry><title>CEP：鱼与熊掌可以兼得</title><link href="http://holbrook.github.io/2012/11/06/cep_about.html" rel="alternate"></link><published>2012-11-06T00:00:00+08:00</published><updated>2012-11-06T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2012-11-06:/2012/11/06/cep_about.html</id><summary type="html">&lt;p&gt;简单的说，事件驱动模式包括三个参与者：事件产生者，事件分发器和事件处理器。&lt;/p&gt;</summary><content type="html">&lt;h1&gt;从事件驱动编程（Event-driven Programming)开始&lt;/h1&gt;
+&lt;/ul&gt;</content><category term="消息中间件"></category></entry><entry><title>CEP：鱼与熊掌可以兼得</title><link href="http://holbrook.github.io/2012/11/06/cep_about.html" rel="alternate"></link><published>2012-11-06T00:00:00+08:00</published><updated>2012-11-06T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2012-11-06:/2012/11/06/cep_about.html</id><summary type="html">&lt;p&gt;简单的说，事件驱动模式包括三个参与者：事件产生者，事件分发器和事件处理器。&lt;/p&gt;</summary><content type="html">&lt;h1 id="cong-shi-jian-qu-dong-bian-cheng-event-driven-programmingkai-shi"&gt;从事件驱动编程（Event-driven Programming)开始&lt;/h1&gt;
 &lt;p&gt;如果你写过GUI程序，对事件处理一定不陌生。事实上，事件驱动编程已经成为一种设计模式。大多数的GUI库都会采用这一模式。&lt;/p&gt;
 &lt;p&gt;简单的说，事件驱动模式包括三个参与者：事件产生者，事件分发器和事件处理器。&lt;/p&gt;
 &lt;ul&gt;
@@ -470,14 +460,14 @@ ZeroMQ得到了最高的分数。&lt;/p&gt;
 &lt;p&gt;根据接收到的事件进行处理，需要GUI框架的使用者自行编写。&lt;/p&gt;
 &lt;p&gt;事件驱动编程的核心价值在于：程序的执行流程不是预先定义好的，而是由程序的使用者决定的。这将极大增强程序的交互性。&lt;/p&gt;
 &lt;p&gt;就好像DVD与RPG游戏的区别：前者的剧情是设定好的，你只能进行开始、暂停、快进、回退等有限的交互；后者可以决定主角的行为从而影响故事的结局。&lt;/p&gt;
-&lt;h1&gt;事件驱动业务（Event-driven Business)&lt;/h1&gt;
+&lt;h1 id="shi-jian-qu-dong-ye-wu-event-driven-business"&gt;事件驱动业务（Event-driven Business)&lt;/h1&gt;
 &lt;p&gt;代码的世界不可能是现实世界的完整镜像，但一定是对现实世界的某种抽象，这种抽象能够简化代码世界中对问题的分析和处理。
 同时，这种抽象还可以反向映射到现实世界，为我们解决现实问题提供思路。&lt;/p&gt;
-&lt;p&gt;现代企业生存的外部环境处于剧烈的变化之中，“敏捷企业”已经成为生存之道，而事件驱动业务是敏捷企业的一个基本要求。&lt;/p&gt;
+&lt;p&gt;现代企业生存的外部环境处于剧烈的变化之中，&amp;ldquo;敏捷企业&amp;rdquo;已经成为生存之道，而事件驱动业务是敏捷企业的一个基本要求。&lt;/p&gt;
 &lt;p&gt;事件驱动业务（Event-driven Business)，是在 连续
 的业务过程中进行决策的一种业务管理方式，即根据不同时点上出现的一系列事件触发相关的任务，并调度可用的资源执行任务。
 如果说事件驱动编程能够为软件带来更灵活的交互性和强大的功能，那么企业中的事件驱动业务能够大幅度提高业务的效率和灵活性。&lt;/p&gt;
-&lt;p&gt;事件驱动业务依托于比较成熟的信息化建设。各个业务应用系统在产生连续不断的数据流的同时，根据定义好的条件产生一些“业务事件”，按照策略对这些业务事件进行分析处理，触发新的业务事件或者业务流程，即实现了业务的事件驱动。&lt;/p&gt;
+&lt;p&gt;事件驱动业务依托于比较成熟的信息化建设。各个业务应用系统在产生连续不断的数据流的同时，根据定义好的条件产生一些&amp;ldquo;业务事件&amp;rdquo;，按照策略对这些业务事件进行分析处理，触发新的业务事件或者业务流程，即实现了业务的事件驱动。&lt;/p&gt;
 &lt;p&gt;从上面的描述可以看出，事件驱动业务要求能够快速（毫秒级）、不间断的处理连续、海量的数据，具备灵活的规则或策略设置，从而具备迅速识别、捕获、响应实时业务数据的能力。
 而传统的企业IT架构通常采用：&lt;/p&gt;
 &lt;ul&gt;
@@ -488,7 +478,7 @@ ZeroMQ得到了最高的分数。&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;这种IT架构远远达不到事件驱动业务的要求。&lt;/p&gt;
 &lt;p&gt;事件驱动业务能够应用的业务领域很多，凡是需要快速处理连续性数据、需要能够灵活制定策略的业务，都可以采用事件驱动的业务模式。如证券行业常见的风险分析预警（事前及事中风控）、投资决策（程序化交易）、经纪人绩效计算等。&lt;/p&gt;
-&lt;h1&gt;业务事件处理的几个层次&lt;/h1&gt;
+&lt;h1 id="ye-wu-shi-jian-chu-li-de-ji-ge-ceng-ci"&gt;业务事件处理的几个层次&lt;/h1&gt;
 &lt;p&gt;其实在传统的IT架构中，我们已经实现了业务事件的处理。比如在传统的业务应用系统中，我们通常将业务数据存储在数据库中，通过应用系统的操作界面由人工发现和处理业务事件。&lt;/p&gt;
 &lt;p&gt;这样的处理方式存在两个不足，一是速度慢，二是对于复杂的情况只靠人脑难以处理。于是有了两个技术方向：&lt;/p&gt;
 &lt;ul&gt;
@@ -497,23 +487,23 @@ ZeroMQ得到了最高的分数。&lt;/p&gt;
 &lt;li&gt;商业智能（BI）
     为了应对复杂性，通过数据仓库将数据整合到一起，并用专门的工具在数据模型的基础上进行分析&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;但是上述两个方向是正交的：MQ不适合处理复杂性，而BI主要适应于对结构化的历史数据的分析，无法处理“现在”的情况。&lt;/p&gt;
-&lt;h1&gt;CEP：鱼与熊掌可以兼得&lt;/h1&gt;
+&lt;p&gt;但是上述两个方向是正交的：MQ不适合处理复杂性，而BI主要适应于对结构化的历史数据的分析，无法处理&amp;ldquo;现在&amp;rdquo;的情况。&lt;/p&gt;
+&lt;h1 id="cepyu-yu-xiong-zhang-ke-yi-jian-de"&gt;CEP：鱼与熊掌可以兼得&lt;/h1&gt;
 &lt;p&gt;CEP（Complex Event
 Processing）的出现解决了上述两个方面的问题，在实时性和复杂性方面都得到了很好的解决。&lt;/p&gt;
-&lt;h2&gt;处理数据流&lt;/h2&gt;
+&lt;h2 id="chu-li-shu-ju-liu"&gt;处理数据流&lt;/h2&gt;
 &lt;p&gt;不管是单独的应用系统，还是数据仓库，都是先将数据存储到数据库/数据仓库，然后再处理或查询。
 而CEP与MQ类似的将数据看作是 数据流
 。在连续数据的快速移动过程中进行分析处理。
 这样的方式不需要很大的数据加载，完全可以在内存中进行，从而能够快速产生结果。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="数据流" src="./assets/images/rule_engine/cep.png"&gt;&lt;/p&gt;
-&lt;h2&gt;处理复杂性&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="数据流" src="./assets/images/rule_engine/cep.png"/&gt;&lt;/p&gt;
+&lt;h2 id="chu-li-fu-za-xing"&gt;处理复杂性&lt;/h2&gt;
 &lt;p&gt;业务事件可能很复杂，在各种不同的数据流中源源不断产生各种类型的事件。需要对这些业务事件进行复杂的计算，如过滤、关联、聚合等，同时还需要考虑这些也是事件出现的时间序列。
 最终才能产生有意义的事件，或触发业务流程。同时，这些计算的规则可能还会经常变化。&lt;/p&gt;
 &lt;p&gt;这一类的问题通常通过基于规则的推理机（即规则引擎）来实现。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="复杂性" src="./assets/images/rule_engine/complex.png"&gt;&lt;/p&gt;
-&lt;h2&gt;CEP的架构&lt;/h2&gt;
-&lt;p&gt;&lt;img alt="CEP的架构" src="./assets/images/rule_engine/cep_architecture.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="复杂性" src="./assets/images/rule_engine/complex.png"/&gt;&lt;/p&gt;
+&lt;h2 id="cepde-jia-gou"&gt;CEP的架构&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="CEP的架构" src="./assets/images/rule_engine/cep_architecture.png"/&gt;&lt;/p&gt;
 &lt;p&gt;综上所述，CEP在逻辑上应该包括：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;事件发生器
@@ -529,10 +519,10 @@ Processing）的出现解决了上述两个方面的问题，在实时性和复�
 &lt;/ul&gt;
 &lt;p&gt;CEP是一种比较新的企业架构(EA,Enterprise
 Architure)组件。CEP将数据看做一种数据流，基于规则引擎对业务过程中持续产生的各种事件进行复杂的处理，能够实现对连续数据的快速分析处理。可以应用在多种业务场景，如风险分析、程序化交易等。&lt;/p&gt;
-&lt;p&gt;如果说BI实现了商业智能，那么CEP则实现了“持续智能（Continuous
-Intelligence）“。&lt;/p&gt;</content><category term="CEP"></category></entry><entry><title>开发和部署JBoss FUSE中的路由(Route)</title><link href="http://holbrook.github.io/2012/04/14/fuse_develop_route.html" rel="alternate"></link><published>2012-04-14T00:00:00+08:00</published><updated>2012-04-14T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2012-04-14:/2012/04/14/fuse_develop_route.html</id><summary type="html"></summary><content type="html">&lt;h1&gt;快速开始&lt;/h1&gt;
+&lt;p&gt;如果说BI实现了商业智能，那么CEP则实现了&amp;ldquo;持续智能（Continuous
+Intelligence）&amp;ldquo;。&lt;/p&gt;</content><category term="CEP"></category></entry><entry><title>开发和部署JBoss FUSE中的路由(Route)</title><link href="http://holbrook.github.io/2012/04/14/fuse_develop_route.html" rel="alternate"></link><published>2012-04-14T00:00:00+08:00</published><updated>2012-04-14T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2012-04-14:/2012/04/14/fuse_develop_route.html</id><summary type="html"></summary><content type="html">&lt;h1 id="kuai-su-kai-shi"&gt;快速开始&lt;/h1&gt;
 &lt;p&gt;因为&lt;em&gt;Fuse的核心组成部分是ServiceMix&lt;/em&gt;，而ServiceMix的核心组成部分是Apache
-Camel，所以“用Fuse开发路由”也就是“开发Camel路由”。&lt;/p&gt;
+Camel，所以&amp;ldquo;用Fuse开发路由&amp;rdquo;也就是&amp;ldquo;开发Camel路由&amp;rdquo;。&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://search.maven.org/#search%7Cga%7C1%7Corg.apache.camel.archetypes"&gt;Camel提供了大量的开发&lt;/a&gt;工具
 ，其中&lt;a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22camel-archetype-blueprint%22"&gt;camel-archetype-blueprint&lt;/a&gt;
 是一个&lt;a href="http://maven.apache.org/guides/introduction/introduction-to-archetypes.html"&gt;maven
@@ -546,42 +536,38 @@ archetype&lt;/a&gt;，
     -DartifactId&lt;span class="o"&gt;=&lt;/span&gt;route-demo &lt;span class="se"&gt;\&lt;/span&gt;
     -Dversion&lt;span class="o"&gt;=&lt;/span&gt;1.0.0-SNAPSHOT
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;会创建如下结构的一个工程：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="./assets/images/fuse/route-demo-structure.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./assets/images/fuse/route-demo-structure.png"/&gt;&lt;/p&gt;
 &lt;p&gt;从 &lt;code&gt;pom.xml&lt;/code&gt;
 来看，这是一个&lt;em&gt;使用maven-bundle-plugin构建的OSGibundle工程&lt;/em&gt;。&lt;/p&gt;
-&lt;h1&gt;基于&lt;em&gt;Blueprint&lt;/em&gt;装配Camel&lt;/h1&gt;
+&lt;h1 id="ji-yu-blueprintzhuang-pei-camel"&gt;基于&lt;em&gt;Blueprint&lt;/em&gt;装配Camel&lt;/h1&gt;
 &lt;p&gt;Context&lt;/p&gt;
 &lt;p&gt;工程的`META-INF/blueprint/blueprint.xml'文件是一个Blueprint配置文件：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;      &lt;span class="cp"&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&lt;/span&gt;
-      &lt;span class="nt"&gt;&amp;lt;blueprint&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://www.osgi.org/xmlns/blueprint/v1.0.0&amp;quot;&lt;/span&gt;
-             &lt;span class="na"&gt;xmlns:xsi=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;&lt;/span&gt;
-             &lt;span class="na"&gt;xmlns:camel=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://camel.apache.org/schema/blueprint&amp;quot;&lt;/span&gt;
-             &lt;span class="na"&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;      &lt;span class="cp"&gt;&amp;lt;?xml version="1.0" encoding="UTF-8"?&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;blueprint&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;"http://www.osgi.org/xmlns/blueprint/v1.0.0"&lt;/span&gt;
+             &lt;span class="na"&gt;xmlns:xsi=&lt;/span&gt;&lt;span class="s"&gt;"http://www.w3.org/2001/XMLSchema-instance"&lt;/span&gt;
+             &lt;span class="na"&gt;xmlns:camel=&lt;/span&gt;&lt;span class="s"&gt;"http://camel.apache.org/schema/blueprint"&lt;/span&gt;
+             &lt;span class="na"&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;
 &lt;span class="s"&gt;             http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd&lt;/span&gt;
-&lt;span class="s"&gt;             http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="s"&gt;             http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
 
-        &lt;span class="nt"&gt;&amp;lt;bean&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;helloBean&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;thinkinside.demo.fuse.HelloBean&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-            &lt;span class="nt"&gt;&amp;lt;property&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;say&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hi from Camel&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;bean&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;"helloBean"&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"thinkinside.demo.fuse.HelloBean"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;property&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;"say"&lt;/span&gt; &lt;span class="na"&gt;value=&lt;/span&gt;&lt;span class="s"&gt;"Hi from Camel"&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
         &lt;span class="nt"&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
 
-        &lt;span class="nt"&gt;&amp;lt;camelContext&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;blueprintContext&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;trace=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;false&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://camel.apache.org/schema/blueprint&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-          &lt;span class="nt"&gt;&amp;lt;route&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;timerToLog&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-            &lt;span class="nt"&gt;&amp;lt;from&lt;/span&gt; &lt;span class="na"&gt;uri=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;timer:foo?period=5000&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;camelContext&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;"blueprintContext"&lt;/span&gt; &lt;span class="na"&gt;trace=&lt;/span&gt;&lt;span class="s"&gt;"false"&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;"http://camel.apache.org/schema/blueprint"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class="nt"&gt;&amp;lt;route&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;"timerToLog"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;from&lt;/span&gt; &lt;span class="na"&gt;uri=&lt;/span&gt;&lt;span class="s"&gt;"timer:foo?period=5000"&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
             &lt;span class="nt"&gt;&amp;lt;setBody&amp;gt;&lt;/span&gt;
-                &lt;span class="nt"&gt;&amp;lt;method&lt;/span&gt; &lt;span class="na"&gt;ref=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;helloBean&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;method=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+                &lt;span class="nt"&gt;&amp;lt;method&lt;/span&gt; &lt;span class="na"&gt;ref=&lt;/span&gt;&lt;span class="s"&gt;"helloBean"&lt;/span&gt; &lt;span class="na"&gt;method=&lt;/span&gt;&lt;span class="s"&gt;"hello"&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
             &lt;span class="nt"&gt;&amp;lt;/setBody&amp;gt;&lt;/span&gt;
-            &lt;span class="nt"&gt;&amp;lt;log&lt;/span&gt; &lt;span class="na"&gt;message=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;The message contains ${body}&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
-            &lt;span class="nt"&gt;&amp;lt;to&lt;/span&gt; &lt;span class="na"&gt;uri=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;mock:result&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;log&lt;/span&gt; &lt;span class="na"&gt;message=&lt;/span&gt;&lt;span class="s"&gt;"The message contains ${body}"&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;to&lt;/span&gt; &lt;span class="na"&gt;uri=&lt;/span&gt;&lt;span class="s"&gt;"mock:result"&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
           &lt;span class="nt"&gt;&amp;lt;/route&amp;gt;&lt;/span&gt;
         &lt;span class="nt"&gt;&amp;lt;/camelContext&amp;gt;&lt;/span&gt;
 
       &lt;span class="nt"&gt;&amp;lt;/blueprint&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;该配置文件中，定义了一个id为 &lt;code&gt;blueprintContext&lt;/code&gt; 的Camel
 Context。这个Context中定义了一个路由：&lt;/p&gt;
 &lt;ol&gt;
@@ -593,16 +579,16 @@ Context。这个Context中定义了一个路由：&lt;/p&gt;
 &lt;p&gt;如果使用FuseIDE，可以看到图形化的配置界面：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="./assets/images/fuse/route-design.png"&gt;
 部署到ServiceMix
-================&lt;/p&gt;
+================&lt;/img&gt;&lt;/p&gt;
 &lt;p&gt;执行 &lt;code&gt;mvn package&lt;/code&gt; 后，得到 &lt;code&gt;route-demo-1.0.0-SNAPSHOT.jar&lt;/code&gt;
 ，这是一个OSGi bundle。可以将jar文件部署到&lt;/p&gt;
 &lt;p&gt;=\$SERVICEMIX~HOME~/deploy/=
 目录中。正常情况下，bundle的依赖关系被满足，该bundle会被自动启动。&lt;/p&gt;
-&lt;h1&gt;从ServiceMix到Fuse&lt;/h1&gt;
+&lt;h1 id="cong-servicemixdao-fuse"&gt;从ServiceMix到Fuse&lt;/h1&gt;
 &lt;p&gt;上述的过程也适用于JBoss Fuse。&lt;/p&gt;
 &lt;p&gt;但是Fuse对ServiceMix进行了再次封装，需要使用Fuse对应的版本。比如，=camel-archetype-blueprint=
 的版本可能要使用 &lt;code&gt;2.10.0.redhat-60024&lt;/code&gt;
-这样的“Fuse版本号”，否则在部署到Fuse是可能会发生版本不匹配的问题。&lt;/p&gt;
+这样的&amp;ldquo;Fuse版本号&amp;rdquo;，否则在部署到Fuse是可能会发生版本不匹配的问题。&lt;/p&gt;
 &lt;p&gt;Fuse提供了一个maven仓库，专门提供这种定制版本的组件，需要在maven中配置：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;        &lt;span class="nt"&gt;&amp;lt;repository&amp;gt;&lt;/span&gt;
             &lt;span class="nt"&gt;&amp;lt;id&amp;gt;&lt;/span&gt;fusesource&lt;span class="nt"&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
@@ -621,26 +607,26 @@ Context。这个Context中定义了一个路由：&lt;/p&gt;
 线程安全
 线程的生命周期
 线程的类型&lt;/p&gt;
-&lt;h1&gt;并发式编程&lt;/h1&gt;
-&lt;p&gt;不同的编程范式对软件有不同的视角。并发式编程将软件看做任务和资源的组合——任务之间竞争和共享资源，当资源满足时执行任务，否则等待资源。&lt;/p&gt;
+&lt;h1 id="bing-fa-shi-bian-cheng"&gt;并发式编程&lt;/h1&gt;
+&lt;p&gt;不同的编程范式对软件有不同的视角。并发式编程将软件看做任务和资源的组合&amp;mdash;&amp;mdash;任务之间竞争和共享资源，当资源满足时执行任务，否则等待资源。&lt;/p&gt;
 &lt;p&gt;并发式编程使得软件易于理解和重用，在某些场景能够极大提高性能。&lt;/p&gt;
-&lt;h1&gt;多任务操作系统&lt;/h1&gt;
-&lt;p&gt;要实现并发，首先需要操作系统的支持。现在的操作系统大部分都是多任务操作系统，可以“同时”执行多个任务。&lt;/p&gt;
+&lt;h1 id="duo-ren-wu-cao-zuo-xi-tong"&gt;多任务操作系统&lt;/h1&gt;
+&lt;p&gt;要实现并发，首先需要操作系统的支持。现在的操作系统大部分都是多任务操作系统，可以&amp;ldquo;同时&amp;rdquo;执行多个任务。&lt;/p&gt;
 &lt;p&gt;多任务可以在进程或线程的层面执行。
-进程是指一个内存中运行的应用程序，每个进程都有自己独立的一块内存空间。多任务操作系统可以“并发”执行这些进程。
-线程是指进程中乱序、多次执行的代码块，多个线程可以“同时”运行，所以认为多个线程是“并发”的。多线程的目的是为了最大限度的利用CPU资源。比如一个JVM进程中，所有的程序代码都以线程的方式运行。&lt;/p&gt;
-&lt;p&gt;这里面的“同时”、“并发”只是一种宏观上的感受，实际上从微观层面看只是进程/线程的轮换执行，只不过切换的时间非常短，所以产生了“并行”的感觉。&lt;/p&gt;
-&lt;h1&gt;多线程vs多进程&lt;/h1&gt;
+进程是指一个内存中运行的应用程序，每个进程都有自己独立的一块内存空间。多任务操作系统可以&amp;ldquo;并发&amp;rdquo;执行这些进程。
+线程是指进程中乱序、多次执行的代码块，多个线程可以&amp;ldquo;同时&amp;rdquo;运行，所以认为多个线程是&amp;ldquo;并发&amp;rdquo;的。多线程的目的是为了最大限度的利用CPU资源。比如一个JVM进程中，所有的程序代码都以线程的方式运行。&lt;/p&gt;
+&lt;p&gt;这里面的&amp;ldquo;同时&amp;rdquo;、&amp;ldquo;并发&amp;rdquo;只是一种宏观上的感受，实际上从微观层面看只是进程/线程的轮换执行，只不过切换的时间非常短，所以产生了&amp;ldquo;并行&amp;rdquo;的感觉。&lt;/p&gt;
+&lt;h1 id="duo-xian-cheng-vsduo-jin-cheng"&gt;多线程vs多进程&lt;/h1&gt;
 &lt;p&gt;操作系统会为每个进程分配不同的内存块，而多个线程共享进程的内存块。这带来最直接的不同就是创建线程的开销远小于创建进程的开销。&lt;/p&gt;
 &lt;p&gt;同时，由于内存块不同，所以进程之间的通信相对困难。需要采用pipe/named pipe，signal, message queue, shared memory,socket等手段；而线程间的通信简单快速，就是共享进程内的全局变量。&lt;/p&gt;
 &lt;p&gt;但是，进程的调度由操作系统负责，线程的调度就需要我们自己来考虑，避免死锁，饥饿，活锁，资源枯竭等情况的发生，这会增加一定的复杂度。而且，由于线程之间共享内存，我们还需要考虑线程安全性的问题。&lt;/p&gt;
-&lt;h1&gt;线程安全&lt;/h1&gt;
+&lt;h1 id="xian-cheng-an-quan"&gt;线程安全&lt;/h1&gt;
 &lt;p&gt;因为线程间共享进程中的全局变量，所以当其他线程改变了共享的变量时，可能会对本线程产生影响。&lt;/p&gt;
 &lt;p&gt;所谓线程安全的约束是指一个函数被多个并发线程反复调用时，要一直产生正确的结果。要保证线程安全，主要是通过加锁的方式保证共享变量的正确访问。&lt;/p&gt;
 &lt;p&gt;比线程安全更严格的约束是"可重入性"，即函数在一个线程内执行的过程中被暂停，接下来又在另一个线程内被调用，之后在返回原线程继续执行。在整个过程中都能保证正确执行。保证可重入性，通常通过制作全局变量的本地拷贝来实现。&lt;/p&gt;
-&lt;h1&gt;线程的生命周期&lt;/h1&gt;
+&lt;h1 id="xian-cheng-de-sheng-ming-zhou-qi"&gt;线程的生命周期&lt;/h1&gt;
 &lt;p&gt;所谓的xx生命周期，其实就是某对象的包含产生和销毁的一张状态图。线程的生命周期如下图所示：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="multi-thread-states" src="images/2013/multi_thread/thread_state.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="multi-thread-states" src="images/2013/multi_thread/thread_state.jpg"/&gt;&lt;/p&gt;
 &lt;p&gt;各状态的说明如下：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;New新建。新创建的线程经过初始化后，进入Runnable状态。&lt;/li&gt;
@@ -652,10 +638,10 @@ Context。这个Context中定义了一个路由：&lt;/p&gt;
 &lt;p&gt;可能有3种情况从Running进入Blocked：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;同步：线程中获取同步锁，但是资源已经被其他线程锁定时，进入Locked状态，直到该资源可获取（获取的顺序由Lock队列控制）&lt;/li&gt;
-&lt;li&gt;睡眠：线程运行sleep()或join()方法后，线程进入Sleeping状态。区别在于sleep等待固定的时间，而join是等待子线程执行完。当然join也可以指定一个“超时时间”。从语义上来说，如果两个线程a,b, 在a中调用b.join()，相当于合并(join)成一个线程。最常见的情况是在主线程中join所有的子线程。&lt;/li&gt;
+&lt;li&gt;睡眠：线程运行sleep()或join()方法后，线程进入Sleeping状态。区别在于sleep等待固定的时间，而join是等待子线程执行完。当然join也可以指定一个&amp;ldquo;超时时间&amp;rdquo;。从语义上来说，如果两个线程a,b, 在a中调用b.join()，相当于合并(join)成一个线程。最常见的情况是在主线程中join所有的子线程。&lt;/li&gt;
 &lt;li&gt;等待：线程中执行wait()方法后，线程进入Waiting状态，等待其他线程的通知(notify）。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;线程的类型&lt;/h1&gt;
+&lt;h1 id="xian-cheng-de-lei-xing"&gt;线程的类型&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;主线程：当一个程序启动时，就有一个进程被操作系统（OS）创建，与此同时一个线程也立刻运行，该线程通常叫做程序的主线程（Main Thread）。每个进程至少都有一个主线程，主线程通常最后关闭。&lt;/li&gt;
 &lt;li&gt;子线程：在程序中创建的其他线程，相对于主线程来说就是这个主线程的子线程。&lt;/li&gt;

@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,27 +138,34 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">Java依赖注入规范：JSR330</h1>
-	<h1>依赖关系</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="Java依赖注入规范：JSR330">Java依赖注入规范：JSR330</a><ul><li><a class="toc-href" href="#yi-lai-guan-xi" title="依赖关系">依赖关系</a></li><li><a class="toc-href" href="#dihe-ioc" title="DI和IoC">DI和IoC</a></li><li><a class="toc-href" href="#yi-lai-de-miao-shu" title="依赖的描述">依赖的描述</a></li><li><a class="toc-href" href="#jsr330" title="JSR330">JSR330</a></li><li><a class="toc-href" href="#springshi-xian" title="spring实现">spring实现</a></li></ul></li></ul></div>
+	</div>
+
+
+
+	<h1 id="yi-lai-guan-xi">依赖关系</h1>
 <p>在面向对象编程中，我们常常处理依赖。比如ClassA依赖ClassB，通常需要：</p>
 <div class="highlight"><pre><span></span>ClassA a = new ClassA();
 ClassB b = new ClassB();
 
 a.setB(b);
 a.xxx();
-……
+&hellip;&hellip;
 </pre></div>
-
-
 <p>大量这样的依赖处理会导致高耦合度，并且由于通过硬编码组织对象和资源，代码不具有灵活性。</p>
-<h1>DI和IoC</h1>
+<h1 id="dihe-ioc">DI和IoC</h1>
 <p>一种更好的处理方式是 <strong>依赖注入</strong> 。比如上面的例子中：</p>
 <ol>
-<li>通过某种方式声明“ClassA <strong>依赖</strong> ClassB”</li>
+<li>通过某种方式声明&ldquo;ClassA <strong>依赖</strong> ClassB&rdquo;</li>
 <li>使用ClassA时，有某种机制自动创建ClassB并将其 <strong>注入</strong> 到ClassA</li>
 </ol>
-<p>这里面，“某种机制”需要一个容器来实现。这个容器叫做"IoC(Inversion of Control)容器"。
-之所以叫做“控制反转”，是说不在对象中直接控制，而是由容器控制创建对象、为对象注入其他对象和资源等行为。</p>
-<p>IoC是一种思想，实际上我们遇到的大多数“容器”都有对其内容的控制功能。</p>
+<p>这里面，&ldquo;某种机制&rdquo;需要一个容器来实现。这个容器叫做"IoC(Inversion of Control)容器"。
+之所以叫做&ldquo;控制反转&rdquo;，是说不在对象中直接控制，而是由容器控制创建对象、为对象注入其他对象和资源等行为。</p>
+<p>IoC是一种思想，实际上我们遇到的大多数&ldquo;容器&rdquo;都有对其内容的控制功能。</p>
 <p>对于前一节的例子，IoC容器可能会有这样一个处理过程：</p>
 <ol>
 <li>创建ClassA</li>
@@ -168,19 +175,19 @@ a.xxx();
 </ol>
 <p>之后，我们可以直接从容器中获取创建并组装好的ClassA对象，无需任何处理即可使用。</p>
 <p>关于DI和IoC，可以参考Martin Fowler的经典文章：<a href="http://www.martinfowler.com/articles/injection.html">《Inversion of Control Containers and the Dependency Injection pattern》</a></p>
-<h1>依赖的描述</h1>
+<h1 id="yi-lai-de-miao-shu">依赖的描述</h1>
 <p>在DI和IoC的历史上，<a href="http://spring.io/">Spring</a>功不可没。可以说，Spring使得DI和IoC称为Java应用开发的主流方式。</p>
 <p>2004年3月，<a href="https://spring.io/blog/2004/03/24/spring-framework-1-0-final-released">Spring 1.0</a>
 使用外部配置文件(xml)描述对象之间的依赖关系。</p>
 <p>2004年10月，JDK1.5开始支持注解(Annotations)语法。</p>
 <p>2007年3月， <a href="https://code.google.com/p/google-guice/">Google Guice</a> 1.0发布，使用annotations作为依赖描述的方式。</p>
 <p>2007年11月，<a href="https://spring.io/blog/2007/11/19/spring-framework-2-5-released">Spring 2.5</a>也开始支持annotation。</p>
-<h1>JSR330</h1>
+<h1 id="jsr330">JSR330</h1>
 <p>随着各种IoC容器的出现，依赖的描述方式也五花八门。为了规范和统一，JCP(Java Community Process)于2009年10月发布了
 <a href="https://jcp.org/en/jsr/detail?id=330">JSR330</a>。</p>
 <p>JSR330在javax.inject中规定了依赖注入的标准注解(Annotations)。包括：</p>
 <ul>
-<li><code>@Inject</code> : 标记为“可注入”。可用于构造器(constructors), 方法(methods)或字段(fields)</li>
+<li><code>@Inject</code> : 标记为&ldquo;可注入&rdquo;。可用于构造器(constructors), 方法(methods)或字段(fields)</li>
 <li><code>@Qualifier</code> : 限定器</li>
 <li><code>@Scope</code> : 标记作用域</li>
 <li><code>@Named</code> : 基于 String 的限定器</li>
@@ -201,20 +208,18 @@ interface MessageProvider {
     public String getMessage();
 }
 </pre></div>
-
-
 <p>很明显，一个MessageRenderer依赖一个MessageProvider。</p>
 <p>在实现类中，可以使用依赖注入：</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">StandardOutMessageRenderer</span> <span class="n">implements</span> <span class="n">MessageRenderer</span> {
 
     <span class="nv">@Inject</span>
-    <span class="nv">@Named</span>(<span class="s">&quot;messageProvider&quot;</span>)
+    <span class="nv">@Named</span>(<span class="s">"messageProvider"</span>)
     <span class="n">private</span> <span class="n">MessageProvider</span> <span class="n">messageProvider</span> = <span class="n">null</span>;
 
         <span class="n">public</span> <span class="nb">void</span> <span class="n">render</span>() {
         <span class="k">if</span> (<span class="n">messageProvider</span> == <span class="n">null</span>) {
             <span class="n">throw</span> <span class="nb">new</span> <span class="n">RuntimeException</span>(
-                    <span class="s">&quot;You must set the property messageProvider of class:&quot;</span>
+                    <span class="s">"You must set the property messageProvider of class:"</span>
                             + <span class="n">StandardOutMessageRenderer</span>.<span class="k">class</span>.<span class="n">getName</span>());
         }
 
@@ -234,13 +239,13 @@ interface MessageProvider {
 
 <span class="k">class</span> <span class="n">ConfigurableMessageProvider</span> <span class="n">implements</span> <span class="n">MessageProvider</span> {
 
-        <span class="n">private</span> <span class="n">String</span> <span class="n">message</span> = <span class="s">&quot;Default message&quot;</span>;
+        <span class="n">private</span> <span class="n">String</span> <span class="n">message</span> = <span class="s">"Default message"</span>;
 
         <span class="n">public</span> <span class="n">ConfigurableMessageProvider</span>() {
         }
 
         <span class="nv">@Inject</span>
-        <span class="nv">@Named</span>(<span class="s">&quot;message&quot;</span>)
+        <span class="nv">@Named</span>(<span class="s">"message"</span>)
         <span class="n">public</span> <span class="n">ConfigurableMessageProvider</span>(<span class="n">String</span> <span class="n">message</span>) {
                 <span class="n">this</span>.<span class="n">message</span> = <span class="n">message</span>;
         }
@@ -255,43 +260,58 @@ interface MessageProvider {
 
 }
 </pre></div>
-
-
 <p>其中，ConfigurableMessageProvider的构造函数中依赖一个<code>String</code>类型的参数。</p>
-<h1>spring实现</h1>
+<h1 id="springshi-xian">spring实现</h1>
 <p>Spring 3.0开始支持JSR330。下面的例子中，使用spring的classpath scanning功能
 (<a href="http://www.infoq.com/articles/spring-2.5-part-1">从spring2.5开始支持</a>)，
 会自动组装bean。</p>
-<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-<span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.springframework.org/schema/beans&quot;</span>
-        <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-        <span class="na">xmlns:context=</span><span class="s">&quot;http://www.springframework.org/schema/context&quot;</span>
-        <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd</span>
-<span class="s">                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">"http://www.springframework.org/schema/beans"</span>
+        <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+        <span class="na">xmlns:context=</span><span class="s">"http://www.springframework.org/schema/context"</span>
+        <span class="na">xsi:schemaLocation=</span><span class="s">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd</span>
+<span class="s">                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd"</span><span class="nt">&gt;</span>
 
-    <span class="nt">&lt;context:component-scan</span> <span class="na">base-package=</span><span class="s">&quot;demo&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;message&quot;</span> <span class="na">class=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&quot;You are running JSR330!&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;context:component-scan</span> <span class="na">base-package=</span><span class="s">"demo"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"message"</span> <span class="na">class=</span><span class="s">"java.lang.String"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">"You are running JSR330!"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/bean&gt;</span>
 <span class="nt">&lt;/beans&gt;</span>
 </pre></div>
-
-
 <div class="highlight"><pre><span></span><span class="nt">public</span> <span class="nt">static</span> <span class="nt">void</span> <span class="nt">main</span><span class="o">(</span><span class="nt">String</span><span class="cp">[]</span> <span class="nt">args</span><span class="o">)</span> <span class="p">{</span>
 
     <span class="n">GenericXmlApplicationContext</span> <span class="n">ctx</span> <span class="o">=</span> <span class="n">new</span> <span class="n">GenericXmlApplicationContext</span><span class="p">();</span>
-    <span class="n">ctx</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;classpath:jsr330.xml&quot;</span><span class="p">);</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"classpath:jsr330.xml"</span><span class="p">);</span>
     <span class="n">ctx</span><span class="o">.</span><span class="n">refresh</span><span class="p">();</span>
-    <span class="n">MessageRenderer</span> <span class="n">renderer</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">getBean</span><span class="p">(</span><span class="s2">&quot;messageRenderer&quot;</span><span class="o">,</span>
+    <span class="n">MessageRenderer</span> <span class="n">renderer</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">getBean</span><span class="p">(</span><span class="s2">"messageRenderer"</span><span class="o">,</span>
             <span class="n">MessageRenderer</span><span class="o">.</span><span class="n">class</span><span class="p">);</span>
     <span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">();</span>
     <span class="n">ctx</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-12-31.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2014/01/22/osgi_blueprint_container.html">Blueprint: OSGi的依赖注入(DI)容器</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/21/tycho_vs_maven_bundle_plugin.html">OSGi构建工具：Tycho还是Maven-Bundle-Plugin？</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/18/swt_jfreechart_candlestick.html">在SWT中用JFreeChart实现K线图</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/12/dependency_injection_in_e4.html">Eclipse e4：从OSGi-DS到依赖注入</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/12/e4_platform_services.html">Eclipse e4中的平台服务</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/08/build_osgi_bundle_with_tycho_maven_plugin.html">Tycho：用Maven构建Eclipse Plugin项目</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/07/eclipse_e4_RCP_quickstart.html">Eclipse e4 概览</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/30/JPA_intro.html">JPA概要</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/07/jsr94.html">Java规则引擎规范：JSR94</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -330,6 +350,8 @@ interface MessageProvider {
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -347,37 +369,37 @@ interface MessageProvider {
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

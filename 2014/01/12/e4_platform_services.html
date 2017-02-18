@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,9 +138,18 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">Eclipse e4中的平台服务</h1>
-	<h1>概述</h1>
-<p><a href="/2014/01/12/dependency_injection_in_e4.html">前面</a>提到，e4中可以通过依赖注入进行服务的发布和获取。并且，”在Eclipse e4中，将全局的上下文分成了多个层次“：</p>
-<p><img alt="" src="images/e4/e4_context_hierarchy.png"></p>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="Eclipse e4中的平台服务">Eclipse e4中的平台服务</a><ul><li><a class="toc-href" href="#gai-shu" title="概述">概述</a></li><li><a class="toc-href" href="#shi-tu-xiang-guan-fu-wu" title="视图相关服务">视图相关服务</a><ul><li><a class="toc-href" href="#epartservice" title="EPartService">EPartService</a></li><li><a class="toc-href" href="#eselectionservice" title="ESelectionService">ESelectionService</a></li></ul></li><li><a class="toc-href" href="#mo-xing-xiang-guan-fu-wu-emodelservice_1" title="模型相关服务EModelService">模型相关服务EModelService</a></li><li><a class="toc-href" href="#kong-zhi-qi-xiang-guan-fu-wu" title="控制器相关服务">控制器相关服务</a><ul><li><a class="toc-href" href="#mdirtyablehe-persistzhu-jie" title="MDirtyable和@Persist注解">MDirtyable和@Persist注解</a></li><li><a class="toc-href" href="#ecommandservicehe-ehandlerservice" title="ECommandService和EHandlerService">ECommandService和EHandlerService</a></li></ul></li><li><a class="toc-href" href="#luo-ji-ceng-xiang-guan-fu-wu_1" title="逻辑层相关服务">逻辑层相关服务</a><ul><li><a class="toc-href" href="#ieventbroker" title="IEventBroker">IEventBroker</a></li></ul></li><li><a class="toc-href" href="#shi-xian-zi-ji-de-fu-wu_1" title="实现自己的服务">实现自己的服务</a></li></ul></li></ul></div>
+	</div>
+
+
+
+	<h1 id="gai-shu">概述</h1>
+<p><a href="/2014/01/12/dependency_injection_in_e4.html">前面</a>提到，e4中可以通过依赖注入进行服务的发布和获取。并且，&rdquo;在Eclipse e4中，将全局的上下文分成了多个层次&ldquo;：</p>
+<p><img alt="" src="images/e4/e4_context_hierarchy.png"/></p>
 <p>e4提供了很多平台级的服务，注册于OSGi context之上的其他各个context层。这些服务提供了开发应用的很多通用的功能。一些常用的服务包括：</p>
 <p>展现层MVC的视图、模型、控制器相关的服务，以及逻辑层服务。</p>
 <ul>
@@ -153,7 +162,7 @@
 </li>
 <li>
 <p>ESelectionService</p>
-<p>处理GUI界面中的”选中“</p>
+<p>处理GUI界面中的&rdquo;选中&ldquo;</p>
 </li>
 <li>
 <p>EMenuService</p>
@@ -213,17 +222,17 @@
 <p>An adapter can adapt an object to the specified type, allowing clients to request domain-specific behavior for an object. It integrates IAdaptable and IAdapterManager</p>
 </li>
 </ul>
-<h1>视图相关服务</h1>
-<h2>EPartService</h2>
+<h1 id="shi-tu-xiang-guan-fu-wu">视图相关服务</h1>
+<h2 id="epartservice">EPartService</h2>
 <p>在应用模型中，可以定义PartDescriptors。PartDescriptors可以作为创建Part的模板。</p>
-<p><img alt="" src="images/e4/PartDescriptors.png"></p>
+<p><img alt="" src="images/e4/PartDescriptors.png"/></p>
 <p>通过EPartService可以访问这些模板，比如：</p>
 <div class="highlight"><pre><span></span>  @Inject private EPartService partService;
 
   // Showing and hiding parts
-  detailsTodoPart = partService.findPart(&quot;com.example.todo.rcp.parts.tododetails&quot;);
+  detailsTodoPart = partService.findPart("com.example.todo.rcp.parts.tododetails");
   partService.hidePart(detailsTodoPart);
-  ……
+  &hellip;&hellip;
   detailsTodoPart.setVisible(true);
   partService.showPart(detailsTodoPart, PartState.VISIBLE);
 
@@ -232,7 +241,7 @@
     public void execute(MApplication app, EPartService partService,
         EModelService modelService) {
       MPerspective element =
-          (MPerspective) modelService.find(&quot;secondperspective&quot;, app);
+          (MPerspective) modelService.find("secondperspective", app);
       // now switch perspective
       partService.switchPerspective(element);
     }
@@ -246,8 +255,8 @@
       // in the application model
       // assume the ID is used for the PartDescriptor
       MPart part = partService
-          .createPart(&quot;com.example.e4.rcp.todo.partdescriptor.fileeditor&quot;);
-      part.setLabel(&quot;New Dynamic Part&quot;);
+          .createPart("com.example.e4.rcp.todo.partdescriptor.fileeditor");
+      part.setLabel("New Dynamic Part");
 
       // If multiple parts of this type are now allowed
       // in the application model,
@@ -261,13 +270,11 @@
     public void execute(MApplication app, EPartService partService,
         EModelService modelService) {
       MPerspective element =
-          (MPerspective) modelService.find(&quot;secondperspective&quot;, app);
+          (MPerspective) modelService.find("secondperspective", app);
       partService.switchPerspective(element);
     }
 </pre></div>
-
-
-<h2>ESelectionService</h2>
+<h2 id="eselectionservice">ESelectionService</h2>
 <p>e4的应用模型中，MWindow对象可以保持选中的Part。e4在IEclipseContext中注册了<code>ESelectionService</code>，可以设置或获取选中的组件。</p>
 <p>使用<code>setSelection()</code>方法可以设置选中状态：</p>
 <div class="highlight"><pre><span></span>  // use field injection for the service
@@ -283,8 +290,6 @@
     }
   });
 </pre></div>
-
-
 <p>使用<code>getSelection(partId)</code>方法可以获取选中的组件，更常用的做法是使用<code>IServiceConstants.ACTIVE_SELECTION</code>作为<code>@Named</code>注解的参数，自动注入选中的组件：</p>
 <div class="highlight"><pre><span></span>  @Inject
   public void setTodo(@Optional
@@ -294,9 +299,7 @@
     }
   }
 </pre></div>
-
-
-<h1>模型相关服务EModelService</h1>
+<h1 id="mo-xing-xiang-guan-fu-wu-emodelservice_1">模型相关服务EModelService</h1>
 <p>使用<code>EModelService</code>可以在运行时访问或更改e4的<a href="/2014/01/07/eclipse_e4_RCP_quickstart.html#menuIndex1">应用模型</a>，比如增加或删除模型元素。EModelService中一些常用的方法包括：</p>
 <ul>
 <li><code>cloneElement()</code>和<code>cloneSnippet()</code>：克隆元素或模型片段</li>
@@ -308,7 +311,7 @@
         EModelService service) {
       List&lt;MPart&gt; parts = service.findElements(application, null,
           MPart.class, null);
-      System.out.println(&quot;Found parts(s) : &quot; + parts.size());
+      System.out.println("Found parts(s) : " + parts.size());
 
     }
 
@@ -320,10 +323,8 @@
   // add new Window to the application
   application.getChildren().add(window);
 </pre></div>
-
-
-<h1>控制器相关服务</h1>
-<h2>MDirtyable和@Persist注解</h2>
+<h1 id="kong-zhi-qi-xiang-guan-fu-wu">控制器相关服务</h1>
+<h2 id="mdirtyablehe-persistzhu-jie">MDirtyable和@Persist注解</h2>
 <p>e4中不再区分ViewPart和EditPart，而是统一使用Part。通过MDirtyable可以标记Part中的内容是否被修改过；使用<code>@Persist</code>注解可以标记持久化Part内容的方法。比如：</p>
 <div class="highlight"><pre><span></span>  public class MyEditPart {
 
@@ -350,8 +351,6 @@
     }
   }
 </pre></div>
-
-
 <p>在上面的例子中，看起来<code>@Persist</code>注解没有多大用处。其实，该注解主要用于EPartService的<code>saveAll()</code>方法：</p>
 <div class="highlight"><pre><span></span>  public class SaveHandler {
 
@@ -361,21 +360,19 @@
     }
   }
 </pre></div>
-
-
-<h2>ECommandService和EHandlerService</h2>
+<h2 id="ecommandservicehe-ehandlerservice">ECommandService和EHandlerService</h2>
 <p>举例如下：</p>
-<div class="highlight"><pre><span></span>  Command command = commandService.getCommand(&quot;com.example.mycommand&quot;);
+<div class="highlight"><pre><span></span>  Command command = commandService.getCommand("com.example.mycommand");
 
   // check if the command is defined
   System.out.println(command.isDefined());
 
   // activate Handler, assume AboutHandler() class exists already
-  handlerService.activateHandler(&quot;com.example.mycommand&quot;,
+  handlerService.activateHandler("com.example.mycommand",
       new AboutHandler());
 
   ParameterizedCommand cmd =
-    commandService.createCommand(&quot;com.example.mycommand&quot;, null);
+    commandService.createCommand("com.example.mycommand", null);
 
   // check if the command can get executed
   System.out.println(handlerService.canExecute(cmd));
@@ -383,10 +380,8 @@
   // execute the command
   handlerService.executeHandler(cmd);
 </pre></div>
-
-
-<h1>逻辑层相关服务</h1>
-<h2>IEventBroker</h2>
+<h1 id="luo-ji-ceng-xiang-guan-fu-wu_1">逻辑层相关服务</h1>
+<h2 id="ieventbroker">IEventBroker</h2>
 <p>Eclipse 3.x中，事件处理使用Observer模式：事件接收者实现事件发布者指定的Listener接口，并注册到事件发布者。
 这带来两个问题：</p>
 <ul>
@@ -406,15 +401,13 @@
 
   @Inject
   private IEclipseContext eclipseContext;
-  ……
+  &hellip;&hellip;
   IEventBroker eventBroker = eclipseContext.get(IEventBroker.class);
 
 - 发布事件
 
 可以用`IEventBroker`的`post()`或`send()`方法，进行同步(synchronous)或异步(asynchronous)事件的发布：
 </pre></div>
-
-
 <p>boolean IEventBroker.post(String topic, Object data) // synchronous delivery</p>
 <p>boolean IEventBroker.send(String topic, Object data) // asynchronous delivery</p>
 <div class="highlight"><pre><span></span>返回值为是否发生成功。
@@ -424,8 +417,6 @@
 
 可以通过依赖注入或者`IEventBroker`的`subscribe()`方法订阅事件：
 </pre></div>
-
-
 <p>@Inject
   @Optional
   private void closeHandler(@UIEventTopic(''TOPIC_STRING'') foo.Bar payload) {
@@ -433,8 +424,6 @@
   }</p>
 <div class="highlight"><pre><span></span>
 </pre></div>
-
-
 <p>@Inject
   IEventBroker eventBroker;</p>
 <p>org.osgi.service.event.EventHandler closeHandler = new EventHandler() {
@@ -443,7 +432,7 @@
     }
   }</p>
 <p>eventBroker.subscribe(TOPIC_STRING, closeHandler);
-  ……
+  &hellip;&hellip;
   eventBroker.unsubscribe(closeHandler);</p>
 <div class="highlight"><pre><span></span>消息对象(payload)作为附件存储在`IEventBroker.DATA`属性中。对于`Dictionary`或`Map`等集合类型的消息，会将其中所有的值按照KEY添加为属性。
 
@@ -451,8 +440,6 @@
 
 Eclipse 3.x中，Log的接口和实现类分别为`org.eclipse.core.runtime.ILog`和`org.osgi.service.log.LogService`，可以使用`ServiceTracker`获取：
 </pre></div>
-
-
 <p>LogService getLog() {
   fLogServiceTracker = new ServiceTracker(fBundleContext, LogService.class.getName(), null);
   return (LogService) fLogServiceTracker.getService();
@@ -461,19 +448,37 @@ Eclipse 3.x中，Log的接口和实现类分别为`org.eclipse.core.runtime.ILog
 
 在`org.eclipse.e4.core.services`插件中提供了`org.eclipse.e4.core.services.Logger`类，可以通过`@Inject`注解或使用`IEclipseContext`接口获取：
 </pre></div>
-
-
 <p>@Inject
 private Logger logger;</p>
 <p>//or use code:
 Logger log = (Logger) context.get(Logger.class.getName());</p>
 <p>```</p>
-<h1>实现自己的服务</h1>
+<h1 id="shi-xian-zi-ji-de-fu-wu_1">实现自己的服务</h1>
 <p>Usually services have two parts: the interface definition and the implementation. How these two are linked is defined by a context function , an OSGi service or plain context value setting (IEclipseContext). Please note that there can be more than one service implementation for an interface.</p>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2014-01-12.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2014/01/12/dependency_injection_in_e4.html">Eclipse e4：从OSGi-DS到依赖注入</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/08/build_osgi_bundle_with_tycho_maven_plugin.html">Tycho：用Maven构建Eclipse Plugin项目</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/22/osgi_blueprint_container.html">Blueprint: OSGi的依赖注入(DI)容器</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/21/tycho_vs_maven_bundle_plugin.html">OSGi构建工具：Tycho还是Maven-Bundle-Plugin？</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/18/swt_jfreechart_candlestick.html">在SWT中用JFreeChart实现K线图</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/07/eclipse_e4_RCP_quickstart.html">Eclipse e4 概览</a></li>
+        <li><a href="http://holbrook.github.io/2014/02/20/apache_karaf.html">Apache Karaf：OSGi中间件</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/31/jsr330.html">Java依赖注入规范：JSR330</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/30/JPA_intro.html">JPA概要</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/07/jsr94.html">Java规则引擎规范：JSR94</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -512,6 +517,8 @@ Logger log = (Logger) context.get(Logger.class.getName());</p>
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -529,37 +536,37 @@ Logger log = (Logger) context.get(Logger.class.getName());</p>
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

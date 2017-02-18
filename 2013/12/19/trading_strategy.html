@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,21 +138,30 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">交易策略与规则引擎</h1>
-	<h1>交易策略的要点</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="交易策略与规则引擎">交易策略与规则引擎</a><ul><li><a class="toc-href" href="#jiao-yi-ce-lue-de-yao-dian" title="交易策略的要点">交易策略的要点</a></li><li><a class="toc-href" href="#jiao-yi-ce-lue-de-chong-lei" title="交易策略的种类">交易策略的种类</a><ul><li><a class="toc-href" href="#ji-yu-ji-zhu-zhi-biao" title="基于技术指标">基于技术指标</a></li><li><a class="toc-href" href="#ji-yu-tong-ji-fen-xi" title="基于统计分析">基于统计分析</a></li><li><a class="toc-href" href="#ji-yu-tu-xing-fen-xi" title="基于图形分析">基于图形分析</a></li><li><a class="toc-href" href="#ji-yu-shu-xue-li-lun" title="基于数学理论">基于数学理论</a></li><li><a class="toc-href" href="#ji-yu-ji-ben-fen-xi" title="基于基本分析">基于基本分析</a></li><li><a class="toc-href" href="#ji-yu-xin-li-fen-xi" title="基于心理分析">基于心理分析</a></li><li><a class="toc-href" href="#qi-ta" title="其他">其他</a></li></ul></li><li><a class="toc-href" href="#yong-gui-ze-yin-qing-qu-dong-jiao-yi-ce-lue_1" title="用规则引擎驱动交易策略">用规则引擎驱动交易策略</a></li><li><a class="toc-href" href="#shi-li" title="实例">实例</a></li></ul></li></ul></div>
+	</div>
+
+
+
+	<h1 id="jiao-yi-ce-lue-de-yao-dian">交易策略的要点</h1>
 <p><a href="/2013/12/16/trade_system.html">前面</a>提到，交易策略是系统化交易的核心。但是要注意的是，风险管理比交易策略要重要10倍。</p>
 <p>交易策略的一些要点整理如下：</p>
 <ul>
 <li>交易策略是一套完整的交易规则体系</li>
 <li>这些规则对投资决策的各个环节做出明确规定</li>
 <li>这些规则必须客观、唯一</li>
-<li>所谓完整，至少要包括入场和出场两个规则——完成一个完整的交易周期，入场和出场信号必须确定会发生</li>
+<li>所谓完整，至少要包括入场和出场两个规则&mdash;&mdash;完成一个完整的交易周期，入场和出场信号必须确定会发生</li>
 <li>出场策略比入场策略要重要10倍</li>
 <li>越简单的策略越可靠</li>
 <li>要有错误处理机制</li>
 </ul>
-<h1>交易策略的种类</h1>
+<h1 id="jiao-yi-ce-lue-de-chong-lei">交易策略的种类</h1>
 <p>所谓<a href="/2012/03/20/rule_engine_1.html">规则，规定了一组确定的条件和此条件所产生的结果</a>。根据条件的类别不同，可以把交易策略分成以下几种：</p>
-<h2>基于技术指标</h2>
+<h2 id="ji-yu-ji-zhu-zhi-biao">基于技术指标</h2>
 <ol>
 <li>例1</li>
 <li>规则定义<ul>
@@ -177,7 +186,7 @@
 <p>有严重的设计缺陷。因为RSI可能长期不能趋近于某一极值，从而得不到对应的操作信号，长期无法完成完整的买卖周期。</p>
 </li>
 </ol>
-<h2>基于统计分析</h2>
+<h2 id="ji-yu-tong-ji-fen-xi">基于统计分析</h2>
 <p>此类策略要研究市场数据的统计分布特征，需要较强的数学功底</p>
 <ol>
 <li>例1</li>
@@ -215,7 +224,7 @@
 <p>交易周期不完整</p>
 </li>
 </ol>
-<h2>基于图形分析</h2>
+<h2 id="ji-yu-tu-xing-fen-xi">基于图形分析</h2>
 <p>这类是最传统、最常见的交易策略</p>
 <ol>
 <li>
@@ -288,7 +297,7 @@
 <p>不一定会发生，交易周期不完整</p>
 </li>
 </ol>
-<h2>基于数学理论</h2>
+<h2 id="ji-yu-shu-xue-li-lun">基于数学理论</h2>
 <p>需要较强的金融投资理论背景</p>
 <ol>
 <li>
@@ -311,21 +320,21 @@
 </ol>
 <p>这是一个以金融占星术理论为基础的交易系统。该方法以月球引力场的变化来解释地球生态系统的周期性变比。</p>
 <ol>
-<li>例3：硬币法——以随机选择过程为基础</li>
+<li>例3：硬币法&mdash;&mdash;以随机选择过程为基础</li>
 </ol>
 <p>（略）</p>
-<h2>基于基本分析</h2>
+<h2 id="ji-yu-ji-ben-fen-xi">基于基本分析</h2>
 <ol>
 <li>P/E小于某一值时买入，P/E大于某一值时卖出</li>
 <li>收益增长率大于某一值时买入，收益增长率小于某一值时卖出</li>
 <li>每年某月买入白糖合约，若干月后平仓（季节波动）</li>
 <li>新建住房开工率持续上升若干月买入铜合约，若干月后平仓（因果关系）</li>
 </ol>
-<h2>基于心理分析</h2>
+<h2 id="ji-yu-xin-li-fen-xi">基于心理分析</h2>
 <p>例： 传言开始是进场，传言证实后出场</p>
-<h2>其他</h2>
+<h2 id="qi-ta">其他</h2>
 <p>基于人工智能、神经网络、混沌理论（Chaos)等</p>
-<h1>用规则引擎驱动交易策略</h1>
+<h1 id="yong-gui-ze-yin-qing-qu-dong-jiao-yi-ce-lue_1">用规则引擎驱动交易策略</h1>
 <p>尽管要求交易策略要尽可能简单，但是交易信号产生的条件可能五花八门。为了使交易系统具备更好的适应性，还是应该使用<a href="/2012/03/20/rule_engine_1.html">规则引擎</a>来驱动。这就需要将交易策略规则化。</p>
 <p>一般来说，交易策略的规则化需要经过确定规则（定性）、确定参数（定量）以及用规则语言描述（实现）三个步骤。</p>
 <ul>
@@ -333,8 +342,8 @@
 </ul>
 <p>将交易策略表示为条件与交易信号。对于最简单的交易策略，可能只有入场信号和出场信号。但也会有一些稍复杂的情况需要处理：</p>
 <ul>
-<li>对于期货交易，入场信号可以区分为“做多”和“做空”，出场信号均为“平仓”</li>
-<li>有些交易策略的入场、出场信号可能会划分出不同的风险级别——风险越高的信号，产生的时间越早，可能的获利越大，但判断失误的风险也更大</li>
+<li>对于期货交易，入场信号可以区分为&ldquo;做多&rdquo;和&ldquo;做空&rdquo;，出场信号均为&ldquo;平仓&rdquo;</li>
+<li>有些交易策略的入场、出场信号可能会划分出不同的风险级别&mdash;&mdash;风险越高的信号，产生的时间越早，可能的获利越大，但判断失误的风险也更大</li>
 <li>
 <p>完善的交易系统，对于(正确入场,正确出场)、(正确入场,错误出场)、(错误入场,正确出场)、(错误入场,错误出场)  等情况都要考虑到，针对这些情况都要及时给出交易信号</p>
 </li>
@@ -358,8 +367,8 @@
 <li>描述规则</li>
 </ul>
 <p>使用前面定义好的参数、事件和操作，用<a href="http://thinkinside.tk/2012/12/06/rule_language.html">规则描述语言</a>将定性的策略描述为定量的规则。</p>
-<h1>实例</h1>
-<p>以“简单算术平均线”策略为例，其实现过程如下：</p>
+<h1 id="shi-li">实例</h1>
+<p>以&ldquo;简单算术平均线&rdquo;策略为例，其实现过程如下：</p>
 <ul>
 <li>
 <p>规则定性</p>
@@ -387,7 +396,7 @@
 <ul>
 <li>事件定义</li>
 </ul>
-<p>定义一个“均线事件”(MAEvent):</p>
+<p>定义一个&ldquo;均线事件&rdquo;(MAEvent):</p>
 <p>```
   public class MAEvent {</p>
 <div class="highlight"><pre><span></span>public Date datetime;
@@ -400,16 +409,14 @@ public double price;
 
 
 public String toString(){
-  return &quot;&quot;+this.getDatetime().toLocaleString()+&quot;:MA&quot;+this.length+&quot;=&quot;+average+&quot;\t(&quot;+price+&quot;)&quot;;
+  return ""+this.getDatetime().toLocaleString()+":MA"+this.length+"="+average+"\t("+price+")";
 }
 </pre></div>
-
-
 <p>}
   ```</p>
 <p>并在规则文件中进行声明：</p>
 <p><code>import my.package.MAEvent
-  ……
+  &hellip;&hellip;
   declare MAEvent
     @role(event)
     @timestamp( datetime )
@@ -418,7 +425,7 @@ public String toString(){
 <ul>
 <li>定义操作</li>
 </ul>
-<p>这里使用一个“操作信号事件”(SingalEvent)作为操作，符合条件时将该事件<a href="/2012/12/06/rule_language.html#menuIndex4">insert</a>到规则引擎：</p>
+<p>这里使用一个&ldquo;操作信号事件&rdquo;(SingalEvent)作为操作，符合条件时将该事件<a href="/2012/12/06/rule_language.html#menuIndex4">insert</a>到规则引擎：</p>
 <p>```
   public class SignalEvent extends AbstractEvent{</p>
 <div class="highlight"><pre><span></span>public enum SignalType{LONG,SHORT}
@@ -430,8 +437,6 @@ public long duration;
 public SignalType type;
 public String strategyName;
 </pre></div>
-
-
 <p>}
   ```</p>
 <p>在规则文件中声明：</p>
@@ -456,15 +461,13 @@ public String strategyName;
 
 <span class="x">    SignalEvent e = new SignalEvent();</span>
 <span class="x">    e.datetime = </span><span class="p">$</span><span class="nv">MA5_1</span><span class="p">.</span><span class="nv">datetime</span><span class="x">;</span>
-<span class="x">    e.strategyName = &quot;简单移动平均线策略&quot;;</span>
+<span class="x">    e.strategyName = "简单移动平均线策略";</span>
 <span class="x">    e.type = SignalEvent.SignalType.LONG;</span>
 <span class="x">    e.price = </span><span class="p">$</span><span class="nv">MA5_1</span><span class="p">.</span><span class="nv">price</span><span class="x">;</span>
 <span class="x">      insert(e);</span>
 
 <span class="x">  System.out.println(e);</span>
 </pre></div>
-
-
 <p>end</p>
 <p>rule "SHORT SIGNAL"
       when
@@ -477,21 +480,38 @@ public String strategyName;
 <div class="highlight"><pre><span></span><span class="x">  then</span>
 <span class="x">      SignalEvent e = new SignalEvent();</span>
 <span class="x">    e.datetime = </span><span class="p">$</span><span class="nv">MA5_1</span><span class="p">.</span><span class="nv">datetime</span><span class="x">;</span>
-<span class="x">    e.strategyName = &quot;简单移动平均线策略&quot;;</span>
+<span class="x">    e.strategyName = "简单移动平均线策略";</span>
 <span class="x">    e.type = SignalEvent.SignalType.SHORT;</span>
 <span class="x">    e.price = </span><span class="p">$</span><span class="nv">MA5_1</span><span class="p">.</span><span class="nv">price</span><span class="x">;</span>
 <span class="x">      insert(e);</span>
 
 <span class="x">      System.out.println(e);</span>
 </pre></div>
-
-
 <p>end
 ```</p>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-12-19.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2014/01/05/verificating_a_trade_system.html">交易策略的基本检验</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/19/Berkeley_DB.html">使用Oracle Berkeley DB持久化股票行情数据</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/18/quotation_model.html">证券行情数据模型</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/16/trade_system.html">系统交易和交易系统</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/20/drools_API.html">Drools规则引擎API概述</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/07/jsr94.html">Java规则引擎规范：JSR94</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/06/rule_language.html">Drools规则描述语言快速手册</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/05/algorithm_of_pattern_match.html">规则引擎中常用的模式匹配算法</a></li>
+        <li><a href="http://holbrook.github.io/2012/03/20/rule_engine_1.html">规则，推理机和规则引擎</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -530,6 +550,8 @@ public String strategyName;
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -547,37 +569,37 @@ public String strategyName;
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

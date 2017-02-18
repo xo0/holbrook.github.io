@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,11 +138,20 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">在SWT中用JFreeChart实现K线图</h1>
-	<h1>目标</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="在SWT中用JFreeChart实现K线图">在SWT中用JFreeChart实现K线图</a><ul><li><a class="toc-href" href="#mu-biao" title="目标">目标</a></li><li><a class="toc-href" href="#swttu-biao-zu-jian-de-xuan-ze" title="SWT图表组件的选择">SWT图表组件的选择</a></li><li><a class="toc-href" href="#huo-qu-gu-piao-shu-ju" title="获取股票数据">获取股票数据</a></li><li><a class="toc-href" href="#lian-he-tu-biao" title="联合图表">联合图表</a></li><li><a class="toc-href" href="#she-zhi-yang-shi" title="设置样式">设置样式</a></li><li><a class="toc-href" href="#qu-chu-fei-jiao-yi-shi-duan" title="去除非交易时段">去除非交易时段</a></li><li><a class="toc-href" href="#xiu-zheng-gao-du-he-kuan-du-todo" title="修正高度和宽度(TODO)">修正高度和宽度(TODO)</a></li><li><a class="toc-href" href="#heng-xiang-gun-dong-he-shi-shi-qu-xian-todo" title="横向滚动和实时曲线(TODO)">横向滚动和实时曲线(TODO)</a></li></ul></li></ul></div>
+	</div>
+
+
+
+	<h1 id="mu-biao">目标</h1>
 <p>在<a href="/2013/05/03/r_notes_1_what.html">R学习笔记</a>中，展示了这样一张图表：</p>
-<p><img alt="" src="images/2013/r_notes/2.png"></p>
+<p><img alt="" src="images/2013/r_notes/2.png"/></p>
 <p>现在需要在Eclipse e4应用中实现这样的图表。</p>
-<h1>SWT图表组件的选择</h1>
+<h1 id="swttu-biao-zu-jian-de-xuan-ze">SWT图表组件的选择</h1>
 <p>在RCP/JFace/SWT中，可以选择的图表组件包括：</p>
 <ul>
 <li>Eclipse BIRT</li>
@@ -159,13 +168,11 @@
 <p><a href="http://www.jfree.org/jfreechart/">JFreeChart</a>是Java世界的老牌图表组件，其强大无以言表。JFreeChart支持AWT、Swing等
 GUI环境，也可以生成图片在Web环境中使用。后来又增加了对SWT环境的支持，从此不再需要SWT_AWT的桥接方式。</p>
 <p>综上所述，这里选择JFreeChart作为绘图组件。</p>
-<h1>获取股票数据</h1>
+<h1 id="huo-qu-gu-piao-shu-ju">获取股票数据</h1>
 <p>由于需要的数据量比较大，不能再使用<a href="">前面</a>的模拟数据方法了。这里使用<a href="http://finance.yahoo.com/">雅虎财经</a>的数据。</p>
 <p>雅虎财经提供了查询股票历史数据的接口：</p>
 <div class="highlight"><pre><span></span>  http://table.finance.yahoo.com/table.csv?ignore=.csv&amp;....
 </pre></div>
-
-
 <p>参数包括：</p>
 <ul>
 <li>s: 股票代码/名称。对于国内的股票，使用类似<code>000001.ss</code>的编码</li>
@@ -177,17 +184,15 @@ GUI环境，也可以生成图片在Web环境中使用。后来又增加了对SW
 <p>本文中使用2013年上证综合指数的日线数据：</p>
 <div class="highlight"><pre><span></span>  http://table.finance.yahoo.com/table.csv?ignore=.csv&amp;s=000001.ss&amp;a=00&amp;b=01&amp;c=2013&amp;d=11&amp;e=31&amp;f=2013&amp;g=d
 </pre></div>
-
-
 <p>获取到的CSV文件包含的数据列为<code>Date,Open,High,Low,Close,Volume,Adj Close</code>，其中Date的格式为<code>yyyy-MM-dd</code>。数据按照日期倒序排列。</p>
 <p>处理代码如下：</p>
-<div class="highlight"><pre><span></span>    <span class="nt">OHLCSeries</span> <span class="nt">ohlcSeries</span> <span class="o">=</span> <span class="nt">new</span> <span class="nt">OHLCSeries</span><span class="o">(</span><span class="s2">&quot;&quot;</span><span class="o">);</span>
-    <span class="nt">TimeSeries</span> <span class="nt">volumeSeries</span> <span class="o">=</span><span class="nt">new</span> <span class="nt">TimeSeries</span><span class="o">(</span><span class="s2">&quot;&quot;</span><span class="o">);</span>
+<div class="highlight"><pre><span></span>    <span class="nt">OHLCSeries</span> <span class="nt">ohlcSeries</span> <span class="o">=</span> <span class="nt">new</span> <span class="nt">OHLCSeries</span><span class="o">(</span><span class="s2">""</span><span class="o">);</span>
+    <span class="nt">TimeSeries</span> <span class="nt">volumeSeries</span> <span class="o">=</span><span class="nt">new</span> <span class="nt">TimeSeries</span><span class="o">(</span><span class="s2">""</span><span class="o">);</span>
 
     <span class="nt">try</span><span class="p">{</span>
-        <span class="n">URL</span> <span class="nb">url</span> <span class="o">=</span> <span class="n">new</span> <span class="n">URL</span><span class="p">(</span><span class="s2">&quot;http://table.finance.yahoo.com/table.csv?ignore=.csv&amp;s=000001.ss&amp;a=00&amp;b=01&amp;c=2013&amp;d=11&amp;e=31&amp;f=2013&amp;g=d&quot;</span><span class="p">);</span>
+        <span class="n">URL</span> <span class="nb">url</span> <span class="o">=</span> <span class="n">new</span> <span class="n">URL</span><span class="p">(</span><span class="s2">"http://table.finance.yahoo.com/table.csv?ignore=.csv&amp;s=000001.ss&amp;a=00&amp;b=01&amp;c=2013&amp;d=11&amp;e=31&amp;f=2013&amp;g=d"</span><span class="p">);</span>
         <span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="nb">url</span><span class="o">.</span><span class="n">openStream</span><span class="p">();</span>
-        <span class="n">InputStreamReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">new</span> <span class="n">InputStreamReader</span><span class="p">(</span><span class="n">is</span><span class="o">,</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">);</span>
+        <span class="n">InputStreamReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">new</span> <span class="n">InputStreamReader</span><span class="p">(</span><span class="n">is</span><span class="o">,</span><span class="s2">"UTF-8"</span><span class="p">);</span>
 
         <span class="n">BufferedReader</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">new</span> <span class="n">BufferedReader</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span>
 
@@ -196,7 +201,7 @@ GUI环境，也可以生成图片在Web环境中使用。后来又增加了对SW
 
 
         <span class="n">while</span> <span class="p">((</span><span class="n">newLine</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">readLine</span><span class="p">())</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span> <span class="err">{</span>
-            <span class="n">String</span> <span class="n">item</span><span class="cp">[]</span> <span class="o">=</span> <span class="n">newLine</span><span class="o">.</span><span class="n">trim</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">);</span>
+            <span class="n">String</span> <span class="n">item</span><span class="cp">[]</span> <span class="o">=</span> <span class="n">newLine</span><span class="o">.</span><span class="n">trim</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">);</span>
             <span class="n">Date</span> <span class="n">date</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">0</span><span class="cp">]</span><span class="p">);</span>
             <span class="nb">float</span> <span class="n">open</span> <span class="o">=</span> <span class="n">Float</span><span class="o">.</span><span class="n">valueOf</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">1</span><span class="cp">]</span><span class="p">);</span>
             <span class="nb">float</span> <span class="nb">high</span> <span class="o">=</span> <span class="n">Float</span><span class="o">.</span><span class="n">valueOf</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">2</span><span class="cp">]</span><span class="p">);</span>
@@ -213,9 +218,7 @@ GUI环境，也可以生成图片在Web环境中使用。后来又增加了对SW
         <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">();</span>
     <span class="p">}</span>
 </pre></div>
-
-
-<h1>联合图表</h1>
+<h1 id="lian-he-tu-biao">联合图表</h1>
 <p>目标中的图表是一种联合图表(Combined Chart)：多个图表共用横坐标或纵坐标。JFreeChart中提供了<code>CombinedDomainXYPlot</code>和<code>CombinedRangeXYPlot</code>，分别用于联合横坐标和联合纵坐标的图表。</p>
 <p>由于各种图表类型都有可能组成联合图表，JFreeChart没有在<code>ChartFactory</code>中提供工厂方法进行创建，
 只能按照<a href="/2014/01/17/jfreechart.html#menuIndex1">JFreeChart中的图表模型</a>进行手工创建。下面是例子：</p>
@@ -230,14 +233,14 @@ GUI环境，也可以生成图片在Web环境中使用。后来又增加了对SW
   CandlestickRenderer ohlcRenderer = new CandlestickRenderer();
   XYBarRenderer volumeRenderer = new XYBarRenderer();
 
-  //创建K线图的Plot，使用“数据”一节中的ohlcSeries
-  ////其中横坐标设为&quot;null&quot;，以使用联合横坐标
+  //创建K线图的Plot，使用&ldquo;数据&rdquo;一节中的ohlcSeries
+  ////其中横坐标设为"null"，以使用联合横坐标
   OHLCSeriesCollection ohlcDataset = new OHLCSeriesCollection();
   ohlcDataset.addSeries(ohlcSeries);
   XYPlot ohlcPlot = new XYPlot(ohlcDataset,timeAxis,ohlcAxis,ohlcRenderer);
 
-  //创建成交量柱状图的Plot，使用“数据”一节中的volumeSeries
-  //其中横坐标设为&quot;null&quot;，以使用联合横坐标
+  //创建成交量柱状图的Plot，使用&ldquo;数据&rdquo;一节中的volumeSeries
+  //其中横坐标设为"null"，以使用联合横坐标
   TimeSeriesCollection volumeDataset = new TimeSeriesCollection();
   volumeDataset.addSeries(timeSeries);
   XYPlot volumePlot=new XYPlot(volumeDataset,null,volumeAxis,volumeRenderer;
@@ -249,13 +252,11 @@ GUI环境，也可以生成图片在Web环境中使用。后来又增加了对SW
   combineddomainxyplot.add(ohlcPlot, 2);
   combineddomainxyplot.add(volumePlot, 1);
   combineddomainxyplot.setGap(10);
-  JFreeChart chart = new JFreeChart(&quot;xx股票&quot;, JFreeChart.DEFAULT_TITLE_FONT, combineddomainxyplot, false);
+  JFreeChart chart = new JFreeChart("xx股票", JFreeChart.DEFAULT_TITLE_FONT, combineddomainxyplot, false);
 </pre></div>
-
-
 <p>创建的图表如下所示：</p>
-<p><img alt="" src="images/chart/sample1.png"></p>
-<h1>设置样式</h1>
+<p><img alt="" src="images/chart/sample1.png"/></p>
+<h1 id="she-zhi-yang-shi">设置样式</h1>
 <p>上面的图表默认样式与国内的习惯不大一样。不过JFreeChart提供了丰富的API进行样式的设置。下面对样式进行简单调整(目前对SWT的支持不够完全。比如，颜色值仍需要使用AWT的<code>Color</code>类)：</p>
 <div class="highlight"><pre><span></span>//图表
 chart.setBackgroundPaint(Color.BLACK);
@@ -278,11 +279,9 @@ timeAxis.setTickLabelPaint(Color.GRAY);
 ohlcAxis.setTickLabelPaint(Color.GRAY);
 volumeAxis.setTickLabelPaint(Color.GRAY);
 </pre></div>
-
-
 <p>调整后的图表如下所示：</p>
-<p><img alt="" src="images/chart/sample2.png"></p>
-<h1>去除非交易时段</h1>
+<p><img alt="" src="images/chart/sample2.png"/></p>
+<h1 id="qu-chu-fei-jiao-yi-shi-duan">去除非交易时段</h1>
 <p>前面的例子中，K线是不连续的，因为会有非交易日的存在。如果是小时、分钟级别的K线图，该问题会更加明显。</p>
 <p>要去除非交易时段，使得K线连续，大体有两个思路：</p>
 <ul>
@@ -290,28 +289,45 @@ volumeAxis.setTickLabelPaint(Color.GRAY);
 <li>实现一个<code>Timeline</code>，并设置给<code>DateAxis</code></li>
 <li>更改Renderer</li>
 </ul>
-<p>看起来方法1更容易，但由于没有相关的文档，需要自己分析<code>DateAxis</code>的代码，类似一种“Hack”的模式，很难保证向后兼容；
+<p>看起来方法1更容易，但由于没有相关的文档，需要自己分析<code>DateAxis</code>的代码，类似一种&ldquo;Hack&rdquo;的模式，很难保证向后兼容；
 方法2是官方指定的方法，可行性更高，但是要同时支持日线、小时线、分钟/5分钟线，实现起来有点难度。
 此外，<a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/axis/Timeline.html">Timeline的接口说明</a>读起来有些费解；方法3需要改变数据源(Dataset)，使用序号作为数据，设置Renderer的<code>ItemLabelGenerator</code>，根据序号产生时间格式的坐标标签。</p>
 <p>这里采用方法3，实例代码如下：</p>
 <div class="highlight"><pre><span></span>//TODO
 </pre></div>
-
-
-<h1>修正高度和宽度(TODO)</h1>
+<h1 id="xiu-zheng-gao-du-he-kuan-du-todo">修正高度和宽度(TODO)</h1>
 <ul>
 <li>
 <p>固定每根K线的宽度，根据图表宽度决定显示多少根K线</p>
 </li>
 <li>
-<p>使用“时间窗口”作为数据</p>
+<p>使用&ldquo;时间窗口&rdquo;作为数据</p>
 </li>
 </ul>
-<h1>横向滚动和实时曲线(TODO)</h1>
+<h1 id="heng-xiang-gun-dong-he-shi-shi-qu-xian-todo">横向滚动和实时曲线(TODO)</h1>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2014-01-18.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2014/01/12/dependency_injection_in_e4.html">Eclipse e4：从OSGi-DS到依赖注入</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/12/e4_platform_services.html">Eclipse e4中的平台服务</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/08/build_osgi_bundle_with_tycho_maven_plugin.html">Tycho：用Maven构建Eclipse Plugin项目</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/07/eclipse_e4_RCP_quickstart.html">Eclipse e4 概览</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/22/osgi_blueprint_container.html">Blueprint: OSGi的依赖注入(DI)容器</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/21/tycho_vs_maven_bundle_plugin.html">OSGi构建工具：Tycho还是Maven-Bundle-Plugin？</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/31/jsr330.html">Java依赖注入规范：JSR330</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/30/JPA_intro.html">JPA概要</a></li>
+        <li><a href="http://holbrook.github.io/2012/12/07/jsr94.html">Java规则引擎规范：JSR94</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -350,6 +366,8 @@ volumeAxis.setTickLabelPaint(Color.GRAY);
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -367,37 +385,37 @@ volumeAxis.setTickLabelPaint(Color.GRAY);
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

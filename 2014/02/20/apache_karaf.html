@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,16 +138,25 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">Apache Karaf：OSGi中间件</h1>
-	<h1>为什么需要“OSGi中间件”</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="Apache Karaf：OSGi中间件">Apache Karaf：OSGi中间件</a><ul><li><a class="toc-href" href="#wei-shi-yao-xu-yao-osgizhong-jian-jian" title="为什么需要&ldquo;OSGi中间件&rdquo;">为什么需要&ldquo;OSGi中间件&rdquo;</a></li><li><a class="toc-href" href="#apache-karafde-gong-neng" title="Apache Karaf的功能">Apache Karaf的功能</a></li><li><a class="toc-href" href="#karafchu-ti-yan" title="Karaf初体验">Karaf初体验</a></li><li><a class="toc-href" href="#karafqi-dong-mo-shi-he-shi-li" title="Karaf启动模式和实例">Karaf启动模式和实例</a></li><li><a class="toc-href" href="#ssh-ke-hu-duan-he-webkong-zhi-tai" title="ssh、客户端和Web控制台">ssh、客户端和Web控制台</a></li><li><a class="toc-href" href="#bundle-urlhe-bundlecang-ku" title="bundle URL和bundle仓库">bundle URL和bundle仓库</a></li><li><a class="toc-href" href="#osgiying-yong-karaf-featurehe-kar" title="OSGi应用，Karaf Feature和KAR">OSGi应用，Karaf Feature和KAR</a></li><li><a class="toc-href" href="#qi-ye-ji-te-xing" title="企业级特性">企业级特性</a></li></ul></li></ul></div>
+	</div>
+
+
+
+	<h1 id="wei-shi-yao-xu-yao-osgizhong-jian-jian">为什么需要&ldquo;OSGi中间件&rdquo;</h1>
 <p>尽管在OSGi Runtime(Felix, Equinox等)的基础上，OSGi组织又规定了<a href="/2014/01/22/osgi_blueprint_container.html">Blueprint规范以实现OSGi环境下的依赖注入</a>，
-但这还不够——没有提供类似Web开发框架那样的一些“平台级”的功能。比如日志，控制台，配置文件等。</p>
-<p>很难想象没有Tomcat这样的Web中间件，开发Java Web应用的工作量有多大。同样的，OSGi应用也需要一种“中间件”，来实现各应用共性的一些功能，并管理应用的部署。</p>
+但这还不够&mdash;&mdash;没有提供类似Web开发框架那样的一些&ldquo;平台级&rdquo;的功能。比如日志，控制台，配置文件等。</p>
+<p>很难想象没有Tomcat这样的Web中间件，开发Java Web应用的工作量有多大。同样的，OSGi应用也需要一种&ldquo;中间件&rdquo;，来实现各应用共性的一些功能，并管理应用的部署。</p>
 <p><a href="http://karaf.apache.org/">Apache Karaf</a>就是这样的一个"OSGi中间件"。最早，Karaf只是<a href="http://servicemix.apache.org/">Apache ServiceMix</a>的Kernel子项目，后来独立出来成为Apache的顶级项目。
 目前，Apache Karaf已经用于Apache Geronimo, Apache ServiceMix, Fuse ESB等项目。</p>
 <p>Apache Karaf的主要竞争对手是<a href="http://www.eclipse.org/virgo/">Eclipse Virgo</a>。</p>
-<h1>Apache Karaf的功能</h1>
-<p><img alt="" src="images/fuse/Karaf.jpg"></p>
-<p>Apache Karaf提供了如下“开箱即用”的功能：</p>
+<h1 id="apache-karafde-gong-neng">Apache Karaf的功能</h1>
+<p><img alt="" src="images/fuse/Karaf.jpg"/></p>
+<p>Apache Karaf提供了如下&ldquo;开箱即用&rdquo;的功能：</p>
 <ul>
 <li>热部署</li>
 </ul>
@@ -181,12 +190,12 @@
 <li>Bundle集合(Feature)</li>
 </ul>
 <p>类似于Eclipse的Feature，Karaf中也支持Feature，即bundle的集合。使用Feature可以简化OSGi应用的部署。</p>
-<h1>Karaf初体验</h1>
+<h1 id="karafchu-ti-yan">Karaf初体验</h1>
 <p>安装好Java环境，加压缩Karaf，执行<code>$KARAF_HOME/bin/karaf</code>，可以看到Karaf的启动界面：</p>
-<p><img alt="" src="images/karaf/karaf1.png"></p>
+<p><img alt="" src="images/karaf/karaf1.png"/></p>
 <p>如图的提示，使用<code>&lt;tab&gt;</code>可以列出所有可用的命令，所有的命令支持<code>--help</code>参数。</p>
 <p>如果执行<code>list</code>命令，可以列出所有的bundles:</p>
-<p><img alt="" src="images/karaf/karaf2.png"></p>
+<p><img alt="" src="images/karaf/karaf2.png"/></p>
 <p>还有很多其他的命令，比如</p>
 <ul>
 <li><code>bundle:install</code> 安装bundle</li>
@@ -209,7 +218,7 @@
 <li><code>/lib/endorsed</code>: Karaf对其他API的再封装(背书)的一些jar包</li>
 <li><code>/system</code>: OSGi bundles库，使用Maven 2仓库的结构</li>
 </ul>
-<h1>Karaf启动模式和实例</h1>
+<h1 id="karafqi-dong-mo-shi-he-shi-li">Karaf启动模式和实例</h1>
 <ul>
 <li>常规模式(regular mode) 使用命令<code>bin/karaf</code>，可以在前端启动Karaf并进入控制台</li>
 <li>服务模式(server mode) 使用命令<code>bin/karaf server</code>，可以在前端启动Karaf，但不进入控制台</li>
@@ -229,18 +238,16 @@ Karaf安装为系统服务。</p>
 <li><code>instance:stop</code> 停止实例</li>
 <li><code>instance:destroy</code> 删除实例</li>
 </ul>
-<h1>ssh、客户端和Web控制台</h1>
+<h1 id="ssh-ke-hu-duan-he-webkong-zhi-tai">ssh、客户端和Web控制台</h1>
 <p>Karaf内置了一个SSHd server，可以通过ssh远程访问Karaf控制台。
 要启动远程控制台服务，需要在控制台中启动bundle: <code>bundle:restart -f org.apache.karaf.shell.ssh</code>。此时，远端可以使用ssh远程访问控制台，比如: <code>ssh -p 8101 karaf@localhost</code>。默认karaf用户的密码也是karaf。ssh的用户、密码、端口等都可以在<code>etc/org.apache.karaf.shell.cfg</code>中配置。</p>
 <p>Karaf的客户端'bin/client'即可以连接本地控制台，也可以通过ssh连接远程控制台，甚至可以执行单个的命令。比如：</p>
 <div class="highlight"><pre><span></span>bin/client -u karaf -p karaf -a 8101 hostname osgi:shutdown
 </pre></div>
-
-
 <p>Karaf还可以安装Web控制台(<code>feature:install webconsole</code>)。通过Web控制台能够管理
 Karaf的bundle、feature、实例、配置以及查看日志。启动web控制台后，默认可以通过<a href="http://localhost:8181/system/console">http://localhost:8181/system/console</a>
 访问web控制台，默认的用户名/密码为<code>karaf/karaf</code>。Web控制台的配置文件位于<code>etc/org.ops4j.pax.web.cfg</code>。</p>
-<h1>bundle URL和bundle仓库</h1>
+<h1 id="bundle-urlhe-bundlecang-ku">bundle URL和bundle仓库</h1>
 <p>Karaf在安装bundle时，可以使用多种URL来定位bundle，比如：</p>
 <ul>
 <li>
@@ -277,9 +284,9 @@ Karaf提供了OBR (OSGi Bundle Repository)，能够管理bundle仓库。在控�
 <li>查找bundle</li>
 </ul>
 <p><code>obr:find</code></p>
-<h1>OSGi应用，Karaf Feature和KAR</h1>
-<p>OSGi运行的基本单元是bundle，bundle之间有依赖关系。一组满足依赖关系的bundle集合，加上相关的配置信息，称为一个“OSGi应用”。
-将OSGi应用部署到Karaf的行为称为“provisioning”。</p>
+<h1 id="osgiying-yong-karaf-featurehe-kar">OSGi应用，Karaf Feature和KAR</h1>
+<p>OSGi运行的基本单元是bundle，bundle之间有依赖关系。一组满足依赖关系的bundle集合，加上相关的配置信息，称为一个&ldquo;OSGi应用&rdquo;。
+将OSGi应用部署到Karaf的行为称为&ldquo;provisioning&rdquo;。</p>
 <p>为了简化OSGi应用的部署，Karaf定义了feature，用于描述OSGi应用的部署信息，包括：</p>
 <ul>
 <li>名称</li>
@@ -303,7 +310,7 @@ Karaf提供了OBR (OSGi Bundle Repository)，能够管理bundle仓库。在控�
 <p>由于feature中可能使用远端的bundle，Karaf提出了<code>KAR</code>格式，可以把一个bundle相关的所有资源打包在一起。
 这类似于使用maven定义的web工程，和最终打包的war文件之间的关系。
 Karaf控制台中，可以打包(<code>kar:create</code>)、安装(<code>kar:install</code>)、卸载(<code>kar:uninstall</code>)或列出(<code>kar:list</code>)KAR文件。</p>
-<h1>企业级特性</h1>
+<h1 id="qi-ye-ji-te-xing">企业级特性</h1>
 <p>Karaf提供了一系列的功能，以支持企业级应用的开发，包括：</p>
 <ul>
 <li>日志</li>
@@ -343,9 +350,24 @@ Karaf控制台中，可以打包(<code>kar:create</code>)、安装(<code>kar:ins
 <p>Karaf还支持<a href="http://karaf.apache.org/manual/latest/users-guide/ejb.html">EJB</a>、<a href="http://karaf.apache.org/manual/latest/users-guide/cdi.html">CDI</a>、<a href="http://karaf.apache.org/manual/latest/users-guide/monitoring.html">JMX</a>、<a href="http://karaf.apache.org/manual/latest/users-guide/jms.html">JMS</a>等企业级特性。</p>
 <p>Karaf内置支持主备方式的部署，以保证高可用。使用<a href="http://karaf.apache.org/index/subprojects/cellar.html">Apache Karaf Cellar</a>可以实现Karaf的集群部署。</p>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2014-02-20.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2014/01/22/osgi_blueprint_container.html">Blueprint: OSGi的依赖注入(DI)容器</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/21/tycho_vs_maven_bundle_plugin.html">OSGi构建工具：Tycho还是Maven-Bundle-Plugin？</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/12/dependency_injection_in_e4.html">Eclipse e4：从OSGi-DS到依赖注入</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/12/e4_platform_services.html">Eclipse e4中的平台服务</a></li>
+        <li><a href="http://holbrook.github.io/2014/01/08/build_osgi_bundle_with_tycho_maven_plugin.html">Tycho：用Maven构建Eclipse Plugin项目</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -384,6 +406,8 @@ Karaf控制台中，可以打包(<code>kar:create</code>)、安装(<code>kar:ins
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -401,37 +425,37 @@ Karaf控制台中，可以打包(<code>kar:create</code>)、安装(<code>kar:ins
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

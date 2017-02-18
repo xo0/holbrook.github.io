@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,7 +138,16 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">Graphviz概述</h1>
-	<h1>Graphviz是什么</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="Graphviz概述">Graphviz概述</a><ul><li><a class="toc-href" href="#graphvizshi-shi-yao" title="Graphviz是什么">Graphviz是什么</a></li><li><a class="toc-href" href="#dotyu-yan-jian-jie" title="DOT语言简介">DOT语言简介</a></li><li><a class="toc-href" href="#ying-yong-chang-jing" title="应用场景">应用场景</a></li></ul></li></ul></div>
+	</div>
+
+
+
+	<h1 id="graphvizshi-shi-yao">Graphviz是什么</h1>
 <p><a href="http://www.graphviz.org/">Graphviz</a>是基于dot语言的绘图工具，可以画有向图、无向图、关系图、目录图、流程图等各种你知道的或不知道的图形。可以欣赏Graphviz的<a href="http://www.graphviz.org/Gallery.php">Gallery</a>，以及Yifan Hu的<a href="http://www2.research.att.com/~yifanhu/GALLERY/GRAPHS/index1.html">gallery of large graphs</a>。</p>
 <p>Graphviz使用<a href="http://zh.wikipedia.org/wiki/DOT%E8%AF%AD%E8%A8%80">DOT语言</a>描述图形，并提供一组工具：</p>
 <ul>
@@ -176,12 +185,12 @@
 </ul>
 <p>有一些强大的工具依赖或支持Graphviz，比如<a href="http://www.omnigroup.com/omnigraffle">OmniGraffle</a>
 和<a href="http://plantuml.sourceforge.net/index.html">PlantUML</a>。</p>
-<h1>DOT语言简介</h1>
+<h1 id="dotyu-yan-jian-jie">DOT语言简介</h1>
 <p>DOT语言使用离散数学中的Graph描述图形，包括三个基本元素：grahp,node,edge。下面是一个例子：</p>
 <p><code>example.dot</code></p>
 <div class="highlight"><pre><span></span>digraph G {
-main -&gt; parse -&gt; execute[label=&quot;edge label2&quot;];
-main -&gt; init[label=&quot;edge label1&quot;];
+main -&gt; parse -&gt; execute[label="edge label2"];
+main -&gt; init[label="edge label1"];
 main -&gt; cleanup;
 execute -&gt; make_string;
 execute -&gt; printf;
@@ -190,25 +199,21 @@ main -&gt; printf;
 execute -&gt; compare;
 }
 </pre></div>
-
-
 <p>执行命令<code>dot -Tpng example.dot -o example.png</code>，就可以生成如下的图形：</p>
-<p><img alt="" src="images/graphviz/example.png"></p>
+<p><img alt="" src="images/graphviz/example.png"/></p>
 <p>DOT通过属性可以设置node和edge的样式，比如：</p>
 <div class="highlight"><pre><span></span>graph graphname {
      // label属性可以改变节点的显示名称
-     a [label=&quot;Foo&quot;];     // 节点形状被改变了
+     a [label="Foo"];     // 节点形状被改变了
      b [shape=box];     // a-b边和b-c边有相同的属性
      a -- b -- c [color=blue];
-     b -- d [style=dotted, label=&quot;无向图&quot;];
+     b -- d [style=dotted, label="无向图"];
 }
 </pre></div>
-
-
 <p>生成的图形如下：</p>
-<p><img alt="" src="images/graphviz/a.png"></p>
+<p><img alt="" src="images/graphviz/a.png"/></p>
 <p>更多的属性设置可以参考<a href="http://www.graphviz.org/content/attrs">官方文档</a>。</p>
-<h1>应用场景</h1>
+<h1 id="ying-yong-chang-jing">应用场景</h1>
 <p>Graphviz可以有很多玩法，常见的比如：</p>
 <ul>
 <li><a href="http://gashero.iteye.com/blog/1748795">直接使用Graphviz绘图</a>，以代替Visio等绘图工具</li>
@@ -217,9 +222,20 @@ execute -&gt; compare;
 <li>嵌入轻量级标记语言，如org-mode和markdown中</li>
 </ul>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2014-02-17.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2014/02/17/graphviz_in_markdown.html">在markdown中嵌入graphviz</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -258,6 +274,8 @@ execute -&gt; compare;
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -275,37 +293,37 @@ execute -&gt; compare;
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>

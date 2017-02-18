@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +44,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -86,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (10)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -138,31 +138,36 @@
 						<div class="medium-9 small-12 columns" role="content">
 <article>
 	<h1 style="font-size: 2.75rem;">利用Python进行数据分析(3)：IPython</h1>
+
+
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="利用Python进行数据分析(3)：IPython">利用Python进行数据分析(3)：IPython</a><ul><li><a class="toc-href" href="#ipythonji-chu" title="IPython基础">IPython基础</a></li><li><a class="toc-href" href="#shi-yong-ji-qiao" title="使用技巧">使用技巧</a></li><li><a class="toc-href" href="#gui-fang-shi" title="GUI 方式">GUI 方式</a></li><li><a class="toc-href" href="#yu-cao-zuo-xi-tong-jiao-hu" title="与操作系统交互">与操作系统交互</a></li><li><a class="toc-href" href="#can-kao-zi-liao" title="参考资料">参考资料</a></li></ul></li></ul></div>
+	</div>
+
+
+
 	<p>《<a href="https://book.douban.com/subject/25779298/">利用Python进行数据分析</a>》读书笔记。
-第 3 章：IPython——一种交互式计算和开发环境。
+第 3 章：IPython&mdash;&mdash;一种交互式计算和开发环境。
 介绍 IPython 及其使用。</p>
-<p>IPython 的设计哲学是鼓励一种“执行-探索”(execute explore)的工作模式，而不是传统编程的“编辑-编译-运行”(edit-complie-run)模式。
-由于大部分的数据分析工作都需要“探索式操作”(试误法和迭代法)，可以说 IPython 就是为了用 python 进行数据分析而生的。</p>
+<p>IPython 的设计哲学是鼓励一种&ldquo;执行-探索&rdquo;(execute explore)的工作模式，而不是传统编程的&ldquo;编辑-编译-运行&rdquo;(edit-complie-run)模式。
+由于大部分的数据分析工作都需要&ldquo;探索式操作&rdquo;(试误法和迭代法)，可以说 IPython 就是为了用 python 进行数据分析而生的。</p>
 <p>可能 IPython 的设计灵感来自 R 等软件，但是在 python 的强大能力下，IPython 系已经形成了一整套的数据分析工具链，
 已经有一些数据分析工作者转移到了 python 生态下。</p>
-<h1>IPython基础</h1>
+<h1 id="ipythonji-chu">IPython基础</h1>
 <p>类似于 python解释器，使用命令 <code>ipython</code>可以打开一个交互式控制台。如果需要使用 Matplotlib 库，增加参数：<code>ipython --pylab</code>。</p>
 <p>更吸引人的使用方式是基于 web 的 ipython notebook。
 可以使用命令：</p>
 <div class="highlight"><pre><span></span># ipython notebook
 jupyter notebook
 </pre></div>
-
-
 <p>该命令会自动打开浏览器并访问 notebook。</p>
 <p>通常我们需要在页面中直接嵌入显示图片，此时使用命令：</p>
 <div class="highlight"><pre><span></span># ipython notebook --pylab inline
 jupyter notebook --pylab inline
 </pre></div>
-
-
 <p>ipython notebook 还可以远程运行，可以参考资料1<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup>。</p>
-<h1>使用技巧</h1>
+<h1 id="shi-yong-ji-qiao">使用技巧</h1>
 <ul>
 <li>用 Tab 建可以自动补全</li>
 <li>内省：在变量的前面或后面加上<code>?</code>，可以显示该对象的信息</li>
@@ -177,25 +182,42 @@ jupyter notebook --pylab inline
 <li><code>Ctrl+K</code> 删除此行光标之后的所有内容</li>
 <li><code>Ctrl+L</code> 清屏（Mac 下 Cmd+K 也可以）</li>
 <li>IPython 支持调试和跟踪</li>
-<li><code>%</code>开头的命令称为“魔术命令（Magic Command）”，能够实现一些“神奇”的功能</li>
+<li><code>%</code>开头的命令称为&ldquo;魔术命令（Magic Command）&rdquo;，能够实现一些&ldquo;神奇&rdquo;的功能</li>
 </ul>
-<h1>GUI 方式</h1>
+<h1 id="gui-fang-shi">GUI 方式</h1>
 <p>使用命令<code>ipython qtconsole --pylab=inline</code>，可以打开一个类似 R 的GUI 程序。</p>
-<h1>与操作系统交互</h1>
+<h1 id="yu-cao-zuo-xi-tong-jiao-hu">与操作系统交互</h1>
 <p>ipython 提供了很多魔术命令，用于与操作系统交互。</p>
-<h1>参考资料</h1>
+<h1 id="can-kao-zi-liao">参考资料</h1>
 <div class="footnote">
 <hr>
 <ol>
 <li id="fn-1">
-<p><a href="http://mindonmind.github.io/2013/02/08/ipython-notebook-interactive-computing-new-era/">IPython Notebook: 交互计算新时代</a>&#160;<a class="footnote-backref" href="#fnref-1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p><a href="http://mindonmind.github.io/2013/02/08/ipython-notebook-interactive-computing-new-era/">IPython Notebook: 交互计算新时代</a>&nbsp;<a class="footnote-backref" href="#fnref-1" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
 </ol>
-</div>
+</hr></div>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-02-16.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2017/02/16/python_data_analysis2-3.html">利用Python进行数据分析(2.3)：全美婴儿姓名分析</a></li>
+        <li><a href="http://holbrook.github.io/2017/02/15/python_data_analysis2-2.html">利用Python进行数据分析(2.2)：电影评分数据分析</a></li>
+        <li><a href="http://holbrook.github.io/2017/02/14/python_data_analysis1.html">利用Python进行数据分析(1)：简单介绍</a></li>
+        <li><a href="http://holbrook.github.io/2017/02/14/python_data_analysis2.html">利用Python进行数据分析(2)：引言</a></li>
+        <li><a href="http://holbrook.github.io/2017/02/14/python_data_analysis2-1.html">利用Python进行数据分析(2.1)：分析网站的用户访问数据</a></li>
+        <li><a href="http://holbrook.github.io/2017/02/11/dataology_python_env.html">基于Python的数据科学环境</a></li>
+        <li><a href="http://holbrook.github.io/2012/02/12/zen_of_python.html">Python之禅(The Zen of Python)</a></li>
+    </ul>
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -234,6 +256,8 @@ jupyter notebook --pylab inline
 	<!-- UJian Button END -->
 
 </div>
+
+
 						</div>
 						<!-- End Main Content -->
 						<!-- Sidebar -->
@@ -251,37 +275,37 @@ jupyter notebook --pylab inline
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
 									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (10)</a></li>
+											<li><a href="/2017/02/">2017-02  (9)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>
