@@ -22,6 +22,7 @@ PLUGIN_PATH = './plugins'
 
 PLUGINS = ['tag_cloud','pelican-ipynb.markup','pelican-toc','relate_posts']
 
+IGNORE_FILES = ['.ipynb_checkpoints']
 
 
 RELATED_POSTS_MAX = 10
