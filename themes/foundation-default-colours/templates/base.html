@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" xml:lang="zh" lang="zh">
 	<head>
-		<meta name="uyan_auth" content="05e9c08001" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -12,12 +11,6 @@
 			{% block windowtitle %}{{ SITENAME }}{% endblock %}
 			{% endif %}
 		</title>
-		<meta name="description" content="
-		{% if article %}
-			{{ article.content if FOUNDATION_FRONT_PAGE_FULL_ARTICLES else article.summary }}
-		{% endif %}
-		">
-		<meta name="author" content="{{ AUTHOR }}">
 
 		<link rel="stylesheet" href="{{ SITEURL }}/theme/css/foundation.css" />
 		{% if not FOUNDATION_PYGMENT_THEME %}
@@ -69,6 +62,7 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
