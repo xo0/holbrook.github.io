@@ -3,11 +3,37 @@
 {% block content %}
 <article>
 	<h1 style="font-size: 2.75rem;">{{ article.title }}</h1>
+
+
+	{% if article.toc %}
+	<h6>目录</h6>
+	<div class="col-lg-3 hidden-xs hidden-sm">
+    	{{article.toc}}
+	</div>
+	{% endif %}
+
+
+
 	{{ article.content }}
 	<h6>Written by <a href="{{ SITEURL }}/author/{{ article.author|lower|replace(' ', '-') }}.html">{{ article.author }}</a> on {{ article.locale_date.format("%Y-%m-%d") }}.</h6>
+
+
+	{% if article.related_posts %}
+	<h2>相关文章</h2>
+    <ul>
+    {% for related_post in article.related_posts %}
+        <li><a href="{{ SITEURL }}/{{ related_post.url }}">{{ related_post.title }}</a></li>
+    {% endfor %}
+    </ul>
+	{% endif %}
 </article>
 
 <hr/>
+
+
+
+
+
 <div class="row">
 
 	<!-- JiaThis Button BEGIN -->
@@ -46,4 +72,6 @@
 	<!-- UJian Button END -->
 
 </div>
+
+
 {% endblock %}

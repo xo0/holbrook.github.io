@@ -20,7 +20,20 @@ MARKUP = ('md', 'ipynb')
 #PLUGIN_PATHS = ['./plugins']
 PLUGIN_PATH = './plugins'
 
-PLUGINS = ['tag_cloud','pelican-ipynb.markup']
+PLUGINS = ['tag_cloud','pelican-ipynb.markup','pelican-toc','relate_posts']
+
+
+
+RELATED_POSTS_MAX = 10
+
+
+TOC = {
+    'TOC_HEADERS' : '^h[1-6]',  # What headers should be included in the generated toc
+                                # Expected format is a regular expression
+
+    'TOC_RUN'     : 'true'      # Default value for toc generation, if it does not evaluate
+                                # to 'true' no toc will be generated
+}
 
 
 #使用目录名作为文章的分类名
