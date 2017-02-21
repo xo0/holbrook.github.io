@@ -1,7 +1,7 @@
 Title: 利用Python进行数据分析(3)：IPython
 Date: 2017-02-16
-Category: 读书笔记
-Tags: python
+Category: 数据科学
+Tags: 读书笔记, python
 Summary:
     《[利用Python进行数据分析](https://book.douban.com/subject/25779298/)》读书笔记。
     第 3 章：IPython——一种交互式计算和开发环境。

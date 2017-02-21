@@ -1,7 +1,7 @@
 title: 《统计学》读书笔记(7/17:相关和回归分析)
 date: 2013-08-05
-category: 读书笔记
-tags: 统计学
+Category: 数据科学
+Tags: 读书笔记, 统计学
 summary: 统计学：从数据到结论，ISBN：9787503749964，作者：吴喜之 @[豆瓣](http://book.douban.com/subject/2193810/)
 
 # 7.1 问题的提出
