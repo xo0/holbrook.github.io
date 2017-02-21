@@ -2,36 +2,36 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
+# blog 信息
 AUTHOR = 'Holbrook'
 SITENAME = u'心内求法'
 SITEURL = ''
 
-PATH = 'content'
+# 编译信息
+PLUGIN_PATHS = ['./plugins']
+PLUGINS = ['tag_cloud','pelican-ipynb.markup','pelican-toc','relate_posts']
 
+
+PATH = 'content'
+MARKUP = ('md', 'ipynb')
+IGNORE_FILES = ['.ipynb_checkpoints']
+
+DEFAULT_LANG = 'zh'
 TIMEZONE = 'Asia/Shanghai'
 DATE_FORMATS = {
     'en': ('en_US','%a, %d %b %Y'),
     'cn': ('zh_CN','%Y-%m-%d'),
 }
-
 DEFAULT_DATE_FORMAT = '%Y-%m-%d'
 
-MARKUP = ('md', 'ipynb')
-#PLUGIN_PATHS = ['./plugins']
-PLUGIN_PATH = './plugins'
 
-PLUGINS = ['tag_cloud','pelican-ipynb.markup','pelican-toc','relate_posts']
-
-IGNORE_FILES = ['.ipynb_checkpoints']
-
-
+# relate_posts 插件
 RELATED_POSTS_MAX = 10
 
-
+# pelican-toc 插件
 TOC = {
     'TOC_HEADERS' : '^h[1-6]',  # What headers should be included in the generated toc
                                 # Expected format is a regular expression
-
     'TOC_RUN'     : 'true'      # Default value for toc generation, if it does not evaluate
                                 # to 'true' no toc will be generated
 }
@@ -51,9 +51,12 @@ TAG_SAVE_AS = ('tag/{slug}.html')  #The location to save the tag page.
 
 
 
-THEME = 'themes/foundation-default-colours'
 #THEME = 'themes/pelican-alchemy/alchemy'
-DEFAULT_LANG = 'zh'
+#THEME = 'themes/niu-x2-sidebar'
+THEME = 'themes/my-foundation'
+#THEME = 'themes/foundation-default-colours'
+
+
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
