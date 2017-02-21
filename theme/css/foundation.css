@@ -2857,6 +2857,12 @@ ul.pagination {
       list-style: none;
       border-top-color: #e6e6e6; }
 
+.side-nav-fixed {
+  width: inherit;
+  position: fixed;
+  top: 50px !important;
+}
+
 .accordion {
   *zoom: 1;
   margin-bottom: 0; }

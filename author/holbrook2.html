@@ -85,7 +85,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/02/">二月 2017 (9)</a></li>
+									<li><a href="/posts/2017/02/">二月 2017 (11)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
 									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
@@ -136,6 +136,21 @@
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
 
+<article>
+	<h3><a href="http://holbrook.github.io/2017/02/05/index.html">数据科学的知识体系</a></h3>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a> on 2017-02-05.</h6>
+	<p>数据科学是利用计算机的运算能力对数据进行处理，从数据中提取信息，进而形成“知识”。
+然而要实现这一点并不容易。Swami Chandrasekaran在他的<a href="http://nirvacana.com/thoughts/becoming-a-data-scientist/">《Becoming a Data Scientist》</a>中，规划了“数据科学家”之路，让我们共勉。</p>
+		<p class="continue"><a href="http://holbrook.github.io/2017/02/05/index.html">Continue reading &raquo;</a></p>
+</article>
+<hr />
+<article>
+	<h3><a href="http://holbrook.github.io/2015/05/04/modern_web_dev_env.html">搭建一个“现代化”的web开发环境</a></h3>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a> on 2015-05-04. Tags: <a href="http://holbrook.github.io/tag/web.html">web</a>, <a href="http://holbrook.github.io/tag/env.html">env</a>, </h6>
+	<p>使用yoeman, bower, grunt等工具开发web。</p>
+		<p class="continue"><a href="http://holbrook.github.io/2015/05/04/modern_web_dev_env.html">Continue reading &raquo;</a></p>
+</article>
+<hr />
 <article>
 	<h3><a href="http://holbrook.github.io/2014/02/20/apache_karaf.html">Apache Karaf：OSGi中间件</a></h3>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a> on 2014-02-20. Tags: <a href="http://holbrook.github.io/tag/osgi.html">OSGi</a>, </h6>
@@ -232,47 +247,6 @@ GUI环境，也可以生成图片在Web环境中使用。后来又增加了对SW
 		<p class="continue"><a href="http://holbrook.github.io/2014/01/18/swt_jfreechart_candlestick.html">Continue reading &raquo;</a></p>
 </article>
 <hr />
-<article>
-	<h3><a href="http://holbrook.github.io/2014/01/12/dependency_injection_in_e4.html">Eclipse e4：从OSGi-DS到依赖注入</a></h3>
-	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a> on 2014-01-12. Tags: <a href="http://holbrook.github.io/tag/osgi.html">OSGi</a>, <a href="http://holbrook.github.io/tag/java.html">java</a>, <a href="http://holbrook.github.io/tag/gui.html">GUI</a>, </h6>
-	<p>e4开始，可以不使用代码或xml进行服务注册和寻找，而使用依赖注入进行装配</p>
-		<p class="continue"><a href="http://holbrook.github.io/2014/01/12/dependency_injection_in_e4.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
-<article>
-	<h3><a href="http://holbrook.github.io/2014/01/12/e4_platform_services.html">Eclipse e4中的平台服务</a></h3>
-	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a> on 2014-01-12. Tags: <a href="http://holbrook.github.io/tag/osgi.html">OSGi</a>, <a href="http://holbrook.github.io/tag/java.html">java</a>, <a href="http://holbrook.github.io/tag/gui.html">GUI</a>, </h6>
-	<h1 id="gai-shu">概述</h1>
-<p><a href="/2014/01/12/dependency_injection_in_e4.html">前面</a>提到，e4中可以通过依赖注入进行服务的发布和获取。并且，&rdquo;在Eclipse e4中，将全局的上下文分成了多个层次&ldquo;：</p>
-<p><img alt="" src="images/e4/e4_context_hierarchy.png"/></p>
-<p>e4提供了很多平台级的服务，注册于OSGi context之上的其他各个context层。这些服务提供了开发应用的很多通用的功能。一些常用的服务包括：</p>
-<p>展现层MVC的视图、模型、控制器相关的服务，以及逻辑层服务。</p>
-<ul>
-<li>
-<p>视图相关服务</p>
-</li>
-<li>
-<p>EPartService</p>
-<p>访问和修改Part，使用Part模板，切换perspectives，支持Edit方法</p>
-</li>
-<li>
-<p>ESelectionService</p>
-<p>处理GUI界面中的&rdquo;选中&ldquo;</p>
-</li>
-<li>
-<p>EMenuService</p>
-<p>Registers a popup menu (MPopupMenu) for an SWT control.</p>
-</li>
-<li>
-<p>org.eclipse.jface.window.IShellProvider</p>
-<p>在SWT环境中访问Shell</p>
-</li>
-<li>
-<p>IThemeEngine</p>
-<p>Allows to switch the styling of the …</p></li></ul>
-		<p class="continue"><a href="http://holbrook.github.io/2014/01/12/e4_platform_services.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
 
 <div class="row">
 	<div class="small-12 columns text-center">
@@ -309,37 +283,39 @@ GUI环境，也可以生成图片在Web环境中使用。后来又增加了对SW
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
 									<li><a href="/tag/osgi.html" class="tag-1">OSGi</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
-									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
 									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
 									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/gui.html" class="tag-1">GUI</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-1">规则引擎</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-1">交易系统</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-1">运维</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/02/">2017-02  (9)</a></li>
+											<li><a href="/2017/02/">2017-02  (11)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/02/">2014-02  (4)</a></li>
 											<li><a href="/2014/01/">2014-01  (9)</a></li>
