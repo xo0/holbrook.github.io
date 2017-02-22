@@ -79,9 +79,8 @@ Summary: 与编程语言级别的逻辑控制(`if-then-else`，`switch`) 相比�
 
    用 C# 的 lambda 表达式可以很容易的创建条件(Condition)，但这还是通过编码的方式，不够通用。
    我更希望能够通过外部文件来定义条件（比如 文本文件 或 Excel)，这就需要用到表达式引擎。
-   使用[Expression Evaluator](https://github.com/RupertAvery/csharpeval)可以很容易的实现这一目标。
    由于我已经定义了策略上下文(Context)来封装策略的运行时环境，
-   只需要把策略上下文中的变量注册到Expression Evaluator中，就可以很容易通过表达式解析的方式定义条件了。
+   只需要把策略上下文中的变量注册到表达式引擎中，就可以很容易通过表达式解析的方式定义条件了。
 
 ## 动作
 
@@ -89,9 +88,51 @@ Summary: 与编程语言级别的逻辑控制(`if-then-else`，`switch`) 相比�
    为了避免在动作中涉及到复杂的运算，需要丰富`Action Factory`的功能，实现各种不同的创建`Action`的方式。
    这样，就可以用表达式为工厂方法传递参数，避免复杂运算。
 
+# C# 表达式引擎: Expression Evaluator
 
+[Expression Evaluator](https://github.com/RupertAvery/csharpeval)是一个轻量级的 C#表达式引擎[^3]。
+Expression Evaluator仅仅依赖[Antlr](www.antlr.org)(“又一个语言识别工具”,一个开源的，支持多平台的语法解析器)，
+并且自身还不到1M。
+
+Expression Evaluator的主要特性包括[^4]：
+
+- 支持算术运算符，支持关系运算符，以及逻辑运算符
+- 支持表达式分组和括号，以及递增递减运算符
+- 支持表达式属性访问以及动态类型，支持字符串的+运算
+- 支持数值类型的后缀d/f/m/l/u/ul、
+- 支持隐式表达式，以及成员访问操作符(.)
+- 支持一些默认的类型，如double, float, char, string, DateTime, Convert, Math
+- 支持foreach循环
+
+# 实现要点
+
+在我的架构中，策略要尽可能的简单，由 Context 封装策略的运行环境。？
+那么很自然的，表达式引擎应该在 Context 中引入并创建，策略中只是调用其结果。
+
+在 Context 中：
+
+```
+// 表达式变量
+
+
+
+// 在构造函数中，定义引擎并注册变量
+public StrategyContext()
+{
+    var registry = new TypeRegistry();
+    registry.RegisterSymbol("当前委托", CurrentOrder);
+    registry.RegisterSymbol("做市商行情", CurrentMMTick);
+}
+
+……
+
+// 提供
+
+```
 
 # 参考资料
 
 [^1]: [决策表_百度百科](http://baike.baidu.com/subview/1448115/1448115.htm)
 [^2]: [Decision Table in C#](http://lukevoss.com/blog/post/2008/09/Decision-Table-in-C.aspx)
+[^3]: [Expression Evaluator：一个轻量级的C#编译器服务](http://www.infoq.com/cn/news/2014/05/Expression-Evaluator)
+[^4]: [Expression Evaluator表达式计算组件使用](http://www.cnblogs.com/asxinyu/p/dotnet_Opensource_project_Expression_Evaluator.html)

@@ -7,6 +7,3 @@
 [submodule "plugins/pelican-toc"]
 	path = plugins/pelican-toc
 	url = https://github.com/ingwinlu/pelican-toc.git
-[submodule "themes/niu-x2-sidebar"]
-	path = themes/niu-x2-sidebar
-	url = https://github.com/mawenbao/niu-x2-sidebar

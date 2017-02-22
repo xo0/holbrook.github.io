@@ -52,10 +52,10 @@ TAG_SAVE_AS = ('tag/{slug}.html')  #The location to save the tag page.
 
 
 #THEME = 'themes/pelican-alchemy/alchemy'
-#THEME = 'themes/niu-x2-sidebar'
-THEME = 'themes/my-foundation'
+THEME = 'themes/niu-x2-sidebar'
+#THEME = 'themes/my-foundation'
 #THEME = 'themes/foundation-default-colours'
-
+#THEME = 'themes/my-niu-x2'
 
 
 # Feed generation is usually not desired when developing
