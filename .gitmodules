@@ -7,3 +7,6 @@
 [submodule "plugins/pelican-toc"]
 	path = plugins/pelican-toc
 	url = https://github.com/ingwinlu/pelican-toc.git
+[submodule "themes/pelican-bootstrap3"]
+	path = themes/pelican-bootstrap3
+	url = git@github.com:holbrook/pelican-bootstrap3.git
