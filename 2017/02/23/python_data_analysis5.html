@@ -1,0 +1,334 @@
+<!doctype html>
+<html class="no-js" xml:lang="zh" lang="zh">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>
+			利用Python进行数据分析(5)：Pandas 入门
+		</title>
+
+		<link rel="stylesheet" href="http://holbrook.github.io/theme/css/foundation.css" />
+		<link rel="stylesheet" href="http://holbrook.github.io/theme/css/pygment/friendly.css" />
+		<link rel="stylesheet" href="http://holbrook.github.io/theme/css/custom.css" />
+
+
+		<script src="http://holbrook.github.io/theme/js/modernizr.js"></script>
+
+		<!-- Feeds -->
+		<link href="http://holbrook.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="心内求法 Atom Feed" />
+
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'] ],
+				displayMath: [ ['$$', '$$']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<!-- 百度统计 -->
+		<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "https://hm.baidu.com/hm.js?16d951e9b49ded5f2e821a0e61d77797";
+		  var s = document.getElementsByTagName("script")[0];
+		  s.parentNode.insertBefore(hm, s);
+		})();
+		</script>
+		<meta name="uyan_auth" content="05e9c08001" />
+	</head>
+	<body>
+		<div class="off-canvas-wrap">
+			<div class="inner-wrap">
+				<!-- mobile top bar to activate nav -->
+				<nav class="tab-bar show-for-small">
+					<section class="left-small">
+						<a class="left-off-canvas-toggle menu-icon" >
+							<span class="fa-stack">
+                    			<i class="fa fa-circle fa-stack-2x"></i>
+                    			<i class="fa fa-bank fa-stack-1x fa-inverse" style="color: #eee"></i>
+                			</span>
+            			</a>
+					</section>
+
+					<section class="middle tab-bar-section">
+						<h1 class="title">心内求法</h1>
+					</section>
+				</nav>
+
+				<!-- mobile side bar nav -->
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><a href="http://holbrook.github.io">Home</a></li>
+						<li><label>Categories</label></li>
+							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
+							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
+							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
+							<li class="active"><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
+							<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
+
+						<li><label>Places</label></li>
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+							<li><a href="#">You can modify those links in your config file</a></li>
+
+
+						<li><label>Monthly Archives</label></li>
+									<li><a href="/posts/2017/02/">二月 2017 (13)</a></li>
+									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
+									<li><a href="/posts/2014/02/">二月 2014 (4)</a></li>
+									<li><a href="/posts/2014/01/">一月 2014 (9)</a></li>
+									<li><a href="/posts/2013/12/">十二月 2013 (10)</a></li>
+									<li><a href="/posts/2013/09/">九月 2013 (1)</a></li>
+									<li><a href="/posts/2013/08/">八月 2013 (2)</a></li>
+									<li><a href="/posts/2013/07/">七月 2013 (7)</a></li>
+									<li><a href="/posts/2013/06/">六月 2013 (4)</a></li>
+									<li><a href="/posts/2013/05/">五月 2013 (6)</a></li>
+									<li><a href="/posts/2013/01/">一月 2013 (2)</a></li>
+									<li><a href="/posts/2012/12/">十二月 2012 (4)</a></li>
+									<li><a href="/posts/2012/11/">十一月 2012 (3)</a></li>
+									<li><a href="/posts/2012/10/">十月 2012 (2)</a></li>
+									<li><a href="/posts/2012/04/">四月 2012 (1)</a></li>
+									<li><a href="/posts/2012/03/">三月 2012 (1)</a></li>
+									<li><a href="/posts/2012/02/">二月 2012 (2)</a></li>
+
+						<li><label>Links</label></li>
+							<li><a href="#">Another social link</a></li>
+							<li><a href="#">You can add links in your config file</a></li>
+					</ul>
+				</aside>
+
+				<!-- top bar nav -->
+				<nav class="top-bar hide-for-small-only" data-topbar>
+					<ul class="title-area">
+						<li class="name">
+							<h1><a href="http://holbrook.github.io/">心内求法</a></h1>
+						</li>
+					</ul>
+
+					<section class="top-bar-section">
+						<ul class="left">
+								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
+								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
+								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
+								<li class="active"><a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a></li>
+								<li ><a href="http://holbrook.github.io/category/tou-zi-fen-xi.html">投资分析</a></li>
+						</ul>
+					</section>
+				</nav>
+
+				<!-- Main Page Content and Sidebar -->
+				<section class="main-section">
+					<div class="row">
+						<!-- Main Content -->
+						<div class="medium-9 small-12 columns" role="content">
+<article>
+	<h1 style="font-size: 2.75rem;">利用Python进行数据分析(5)：Pandas 入门</h1>
+
+
+
+
+
+	<p>NumPy虽然提供了方便的数组处理功能，但是它还是缺少许多数据处理、分析所需的一些快速工具。
+Pandas基于NumPy构建，提供众多更高级的数据处理功能，使得以 NumPy 为中心的数据处理工作更便捷。</p>
+<p>pandas的作者在设计 Pandas 时，主要考虑以下几个方面：</p>
+<ul>
+<li>按轴自动或显式数据对齐功能的数据结构</li>
+</ul>
+<p>来自不同数据源的数据，由于各数据源的索引方式不同，经常会出现数据未对齐，而这会导致很多常见错误。</p>
+<ul>
+<li>集成时间序列功能</li>
+<li>既能处理时间序列数据也能处理非时间序列数据的数据结构</li>
+<li>数学运算和简约（比如对某个轴求和）可以根据不同的元数据（轴编号）执行</li>
+<li>灵活处理缺失数据</li>
+<li>合并及其他出现在常见数据库（例如基于SQL的）中的关系型运算</li>
+</ul>
+<p>引入 Pandas 的约定为：</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">Series</span><span class="p">,</span> <span class="n">DataFrame</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+</pre></div>
+<p>本章内容较多，每节的内容拆分成一个 ipython notebook:</p>
+<ul>
+<li><a href="/2017/02/24/python_data_analysis5-1.html">数据结构</a></li>
+<li><a href="">基本功能</a></li>
+<li><a href="">汇总和描述性统计</a></li>
+<li><a href="">处理缺失数据</a></li>
+<li><a href="">层次化索引</a></li>
+<li><a href="">其他</a></li>
+</ul>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-02-23.</h6>
+
+
+	<h2>相关文章</h2>
+    <ul>
+        <li><a href="http://holbrook.github.io/2017/02/24/python_data_analysis5-1.html">利用Python进行数据分析(5.1)：Pandas 中的数据结构</a></li>
+        <li><a href="http://holbrook.github.io/2017/02/17/python_data_analysis4.html">利用Python进行数据分析(4)：NumPy</a></li>
+        <li><a href="http://holbrook.github.io/2017/02/16/python_data_analysis2-3.html">利用Python进行数据分析(2.3)：全美婴儿姓名分析</a></li>
+        <li><a href="http://holbrook.github.io/2017/02/16/python_data_analysis3.html">利用Python进行数据分析(3)：IPython</a></li>
+        <li><a href="http://holbrook.github.io/2017/02/15/python_data_analysis2-2.html">利用Python进行数据分析(2.2)：电影评分数据分析</a></li>
+        <li><a href="http://holbrook.github.io/2017/02/14/python_data_analysis1.html">利用Python进行数据分析(1)：简单介绍</a></li>
+        <li><a href="http://holbrook.github.io/2017/02/14/python_data_analysis2.html">利用Python进行数据分析(2)：引言</a></li>
+        <li><a href="http://holbrook.github.io/2017/02/14/python_data_analysis2-1.html">利用Python进行数据分析(2.1)：分析网站的用户访问数据</a></li>
+        <li><a href="http://holbrook.github.io/2013/12/11/statistics_intro_9.html">《统计学》读书笔记(9/17:方差分析)</a></li>
+        <li><a href="http://holbrook.github.io/2013/09/05/statistics_intro_8.html">《统计学》读书笔记(8/17:列连表，x^2检验和对数线性模型)</a></li>
+    </ul>
+</article>
+
+<hr/>
+
+
+
+
+
+<div class="row">
+
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_weixin">微信</a>
+		<a class="jiathis_button_email">邮件</a>
+		<a class="jiathis_button_douban">豆瓣</a>
+		<a class="jiathis_button_hi">百度空间</a>
+		<a class="jiathis_button_xqw">雪球</a>
+		<a class="jiathis_button_tsina">新浪微博</a>
+		<a class="jiathis_button_ishare">一键分享</a>
+		<a href="http://www.jiathis.com/share?uid=2124868" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+		<a class="jiathis_counter_style"></a>
+	</div>
+	<script type="text/javascript">
+	var jiathis_config = {data_track_clickback:'true'};
+	</script>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2124868" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+
+
+	<div class="small-12 columns">
+		<h3>Comments</h3>
+		<!-- UY BEGIN -->
+		<div id="uyan_frame"></div>
+		<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2124868"></script>
+		<!-- UY END -->
+	</div>
+
+	<!-- UJian Button BEGIN -->
+	<div class="ujian-hook"></div>
+	<script type="text/javascript">var ujian_config = {num:8,showType:3};</script>
+	<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js"></script>
+	<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+	<!-- UJian Button END -->
+
+</div>
+
+
+						</div>
+						<!-- End Main Content -->
+						<!-- Sidebar -->
+						<aside class="medium-3 hide-for-small-only columns">
+							<!-- <div class="panel">
+								<h5>Places</h5>
+								<ul class="side-nav">
+									<li><a href="http://getpelican.com/">Pelican</a></li>
+									<li><a href="http://python.org/">Python.org</a></li>
+									<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+									<li><a href="#">You can modify those links in your config file</a></li>
+								</ul>
+							</div> -->
+
+							<div class="panel">
+								<h5>Tags</h5>
+								<ul class="tag-cloud">
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+								</ul>
+							</div>
+
+							<div class="panel">
+								<h5>Monthly Archives</h5>
+								<ul class="side-nav">
+											<li><a href="/2017/02/">2017-02  (13)</a></li>
+											<li><a href="/2015/05/">2015-05  (1)</a></li>
+											<li><a href="/2014/02/">2014-02  (4)</a></li>
+											<li><a href="/2014/01/">2014-01  (9)</a></li>
+											<li><a href="/2013/12/">2013-12  (10)</a></li>
+											<li><a href="/2013/09/">2013-09  (1)</a></li>
+											<li><a href="/2013/08/">2013-08  (2)</a></li>
+											<li><a href="/2013/07/">2013-07  (7)</a></li>
+											<li><a href="/2013/06/">2013-06  (4)</a></li>
+											<li><a href="/2013/05/">2013-05  (6)</a></li>
+											<li><a href="/2013/01/">2013-01  (2)</a></li>
+											<li><a href="/2012/12/">2012-12  (4)</a></li>
+											<li><a href="/2012/11/">2012-11  (3)</a></li>
+											<li><a href="/2012/10/">2012-10  (2)</a></li>
+											<li><a href="/2012/04/">2012-04  (1)</a></li>
+											<li><a href="/2012/03/">2012-03  (1)</a></li>
+											<li><a href="/2012/02/">2012-02  (2)</a></li>
+								</ul>
+							</div>
+
+							<div class="panel">
+								<h5>Links</h5>
+								<ul class="side-nav">
+									<li><a href="#">Another social link</a></li>
+									<li><a href="#">You can add links in your config file</a></li>
+								</ul>
+							</div>
+						</aside>
+						<!-- End Sidebar -->
+					</div>
+
+					<!-- Footer -->
+					<footer class="row">
+						<div class="medium-9 small-12">
+							<p class="text-center">Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.</p>
+						</div>
+					</footer>
+					<!-- End Footer -->
+				</section>
+				<a class="exit-off-canvas"></a>
+			</div><!--off-canvas inner-->
+		</div><!--off-canvas wrap-->
+
+		<script src="http://holbrook.github.io/theme/js/jquery.js"></script>
+		<script src="http://holbrook.github.io/theme/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
+</html>
