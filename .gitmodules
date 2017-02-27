@@ -4,9 +4,9 @@
 [submodule "plugins/pelican-ipynb"]
 	path = plugins/pelican-ipynb
 	url = http://github.com/danielfrg/pelican-ipynb.git
-[submodule "plugins/pelican-toc"]
-	path = plugins/pelican-toc
-	url = https://github.com/ingwinlu/pelican-toc.git
 [submodule "themes/pelican-bootstrap3"]
 	path = themes/pelican-bootstrap3
 	url = git@github.com:holbrook/pelican-bootstrap3.git
+[submodule "pelican-plugins"]
+	path = pelican-plugins
+	url = https://github.com/getpelican/pelican-plugins.git
