@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<title>
-			利用Python进行数据分析(2.2)：电影评分数据分析
+			利用Python进行数据分析(5.4)：处理缺失数据
 		</title>
 
 		<link rel="stylesheet" href="http://holbrook.github.io/theme/css/foundation.css" />
@@ -137,12 +137,12 @@
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
 <article>
-	<h1 style="font-size: 2.75rem;">利用Python进行数据分析(2.2)：电影评分数据分析</h1>
+	<h1 style="font-size: 2.75rem;">利用Python进行数据分析(5.4)：处理缺失数据</h1>
 
 
 	<h6>目录</h6>
 	<div class="col-lg-3 hidden-xs hidden-sm">
-    	<div id="toc"><ul><li><a class="toc-href" href="#" title="利用Python进行数据分析(2.2)：电影评分数据分析">利用Python进行数据分析(2.2)：电影评分数据分析</a><ul><li><a class="toc-href" href="#0.-准备工作" title="0. 准备工作&para;">0. 准备工作&para;</a></li><li><a class="toc-href" href="#1.--将数据加载到-DataFrame" title="1.  将数据加载到 DataFrame&para;">1.  将数据加载到 DataFrame&para;</a></li><li><a class="toc-href" href="#2.--合并数据" title="2.  合并数据&para;">2.  合并数据&para;</a></li><li><a class="toc-href" href="#3.数据转换" title="3.数据转换&para;">3.数据转换&para;</a></li><li><a class="toc-href" href="#4.-数据筛选" title="4. 数据筛选&para;">4. 数据筛选&para;</a></li><li><a class="toc-href" href="#5.-结果展示" title="5. 结果展示&para;">5. 结果展示&para;</a></li></ul></li></ul></div>
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="利用Python进行数据分析(5.4)：处理缺失数据">利用Python进行数据分析(5.4)：处理缺失数据</a><ul><li><a class="toc-href" href="#根据索引选择数据子集" title="根据索引选择数据子集&para;">根据索引选择数据子集&para;</a></li><li><a class="toc-href" href="#stack()-和-unstack()" title="stack() 和 unstack()&para;">stack() 和 unstack()&para;</a></li><li><a class="toc-href" href="#DataFrame-的层次化索引" title="DataFrame 的层次化索引&para;">DataFrame 的层次化索引&para;</a></li><li><a class="toc-href" href="#重排分级顺序" title="重排分级顺序&para;">重排分级顺序&para;</a></li><li><a class="toc-href" href="#根据级别汇总统计" title="根据级别汇总统计&para;">根据级别汇总统计&para;</a></li><li><a class="toc-href" href="#使用-DataFrame-列" title="使用 DataFrame 列&para;">使用 DataFrame 列&para;</a></li></ul></li></ul></div>
 	</div>
 
 
@@ -1119,24 +1119,13 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>《<a href="https://book.douban.com/subject/25779298/">利用Python进行数据分析</a>》读书笔记。</p>
-<p><a href="/2017/02/14/python_data_analysis2.html">第2章</a>中的例子：电影评分数据分析。</p>
-<p>所有用到的数据可以从<a href="https://github.com/wesm/pydata-book">作者的 github</a>下载。</p>
-<h4 id="0.-准备工作">0. 准备工作<a class="anchor-link" href="#0.-准备工作">&para;</a></h4>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="k">import</span> <span class="n">Series</span><span class="p">,</span> <span class="n">DataFrame</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </pre></div>
 </div>
@@ -1158,86 +1147,340 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="1.--将数据加载到-DataFrame">1.  将数据加载到 DataFrame<a class="anchor-link" href="#1.--将数据加载到-DataFrame">&para;</a></h4>
+<p>《<a href="https://book.douban.com/subject/25779298/">利用Python进行数据分析</a>》
+作者: Wes McKinney
+译者: 唐学韬</p>
+<p>层次化索引</p>
+<p>层次化索引（hierarchical index）是pandas的重要功能，</p>
+<p>通过在一个轴上拥有两个以上的索引级别， 使得 Pandas 可以用低维度形式处理高维度。</p>
+<p>层次化索引在数据重塑和基于分组操作（如透视表生成）中扮演者重要的角色。</p>
+<h1 id="根据索引选择数据子集">根据索引选择数据子集<a class="anchor-link" href="#根据索引选择数据子集">&para;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 定义列名</span>
-<span class="n">unames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'user_id'</span><span class="p">,</span><span class="s1">'gender'</span><span class="p">,</span><span class="s1">'age'</span><span class="p">,</span><span class="s1">'occupation'</span><span class="p">,</span><span class="s1">'zip'</span><span class="p">]</span>
-<span class="n">rnames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'user_id'</span><span class="p">,</span><span class="s1">'movie_id'</span><span class="p">,</span><span class="s1">'rating'</span><span class="p">,</span><span class="s1">'timestamp'</span><span class="p">]</span>
-<span class="n">mnames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'movie_id'</span><span class="p">,</span><span class="s1">'title'</span><span class="p">,</span><span class="s1">'genres'</span><span class="p">]</span>
-
-<span class="c1"># 读取数据</span>
-<span class="n">users</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">'data/ch02/movielens/users.dat'</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">'::'</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">names</span><span class="o">=</span><span class="n">unames</span><span class="p">,</span><span class="n">engine</span><span class="o">=</span><span class="s1">'python'</span><span class="p">)</span>
-<span class="n">ratings</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">'data/ch02/movielens/ratings.dat'</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">'::'</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">names</span><span class="o">=</span><span class="n">rnames</span><span class="p">,</span><span class="n">engine</span><span class="o">=</span><span class="s1">'python'</span><span class="p">)</span>
-<span class="n">movies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">'data/ch02/movielens/movies.dat'</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">'::'</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">names</span><span class="o">=</span><span class="n">mnames</span><span class="p">,</span><span class="n">engine</span><span class="o">=</span><span class="s1">'python'</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 检验数据</span>
-<span class="n">users</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="n">ratings</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="n">movies</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+              <span class="n">index</span><span class="o">=</span><span class="p">[[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="n">data</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[54]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>a  1   -0.291810
+   2   -2.489879
+   3   -0.993844
+b  1    0.791313
+   2   -1.233354
+   3    1.096154
+c  1    1.627453
+   2    0.637391
+d  2   -0.726163
+   3   -2.117156
+dtype: float64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">index</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>MultiIndex(levels=[['a', 'b', 'c', 'd'], [1, 2, 3]],
+           labels=[[0, 0, 0, 1, 1, 1, 2, 2, 3, 3], [0, 1, 2, 0, 1, 2, 0, 1, 1, 2]])</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 以外层索引的方式选择</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">'b'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>1    0.791313
+2   -1.233354
+3    1.096154
+dtype: float64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">'b'</span><span class="p">:</span><span class="s1">'c'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>b  1    0.791313
+   2   -1.233354
+   3    1.096154
+c  1    1.627453
+   2    0.637391
+dtype: float64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">ix</span><span class="p">[[</span><span class="s1">'b'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>b  1    0.791313
+   2   -1.233354
+   3    1.096154
+d  2   -0.726163
+   3   -2.117156
+dtype: float64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 以内层索引的方式选择</span>
+<span class="n">data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[11]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>a   -2.489879
+b   -1.233354
+c    0.637391
+d   -0.726163
+dtype: float64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="stack()-和-unstack()"><code>stack()</code> 和 <code>unstack()</code><a class="anchor-link" href="#stack()-和-unstack()">&para;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 层次化索引数据可以转换为一个DataFrame</span>
+<span class="n">data</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
 <thead>
 <tr style="text-align: right;">
 <th></th>
-<th>movie_id</th>
-<th>title</th>
-<th>genres</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>0</th>
-<td>1</td>
-<td>Toy Story (1995)</td>
-<td>Animation|Children's|Comedy</td>
+<th>a</th>
+<td>-0.291810</td>
+<td>-2.489879</td>
+<td>-0.993844</td>
 </tr>
 <tr>
+<th>b</th>
+<td>0.791313</td>
+<td>-1.233354</td>
+<td>1.096154</td>
+</tr>
+<tr>
+<th>c</th>
+<td>1.627453</td>
+<td>0.637391</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>d</th>
+<td>NaN</td>
+<td>-0.726163</td>
+<td>-2.117156</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  反向</span>
+<span class="n">data</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[14]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>a  1   -0.291810
+   2   -2.489879
+   3   -0.993844
+b  1    0.791313
+   2   -1.233354
+   3    1.096154
+c  1    1.627453
+   2    0.637391
+d  2   -0.726163
+   3   -2.117156
+dtype: float64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="DataFrame-的层次化索引">DataFrame 的层次化索引<a class="anchor-link" href="#DataFrame-的层次化索引">&para;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 对于DataFrame，横轴和竖轴都可以有层次化索引</span>
+
+<span class="n">frame</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
+                  <span class="n">index</span><span class="o">=</span><span class="p">[[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span>
+                  <span class="n">columns</span><span class="o">=</span><span class="p">[[</span><span class="s1">'Ohio'</span><span class="p">,</span> <span class="s1">'Ohio'</span><span class="p">,</span> <span class="s1">'Colorado'</span><span class="p">],</span>
+                           <span class="p">[</span><span class="s1">'Green'</span><span class="p">,</span> <span class="s1">'Red'</span><span class="p">,</span> <span class="s1">'Green'</span><span class="p">]])</span>
+<span class="n">frame</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[19]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th colspan="2" halign="left">Ohio</th>
+<th>Colorado</th>
+</tr>
+<tr>
+<th></th>
+<th></th>
+<th>Green</th>
+<th>Red</th>
+<th>Green</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="2" valign="top">a</th>
 <th>1</th>
+<td>0</td>
+<td>1</td>
 <td>2</td>
-<td>Jumanji (1995)</td>
-<td>Adventure|Children's|Fantasy</td>
 </tr>
 <tr>
 <th>2</th>
 <td>3</td>
-<td>Grumpier Old Men (1995)</td>
-<td>Comedy|Romance</td>
-</tr>
-<tr>
-<th>3</th>
 <td>4</td>
-<td>Waiting to Exhale (1995)</td>
-<td>Comedy|Drama</td>
+<td>5</td>
 </tr>
 <tr>
-<th>4</th>
-<td>5</td>
-<td>Father of the Bride Part II (1995)</td>
-<td>Comedy</td>
+<th rowspan="2" valign="top">b</th>
+<th>1</th>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+</tr>
+<tr>
+<th>2</th>
+<td>9</td>
+<td>10</td>
+<td>11</td>
 </tr>
 </tbody>
 </table>
@@ -1247,115 +1490,725 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="2.--合并数据">2.  合并数据<a class="anchor-link" href="#2.--合并数据">&para;</a></h4>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 先合并 users 到ratings,  再合并movies</span>
-<span class="c1"># pandas 会根据列名进行连接</span>
-
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">ratings</span><span class="p">,</span><span class="n">users</span><span class="p">),</span><span class="n">movies</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  每层索引都可以命名</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'key1'</span><span class="p">,</span> <span class="s1">'key2'</span><span class="p">]</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'state'</span><span class="p">,</span> <span class="s1">'color'</span><span class="p">]</span>
+<span class="n">frame</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[55]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[20]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th></th>
+<th>state</th>
+<th colspan="2" halign="left">Ohio</th>
+<th>Colorado</th>
+</tr>
+<tr>
+<th></th>
+<th>color</th>
+<th>Green</th>
+<th>Red</th>
+<th>Green</th>
+</tr>
+<tr>
+<th>key1</th>
+<th>key2</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="2" valign="top">a</th>
+<th>1</th>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<th>2</th>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+</tr>
+<tr>
+<th rowspan="2" valign="top">b</th>
+<th>1</th>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+</tr>
+<tr>
+<th>2</th>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">frame</span><span class="p">[</span><span class="s1">'Ohio'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[18]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
 <thead>
 <tr style="text-align: right;">
 <th></th>
-<th>user_id</th>
-<th>movie_id</th>
-<th>rating</th>
-<th>timestamp</th>
-<th>gender</th>
-<th>age</th>
-<th>occupation</th>
-<th>zip</th>
-<th>title</th>
-<th>genres</th>
+<th>color</th>
+<th>Green</th>
+<th>Red</th>
+</tr>
+<tr>
+<th>key1</th>
+<th>key2</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="2" valign="top">a</th>
+<th>1</th>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<th>2</th>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr>
+<th rowspan="2" valign="top">b</th>
+<th>1</th>
+<td>6</td>
+<td>7</td>
+</tr>
+<tr>
+<th>2</th>
+<td>9</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 可以单独创建MultiIndex然后复用</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_arrays</span><span class="p">([[</span><span class="s1">'Ohio'</span><span class="p">,</span><span class="s1">'Ohio'</span><span class="p">,</span><span class="s1">'Colorado'</span><span class="p">],[</span><span class="s1">'Green'</span><span class="p">,</span><span class="s1">'Red'</span><span class="p">,</span><span class="s1">'Green'</span><span class="p">]],</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'state'</span><span class="p">,</span><span class="s1">'color'</span><span class="p">])</span>
+<span class="n">frame1</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">)),</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span><span class="p">)</span>
+<span class="n">frame1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[22]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th>state</th>
+<th colspan="2" halign="left">Ohio</th>
+<th>Colorado</th>
+</tr>
+<tr>
+<th>color</th>
+<th>Green</th>
+<th>Red</th>
+<th>Green</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <th>0</th>
+<td>0</td>
 <td>1</td>
-<td>1193</td>
-<td>5</td>
-<td>978300760</td>
-<td>F</td>
-<td>1</td>
-<td>10</td>
-<td>48067</td>
-<td>One Flew Over the Cuckoo's Nest (1975)</td>
-<td>Drama</td>
+<td>2</td>
 </tr>
 <tr>
 <th>1</th>
-<td>2</td>
-<td>1193</td>
+<td>3</td>
+<td>4</td>
 <td>5</td>
-<td>978298413</td>
-<td>M</td>
-<td>56</td>
-<td>16</td>
-<td>70072</td>
-<td>One Flew Over the Cuckoo's Nest (1975)</td>
-<td>Drama</td>
+</tr>
+<tr>
+<th>2</th>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+</tr>
+<tr>
+<th>3</th>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="重排分级顺序">重排分级顺序<a class="anchor-link" href="#重排分级顺序">&para;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">frame</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[26]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th></th>
+<th>state</th>
+<th colspan="2" halign="left">Ohio</th>
+<th>Colorado</th>
+</tr>
+<tr>
+<th></th>
+<th>color</th>
+<th>Green</th>
+<th>Red</th>
+<th>Green</th>
+</tr>
+<tr>
+<th>key1</th>
+<th>key2</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="2" valign="top">a</th>
+<th>1</th>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<th>2</th>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+</tr>
+<tr>
+<th rowspan="2" valign="top">b</th>
+<th>1</th>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+</tr>
+<tr>
+<th>2</th>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">frame</span><span class="o">.</span><span class="n">swaplevel</span><span class="p">(</span><span class="s1">'key1'</span><span class="p">,</span> <span class="s1">'key2'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[23]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th></th>
+<th>state</th>
+<th colspan="2" halign="left">Ohio</th>
+<th>Colorado</th>
+</tr>
+<tr>
+<th></th>
+<th>color</th>
+<th>Green</th>
+<th>Red</th>
+<th>Green</th>
+</tr>
+<tr>
+<th>key2</th>
+<th>key1</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>1</th>
+<th>a</th>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<th>2</th>
+<th>a</th>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+</tr>
+<tr>
+<th>1</th>
+<th>b</th>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+</tr>
+<tr>
+<th>2</th>
+<th>b</th>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">frame</span><span class="o">.</span><span class="n">sortlevel</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[24]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th></th>
+<th>state</th>
+<th colspan="2" halign="left">Ohio</th>
+<th>Colorado</th>
+</tr>
+<tr>
+<th></th>
+<th>color</th>
+<th>Green</th>
+<th>Red</th>
+<th>Green</th>
+</tr>
+<tr>
+<th>key1</th>
+<th>key2</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>a</th>
+<th>1</th>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<th>b</th>
+<th>1</th>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+</tr>
+<tr>
+<th>a</th>
+<th>2</th>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+</tr>
+<tr>
+<th>b</th>
+<th>2</th>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">frame</span><span class="o">.</span><span class="n">swaplevel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sortlevel</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[25]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th></th>
+<th>state</th>
+<th colspan="2" halign="left">Ohio</th>
+<th>Colorado</th>
+</tr>
+<tr>
+<th></th>
+<th>color</th>
+<th>Green</th>
+<th>Red</th>
+<th>Green</th>
+</tr>
+<tr>
+<th>key2</th>
+<th>key1</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="2" valign="top">1</th>
+<th>a</th>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<th>b</th>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+</tr>
+<tr>
+<th rowspan="2" valign="top">2</th>
+<th>a</th>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+</tr>
+<tr>
+<th>b</th>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="根据级别汇总统计">根据级别汇总统计<a class="anchor-link" href="#根据级别汇总统计">&para;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">frame</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s1">'key2'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[27]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th>state</th>
+<th colspan="2" halign="left">Ohio</th>
+<th>Colorado</th>
+</tr>
+<tr>
+<th>color</th>
+<th>Green</th>
+<th>Red</th>
+<th>Green</th>
+</tr>
+<tr>
+<th>key2</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>1</th>
+<td>6</td>
+<td>8</td>
+<td>10</td>
 </tr>
 <tr>
 <th>2</th>
 <td>12</td>
-<td>1193</td>
+<td>14</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">frame</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s1">'color'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[28]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>color</th>
+<th>Green</th>
+<th>Red</th>
+</tr>
+<tr>
+<th>key1</th>
+<th>key2</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="2" valign="top">a</th>
+<th>1</th>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<th>2</th>
+<td>8</td>
 <td>4</td>
-<td>978220179</td>
-<td>M</td>
-<td>25</td>
-<td>12</td>
-<td>32793</td>
-<td>One Flew Over the Cuckoo's Nest (1975)</td>
-<td>Drama</td>
+</tr>
+<tr>
+<th rowspan="2" valign="top">b</th>
+<th>1</th>
+<td>14</td>
+<td>7</td>
+</tr>
+<tr>
+<th>2</th>
+<td>20</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="使用-DataFrame-列">使用 DataFrame 列<a class="anchor-link" href="#使用-DataFrame-列">&para;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">frame</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">({</span><span class="s1">'a'</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="s1">'b'</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+                   <span class="s1">'c'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'one'</span><span class="p">,</span> <span class="s1">'one'</span><span class="p">,</span> <span class="s1">'one'</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">],</span>
+                   <span class="s1">'d'</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]})</span>
+<span class="n">frame</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[29]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>0</td>
+<td>7</td>
+<td>one</td>
+<td>0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>1</td>
+<td>6</td>
+<td>one</td>
+<td>1</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2</td>
+<td>5</td>
+<td>one</td>
+<td>2</td>
 </tr>
 <tr>
 <th>3</th>
-<td>15</td>
-<td>1193</td>
+<td>3</td>
 <td>4</td>
-<td>978199279</td>
-<td>M</td>
-<td>25</td>
-<td>7</td>
-<td>22903</td>
-<td>One Flew Over the Cuckoo's Nest (1975)</td>
-<td>Drama</td>
+<td>two</td>
+<td>0</td>
 </tr>
 <tr>
 <th>4</th>
-<td>17</td>
-<td>1193</td>
-<td>5</td>
-<td>978158471</td>
-<td>M</td>
-<td>50</td>
+<td>4</td>
+<td>3</td>
+<td>two</td>
 <td>1</td>
-<td>95350</td>
-<td>One Flew Over the Cuckoo's Nest (1975)</td>
-<td>Drama</td>
+</tr>
+<tr>
+<th>5</th>
+<td>5</td>
+<td>2</td>
+<td>two</td>
+<td>2</td>
+</tr>
+<tr>
+<th>6</th>
+<td>6</td>
+<td>1</td>
+<td>two</td>
+<td>3</td>
 </tr>
 </tbody>
 </table>
@@ -1365,248 +2218,75 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="3.数据转换">3.数据转换<a class="anchor-link" href="#3.数据转换">&para;</a></h4>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  按性别统计每部电影的得分</span>
-<span class="c1"># pivot_table, 透视表, 是一个很常用的工具</span>
-<span class="n">mean_ratings</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="s1">'rating'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">'title'</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'gender'</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">'mean'</span><span class="p">)</span>
-
-<span class="c1"># 另一种写法</span>
-<span class="c1">#mean_ratings = pd.pivot_table(data,values=['rating'], index='title',columns=['gender'], aggfunc='mean')</span>
-
-<span class="n">mean_ratings</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set_index(): 将列转化为索引</span>
+<span class="n">frame2</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">'c'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">])</span>
+<span class="n">frame2</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[56]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[31]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
 <thead>
 <tr style="text-align: right;">
-<th>gender</th>
-<th>F</th>
-<th>M</th>
+<th></th>
+<th></th>
+<th>a</th>
+<th>b</th>
 </tr>
 <tr>
-<th>title</th>
+<th>c</th>
+<th>d</th>
 <th></th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>$1,000,000 Duck (1971)</th>
-<td>3.375000</td>
-<td>2.761905</td>
+<th rowspan="3" valign="top">one</th>
+<th>0</th>
+<td>0</td>
+<td>7</td>
 </tr>
 <tr>
-<th>'Night Mother (1986)</th>
-<td>3.388889</td>
-<td>3.352941</td>
+<th>1</th>
+<td>1</td>
+<td>6</td>
 </tr>
 <tr>
-<th>'Til There Was You (1997)</th>
-<td>2.675676</td>
-<td>2.733333</td>
+<th>2</th>
+<td>2</td>
+<td>5</td>
 </tr>
 <tr>
-<th>'burbs, The (1989)</th>
-<td>2.793478</td>
-<td>2.962085</td>
+<th rowspan="4" valign="top">two</th>
+<th>0</th>
+<td>3</td>
+<td>4</td>
 </tr>
 <tr>
-<th>...And Justice for All (1979)</th>
-<td>3.828571</td>
-<td>3.689024</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.-数据筛选">4. 数据筛选<a class="anchor-link" href="#4.-数据筛选">&para;</a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 筛选评分数据&gt;250 条的电影</span>
-<span class="n">ratings_by_title</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'title'</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="c1"># 按照title对data分组并计数</span>
-<span class="n">active_titles</span> <span class="o">=</span> <span class="n">ratings_by_title</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">ratings_by_title</span> <span class="o">&gt;=</span> <span class="mi">251</span><span class="p">]</span>  <span class="c1"># index返回的下标</span>
-<span class="n">mean_ratings</span> <span class="o">=</span> <span class="n">mean_ratings</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">active_titles</span><span class="p">]</span>  <span class="c1">#  进行筛选。注意，这里原表和透视表的排序相同</span>
-<span class="n">mean_ratings</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[57]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th>gender</th>
-<th>F</th>
-<th>M</th>
+<th>1</th>
+<td>4</td>
+<td>3</td>
 </tr>
 <tr>
-<th>title</th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>'burbs, The (1989)</th>
-<td>2.793478</td>
-<td>2.962085</td>
+<th>2</th>
+<td>5</td>
+<td>2</td>
 </tr>
 <tr>
-<th>10 Things I Hate About You (1999)</th>
-<td>3.646552</td>
-<td>3.311966</td>
-</tr>
-<tr>
-<th>101 Dalmatians (1961)</th>
-<td>3.791444</td>
-<td>3.500000</td>
-</tr>
-<tr>
-<th>101 Dalmatians (1996)</th>
-<td>3.240000</td>
-<td>2.911215</td>
-</tr>
-<tr>
-<th>12 Angry Men (1957)</th>
-<td>4.184397</td>
-<td>4.328421</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="5.-结果展示">5. 结果展示<a class="anchor-link" href="#5.-结果展示">&para;</a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  女性观众最喜欢的 TOP10 电影</span>
-<span class="n">top_female_ratings</span> <span class="o">=</span> <span class="n">mean_ratings</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'F'</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
-<span class="n">top_female_ratings</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[58]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th>gender</th>
-<th>F</th>
-<th>M</th>
-</tr>
-<tr>
-<th>title</th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>Close Shave, A (1995)</th>
-<td>4.644444</td>
-<td>4.473795</td>
-</tr>
-<tr>
-<th>Wrong Trousers, The (1993)</th>
-<td>4.588235</td>
-<td>4.478261</td>
-</tr>
-<tr>
-<th>Sunset Blvd. (a.k.a. Sunset Boulevard) (1950)</th>
-<td>4.572650</td>
-<td>4.464589</td>
-</tr>
-<tr>
-<th>Wallace &amp; Gromit: The Best of Aardman Animation (1996)</th>
-<td>4.563107</td>
-<td>4.385075</td>
-</tr>
-<tr>
-<th>Schindler's List (1993)</th>
-<td>4.562602</td>
-<td>4.491415</td>
-</tr>
-<tr>
-<th>Shawshank Redemption, The (1994)</th>
-<td>4.539075</td>
-<td>4.560625</td>
-</tr>
-<tr>
-<th>Grand Day Out, A (1992)</th>
-<td>4.537879</td>
-<td>4.293255</td>
-</tr>
-<tr>
-<th>To Kill a Mockingbird (1962)</th>
-<td>4.536667</td>
-<td>4.372611</td>
-</tr>
-<tr>
-<th>Creature Comforts (1990)</th>
-<td>4.513889</td>
-<td>4.272277</td>
-</tr>
-<tr>
-<th>Usual Suspects, The (1995)</th>
-<td>4.513317</td>
-<td>4.518248</td>
+<th>3</th>
+<td>6</td>
+<td>1</td>
 </tr>
 </tbody>
 </table>
@@ -1618,34 +2298,34 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 分歧最大的电影</span>
-
-<span class="n">mean_ratings</span><span class="p">[</span><span class="s1">'diff'</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_ratings</span><span class="p">[</span><span class="s1">'M'</span><span class="p">]</span> <span class="o">-</span> <span class="n">mean_ratings</span><span class="p">[</span><span class="s1">'F'</span><span class="p">]</span>
-
-<span class="c1">#  分歧最大且女性更喜欢的电影</span>
-<span class="n">mean_ratings</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'diff'</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 转化为索引，同时保留列</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">'c'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">],</span> <span class="n">drop</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[59]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[33]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
 <thead>
 <tr style="text-align: right;">
-<th>gender</th>
-<th>F</th>
-<th>M</th>
-<th>diff</th>
+<th></th>
+<th></th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
 </tr>
 <tr>
-<th>title</th>
+<th>c</th>
+<th>d</th>
+<th></th>
 <th></th>
 <th></th>
 <th></th>
@@ -1653,64 +2333,55 @@ h6:hover .anchor-link {
 </thead>
 <tbody>
 <tr>
-<th>Dirty Dancing (1987)</th>
-<td>3.790378</td>
-<td>2.959596</td>
-<td>-0.830782</td>
+<th rowspan="3" valign="top">one</th>
+<th>0</th>
+<td>0</td>
+<td>7</td>
+<td>one</td>
+<td>0</td>
 </tr>
 <tr>
-<th>Jumpin' Jack Flash (1986)</th>
-<td>3.254717</td>
-<td>2.578358</td>
-<td>-0.676359</td>
+<th>1</th>
+<td>1</td>
+<td>6</td>
+<td>one</td>
+<td>1</td>
 </tr>
 <tr>
-<th>Grease (1978)</th>
-<td>3.975265</td>
-<td>3.367041</td>
-<td>-0.608224</td>
+<th>2</th>
+<td>2</td>
+<td>5</td>
+<td>one</td>
+<td>2</td>
 </tr>
 <tr>
-<th>Little Women (1994)</th>
-<td>3.870588</td>
-<td>3.321739</td>
-<td>-0.548849</td>
+<th rowspan="4" valign="top">two</th>
+<th>0</th>
+<td>3</td>
+<td>4</td>
+<td>two</td>
+<td>0</td>
 </tr>
 <tr>
-<th>Steel Magnolias (1989)</th>
-<td>3.901734</td>
-<td>3.365957</td>
-<td>-0.535777</td>
+<th>1</th>
+<td>4</td>
+<td>3</td>
+<td>two</td>
+<td>1</td>
 </tr>
 <tr>
-<th>Anastasia (1997)</th>
-<td>3.800000</td>
-<td>3.281609</td>
-<td>-0.518391</td>
+<th>2</th>
+<td>5</td>
+<td>2</td>
+<td>two</td>
+<td>2</td>
 </tr>
 <tr>
-<th>Rocky Horror Picture Show, The (1975)</th>
-<td>3.673016</td>
-<td>3.160131</td>
-<td>-0.512885</td>
-</tr>
-<tr>
-<th>Color Purple, The (1985)</th>
-<td>4.158192</td>
-<td>3.659341</td>
-<td>-0.498851</td>
-</tr>
-<tr>
-<th>Age of Innocence, The (1993)</th>
-<td>3.827068</td>
-<td>3.339506</td>
-<td>-0.487561</td>
-</tr>
-<tr>
-<th>Free Willy (1993)</th>
-<td>2.921348</td>
-<td>2.438776</td>
-<td>-0.482573</td>
+<th>3</th>
+<td>6</td>
+<td>1</td>
+<td>two</td>
+<td>3</td>
 </tr>
 </tbody>
 </table>
@@ -1722,95 +2393,79 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  分歧最大且男性更喜欢的电影</span>
-<span class="n">mean_ratings</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'diff'</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># reset_index(): 将索引转化为列</span>
+<span class="n">frame2</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[60]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[35]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
 <thead>
 <tr style="text-align: right;">
-<th>gender</th>
-<th>F</th>
-<th>M</th>
-<th>diff</th>
-</tr>
-<tr>
-<th>title</th>
 <th></th>
-<th></th>
-<th></th>
+<th>c</th>
+<th>d</th>
+<th>a</th>
+<th>b</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>Good, The Bad and The Ugly, The (1966)</th>
-<td>3.494949</td>
-<td>4.221300</td>
-<td>0.726351</td>
+<th>0</th>
+<td>one</td>
+<td>0</td>
+<td>0</td>
+<td>7</td>
 </tr>
 <tr>
-<th>Kentucky Fried Movie, The (1977)</th>
-<td>2.878788</td>
-<td>3.555147</td>
-<td>0.676359</td>
+<th>1</th>
+<td>one</td>
+<td>1</td>
+<td>1</td>
+<td>6</td>
 </tr>
 <tr>
-<th>Dumb &amp; Dumber (1994)</th>
-<td>2.697987</td>
-<td>3.336595</td>
-<td>0.638608</td>
+<th>2</th>
+<td>one</td>
+<td>2</td>
+<td>2</td>
+<td>5</td>
 </tr>
 <tr>
-<th>Longest Day, The (1962)</th>
-<td>3.411765</td>
-<td>4.031447</td>
-<td>0.619682</td>
+<th>3</th>
+<td>two</td>
+<td>0</td>
+<td>3</td>
+<td>4</td>
 </tr>
 <tr>
-<th>Cable Guy, The (1996)</th>
-<td>2.250000</td>
-<td>2.863787</td>
-<td>0.613787</td>
+<th>4</th>
+<td>two</td>
+<td>1</td>
+<td>4</td>
+<td>3</td>
 </tr>
 <tr>
-<th>Evil Dead II (Dead By Dawn) (1987)</th>
-<td>3.297297</td>
-<td>3.909283</td>
-<td>0.611985</td>
+<th>5</th>
+<td>two</td>
+<td>2</td>
+<td>5</td>
+<td>2</td>
 </tr>
 <tr>
-<th>Hidden, The (1987)</th>
-<td>3.137931</td>
-<td>3.745098</td>
-<td>0.607167</td>
-</tr>
-<tr>
-<th>Rocky III (1982)</th>
-<td>2.361702</td>
-<td>2.943503</td>
-<td>0.581801</td>
-</tr>
-<tr>
-<th>Caddyshack (1980)</th>
-<td>3.396135</td>
-<td>3.969737</td>
-<td>0.573602</td>
-</tr>
-<tr>
-<th>For a Few Dollars More (1965)</th>
-<td>3.409091</td>
-<td>3.953795</td>
-<td>0.544704</td>
+<th>6</th>
+<td>two</td>
+<td>3</td>
+<td>6</td>
+<td>1</td>
 </tr>
 </tbody>
 </table>
@@ -1822,34 +2477,11 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  分歧最大的电影</span>
-
-<span class="n">rating_std_by_title</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'title'</span><span class="p">)[</span><span class="s1">'rating'</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
-<span class="n">rating_std_by_title</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[61]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>title
-Foreign Student (1994)                                             2.828427
-Criminal Lovers (Les Amants Criminels) (1999)                      2.309401
-Identification of a Woman (Identificazione di una donna) (1982)    2.121320
-Sunset Park (1996)                                                 2.121320
-Eaten Alive (1976)                                                 2.121320
-Neon Bible, The (1995)                                             2.121320
-Talk of Angels (1998)                                              2.121320
-Tokyo Fist (1995)                                                  2.121320
-Paralyzing Fear: The Story of Polio in America, A (1998)           2.121320
-Better Living (1998)                                               2.121320
-Name: rating, dtype: float64</pre>
-</div>
 </div>
 </div>
 </div>
@@ -1882,12 +2514,11 @@ Name: rating, dtype: float64</pre>
 }
 </script>
 
-	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-02-15.</h6>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-03-01.</h6>
 
 
 	<h2>相关文章</h2>
     <ul>
-        <li><a href="http://holbrook.github.io/2017/03/01/python_data_analysis5-5.html">利用Python进行数据分析(5.4)：处理缺失数据</a></li>
         <li><a href="http://holbrook.github.io/2017/02/28/python_data_analysis5-4.html">利用Python进行数据分析(5.4)：处理缺失数据</a></li>
         <li><a href="http://holbrook.github.io/2017/02/27/python_data_analysis5-3.html">利用Python进行数据分析(5.3)：Pandas 计算汇总和描述统计</a></li>
         <li><a href="http://holbrook.github.io/2017/02/24/python_data_analysis5-1.html">利用Python进行数据分析(5.1)：Pandas 中的数据结构</a></li>
@@ -1896,6 +2527,7 @@ Name: rating, dtype: float64</pre>
         <li><a href="http://holbrook.github.io/2017/02/17/python_data_analysis4.html">利用Python进行数据分析(4)：NumPy</a></li>
         <li><a href="http://holbrook.github.io/2017/02/16/python_data_analysis2-3.html">利用Python进行数据分析(2.3)：全美婴儿姓名分析</a></li>
         <li><a href="http://holbrook.github.io/2017/02/16/python_data_analysis3.html">利用Python进行数据分析(3)：IPython</a></li>
+        <li><a href="http://holbrook.github.io/2017/02/15/python_data_analysis2-2.html">利用Python进行数据分析(2.2)：电影评分数据分析</a></li>
         <li><a href="http://holbrook.github.io/2017/02/14/python_data_analysis1.html">利用Python进行数据分析(1)：简单介绍</a></li>
     </ul>
 </article>
