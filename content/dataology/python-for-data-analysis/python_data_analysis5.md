@@ -37,7 +37,7 @@ import pandas as pd
 - [基本功能](/2017/02/24/python_data_analysis5-2.html)
 - [汇总和描述性统计](/2017/02/27/python_data_analysis5-3.html)
 - [处理缺失数据](/2017/02/28/python_data_analysis5-4.html)
-- [层次化索引]()
-- [其他]()
+- [层次化索引](/2017/03/01/python_data_analysis5-5.html)
+- [其他](/2017/03/01/python_data_analysis5-6.html)
 
 
