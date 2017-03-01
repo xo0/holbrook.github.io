@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<title>
-			利用Python进行数据分析(1)：简单介绍
+			利用Python进行数据分析(5.6)：Pandas 其他
 		</title>
 
 		<link rel="stylesheet" href="http://holbrook.github.io/theme/css/foundation.css" />
@@ -137,12 +137,12 @@
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
 <article>
-	<h1 style="font-size: 2.75rem;">利用Python进行数据分析(1)：简单介绍</h1>
+	<h1 style="font-size: 2.75rem;">利用Python进行数据分析(5.6)：Pandas 其他</h1>
 
 
 	<h6>目录</h6>
 	<div class="col-lg-3 hidden-xs hidden-sm">
-    	<div id="toc"><ul><li><a class="toc-href" href="#" title="利用Python进行数据分析(1)：简单介绍">利用Python进行数据分析(1)：简单介绍</a><ul><li><a class="toc-href" href="#补充说明" title="补充说明&para;">补充说明&para;</a></li><li><a class="toc-href" href="#绘制直线的例子" title="绘制直线的例子&para;">绘制直线的例子&para;</a></li></ul></li></ul></div>
+    	<div id="toc"><ul><li><a class="toc-href" href="#" title="利用Python进行数据分析(5.6)：Pandas 其他">利用Python进行数据分析(5.6)：Pandas 其他</a><ul><li><a class="toc-href" href="#整数索引" title="整数索引&para;">整数索引&para;</a></li><li><a class="toc-href" href="#面板数据" title="面板数据&para;">面板数据&para;</a></li></ul></li></ul></div>
 	</div>
 
 
@@ -1119,43 +1119,14 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>《<a href="https://book.douban.com/subject/25779298/">利用Python进行数据分析</a>》
-作者: Wes McKinney
-译者: 唐学韬</p>
-<h3 id="补充说明">补充说明<a class="anchor-link" href="#补充说明">&para;</a></h3><p>大部分问题在<a href="http://holbrook.github.io/2017/02/11/dataology_python_env.html">这里</a> 都有介绍。
-两点补充：</p>
-<ol>
-<li><p>书中推荐 <a href="http://code.enthought.com/">Enthought公司</a>的 
-<a href="https://www.enthought.com/products/canopy/">Canopy</a>,
-但我更喜欢非商业的 <a href="https://www.continuum.io">Anaconda</a></p>
-</li>
-<li><p>我已经把博客从 Jekyll  切换到了 <a href="https://github.com/getpelican/pelican">Pelican</a>，
-一切都回到了纯 python , 这个世界果然清净了许多。
-更重要的是， 通过 Pelican 的插件 <a href="https://github.com/getpelican/pelican-plugins">pelican-ipynb</a> 可以在 bolg 中直接发布 ipython/jupyter notebook。
-本文就是用 jupyter notebook 直接编辑并通过 Pelican 发布的。</p>
-</li>
-</ol>
-<h3 id="绘制直线的例子">绘制直线的例子<a class="anchor-link" href="#绘制直线的例子">&para;</a></h3>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
-
-<span class="c1"># import pandas as pd</span>
-<span class="c1"># import numpy as np</span>
-<span class="c1"># import matplotlib.pyplot as plt</span>
-
-<span class="n">plot</span><span class="p">(</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="k">import</span> <span class="n">Series</span><span class="p">,</span> <span class="n">DataFrame</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
@@ -1168,167 +1139,1861 @@ h6:hover .anchor-link {
 </pre>
 </div>
 </div>
-<div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>《<a href="https://book.douban.com/subject/25779298/">利用Python进行数据分析</a>》
+作者: Wes McKinney
+译者: 唐学韬</p>
+<p>其他关于 Pandas的话题</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="整数索引">整数索引<a class="anchor-link" href="#整数索引">&para;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ser</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">3.</span><span class="p">))</span>
+<span class="n">ser</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>[<matplotlib.lines.line2d 0x11bf08828="" at="">]</matplotlib.lines.line2d></pre>
+<pre>0    0.0
+1    1.0
+2    2.0
+dtype: float64</pre>
 </div>
 </div>
-<div class="output_area"><div class="prompt"></div>
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-">
-</img></div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ser</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>2.0</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ser2</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">3.</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">])</span>
+<span class="n">ser2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>2.0</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#ix函数总是面向标签的</span>
+<span class="n">ser</span><span class="o">.</span><span class="n">ix</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>0    0.0
+1    1.0
+dtype: float64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ser3</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">ser3</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#如果需要可靠的、不考虑索引类型的、基于位置的索引，可以使用Series的iget_value方法，Dataframe的irow 和 icol方法</span>
+<span class="n">frame</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>0    0
+1    1
+Name: 2, dtype: int64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="面板数据">面板数据<a class="anchor-link" href="#面板数据">&para;</a></h1><p>可以看做是三维的 DataFrame， 但是通常用多层索引的 DataFrame，而不是使用 Panel。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#可以利用DataFrame对象组成的字典或者一个三维ndarray来创建Panel对象</span>
+<span class="kn">from</span> <span class="nn">pandas_datareader</span> <span class="k">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">wb</span>
+
+<span class="n">pdata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Panel</span><span class="p">(</span><span class="nb">dict</span><span class="p">((</span><span class="n">stk</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">get_data_yahoo</span><span class="p">(</span><span class="n">stk</span><span class="p">))</span>
+                       <span class="k">for</span> <span class="n">stk</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'AAPL'</span><span class="p">,</span> <span class="s1">'GOOG'</span><span class="p">,</span> <span class="s1">'MSFT'</span><span class="p">,</span> <span class="s1">'DELL'</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pdata</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[12]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><class &#x27;pandas.core.panel.panel&#x27;="">
+Dimensions: 4 (items) x 1821 (major_axis) x 6 (minor_axis)
+Items axis: AAPL to MSFT
+Major_axis axis: 2010-01-04 00:00:00 to 2017-02-28 00:00:00
+Minor_axis axis: Open to Adj Close</class></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pdata</span> <span class="o">=</span> <span class="n">pdata</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="s1">'items'</span><span class="p">,</span> <span class="s1">'minor'</span><span class="p">)</span>
+<span class="n">pdata</span><span class="p">[</span><span class="s1">'Adj Close'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>AAPL</th>
+<th>DELL</th>
+<th>GOOG</th>
+<th>MSFT</th>
+</tr>
+<tr>
+<th>Date</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>2010-01-04</th>
+<td>27.727039</td>
+<td>14.06528</td>
+<td>313.062468</td>
+<td>25.555485</td>
+</tr>
+<tr>
+<th>2010-01-05</th>
+<td>27.774976</td>
+<td>14.38450</td>
+<td>311.683844</td>
+<td>25.563741</td>
+</tr>
+<tr>
+<th>2010-01-06</th>
+<td>27.333178</td>
+<td>14.10397</td>
+<td>303.826685</td>
+<td>25.406859</td>
+</tr>
+<tr>
+<th>2010-01-07</th>
+<td>27.282650</td>
+<td>14.23940</td>
+<td>296.753749</td>
+<td>25.142634</td>
+</tr>
+<tr>
+<th>2010-01-08</th>
+<td>27.464034</td>
+<td>14.36516</td>
+<td>300.709808</td>
+<td>25.316031</td>
+</tr>
+<tr>
+<th>2010-01-11</th>
+<td>27.221758</td>
+<td>14.37483</td>
+<td>300.255255</td>
+<td>24.994007</td>
+</tr>
+<tr>
+<th>2010-01-12</th>
+<td>26.912110</td>
+<td>14.56830</td>
+<td>294.945572</td>
+<td>24.828866</td>
+</tr>
+<tr>
+<th>2010-01-13</th>
+<td>27.291720</td>
+<td>14.57797</td>
+<td>293.252243</td>
+<td>25.060064</td>
+</tr>
+<tr>
+<th>2010-01-14</th>
+<td>27.133657</td>
+<td>14.22005</td>
+<td>294.630868</td>
+<td>25.563741</td>
+</tr>
+<tr>
+<th>2010-01-15</th>
+<td>26.680198</td>
+<td>13.92985</td>
+<td>289.710772</td>
+<td>25.481172</td>
+</tr>
+<tr>
+<th>2010-01-19</th>
+<td>27.860485</td>
+<td>14.32646</td>
+<td>293.516976</td>
+<td>25.679340</td>
+</tr>
+<tr>
+<th>2010-01-20</th>
+<td>27.431644</td>
+<td>14.03626</td>
+<td>289.915587</td>
+<td>25.258232</td>
+</tr>
+<tr>
+<th>2010-01-21</th>
+<td>26.957455</td>
+<td>13.92017</td>
+<td>291.199286</td>
+<td>24.779325</td>
+</tr>
+<tr>
+<th>2010-01-22</th>
+<td>25.620401</td>
+<td>13.18982</td>
+<td>274.730736</td>
+<td>23.912336</td>
+</tr>
+<tr>
+<th>2010-01-25</th>
+<td>26.309658</td>
+<td>13.43650</td>
+<td>269.730740</td>
+<td>24.209590</td>
+</tr>
+<tr>
+<th>2010-01-26</th>
+<td>26.681494</td>
+<td>13.13662</td>
+<td>270.939526</td>
+<td>24.358216</td>
+</tr>
+<tr>
+<th>2010-01-27</th>
+<td>26.932840</td>
+<td>13.08825</td>
+<td>270.779695</td>
+<td>24.498586</td>
+</tr>
+<tr>
+<th>2010-01-28</th>
+<td>25.819922</td>
+<td>12.84641</td>
+<td>266.878565</td>
+<td>24.077477</td>
+</tr>
+<tr>
+<th>2010-01-29</th>
+<td>24.883208</td>
+<td>12.47882</td>
+<td>264.705742</td>
+<td>23.268290</td>
+</tr>
+<tr>
+<th>2010-02-01</th>
+<td>25.229131</td>
+<td>12.78837</td>
+<td>266.244198</td>
+<td>23.458201</td>
+</tr>
+<tr>
+<th>2010-02-02</th>
+<td>25.375533</td>
+<td>12.86576</td>
+<td>265.295156</td>
+<td>23.499485</td>
+</tr>
+<tr>
+<th>2010-02-03</th>
+<td>25.812149</td>
+<td>12.92380</td>
+<td>270.140309</td>
+<td>23.639855</td>
+</tr>
+<tr>
+<th>2010-02-04</th>
+<td>24.881912</td>
+<td>12.58523</td>
+<td>263.127321</td>
+<td>22.987551</td>
+</tr>
+<tr>
+<th>2010-02-05</th>
+<td>25.323710</td>
+<td>12.80772</td>
+<td>265.380075</td>
+<td>23.136177</td>
+</tr>
+<tr>
+<th>2010-02-08</th>
+<td>25.150100</td>
+<td>12.95282</td>
+<td>266.468996</td>
+<td>22.888466</td>
+</tr>
+<tr>
+<th>2010-02-09</th>
+<td>25.418289</td>
+<td>13.10760</td>
+<td>267.952522</td>
+<td>23.127920</td>
+</tr>
+<tr>
+<th>2010-02-10</th>
+<td>25.279660</td>
+<td>13.30107</td>
+<td>266.958496</td>
+<td>23.111406</td>
+</tr>
+<tr>
+<th>2010-02-11</th>
+<td>25.739595</td>
+<td>13.49454</td>
+<td>267.932539</td>
+<td>23.218748</td>
+</tr>
+<tr>
+<th>2010-02-12</th>
+<td>25.961142</td>
+<td>13.38813</td>
+<td>266.294170</td>
+<td>23.061864</td>
+</tr>
+<tr>
+<th>2010-02-16</th>
+<td>26.352412</td>
+<td>13.67834</td>
+<td>270.380071</td>
+<td>23.518124</td>
+</tr>
+<tr>
+<th>...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<th>2017-01-17</th>
+<td>119.481976</td>
+<td>NaN</td>
+<td>804.609985</td>
+<td>62.153195</td>
+</tr>
+<tr>
+<th>2017-01-18</th>
+<td>119.472017</td>
+<td>NaN</td>
+<td>806.070007</td>
+<td>62.123377</td>
+</tr>
+<tr>
+<th>2017-01-19</th>
+<td>119.262925</td>
+<td>NaN</td>
+<td>802.174988</td>
+<td>61.924581</td>
+</tr>
+<tr>
+<th>2017-01-20</th>
+<td>119.481976</td>
+<td>NaN</td>
+<td>805.020020</td>
+<td>62.361932</td>
+</tr>
+<tr>
+<th>2017-01-23</th>
+<td>119.561633</td>
+<td>NaN</td>
+<td>819.309998</td>
+<td>62.580604</td>
+</tr>
+<tr>
+<th>2017-01-24</th>
+<td>119.452107</td>
+<td>NaN</td>
+<td>823.869995</td>
+<td>63.137231</td>
+</tr>
+<tr>
+<th>2017-01-25</th>
+<td>121.353858</td>
+<td>NaN</td>
+<td>835.669983</td>
+<td>63.296267</td>
+</tr>
+<tr>
+<th>2017-01-26</th>
+<td>121.413604</td>
+<td>NaN</td>
+<td>832.150024</td>
+<td>63.882708</td>
+</tr>
+<tr>
+<th>2017-01-27</th>
+<td>121.423555</td>
+<td>NaN</td>
+<td>823.309998</td>
+<td>65.383610</td>
+</tr>
+<tr>
+<th>2017-01-30</th>
+<td>121.104937</td>
+<td>NaN</td>
+<td>802.320007</td>
+<td>64.737526</td>
+</tr>
+<tr>
+<th>2017-01-31</th>
+<td>120.826147</td>
+<td>NaN</td>
+<td>796.789978</td>
+<td>64.260423</td>
+</tr>
+<tr>
+<th>2017-02-01</th>
+<td>128.194203</td>
+<td>NaN</td>
+<td>795.695007</td>
+<td>63.196871</td>
+</tr>
+<tr>
+<th>2017-02-02</th>
+<td>127.975152</td>
+<td>NaN</td>
+<td>798.530029</td>
+<td>62.789338</td>
+</tr>
+<tr>
+<th>2017-02-03</th>
+<td>128.522781</td>
+<td>NaN</td>
+<td>801.489990</td>
+<td>63.296267</td>
+</tr>
+<tr>
+<th>2017-02-06</th>
+<td>129.727549</td>
+<td>NaN</td>
+<td>801.340027</td>
+<td>63.256507</td>
+</tr>
+<tr>
+<th>2017-02-07</th>
+<td>130.962201</td>
+<td>NaN</td>
+<td>806.969971</td>
+<td>63.047773</td>
+</tr>
+<tr>
+<th>2017-02-08</th>
+<td>131.469994</td>
+<td>NaN</td>
+<td>808.380005</td>
+<td>62.958315</td>
+</tr>
+<tr>
+<th>2017-02-09</th>
+<td>132.419998</td>
+<td>NaN</td>
+<td>809.559998</td>
+<td>63.673974</td>
+</tr>
+<tr>
+<th>2017-02-10</th>
+<td>132.119995</td>
+<td>NaN</td>
+<td>813.669983</td>
+<td>63.614338</td>
+</tr>
+<tr>
+<th>2017-02-13</th>
+<td>133.289993</td>
+<td>NaN</td>
+<td>819.239990</td>
+<td>64.330000</td>
+</tr>
+<tr>
+<th>2017-02-14</th>
+<td>135.020004</td>
+<td>NaN</td>
+<td>820.450012</td>
+<td>64.570000</td>
+</tr>
+<tr>
+<th>2017-02-15</th>
+<td>135.509995</td>
+<td>NaN</td>
+<td>818.979980</td>
+<td>64.529999</td>
+</tr>
+<tr>
+<th>2017-02-16</th>
+<td>135.350006</td>
+<td>NaN</td>
+<td>824.159973</td>
+<td>64.519997</td>
+</tr>
+<tr>
+<th>2017-02-17</th>
+<td>135.720001</td>
+<td>NaN</td>
+<td>828.070007</td>
+<td>64.620003</td>
+</tr>
+<tr>
+<th>2017-02-21</th>
+<td>136.699997</td>
+<td>NaN</td>
+<td>831.659973</td>
+<td>64.489998</td>
+</tr>
+<tr>
+<th>2017-02-22</th>
+<td>137.110001</td>
+<td>NaN</td>
+<td>830.760010</td>
+<td>64.360001</td>
+</tr>
+<tr>
+<th>2017-02-23</th>
+<td>136.529999</td>
+<td>NaN</td>
+<td>831.330017</td>
+<td>64.620003</td>
+</tr>
+<tr>
+<th>2017-02-24</th>
+<td>136.660004</td>
+<td>NaN</td>
+<td>828.640015</td>
+<td>64.620003</td>
+</tr>
+<tr>
+<th>2017-02-27</th>
+<td>136.929993</td>
+<td>NaN</td>
+<td>829.280029</td>
+<td>64.230003</td>
+</tr>
+<tr>
+<th>2017-02-28</th>
+<td>136.990005</td>
+<td>NaN</td>
+<td>823.210022</td>
+<td>63.980000</td>
+</tr>
+</tbody>
+</table>
+<p>1821 rows &times; 4 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pdata</span><span class="o">.</span><span class="n">ix</span><span class="p">[:,</span> <span class="s1">'6/1/2012'</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[14]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Open</th>
+<th>High</th>
+<th>Low</th>
+<th>Close</th>
+<th>Volume</th>
+<th>Adj Close</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>AAPL</th>
+<td>569.159996</td>
+<td>572.650009</td>
+<td>560.520012</td>
+<td>560.989983</td>
+<td>130246900.0</td>
+<td>72.681610</td>
+</tr>
+<tr>
+<th>DELL</th>
+<td>12.150000</td>
+<td>12.300000</td>
+<td>12.045000</td>
+<td>12.070000</td>
+<td>19397600.0</td>
+<td>11.675920</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>571.790972</td>
+<td>572.650996</td>
+<td>568.350996</td>
+<td>570.981000</td>
+<td>6138700.0</td>
+<td>285.205295</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>28.760000</td>
+<td>28.959999</td>
+<td>28.440001</td>
+<td>28.450001</td>
+<td>56634300.0</td>
+<td>24.942239</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pdata</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="s1">'Adj Close'</span><span class="p">,</span> <span class="s1">'5/22/2012'</span><span class="p">:,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[15]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>AAPL</th>
+<th>DELL</th>
+<th>GOOG</th>
+<th>MSFT</th>
+</tr>
+<tr>
+<th>Date</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>2012-05-22</th>
+<td>72.160786</td>
+<td>14.58765</td>
+<td>300.100412</td>
+<td>26.090721</td>
+</tr>
+<tr>
+<th>2012-05-23</th>
+<td>73.921494</td>
+<td>12.08221</td>
+<td>304.426106</td>
+<td>25.520864</td>
+</tr>
+<tr>
+<th>2012-05-24</th>
+<td>73.242607</td>
+<td>12.04351</td>
+<td>301.528978</td>
+<td>25.485795</td>
+</tr>
+<tr>
+<th>2012-05-25</th>
+<td>72.850038</td>
+<td>12.05319</td>
+<td>295.470050</td>
+<td>25.477028</td>
+</tr>
+<tr>
+<th>2012-05-28</th>
+<td>NaN</td>
+<td>12.05319</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>2012-05-29</th>
+<td>74.143041</td>
+<td>12.24666</td>
+<td>296.873645</td>
+<td>25.915380</td>
+</tr>
+<tr>
+<th>2012-05-30</th>
+<td>75.037005</td>
+<td>12.14992</td>
+<td>293.821674</td>
+<td>25.722505</td>
+</tr>
+<tr>
+<th>2012-05-31</th>
+<td>74.850442</td>
+<td>11.92743</td>
+<td>290.140354</td>
+<td>25.591000</td>
+</tr>
+<tr>
+<th>2012-06-01</th>
+<td>72.681610</td>
+<td>11.67592</td>
+<td>285.205295</td>
+<td>24.942239</td>
+</tr>
+<tr>
+<th>2012-06-04</th>
+<td>73.109156</td>
+<td>11.60821</td>
+<td>289.006480</td>
+<td>25.029908</td>
+</tr>
+<tr>
+<th>2012-06-05</th>
+<td>72.920005</td>
+<td>11.76298</td>
+<td>284.920579</td>
+<td>24.994841</td>
+</tr>
+<tr>
+<th>2012-06-06</th>
+<td>74.038104</td>
+<td>11.81619</td>
+<td>289.995487</td>
+<td>25.731273</td>
+</tr>
+<tr>
+<th>2012-06-07</th>
+<td>74.071787</td>
+<td>11.73396</td>
+<td>288.826666</td>
+<td>25.626067</td>
+</tr>
+<tr>
+<th>2012-06-08</th>
+<td>75.185997</td>
+<td>11.72429</td>
+<td>289.935570</td>
+<td>25.994283</td>
+</tr>
+<tr>
+<th>2012-06-11</th>
+<td>74.000526</td>
+<td>11.47278</td>
+<td>283.966519</td>
+<td>25.336755</td>
+</tr>
+<tr>
+<th>2012-06-12</th>
+<td>74.647030</td>
+<td>11.57919</td>
+<td>282.268201</td>
+<td>25.678671</td>
+</tr>
+<tr>
+<th>2012-06-13</th>
+<td>74.128794</td>
+<td>11.87423</td>
+<td>280.265216</td>
+<td>25.538397</td>
+</tr>
+<tr>
+<th>2012-06-14</th>
+<td>74.047168</td>
+<td>11.93711</td>
+<td>279.246220</td>
+<td>25.722505</td>
+</tr>
+<tr>
+<th>2012-06-15</th>
+<td>74.384024</td>
+<td>11.89841</td>
+<td>281.973510</td>
+<td>26.318665</td>
+</tr>
+<tr>
+<th>2012-06-18</th>
+<td>75.893391</td>
+<td>12.01449</td>
+<td>285.140358</td>
+<td>26.160857</td>
+</tr>
+<tr>
+<th>2012-06-19</th>
+<td>76.104579</td>
+<td>11.78233</td>
+<td>290.475012</td>
+<td>26.914824</td>
+</tr>
+<tr>
+<th>2012-06-20</th>
+<td>75.888208</td>
+<td>11.89841</td>
+<td>288.467038</td>
+<td>27.116465</td>
+</tr>
+<tr>
+<th>2012-06-21</th>
+<td>74.842665</td>
+<td>11.60821</td>
+<td>282.323161</td>
+<td>26.423868</td>
+</tr>
+<tr>
+<th>2012-06-22</th>
+<td>75.416614</td>
+<td>11.80168</td>
+<td>285.455033</td>
+<td>26.914824</td>
+</tr>
+<tr>
+<th>2012-06-25</th>
+<td>73.948707</td>
+<td>11.55500</td>
+<td>280.070407</td>
+<td>26.187159</td>
+</tr>
+<tr>
+<th>2012-06-26</th>
+<td>74.111953</td>
+<td>11.53565</td>
+<td>282.058429</td>
+<td>26.318665</td>
+</tr>
+<tr>
+<th>2012-06-27</th>
+<td>74.431960</td>
+<td>11.92743</td>
+<td>284.366112</td>
+<td>26.450170</td>
+</tr>
+<tr>
+<th>2012-06-28</th>
+<td>73.725860</td>
+<td>11.55984</td>
+<td>281.873596</td>
+<td>26.222227</td>
+</tr>
+<tr>
+<th>2012-06-29</th>
+<td>75.662780</td>
+<td>12.10155</td>
+<td>289.745749</td>
+<td>26.818386</td>
+</tr>
+<tr>
+<th>2012-07-02</th>
+<td>76.766625</td>
+<td>11.98064</td>
+<td>289.945546</td>
+<td>26.792084</td>
+</tr>
+<tr>
+<th>...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<th>2017-01-17</th>
+<td>119.481976</td>
+<td>NaN</td>
+<td>804.609985</td>
+<td>62.153195</td>
+</tr>
+<tr>
+<th>2017-01-18</th>
+<td>119.472017</td>
+<td>NaN</td>
+<td>806.070007</td>
+<td>62.123377</td>
+</tr>
+<tr>
+<th>2017-01-19</th>
+<td>119.262925</td>
+<td>NaN</td>
+<td>802.174988</td>
+<td>61.924581</td>
+</tr>
+<tr>
+<th>2017-01-20</th>
+<td>119.481976</td>
+<td>NaN</td>
+<td>805.020020</td>
+<td>62.361932</td>
+</tr>
+<tr>
+<th>2017-01-23</th>
+<td>119.561633</td>
+<td>NaN</td>
+<td>819.309998</td>
+<td>62.580604</td>
+</tr>
+<tr>
+<th>2017-01-24</th>
+<td>119.452107</td>
+<td>NaN</td>
+<td>823.869995</td>
+<td>63.137231</td>
+</tr>
+<tr>
+<th>2017-01-25</th>
+<td>121.353858</td>
+<td>NaN</td>
+<td>835.669983</td>
+<td>63.296267</td>
+</tr>
+<tr>
+<th>2017-01-26</th>
+<td>121.413604</td>
+<td>NaN</td>
+<td>832.150024</td>
+<td>63.882708</td>
+</tr>
+<tr>
+<th>2017-01-27</th>
+<td>121.423555</td>
+<td>NaN</td>
+<td>823.309998</td>
+<td>65.383610</td>
+</tr>
+<tr>
+<th>2017-01-30</th>
+<td>121.104937</td>
+<td>NaN</td>
+<td>802.320007</td>
+<td>64.737526</td>
+</tr>
+<tr>
+<th>2017-01-31</th>
+<td>120.826147</td>
+<td>NaN</td>
+<td>796.789978</td>
+<td>64.260423</td>
+</tr>
+<tr>
+<th>2017-02-01</th>
+<td>128.194203</td>
+<td>NaN</td>
+<td>795.695007</td>
+<td>63.196871</td>
+</tr>
+<tr>
+<th>2017-02-02</th>
+<td>127.975152</td>
+<td>NaN</td>
+<td>798.530029</td>
+<td>62.789338</td>
+</tr>
+<tr>
+<th>2017-02-03</th>
+<td>128.522781</td>
+<td>NaN</td>
+<td>801.489990</td>
+<td>63.296267</td>
+</tr>
+<tr>
+<th>2017-02-06</th>
+<td>129.727549</td>
+<td>NaN</td>
+<td>801.340027</td>
+<td>63.256507</td>
+</tr>
+<tr>
+<th>2017-02-07</th>
+<td>130.962201</td>
+<td>NaN</td>
+<td>806.969971</td>
+<td>63.047773</td>
+</tr>
+<tr>
+<th>2017-02-08</th>
+<td>131.469994</td>
+<td>NaN</td>
+<td>808.380005</td>
+<td>62.958315</td>
+</tr>
+<tr>
+<th>2017-02-09</th>
+<td>132.419998</td>
+<td>NaN</td>
+<td>809.559998</td>
+<td>63.673974</td>
+</tr>
+<tr>
+<th>2017-02-10</th>
+<td>132.119995</td>
+<td>NaN</td>
+<td>813.669983</td>
+<td>63.614338</td>
+</tr>
+<tr>
+<th>2017-02-13</th>
+<td>133.289993</td>
+<td>NaN</td>
+<td>819.239990</td>
+<td>64.330000</td>
+</tr>
+<tr>
+<th>2017-02-14</th>
+<td>135.020004</td>
+<td>NaN</td>
+<td>820.450012</td>
+<td>64.570000</td>
+</tr>
+<tr>
+<th>2017-02-15</th>
+<td>135.509995</td>
+<td>NaN</td>
+<td>818.979980</td>
+<td>64.529999</td>
+</tr>
+<tr>
+<th>2017-02-16</th>
+<td>135.350006</td>
+<td>NaN</td>
+<td>824.159973</td>
+<td>64.519997</td>
+</tr>
+<tr>
+<th>2017-02-17</th>
+<td>135.720001</td>
+<td>NaN</td>
+<td>828.070007</td>
+<td>64.620003</td>
+</tr>
+<tr>
+<th>2017-02-21</th>
+<td>136.699997</td>
+<td>NaN</td>
+<td>831.659973</td>
+<td>64.489998</td>
+</tr>
+<tr>
+<th>2017-02-22</th>
+<td>137.110001</td>
+<td>NaN</td>
+<td>830.760010</td>
+<td>64.360001</td>
+</tr>
+<tr>
+<th>2017-02-23</th>
+<td>136.529999</td>
+<td>NaN</td>
+<td>831.330017</td>
+<td>64.620003</td>
+</tr>
+<tr>
+<th>2017-02-24</th>
+<td>136.660004</td>
+<td>NaN</td>
+<td>828.640015</td>
+<td>64.620003</td>
+</tr>
+<tr>
+<th>2017-02-27</th>
+<td>136.929993</td>
+<td>NaN</td>
+<td>829.280029</td>
+<td>64.230003</td>
+</tr>
+<tr>
+<th>2017-02-28</th>
+<td>136.990005</td>
+<td>NaN</td>
+<td>823.210022</td>
+<td>63.980000</td>
+</tr>
+</tbody>
+</table>
+<p>1214 rows &times; 4 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stacked</span> <span class="o">=</span> <span class="n">pdata</span><span class="o">.</span><span class="n">ix</span><span class="p">[:,</span> <span class="s1">'5/30/2012'</span><span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="n">stacked</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[16]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th></th>
+<th>Open</th>
+<th>High</th>
+<th>Low</th>
+<th>Close</th>
+<th>Volume</th>
+<th>Adj Close</th>
+</tr>
+<tr>
+<th>Date</th>
+<th>minor</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="4" valign="top">2012-05-30</th>
+<th>AAPL</th>
+<td>569.199997</td>
+<td>579.989990</td>
+<td>566.559990</td>
+<td>579.169998</td>
+<td>132357400.0</td>
+<td>75.037005</td>
+</tr>
+<tr>
+<th>DELL</th>
+<td>12.590000</td>
+<td>12.700000</td>
+<td>12.460000</td>
+<td>12.560000</td>
+<td>19787800.0</td>
+<td>12.149920</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>588.161028</td>
+<td>591.901014</td>
+<td>583.530999</td>
+<td>588.230992</td>
+<td>3827600.0</td>
+<td>293.821674</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>29.350000</td>
+<td>29.480000</td>
+<td>29.120001</td>
+<td>29.340000</td>
+<td>41585500.0</td>
+<td>25.722505</td>
+</tr>
+<tr>
+<th rowspan="4" valign="top">2012-05-31</th>
+<th>AAPL</th>
+<td>580.740021</td>
+<td>581.499985</td>
+<td>571.460022</td>
+<td>577.730019</td>
+<td>122918600.0</td>
+<td>74.850442</td>
+</tr>
+<tr>
+<th>DELL</th>
+<td>12.530000</td>
+<td>12.540000</td>
+<td>12.330000</td>
+<td>12.330000</td>
+<td>19955600.0</td>
+<td>11.927430</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>588.720982</td>
+<td>590.001032</td>
+<td>579.001013</td>
+<td>580.860990</td>
+<td>5958800.0</td>
+<td>290.140354</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>29.299999</td>
+<td>29.420000</td>
+<td>28.940001</td>
+<td>29.190001</td>
+<td>39134000.0</td>
+<td>25.591000</td>
+</tr>
+<tr>
+<th rowspan="4" valign="top">2012-06-01</th>
+<th>AAPL</th>
+<td>569.159996</td>
+<td>572.650009</td>
+<td>560.520012</td>
+<td>560.989983</td>
+<td>130246900.0</td>
+<td>72.681610</td>
+</tr>
+<tr>
+<th>DELL</th>
+<td>12.150000</td>
+<td>12.300000</td>
+<td>12.045000</td>
+<td>12.070000</td>
+<td>19397600.0</td>
+<td>11.675920</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>571.790972</td>
+<td>572.650996</td>
+<td>568.350996</td>
+<td>570.981000</td>
+<td>6138700.0</td>
+<td>285.205295</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>28.760000</td>
+<td>28.959999</td>
+<td>28.440001</td>
+<td>28.450001</td>
+<td>56634300.0</td>
+<td>24.942239</td>
+</tr>
+<tr>
+<th rowspan="4" valign="top">2012-06-04</th>
+<th>AAPL</th>
+<td>561.500008</td>
+<td>567.499985</td>
+<td>548.499977</td>
+<td>564.289978</td>
+<td>139248900.0</td>
+<td>73.109156</td>
+</tr>
+<tr>
+<th>DELL</th>
+<td>12.110000</td>
+<td>12.112500</td>
+<td>11.800000</td>
+<td>12.000000</td>
+<td>17015700.0</td>
+<td>11.608210</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>570.220958</td>
+<td>580.491016</td>
+<td>570.011006</td>
+<td>578.590973</td>
+<td>4883500.0</td>
+<td>289.006480</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>28.620001</td>
+<td>28.780001</td>
+<td>28.320000</td>
+<td>28.549999</td>
+<td>47926300.0</td>
+<td>25.029908</td>
+</tr>
+<tr>
+<th rowspan="4" valign="top">2012-06-05</th>
+<th>AAPL</th>
+<td>561.269989</td>
+<td>566.470001</td>
+<td>558.330002</td>
+<td>562.830025</td>
+<td>97053600.0</td>
+<td>72.920005</td>
+</tr>
+<tr>
+<th>DELL</th>
+<td>11.950000</td>
+<td>12.240000</td>
+<td>11.950000</td>
+<td>12.160000</td>
+<td>15620900.0</td>
+<td>11.762980</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>575.451008</td>
+<td>578.131003</td>
+<td>566.470986</td>
+<td>570.410999</td>
+<td>4697200.0</td>
+<td>284.920579</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>28.510000</td>
+<td>28.750000</td>
+<td>28.389999</td>
+<td>28.510000</td>
+<td>45715400.0</td>
+<td>24.994841</td>
+</tr>
+<tr>
+<th rowspan="4" valign="top">2012-06-06</th>
+<th>AAPL</th>
+<td>567.770004</td>
+<td>573.849983</td>
+<td>565.499992</td>
+<td>571.460022</td>
+<td>100363900.0</td>
+<td>74.038104</td>
+</tr>
+<tr>
+<th>DELL</th>
+<td>12.210000</td>
+<td>12.280000</td>
+<td>12.090000</td>
+<td>12.215000</td>
+<td>20779900.0</td>
+<td>11.816190</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>576.480979</td>
+<td>581.970971</td>
+<td>573.611004</td>
+<td>580.570966</td>
+<td>4207200.0</td>
+<td>289.995487</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>28.879999</td>
+<td>29.370001</td>
+<td>28.809999</td>
+<td>29.350000</td>
+<td>46860500.0</td>
+<td>25.731273</td>
+</tr>
+<tr>
+<th rowspan="4" valign="top">2012-06-07</th>
+<th>AAPL</th>
+<td>577.290009</td>
+<td>577.320023</td>
+<td>570.500000</td>
+<td>571.720001</td>
+<td>94941700.0</td>
+<td>74.071787</td>
+</tr>
+<tr>
+<th>DELL</th>
+<td>12.320000</td>
+<td>12.410000</td>
+<td>12.120000</td>
+<td>12.130000</td>
+<td>20074000.0</td>
+<td>11.733960</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>587.601014</td>
+<td>587.891038</td>
+<td>577.251006</td>
+<td>578.230986</td>
+<td>3530100.0</td>
+<td>288.826666</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>29.639999</td>
+<td>29.700001</td>
+<td>29.170000</td>
+<td>29.230000</td>
+<td>37792800.0</td>
+<td>25.626067</td>
+</tr>
+<tr>
+<th rowspan="2" valign="top">2012-06-08</th>
+<th>AAPL</th>
+<td>571.599998</td>
+<td>580.580017</td>
+<td>568.999992</td>
+<td>580.319984</td>
+<td>86879100.0</td>
+<td>75.185997</td>
+</tr>
+<tr>
+<th>DELL</th>
+<td>12.130000</td>
+<td>12.225000</td>
+<td>12.020000</td>
+<td>12.120000</td>
+<td>18155600.0</td>
+<td>11.724290</td>
+</tr>
+<tr>
+<th>...</th>
+<th>...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<th rowspan="3" valign="top">2017-02-14</th>
+<th>AAPL</th>
+<td>133.470001</td>
+<td>135.089996</td>
+<td>133.250000</td>
+<td>135.020004</td>
+<td>32815500.0</td>
+<td>135.020004</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>819.000000</td>
+<td>823.000000</td>
+<td>816.000000</td>
+<td>820.450012</td>
+<td>1053600.0</td>
+<td>820.450012</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>64.410004</td>
+<td>64.720001</td>
+<td>64.019997</td>
+<td>64.570000</td>
+<td>23065900.0</td>
+<td>64.570000</td>
+</tr>
+<tr>
+<th rowspan="3" valign="top">2017-02-15</th>
+<th>AAPL</th>
+<td>135.520004</td>
+<td>136.270004</td>
+<td>134.619995</td>
+<td>135.509995</td>
+<td>35501600.0</td>
+<td>135.509995</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>819.359985</td>
+<td>823.000000</td>
+<td>818.469971</td>
+<td>818.979980</td>
+<td>1304000.0</td>
+<td>818.979980</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>64.500000</td>
+<td>64.570000</td>
+<td>64.160004</td>
+<td>64.529999</td>
+<td>16917000.0</td>
+<td>64.529999</td>
+</tr>
+<tr>
+<th rowspan="3" valign="top">2017-02-16</th>
+<th>AAPL</th>
+<td>135.669998</td>
+<td>135.899994</td>
+<td>134.839996</td>
+<td>135.350006</td>
+<td>22118000.0</td>
+<td>135.350006</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>819.929993</td>
+<td>824.400024</td>
+<td>818.979980</td>
+<td>824.159973</td>
+<td>1281700.0</td>
+<td>824.159973</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>64.739998</td>
+<td>65.239998</td>
+<td>64.440002</td>
+<td>64.519997</td>
+<td>20524700.0</td>
+<td>64.519997</td>
+</tr>
+<tr>
+<th rowspan="3" valign="top">2017-02-17</th>
+<th>AAPL</th>
+<td>135.100006</td>
+<td>135.830002</td>
+<td>135.100006</td>
+<td>135.720001</td>
+<td>22084500.0</td>
+<td>135.720001</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>823.020020</td>
+<td>828.070007</td>
+<td>821.655029</td>
+<td>828.070007</td>
+<td>1597800.0</td>
+<td>828.070007</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>64.470001</td>
+<td>64.690002</td>
+<td>64.300003</td>
+<td>64.620003</td>
+<td>21234600.0</td>
+<td>64.620003</td>
+</tr>
+<tr>
+<th rowspan="3" valign="top">2017-02-21</th>
+<th>AAPL</th>
+<td>136.229996</td>
+<td>136.750000</td>
+<td>135.979996</td>
+<td>136.699997</td>
+<td>24265100.0</td>
+<td>136.699997</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>828.659973</td>
+<td>833.450012</td>
+<td>828.349976</td>
+<td>831.659973</td>
+<td>1247700.0</td>
+<td>831.659973</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>64.610001</td>
+<td>64.949997</td>
+<td>64.449997</td>
+<td>64.489998</td>
+<td>19384900.0</td>
+<td>64.489998</td>
+</tr>
+<tr>
+<th rowspan="3" valign="top">2017-02-22</th>
+<th>AAPL</th>
+<td>136.429993</td>
+<td>137.119995</td>
+<td>136.110001</td>
+<td>137.110001</td>
+<td>20745300.0</td>
+<td>137.110001</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>828.659973</td>
+<td>833.250000</td>
+<td>828.640015</td>
+<td>830.760010</td>
+<td>982900.0</td>
+<td>830.760010</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>64.330002</td>
+<td>64.389999</td>
+<td>64.050003</td>
+<td>64.360001</td>
+<td>19259700.0</td>
+<td>64.360001</td>
+</tr>
+<tr>
+<th rowspan="3" valign="top">2017-02-23</th>
+<th>AAPL</th>
+<td>137.380005</td>
+<td>137.479996</td>
+<td>136.300003</td>
+<td>136.529999</td>
+<td>20704100.0</td>
+<td>136.529999</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>830.119995</td>
+<td>832.460022</td>
+<td>822.880005</td>
+<td>831.330017</td>
+<td>1470100.0</td>
+<td>831.330017</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>64.419998</td>
+<td>64.730003</td>
+<td>64.190002</td>
+<td>64.620003</td>
+<td>20235200.0</td>
+<td>64.620003</td>
+</tr>
+<tr>
+<th rowspan="3" valign="top">2017-02-24</th>
+<th>AAPL</th>
+<td>135.910004</td>
+<td>136.660004</td>
+<td>135.279999</td>
+<td>136.660004</td>
+<td>21690900.0</td>
+<td>136.660004</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>827.729980</td>
+<td>829.000000</td>
+<td>824.200012</td>
+<td>828.640015</td>
+<td>1386600.0</td>
+<td>828.640015</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>64.529999</td>
+<td>64.800003</td>
+<td>64.139999</td>
+<td>64.620003</td>
+<td>21705200.0</td>
+<td>64.620003</td>
+</tr>
+<tr>
+<th rowspan="3" valign="top">2017-02-27</th>
+<th>AAPL</th>
+<td>137.139999</td>
+<td>137.440002</td>
+<td>136.279999</td>
+<td>136.929993</td>
+<td>20196400.0</td>
+<td>136.929993</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>824.549988</td>
+<td>830.500000</td>
+<td>824.000000</td>
+<td>829.280029</td>
+<td>1099500.0</td>
+<td>829.280029</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>64.540001</td>
+<td>64.540001</td>
+<td>64.050003</td>
+<td>64.230003</td>
+<td>15850400.0</td>
+<td>64.230003</td>
+</tr>
+<tr>
+<th rowspan="3" valign="top">2017-02-28</th>
+<th>AAPL</th>
+<td>137.080002</td>
+<td>137.440002</td>
+<td>136.699997</td>
+<td>136.990005</td>
+<td>23403500.0</td>
+<td>136.990005</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>825.609985</td>
+<td>828.539978</td>
+<td>820.200012</td>
+<td>823.210022</td>
+<td>2252300.0</td>
+<td>823.210022</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>64.080002</td>
+<td>64.199997</td>
+<td>63.759998</td>
+<td>63.980000</td>
+<td>23043900.0</td>
+<td>63.980000</td>
+</tr>
+</tbody>
+</table>
+<p>3955 rows &times; 6 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stacked</span><span class="o">.</span><span class="n">to_panel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[17]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><class &#x27;pandas.core.panel.panel&#x27;="">
+Dimensions: 6 (items) x 1208 (major_axis) x 4 (minor_axis)
+Items axis: Open to Adj Close
+Major_axis axis: 2012-05-30 00:00:00 to 2017-02-28 00:00:00
+Minor_axis axis: AAPL to MSFT</class></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
 </div>
 </div>
 </div>
@@ -1361,13 +3026,12 @@ yATSgJeBFm5cN/Aqtb+HqKL2f3Czv2udwN2+fMsCrqjvfvXKWBERl2vMp25EROQ0KOhFRFxOQS8i
 }
 </script>
 
-	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-02-14.</h6>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-03-01.</h6>
 
 
 	<h2>相关文章</h2>
     <ul>
         <li><a href="http://holbrook.github.io/2017/03/01/python_data_analysis5-5.html">利用Python进行数据分析(5.5)：多层次索引</a></li>
-        <li><a href="http://holbrook.github.io/2017/03/01/python_data_analysis5-6.html">利用Python进行数据分析(5.6)：Pandas 其他</a></li>
         <li><a href="http://holbrook.github.io/2017/02/28/python_data_analysis5-4.html">利用Python进行数据分析(5.4)：处理缺失数据</a></li>
         <li><a href="http://holbrook.github.io/2017/02/27/python_data_analysis5-3.html">利用Python进行数据分析(5.3)：Pandas 计算汇总和描述统计</a></li>
         <li><a href="http://holbrook.github.io/2017/02/24/python_data_analysis5-1.html">利用Python进行数据分析(5.1)：Pandas 中的数据结构</a></li>
@@ -1376,6 +3040,7 @@ yATSgJeBFm5cN/Aqtb+HqKL2f3Czv2udwN2+fMsCrqjvfvXKWBERl2vMp25EROQ0KOhFRFxOQS8i
         <li><a href="http://holbrook.github.io/2017/02/17/python_data_analysis4.html">利用Python进行数据分析(4)：NumPy</a></li>
         <li><a href="http://holbrook.github.io/2017/02/16/python_data_analysis2-3.html">利用Python进行数据分析(2.3)：全美婴儿姓名分析</a></li>
         <li><a href="http://holbrook.github.io/2017/02/16/python_data_analysis3.html">利用Python进行数据分析(3)：IPython</a></li>
+        <li><a href="http://holbrook.github.io/2017/02/15/python_data_analysis2-2.html">利用Python进行数据分析(2.2)：电影评分数据分析</a></li>
     </ul>
 </article>
 

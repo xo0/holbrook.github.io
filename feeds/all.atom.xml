@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>心内求法</title><link href="http://holbrook.github.io/" rel="alternate"></link><link href="http://holbrook.github.io/feeds/all.atom.xml" rel="self"></link><id>http://holbrook.github.io/</id><updated>2017-03-01T00:00:00+08:00</updated><entry><title>利用Python进行数据分析(5.4)：处理缺失数据</title><link href="http://holbrook.github.io/2017/03/01/python_data_analysis5-5.html" rel="alternate"></link><published>2017-03-01T00:00:00+08:00</published><updated>2017-03-01T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2017-03-01:/2017/03/01/python_data_analysis5-5.html</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>心内求法</title><link href="http://holbrook.github.io/" rel="alternate"></link><link href="http://holbrook.github.io/feeds/all.atom.xml" rel="self"></link><id>http://holbrook.github.io/</id><updated>2017-03-01T00:00:00+08:00</updated><entry><title>利用Python进行数据分析(5.5)：多层次索引</title><link href="http://holbrook.github.io/2017/03/01/python_data_analysis5-5.html" rel="alternate"></link><published>2017-03-01T00:00:00+08:00</published><updated>2017-03-01T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2017-03-01:/2017/03/01/python_data_analysis5-5.html</id><summary type="html">
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
 *
@@ -2324,6 +2324,2886 @@ dtype: float64&lt;/pre&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[&amp;nbsp;]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;
+</content><category term="读书笔记"></category><category term="python"></category></entry><entry><title>利用Python进行数据分析(5.6)：Pandas 其他</title><link href="http://holbrook.github.io/2017/03/01/python_data_analysis5-6.html" rel="alternate"></link><published>2017-03-01T00:00:00+08:00</published><updated>2017-03-01T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2017-03-01:/2017/03/01/python_data_analysis5-6.html</id><summary type="html">
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI colors. */
+.ansibold {
+  font-weight: bold;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected {
+  border-color: #ababab;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  div.cell.selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+@-moz-document url-prefix() {
+  div.inner_cell {
+    overflow-x: hidden;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell &gt; div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area &gt; div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area &gt; div.highlight &gt; pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the &lt;head&gt; if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  padding: 0.4em;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev &lt;Maniac@SoftwareManiacs.Org&gt;
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+.rendered_html pre,
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+.rendered_html td,
+
+
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell &gt; div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+&lt;/style&gt;
+&lt;style type="text/css"&gt;.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */&lt;/style&gt;
+&lt;style type="text/css"&gt;
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+&lt;/style&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[1]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;pylab&lt;/span&gt; inline
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Series&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;DataFrame&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;Populating the interactive namespace from numpy and matplotlib
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;《&lt;a href="https://book.douban.com/subject/25779298/"&gt;利用Python进行数据分析&lt;/a&gt;》
+作者: Wes McKinney
+译者: 唐学韬&lt;/p&gt;
+&lt;p&gt;其他关于 Pandas的话题&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h1 id="整数索引"&gt;整数索引&lt;a class="anchor-link" href="#整数索引"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[5]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ser&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Series&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;arange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;3.&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;ser&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[5]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;0    0.0
+1    1.0
+2    2.0
+dtype: float64&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[6]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ser&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iloc&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[6]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;2.0&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[7]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ser2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Series&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;arange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;3.&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'a'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'b'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'c'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;ser2&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[7]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;2.0&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[8]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#ix函数总是面向标签的&lt;/span&gt;
+&lt;span class="n"&gt;ser&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ix&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[8]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;0    0.0
+1    1.0
+dtype: float64&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[&amp;nbsp;]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ser3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Series&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;ser3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iloc&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[9]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#如果需要可靠的、不考虑索引类型的、基于位置的索引，可以使用Series的iget_value方法，Dataframe的irow 和 icol方法&lt;/span&gt;
+&lt;span class="n"&gt;frame&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;arange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reshape&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;frame&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iloc&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[9]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;0    0
+1    1
+Name: 2, dtype: int64&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h1 id="面板数据"&gt;面板数据&lt;a class="anchor-link" href="#面板数据"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;可以看做是三维的 DataFrame， 但是通常用多层索引的 DataFrame，而不是使用 Panel。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[11]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#可以利用DataFrame对象组成的字典或者一个三维ndarray来创建Panel对象&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pandas_datareader&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;wb&lt;/span&gt;
+
+&lt;span class="n"&gt;pdata&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Panel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;stk&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_data_yahoo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stk&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+                       &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;stk&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'AAPL'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'GOOG'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'MSFT'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'DELL'&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[12]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pdata&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[12]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;&lt;class &amp;#x27;pandas.core.panel.panel&amp;#x27;=""&gt;
+Dimensions: 4 (items) x 1821 (major_axis) x 6 (minor_axis)
+Items axis: AAPL to MSFT
+Major_axis axis: 2010-01-04 00:00:00 to 2017-02-28 00:00:00
+Minor_axis axis: Open to Adj Close&lt;/class&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[13]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pdata&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pdata&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;swapaxes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'items'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'minor'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;pdata&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Adj Close'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[13]:&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;table border="1" class="dataframe"&gt;
+&lt;thead&gt;
+&lt;tr style="text-align: right;"&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;th&gt;DELL&lt;/th&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;Date&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-04&lt;/th&gt;
+&lt;td&gt;27.727039&lt;/td&gt;
+&lt;td&gt;14.06528&lt;/td&gt;
+&lt;td&gt;313.062468&lt;/td&gt;
+&lt;td&gt;25.555485&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-05&lt;/th&gt;
+&lt;td&gt;27.774976&lt;/td&gt;
+&lt;td&gt;14.38450&lt;/td&gt;
+&lt;td&gt;311.683844&lt;/td&gt;
+&lt;td&gt;25.563741&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-06&lt;/th&gt;
+&lt;td&gt;27.333178&lt;/td&gt;
+&lt;td&gt;14.10397&lt;/td&gt;
+&lt;td&gt;303.826685&lt;/td&gt;
+&lt;td&gt;25.406859&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-07&lt;/th&gt;
+&lt;td&gt;27.282650&lt;/td&gt;
+&lt;td&gt;14.23940&lt;/td&gt;
+&lt;td&gt;296.753749&lt;/td&gt;
+&lt;td&gt;25.142634&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-08&lt;/th&gt;
+&lt;td&gt;27.464034&lt;/td&gt;
+&lt;td&gt;14.36516&lt;/td&gt;
+&lt;td&gt;300.709808&lt;/td&gt;
+&lt;td&gt;25.316031&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-11&lt;/th&gt;
+&lt;td&gt;27.221758&lt;/td&gt;
+&lt;td&gt;14.37483&lt;/td&gt;
+&lt;td&gt;300.255255&lt;/td&gt;
+&lt;td&gt;24.994007&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-12&lt;/th&gt;
+&lt;td&gt;26.912110&lt;/td&gt;
+&lt;td&gt;14.56830&lt;/td&gt;
+&lt;td&gt;294.945572&lt;/td&gt;
+&lt;td&gt;24.828866&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-13&lt;/th&gt;
+&lt;td&gt;27.291720&lt;/td&gt;
+&lt;td&gt;14.57797&lt;/td&gt;
+&lt;td&gt;293.252243&lt;/td&gt;
+&lt;td&gt;25.060064&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-14&lt;/th&gt;
+&lt;td&gt;27.133657&lt;/td&gt;
+&lt;td&gt;14.22005&lt;/td&gt;
+&lt;td&gt;294.630868&lt;/td&gt;
+&lt;td&gt;25.563741&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-15&lt;/th&gt;
+&lt;td&gt;26.680198&lt;/td&gt;
+&lt;td&gt;13.92985&lt;/td&gt;
+&lt;td&gt;289.710772&lt;/td&gt;
+&lt;td&gt;25.481172&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-19&lt;/th&gt;
+&lt;td&gt;27.860485&lt;/td&gt;
+&lt;td&gt;14.32646&lt;/td&gt;
+&lt;td&gt;293.516976&lt;/td&gt;
+&lt;td&gt;25.679340&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-20&lt;/th&gt;
+&lt;td&gt;27.431644&lt;/td&gt;
+&lt;td&gt;14.03626&lt;/td&gt;
+&lt;td&gt;289.915587&lt;/td&gt;
+&lt;td&gt;25.258232&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-21&lt;/th&gt;
+&lt;td&gt;26.957455&lt;/td&gt;
+&lt;td&gt;13.92017&lt;/td&gt;
+&lt;td&gt;291.199286&lt;/td&gt;
+&lt;td&gt;24.779325&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-22&lt;/th&gt;
+&lt;td&gt;25.620401&lt;/td&gt;
+&lt;td&gt;13.18982&lt;/td&gt;
+&lt;td&gt;274.730736&lt;/td&gt;
+&lt;td&gt;23.912336&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-25&lt;/th&gt;
+&lt;td&gt;26.309658&lt;/td&gt;
+&lt;td&gt;13.43650&lt;/td&gt;
+&lt;td&gt;269.730740&lt;/td&gt;
+&lt;td&gt;24.209590&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-26&lt;/th&gt;
+&lt;td&gt;26.681494&lt;/td&gt;
+&lt;td&gt;13.13662&lt;/td&gt;
+&lt;td&gt;270.939526&lt;/td&gt;
+&lt;td&gt;24.358216&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-27&lt;/th&gt;
+&lt;td&gt;26.932840&lt;/td&gt;
+&lt;td&gt;13.08825&lt;/td&gt;
+&lt;td&gt;270.779695&lt;/td&gt;
+&lt;td&gt;24.498586&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-28&lt;/th&gt;
+&lt;td&gt;25.819922&lt;/td&gt;
+&lt;td&gt;12.84641&lt;/td&gt;
+&lt;td&gt;266.878565&lt;/td&gt;
+&lt;td&gt;24.077477&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-01-29&lt;/th&gt;
+&lt;td&gt;24.883208&lt;/td&gt;
+&lt;td&gt;12.47882&lt;/td&gt;
+&lt;td&gt;264.705742&lt;/td&gt;
+&lt;td&gt;23.268290&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-02-01&lt;/th&gt;
+&lt;td&gt;25.229131&lt;/td&gt;
+&lt;td&gt;12.78837&lt;/td&gt;
+&lt;td&gt;266.244198&lt;/td&gt;
+&lt;td&gt;23.458201&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-02-02&lt;/th&gt;
+&lt;td&gt;25.375533&lt;/td&gt;
+&lt;td&gt;12.86576&lt;/td&gt;
+&lt;td&gt;265.295156&lt;/td&gt;
+&lt;td&gt;23.499485&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-02-03&lt;/th&gt;
+&lt;td&gt;25.812149&lt;/td&gt;
+&lt;td&gt;12.92380&lt;/td&gt;
+&lt;td&gt;270.140309&lt;/td&gt;
+&lt;td&gt;23.639855&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-02-04&lt;/th&gt;
+&lt;td&gt;24.881912&lt;/td&gt;
+&lt;td&gt;12.58523&lt;/td&gt;
+&lt;td&gt;263.127321&lt;/td&gt;
+&lt;td&gt;22.987551&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-02-05&lt;/th&gt;
+&lt;td&gt;25.323710&lt;/td&gt;
+&lt;td&gt;12.80772&lt;/td&gt;
+&lt;td&gt;265.380075&lt;/td&gt;
+&lt;td&gt;23.136177&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-02-08&lt;/th&gt;
+&lt;td&gt;25.150100&lt;/td&gt;
+&lt;td&gt;12.95282&lt;/td&gt;
+&lt;td&gt;266.468996&lt;/td&gt;
+&lt;td&gt;22.888466&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-02-09&lt;/th&gt;
+&lt;td&gt;25.418289&lt;/td&gt;
+&lt;td&gt;13.10760&lt;/td&gt;
+&lt;td&gt;267.952522&lt;/td&gt;
+&lt;td&gt;23.127920&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-02-10&lt;/th&gt;
+&lt;td&gt;25.279660&lt;/td&gt;
+&lt;td&gt;13.30107&lt;/td&gt;
+&lt;td&gt;266.958496&lt;/td&gt;
+&lt;td&gt;23.111406&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-02-11&lt;/th&gt;
+&lt;td&gt;25.739595&lt;/td&gt;
+&lt;td&gt;13.49454&lt;/td&gt;
+&lt;td&gt;267.932539&lt;/td&gt;
+&lt;td&gt;23.218748&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-02-12&lt;/th&gt;
+&lt;td&gt;25.961142&lt;/td&gt;
+&lt;td&gt;13.38813&lt;/td&gt;
+&lt;td&gt;266.294170&lt;/td&gt;
+&lt;td&gt;23.061864&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2010-02-16&lt;/th&gt;
+&lt;td&gt;26.352412&lt;/td&gt;
+&lt;td&gt;13.67834&lt;/td&gt;
+&lt;td&gt;270.380071&lt;/td&gt;
+&lt;td&gt;23.518124&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;...&lt;/th&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-17&lt;/th&gt;
+&lt;td&gt;119.481976&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;804.609985&lt;/td&gt;
+&lt;td&gt;62.153195&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-18&lt;/th&gt;
+&lt;td&gt;119.472017&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;806.070007&lt;/td&gt;
+&lt;td&gt;62.123377&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-19&lt;/th&gt;
+&lt;td&gt;119.262925&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;802.174988&lt;/td&gt;
+&lt;td&gt;61.924581&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-20&lt;/th&gt;
+&lt;td&gt;119.481976&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;805.020020&lt;/td&gt;
+&lt;td&gt;62.361932&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-23&lt;/th&gt;
+&lt;td&gt;119.561633&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;819.309998&lt;/td&gt;
+&lt;td&gt;62.580604&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-24&lt;/th&gt;
+&lt;td&gt;119.452107&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;823.869995&lt;/td&gt;
+&lt;td&gt;63.137231&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-25&lt;/th&gt;
+&lt;td&gt;121.353858&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;835.669983&lt;/td&gt;
+&lt;td&gt;63.296267&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-26&lt;/th&gt;
+&lt;td&gt;121.413604&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;832.150024&lt;/td&gt;
+&lt;td&gt;63.882708&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-27&lt;/th&gt;
+&lt;td&gt;121.423555&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;823.309998&lt;/td&gt;
+&lt;td&gt;65.383610&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-30&lt;/th&gt;
+&lt;td&gt;121.104937&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;802.320007&lt;/td&gt;
+&lt;td&gt;64.737526&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-31&lt;/th&gt;
+&lt;td&gt;120.826147&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;796.789978&lt;/td&gt;
+&lt;td&gt;64.260423&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-01&lt;/th&gt;
+&lt;td&gt;128.194203&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;795.695007&lt;/td&gt;
+&lt;td&gt;63.196871&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-02&lt;/th&gt;
+&lt;td&gt;127.975152&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;798.530029&lt;/td&gt;
+&lt;td&gt;62.789338&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-03&lt;/th&gt;
+&lt;td&gt;128.522781&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;801.489990&lt;/td&gt;
+&lt;td&gt;63.296267&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-06&lt;/th&gt;
+&lt;td&gt;129.727549&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;801.340027&lt;/td&gt;
+&lt;td&gt;63.256507&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-07&lt;/th&gt;
+&lt;td&gt;130.962201&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;806.969971&lt;/td&gt;
+&lt;td&gt;63.047773&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-08&lt;/th&gt;
+&lt;td&gt;131.469994&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;808.380005&lt;/td&gt;
+&lt;td&gt;62.958315&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-09&lt;/th&gt;
+&lt;td&gt;132.419998&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;809.559998&lt;/td&gt;
+&lt;td&gt;63.673974&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-10&lt;/th&gt;
+&lt;td&gt;132.119995&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;813.669983&lt;/td&gt;
+&lt;td&gt;63.614338&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-13&lt;/th&gt;
+&lt;td&gt;133.289993&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;819.239990&lt;/td&gt;
+&lt;td&gt;64.330000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-14&lt;/th&gt;
+&lt;td&gt;135.020004&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;820.450012&lt;/td&gt;
+&lt;td&gt;64.570000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-15&lt;/th&gt;
+&lt;td&gt;135.509995&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;818.979980&lt;/td&gt;
+&lt;td&gt;64.529999&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-16&lt;/th&gt;
+&lt;td&gt;135.350006&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;824.159973&lt;/td&gt;
+&lt;td&gt;64.519997&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-17&lt;/th&gt;
+&lt;td&gt;135.720001&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;828.070007&lt;/td&gt;
+&lt;td&gt;64.620003&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-21&lt;/th&gt;
+&lt;td&gt;136.699997&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;831.659973&lt;/td&gt;
+&lt;td&gt;64.489998&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-22&lt;/th&gt;
+&lt;td&gt;137.110001&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;830.760010&lt;/td&gt;
+&lt;td&gt;64.360001&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-23&lt;/th&gt;
+&lt;td&gt;136.529999&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;831.330017&lt;/td&gt;
+&lt;td&gt;64.620003&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-24&lt;/th&gt;
+&lt;td&gt;136.660004&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;828.640015&lt;/td&gt;
+&lt;td&gt;64.620003&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-27&lt;/th&gt;
+&lt;td&gt;136.929993&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;829.280029&lt;/td&gt;
+&lt;td&gt;64.230003&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-28&lt;/th&gt;
+&lt;td&gt;136.990005&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;823.210022&lt;/td&gt;
+&lt;td&gt;63.980000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;1821 rows &amp;times; 4 columns&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[14]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pdata&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ix&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt; &lt;span class="s1"&gt;'6/1/2012'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;:]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[14]:&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;table border="1" class="dataframe"&gt;
+&lt;thead&gt;
+&lt;tr style="text-align: right;"&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Open&lt;/th&gt;
+&lt;th&gt;High&lt;/th&gt;
+&lt;th&gt;Low&lt;/th&gt;
+&lt;th&gt;Close&lt;/th&gt;
+&lt;th&gt;Volume&lt;/th&gt;
+&lt;th&gt;Adj Close&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;569.159996&lt;/td&gt;
+&lt;td&gt;572.650009&lt;/td&gt;
+&lt;td&gt;560.520012&lt;/td&gt;
+&lt;td&gt;560.989983&lt;/td&gt;
+&lt;td&gt;130246900.0&lt;/td&gt;
+&lt;td&gt;72.681610&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;DELL&lt;/th&gt;
+&lt;td&gt;12.150000&lt;/td&gt;
+&lt;td&gt;12.300000&lt;/td&gt;
+&lt;td&gt;12.045000&lt;/td&gt;
+&lt;td&gt;12.070000&lt;/td&gt;
+&lt;td&gt;19397600.0&lt;/td&gt;
+&lt;td&gt;11.675920&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;571.790972&lt;/td&gt;
+&lt;td&gt;572.650996&lt;/td&gt;
+&lt;td&gt;568.350996&lt;/td&gt;
+&lt;td&gt;570.981000&lt;/td&gt;
+&lt;td&gt;6138700.0&lt;/td&gt;
+&lt;td&gt;285.205295&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;28.760000&lt;/td&gt;
+&lt;td&gt;28.959999&lt;/td&gt;
+&lt;td&gt;28.440001&lt;/td&gt;
+&lt;td&gt;28.450001&lt;/td&gt;
+&lt;td&gt;56634300.0&lt;/td&gt;
+&lt;td&gt;24.942239&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[15]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pdata&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ix&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Adj Close'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'5/22/2012'&lt;/span&gt;&lt;span class="p"&gt;:,&lt;/span&gt; &lt;span class="p"&gt;:]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[15]:&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;table border="1" class="dataframe"&gt;
+&lt;thead&gt;
+&lt;tr style="text-align: right;"&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;th&gt;DELL&lt;/th&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;Date&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-05-22&lt;/th&gt;
+&lt;td&gt;72.160786&lt;/td&gt;
+&lt;td&gt;14.58765&lt;/td&gt;
+&lt;td&gt;300.100412&lt;/td&gt;
+&lt;td&gt;26.090721&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-05-23&lt;/th&gt;
+&lt;td&gt;73.921494&lt;/td&gt;
+&lt;td&gt;12.08221&lt;/td&gt;
+&lt;td&gt;304.426106&lt;/td&gt;
+&lt;td&gt;25.520864&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-05-24&lt;/th&gt;
+&lt;td&gt;73.242607&lt;/td&gt;
+&lt;td&gt;12.04351&lt;/td&gt;
+&lt;td&gt;301.528978&lt;/td&gt;
+&lt;td&gt;25.485795&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-05-25&lt;/th&gt;
+&lt;td&gt;72.850038&lt;/td&gt;
+&lt;td&gt;12.05319&lt;/td&gt;
+&lt;td&gt;295.470050&lt;/td&gt;
+&lt;td&gt;25.477028&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-05-28&lt;/th&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;12.05319&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-05-29&lt;/th&gt;
+&lt;td&gt;74.143041&lt;/td&gt;
+&lt;td&gt;12.24666&lt;/td&gt;
+&lt;td&gt;296.873645&lt;/td&gt;
+&lt;td&gt;25.915380&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-05-30&lt;/th&gt;
+&lt;td&gt;75.037005&lt;/td&gt;
+&lt;td&gt;12.14992&lt;/td&gt;
+&lt;td&gt;293.821674&lt;/td&gt;
+&lt;td&gt;25.722505&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-05-31&lt;/th&gt;
+&lt;td&gt;74.850442&lt;/td&gt;
+&lt;td&gt;11.92743&lt;/td&gt;
+&lt;td&gt;290.140354&lt;/td&gt;
+&lt;td&gt;25.591000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-01&lt;/th&gt;
+&lt;td&gt;72.681610&lt;/td&gt;
+&lt;td&gt;11.67592&lt;/td&gt;
+&lt;td&gt;285.205295&lt;/td&gt;
+&lt;td&gt;24.942239&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-04&lt;/th&gt;
+&lt;td&gt;73.109156&lt;/td&gt;
+&lt;td&gt;11.60821&lt;/td&gt;
+&lt;td&gt;289.006480&lt;/td&gt;
+&lt;td&gt;25.029908&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-05&lt;/th&gt;
+&lt;td&gt;72.920005&lt;/td&gt;
+&lt;td&gt;11.76298&lt;/td&gt;
+&lt;td&gt;284.920579&lt;/td&gt;
+&lt;td&gt;24.994841&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-06&lt;/th&gt;
+&lt;td&gt;74.038104&lt;/td&gt;
+&lt;td&gt;11.81619&lt;/td&gt;
+&lt;td&gt;289.995487&lt;/td&gt;
+&lt;td&gt;25.731273&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-07&lt;/th&gt;
+&lt;td&gt;74.071787&lt;/td&gt;
+&lt;td&gt;11.73396&lt;/td&gt;
+&lt;td&gt;288.826666&lt;/td&gt;
+&lt;td&gt;25.626067&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-08&lt;/th&gt;
+&lt;td&gt;75.185997&lt;/td&gt;
+&lt;td&gt;11.72429&lt;/td&gt;
+&lt;td&gt;289.935570&lt;/td&gt;
+&lt;td&gt;25.994283&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-11&lt;/th&gt;
+&lt;td&gt;74.000526&lt;/td&gt;
+&lt;td&gt;11.47278&lt;/td&gt;
+&lt;td&gt;283.966519&lt;/td&gt;
+&lt;td&gt;25.336755&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-12&lt;/th&gt;
+&lt;td&gt;74.647030&lt;/td&gt;
+&lt;td&gt;11.57919&lt;/td&gt;
+&lt;td&gt;282.268201&lt;/td&gt;
+&lt;td&gt;25.678671&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-13&lt;/th&gt;
+&lt;td&gt;74.128794&lt;/td&gt;
+&lt;td&gt;11.87423&lt;/td&gt;
+&lt;td&gt;280.265216&lt;/td&gt;
+&lt;td&gt;25.538397&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-14&lt;/th&gt;
+&lt;td&gt;74.047168&lt;/td&gt;
+&lt;td&gt;11.93711&lt;/td&gt;
+&lt;td&gt;279.246220&lt;/td&gt;
+&lt;td&gt;25.722505&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-15&lt;/th&gt;
+&lt;td&gt;74.384024&lt;/td&gt;
+&lt;td&gt;11.89841&lt;/td&gt;
+&lt;td&gt;281.973510&lt;/td&gt;
+&lt;td&gt;26.318665&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-18&lt;/th&gt;
+&lt;td&gt;75.893391&lt;/td&gt;
+&lt;td&gt;12.01449&lt;/td&gt;
+&lt;td&gt;285.140358&lt;/td&gt;
+&lt;td&gt;26.160857&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-19&lt;/th&gt;
+&lt;td&gt;76.104579&lt;/td&gt;
+&lt;td&gt;11.78233&lt;/td&gt;
+&lt;td&gt;290.475012&lt;/td&gt;
+&lt;td&gt;26.914824&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-20&lt;/th&gt;
+&lt;td&gt;75.888208&lt;/td&gt;
+&lt;td&gt;11.89841&lt;/td&gt;
+&lt;td&gt;288.467038&lt;/td&gt;
+&lt;td&gt;27.116465&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-21&lt;/th&gt;
+&lt;td&gt;74.842665&lt;/td&gt;
+&lt;td&gt;11.60821&lt;/td&gt;
+&lt;td&gt;282.323161&lt;/td&gt;
+&lt;td&gt;26.423868&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-22&lt;/th&gt;
+&lt;td&gt;75.416614&lt;/td&gt;
+&lt;td&gt;11.80168&lt;/td&gt;
+&lt;td&gt;285.455033&lt;/td&gt;
+&lt;td&gt;26.914824&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-25&lt;/th&gt;
+&lt;td&gt;73.948707&lt;/td&gt;
+&lt;td&gt;11.55500&lt;/td&gt;
+&lt;td&gt;280.070407&lt;/td&gt;
+&lt;td&gt;26.187159&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-26&lt;/th&gt;
+&lt;td&gt;74.111953&lt;/td&gt;
+&lt;td&gt;11.53565&lt;/td&gt;
+&lt;td&gt;282.058429&lt;/td&gt;
+&lt;td&gt;26.318665&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-27&lt;/th&gt;
+&lt;td&gt;74.431960&lt;/td&gt;
+&lt;td&gt;11.92743&lt;/td&gt;
+&lt;td&gt;284.366112&lt;/td&gt;
+&lt;td&gt;26.450170&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-28&lt;/th&gt;
+&lt;td&gt;73.725860&lt;/td&gt;
+&lt;td&gt;11.55984&lt;/td&gt;
+&lt;td&gt;281.873596&lt;/td&gt;
+&lt;td&gt;26.222227&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-06-29&lt;/th&gt;
+&lt;td&gt;75.662780&lt;/td&gt;
+&lt;td&gt;12.10155&lt;/td&gt;
+&lt;td&gt;289.745749&lt;/td&gt;
+&lt;td&gt;26.818386&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2012-07-02&lt;/th&gt;
+&lt;td&gt;76.766625&lt;/td&gt;
+&lt;td&gt;11.98064&lt;/td&gt;
+&lt;td&gt;289.945546&lt;/td&gt;
+&lt;td&gt;26.792084&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;...&lt;/th&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-17&lt;/th&gt;
+&lt;td&gt;119.481976&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;804.609985&lt;/td&gt;
+&lt;td&gt;62.153195&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-18&lt;/th&gt;
+&lt;td&gt;119.472017&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;806.070007&lt;/td&gt;
+&lt;td&gt;62.123377&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-19&lt;/th&gt;
+&lt;td&gt;119.262925&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;802.174988&lt;/td&gt;
+&lt;td&gt;61.924581&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-20&lt;/th&gt;
+&lt;td&gt;119.481976&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;805.020020&lt;/td&gt;
+&lt;td&gt;62.361932&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-23&lt;/th&gt;
+&lt;td&gt;119.561633&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;819.309998&lt;/td&gt;
+&lt;td&gt;62.580604&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-24&lt;/th&gt;
+&lt;td&gt;119.452107&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;823.869995&lt;/td&gt;
+&lt;td&gt;63.137231&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-25&lt;/th&gt;
+&lt;td&gt;121.353858&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;835.669983&lt;/td&gt;
+&lt;td&gt;63.296267&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-26&lt;/th&gt;
+&lt;td&gt;121.413604&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;832.150024&lt;/td&gt;
+&lt;td&gt;63.882708&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-27&lt;/th&gt;
+&lt;td&gt;121.423555&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;823.309998&lt;/td&gt;
+&lt;td&gt;65.383610&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-30&lt;/th&gt;
+&lt;td&gt;121.104937&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;802.320007&lt;/td&gt;
+&lt;td&gt;64.737526&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-01-31&lt;/th&gt;
+&lt;td&gt;120.826147&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;796.789978&lt;/td&gt;
+&lt;td&gt;64.260423&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-01&lt;/th&gt;
+&lt;td&gt;128.194203&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;795.695007&lt;/td&gt;
+&lt;td&gt;63.196871&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-02&lt;/th&gt;
+&lt;td&gt;127.975152&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;798.530029&lt;/td&gt;
+&lt;td&gt;62.789338&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-03&lt;/th&gt;
+&lt;td&gt;128.522781&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;801.489990&lt;/td&gt;
+&lt;td&gt;63.296267&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-06&lt;/th&gt;
+&lt;td&gt;129.727549&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;801.340027&lt;/td&gt;
+&lt;td&gt;63.256507&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-07&lt;/th&gt;
+&lt;td&gt;130.962201&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;806.969971&lt;/td&gt;
+&lt;td&gt;63.047773&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-08&lt;/th&gt;
+&lt;td&gt;131.469994&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;808.380005&lt;/td&gt;
+&lt;td&gt;62.958315&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-09&lt;/th&gt;
+&lt;td&gt;132.419998&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;809.559998&lt;/td&gt;
+&lt;td&gt;63.673974&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-10&lt;/th&gt;
+&lt;td&gt;132.119995&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;813.669983&lt;/td&gt;
+&lt;td&gt;63.614338&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-13&lt;/th&gt;
+&lt;td&gt;133.289993&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;819.239990&lt;/td&gt;
+&lt;td&gt;64.330000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-14&lt;/th&gt;
+&lt;td&gt;135.020004&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;820.450012&lt;/td&gt;
+&lt;td&gt;64.570000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-15&lt;/th&gt;
+&lt;td&gt;135.509995&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;818.979980&lt;/td&gt;
+&lt;td&gt;64.529999&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-16&lt;/th&gt;
+&lt;td&gt;135.350006&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;824.159973&lt;/td&gt;
+&lt;td&gt;64.519997&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-17&lt;/th&gt;
+&lt;td&gt;135.720001&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;828.070007&lt;/td&gt;
+&lt;td&gt;64.620003&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-21&lt;/th&gt;
+&lt;td&gt;136.699997&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;831.659973&lt;/td&gt;
+&lt;td&gt;64.489998&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-22&lt;/th&gt;
+&lt;td&gt;137.110001&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;830.760010&lt;/td&gt;
+&lt;td&gt;64.360001&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-23&lt;/th&gt;
+&lt;td&gt;136.529999&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;831.330017&lt;/td&gt;
+&lt;td&gt;64.620003&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-24&lt;/th&gt;
+&lt;td&gt;136.660004&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;828.640015&lt;/td&gt;
+&lt;td&gt;64.620003&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-27&lt;/th&gt;
+&lt;td&gt;136.929993&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;829.280029&lt;/td&gt;
+&lt;td&gt;64.230003&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2017-02-28&lt;/th&gt;
+&lt;td&gt;136.990005&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;823.210022&lt;/td&gt;
+&lt;td&gt;63.980000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;1214 rows &amp;times; 4 columns&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[16]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;stacked&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pdata&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ix&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt; &lt;span class="s1"&gt;'5/30/2012'&lt;/span&gt;&lt;span class="p"&gt;:,&lt;/span&gt; &lt;span class="p"&gt;:]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_frame&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;stacked&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[16]:&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;table border="1" class="dataframe"&gt;
+&lt;thead&gt;
+&lt;tr style="text-align: right;"&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Open&lt;/th&gt;
+&lt;th&gt;High&lt;/th&gt;
+&lt;th&gt;Low&lt;/th&gt;
+&lt;th&gt;Close&lt;/th&gt;
+&lt;th&gt;Volume&lt;/th&gt;
+&lt;th&gt;Adj Close&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;Date&lt;/th&gt;
+&lt;th&gt;minor&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th rowspan="4" valign="top"&gt;2012-05-30&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;569.199997&lt;/td&gt;
+&lt;td&gt;579.989990&lt;/td&gt;
+&lt;td&gt;566.559990&lt;/td&gt;
+&lt;td&gt;579.169998&lt;/td&gt;
+&lt;td&gt;132357400.0&lt;/td&gt;
+&lt;td&gt;75.037005&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;DELL&lt;/th&gt;
+&lt;td&gt;12.590000&lt;/td&gt;
+&lt;td&gt;12.700000&lt;/td&gt;
+&lt;td&gt;12.460000&lt;/td&gt;
+&lt;td&gt;12.560000&lt;/td&gt;
+&lt;td&gt;19787800.0&lt;/td&gt;
+&lt;td&gt;12.149920&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;588.161028&lt;/td&gt;
+&lt;td&gt;591.901014&lt;/td&gt;
+&lt;td&gt;583.530999&lt;/td&gt;
+&lt;td&gt;588.230992&lt;/td&gt;
+&lt;td&gt;3827600.0&lt;/td&gt;
+&lt;td&gt;293.821674&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;29.350000&lt;/td&gt;
+&lt;td&gt;29.480000&lt;/td&gt;
+&lt;td&gt;29.120001&lt;/td&gt;
+&lt;td&gt;29.340000&lt;/td&gt;
+&lt;td&gt;41585500.0&lt;/td&gt;
+&lt;td&gt;25.722505&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="4" valign="top"&gt;2012-05-31&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;580.740021&lt;/td&gt;
+&lt;td&gt;581.499985&lt;/td&gt;
+&lt;td&gt;571.460022&lt;/td&gt;
+&lt;td&gt;577.730019&lt;/td&gt;
+&lt;td&gt;122918600.0&lt;/td&gt;
+&lt;td&gt;74.850442&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;DELL&lt;/th&gt;
+&lt;td&gt;12.530000&lt;/td&gt;
+&lt;td&gt;12.540000&lt;/td&gt;
+&lt;td&gt;12.330000&lt;/td&gt;
+&lt;td&gt;12.330000&lt;/td&gt;
+&lt;td&gt;19955600.0&lt;/td&gt;
+&lt;td&gt;11.927430&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;588.720982&lt;/td&gt;
+&lt;td&gt;590.001032&lt;/td&gt;
+&lt;td&gt;579.001013&lt;/td&gt;
+&lt;td&gt;580.860990&lt;/td&gt;
+&lt;td&gt;5958800.0&lt;/td&gt;
+&lt;td&gt;290.140354&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;29.299999&lt;/td&gt;
+&lt;td&gt;29.420000&lt;/td&gt;
+&lt;td&gt;28.940001&lt;/td&gt;
+&lt;td&gt;29.190001&lt;/td&gt;
+&lt;td&gt;39134000.0&lt;/td&gt;
+&lt;td&gt;25.591000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="4" valign="top"&gt;2012-06-01&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;569.159996&lt;/td&gt;
+&lt;td&gt;572.650009&lt;/td&gt;
+&lt;td&gt;560.520012&lt;/td&gt;
+&lt;td&gt;560.989983&lt;/td&gt;
+&lt;td&gt;130246900.0&lt;/td&gt;
+&lt;td&gt;72.681610&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;DELL&lt;/th&gt;
+&lt;td&gt;12.150000&lt;/td&gt;
+&lt;td&gt;12.300000&lt;/td&gt;
+&lt;td&gt;12.045000&lt;/td&gt;
+&lt;td&gt;12.070000&lt;/td&gt;
+&lt;td&gt;19397600.0&lt;/td&gt;
+&lt;td&gt;11.675920&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;571.790972&lt;/td&gt;
+&lt;td&gt;572.650996&lt;/td&gt;
+&lt;td&gt;568.350996&lt;/td&gt;
+&lt;td&gt;570.981000&lt;/td&gt;
+&lt;td&gt;6138700.0&lt;/td&gt;
+&lt;td&gt;285.205295&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;28.760000&lt;/td&gt;
+&lt;td&gt;28.959999&lt;/td&gt;
+&lt;td&gt;28.440001&lt;/td&gt;
+&lt;td&gt;28.450001&lt;/td&gt;
+&lt;td&gt;56634300.0&lt;/td&gt;
+&lt;td&gt;24.942239&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="4" valign="top"&gt;2012-06-04&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;561.500008&lt;/td&gt;
+&lt;td&gt;567.499985&lt;/td&gt;
+&lt;td&gt;548.499977&lt;/td&gt;
+&lt;td&gt;564.289978&lt;/td&gt;
+&lt;td&gt;139248900.0&lt;/td&gt;
+&lt;td&gt;73.109156&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;DELL&lt;/th&gt;
+&lt;td&gt;12.110000&lt;/td&gt;
+&lt;td&gt;12.112500&lt;/td&gt;
+&lt;td&gt;11.800000&lt;/td&gt;
+&lt;td&gt;12.000000&lt;/td&gt;
+&lt;td&gt;17015700.0&lt;/td&gt;
+&lt;td&gt;11.608210&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;570.220958&lt;/td&gt;
+&lt;td&gt;580.491016&lt;/td&gt;
+&lt;td&gt;570.011006&lt;/td&gt;
+&lt;td&gt;578.590973&lt;/td&gt;
+&lt;td&gt;4883500.0&lt;/td&gt;
+&lt;td&gt;289.006480&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;28.620001&lt;/td&gt;
+&lt;td&gt;28.780001&lt;/td&gt;
+&lt;td&gt;28.320000&lt;/td&gt;
+&lt;td&gt;28.549999&lt;/td&gt;
+&lt;td&gt;47926300.0&lt;/td&gt;
+&lt;td&gt;25.029908&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="4" valign="top"&gt;2012-06-05&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;561.269989&lt;/td&gt;
+&lt;td&gt;566.470001&lt;/td&gt;
+&lt;td&gt;558.330002&lt;/td&gt;
+&lt;td&gt;562.830025&lt;/td&gt;
+&lt;td&gt;97053600.0&lt;/td&gt;
+&lt;td&gt;72.920005&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;DELL&lt;/th&gt;
+&lt;td&gt;11.950000&lt;/td&gt;
+&lt;td&gt;12.240000&lt;/td&gt;
+&lt;td&gt;11.950000&lt;/td&gt;
+&lt;td&gt;12.160000&lt;/td&gt;
+&lt;td&gt;15620900.0&lt;/td&gt;
+&lt;td&gt;11.762980&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;575.451008&lt;/td&gt;
+&lt;td&gt;578.131003&lt;/td&gt;
+&lt;td&gt;566.470986&lt;/td&gt;
+&lt;td&gt;570.410999&lt;/td&gt;
+&lt;td&gt;4697200.0&lt;/td&gt;
+&lt;td&gt;284.920579&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;28.510000&lt;/td&gt;
+&lt;td&gt;28.750000&lt;/td&gt;
+&lt;td&gt;28.389999&lt;/td&gt;
+&lt;td&gt;28.510000&lt;/td&gt;
+&lt;td&gt;45715400.0&lt;/td&gt;
+&lt;td&gt;24.994841&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="4" valign="top"&gt;2012-06-06&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;567.770004&lt;/td&gt;
+&lt;td&gt;573.849983&lt;/td&gt;
+&lt;td&gt;565.499992&lt;/td&gt;
+&lt;td&gt;571.460022&lt;/td&gt;
+&lt;td&gt;100363900.0&lt;/td&gt;
+&lt;td&gt;74.038104&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;DELL&lt;/th&gt;
+&lt;td&gt;12.210000&lt;/td&gt;
+&lt;td&gt;12.280000&lt;/td&gt;
+&lt;td&gt;12.090000&lt;/td&gt;
+&lt;td&gt;12.215000&lt;/td&gt;
+&lt;td&gt;20779900.0&lt;/td&gt;
+&lt;td&gt;11.816190&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;576.480979&lt;/td&gt;
+&lt;td&gt;581.970971&lt;/td&gt;
+&lt;td&gt;573.611004&lt;/td&gt;
+&lt;td&gt;580.570966&lt;/td&gt;
+&lt;td&gt;4207200.0&lt;/td&gt;
+&lt;td&gt;289.995487&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;28.879999&lt;/td&gt;
+&lt;td&gt;29.370001&lt;/td&gt;
+&lt;td&gt;28.809999&lt;/td&gt;
+&lt;td&gt;29.350000&lt;/td&gt;
+&lt;td&gt;46860500.0&lt;/td&gt;
+&lt;td&gt;25.731273&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="4" valign="top"&gt;2012-06-07&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;577.290009&lt;/td&gt;
+&lt;td&gt;577.320023&lt;/td&gt;
+&lt;td&gt;570.500000&lt;/td&gt;
+&lt;td&gt;571.720001&lt;/td&gt;
+&lt;td&gt;94941700.0&lt;/td&gt;
+&lt;td&gt;74.071787&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;DELL&lt;/th&gt;
+&lt;td&gt;12.320000&lt;/td&gt;
+&lt;td&gt;12.410000&lt;/td&gt;
+&lt;td&gt;12.120000&lt;/td&gt;
+&lt;td&gt;12.130000&lt;/td&gt;
+&lt;td&gt;20074000.0&lt;/td&gt;
+&lt;td&gt;11.733960&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;587.601014&lt;/td&gt;
+&lt;td&gt;587.891038&lt;/td&gt;
+&lt;td&gt;577.251006&lt;/td&gt;
+&lt;td&gt;578.230986&lt;/td&gt;
+&lt;td&gt;3530100.0&lt;/td&gt;
+&lt;td&gt;288.826666&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;29.639999&lt;/td&gt;
+&lt;td&gt;29.700001&lt;/td&gt;
+&lt;td&gt;29.170000&lt;/td&gt;
+&lt;td&gt;29.230000&lt;/td&gt;
+&lt;td&gt;37792800.0&lt;/td&gt;
+&lt;td&gt;25.626067&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="2" valign="top"&gt;2012-06-08&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;571.599998&lt;/td&gt;
+&lt;td&gt;580.580017&lt;/td&gt;
+&lt;td&gt;568.999992&lt;/td&gt;
+&lt;td&gt;580.319984&lt;/td&gt;
+&lt;td&gt;86879100.0&lt;/td&gt;
+&lt;td&gt;75.185997&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;DELL&lt;/th&gt;
+&lt;td&gt;12.130000&lt;/td&gt;
+&lt;td&gt;12.225000&lt;/td&gt;
+&lt;td&gt;12.020000&lt;/td&gt;
+&lt;td&gt;12.120000&lt;/td&gt;
+&lt;td&gt;18155600.0&lt;/td&gt;
+&lt;td&gt;11.724290&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;...&lt;/th&gt;
+&lt;th&gt;...&lt;/th&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="3" valign="top"&gt;2017-02-14&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;133.470001&lt;/td&gt;
+&lt;td&gt;135.089996&lt;/td&gt;
+&lt;td&gt;133.250000&lt;/td&gt;
+&lt;td&gt;135.020004&lt;/td&gt;
+&lt;td&gt;32815500.0&lt;/td&gt;
+&lt;td&gt;135.020004&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;819.000000&lt;/td&gt;
+&lt;td&gt;823.000000&lt;/td&gt;
+&lt;td&gt;816.000000&lt;/td&gt;
+&lt;td&gt;820.450012&lt;/td&gt;
+&lt;td&gt;1053600.0&lt;/td&gt;
+&lt;td&gt;820.450012&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;64.410004&lt;/td&gt;
+&lt;td&gt;64.720001&lt;/td&gt;
+&lt;td&gt;64.019997&lt;/td&gt;
+&lt;td&gt;64.570000&lt;/td&gt;
+&lt;td&gt;23065900.0&lt;/td&gt;
+&lt;td&gt;64.570000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="3" valign="top"&gt;2017-02-15&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;135.520004&lt;/td&gt;
+&lt;td&gt;136.270004&lt;/td&gt;
+&lt;td&gt;134.619995&lt;/td&gt;
+&lt;td&gt;135.509995&lt;/td&gt;
+&lt;td&gt;35501600.0&lt;/td&gt;
+&lt;td&gt;135.509995&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;819.359985&lt;/td&gt;
+&lt;td&gt;823.000000&lt;/td&gt;
+&lt;td&gt;818.469971&lt;/td&gt;
+&lt;td&gt;818.979980&lt;/td&gt;
+&lt;td&gt;1304000.0&lt;/td&gt;
+&lt;td&gt;818.979980&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;64.500000&lt;/td&gt;
+&lt;td&gt;64.570000&lt;/td&gt;
+&lt;td&gt;64.160004&lt;/td&gt;
+&lt;td&gt;64.529999&lt;/td&gt;
+&lt;td&gt;16917000.0&lt;/td&gt;
+&lt;td&gt;64.529999&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="3" valign="top"&gt;2017-02-16&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;135.669998&lt;/td&gt;
+&lt;td&gt;135.899994&lt;/td&gt;
+&lt;td&gt;134.839996&lt;/td&gt;
+&lt;td&gt;135.350006&lt;/td&gt;
+&lt;td&gt;22118000.0&lt;/td&gt;
+&lt;td&gt;135.350006&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;819.929993&lt;/td&gt;
+&lt;td&gt;824.400024&lt;/td&gt;
+&lt;td&gt;818.979980&lt;/td&gt;
+&lt;td&gt;824.159973&lt;/td&gt;
+&lt;td&gt;1281700.0&lt;/td&gt;
+&lt;td&gt;824.159973&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;64.739998&lt;/td&gt;
+&lt;td&gt;65.239998&lt;/td&gt;
+&lt;td&gt;64.440002&lt;/td&gt;
+&lt;td&gt;64.519997&lt;/td&gt;
+&lt;td&gt;20524700.0&lt;/td&gt;
+&lt;td&gt;64.519997&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="3" valign="top"&gt;2017-02-17&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;135.100006&lt;/td&gt;
+&lt;td&gt;135.830002&lt;/td&gt;
+&lt;td&gt;135.100006&lt;/td&gt;
+&lt;td&gt;135.720001&lt;/td&gt;
+&lt;td&gt;22084500.0&lt;/td&gt;
+&lt;td&gt;135.720001&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;823.020020&lt;/td&gt;
+&lt;td&gt;828.070007&lt;/td&gt;
+&lt;td&gt;821.655029&lt;/td&gt;
+&lt;td&gt;828.070007&lt;/td&gt;
+&lt;td&gt;1597800.0&lt;/td&gt;
+&lt;td&gt;828.070007&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;64.470001&lt;/td&gt;
+&lt;td&gt;64.690002&lt;/td&gt;
+&lt;td&gt;64.300003&lt;/td&gt;
+&lt;td&gt;64.620003&lt;/td&gt;
+&lt;td&gt;21234600.0&lt;/td&gt;
+&lt;td&gt;64.620003&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="3" valign="top"&gt;2017-02-21&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;136.229996&lt;/td&gt;
+&lt;td&gt;136.750000&lt;/td&gt;
+&lt;td&gt;135.979996&lt;/td&gt;
+&lt;td&gt;136.699997&lt;/td&gt;
+&lt;td&gt;24265100.0&lt;/td&gt;
+&lt;td&gt;136.699997&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;828.659973&lt;/td&gt;
+&lt;td&gt;833.450012&lt;/td&gt;
+&lt;td&gt;828.349976&lt;/td&gt;
+&lt;td&gt;831.659973&lt;/td&gt;
+&lt;td&gt;1247700.0&lt;/td&gt;
+&lt;td&gt;831.659973&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;64.610001&lt;/td&gt;
+&lt;td&gt;64.949997&lt;/td&gt;
+&lt;td&gt;64.449997&lt;/td&gt;
+&lt;td&gt;64.489998&lt;/td&gt;
+&lt;td&gt;19384900.0&lt;/td&gt;
+&lt;td&gt;64.489998&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="3" valign="top"&gt;2017-02-22&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;136.429993&lt;/td&gt;
+&lt;td&gt;137.119995&lt;/td&gt;
+&lt;td&gt;136.110001&lt;/td&gt;
+&lt;td&gt;137.110001&lt;/td&gt;
+&lt;td&gt;20745300.0&lt;/td&gt;
+&lt;td&gt;137.110001&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;828.659973&lt;/td&gt;
+&lt;td&gt;833.250000&lt;/td&gt;
+&lt;td&gt;828.640015&lt;/td&gt;
+&lt;td&gt;830.760010&lt;/td&gt;
+&lt;td&gt;982900.0&lt;/td&gt;
+&lt;td&gt;830.760010&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;64.330002&lt;/td&gt;
+&lt;td&gt;64.389999&lt;/td&gt;
+&lt;td&gt;64.050003&lt;/td&gt;
+&lt;td&gt;64.360001&lt;/td&gt;
+&lt;td&gt;19259700.0&lt;/td&gt;
+&lt;td&gt;64.360001&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="3" valign="top"&gt;2017-02-23&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;137.380005&lt;/td&gt;
+&lt;td&gt;137.479996&lt;/td&gt;
+&lt;td&gt;136.300003&lt;/td&gt;
+&lt;td&gt;136.529999&lt;/td&gt;
+&lt;td&gt;20704100.0&lt;/td&gt;
+&lt;td&gt;136.529999&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;830.119995&lt;/td&gt;
+&lt;td&gt;832.460022&lt;/td&gt;
+&lt;td&gt;822.880005&lt;/td&gt;
+&lt;td&gt;831.330017&lt;/td&gt;
+&lt;td&gt;1470100.0&lt;/td&gt;
+&lt;td&gt;831.330017&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;64.419998&lt;/td&gt;
+&lt;td&gt;64.730003&lt;/td&gt;
+&lt;td&gt;64.190002&lt;/td&gt;
+&lt;td&gt;64.620003&lt;/td&gt;
+&lt;td&gt;20235200.0&lt;/td&gt;
+&lt;td&gt;64.620003&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="3" valign="top"&gt;2017-02-24&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;135.910004&lt;/td&gt;
+&lt;td&gt;136.660004&lt;/td&gt;
+&lt;td&gt;135.279999&lt;/td&gt;
+&lt;td&gt;136.660004&lt;/td&gt;
+&lt;td&gt;21690900.0&lt;/td&gt;
+&lt;td&gt;136.660004&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;827.729980&lt;/td&gt;
+&lt;td&gt;829.000000&lt;/td&gt;
+&lt;td&gt;824.200012&lt;/td&gt;
+&lt;td&gt;828.640015&lt;/td&gt;
+&lt;td&gt;1386600.0&lt;/td&gt;
+&lt;td&gt;828.640015&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;64.529999&lt;/td&gt;
+&lt;td&gt;64.800003&lt;/td&gt;
+&lt;td&gt;64.139999&lt;/td&gt;
+&lt;td&gt;64.620003&lt;/td&gt;
+&lt;td&gt;21705200.0&lt;/td&gt;
+&lt;td&gt;64.620003&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="3" valign="top"&gt;2017-02-27&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;137.139999&lt;/td&gt;
+&lt;td&gt;137.440002&lt;/td&gt;
+&lt;td&gt;136.279999&lt;/td&gt;
+&lt;td&gt;136.929993&lt;/td&gt;
+&lt;td&gt;20196400.0&lt;/td&gt;
+&lt;td&gt;136.929993&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;824.549988&lt;/td&gt;
+&lt;td&gt;830.500000&lt;/td&gt;
+&lt;td&gt;824.000000&lt;/td&gt;
+&lt;td&gt;829.280029&lt;/td&gt;
+&lt;td&gt;1099500.0&lt;/td&gt;
+&lt;td&gt;829.280029&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;64.540001&lt;/td&gt;
+&lt;td&gt;64.540001&lt;/td&gt;
+&lt;td&gt;64.050003&lt;/td&gt;
+&lt;td&gt;64.230003&lt;/td&gt;
+&lt;td&gt;15850400.0&lt;/td&gt;
+&lt;td&gt;64.230003&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th rowspan="3" valign="top"&gt;2017-02-28&lt;/th&gt;
+&lt;th&gt;AAPL&lt;/th&gt;
+&lt;td&gt;137.080002&lt;/td&gt;
+&lt;td&gt;137.440002&lt;/td&gt;
+&lt;td&gt;136.699997&lt;/td&gt;
+&lt;td&gt;136.990005&lt;/td&gt;
+&lt;td&gt;23403500.0&lt;/td&gt;
+&lt;td&gt;136.990005&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;GOOG&lt;/th&gt;
+&lt;td&gt;825.609985&lt;/td&gt;
+&lt;td&gt;828.539978&lt;/td&gt;
+&lt;td&gt;820.200012&lt;/td&gt;
+&lt;td&gt;823.210022&lt;/td&gt;
+&lt;td&gt;2252300.0&lt;/td&gt;
+&lt;td&gt;823.210022&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;MSFT&lt;/th&gt;
+&lt;td&gt;64.080002&lt;/td&gt;
+&lt;td&gt;64.199997&lt;/td&gt;
+&lt;td&gt;63.759998&lt;/td&gt;
+&lt;td&gt;63.980000&lt;/td&gt;
+&lt;td&gt;23043900.0&lt;/td&gt;
+&lt;td&gt;63.980000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;3955 rows &amp;times; 6 columns&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[17]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;stacked&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_panel&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[17]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;&lt;class &amp;#x27;pandas.core.panel.panel&amp;#x27;=""&gt;
+Dimensions: 6 (items) x 1208 (major_axis) x 4 (minor_axis)
+Items axis: Open to Adj Close
+Major_axis axis: 2012-05-30 00:00:00 to 2017-02-28 00:00:00
+Minor_axis axis: AAPL to MSFT&lt;/class&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -14557,7 +17437,7 @@ Pandas基于NumPy构建，提供众多更高级的数据处理功能，使得以
 &lt;li&gt;&lt;a href="/2017/02/27/python_data_analysis5-3.html"&gt;汇总和描述性统计&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/2017/02/28/python_data_analysis5-4.html"&gt;处理缺失数据&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/2017/03/01/python_data_analysis5-5.html"&gt;层次化索引&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=""&gt;其他&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/2017/03/01/python_data_analysis5-6.html"&gt;其他&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content><category term="读书笔记"></category><category term="python"></category></entry><entry><title>基于决策表实现交易策略</title><link href="http://holbrook.github.io/2017/02/21/strategy_based_on_decision_table.html" rel="alternate"></link><published>2017-02-21T00:00:00+08:00</published><updated>2017-02-21T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2017-02-21:/2017/02/21/strategy_based_on_decision_table.html</id><summary type="html">&lt;p&gt;与编程语言级别的逻辑控制(&lt;code&gt;if-then-else&lt;/code&gt;，&lt;code&gt;switch&lt;/code&gt;) 相比，决策表能在一个平面中罗列出所有的可能情况，并清晰的指出相应的处理方式，不需要层层嵌套。用户不需要考虑其中的逻辑关系就能一眼看出其中什么样的动作对应什么样的情况，可读性大大提高，并且不容易因为疏忽产生不易察觉的错误。&lt;/p&gt;</summary><content type="html">&lt;p&gt;所以决策表是进行实现复杂控制逻辑的一个有力工具。现在，考虑构建一个通用的决策表，用于定义交易策略。&lt;/p&gt;
 &lt;h1 id="jue-ce-biao-yu-gui-ze-yin-qing"&gt;决策表与规则引擎&lt;/h1&gt;
 &lt;p&gt;决策表又称判断表，是一种呈表格状的图形工具，适用于描述处理判断条件较多，各条件又相互组合、有多种决策方案的情况。

@@ -84,7 +84,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (1)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -136,6 +136,22 @@
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
 
+<article>
+	<h3><a href="http://holbrook.github.io/2014/02/20/apache_karaf.html">Apache Karaf：OSGi中间件</a></h3>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a> on 2014-02-20. Tags: <a href="http://holbrook.github.io/tag/osgi.html">OSGi</a>, </h6>
+	<h1 id="wei-shi-yao-xu-yao-osgizhong-jian-jian">为什么需要&ldquo;OSGi中间件&rdquo;</h1>
+<p>尽管在OSGi Runtime(Felix, Equinox等)的基础上，OSGi组织又规定了<a href="/2014/01/22/osgi_blueprint_container.html">Blueprint规范以实现OSGi环境下的依赖注入</a>，
+但这还不够&mdash;&mdash;没有提供类似Web开发框架那样的一些&ldquo;平台级&rdquo;的功能。比如日志，控制台，配置文件等。</p>
+<p>很难想象没有Tomcat这样的Web中间件，开发Java Web应用的工作量有多大。同样的，OSGi应用也需要一种&ldquo;中间件&rdquo;，来实现各应用共性的一些功能，并管理应用的部署。</p>
+<p><a href="http://karaf.apache.org/">Apache Karaf</a>就是这样的一个"OSGi中间件"。最早，Karaf只是<a href="http://servicemix.apache.org/">Apache ServiceMix</a>的Kernel子项目，后来独立出来成为Apache的顶级项目。
+目前，Apache Karaf已经用于Apache Geronimo, Apache ServiceMix, Fuse ESB等项目。</p>
+<p>Apache Karaf的主要竞争对手是<a href="http://www.eclipse.org/virgo/">Eclipse Virgo</a>。</p>
+<h1 id="apache-karafde-gong-neng">Apache Karaf的功能</h1>
+<p><img alt="" src="images/fuse/Karaf.jpg"/></p>
+<p>Apache Karaf提供了如下 …</p>
+		<p class="continue"><a href="http://holbrook.github.io/2014/02/20/apache_karaf.html">Continue reading &raquo;</a></p>
+</article>
+<hr />
 <article>
 	<h3><a href="http://holbrook.github.io/2014/02/17/graphviz_in_markdown.html">在markdown中嵌入graphviz</a></h3>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a> on 2014-02-17. Tags: <a href="http://holbrook.github.io/tag/graph.html">graph</a>, <a href="http://holbrook.github.io/tag/markdown.html">markdown</a>, </h6>
@@ -257,13 +273,6 @@ GUI环境，也可以生成图片在Web环境中使用。后来又增加了对SW
 		<p class="continue"><a href="http://holbrook.github.io/2014/01/12/e4_platform_services.html">Continue reading &raquo;</a></p>
 </article>
 <hr />
-<article>
-	<h3><a href="http://holbrook.github.io/2014/01/08/build_osgi_bundle_with_tycho_maven_plugin.html">Tycho：用Maven构建Eclipse Plugin项目</a></h3>
-	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a> on 2014-01-08. Tags: <a href="http://holbrook.github.io/tag/osgi.html">OSGi</a>, <a href="http://holbrook.github.io/tag/java.html">java</a>, <a href="http://holbrook.github.io/tag/gui.html">GUI</a>, </h6>
-	<p>Tycho以一组maven插件的形式，支持Eclipse的plug-ins, features, update sites (based on p2) 、products等类型工程的构建。</p>
-		<p class="continue"><a href="http://holbrook.github.io/2014/01/08/build_osgi_bundle_with_tycho_maven_plugin.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
 
 <div class="row">
 	<div class="small-12 columns text-center">
@@ -301,41 +310,41 @@ GUI环境，也可以生成图片在Web环境中使用。后来又增加了对SW
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
 									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
 									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/env.html" class="tag-2">env</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
 									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
 									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
 									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (1)</a></li>
+											<li><a href="/2017/03/">2017-03  (2)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>
