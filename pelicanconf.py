@@ -9,7 +9,12 @@ SITEURL = ''
 
 # 编译信息
 PLUGIN_PATHS = ['./pelican-plugins','./plugins.custom']
-PLUGINS = ['tag_cloud','pelican-ipynb.markup','pelican-toc','relate_posts',
+PLUGINS = [
+    'tag_cloud',
+    'pelican-ipynb.markup',
+    'pelican-toc',
+    'relate_posts',
+    'plantuml',
 ]
 
 
