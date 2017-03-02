@@ -16,9 +16,6 @@
 [submodule "themes/niu-x2-sidebar"]
 	path =  themes/niu-x2-sidebar
 	url = http:///
-[submodule "pelican-plugins"]
-	path = pelican-plugins
-    url = https://github.com/getpelican/pelican-plugins.git
 [submodule "data"]
     path = content/dataology/python-for-data-analysis/data
     url = http:///

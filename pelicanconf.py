@@ -8,13 +8,29 @@ SITENAME = u'心内求法'
 SITEURL = ''
 
 # 编译信息
-PLUGIN_PATHS = ['./pelican-plugins','./plugins.custom']
+PLUGIN_PATHS = ['./plugins','./plugins.custom']
 PLUGINS = [
     'tag_cloud',
     'pelican-ipynb.markup',
     'pelican-toc',
     'relate_posts',
     'plantuml',
+
+    "i18n_subsites",
+    "better_codeblock_line_numbering",
+    "plantuml",
+#    "youku",
+#    "youtube",
+    'tipue_search',
+    'neighbors',
+    'series',
+    'bootstrapify',
+    'twitter_bootstrap_rst_directives',
+    "render_math",
+    'extract_toc',
+    'tag_cloud',
+    'sitemap',
+    'summary'
 ]
 
 
@@ -56,12 +72,8 @@ TAG_URL = ('tag/{slug}.html')     #The URL to use for a tag.
 TAG_SAVE_AS = ('tag/{slug}.html')  #The location to save the tag page.
 
 
-
-#THEME = 'themes/pelican-alchemy/alchemy'
-#THEME = 'themes/pelican-bootstrap3'
-THEME = 'themes/my-foundation'
-#THEME = 'themes/foundation-default-colours'
-#THEME = 'themes/my-niu-x2'
+#THEME = 'themes/my-foundation'
+THEME = 'themes/pelican-bootstrap3'
 
 
 # Feed generation is usually not desired when developing
