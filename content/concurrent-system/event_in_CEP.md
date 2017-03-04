@@ -3,12 +3,12 @@ date: 2013-12-21
 category: 并发系统
 tags: CEP
 summary:
-    [CEP](/2012/11/06/about_cep.html)处理复杂事件。宽泛的事件，是指在应用程序域中的状态的一个有意义改变的一条记录。
-    而复杂事件处理关注[事件之间的相关性](/2013/12/21/Temporal_of_CEP.html),以及原子事件组合成的复杂(复合)事件。
+    [CEP]({filename}cep_about.md)处理复杂事件。宽泛的事件，是指在应用程序域中的状态的一个有意义改变的一条记录。
+    而复杂事件处理关注[事件之间的相关性]({filename}Temporal_of_CEP.md),以及原子事件组合成的复杂(复合)事件。
 
 
-[CEP](/2012/11/06/about_cep.html)处理复杂事件。宽泛的事件，是指在应用程序域中的状态的一个有意义改变的一条记录。
-而复杂事件处理关注[事件之间的相关性](/2013/12/21/Temporal_of_CEP.html),以及原子事件组合成的复杂(复合)事件。
+[CEP]({filename}cep_about.md)处理复杂事件。宽泛的事件，是指在应用程序域中的状态的一个有意义改变的一条记录。
+而复杂事件处理关注[事件之间的相关性]({filename}Temporal_of_CEP.md),以及原子事件组合成的复杂(复合)事件。
 
 CEP与规则引擎有类似之处，但CEP中的事件(Event)是一种特殊类型的事实(Fact)。其特殊性在于：
 
@@ -38,7 +38,7 @@ CEP与规则引擎有类似之处，但CEP中的事件(Event)是一种特殊类�
 
 # 事件声明
 
-DRL中的[declare](/2012/12/06/rule_language.html#menuIndex7)可以用于声明事件，只需要在declare中增加一条`@role(event)`
+DRL中的[declare]({filename}../develop/rule_language.md)可以用于声明事件，只需要在declare中增加一条`@role(event)`
 的元数据。实际上，declare默认隐含了`@role(fact)`的元数据，表面声明的是事实(Fact)。
 
 比如：

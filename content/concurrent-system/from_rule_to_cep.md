@@ -3,10 +3,12 @@ date: 2013-12-22
 category: 并发系统
 tags: CEP
 summary:
-    Drools Fusion既是规则引擎，又可以作为CEP。除了[事件定义](/2013/12/21/event_in_CEP.html)和[时间推理](/2013/12/21/Temporal_of_CEP.html)之外，对于引擎本身也会有一些不同的使用。主要体现在会话时钟、流模式、滑动窗口和对事件的内存管理。
+    Drools Fusion既是规则引擎，又可以作为CEP。除了[事件定义]({filename}event_in_CEP.md)和
+    [时间推理]({filename}Temporal_of_CEP.md)之外，对于引擎本身也会有一些不同的使用。主要体现在会话时钟、流模式、滑动窗口和对事件的内存管理。
 
-Drools Fusion既是规则引擎，又可以作为CEP。除了[事件定义](/2013/12/21/event_in_CEP.html)和[时间推理](/2013/12/21/Temporal_of_CEP.html)之外，对于引擎本身也会有一些不同的使用。主要体现在会话时钟、流模式、滑动窗口和对事件的内存管理。
-
+Drools Fusion既是规则引擎，又可以作为CEP。除了[事件定义]({filename}event_in_CEP.md)和
+[时间推理]({filename}Temporal_of_CEP.md)之外，对于引擎本身也会有一些不同的使用。
+主要体现在会话时钟、流模式、滑动窗口和对事件的内存管理。
 
 # 会话时钟
 
@@ -59,9 +61,9 @@ FactHandle handle3 = session.insert( tick3 );
 Drools默认运行在云(Cloud)模式下。云模式下没有时间流的概念，引擎知道所有的事实(Fact)和事件(Event)。此时引擎将所有的事实/事件看做是一个无序的云。
 
 由于云模式下引擎没有“现在”的概念，尽管事件具有时间戳、期限等元数据，这些数据也仅仅作为事件的属性，
-不代表事件发生的顺序，也不能进行[时间推理](/2013/12/21/Temporal_of_CEP.html)。
+不代表事件发生的顺序，也不能进行[时间推理]({filename}Temporal_of_CEP.md)。
 
-如果需要处理实时/准实时事件(Event)，需要[时间推理](/2013/12/21/Temporal_of_CEP.html)，Drools必须工作在流(Stream)模式下。
+如果需要处理实时/准实时事件(Event)，需要[时间推理]({filename}Temporal_of_CEP.md)，Drools必须工作在流(Stream)模式下。
 此时要求每个流中的事件必须按照时间顺序插入。
 
 ## 启用流模式

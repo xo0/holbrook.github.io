@@ -10,7 +10,7 @@ Summary:
 
 由这两个时间属性，还可以计算出事件结束的事件。
 
-时间推理(Temporal)是CEP中特有的条件判断([LHS](/2012/12/06/rule_language.html#menuIndex3))，其判断的要素正是基于事件的上述时间属性。
+时间推理(Temporal)是CEP中特有的条件判断([LHS]({filename}../develop/rule_language.md)，其判断的要素正是基于事件的上述时间属性。
 
 Allen在《An Interval-based Representation of Temporal Knowledge》中描述了13种时间推理的运算符。
 
