@@ -10,3 +10,6 @@
 [submodule "data"]
     path = content/dataology/python-for-data-analysis/data
     url = http:///
+[submodule "themes/pelican-bootstrap3"]
+	path = themes/pelican-bootstrap3
+	url = git@github.com:holbrook/pelican-bootstrap3.git
