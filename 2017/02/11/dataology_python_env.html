@@ -71,6 +71,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -85,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (5)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -122,6 +123,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -147,7 +149,7 @@
 
 
 
-	<p>在<a href="http://holbrook.github.io/2017/02/05/index.html">《数据科学的知识体系》</a>中，
+	<html><body><p>在<a href="http://holbrook.github.io/2017/02/05/index.html">《数据科学的知识体系》</a>中，
 列出了进行数据科学研究所需的知识。但Swami Chandrasekaran明显更喜欢 R 。
 我个人更倾向于 python。至于为什么不是 R 或 Matlib，可以参考
 <a href="https://futures.io/matlab-r-project-python/33828-r-vs-python-vs-matlab-quant-language-war.html">《R vs Python vs matlab: the quant language war》</a>和
@@ -163,13 +165,13 @@
 可以从<a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">清华大学开源软件镜像站(TUNA)</a>下载。
 但还是建议<a href="http://holbrook.github.io/2017/02/11/windows_pkg_manager_chocolatey.html">使用包管理器</a>
 进行安装，安装后再配置TNUA 上Anaconda 仓库的镜像作为源：</p>
-<div class="highlight"><pre><span></span>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-conda config --set show_channel_urls yes
+<div class="highlight"><pre><span class="code-line"><span></span>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span>
+<span class="code-line">conda config --set show_channel_urls yes</span>
 </pre></div>
 <p>安装和配置完 Anaconda 后，可以使用其自带的 python 包管理器安装 python 模块，也可以使用常用的 <code>pip</code>。
 但要注意环境的配置。比如：</p>
-<div class="highlight"><pre><span></span>conda --version  # 查看版本
-conda install seaborn #
+<div class="highlight"><pre><span class="code-line"><span></span>conda --version  # 查看版本</span>
+<span class="code-line">conda install seaborn #</span>
 </pre></div>
 <h2 id="ipython-jupyter-he-spyder">ipython, jupyter 和 spyder</h2>
 <p>python 本身提供了类似shell的交互式解释器，但是并不好用， <a href="http://ipython.org/">IPython</a> 对其进行了极大加强。
@@ -301,7 +303,7 @@ Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。
 </ul>
 <h1 id="can-kao-zi-liao_1">参考资料</h1>
 <div class="footnote">
-<hr>
+<hr/>
 <ol>
 <li id="fn-1">
 <p><a href="http://www.cnblogs.com/super-d2/p/4725818.html">Python科学计算发行版&mdash;Anaconda</a>&nbsp;<a class="footnote-backref" href="#fnref-1" title="Jump back to footnote 1 in the text">↩</a></p>
@@ -319,13 +321,14 @@ Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。
 <p><a href="http://aliquote.org/memos/2011/02/07/python-for-statistical-computing">Python for statistical computing</a>&nbsp;<a class="footnote-backref" href="#fnref-5" title="Jump back to footnote 5 in the text">↩</a></p>
 </li>
 </ol>
-</hr></div>
+</div></body></html>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-02-11.</h6>
 
 
 	<h2>相关文章</h2>
     <ul>
         <li><a href="http://holbrook.github.io/2017/02/14/python_data_analysis1.html">利用Python进行数据分析(1)：简单介绍</a></li>
+        <li><a href="http://holbrook.github.io/2017/03/04/index.html">《机器学习》</a></li>
         <li><a href="http://holbrook.github.io/2017/03/01/python_data_analysis5-5.html">利用Python进行数据分析(5.5)：多层次索引</a></li>
         <li><a href="http://holbrook.github.io/2017/03/01/python_data_analysis5-6.html">利用Python进行数据分析(5.6)：Pandas 其他</a></li>
         <li><a href="http://holbrook.github.io/2017/02/28/python_data_analysis5-4.html">利用Python进行数据分析(5.4)：处理缺失数据</a></li>
@@ -334,7 +337,6 @@ Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。
         <li><a href="http://holbrook.github.io/2017/02/24/python_data_analysis5-2.html">利用Python进行数据分析(5.2)：Pandas  基本功能</a></li>
         <li><a href="http://holbrook.github.io/2017/02/23/python_data_analysis5.html">利用Python进行数据分析(5)：Pandas 入门</a></li>
         <li><a href="http://holbrook.github.io/2017/02/17/python_data_analysis4.html">利用Python进行数据分析(4)：NumPy</a></li>
-        <li><a href="http://holbrook.github.io/2017/02/16/python_data_analysis2-3.html">利用Python进行数据分析(2.3)：全美婴儿姓名分析</a></li>
     </ul>
 </article>
 
@@ -401,41 +403,44 @@ Matplotlib很强大，但是也很复杂。因此推荐一开始使用Seaborn。
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/suo-yin.html" class="tag-3">索引</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/ji-qi-xue-xi.html" class="tag-3">机器学习</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/jiao-yi-gui-ze.html" class="tag-4">交易规则</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (2)</a></li>
+											<li><a href="/2017/03/">2017-03  (5)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>

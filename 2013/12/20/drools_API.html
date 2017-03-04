@@ -71,6 +71,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -85,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (5)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -122,6 +123,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -147,16 +149,16 @@
 
 
 
-	<p><a href="/2012/03/20/rule_engine_1.html">如前所述</a>，
+	<html><body><p><a href="/2012/03/20/rule_engine_1.html">如前所述</a>，
 规则引擎中，将知识表达为规则（rules），要分析的情况定义为事实（facts）。二者在内存中的存储分别称为Production Memory和Working Memory。在外围，还会有一个执行引擎（Execution Engine）。</p>
 <p>与此对应，规则引擎API也分成三个部分。在Drools中，分别叫做Knowledge API，Fact API和Execution API。</p>
 <h1 id="knowledge-api">Knowledge API</h1>
 <p>Drools将知识库(KnowledgeBase)作为<a href="/2012/12/07/jsr94.html">JSR94</a>中的规则执行集(RuleExecutionSet)。知识库中的知识以包(KnowledgePackage)为单位组合而成。每个包中聚合多个规则(Rule)。</p>
 <p>通常，一个包中的内容会在一个或多个资源(Resource)中保存。资源的类型可以有很多种,如.drl 文件、.dslr 文件或 xls 文件等。</p>
 <p>规则包还可以从规则流(rule flow) 文件中获取。</p>
-<p><img alt="KnowledgeBase" src="images/rule-engine/KnowledgeBase.png"/></p>
+<p><img alt="KnowledgeBase" class="img-responsive" src="images/rule-engine/KnowledgeBase.png"/></p>
 <p>与此对应，Drools定义了一组Knowledge API来操作知识库。</p>
-<p><img alt="KnowledgeBase" src="images/rule-engine/KnowledgeAPI.png"/></p>
+<p><img alt="KnowledgeBase" class="img-responsive" src="images/rule-engine/KnowledgeAPI.png"/></p>
 <p>构建知识库的一般过程为：</p>
 <ol>
 <li>通过ResourceFactory获取资源。可以从Classpath、URL、File、ByteArray、Reader等输入源中获取</li>
@@ -168,38 +170,38 @@
 </ol>
 <p>代码示例：</p>
 <p>{% highlight java %}</p>
-<div class="highlight"><pre><span></span><span class="nt">KnowledgeBase</span> <span class="nt">buildKBase</span><span class="o">()</span><span class="p">{</span>
-
-    <span class="n">Resource</span> <span class="n">res</span> <span class="o">=</span> <span class="n">ResourceFactory</span><span class="o">.</span><span class="n">newClassPathResource</span><span class="p">(</span><span class="s2">"hello.drl"</span><span class="o">,</span> <span class="n">Demo</span><span class="o">.</span><span class="n">class</span><span class="p">);</span>
-
-    <span class="n">KnowledgeBuilder</span> <span class="n">kbuilder</span> <span class="o">=</span> <span class="n">KnowledgeBuilderFactory</span>
-            <span class="o">.</span><span class="n">newKnowledgeBuilder</span><span class="p">();</span>
-
-    <span class="n">kbuilder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">res</span><span class="o">,</span><span class="n">ResourceType</span><span class="o">.</span><span class="n">DRL</span><span class="p">);</span>
-
-    <span class="o">//</span><span class="n">validate</span>
-    <span class="n">if</span> <span class="p">(</span><span class="n">kbuilder</span><span class="o">.</span><span class="n">hasErrors</span><span class="p">())</span> <span class="err">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"规则中存在错误,错误消息如下:"</span><span class="p">);</span>
-        <span class="n">KnowledgeBuilderErrors</span> <span class="n">kbuidlerErrors</span> <span class="o">=</span> <span class="n">kbuilder</span><span class="o">.</span><span class="n">getErrors</span><span class="p">();</span>
-        <span class="n">for</span> <span class="p">(</span><span class="n">Iterator</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">kbuidlerErrors</span><span class="o">.</span><span class="n">iterator</span><span class="p">();</span> <span class="n">iter</span><span class="o">.</span><span class="n">hasNext</span><span class="p">();)</span> <span class="err">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="n">iter</span><span class="o">.</span><span class="n">next</span><span class="p">());</span>
-        <span class="p">}</span>
-    <span class="err">}</span>
-
-    <span class="nt">Collection</span><span class="o">&lt;</span><span class="nt">KnowledgePackage</span><span class="o">&gt;</span> <span class="nt">kpackages</span> <span class="o">=</span> <span class="nt">kbuilder</span><span class="nc">.getKnowledgePackages</span><span class="o">();</span>
-
-    <span class="nt">KnowledgeBaseConfiguration</span> <span class="nt">kbConf</span> <span class="o">=</span>
-            <span class="nt">KnowledgeBaseFactory</span><span class="nc">.newKnowledgeBaseConfiguration</span><span class="o">();</span>
-    <span class="nt">kbConf</span><span class="nc">.setProperty</span><span class="o">(</span> <span class="s2">"org.drools.sequential"</span><span class="o">,</span> <span class="s2">"true"</span><span class="o">);</span>
-
-    <span class="o">//</span><span class="nt">KnowledgeBase</span> <span class="nt">kbase</span><span class="o">=</span><span class="nt">KnowledgeBaseFactory</span><span class="nc">.newKnowledgeBase</span><span class="o">();</span>
-    <span class="nt">KnowledgeBase</span> <span class="nt">kbase</span> <span class="o">=</span>
-            <span class="nt">KnowledgeBaseFactory</span><span class="nc">.newKnowledgeBase</span><span class="o">(</span><span class="nt">kbConf</span><span class="o">);</span>
-
-    <span class="nt">kbase</span><span class="nc">.addKnowledgePackages</span><span class="o">(</span><span class="nt">kpackages</span><span class="o">);</span>
-
-    <span class="nt">return</span> <span class="nt">kbase</span><span class="o">;</span>
-<span class="err">}</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nt">KnowledgeBase</span> <span class="nt">buildKBase</span><span class="o">()</span><span class="p">{</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="n">Resource</span> <span class="n">res</span> <span class="o">=</span> <span class="n">ResourceFactory</span><span class="o">.</span><span class="n">newClassPathResource</span><span class="p">(</span><span class="s2">"hello.drl"</span><span class="o">,</span> <span class="n">Demo</span><span class="o">.</span><span class="n">class</span><span class="p">);</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="n">KnowledgeBuilder</span> <span class="n">kbuilder</span> <span class="o">=</span> <span class="n">KnowledgeBuilderFactory</span></span>
+<span class="code-line">            <span class="o">.</span><span class="n">newKnowledgeBuilder</span><span class="p">();</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="n">kbuilder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">res</span><span class="o">,</span><span class="n">ResourceType</span><span class="o">.</span><span class="n">DRL</span><span class="p">);</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="o">//</span><span class="n">validate</span></span>
+<span class="code-line">    <span class="n">if</span> <span class="p">(</span><span class="n">kbuilder</span><span class="o">.</span><span class="n">hasErrors</span><span class="p">())</span> <span class="err">{</span></span>
+<span class="code-line">        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"规则中存在错误,错误消息如下:"</span><span class="p">);</span></span>
+<span class="code-line">        <span class="n">KnowledgeBuilderErrors</span> <span class="n">kbuidlerErrors</span> <span class="o">=</span> <span class="n">kbuilder</span><span class="o">.</span><span class="n">getErrors</span><span class="p">();</span></span>
+<span class="code-line">        <span class="n">for</span> <span class="p">(</span><span class="n">Iterator</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">kbuidlerErrors</span><span class="o">.</span><span class="n">iterator</span><span class="p">();</span> <span class="n">iter</span><span class="o">.</span><span class="n">hasNext</span><span class="p">();)</span> <span class="err">{</span></span>
+<span class="code-line">            <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="n">iter</span><span class="o">.</span><span class="n">next</span><span class="p">());</span></span>
+<span class="code-line">        <span class="p">}</span></span>
+<span class="code-line">    <span class="err">}</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nt">Collection</span><span class="o">&lt;</span><span class="nt">KnowledgePackage</span><span class="o">&gt;</span> <span class="nt">kpackages</span> <span class="o">=</span> <span class="nt">kbuilder</span><span class="nc">.getKnowledgePackages</span><span class="o">();</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nt">KnowledgeBaseConfiguration</span> <span class="nt">kbConf</span> <span class="o">=</span></span>
+<span class="code-line">            <span class="nt">KnowledgeBaseFactory</span><span class="nc">.newKnowledgeBaseConfiguration</span><span class="o">();</span></span>
+<span class="code-line">    <span class="nt">kbConf</span><span class="nc">.setProperty</span><span class="o">(</span> <span class="s2">"org.drools.sequential"</span><span class="o">,</span> <span class="s2">"true"</span><span class="o">);</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="o">//</span><span class="nt">KnowledgeBase</span> <span class="nt">kbase</span><span class="o">=</span><span class="nt">KnowledgeBaseFactory</span><span class="nc">.newKnowledgeBase</span><span class="o">();</span></span>
+<span class="code-line">    <span class="nt">KnowledgeBase</span> <span class="nt">kbase</span> <span class="o">=</span></span>
+<span class="code-line">            <span class="nt">KnowledgeBaseFactory</span><span class="nc">.newKnowledgeBase</span><span class="o">(</span><span class="nt">kbConf</span><span class="o">);</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nt">kbase</span><span class="nc">.addKnowledgePackages</span><span class="o">(</span><span class="nt">kpackages</span><span class="o">);</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nt">return</span> <span class="nt">kbase</span><span class="o">;</span></span>
+<span class="code-line"><span class="err">}</span></span>
 </pre></div>
 <p>{% endhighlight %}</p>
 <h1 id="fact-api">Fact API</h1>
@@ -244,12 +246,12 @@ public interface WorkingMemoryEventListener
     extends
     EventListener {
     void objectInserted(ObjectInsertedEvent event);</p>
-<div class="highlight"><pre><span></span>void objectUpdated(ObjectUpdatedEvent event);
-
-void objectRetracted(ObjectRetractedEvent event);
+<div class="highlight"><pre><span class="code-line"><span></span>void objectUpdated(ObjectUpdatedEvent event);</span>
+<span class="code-line"></span>
+<span class="code-line">void objectRetracted(ObjectRetractedEvent event);</span>
 </pre></div>
 <p>}</p>
-<p>{% endhighlight %}</p>
+<p>{% endhighlight %}</p></body></html>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-12-20.</h6>
 
 
@@ -326,41 +328,44 @@ void objectRetracted(ObjectRetractedEvent event);
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/suo-yin.html" class="tag-3">索引</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/ji-qi-xue-xi.html" class="tag-3">机器学习</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/jiao-yi-gui-ze.html" class="tag-4">交易规则</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (2)</a></li>
+											<li><a href="/2017/03/">2017-03  (5)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>

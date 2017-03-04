@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>心内求法 - 投资分析</title><link href="http://holbrook.github.io/" rel="alternate"></link><link href="http://holbrook.github.io/feeds/tou-zi-fen-xi.atom.xml" rel="self"></link><id>http://holbrook.github.io/</id><updated>2013-01-26T00:00:00+08:00</updated><entry><title>技术分析的理论体系</title><link href="http://holbrook.github.io/2013/01/26/technical_analysis.html" rel="alternate"></link><published>2013-01-26T00:00:00+08:00</published><updated>2013-01-26T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-01-26:/2013/01/26/technical_analysis.html</id><summary type="html">&lt;p&gt;100个股民可能有101种分析手段，但通常都是采用技术分析（Technical Analysis,TA)。本文视图整理技术分析理论的总体理论框架，以便对于研究内容有一个定位和界定，并作为今后学习的索引。&lt;/p&gt;</summary><content type="html">&lt;h1 id="jie-zhi-tou-zi-he-qu-shi-tou-zi"&gt;价值投资和趋势投资&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>心内求法 - 投资分析</title><link href="http://holbrook.github.io/" rel="alternate"></link><link href="http://holbrook.github.io/feeds/tou-zi-fen-xi.atom.xml" rel="self"></link><id>http://holbrook.github.io/</id><updated>2013-01-26T00:00:00+08:00</updated><entry><title>技术分析的理论体系</title><link href="http://holbrook.github.io/2013/01/26/technical_analysis.html" rel="alternate"></link><published>2013-01-26T00:00:00+08:00</published><updated>2013-01-26T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-01-26:/2013/01/26/technical_analysis.html</id><summary type="html">&lt;p&gt;100个股民可能有101种分析手段，但通常都是采用技术分析（Technical Analysis,TA)。本文视图整理技术分析理论的总体理论框架，以便对于研究内容有一个定位和界定，并作为今后学习的索引。&lt;/p&gt;</summary><content type="html">&lt;html&gt;&lt;body&gt;&lt;h1 id="jie-zhi-tou-zi-he-qu-shi-tou-zi"&gt;价值投资和趋势投资&lt;/h1&gt;
 &lt;p&gt;投资的终极目的就是获利；为了获利，就要找出价格变化的一些规律； 通过不同的手段发现价格规律，就形成了不同的投资策略。 策略的不同，体现了投资者看待市场角度的不同。&lt;/p&gt;
 &lt;p&gt;大体来说，证券市场的投资策略主要有两种：&lt;/p&gt;
 &lt;ul&gt;
@@ -129,4 +129,4 @@
 &lt;li&gt;&lt;a href="http://www.csta.org/"&gt;加拿大技术分析师公会&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.moneydj.com/z/analyst/analyst_home.htm"&gt;MoneyDJ技术分析学院&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.facebook.com/pages/tu-biao-ren-ji-shu-fen-xi/290418956236"&gt;图表人技术分析Facebook专页&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content></entry></feed>
+&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</content></entry></feed>

@@ -71,6 +71,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 							<li class="active"><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -85,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (5)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -122,6 +123,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 								<li class="active"><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -147,7 +149,7 @@
 
 
 
-	<p>以前在<a href="http://www.cnblogs.com/holbrook/" title="心内求法">博客园</a>时，用<a href="http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html" title="Emacs学习笔记(9):org-mode，最好的文档编辑利器，没有之一">emacs org-mode</a> 写博客，并且写了一系列<a href="http://www.cnblogs.com/holbrook/tag/emacs/" title="emacs 学习笔记">《emacs 学习笔记》</a>。
+	<html><body><p>以前在<a href="http://www.cnblogs.com/holbrook/" title="心内求法">博客园</a>时，用<a href="http://www.cnblogs.com/holbrook/archive/2012/04/12/2444992.html" title="Emacs学习笔记(9):org-mode，最好的文档编辑利器，没有之一">emacs org-mode</a> 写博客，并且写了一系列<a href="http://www.cnblogs.com/holbrook/tag/emacs/" title="emacs 学习笔记">《emacs 学习笔记》</a>。
 emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是有些不适应：</p>
 <ol>
 <li>
@@ -186,47 +188,47 @@ emacs 和 org-mode 的强大毋庸置疑，但是经过1年多的使用，还是
 </ol>
 <h2 id="an-zhuang-vundle">安装Vundle</h2>
 <p>安装Vundle只需要一条命令：</p>
-<div class="highlight"><pre><span></span>$ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+<div class="highlight"><pre><span class="code-line"><span></span>$ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle</span>
 </pre></div>
 <p>如果你使用git管理vim配置，还可以使用git submodule：</p>
-<div class="highlight"><pre><span></span>git submodule add https://github.com/gmarik/vundle.git vim/bundle/vundle
+<div class="highlight"><pre><span class="code-line"><span></span>git submodule add https://github.com/gmarik/vundle.git vim/bundle/vundle</span>
 </pre></div>
 <p>会在.gitmodule中增加如下配置：</p>
-<div class="highlight"><pre><span></span><span class="k">[submodule "vim/bundle/vundle"]</span>
-    <span class="na">path</span> <span class="o">=</span> <span class="s">vim/bundle/vundle</span>
-<span class="s">    url = https://github.com/gmarik/vundle.git</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="k">[submodule "vim/bundle/vundle"]</span></span>
+<span class="code-line">    <span class="na">path</span> <span class="o">=</span> <span class="s">vim/bundle/vundle</span></span>
+<span class="code-line"><span class="s">    url = https://github.com/gmarik/vundle.git</span></span>
 </pre></div>
 <p>之后运行git命令：</p>
-<div class="highlight"><pre><span></span>git submodule init
-git submodule update
+<div class="highlight"><pre><span class="code-line"><span></span>git submodule init</span>
+<span class="code-line">git submodule update</span>
 </pre></div>
 <p>即可。</p>
 <h2 id="pei-zhi-cha-jian">配置插件</h2>
 <p>在.vimrc中配置需要的插件，作者给出了一个例子：</p>
-<div class="highlight"><pre><span></span>set nocompatible               " be iMproved
-filetype off                   " required!
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
-
-
-" My Bundles here:
-"
-" original repos on github
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'tpope/vim-rails.git'
-" vim-scripts repos
-Bundle 'L9'
-Bundle 'FuzzyFinder'
-" non github repos
-Bundle 'git://git.wincent.com/command-t.git'
-" ...
+<div class="highlight"><pre><span class="code-line"><span></span>set nocompatible               " be iMproved</span>
+<span class="code-line">filetype off                   " required!</span>
+<span class="code-line">set rtp+=~/.vim/bundle/vundle/</span>
+<span class="code-line">call vundle#rc()</span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line">" let Vundle manage Vundle</span>
+<span class="code-line">" required!</span>
+<span class="code-line">Bundle 'gmarik/vundle'</span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line">" My Bundles here:</span>
+<span class="code-line">"</span>
+<span class="code-line">" original repos on github</span>
+<span class="code-line">Bundle 'tpope/vim-fugitive'</span>
+<span class="code-line">Bundle 'Lokaltog/vim-easymotion'</span>
+<span class="code-line">Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}</span>
+<span class="code-line">Bundle 'tpope/vim-rails.git'</span>
+<span class="code-line">" vim-scripts repos</span>
+<span class="code-line">Bundle 'L9'</span>
+<span class="code-line">Bundle 'FuzzyFinder'</span>
+<span class="code-line">" non github repos</span>
+<span class="code-line">Bundle 'git://git.wincent.com/command-t.git'</span>
+<span class="code-line">" ...</span>
 </pre></div>
 <p>注意：</p>
 <ol>
@@ -235,23 +237,23 @@ Bundle 'git://git.wincent.com/command-t.git'
 </ol>
 <h2 id="an-zhuang-cha-jian">安装插件</h2>
 <p>只需要在启动vim后，运行命令：</p>
-<div class="highlight"><pre><span></span>:BundleInstall
+<div class="highlight"><pre><span class="code-line"><span></span>:BundleInstall</span>
 </pre></div>
 <p>Vbundle就会自动安装或更新前面配置好的插件</p>
 <h2 id="qi-ta-cao-zuo">其他操作</h2>
 <p>使用帮助：</p>
-<div class="highlight"><pre><span></span>:h vundle
+<div class="highlight"><pre><span class="code-line"><span></span>:h vundle</span>
 </pre></div>
 <p>查看插件清单：</p>
-<div class="highlight"><pre><span></span>:BundleList
+<div class="highlight"><pre><span class="code-line"><span></span>:BundleList</span>
 </pre></div>
 <p>搜索插件：</p>
-<div class="highlight"><pre><span></span>:BundleSearch markdown
+<div class="highlight"><pre><span class="code-line"><span></span>:BundleSearch markdown</span>
 </pre></div>
 <p>清理不用的插件：</p>
-<div class="highlight"><pre><span></span>:BundleClean
-#或者
-:BundleClean markdown
+<div class="highlight"><pre><span class="code-line"><span></span>:BundleClean</span>
+<span class="code-line">#或者</span>
+<span class="code-line">:BundleClean markdown</span>
 </pre></div>
 <h1 id="bi-bei-cha-jian-todo_1">必备插件（TODO）</h1>
 <p>下面是我使用的一些vim插件，直接在.vimrc中配置。可以在 <a href="https://github.com/holbrook/macENV/blob/master/vimrc">github</a> 查看。</p>
@@ -276,9 +278,9 @@ Bundle 'git://git.wincent.com/command-t.git'
 <p>别人的一个更详细的版本：</p>
 <p><a href="images/2013/vim_addon_manager/vi-vim-cheat-sheet-list.png">vi-vim-cheat-sheet-list</a></p>
 <p>如果已经有一定的基础，还可以使用vim cheat sheet。下面的图分别可以用于打印版或者桌面背景。</p>
-<p><img alt="打印版，Eng" src="images/2013/vim_addon_manager/vi-vim-cheat-sheet.gif"/></p>
-<p><img alt="打印版，Chs" src="images/2013/vim_addon_manager/vi-vim-cheat-sheet-sch.gif"/></p>
-<p><img alt="桌面版，Eng" src="images/2013/vim_addon_manager/vi-vim_cheat_sheet_dark.png"/></p>
+<p><img alt="打印版，Eng" class="img-responsive" src="images/2013/vim_addon_manager/vi-vim-cheat-sheet.gif"/></p>
+<p><img alt="打印版，Chs" class="img-responsive" src="images/2013/vim_addon_manager/vi-vim-cheat-sheet-sch.gif"/></p>
+<p><img alt="桌面版，Eng" class="img-responsive" src="images/2013/vim_addon_manager/vi-vim_cheat_sheet_dark.png"/></p></body></html>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-05-23.</h6>
 
 
@@ -347,41 +349,44 @@ Bundle 'git://git.wincent.com/command-t.git'
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/suo-yin.html" class="tag-3">索引</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/ji-qi-xue-xi.html" class="tag-3">机器学习</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/jiao-yi-gui-ze.html" class="tag-4">交易规则</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (2)</a></li>
+											<li><a href="/2017/03/">2017-03  (5)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>

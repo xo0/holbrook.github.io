@@ -71,6 +71,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li class="active"><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -85,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (5)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -122,6 +123,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li class="active"><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -147,7 +149,9 @@
 
 
 
-	<p>Drools Fusion既是规则引擎，又可以作为CEP。除了<a href="/2013/12/21/event_in_CEP.html">事件定义</a>和<a href="/2013/12/21/Temporal_of_CEP.html">时间推理</a>之外，对于引擎本身也会有一些不同的使用。主要体现在会话时钟、流模式、滑动窗口和对事件的内存管理。</p>
+	<html><body><p>Drools Fusion既是规则引擎，又可以作为CEP。除了<a href="http://holbrook.github.io/2013/12/21/event_in_CEP.html">事件定义</a>和
+<a href="http://holbrook.github.io/2013/12/21/Temporal_of_CEP.html">时间推理</a>之外，对于引擎本身也会有一些不同的使用。
+主要体现在会话时钟、流模式、滑动窗口和对事件的内存管理。</p>
 <h1 id="hui-hua-shi-zhong">会话时钟</h1>
 <p>由于事件的时间性，处理事件时需要一个参考时钟。
 这个参考时钟在会话配置(KnowledgeSessionConfiguration)中指定，所以称为会话时钟(Session Clock)。</p>
@@ -182,8 +186,8 @@ FactHandle handle3 = session.insert( tick3 );</p>
 <h1 id="liu-mo-shi">流模式</h1>
 <p>Drools默认运行在云(Cloud)模式下。云模式下没有时间流的概念，引擎知道所有的事实(Fact)和事件(Event)。此时引擎将所有的事实/事件看做是一个无序的云。</p>
 <p>由于云模式下引擎没有&ldquo;现在&rdquo;的概念，尽管事件具有时间戳、期限等元数据，这些数据也仅仅作为事件的属性，
-不代表事件发生的顺序，也不能进行<a href="/2013/12/21/Temporal_of_CEP.html">时间推理</a>。</p>
-<p>如果需要处理实时/准实时事件(Event)，需要<a href="/2013/12/21/Temporal_of_CEP.html">时间推理</a>，Drools必须工作在流(Stream)模式下。
+不代表事件发生的顺序，也不能进行<a href="http://holbrook.github.io/2013/12/21/Temporal_of_CEP.html">时间推理</a>。</p>
+<p>如果需要处理实时/准实时事件(Event)，需要<a href="http://holbrook.github.io/2013/12/21/Temporal_of_CEP.html">时间推理</a>，Drools必须工作在流(Stream)模式下。
 此时要求每个流中的事件必须按照时间顺序插入。</p>
 <h2 id="qi-yong-liu-mo-shi">启用流模式</h2>
 <p>Drools默认运行在云模式下，可以通过以下方式启用流模式：</p>
@@ -225,21 +229,21 @@ config.setOption( EventProcessingOption.STREAM );</p>
 <p>在流模式中，规则的<a href="/2012/12/06/rule_language.html#menuIndex3">LHS部分</a>
 可以使用滑动窗口限定只关注一定范围内的事件。这个范围可以是时间或事件的个数，分别成为滑动时间窗口和滑动长度窗口。</p>
 <p>比如：</p>
-<div class="highlight"><pre><span></span><span class="x">StockTick() over window:time( 2m )</span>
-
-<span class="x">Number( doubleValue &gt; </span><span class="p">$</span><span class="nv">max</span><span class="x"> ) from accumulate(</span>
-<span class="x">    SensorReading( </span><span class="p">$</span><span class="nv">temp</span><span class="x"> : temperature ) over window:time( 10m ), average( </span><span class="p">$</span><span class="nv">temp</span><span class="x"> )</span>
-<span class="x">)</span>
-
-<span class="x">StockTick( company == "IBM" ) over window:length( 10 )</span>
-
-<span class="x">Number( doubleValue &gt; </span><span class="p">$</span><span class="nv">max</span><span class="x"> ) from accumulate(</span>
-<span class="x">    SensorReading( </span><span class="p">$</span><span class="nv">temp</span><span class="x"> : temperature ) over window:length( 100 ), average( </span><span class="p">$</span><span class="nv">temp</span><span class="x"> )</span>
-<span class="x">)</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="x">StockTick() over window:time( 2m )</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="x">Number( doubleValue &gt; </span><span class="p">$</span><span class="nv">max</span><span class="x"> ) from accumulate(</span></span>
+<span class="code-line"><span class="x">    SensorReading( </span><span class="p">$</span><span class="nv">temp</span><span class="x"> : temperature ) over window:time( 10m ), average( </span><span class="p">$</span><span class="nv">temp</span><span class="x"> )</span></span>
+<span class="code-line"><span class="x">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="x">StockTick( company == "IBM" ) over window:length( 10 )</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="x">Number( doubleValue &gt; </span><span class="p">$</span><span class="nv">max</span><span class="x"> ) from accumulate(</span></span>
+<span class="code-line"><span class="x">    SensorReading( </span><span class="p">$</span><span class="nv">temp</span><span class="x"> : temperature ) over window:length( 100 ), average( </span><span class="p">$</span><span class="nv">temp</span><span class="x"> )</span></span>
+<span class="code-line"><span class="x">)</span></span>
 </pre></div>
 <h1 id="nei-cun-guan-li">内存管理</h1>
 <p>在流模式下，引擎自动执行事件的内存管理。对于不可能再被匹配的事件自动释放。</p>
-<p>引擎会关注事件的@expires中指定的到期时间，并分析规则中隐含的到期时间，进行自动释放。</p>
+<p>引擎会关注事件的@expires中指定的到期时间，并分析规则中隐含的到期时间，进行自动释放。</p></body></html>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-12-22.</h6>
 
 
@@ -314,41 +318,44 @@ config.setOption( EventProcessingOption.STREAM );</p>
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/suo-yin.html" class="tag-3">索引</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/ji-qi-xue-xi.html" class="tag-3">机器学习</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/jiao-yi-gui-ze.html" class="tag-4">交易规则</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (2)</a></li>
+											<li><a href="/2017/03/">2017-03  (5)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>

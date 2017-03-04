@@ -71,6 +71,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -85,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (5)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -122,6 +123,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -147,7 +149,7 @@
 
 
 
-	<style type="text/css">/*!
+	<html><head><style type="text/css">/*!
 *
 * IPython notebook
 *
@@ -1119,13 +1121,13 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing text_cell rendered">
+</head><body><div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>《<a href="https://book.douban.com/subject/25779298/">利用Python进行数据分析</a>》读书笔记。</p>
-<p><a href="/2017/02/14/python_data_analysis2.html">第2章</a>中的例子： 美国婴儿姓名统计。</p>
+<p><a href="http://holbrook.github.io/2017/02/14/python_data_analysis2.html">第2章</a>中的例子： 美国婴儿姓名统计。</p>
 <p>所有用到的数据可以从<a href="https://github.com/wesm/pydata-book">作者的 github</a>下载。</p>
 <h4 id="0.-准备工作">0. 准备工作<a class="anchor-link" href="#0.-准备工作">&para;</a></h4>
 </div>
@@ -1136,8 +1138,8 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="o">%</span><span class="k">pylab</span> inline</span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span></span>
 </pre></div>
 </div>
 </div>
@@ -1146,7 +1148,7 @@ h6:hover .anchor-link {
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Populating the interactive namespace from numpy and matplotlib
+<pre><span class="code-line">Populating the interactive namespace from numpy and matplotlib</span>
 </pre>
 </div>
 </div>
@@ -1167,22 +1169,22 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#pd.read_csv('data/ch02/names/yob1880.txt', names=['name', 'sex', 'births'])</span>
-
-<span class="n">years</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1880</span><span class="p">,</span> <span class="mi">2011</span><span class="p">)</span>
-
-<span class="n">pieces</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'sex'</span><span class="p">,</span> <span class="s1">'births'</span><span class="p">]</span>
-
-<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s1">'data/ch02/names/yob</span><span class="si">%d</span><span class="s1">.txt'</span> <span class="o">%</span> <span class="n">year</span>
-    <span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
-
-    <span class="n">frame</span><span class="p">[</span><span class="s1">'year'</span><span class="p">]</span> <span class="o">=</span> <span class="n">year</span>
-    <span class="n">pieces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
-
-<span class="c1">#  将多个 DataFrame 连接成一个</span>
-<span class="n">names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">pieces</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1">#pd.read_csv('data/ch02/names/yob1880.txt', names=['name', 'sex', 'births'])</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">years</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1880</span><span class="p">,</span> <span class="mi">2011</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">pieces</span> <span class="o">=</span> <span class="p">[]</span></span>
+<span class="code-line"><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'sex'</span><span class="p">,</span> <span class="s1">'births'</span><span class="p">]</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span></span>
+<span class="code-line">    <span class="n">path</span> <span class="o">=</span> <span class="s1">'data/ch02/names/yob</span><span class="si">%d</span><span class="s1">.txt'</span> <span class="o">%</span> <span class="n">year</span></span>
+<span class="code-line">    <span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="n">frame</span><span class="p">[</span><span class="s1">'year'</span><span class="p">]</span> <span class="o">=</span> <span class="n">year</span></span>
+<span class="code-line">    <span class="n">pieces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c1">#  将多个 DataFrame 连接成一个</span></span>
+<span class="code-line"><span class="n">names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">pieces</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></span>
 </pre></div>
 </div>
 </div>
@@ -1202,10 +1204,10 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 按年度聚合，区分性别</span>
-<span class="n">total_births</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="s1">'births'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">'year'</span><span class="p">,</span>
-                                 <span class="n">columns</span><span class="o">=</span><span class="s1">'sex'</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span><span class="p">)</span>
-<span class="n">total_births</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1"># 按年度聚合，区分性别</span></span>
+<span class="code-line"><span class="n">total_births</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="s1">'births'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">'year'</span><span class="p">,</span></span>
+<span class="code-line">                                 <span class="n">columns</span><span class="o">=</span><span class="s1">'sex'</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">total_births</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span></span>
 </pre></div>
 </div>
 </div>
@@ -1215,7 +1217,7 @@ h6:hover .anchor-link {
 <div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<table border="1" class="dataframe">
+<table border="1" class="table dataframe table-striped table-hover">
 <thead>
 <tr style="text-align: right;">
 <th>sex</th>
@@ -1292,8 +1294,8 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  画张图看看</span>
-<span class="n">total_births</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Total births by sex and year'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1">#  画张图看看</span></span>
+<span class="code-line"><span class="n">total_births</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Total births by sex and year'</span><span class="p">)</span></span>
 </pre></div>
 </div>
 </div>
@@ -1302,12 +1304,12 @@ h6:hover .anchor-link {
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><matplotlib.axes._subplots.axessubplot 0x1149ebc18="" at=""></matplotlib.axes._subplots.axessubplot></pre>
+<pre><span class="code-line"><matplotlib.axes._subplots.axessubplot at=""></matplotlib.axes._subplots.axessubplot></pre>
 </div>
 </div>
 <div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZQAAAEWCAYAAABBvWFzAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZQAAAEWCAYAAABBvWFzAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3Xd8lEX+wPHPpCekhxRSIPQSqtKxoKAgInbAcqBYz3ae
 nvW88/T0Z7s7PT3FioAFUUQBaQKioNI7oZcASUghPSF1d35/zBMIISE9m5Dv+/XaV3bnmWd2dpPs
 d+eZprTWCCGEEHXl5OgKCCGEOD9IQBFCCFEvJKAIIYSoFxJQhBBC1AsJKEIIIeqFBBQhhBD1QgKK
@@ -1671,8 +1673,8 @@ cCERGQOMA0aparmIzAcSvdlHVLWmuQI2prFsl5cxTesfwOW4nslc7zbd+70LRKSHNzJuKlDsFZP+
 uFFwjYko1kMxpgmpaqWIfAaUeL2Mj0TkTGCxG1WcMtxovnOAn4hINm7U2CXhitmYxrLRho1pQt7B
 +JXAJFXdfKLljYlktsvLmCYiIllALvCJFRPTElgPxRhjTEhYD8UYY0xIWEExxhgTElZQjDHGhIQV
 FGOMMSFhBcUYY0xI/D8NFy9fXGxMAQAAAABJRU5ErkJggg==
-">
-</img></div>
+"/>
+</div>
 </div>
 </div>
 </div>
@@ -1691,16 +1693,16 @@ FGOMMSFhBcUYY0xI/D8NFy9fXGxMAQAAAABJRU5ErkJggg==
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 计算名字占所有出生婴儿的比重</span>
-
-<span class="k">def</span> <span class="nf">add_prop</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
-    <span class="c1"># Integer division floors</span>
-    <span class="n">births</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">births</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-
-    <span class="n">group</span><span class="p">[</span><span class="s1">'prop'</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span> <span class="o">/</span> <span class="n">births</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">group</span>
-<span class="n">names</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'year'</span><span class="p">,</span> <span class="s1">'sex'</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">add_prop</span><span class="p">)</span>
-<span class="n">names</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1"># 计算名字占所有出生婴儿的比重</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="k">def</span> <span class="nf">add_prop</span><span class="p">(</span><span class="n">group</span><span class="p">):</span></span>
+<span class="code-line">    <span class="c1"># Integer division floors</span></span>
+<span class="code-line">    <span class="n">births</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">births</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="n">group</span><span class="p">[</span><span class="s1">'prop'</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span> <span class="o">/</span> <span class="n">births</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="n">group</span></span>
+<span class="code-line"><span class="n">names</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'year'</span><span class="p">,</span> <span class="s1">'sex'</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">add_prop</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">names</span><span class="o">.</span><span class="n">head</span><span class="p">()</span></span>
 </pre></div>
 </div>
 </div>
@@ -1710,7 +1712,7 @@ FGOMMSFhBcUYY0xI/D8NFy9fXGxMAQAAAABJRU5ErkJggg==
 <div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<table border="1" class="dataframe">
+<table border="1" class="table dataframe table-striped table-hover">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -1775,8 +1777,8 @@ FGOMMSFhBcUYY0xI/D8NFy9fXGxMAQAAAABJRU5ErkJggg==
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 检查所有分组的 prop 之和是否近似=1</span>
-<span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">names</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'year'</span><span class="p">,</span><span class="s1">'sex'</span><span class="p">])</span><span class="o">.</span><span class="n">prop</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1"># 检查所有分组的 prop 之和是否近似=1</span></span>
+<span class="code-line"><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">names</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'year'</span><span class="p">,</span><span class="s1">'sex'</span><span class="p">])</span><span class="o">.</span><span class="n">prop</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span><span class="mi">1</span><span class="p">)</span></span>
 </pre></div>
 </div>
 </div>
@@ -1785,7 +1787,7 @@ FGOMMSFhBcUYY0xI/D8NFy9fXGxMAQAAAABJRU5ErkJggg==
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>True</pre>
+<pre><span class="code-line">True</pre>
 </div>
 </div>
 </div>
@@ -1805,11 +1807,11 @@ FGOMMSFhBcUYY0xI/D8NFy9fXGxMAQAAAABJRU5ErkJggg==
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_top1000</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'births'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">1000</span><span class="p">]</span>
-<span class="n">grouped</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'year'</span><span class="p">,</span> <span class="s1">'sex'</span><span class="p">])</span>
-<span class="n">top1000</span> <span class="o">=</span> <span class="n">grouped</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">get_top1000</span><span class="p">)</span>
-<span class="n">top1000</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">get_top1000</span><span class="p">(</span><span class="n">group</span><span class="p">):</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'births'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">1000</span><span class="p">]</span></span>
+<span class="code-line"><span class="n">grouped</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'year'</span><span class="p">,</span> <span class="s1">'sex'</span><span class="p">])</span></span>
+<span class="code-line"><span class="n">top1000</span> <span class="o">=</span> <span class="n">grouped</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">get_top1000</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">top1000</span><span class="o">.</span><span class="n">head</span><span class="p">()</span></span>
 </pre></div>
 </div>
 </div>
@@ -1819,7 +1821,7 @@ FGOMMSFhBcUYY0xI/D8NFy9fXGxMAQAAAABJRU5ErkJggg==
 <div class="output_area"><div class="prompt output_prompt">Out[11]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<table border="1" class="dataframe">
+<table border="1" class="table dataframe table-striped table-hover">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -1907,17 +1909,17 @@ FGOMMSFhBcUYY0xI/D8NFy9fXGxMAQAAAABJRU5ErkJggg==
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">boys</span> <span class="o">=</span> <span class="n">top1000</span><span class="p">[</span><span class="n">top1000</span><span class="o">.</span><span class="n">sex</span> <span class="o">==</span> <span class="s1">'M'</span><span class="p">]</span>
-<span class="n">girls</span> <span class="o">=</span> <span class="n">top1000</span><span class="p">[</span><span class="n">top1000</span><span class="o">.</span><span class="n">sex</span> <span class="o">==</span> <span class="s1">'F'</span><span class="p">]</span>
-
-<span class="c1"># 按名字聚合，做透视表</span>
-<span class="n">total_births</span> <span class="o">=</span> <span class="n">top1000</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="s1">'births'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">'year'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'name'</span><span class="p">,</span>
-                                   <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span><span class="p">)</span>
-
-<span class="c1"># 分析5个名字的趋势</span>
-<span class="n">subset</span> <span class="o">=</span> <span class="n">total_births</span><span class="p">[[</span><span class="s1">'John'</span><span class="p">,</span> <span class="s1">'Harry'</span><span class="p">,</span> <span class="s1">'Mary'</span><span class="p">,</span> <span class="s1">'Marilyn'</span><span class="p">]]</span>
-<span class="n">subset</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">grid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-            <span class="n">title</span><span class="o">=</span><span class="s2">"Number of births per year"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">boys</span> <span class="o">=</span> <span class="n">top1000</span><span class="p">[</span><span class="n">top1000</span><span class="o">.</span><span class="n">sex</span> <span class="o">==</span> <span class="s1">'M'</span><span class="p">]</span></span>
+<span class="code-line"><span class="n">girls</span> <span class="o">=</span> <span class="n">top1000</span><span class="p">[</span><span class="n">top1000</span><span class="o">.</span><span class="n">sex</span> <span class="o">==</span> <span class="s1">'F'</span><span class="p">]</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c1"># 按名字聚合，做透视表</span></span>
+<span class="code-line"><span class="n">total_births</span> <span class="o">=</span> <span class="n">top1000</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="s1">'births'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">'year'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'name'</span><span class="p">,</span></span>
+<span class="code-line">                                   <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c1"># 分析5个名字的趋势</span></span>
+<span class="code-line"><span class="n">subset</span> <span class="o">=</span> <span class="n">total_births</span><span class="p">[[</span><span class="s1">'John'</span><span class="p">,</span> <span class="s1">'Harry'</span><span class="p">,</span> <span class="s1">'Mary'</span><span class="p">,</span> <span class="s1">'Marilyn'</span><span class="p">]]</span></span>
+<span class="code-line"><span class="n">subset</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">grid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span></span>
+<span class="code-line">            <span class="n">title</span><span class="o">=</span><span class="s2">"Number of births per year"</span><span class="p">)</span></span>
 </pre></div>
 </div>
 </div>
@@ -1926,15 +1928,15 @@ FGOMMSFhBcUYY0xI/D8NFy9fXGxMAQAAAABJRU5ErkJggg==
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([<matplotlib.axes._subplots.axessubplot 0x10e239748="" at="" object="">,
-       <matplotlib.axes._subplots.axessubplot 0x110d98d68="" at="" object="">,
-       <matplotlib.axes._subplots.axessubplot 0x11101ab38="" at="" object="">,
-       <matplotlib.axes._subplots.axessubplot 0x10f101860="" at="" object="">], dtype=object)</matplotlib.axes._subplots.axessubplot></matplotlib.axes._subplots.axessubplot></matplotlib.axes._subplots.axessubplot></matplotlib.axes._subplots.axessubplot></pre>
+<pre><span class="code-line">array([<matplotlib.axes._subplots.axessubplot at="" object="">,</span>
+<span class="code-line">       <matplotlib.axes._subplots.axessubplot at="" object="">,</span>
+<span class="code-line">       <matplotlib.axes._subplots.axessubplot at="" object="">,</span>
+<span class="code-line">       <matplotlib.axes._subplots.axessubplot at="" object="">], dtype=object)</matplotlib.axes._subplots.axessubplot></matplotlib.axes._subplots.axessubplot></matplotlib.axes._subplots.axessubplot></matplotlib.axes._subplots.axessubplot></pre>
 </div>
 </div>
 <div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtYAAAJqCAYAAAAPGAfIAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtYAAAJqCAYAAAAPGAfIAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XecXFX9//HXZ2d775st2Wx6SIGQSgm9I0gPICh+pYj4
 FfUrKOrPr+UrYgVBFEWQKhKaAhKBEKSnd9LbbnaTzfbeZ+b8/phJ2MQkuwmzmd3k/Xw85jF3z9xz
 53P3BvYzZz7nXHPOISIiIiIin05EuAMQERERETkSKLEWEREREQkBJdYiIiIiIiGgxFpEREREJASU
@@ -2811,8 +2813,8 @@ vX/fev86YAvwm26OPSJiKElhHRExNMwGTgX2psxgfwy41PZ1fR8k6cPA4cAk2xsl3Q28pv55k+0t
 u4D1ddb5NkkHAvdIAtgAnAzcCkyXtBRYBtzbqzFHRAw1st3rMURExE6qixYfAD5p++FejyciYjhK
 K0hExCAnaSywHJiXojoioncyYx0RERER0YDMWEdERERENCCFdUREREREA1JYR0REREQ0IIV1RERE
 REQDUlhHRERERDQghXVERERERAP+BxLMesWQDXFMAAAAAElFTkSuQmCC
-">
-</img></div>
+"/>
+</div>
 </div>
 </div>
 </div>
@@ -2831,11 +2833,11 @@ REQDUlhHRERERDQghXVERERERAP+BxLMesWQDXFMAAAAAElFTkSuQmCC
 <div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  最流行的1000个名字的占比</span>
-<span class="n">table</span> <span class="o">=</span> <span class="n">top1000</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="s1">'prop'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">'year'</span><span class="p">,</span>
-                            <span class="n">columns</span><span class="o">=</span><span class="s1">'sex'</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span><span class="p">)</span>
-<span class="n">table</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Sum of table1000.prop by year and sex'</span><span class="p">,</span>
-           <span class="n">yticks</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="n">xticks</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1880</span><span class="p">,</span> <span class="mi">2020</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1">#  最流行的1000个名字的占比</span></span>
+<span class="code-line"><span class="n">table</span> <span class="o">=</span> <span class="n">top1000</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="s1">'prop'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">'year'</span><span class="p">,</span></span>
+<span class="code-line">                            <span class="n">columns</span><span class="o">=</span><span class="s1">'sex'</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">table</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Sum of table1000.prop by year and sex'</span><span class="p">,</span></span>
+<span class="code-line">           <span class="n">yticks</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="n">xticks</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1880</span><span class="p">,</span> <span class="mi">2020</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span></span>
 </pre></div>
 </div>
 </div>
@@ -2844,12 +2846,12 @@ REQDUlhHRERERDQghXVERERERAP+BxLMesWQDXFMAAAAAElFTkSuQmCC
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[16]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><matplotlib.axes._subplots.axessubplot 0x10fd78b38="" at=""></matplotlib.axes._subplots.axessubplot></pre>
+<pre><span class="code-line"><matplotlib.axes._subplots.axessubplot at=""></matplotlib.axes._subplots.axessubplot></pre>
 </div>
 </div>
 <div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYAAAAEWCAYAAABv+EDhAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYAAAAEWCAYAAABv+EDhAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3XeYHMWd//H3d2dms1YrrXJYrSwQCggRRDQ2yZiMseFs
 8tnY5myfTTgbA+dw+O7sc/ydMzYPxuDDBhxINgYTjEwGSSAUkZCE4kpaaXPenZ36/VG92tGyeXvj
 fF7PM8/2dPd0VffM1rerq7vKnHOIiEjqSRvqDIiIyNBQABARSVEKACIiKUoBQEQkRSkAiIikKAUA
@@ -3081,8 +3083,8 @@ A8CJzrk6M1sKtHZX3eCc60+34iLDgi4BSap5CDgbf+b/t+B1jfm+2DGz6UGvkmOB8qDwn4fvqVJk
 VFENQFKKc67JzJ4FKoKz+CfNbD7wsu9Blxp8b5tPAJ8xs/X4nh1fGao8iwwU9QYqKSVo/H0d+Cfn
 3NvdrS8ymukSkKQMM1sAbAKeUeEvohqAiEjKUg1ARCRFKQCIiKQoBQARkRSlACAikqIUAEREUtT/
 B/jpqkCcTZJyAAAAAElFTkSuQmCC
-">
-</img></div>
+"/>
+</div>
 </div>
 </div>
 </div>
@@ -3092,14 +3094,14 @@ B/jpqkCcTZJyAAAAAElFTkSuQmCC
 <div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 占总出生人数前50%的不同名字的数量</span>
-<span class="k">def</span> <span class="nf">get_quantile_count</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
-    <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'prop'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">prop</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1">#numpy 的 searchsorted，查找 q 放在哪个索引合适</span>
-
-<span class="n">diversity</span> <span class="o">=</span> <span class="n">top1000</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'year'</span><span class="p">,</span> <span class="s1">'sex'</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">get_quantile_count</span><span class="p">)</span>   <span class="c1"># 按 year 分组，每个分组都执行一次</span>
-<span class="n">diversity</span> <span class="o">=</span> <span class="n">diversity</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="s1">'sex'</span><span class="p">)</span>  
-<span class="n">diversity</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1"># 占总出生人数前50%的不同名字的数量</span></span>
+<span class="code-line"><span class="k">def</span> <span class="nf">get_quantile_count</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span></span>
+<span class="code-line">    <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'prop'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">prop</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1">#numpy 的 searchsorted，查找 q 放在哪个索引合适</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">diversity</span> <span class="o">=</span> <span class="n">top1000</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'year'</span><span class="p">,</span> <span class="s1">'sex'</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">get_quantile_count</span><span class="p">)</span>   <span class="c1"># 按 year 分组，每个分组都执行一次</span></span>
+<span class="code-line"><span class="n">diversity</span> <span class="o">=</span> <span class="n">diversity</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="s1">'sex'</span><span class="p">)</span>  </span>
+<span class="code-line"><span class="n">diversity</span><span class="o">.</span><span class="n">head</span><span class="p">()</span></span>
 </pre></div>
 </div>
 </div>
@@ -3109,7 +3111,7 @@ B/jpqkCcTZJyAAAAAElFTkSuQmCC
 <div class="output_area"><div class="prompt output_prompt">Out[18]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<table border="1" class="dataframe">
+<table border="1" class="table dataframe table-striped table-hover">
 <thead>
 <tr style="text-align: right;">
 <th>sex</th>
@@ -3161,7 +3163,7 @@ B/jpqkCcTZJyAAAAAElFTkSuQmCC
 <div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">diversity</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"Number of popular names in top 50%"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">diversity</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"Number of popular names in top 50%"</span><span class="p">)</span></span>
 </pre></div>
 </div>
 </div>
@@ -3170,12 +3172,12 @@ B/jpqkCcTZJyAAAAAElFTkSuQmCC
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[19]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><matplotlib.axes._subplots.axessubplot 0x10fe39ba8="" at=""></matplotlib.axes._subplots.axessubplot></pre>
+<pre><span class="code-line"><matplotlib.axes._subplots.axessubplot at=""></matplotlib.axes._subplots.axessubplot></pre>
 </div>
 </div>
 <div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXoAAAEWCAYAAABollyxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXoAAAEWCAYAAABollyxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3Xl8VNXZwPHfkx1IIJCNQAIJ+xbWAO4iLiBQ9wUt1qWt
 7dtW1KpVq61La2utb33bt9VXWxdcigsiKCCKCOIC2LBIEvadhJANkpCQkGTmvH/cGxhC9mXmZni+
 n08+mTl3e05m8syZc889V4wxKKWU8l8Bvg5AKaVU+9JEr5RSfk4TvVJK+TlN9Eop5ec00SullJ/T
@@ -3434,8 +3436,8 @@ XN4KWKmW0K4bdSb7AJiK1ZL/xP65w55zHBHpbc+22A04Yif5IVgzKyrVYWiLXp2xjDGVIrICKLJb
 5Z+KyFBgtX2/5lKs2SGXAj8VkS1YMxGu8VXMSrWEzl6pzlj2Sdj1wPXGmB2Nra9UR6VdN+qMJCLD
 sG7YvFyTvPJ32qJXSik/py16pZTyc5rolVLKz2miV0opP6eJXiml/JwmeqWU8nP/DyEA+/hJ3P4X
 AAAAAElFTkSuQmCC
-">
-</img></div>
+"/>
+</div>
 </div>
 </div>
 </div>
@@ -3454,16 +3456,16 @@ AAAAAElFTkSuQmCC
 <div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  获取尾字母，并聚合</span>
-<span class="n">get_last_letter</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">last_letters</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">get_last_letter</span><span class="p">)</span>
-<span class="n">last_letters</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'last_letter'</span>
-
-<span class="n">table</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="s1">'births'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">last_letters</span><span class="p">,</span>
-                          <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'sex'</span><span class="p">,</span> <span class="s1">'year'</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span><span class="p">)</span>
-<span class="c1"># 选取有代表性的3个年份</span>
-<span class="n">subtable</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="mi">1910</span><span class="p">,</span> <span class="mi">1960</span><span class="p">,</span> <span class="mi">2010</span><span class="p">],</span> <span class="n">level</span><span class="o">=</span><span class="s1">'year'</span><span class="p">)</span>
-<span class="n">subtable</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1">#  获取尾字母，并聚合</span></span>
+<span class="code-line"><span class="n">get_last_letter</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></span>
+<span class="code-line"><span class="n">last_letters</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">get_last_letter</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">last_letters</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'last_letter'</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">table</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="s1">'births'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">last_letters</span><span class="p">,</span></span>
+<span class="code-line">                          <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'sex'</span><span class="p">,</span> <span class="s1">'year'</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span><span class="p">)</span></span>
+<span class="code-line"><span class="c1"># 选取有代表性的3个年份</span></span>
+<span class="code-line"><span class="n">subtable</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="mi">1910</span><span class="p">,</span> <span class="mi">1960</span><span class="p">,</span> <span class="mi">2010</span><span class="p">],</span> <span class="n">level</span><span class="o">=</span><span class="s1">'year'</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">subtable</span><span class="o">.</span><span class="n">head</span><span class="p">()</span></span>
 </pre></div>
 </div>
 </div>
@@ -3473,7 +3475,7 @@ AAAAAElFTkSuQmCC
 <div class="output_area"><div class="prompt output_prompt">Out[24]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<table border="1" class="dataframe">
+<table border="1" class="table dataframe table-striped table-hover">
 <thead>
 <tr>
 <th>sex</th>
@@ -3558,15 +3560,15 @@ AAAAAElFTkSuQmCC
 <div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  规范化处理，计算比例</span>
-<span class="n">letter_prop</span> <span class="o">=</span> <span class="n">subtable</span> <span class="o">/</span> <span class="n">subtable</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-
-<span class="c1">#  绘图</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">letter_prop</span><span class="p">[</span><span class="s1">'M'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s1">'Male'</span><span class="p">)</span>
-<span class="n">letter_prop</span><span class="p">[</span><span class="s1">'F'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s1">'Female'</span><span class="p">,</span>
-                      <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1">#  规范化处理，计算比例</span></span>
+<span class="code-line"><span class="n">letter_prop</span> <span class="o">=</span> <span class="n">subtable</span> <span class="o">/</span> <span class="n">subtable</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c1">#  绘图</span></span>
+<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span></span>
+<span class="code-line"><span class="n">letter_prop</span><span class="p">[</span><span class="s1">'M'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s1">'Male'</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">letter_prop</span><span class="p">[</span><span class="s1">'F'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s1">'Female'</span><span class="p">,</span></span>
+<span class="code-line">                      <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></span>
 </pre></div>
 </div>
 </div>
@@ -3575,17 +3577,17 @@ AAAAAElFTkSuQmCC
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[28]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><matplotlib.axes._subplots.axessubplot 0x11649ccf8="" at=""></matplotlib.axes._subplots.axessubplot></pre>
+<pre><span class="code-line"><matplotlib.axes._subplots.axessubplot at=""></matplotlib.axes._subplots.axessubplot></pre>
 </div>
 </div>
 <div class="output_area"><div class="prompt"></div>
 <div class="output_text output_subarea ">
-<pre><matplotlib.figure.figure 0x11194f9b0="" at=""></matplotlib.figure.figure></pre>
+<pre><span class="code-line"><matplotlib.figure.figure at=""></matplotlib.figure.figure></pre>
 </div>
 </div>
 <div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAl0AAAHxCAYAAABXtAkjAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAl0AAAHxCAYAAABXtAkjAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3X+UXVWd5/33pwOYJoA/ICidEBMlqyEYUQgEpvNg03YQ
 cOyoOCP4IyAyaWzzoOPoGpx+xkZxekFjr1GfBR2DnRH80bSOgpkmAkK30ogskyiQ8DuNcVI1KBB9
 +KEoRL7PH/cmfRMCdZO6dapu1fu1Vq06e5+9d33vrXtvfWufc/ZJVSFJkqSR9TujHYAkSdJEYNIl
@@ -3869,8 +3871,8 @@ kpiPAl+SNDz9eMlwjIiI05GRroiYiNYDv5E0ADwNPF/3XwqslTQEDAI31f13A49I+oftJacKbHu3
 pNuBx+qZhoPAzcD+GmenpH7byyU9KWkX8LDtVZI+CGyp05JHgBXA8YavOyKmsCykj4iIiOiBTC9G
 RERE9ECmFyNiSpH0J+DcN+2+wfbAeLQnImJYphcjIiIieiDTixERERE9kKQrIiIiogeSdEVERET0
 QJKuiIiIiB5I0hURERHRA/8Ff7DF9nVn2RkAAAAASUVORK5CYII=
-">
-</img></div>
+"/>
+</div>
 </div>
 </div>
 </div>
@@ -3880,12 +3882,12 @@ QJKuiIiIiB5I0hURERHRA/8Ff7DF9nVn2RkAAAAASUVORK5CYII=
 <div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 进一步分析男孩的 d, n, y 三个字母</span>
-<span class="n">letter_prop</span> <span class="o">=</span> <span class="n">table</span> <span class="o">/</span> <span class="n">table</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-
-<span class="n">dny_ts</span> <span class="o">=</span> <span class="n">letter_prop</span><span class="o">.</span><span class="n">ix</span><span class="p">[[</span><span class="s1">'d'</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">],</span> <span class="s1">'M'</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">'all'</span><span class="p">)</span>
-<span class="n">dny_ts</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1"># 进一步分析男孩的 d, n, y 三个字母</span></span>
+<span class="code-line"><span class="n">letter_prop</span> <span class="o">=</span> <span class="n">table</span> <span class="o">/</span> <span class="n">table</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">dny_ts</span> <span class="o">=</span> <span class="n">letter_prop</span><span class="o">.</span><span class="n">ix</span><span class="p">[[</span><span class="s1">'d'</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">],</span> <span class="s1">'M'</span><span class="p">]</span><span class="o">.</span><span class="n">T</span></span>
+<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">'all'</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">dny_ts</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span></span>
 </pre></div>
 </div>
 </div>
@@ -3894,12 +3896,12 @@ QJKuiIiIiB5I0hURERHRA/8Ff7DF9nVn2RkAAAAASUVORK5CYII=
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[30]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><matplotlib.axes._subplots.axessubplot 0x117b93160="" at=""></matplotlib.axes._subplots.axessubplot></pre>
+<pre><span class="code-line"><matplotlib.axes._subplots.axessubplot at=""></matplotlib.axes._subplots.axessubplot></pre>
 </div>
 </div>
 <div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAX4AAAEKCAYAAAAVaT4rAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAX4AAAEKCAYAAAAVaT4rAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3Xdc1fX+wPHXh8OeKksBEdwLJ+6duXJlQxtmZWrauHV/
 Xiuz4c26LSvbXSsry7K0a2lLrdwTcIuiiCCI7D3P+vz++KJhmR70wOEcPs/Hwwec73wfwPf5fD9T
 SClRFEVRGg4nWwegKIqi1C2V+BVFURoYlfgVRVEaGJX4FUVRGhiV+BVFURoYlfgVRVEaGJX4FUVR
@@ -4229,8 +4231,8 @@ iOlkn7j8jqRhqb8OWBgR0yLiP30ZwKwYpZykzSwXImKtpK2STiSbRncJ8HGyCcSWpNUGk/1HMJ+s
 RwEL0ndf7yKb/fIR4JuSlpPNsvhMqcZsdrA8O6cZ717UXQxcHBGvfND6Zocyn+qxiifpaLIvv37C
 Rd8qgff4zcwqjPf4zcwqjAu/mVmFceE3M6swLvxmZhXGhd/MrMK48JuZVZj/AYqG9B6PN+FvAAAA
 AElFTkSuQmCC
-">
-</img></div>
+"/>
+</div>
 </div>
 </div>
 </div>
@@ -4249,13 +4251,13 @@ AElFTkSuQmCC
 <div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 合并重复的名字</span>
-<span class="n">all_names</span> <span class="o">=</span> <span class="n">top1000</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>  
-
-<span class="c1"># 找到 lesl 开头的名字</span>
-<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">'lesl'</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">all_names</span><span class="p">])</span>  
-<span class="n">lesley_like</span> <span class="o">=</span> <span class="n">all_names</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-<span class="n">lesley_like</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1"># 合并重复的名字</span></span>
+<span class="code-line"><span class="n">all_names</span> <span class="o">=</span> <span class="n">top1000</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>  </span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c1"># 找到 lesl 开头的名字</span></span>
+<span class="code-line"><span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">'lesl'</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">all_names</span><span class="p">])</span>  </span>
+<span class="code-line"><span class="n">lesley_like</span> <span class="o">=</span> <span class="n">all_names</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span></span>
+<span class="code-line"><span class="n">lesley_like</span></span>
 </pre></div>
 </div>
 </div>
@@ -4264,7 +4266,7 @@ AElFTkSuQmCC
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[32]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array(['Leslie', 'Lesley', 'Leslee', 'Lesli', 'Lesly'], dtype=object)</pre>
+<pre><span class="code-line">array(['Leslie', 'Lesley', 'Leslee', 'Lesli', 'Lesly'], dtype=object)</pre>
 </div>
 </div>
 </div>
@@ -4275,8 +4277,8 @@ AElFTkSuQmCC
 <div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">filtered</span> <span class="o">=</span> <span class="n">top1000</span><span class="p">[</span><span class="n">top1000</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">lesley_like</span><span class="p">)]</span>
-<span class="n">filtered</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)</span><span class="o">.</span><span class="n">births</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">filtered</span> <span class="o">=</span> <span class="n">top1000</span><span class="p">[</span><span class="n">top1000</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">lesley_like</span><span class="p">)]</span></span>
+<span class="code-line"><span class="n">filtered</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)</span><span class="o">.</span><span class="n">births</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span></span>
 </pre></div>
 </div>
 </div>
@@ -4285,13 +4287,13 @@ AElFTkSuQmCC
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[33]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>name
-Leslee      1082
-Lesley     35022
-Lesli        929
-Leslie    370429
-Lesly      10067
-Name: births, dtype: int64</pre>
+<pre><span class="code-line">name</span>
+<span class="code-line">Leslee      1082</span>
+<span class="code-line">Lesley     35022</span>
+<span class="code-line">Lesli        929</span>
+<span class="code-line">Leslie    370429</span>
+<span class="code-line">Lesly      10067</span>
+<span class="code-line">Name: births, dtype: int64</pre>
 </div>
 </div>
 </div>
@@ -4302,10 +4304,10 @@ Name: births, dtype: int64</pre>
 <div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">filtered</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="s1">'births'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">'year'</span><span class="p">,</span>
-                             <span class="n">columns</span><span class="o">=</span><span class="s1">'sex'</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">'sum'</span><span class="p">)</span>
-<span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">table</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">filtered</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="s1">'births'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">'year'</span><span class="p">,</span></span>
+<span class="code-line">                             <span class="n">columns</span><span class="o">=</span><span class="s1">'sex'</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">'sum'</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">table</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span></span>
 </pre></div>
 </div>
 </div>
@@ -4315,7 +4317,7 @@ Name: births, dtype: int64</pre>
 <div class="output_area"><div class="prompt output_prompt">Out[34]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<table border="1" class="dataframe">
+<table border="1" class="table dataframe table-striped table-hover">
 <thead>
 <tr style="text-align: right;">
 <th>sex</th>
@@ -4367,8 +4369,8 @@ Name: births, dtype: int64</pre>
 <div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">'all'</span><span class="p">)</span>
-<span class="n">table</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s1">'M'</span><span class="p">:</span> <span class="s1">'k-'</span><span class="p">,</span> <span class="s1">'F'</span><span class="p">:</span> <span class="s1">'k--'</span><span class="p">})</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">'all'</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">table</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s1">'M'</span><span class="p">:</span> <span class="s1">'k-'</span><span class="p">,</span> <span class="s1">'F'</span><span class="p">:</span> <span class="s1">'k--'</span><span class="p">})</span></span>
 </pre></div>
 </div>
 </div>
@@ -4377,12 +4379,12 @@ Name: births, dtype: int64</pre>
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[35]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><matplotlib.axes._subplots.axessubplot 0x11b311ba8="" at=""></matplotlib.axes._subplots.axessubplot></pre>
+<pre><span class="code-line"><matplotlib.axes._subplots.axessubplot at=""></matplotlib.axes._subplots.axessubplot></pre>
 </div>
 </div>
 <div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXcAAAEKCAYAAADpfBXhAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXcAAAEKCAYAAADpfBXhAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3Xl8TFf/B/DPySYREluESNKkIlpLJITQqn3nqaUoSlva
 Kq1aau1Dtx/VVku1tJSiqkXt+4NSRAmPJXayCGJfIkEkZJnP749M5kkkkW2SO5n5vl+veWXm3jP3
 fM9k5jtnzj33XkUSQgghzIuV1gEIIYQwPknuQghhhiS5CyGEGZLkLoQQZkiSuxBCmCFJ7kIIYYYk
@@ -4686,8 +4688,8 @@ JBOUUrsB2OtXPyKZWlwBC1EQMiwjLM1aAB2Q1mPfpr8N0p+zG0qpavqzGDoDiNUn9ueQdsZCIUoM
 6bkLi0IySSm1C0Ccvve9XSn1PIAQ/TWL45F21sWtAIYopc4i7Qx/B7SKWYiCkLNCCoui35F6FEAv
 khG5lReipJJhGWExlFK1kHbR4p2S2IW5k567EEKYIem5CyGEGZLkLoQQZkiSuxBCmCFJ7kIIYYYk
 uQshhBmS5C6EEGbo/wFPS4RtMYJ8KwAAAABJRU5ErkJggg==
-">
-</img></div>
+"/>
+</div>
 </div>
 </div>
 </div>
@@ -4697,7 +4699,7 @@ uQshhBmS5C6EEGbo/wFPS4RtMYJ8KwAAAABJRU5ErkJggg==
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span> </span>
 </pre></div>
 </div>
 </div>
@@ -4730,12 +4732,13 @@ uQshhBmS5C6EEGbo/wFPS4RtMYJ8KwAAAABJRU5ErkJggg==
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 </script>
-
+</body></html>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-02-16.</h6>
 
 
 	<h2>相关文章</h2>
     <ul>
+        <li><a href="http://holbrook.github.io/2017/03/04/index.html">《机器学习》</a></li>
         <li><a href="http://holbrook.github.io/2017/03/01/python_data_analysis5-5.html">利用Python进行数据分析(5.5)：多层次索引</a></li>
         <li><a href="http://holbrook.github.io/2017/03/01/python_data_analysis5-6.html">利用Python进行数据分析(5.6)：Pandas 其他</a></li>
         <li><a href="http://holbrook.github.io/2017/02/28/python_data_analysis5-4.html">利用Python进行数据分析(5.4)：处理缺失数据</a></li>
@@ -4745,7 +4748,6 @@ uQshhBmS5C6EEGbo/wFPS4RtMYJ8KwAAAABJRU5ErkJggg==
         <li><a href="http://holbrook.github.io/2017/02/23/python_data_analysis5.html">利用Python进行数据分析(5)：Pandas 入门</a></li>
         <li><a href="http://holbrook.github.io/2017/02/17/python_data_analysis4.html">利用Python进行数据分析(4)：NumPy</a></li>
         <li><a href="http://holbrook.github.io/2017/02/16/python_data_analysis3.html">利用Python进行数据分析(3)：IPython</a></li>
-        <li><a href="http://holbrook.github.io/2017/02/15/python_data_analysis2-2.html">利用Python进行数据分析(2.2)：电影评分数据分析</a></li>
     </ul>
 </article>
 
@@ -4812,41 +4814,44 @@ uQshhBmS5C6EEGbo/wFPS4RtMYJ8KwAAAABJRU5ErkJggg==
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/suo-yin.html" class="tag-3">索引</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/ji-qi-xue-xi.html" class="tag-3">机器学习</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/jiao-yi-gui-ze.html" class="tag-4">交易规则</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (2)</a></li>
+											<li><a href="/2017/03/">2017-03  (5)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>

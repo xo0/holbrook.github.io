@@ -71,6 +71,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 							<li class="active"><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -85,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (5)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -122,6 +123,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 								<li class="active"><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -147,7 +149,7 @@
 
 
 
-	<p>早在2012年8月，就通过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">这篇文章</a>知道了Jekyll,  但是一直没有去尝试。</p>
+	<html><body><p>早在2012年8月，就通过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">这篇文章</a>知道了Jekyll,  但是一直没有去尝试。</p>
 <p>直到最近静下心来，才发现使用Jekyll 搭建博客非常简单。当然，上手简单，想用好并不容易。</p>
 <p>本文记录在使用Jekyll搭建博客过程中的一些过程和经验，并持续完善和改进。</p>
 <p>本文分成3个部分：</p>
@@ -158,7 +160,7 @@
 </ul>
 <h1 id="ji-chu-pian">基础篇</h1>
 <h2 id="guan-yu-jekyll">关于Jekyll</h2>
-<p><img alt="Jekyll" src="images/posts/tools/jekyll_mysite/jekyll.jpg"/></p>
+<p><img alt="Jekyll" class="img-responsive" src="images/posts/tools/jekyll_mysite/jekyll.jpg"/></p>
 <p>已经有太多的文章介绍了<a href="http://jekyllrb.com/">Jekyll</a>(/'dʒiːk əl/)。
 简单的说，Jekyll是用ruby语言实现的一个静态网站生成器，可以将<a href="https://help.github.com/articles/my-custom-domain-isn-t-working">Markdown</a> (或者<a href="http://textile.sitemonks.com/">Textile</a>)编辑的文档生成html。
 当然也可以用来生成博客。
@@ -185,53 +187,53 @@
 <p>对于Jekyll的初学者能提供很大的帮助，其网站上号称&ldquo;基于GitHub Pages建博客的最快方式&rdquo;，可以&ldquo;用3分钟就建立一个博客&rdquo;。</p>
 <h2 id="3fen-zhong-jian-li-bo-ke">3分钟建立博客</h2>
 <p>让我们看看上述工具的组合如何用3分钟建立博客。假设你已经有git的基础，在github上托管过项目。并且使用的不是windows。</p>
-<div class="highlight"><pre><span></span># 检查ruby版本
-ruby -v
-#更换更快的gem源，可选
-gem sources --remove http://rubygems.org/
-gem sources -a http://ruby.taobao.org/
-gem sources -l
-
-#如果不是1.9.3+，需要升级到1.9.3
-bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
-source ~/.bashrc
-
-rvm install 1.9.3
-# 安装jekyll, 并使用rdiscount作为markdown解析器
-sudo gem install jekyll
-gem install rdiscount
-
-# 使用Jekyll-Bootstrap，其实就是一个复制的过程。下面的USERNAME代表你在github上的用户名
-git clone https://github.com/plusjade/jekyll-bootstrap.git USERNAME.github.com
-
-
-# 使用GitHub Pages的账户主页建立博客，必须使用如下形式的项目名称并使用主分支
-# 如果使用项目主页，必须使用项目的gh-pages分支
-cd USERNAME.github.com
-git remote set-url origin git@github.com:USERNAME/USERNAME.github.com.git
-git push origin master
-
-好了，等上几分钟，你的主页就发布在了https://USERNAME.github.com。
+<div class="highlight"><pre><span class="code-line"><span></span># 检查ruby版本</span>
+<span class="code-line">ruby -v</span>
+<span class="code-line">#更换更快的gem源，可选</span>
+<span class="code-line">gem sources --remove http://rubygems.org/</span>
+<span class="code-line">gem sources -a http://ruby.taobao.org/</span>
+<span class="code-line">gem sources -l</span>
+<span class="code-line"></span>
+<span class="code-line">#如果不是1.9.3+，需要升级到1.9.3</span>
+<span class="code-line">bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )</span>
+<span class="code-line">source ~/.bashrc</span>
+<span class="code-line"></span>
+<span class="code-line">rvm install 1.9.3</span>
+<span class="code-line"># 安装jekyll, 并使用rdiscount作为markdown解析器</span>
+<span class="code-line">sudo gem install jekyll</span>
+<span class="code-line">gem install rdiscount</span>
+<span class="code-line"></span>
+<span class="code-line"># 使用Jekyll-Bootstrap，其实就是一个复制的过程。下面的USERNAME代表你在github上的用户名</span>
+<span class="code-line">git clone https://github.com/plusjade/jekyll-bootstrap.git USERNAME.github.com</span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line"># 使用GitHub Pages的账户主页建立博客，必须使用如下形式的项目名称并使用主分支</span>
+<span class="code-line"># 如果使用项目主页，必须使用项目的gh-pages分支</span>
+<span class="code-line">cd USERNAME.github.com</span>
+<span class="code-line">git remote set-url origin git@github.com:USERNAME/USERNAME.github.com.git</span>
+<span class="code-line">git push origin master</span>
+<span class="code-line"></span>
+<span class="code-line">好了，等上几分钟，你的主页就发布在了https://USERNAME.github.com。</span>
 </pre></div>
 <h2 id="qi-ta-cao-zuo">其他操作</h2>
 <h3 id="jekyllming-ling">jekyll命令</h3>
 <p>安装jekyll会产生一个命令行工具：jekyll，提供以下功能：</p>
-<div class="highlight"><pre><span></span><span class="n">build</span>                <span class="n">Build</span> <span class="n">your</span> <span class="n">site</span>
-<span class="n">doctor</span>               <span class="n">Search</span> <span class="n">site</span> <span class="ow">and</span> <span class="k">print</span> <span class="n">specific</span> <span class="n">deprecation</span> <span class="n">warnings</span>
-<span class="n">help</span>                 <span class="n">Display</span> <span class="k">global</span> <span class="ow">or</span> <span class="p">[</span><span class="n">command</span><span class="p">]</span> <span class="n">help</span> <span class="n">documentation</span><span class="o">.</span>
-<span class="kn">import</span>               <span class="nn">Import</span> <span class="nn">your</span> <span class="nn">old</span> <span class="nn">blog</span> <span class="nn">to</span> <span class="nn">Jekyll</span>
-<span class="n">new</span>                  <span class="n">Creates</span> <span class="n">a</span> <span class="n">new</span> <span class="n">Jekyll</span> <span class="n">site</span> <span class="n">scaffold</span> <span class="ow">in</span> <span class="n">PATH</span>
-<span class="n">serve</span>                <span class="n">Serve</span> <span class="n">your</span> <span class="n">site</span> <span class="n">locally</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">build</span>                <span class="n">Build</span> <span class="n">your</span> <span class="n">site</span></span>
+<span class="code-line"><span class="n">doctor</span>               <span class="n">Search</span> <span class="n">site</span> <span class="ow">and</span> <span class="k">print</span> <span class="n">specific</span> <span class="n">deprecation</span> <span class="n">warnings</span></span>
+<span class="code-line"><span class="n">help</span>                 <span class="n">Display</span> <span class="k">global</span> <span class="ow">or</span> <span class="p">[</span><span class="n">command</span><span class="p">]</span> <span class="n">help</span> <span class="n">documentation</span><span class="o">.</span></span>
+<span class="code-line"><span class="kn">import</span>               <span class="nn">Import</span> <span class="nn">your</span> <span class="nn">old</span> <span class="nn">blog</span> <span class="nn">to</span> <span class="nn">Jekyll</span></span>
+<span class="code-line"><span class="n">new</span>                  <span class="n">Creates</span> <span class="n">a</span> <span class="n">new</span> <span class="n">Jekyll</span> <span class="n">site</span> <span class="n">scaffold</span> <span class="ow">in</span> <span class="n">PATH</span></span>
+<span class="code-line"><span class="n">serve</span>                <span class="n">Serve</span> <span class="n">your</span> <span class="n">site</span> <span class="n">locally</span></span>
 </pre></div>
 <h3 id="rakefile">Rakefile</h3>
 <p>Jekyll-Bootstrap提供了一个Rakefile（ruby的makefile），包含一些博客相关的任务（task），包括：</p>
-<div class="highlight"><pre><span></span>$ rake -T
-rake page           <span class="c1"># Create a new page.</span>
-rake post           <span class="c1"># Begin a new post in ./_posts</span>
-rake preview        <span class="c1"># Launch preview environment</span>
-rake theme:install  <span class="c1"># Install theme</span>
-rake theme:package  <span class="c1"># Package theme</span>
-rake theme:switch   <span class="c1"># Switch between Jekyll-bootstrap themes.</span>
+<div class="highlight"><pre><span class="code-line"><span></span>$ rake -T</span>
+<span class="code-line">rake page           <span class="c1"># Create a new page.</span></span>
+<span class="code-line">rake post           <span class="c1"># Begin a new post in ./_posts</span></span>
+<span class="code-line">rake preview        <span class="c1"># Launch preview environment</span></span>
+<span class="code-line">rake theme:install  <span class="c1"># Install theme</span></span>
+<span class="code-line">rake theme:package  <span class="c1"># Package theme</span></span>
+<span class="code-line">rake theme:switch   <span class="c1"># Switch between Jekyll-bootstrap themes.</span></span>
 </pre></div>
 <h1 id="jin-jie-pian_2">进阶篇</h1>
 <h2 id="fang-qi-jekyll-bootstrap">放弃Jekyll bootstrap</h2>
@@ -240,19 +242,19 @@ rake theme:switch   <span class="c1"># Switch between Jekyll-bootstrap themes.</
 <p>经过初步的尝试后，我决定放弃JB，也不想尝试<a href="http://octopress.org/">Octopress</a>。我的选择是用原生的Jekyll来构建博客，让一切都在掌控之中。</p>
 <h2 id="jekyllde-mu-lu-jie-gou">Jekyll的目录结构</h2>
 <p>使用Jekyll创建一个干净的站点：</p>
-<div class="highlight"><pre><span></span>$ jekyll new clearly
-$ tree clearly/
-clearly/
-├── _config.yml
-├── _layouts
-│&nbsp;&nbsp; ├── default.html
-│&nbsp;&nbsp; └── post.html
-├── _posts
-│&nbsp;&nbsp; └── 2013-05-29-welcome-to-jekyll.markdown
-├── css
-│&nbsp;&nbsp; ├── main.css
-│&nbsp;&nbsp; └── syntax.css
-└── index.html
+<div class="highlight"><pre><span class="code-line"><span></span>$ jekyll new clearly</span>
+<span class="code-line">$ tree clearly/</span>
+<span class="code-line">clearly/</span>
+<span class="code-line">├── _config.yml</span>
+<span class="code-line">├── _layouts</span>
+<span class="code-line">│&nbsp;&nbsp; ├── default.html</span>
+<span class="code-line">│&nbsp;&nbsp; └── post.html</span>
+<span class="code-line">├── _posts</span>
+<span class="code-line">│&nbsp;&nbsp; └── 2013-05-29-welcome-to-jekyll.markdown</span>
+<span class="code-line">├── css</span>
+<span class="code-line">│&nbsp;&nbsp; ├── main.css</span>
+<span class="code-line">│&nbsp;&nbsp; └── syntax.css</span>
+<span class="code-line">└── index.html</span>
 </pre></div>
 <p>其中，博客文章放在_posts目录中，可以使用子目录。
 博客文章必须使用
@@ -263,10 +265,10 @@ clearly/
 <p>Jekyll会把任何不以下划线开头的文件和目录都复制/生成到网站（在本地是生成到_site/目录)。</p>
 <h2 id="she-ji-mo-ban">设计模板</h2>
 <p>jekyll把_layouts目录中的文档看做是模板，如果某个文档中的头部变量声明中指定了layout：</p>
-<div class="highlight"><pre><span></span>---
-layout: post
-...
----
+<div class="highlight"><pre><span class="code-line"><span></span>---</span>
+<span class="code-line">layout: post</span>
+<span class="code-line">...</span>
+<span class="code-line">---</span>
 </pre></div>
 <p>则Jekyll在生成页面时会使用该模板进行渲染，用文档的内容替换模板中的{{ content }}部分。</p>
 <p>模板本身也是文档，所以一个模板也可以用layout变量指定使用一个模板作为布局，这就是模板的继承。</p>
@@ -296,17 +298,17 @@ layout: post
     - name:         关于
       url:          /about.html</p>
 <p>然后在模板的导航部分可以这样写：</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"nav"</span><span class="nt">&gt;</span>
-  {/% for item in site.menuitems %/}
-    {/% if item.url == page.url %/}
-    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"active"</span><span class="nt">&gt;</span>
-    {/% else %/}
-    <span class="nt">&lt;li&gt;</span>
-    {/% endif %/}
-    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="cp">{{</span><span class="nv">item.url</span><span class="cp">}}</span><span class="s">"</span><span class="nt">&gt;</span><span class="cp">{{</span><span class="nv">item.name</span><span class="cp">}}</span><span class="nt">&lt;/a&gt;</span>
-    <span class="nt">&lt;/li&gt;</span>
-  {/% endfor %/}
-<span class="nt">&lt;/ul&gt;</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"nav"</span><span class="nt">&gt;</span></span>
+<span class="code-line">  {/% for item in site.menuitems %/}</span>
+<span class="code-line">    {/% if item.url == page.url %/}</span>
+<span class="code-line">    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"active"</span><span class="nt">&gt;</span></span>
+<span class="code-line">    {/% else %/}</span>
+<span class="code-line">    <span class="nt">&lt;li&gt;</span></span>
+<span class="code-line">    {/% endif %/}</span>
+<span class="code-line">    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="cp">{{</span><span class="nv">item.url</span><span class="cp">}}</span><span class="s">"</span><span class="nt">&gt;</span><span class="cp">{{</span><span class="nv">item.name</span><span class="cp">}}</span><span class="nt">&lt;/a&gt;</span></span>
+<span class="code-line">    <span class="nt">&lt;/li&gt;</span></span>
+<span class="code-line">  {/% endfor %/}</span>
+<span class="code-line"><span class="nt">&lt;/ul&gt;</span></span>
 </pre></div>
 <h2 id="fen-lei-biao-qian-gui-dang-he-rss">分类、标签、归档和RSS</h2>
 <p>这些都是博客站点必须有的元素。分类、标签和归档可以安装不同的方式检索博客文章；RSS可以订阅博客。</p>
@@ -319,31 +321,31 @@ layout: post
 但这不符合&ldquo;KISS&rdquo;原则，这里不进行探讨。</p>
 <p>对于标签云(tag cloud)，在不使用插件的情况下，可以使用js实现，参考如下代码：
 {% highlight html %}
-    <div class="tag-cloud">
+    </p><div class="tag-cloud">
        {/% for tag in site.tags %/}
           <a class="__tag" href="/pages/tags.html#{/{ tag[0] }/}-ref" id="{/{ forloop.index }/}" style="margin: 5px">{/{ tag[0] }/}</a>
        {/% endfor %/}
-    </div></p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
-   $(function() {
-      var minFont = 15.0,
-          maxFont = 40.0,
-          diffFont = maxFont - minFont,
-          size = 0;
-
-      {/% assign max = 1.0 %/}
-      {/% for tag in site.tags %/}
-         {/% if tag[1].size &gt; max %/}
-            {/% assign max = tag[1].size %/}
-         {/% endif %/}
-      {/% endfor %/}
-
-      {/% for tag in site.tags %/}
-         size = (Math.log(<span class="cp">{{</span> <span class="nv">tag</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="nv">.size</span> <span class="cp">}}</span>) / Math.log(<span class="cp">{{</span> <span class="nv">max</span> <span class="cp">}}</span>)) * diffFont + minFont;
-         $("#<span class="cp">{{</span> <span class="nb">forloop</span><span class="nv">.index</span> <span class="cp">}}</span>").css("font-size", size + "px");
-      {/% endfor %/}
-   });
-<span class="nt">&lt;/script&gt;</span>
+    </div>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span></span>
+<span class="code-line">   $(function() {</span>
+<span class="code-line">      var minFont = 15.0,</span>
+<span class="code-line">          maxFont = 40.0,</span>
+<span class="code-line">          diffFont = maxFont - minFont,</span>
+<span class="code-line">          size = 0;</span>
+<span class="code-line"></span>
+<span class="code-line">      {/% assign max = 1.0 %/}</span>
+<span class="code-line">      {/% for tag in site.tags %/}</span>
+<span class="code-line">         {/% if tag[1].size &gt; max %/}</span>
+<span class="code-line">            {/% assign max = tag[1].size %/}</span>
+<span class="code-line">         {/% endif %/}</span>
+<span class="code-line">      {/% endfor %/}</span>
+<span class="code-line"></span>
+<span class="code-line">      {/% for tag in site.tags %/}</span>
+<span class="code-line">         size = (Math.log(<span class="cp">{{</span> <span class="nv">tag</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="nv">.size</span> <span class="cp">}}</span>) / Math.log(<span class="cp">{{</span> <span class="nv">max</span> <span class="cp">}}</span>)) * diffFont + minFont;</span>
+<span class="code-line">         $("#<span class="cp">{{</span> <span class="nb">forloop</span><span class="nv">.index</span> <span class="cp">}}</span>").css("font-size", size + "px");</span>
+<span class="code-line">      {/% endfor %/}</span>
+<span class="code-line">   });</span>
+<span class="code-line"><span class="nt">&lt;/script&gt;</span></span>
 </pre></div>
 <p>{% endhighlight %}</p>
 <p>关于分类和标签的设计，可以参考<a href="http://thinkinside.tk/2012/11/05/blog_design_categories_and_tags.html">这篇文章</a></p>
@@ -365,17 +367,17 @@ TODO: 浮动标题 on paginator</p>
 </ul>
 <p>推荐方式。支持<a href="http://pygments.org/languages/">100多种语言</a>。</p>
 <p>~~~本站采取js的方式。只需要在post的模板中进行配置，就可以为所有博文的代码进行渲染~~~</p>
-<p>~~~Jekyll在编译markdown时，会将符合&ldquo;代码格式&rdquo;的内容放到一个&lt; pre&gt;&lt; code&gt;</p>&lt; /pre&gt;标签中。~~~
-~~~而prettify提供的js会对html中的所有&lt; pre&gt;&lt; /pre&gt;或&lt; code&gt;区块进行处理，甚至会自动判断使用的语言。~~~
+<p>~~~Jekyll在编译markdown时，会将符合&ldquo;代码格式&rdquo;的内容放到一个&lt; pre&gt;&lt; code&gt; code&gt;&lt; /pre&gt;标签中。~~~
+~~~而prettify提供的js会对html中的所有&lt; pre&gt;&lt; /pre&gt;或&lt; code&gt; code&gt;区块进行处理，甚至会自动判断使用的语言。~~~</p>
 <p _="%" endhighlight="">~~~在post模板的合适位置中增加以下内容：~~~
 {% highlight html %}
-<link href="/js/google-code-prettify/prettify.css" rel="stylesheet">
+<link href="/js/google-code-prettify/prettify.css" rel="stylesheet"/>
 <script src="/js/google-code-prettify/prettify.js"></script>
 <script>
 $(document).ready(function(){
      prettyPrint();
 });
-</script></link></p>
+</script></p>
 <p>~~~如果要更改配色方案，只需要修改css文件。~~~</p>
 <p>本站采用pygments的方式：</p>
 <ul>
@@ -422,12 +424,12 @@ page_url</p>
 <p>Jekyll提供了一个import的子命令(需要插件jekyll-import），可以将旧的博客导入到Jekyll。</p>
 <p><a href="https://github.com/thomasf/exitwp">exitwp</a>是一个用python开发的工具，号称是将wordpress的博客导出并转换成markdown，但实际上
 任何能导出rss/atom的博客都可以用这个工具进行转换。</p>
-<div class="highlight"><pre><span></span>git clone https://github.com/thomasf/exitwp
-sudo pip install --upgrade  -r pip_requirements.txt
-cd exitwp/wordpress-xml/
-wget http://your/atom/file/xml
-cd ..
-python exitwp.py
+<div class="highlight"><pre><span class="code-line"><span></span>git clone https://github.com/thomasf/exitwp</span>
+<span class="code-line">sudo pip install --upgrade  -r pip_requirements.txt</span>
+<span class="code-line">cd exitwp/wordpress-xml/</span>
+<span class="code-line">wget http://your/atom/file/xml</span>
+<span class="code-line">cd ..</span>
+<span class="code-line">python exitwp.py</span>
 </pre></div>
 <h1 id="tui-yan-pian_1">推广篇</h1>
 <h2 id="shi-yong-yu-ming">使用域名</h2>
@@ -502,7 +504,7 @@ python exitwp.py
 <p>第三方的流量分析和统计工具可以说是最古老的marshup，尽管没有社会化网络的功能。</p>
 <p>可以选择的有国外的<a href="http://www.google.cn/intl/zh-CN_ALL/analytics/">Google Analysis</a>、<a href="http://www.sitemeter.com">SiteMeter</a>和国内的<a href="http://tongji.baidu.com/web/welcome/login">百度统计</a>、
    <a href="http://linezing.com">量子恒道统计</a>等。</p>
-<p>出于种种无奈，还是选择了百度。</p>
+<p>出于种种无奈，还是选择了百度。</p></body></html>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-05-27.</h6>
 
 
@@ -575,41 +577,44 @@ python exitwp.py
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/suo-yin.html" class="tag-3">索引</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/ji-qi-xue-xi.html" class="tag-3">机器学习</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/jiao-yi-gui-ze.html" class="tag-4">交易规则</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (2)</a></li>
+											<li><a href="/2017/03/">2017-03  (5)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>

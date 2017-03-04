@@ -71,6 +71,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -85,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (5)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -122,6 +123,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -147,9 +149,9 @@
 
 
 
-	<h1 id="mu-biao">目标</h1>
+	<html><body><h1 id="mu-biao">目标</h1>
 <p>在<a href="/2013/05/03/r_notes_1_what.html">R学习笔记</a>中，展示了这样一张图表：</p>
-<p><img alt="" src="images/2013/r_notes/2.png"/></p>
+<p><img alt="" class="img-responsive" src="images/2013/r_notes/2.png"/></p>
 <p>现在需要在Eclipse e4应用中实现这样的图表。</p>
 <h1 id="swttu-biao-zu-jian-de-xuan-ze">SWT图表组件的选择</h1>
 <p>在RCP/JFace/SWT中，可以选择的图表组件包括：</p>
@@ -171,7 +173,7 @@ GUI环境，也可以生成图片在Web环境中使用。后来又增加了对SW
 <h1 id="huo-qu-gu-piao-shu-ju">获取股票数据</h1>
 <p>由于需要的数据量比较大，不能再使用<a href="">前面</a>的模拟数据方法了。这里使用<a href="http://finance.yahoo.com/">雅虎财经</a>的数据。</p>
 <p>雅虎财经提供了查询股票历史数据的接口：</p>
-<div class="highlight"><pre><span></span>  http://table.finance.yahoo.com/table.csv?ignore=.csv&amp;....
+<div class="highlight"><pre><span class="code-line"><span></span>  http://table.finance.yahoo.com/table.csv?ignore=.csv&amp;....</span>
 </pre></div>
 <p>参数包括：</p>
 <ul>
@@ -182,105 +184,105 @@ GUI环境，也可以生成图片在Web环境中使用。后来又增加了对SW
 </ul>
 <p>其中，月份是从0开始。比如，9月数据写为08。</p>
 <p>本文中使用2013年上证综合指数的日线数据：</p>
-<div class="highlight"><pre><span></span>  http://table.finance.yahoo.com/table.csv?ignore=.csv&amp;s=000001.ss&amp;a=00&amp;b=01&amp;c=2013&amp;d=11&amp;e=31&amp;f=2013&amp;g=d
+<div class="highlight"><pre><span class="code-line"><span></span>  http://table.finance.yahoo.com/table.csv?ignore=.csv&amp;s=000001.ss&amp;a=00&amp;b=01&amp;c=2013&amp;d=11&amp;e=31&amp;f=2013&amp;g=d</span>
 </pre></div>
 <p>获取到的CSV文件包含的数据列为<code>Date,Open,High,Low,Close,Volume,Adj Close</code>，其中Date的格式为<code>yyyy-MM-dd</code>。数据按照日期倒序排列。</p>
 <p>处理代码如下：</p>
-<div class="highlight"><pre><span></span>    <span class="nt">OHLCSeries</span> <span class="nt">ohlcSeries</span> <span class="o">=</span> <span class="nt">new</span> <span class="nt">OHLCSeries</span><span class="o">(</span><span class="s2">""</span><span class="o">);</span>
-    <span class="nt">TimeSeries</span> <span class="nt">volumeSeries</span> <span class="o">=</span><span class="nt">new</span> <span class="nt">TimeSeries</span><span class="o">(</span><span class="s2">""</span><span class="o">);</span>
-
-    <span class="nt">try</span><span class="p">{</span>
-        <span class="n">URL</span> <span class="nb">url</span> <span class="o">=</span> <span class="n">new</span> <span class="n">URL</span><span class="p">(</span><span class="s2">"http://table.finance.yahoo.com/table.csv?ignore=.csv&amp;s=000001.ss&amp;a=00&amp;b=01&amp;c=2013&amp;d=11&amp;e=31&amp;f=2013&amp;g=d"</span><span class="p">);</span>
-        <span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="nb">url</span><span class="o">.</span><span class="n">openStream</span><span class="p">();</span>
-        <span class="n">InputStreamReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">new</span> <span class="n">InputStreamReader</span><span class="p">(</span><span class="n">is</span><span class="o">,</span><span class="s2">"UTF-8"</span><span class="p">);</span>
-
-        <span class="n">BufferedReader</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">new</span> <span class="n">BufferedReader</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span>
-
-
-        <span class="n">String</span> <span class="n">newLine</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">readLine</span><span class="p">();</span><span class="o">//</span> <span class="err">标题行</span>
-
-
-        <span class="n">while</span> <span class="p">((</span><span class="n">newLine</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">readLine</span><span class="p">())</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span> <span class="err">{</span>
-            <span class="n">String</span> <span class="n">item</span><span class="cp">[]</span> <span class="o">=</span> <span class="n">newLine</span><span class="o">.</span><span class="n">trim</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">);</span>
-            <span class="n">Date</span> <span class="n">date</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">0</span><span class="cp">]</span><span class="p">);</span>
-            <span class="nb">float</span> <span class="n">open</span> <span class="o">=</span> <span class="n">Float</span><span class="o">.</span><span class="n">valueOf</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">1</span><span class="cp">]</span><span class="p">);</span>
-            <span class="nb">float</span> <span class="nb">high</span> <span class="o">=</span> <span class="n">Float</span><span class="o">.</span><span class="n">valueOf</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">2</span><span class="cp">]</span><span class="p">);</span>
-            <span class="nb">float</span> <span class="nb">low</span> <span class="o">=</span> <span class="n">Float</span><span class="o">.</span><span class="n">valueOf</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">3</span><span class="cp">]</span><span class="p">);</span>
-            <span class="nb">float</span> <span class="n">close</span> <span class="o">=</span> <span class="n">Float</span><span class="o">.</span><span class="n">valueOf</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">4</span><span class="cp">]</span><span class="p">);</span>
-            <span class="nb">float</span> <span class="nb">volume</span> <span class="o">=</span> <span class="n">Float</span><span class="o">.</span><span class="n">valueOf</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">5</span><span class="cp">]</span><span class="p">);</span>
-            <span class="nb">float</span> <span class="n">adj_close</span> <span class="o">=</span> <span class="n">Float</span><span class="o">.</span><span class="n">valueOf</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">6</span><span class="cp">]</span><span class="p">);</span>
-
-            <span class="n">ohlcSeries</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">new</span> <span class="n">Day</span><span class="p">(</span><span class="n">date</span><span class="p">)</span><span class="o">,</span> <span class="n">open</span><span class="o">,</span><span class="nb">high</span><span class="o">,</span><span class="nb">low</span><span class="o">,</span><span class="n">close</span><span class="p">);</span>
-            <span class="n">volumeSeries</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">new</span> <span class="n">Day</span><span class="p">(</span><span class="n">date</span><span class="p">)</span><span class="o">,</span><span class="nb">volume</span><span class="p">);</span>
-        <span class="p">}</span>
-
-    <span class="err">}</span><span class="nt">catch</span><span class="o">(</span><span class="nt">Exception</span> <span class="nt">e</span><span class="o">)</span><span class="p">{</span>
-        <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">();</span>
-    <span class="p">}</span>
+<div class="highlight"><pre><span class="code-line"><span></span>    <span class="nt">OHLCSeries</span> <span class="nt">ohlcSeries</span> <span class="o">=</span> <span class="nt">new</span> <span class="nt">OHLCSeries</span><span class="o">(</span><span class="s2">""</span><span class="o">);</span></span>
+<span class="code-line">    <span class="nt">TimeSeries</span> <span class="nt">volumeSeries</span> <span class="o">=</span><span class="nt">new</span> <span class="nt">TimeSeries</span><span class="o">(</span><span class="s2">""</span><span class="o">);</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nt">try</span><span class="p">{</span></span>
+<span class="code-line">        <span class="n">URL</span> <span class="nb">url</span> <span class="o">=</span> <span class="n">new</span> <span class="n">URL</span><span class="p">(</span><span class="s2">"http://table.finance.yahoo.com/table.csv?ignore=.csv&amp;s=000001.ss&amp;a=00&amp;b=01&amp;c=2013&amp;d=11&amp;e=31&amp;f=2013&amp;g=d"</span><span class="p">);</span></span>
+<span class="code-line">        <span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="nb">url</span><span class="o">.</span><span class="n">openStream</span><span class="p">();</span></span>
+<span class="code-line">        <span class="n">InputStreamReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">new</span> <span class="n">InputStreamReader</span><span class="p">(</span><span class="n">is</span><span class="o">,</span><span class="s2">"UTF-8"</span><span class="p">);</span></span>
+<span class="code-line"></span>
+<span class="code-line">        <span class="n">BufferedReader</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">new</span> <span class="n">BufferedReader</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line">        <span class="n">String</span> <span class="n">newLine</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">readLine</span><span class="p">();</span><span class="o">//</span> <span class="err">标题行</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line">        <span class="n">while</span> <span class="p">((</span><span class="n">newLine</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">readLine</span><span class="p">())</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span> <span class="err">{</span></span>
+<span class="code-line">            <span class="n">String</span> <span class="n">item</span><span class="cp">[]</span> <span class="o">=</span> <span class="n">newLine</span><span class="o">.</span><span class="n">trim</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">);</span></span>
+<span class="code-line">            <span class="n">Date</span> <span class="n">date</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">0</span><span class="cp">]</span><span class="p">);</span></span>
+<span class="code-line">            <span class="nb">float</span> <span class="n">open</span> <span class="o">=</span> <span class="n">Float</span><span class="o">.</span><span class="n">valueOf</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">1</span><span class="cp">]</span><span class="p">);</span></span>
+<span class="code-line">            <span class="nb">float</span> <span class="nb">high</span> <span class="o">=</span> <span class="n">Float</span><span class="o">.</span><span class="n">valueOf</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">2</span><span class="cp">]</span><span class="p">);</span></span>
+<span class="code-line">            <span class="nb">float</span> <span class="nb">low</span> <span class="o">=</span> <span class="n">Float</span><span class="o">.</span><span class="n">valueOf</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">3</span><span class="cp">]</span><span class="p">);</span></span>
+<span class="code-line">            <span class="nb">float</span> <span class="n">close</span> <span class="o">=</span> <span class="n">Float</span><span class="o">.</span><span class="n">valueOf</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">4</span><span class="cp">]</span><span class="p">);</span></span>
+<span class="code-line">            <span class="nb">float</span> <span class="nb">volume</span> <span class="o">=</span> <span class="n">Float</span><span class="o">.</span><span class="n">valueOf</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">5</span><span class="cp">]</span><span class="p">);</span></span>
+<span class="code-line">            <span class="nb">float</span> <span class="n">adj_close</span> <span class="o">=</span> <span class="n">Float</span><span class="o">.</span><span class="n">valueOf</span><span class="p">(</span><span class="n">item</span><span class="cp">[</span><span class="mi">6</span><span class="cp">]</span><span class="p">);</span></span>
+<span class="code-line"></span>
+<span class="code-line">            <span class="n">ohlcSeries</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">new</span> <span class="n">Day</span><span class="p">(</span><span class="n">date</span><span class="p">)</span><span class="o">,</span> <span class="n">open</span><span class="o">,</span><span class="nb">high</span><span class="o">,</span><span class="nb">low</span><span class="o">,</span><span class="n">close</span><span class="p">);</span></span>
+<span class="code-line">            <span class="n">volumeSeries</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">new</span> <span class="n">Day</span><span class="p">(</span><span class="n">date</span><span class="p">)</span><span class="o">,</span><span class="nb">volume</span><span class="p">);</span></span>
+<span class="code-line">        <span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="err">}</span><span class="nt">catch</span><span class="o">(</span><span class="nt">Exception</span> <span class="nt">e</span><span class="o">)</span><span class="p">{</span></span>
+<span class="code-line">        <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">();</span></span>
+<span class="code-line">    <span class="p">}</span></span>
 </pre></div>
 <h1 id="lian-he-tu-biao">联合图表</h1>
 <p>目标中的图表是一种联合图表(Combined Chart)：多个图表共用横坐标或纵坐标。JFreeChart中提供了<code>CombinedDomainXYPlot</code>和<code>CombinedRangeXYPlot</code>，分别用于联合横坐标和联合纵坐标的图表。</p>
 <p>由于各种图表类型都有可能组成联合图表，JFreeChart没有在<code>ChartFactory</code>中提供工厂方法进行创建，
 只能按照<a href="/2014/01/17/jfreechart.html#menuIndex1">JFreeChart中的图表模型</a>进行手工创建。下面是例子：</p>
-<div class="highlight"><pre><span></span>  //创建横坐标轴，作为联合坐标
-  DateAxis timeAxis = new DateAxis();
-
-  //创建两个纵坐标，用于上下两个Plot
-  NumberAxis ohlcAxis = new NumberAxis();
-  NumberAxis volumeAxis = new NumberAxis();
-
-  //创建两个Plot对应的Renderer
-  CandlestickRenderer ohlcRenderer = new CandlestickRenderer();
-  XYBarRenderer volumeRenderer = new XYBarRenderer();
-
-  //创建K线图的Plot，使用&ldquo;数据&rdquo;一节中的ohlcSeries
-  ////其中横坐标设为"null"，以使用联合横坐标
-  OHLCSeriesCollection ohlcDataset = new OHLCSeriesCollection();
-  ohlcDataset.addSeries(ohlcSeries);
-  XYPlot ohlcPlot = new XYPlot(ohlcDataset,timeAxis,ohlcAxis,ohlcRenderer);
-
-  //创建成交量柱状图的Plot，使用&ldquo;数据&rdquo;一节中的volumeSeries
-  //其中横坐标设为"null"，以使用联合横坐标
-  TimeSeriesCollection volumeDataset = new TimeSeriesCollection();
-  volumeDataset.addSeries(timeSeries);
-  XYPlot volumePlot=new XYPlot(volumeDataset,null,volumeAxis,volumeRenderer;
-
-  //创建联合图表
-  CombinedDomainXYPlot combineddomainxyplot = new CombinedDomainXYPlot(timeAxis());
-
-  //上下两个图表占据的高度比例为2:1，间隔为10
-  combineddomainxyplot.add(ohlcPlot, 2);
-  combineddomainxyplot.add(volumePlot, 1);
-  combineddomainxyplot.setGap(10);
-  JFreeChart chart = new JFreeChart("xx股票", JFreeChart.DEFAULT_TITLE_FONT, combineddomainxyplot, false);
+<div class="highlight"><pre><span class="code-line"><span></span>  //创建横坐标轴，作为联合坐标</span>
+<span class="code-line">  DateAxis timeAxis = new DateAxis();</span>
+<span class="code-line"></span>
+<span class="code-line">  //创建两个纵坐标，用于上下两个Plot</span>
+<span class="code-line">  NumberAxis ohlcAxis = new NumberAxis();</span>
+<span class="code-line">  NumberAxis volumeAxis = new NumberAxis();</span>
+<span class="code-line"></span>
+<span class="code-line">  //创建两个Plot对应的Renderer</span>
+<span class="code-line">  CandlestickRenderer ohlcRenderer = new CandlestickRenderer();</span>
+<span class="code-line">  XYBarRenderer volumeRenderer = new XYBarRenderer();</span>
+<span class="code-line"></span>
+<span class="code-line">  //创建K线图的Plot，使用&ldquo;数据&rdquo;一节中的ohlcSeries</span>
+<span class="code-line">  ////其中横坐标设为"null"，以使用联合横坐标</span>
+<span class="code-line">  OHLCSeriesCollection ohlcDataset = new OHLCSeriesCollection();</span>
+<span class="code-line">  ohlcDataset.addSeries(ohlcSeries);</span>
+<span class="code-line">  XYPlot ohlcPlot = new XYPlot(ohlcDataset,timeAxis,ohlcAxis,ohlcRenderer);</span>
+<span class="code-line"></span>
+<span class="code-line">  //创建成交量柱状图的Plot，使用&ldquo;数据&rdquo;一节中的volumeSeries</span>
+<span class="code-line">  //其中横坐标设为"null"，以使用联合横坐标</span>
+<span class="code-line">  TimeSeriesCollection volumeDataset = new TimeSeriesCollection();</span>
+<span class="code-line">  volumeDataset.addSeries(timeSeries);</span>
+<span class="code-line">  XYPlot volumePlot=new XYPlot(volumeDataset,null,volumeAxis,volumeRenderer;</span>
+<span class="code-line"></span>
+<span class="code-line">  //创建联合图表</span>
+<span class="code-line">  CombinedDomainXYPlot combineddomainxyplot = new CombinedDomainXYPlot(timeAxis());</span>
+<span class="code-line"></span>
+<span class="code-line">  //上下两个图表占据的高度比例为2:1，间隔为10</span>
+<span class="code-line">  combineddomainxyplot.add(ohlcPlot, 2);</span>
+<span class="code-line">  combineddomainxyplot.add(volumePlot, 1);</span>
+<span class="code-line">  combineddomainxyplot.setGap(10);</span>
+<span class="code-line">  JFreeChart chart = new JFreeChart("xx股票", JFreeChart.DEFAULT_TITLE_FONT, combineddomainxyplot, false);</span>
 </pre></div>
 <p>创建的图表如下所示：</p>
-<p><img alt="" src="images/chart/sample1.png"/></p>
+<p><img alt="" class="img-responsive" src="images/chart/sample1.png"/></p>
 <h1 id="she-zhi-yang-shi">设置样式</h1>
 <p>上面的图表默认样式与国内的习惯不大一样。不过JFreeChart提供了丰富的API进行样式的设置。下面对样式进行简单调整(目前对SWT的支持不够完全。比如，颜色值仍需要使用AWT的<code>Color</code>类)：</p>
-<div class="highlight"><pre><span></span>//图表
-chart.setBackgroundPaint(Color.BLACK);
-chart.getTitle().setPaint(Color.WHITE);
-chart.setBorderVisible(false);
-
-//Plot
-combineddomainxyplot.setBackgroundPaint(Color.BLACK);
-ohlcPlot.setBackgroundPaint(Color.BLACK);
-volumePlot.setBackgroundPaint(Color.BLACK);
-
-//渲染
-ohlcRenderer.setUpPaint(Color.RED);
-ohlcRenderer.setDownPaint(Color.GREEN);
-
-volumeRenderer.setShadowVisible(false);
-
-//坐标轴
-timeAxis.setTickLabelPaint(Color.GRAY);
-ohlcAxis.setTickLabelPaint(Color.GRAY);
-volumeAxis.setTickLabelPaint(Color.GRAY);
+<div class="highlight"><pre><span class="code-line"><span></span>//图表</span>
+<span class="code-line">chart.setBackgroundPaint(Color.BLACK);</span>
+<span class="code-line">chart.getTitle().setPaint(Color.WHITE);</span>
+<span class="code-line">chart.setBorderVisible(false);</span>
+<span class="code-line"></span>
+<span class="code-line">//Plot</span>
+<span class="code-line">combineddomainxyplot.setBackgroundPaint(Color.BLACK);</span>
+<span class="code-line">ohlcPlot.setBackgroundPaint(Color.BLACK);</span>
+<span class="code-line">volumePlot.setBackgroundPaint(Color.BLACK);</span>
+<span class="code-line"></span>
+<span class="code-line">//渲染</span>
+<span class="code-line">ohlcRenderer.setUpPaint(Color.RED);</span>
+<span class="code-line">ohlcRenderer.setDownPaint(Color.GREEN);</span>
+<span class="code-line"></span>
+<span class="code-line">volumeRenderer.setShadowVisible(false);</span>
+<span class="code-line"></span>
+<span class="code-line">//坐标轴</span>
+<span class="code-line">timeAxis.setTickLabelPaint(Color.GRAY);</span>
+<span class="code-line">ohlcAxis.setTickLabelPaint(Color.GRAY);</span>
+<span class="code-line">volumeAxis.setTickLabelPaint(Color.GRAY);</span>
 </pre></div>
 <p>调整后的图表如下所示：</p>
-<p><img alt="" src="images/chart/sample2.png"/></p>
+<p><img alt="" class="img-responsive" src="images/chart/sample2.png"/></p>
 <h1 id="qu-chu-fei-jiao-yi-shi-duan">去除非交易时段</h1>
 <p>前面的例子中，K线是不连续的，因为会有非交易日的存在。如果是小时、分钟级别的K线图，该问题会更加明显。</p>
 <p>要去除非交易时段，使得K线连续，大体有两个思路：</p>
@@ -293,7 +295,7 @@ volumeAxis.setTickLabelPaint(Color.GRAY);
 方法2是官方指定的方法，可行性更高，但是要同时支持日线、小时线、分钟/5分钟线，实现起来有点难度。
 此外，<a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/axis/Timeline.html">Timeline的接口说明</a>读起来有些费解；方法3需要改变数据源(Dataset)，使用序号作为数据，设置Renderer的<code>ItemLabelGenerator</code>，根据序号产生时间格式的坐标标签。</p>
 <p>这里采用方法3，实例代码如下：</p>
-<div class="highlight"><pre><span></span>//TODO
+<div class="highlight"><pre><span class="code-line"><span></span>//TODO</span>
 </pre></div>
 <h1 id="xiu-zheng-gao-du-he-kuan-du-todo">修正高度和宽度(TODO)</h1>
 <ul>
@@ -304,7 +306,7 @@ volumeAxis.setTickLabelPaint(Color.GRAY);
 <p>使用&ldquo;时间窗口&rdquo;作为数据</p>
 </li>
 </ul>
-<h1 id="heng-xiang-gun-dong-he-shi-shi-qu-xian-todo">横向滚动和实时曲线(TODO)</h1>
+<h1 id="heng-xiang-gun-dong-he-shi-shi-qu-xian-todo">横向滚动和实时曲线(TODO)</h1></body></html>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2014-01-18.</h6>
 
 
@@ -385,41 +387,44 @@ volumeAxis.setTickLabelPaint(Color.GRAY);
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/suo-yin.html" class="tag-3">索引</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/ji-qi-xue-xi.html" class="tag-3">机器学习</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/jiao-yi-gui-ze.html" class="tag-4">交易规则</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (2)</a></li>
+											<li><a href="/2017/03/">2017-03  (5)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>

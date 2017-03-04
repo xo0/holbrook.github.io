@@ -71,6 +71,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -85,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (5)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -122,6 +123,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -147,7 +149,7 @@
 
 
 
-	<h1 id="mu-biao">目标</h1>
+	<html><body><h1 id="mu-biao">目标</h1>
 <p>将要开展的一个项目，使用Angularjs 和 Flask开发一个web界面，
 作为saltstack和其他自行开发的python小工具的前端界面，
 实现自己的&ldquo;运维操作平台&rdquo;。</p>
@@ -204,25 +206,25 @@
 </li>
 </ul>
 <h2 id="huan-jing-zhun-bei">环境准备</h2>
-<div class="highlight"><pre><span></span>本文中仅给出MacOS下的安装方法，其他系统可以阅读官方文档或参考资料。
+<div class="highlight"><pre><span class="code-line"><span></span>本文中仅给出MacOS下的安装方法，其他系统可以阅读官方文档或参考资料。</span>
 </pre></div>
-<div class="highlight"><pre><span></span><span class="c1">#安装npm</span>
-brew install npm
-
-<span class="c1">#全局安装工具</span>
-npm install -g yo grunt-cli grunt bower generator-angular
-
-<span class="c1">#安装virtualenv</span>
-sudo easy_install pip
-sudo pip install virtualenv
+<div class="highlight"><pre><span class="code-line"><span></span><span class="c1">#安装npm</span></span>
+<span class="code-line">brew install npm</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c1">#全局安装工具</span></span>
+<span class="code-line">npm install -g yo grunt-cli grunt bower generator-angular</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c1">#安装virtualenv</span></span>
+<span class="code-line">sudo easy_install pip</span>
+<span class="code-line">sudo pip install virtualenv</span>
 </pre></div>
 <h1 id="da-jian-gong-cheng_1">搭建工程</h1>
 <h2 id="chuang-jian-gong-cheng-mu-lu">创建工程目录</h2>
-<div class="highlight"><pre><span></span>mkdir -p PROJ<span class="se">\_</span>ROOT/web <span class="se">\#</span> 前端工程目录 mkdir -p
-PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME <span class="se">\#</span> 后端工程目录 <span class="se">\#</span>+END
+<div class="highlight"><pre><span class="code-line"><span></span>mkdir -p PROJ<span class="se">\_</span>ROOT/web <span class="se">\#</span> 前端工程目录 mkdir -p</span>
+<span class="code-line">PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME <span class="se">\#</span> 后端工程目录 <span class="se">\#</span>+END</span>
 </pre></div>
 <h2 id="chuang-jian-qian-duan-gong-cheng">创建前端工程</h2>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> PROJ<span class="se">\_</span>ROOT/web yo angular <span class="se">\#</span> 一些交互，按照自己的需要选择即可。 <span class="se">\#</span>...
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nb">cd</span> PROJ<span class="se">\_</span>ROOT/web yo angular <span class="se">\#</span> 一些交互，按照自己的需要选择即可。 <span class="se">\#</span>...</span>
 </pre></div>
 <h2 id="pei-zhi-qian-duan-gong-cheng">配置前端工程</h2>
 <ol>
@@ -238,71 +240,71 @@ PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME <span c
 <p>virtualenv</p>
 </li>
 </ol>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> PROJ<span class="se">\_</span>ROOT
-virtualenv venv
-<span class="nb">source</span> venv/bin/activate
-pip install flask
-pip install sqlalchemy
-pip install flask-sqlalchemy
-...
-pip freeze &gt; app/requirements.txt
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nb">cd</span> PROJ<span class="se">\_</span>ROOT</span>
+<span class="code-line">virtualenv venv</span>
+<span class="code-line"><span class="nb">source</span> venv/bin/activate</span>
+<span class="code-line">pip install flask</span>
+<span class="code-line">pip install sqlalchemy</span>
+<span class="code-line">pip install flask-sqlalchemy</span>
+<span class="code-line">...</span>
+<span class="code-line">pip freeze &gt; app/requirements.txt</span>
 </pre></div>
 <ol>
 <li>构建Flask工程</li>
 </ol>
-<div class="highlight"><pre><span></span>mkdir -p PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME/common
-mkdir -p PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME/models
-mkdir -p PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME/static
-mkdir -p PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME/templates
-mkdir -p PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME/views
-
-touch PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME/common/__init__.py
-touch PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME/models/__init__.py
-touch PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME/views/__init__.py
+<div class="highlight"><pre><span class="code-line"><span></span>mkdir -p PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME/common</span>
+<span class="code-line">mkdir -p PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME/models</span>
+<span class="code-line">mkdir -p PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME/static</span>
+<span class="code-line">mkdir -p PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME/templates</span>
+<span class="code-line">mkdir -p PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME/views</span>
+<span class="code-line"></span>
+<span class="code-line">touch PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME/common/__init__.py</span>
+<span class="code-line">touch PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME/models/__init__.py</span>
+<span class="code-line">touch PROJ<span class="se">\_</span>ROOT/app/APP<span class="se">\_</span>NAME/views/__init__.py</span>
 </pre></div>
 <ol>
 <li>配置git</li>
 </ol>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> PROJ<span class="se">\_</span>ROOT
-mv web/.gitattributes .
-rm -f web/.gitignore
-cat &gt; .gitignore <span class="s">&lt;&lt; EOF</span>
-<span class="s">web/node_modules</span>
-<span class="s">web/.tmp</span>
-<span class="s">web/.sass-cache</span>
-<span class="s">web/bower_components</span>
-<span class="s">dist</span>
-<span class="s">venv</span>
-<span class="s">EOF</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nb">cd</span> PROJ<span class="se">\_</span>ROOT</span>
+<span class="code-line">mv web/.gitattributes .</span>
+<span class="code-line">rm -f web/.gitignore</span>
+<span class="code-line">cat &gt; .gitignore <span class="s">&lt;&lt; EOF</span></span>
+<span class="code-line"><span class="s">web/node_modules</span></span>
+<span class="code-line"><span class="s">web/.tmp</span></span>
+<span class="code-line"><span class="s">web/.sass-cache</span></span>
+<span class="code-line"><span class="s">web/bower_components</span></span>
+<span class="code-line"><span class="s">dist</span></span>
+<span class="code-line"><span class="s">venv</span></span>
+<span class="code-line"><span class="s">EOF</span></span>
 </pre></div>
 <h1 id="shi-yong_1">使用</h1>
 <p>以上是工程框架搭建的过程，对于开发人员，不需要要这么麻烦，只要从版本库中获取源代码后进行初始化即可：</p>
-<div class="highlight"><pre><span></span>git clone xxxx <span class="nb">cd</span> PROJ_ROOT
-virtualenv venv
-<span class="nb">source</span> venv/bin/activate
-pip install -r app/requirements.txt
-<span class="nb">cd</span> web
-npm install
-bower install
+<div class="highlight"><pre><span class="code-line"><span></span>git clone xxxx <span class="nb">cd</span> PROJ_ROOT</span>
+<span class="code-line">virtualenv venv</span>
+<span class="code-line"><span class="nb">source</span> venv/bin/activate</span>
+<span class="code-line">pip install -r app/requirements.txt</span>
+<span class="code-line"><span class="nb">cd</span> web</span>
+<span class="code-line">npm install</span>
+<span class="code-line">bower install</span>
 </pre></div>
 <h2 id="qi-dong-qian-duan">启动前端</h2>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> PROJ_ROOT/web
-grunt serve
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nb">cd</span> PROJ_ROOT/web</span>
+<span class="code-line">grunt serve</span>
 </pre></div>
 <p>然后通过http://0.0.0.0:9000可以访问前端界面。</p>
 <h2 id="qi-dong-hou-duan">启动后端</h2>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> PROJ<span class="se">\_</span>ROOT/app
-python run.py
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nb">cd</span> PROJ<span class="se">\_</span>ROOT/app</span>
+<span class="code-line">python run.py</span>
 </pre></div>
-<div class="highlight"><pre><span></span>然后通过http://127.0.0.1:5000/ 访问后端应用。
+<div class="highlight"><pre><span class="code-line"><span></span>然后通过http://127.0.0.1:5000/ 访问后端应用。</span>
 </pre></div>
 <h1 id="zhi-shi-zhun-bei_1">知识准备</h1>
-<div class="highlight"><pre><span></span>在开始开发之前，开发人员最好熟悉以下内容：
-
-- Bootstrap入门: http://v3.bootcss.com/getting-started/
-- Angularjs入门教程: http://www.ituring.com.cn/article/13471
-- Flask系列教程 :http://www.oschina.net/translate/the-flask-mega-tutorial-part-i-hello-world
-- SQLAlchemy教程:
+<div class="highlight"><pre><span class="code-line"><span></span>在开始开发之前，开发人员最好熟悉以下内容：</span>
+<span class="code-line"></span>
+<span class="code-line">- Bootstrap入门: http://v3.bootcss.com/getting-started/</span>
+<span class="code-line">- Angularjs入门教程: http://www.ituring.com.cn/article/13471</span>
+<span class="code-line">- Flask系列教程 :http://www.oschina.net/translate/the-flask-mega-tutorial-part-i-hello-world</span>
+<span class="code-line">- SQLAlchemy教程:</span>
 </pre></div>
 <h1 id="can-kao-zi-liao">参考资料</h1>
 <ol>
@@ -323,7 +325,7 @@ python run.py
 <li>使用 Flask 和 AngularJS 构建博客 - 2
     http://segmentfault.com/a/1190000000665636</li>
 </ol>
-<hr>
+<hr/>
 <p>references:
 - id: fenner2012a
   title: One-click science marketing
@@ -341,7 +343,7 @@ python run.py
         issued:
         year: 2012
         month: 3</p>
-<hr/></hr>
+<hr/></body></html>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2015-05-04.</h6>
 
 
@@ -416,41 +418,44 @@ python run.py
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/suo-yin.html" class="tag-3">索引</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/ji-qi-xue-xi.html" class="tag-3">机器学习</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/jiao-yi-gui-ze.html" class="tag-4">交易规则</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (2)</a></li>
+											<li><a href="/2017/03/">2017-03  (5)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>

@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>心内求法 - 量化交易</title><link href="http://holbrook.github.io/" rel="alternate"></link><link href="http://holbrook.github.io/feeds/liang-hua-jiao-yi.atom.xml" rel="self"></link><id>http://holbrook.github.io/</id><updated>2017-02-21T00:00:00+08:00</updated><entry><title>基于决策表实现交易策略</title><link href="http://holbrook.github.io/2017/02/21/strategy_based_on_decision_table.html" rel="alternate"></link><published>2017-02-21T00:00:00+08:00</published><updated>2017-02-21T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2017-02-21:/2017/02/21/strategy_based_on_decision_table.html</id><summary type="html">&lt;p&gt;与编程语言级别的逻辑控制(&lt;code&gt;if-then-else&lt;/code&gt;，&lt;code&gt;switch&lt;/code&gt;) 相比，决策表能在一个平面中罗列出所有的可能情况，并清晰的指出相应的处理方式，不需要层层嵌套。用户不需要考虑其中的逻辑关系就能一眼看出其中什么样的动作对应什么样的情况，可读性大大提高，并且不容易因为疏忽产生不易察觉的错误。&lt;/p&gt;</summary><content type="html">&lt;p&gt;所以决策表是进行实现复杂控制逻辑的一个有力工具。现在，考虑构建一个通用的决策表，用于定义交易策略。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>心内求法 - 量化交易</title><link href="http://holbrook.github.io/" rel="alternate"></link><link href="http://holbrook.github.io/feeds/liang-hua-jiao-yi.atom.xml" rel="self"></link><id>http://holbrook.github.io/</id><updated>2017-03-02T00:00:00+08:00</updated><entry><title>委托和成交</title><link href="http://holbrook.github.io/2017/03/02/order_and_match.html" rel="alternate"></link><published>2017-03-02T00:00:00+08:00</published><updated>2017-03-02T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2017-03-02:/2017/03/02/order_and_match.html</id><summary type="html">&lt;p&gt;abc&lt;/p&gt;</summary><content type="html">&lt;html&gt;&lt;body&gt;&lt;h1 id="demo"&gt;demo&lt;/h1&gt;
+&lt;p&gt;::uml:: format="png" alt="Sample sequence diagram"
+  participant User&lt;/p&gt;
+&lt;p&gt;User -&amp;gt; A: DoWork
+  activate A #FFBBBB&lt;/p&gt;
+&lt;p&gt;A -&amp;gt; A: Internal call
+  activate A #DarkSalmon&lt;/p&gt;
+&lt;p&gt;A -&amp;gt; B: &amp;lt;&amp;lt; createRequest &amp;gt;&amp;gt;
+  activate B&lt;/p&gt;
+&lt;p&gt;B --&amp;gt; A: RequestCreated
+  deactivate B
+  deactivate A
+  A -&amp;gt; User: Done
+  deactivate A
+::end-uml::&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</content><category term="交易规则"></category></entry><entry><title>基于决策表实现交易策略</title><link href="http://holbrook.github.io/2017/02/21/strategy_based_on_decision_table.html" rel="alternate"></link><published>2017-02-21T00:00:00+08:00</published><updated>2017-02-21T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2017-02-21:/2017/02/21/strategy_based_on_decision_table.html</id><summary type="html">&lt;p&gt;与编程语言级别的逻辑控制(&lt;code&gt;if-then-else&lt;/code&gt;，&lt;code&gt;switch&lt;/code&gt;) 相比，决策表能在一个平面中罗列出所有的可能情况，并清晰的指出相应的处理方式，不需要层层嵌套。用户不需要考虑其中的逻辑关系就能一眼看出其中什么样的动作对应什么样的情况，可读性大大提高，并且不容易因为疏忽产生不易察觉的错误。&lt;/p&gt;</summary><content type="html">&lt;html&gt;&lt;body&gt;&lt;p&gt;所以决策表是进行实现复杂控制逻辑的一个有力工具。现在，考虑构建一个通用的决策表，用于定义交易策略。&lt;/p&gt;
 &lt;h1 id="jue-ce-biao-yu-gui-ze-yin-qing"&gt;决策表与规则引擎&lt;/h1&gt;
 &lt;p&gt;决策表又称判断表，是一种呈表格状的图形工具，适用于描述处理判断条件较多，各条件又相互组合、有多种决策方案的情况。
 精确而简洁描述复杂逻辑的方式，将多个条件与这些条件满足后要执行动作相对应。
@@ -76,25 +90,25 @@ Expression Evaluator仅仅依赖&lt;a href="www.antlr.org"&gt;Antlr&lt;/a&gt;(&a
 &lt;p&gt;在我的架构中，策略要尽可能的简单，由 Context 封装策略的运行环境。？
 那么很自然的，表达式引擎应该在 Context 中引入并创建，策略中只是调用其结果。&lt;/p&gt;
 &lt;p&gt;在 Context 中：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;// 表达式变量
-
-
-
-// 在构造函数中，定义引擎并注册变量
-public StrategyContext()
-{
-    var registry = new TypeRegistry();
-    registry.RegisterSymbol("当前委托", CurrentOrder);
-    registry.RegisterSymbol("做市商行情", CurrentMMTick);
-}
-
-&amp;hellip;&amp;hellip;
-
-// 提供
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;// 表达式变量&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;// 在构造函数中，定义引擎并注册变量&lt;/span&gt;
+&lt;span class="code-line"&gt;public StrategyContext()&lt;/span&gt;
+&lt;span class="code-line"&gt;{&lt;/span&gt;
+&lt;span class="code-line"&gt;    var registry = new TypeRegistry();&lt;/span&gt;
+&lt;span class="code-line"&gt;    registry.RegisterSymbol("当前委托", CurrentOrder);&lt;/span&gt;
+&lt;span class="code-line"&gt;    registry.RegisterSymbol("做市商行情", CurrentMMTick);&lt;/span&gt;
+&lt;span class="code-line"&gt;}&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&amp;hellip;&amp;hellip;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;// 提供&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;h1 id="can-kao-zi-liao"&gt;参考资料&lt;/h1&gt;
 &lt;div class="footnote"&gt;
-&lt;hr&gt;
+&lt;hr/&gt;
 &lt;ol&gt;
 &lt;li id="fn-1"&gt;
 &lt;p&gt;&lt;a href="http://baike.baidu.com/subview/1448115/1448115.htm"&gt;决策表_百度百科&lt;/a&gt;&amp;nbsp;&lt;a class="footnote-backref" href="#fnref-1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
@@ -109,7 +123,7 @@ public StrategyContext()
 &lt;p&gt;&lt;a href="http://www.cnblogs.com/asxinyu/p/dotnet_Opensource_project_Expression_Evaluator.html"&gt;Expression Evaluator表达式计算组件使用&lt;/a&gt;&amp;nbsp;&lt;a class="footnote-backref" href="#fnref-4" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/hr&gt;&lt;/div&gt;</content><category term="策略平台"></category><category term="C#"></category></entry><entry><title>交易策略的基本检验</title><link href="http://holbrook.github.io/2014/01/05/verificating_a_trade_system.html" rel="alternate"></link><published>2014-01-05T00:00:00+08:00</published><updated>2014-01-05T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2014-01-05:/2014/01/05/verificating_a_trade_system.html</id><summary type="html">&lt;p&gt;交易策略在其生命周期中要经历过多次检验。这些检验通常需要经过统计分析。最基本的检验是不考虑交易成本、指令类型、突发事件、涨跌停和跳空、回波效应等外部因素的影响，只考虑操作信号自身的统计分析指标。&lt;/p&gt;</summary><content type="html">&lt;h1 id="qian-ti-he-jia-she"&gt;前提和假设&lt;/h1&gt;
+&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><category term="策略平台"></category><category term="C#"></category></entry><entry><title>交易策略的基本检验</title><link href="http://holbrook.github.io/2014/01/05/verificating_a_trade_system.html" rel="alternate"></link><published>2014-01-05T00:00:00+08:00</published><updated>2014-01-05T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2014-01-05:/2014/01/05/verificating_a_trade_system.html</id><summary type="html">&lt;p&gt;交易策略在其生命周期中要经历过多次检验。这些检验通常需要经过统计分析。最基本的检验是不考虑交易成本、指令类型、突发事件、涨跌停和跳空、回波效应等外部因素的影响，只考虑操作信号自身的统计分析指标。&lt;/p&gt;</summary><content type="html">&lt;html&gt;&lt;body&gt;&lt;h1 id="qian-ti-he-jia-she"&gt;前提和假设&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;信号发生时机&lt;/li&gt;
 &lt;/ol&gt;
@@ -125,7 +139,7 @@ public StrategyContext()
 &lt;p&gt;为了减小随机误差的影响，每个样本至少要包含30对买入/卖出的交易，即至少要涵盖30个交易周期。&lt;/p&gt;
 &lt;h1 id="ji-hui-de-du-liang"&gt;机会的度量&lt;/h1&gt;
 &lt;p&gt;交易策略最根本的指标就是获利的机会。统计学中，用&lt;a href="/2013/06/07/statistics_intro_4.html"&gt;概率和分布&lt;/a&gt;来度量机会。相应的，对交易策略的获利机会的度量需要确定以下几个指标：&lt;/p&gt;
-&lt;table border="2" cellpadding="6" cellspacing="0" frame="hsides" rules="groups" style="border-collapse: collapse;"&gt;
+&lt;table border="2" cellpadding="6" cellspacing="0" class="table table-striped table-hover" frame="hsides" rules="groups" style="border-collapse: collapse;"&gt;
 &lt;thead&gt;
 &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;总量&lt;/th&gt;&lt;th&gt;比率&lt;/th&gt;&lt;th&gt;分布&lt;/th&gt;&lt;/tr&gt;
 &lt;/thead&gt;
@@ -195,7 +209,7 @@ public StrategyContext()
 &lt;h1 id="yang-ben-de-zhi-liang"&gt;样本的质量&lt;/h1&gt;
 &lt;p&gt;对一个交易策略用不同的时间、不同的交易对象反复多次验证，并根据抽样分布（即各样本的统计量，如均值、中位数、标准差等的分布）的特征，剔除一些不合格的样本，重新对交易策略进行综合评价。&lt;/p&gt;
 &lt;h1 id="bo-chang-wen-ding-xing"&gt;波长稳定性&lt;/h1&gt;
-&lt;p&gt;理论上来说，在各波长下（日线，5分钟线等），信号成功率应该保持稳定。&lt;/p&gt;</content><category term="交易系统"></category></entry><entry><title>使用Oracle Berkeley DB持久化股票行情数据</title><link href="http://holbrook.github.io/2013/12/19/Berkeley_DB.html" rel="alternate"></link><published>2013-12-19T00:00:00+08:00</published><updated>2013-12-19T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-19:/2013/12/19/Berkeley_DB.html</id><summary type="html"></summary><content type="html">&lt;h1 id="guan-xi-shu-ju-ku-shu-ju-wen-jian-huan-shi-nosql"&gt;关系数据库，数据文件 还是 NoSQL&lt;/h1&gt;
+&lt;p&gt;理论上来说，在各波长下（日线，5分钟线等），信号成功率应该保持稳定。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</content><category term="交易系统"></category></entry><entry><title>使用Oracle Berkeley DB持久化股票行情数据</title><link href="http://holbrook.github.io/2013/12/19/Berkeley_DB.html" rel="alternate"></link><published>2013-12-19T00:00:00+08:00</published><updated>2013-12-19T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-19:/2013/12/19/Berkeley_DB.html</id><summary type="html"></summary><content type="html">&lt;html&gt;&lt;body&gt;&lt;h1 id="guan-xi-shu-ju-ku-shu-ju-wen-jian-huan-shi-nosql"&gt;关系数据库，数据文件 还是 NoSQL&lt;/h1&gt;
 &lt;p&gt;股票行情数据具有如下特点：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;数据量大&lt;/li&gt;
@@ -221,7 +235,7 @@ public StrategyContext()
 &lt;/ul&gt;
 &lt;h1 id="oracle-berkeley-db"&gt;Oracle Berkeley DB&lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://www.oracle.com/technetwork/cn/products/berkeleydb/overview/index.html"&gt;Berkeley DB&lt;/a&gt;是满足上述4点要求的比较好的一款产品。Berkeley DB分为BDB、BDB Java版和BDB XML版。其总体架构如下图：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Berkeley DB" src="images/trade-system/berkeley-db.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Berkeley DB" class="img-responsive" src="images/trade-system/berkeley-db.png"/&gt;&lt;/p&gt;
 &lt;p&gt;BDB的三个版本的功能不完全相同。&lt;/p&gt;
 &lt;p&gt;我选择BDB Java版，不支持SQL API和XQuery API，可以使用底层的键/值API、Java 直接持久层 (DPL) API和Java 集合 API。三种API的应用场景如下：&lt;/p&gt;
 &lt;ul&gt;
@@ -280,9 +294,9 @@ public class OHLC {
 public class Security implements Instrument{
     @PrimaryKey
     private String code;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;@SecondaryKey(relate=Relationship.ONE_TO_ONE)
-private String name;
-&amp;hellip;&amp;hellip;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;@SecondaryKey(relate=Relationship.ONE_TO_ONE)&lt;/span&gt;
+&lt;span class="code-line"&gt;private String name;&lt;/span&gt;
+&lt;span class="code-line"&gt;&amp;hellip;&amp;hellip;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p _="%" endhighlight=""&gt;}&lt;/p&gt;
 &lt;h3 id="guan-lian-guan-xi"&gt;关联关系&lt;/h3&gt;
@@ -295,23 +309,23 @@ relate可以是ONE_TO_ONE,ONE_TO_MANY,MANY_TO_ONE或MANY_TO_MANY(在com.sleepyca
 class Employer {
     @PrimaryKey(sequence="ID")
     long id;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;@SecondaryKey(relate=ONE_TO_ONE) String name;
-&amp;hellip;&amp;hellip;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;@SecondaryKey(relate=ONE_TO_ONE) String name;&lt;/span&gt;
+&lt;span class="code-line"&gt;&amp;hellip;&amp;hellip;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;}&lt;/p&gt;
 &lt;p&gt;@Entity
 class Person {
     @PrimaryKey
     String ssn;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;@SecondaryKey(relate=MANY_TO_ONE, relatedEntity=Person.class)
-String parentSsn;
-
-@SecondaryKey(relate=ONE_TO_MANY)
-Set&amp;lt;String&amp;gt; emailAddresses = new HashSet&amp;lt;String&amp;gt;();
-
-@SecondaryKey(relate=MANY_TO_MANY, relatedEntity=Employer.class, onRelatedEntityDelete=NULLIFY)
-Set&amp;lt;Long&amp;gt; employerIds = new HashSet&amp;lt;Long&amp;gt;();
-&amp;hellip;&amp;hellip;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;@SecondaryKey(relate=MANY_TO_ONE, relatedEntity=Person.class)&lt;/span&gt;
+&lt;span class="code-line"&gt;String parentSsn;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;@SecondaryKey(relate=ONE_TO_MANY)&lt;/span&gt;
+&lt;span class="code-line"&gt;Set&amp;lt;String&amp;gt; emailAddresses = new HashSet&amp;lt;String&amp;gt;();&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;@SecondaryKey(relate=MANY_TO_MANY, relatedEntity=Employer.class, onRelatedEntityDelete=NULLIFY)&lt;/span&gt;
+&lt;span class="code-line"&gt;Set&amp;lt;Long&amp;gt; employerIds = new HashSet&amp;lt;Long&amp;gt;();&lt;/span&gt;
+&lt;span class="code-line"&gt;&amp;hellip;&amp;hellip;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;}&lt;/p&gt;
 &lt;p&gt;{% endhighlight %}&lt;/p&gt;
@@ -351,14 +365,14 @@ System.out.println(employee.ssn + ' ' + employee.name); }
 &lt;p&gt;通过 EntityJoin 类可以进行等值连 接(equality join)操作。&lt;/p&gt;
 &lt;p&gt;比如，以下代码查询所有Bob的孩子中为gizmo公司工作的 员工:&lt;/p&gt;
 &lt;p _="%" endhighlight=""&gt;{% highlight java %}
-EntityJoin&lt;string,person&gt; join = new EntityJoin(dao.personBySsn);
+EntityJoin&lt;string&gt; join = new EntityJoin(dao.personBySsn);
 join.addCondition(dao.personByParentSsn, "111-11-1111"); join.addCondition(dao.personByEmployerIds, gizmoInc.id);
 ForwardCursor&lt;person&gt; results = join.entities(); try {
 for (Person person : results) { System.out.println(person.ssn + ' ' + person.name);
 }
 } finally {
     results.close();
-}&lt;/person&gt;&lt;/string,person&gt;&lt;/p&gt;
+}&lt;/person&gt;&lt;/string&gt;&lt;/p&gt;
 &lt;h3 id="jian-li-lian-jie"&gt;建立连接&lt;/h3&gt;
 &lt;h3 id="shi-wu-zhi-chi"&gt;事务支持&lt;/h3&gt;
 &lt;p _="%" endhighlight=""&gt;{% highlight java %}
@@ -384,8 +398,8 @@ txn.commit();&lt;/p&gt;
 &lt;li&gt;CRUD操作参数&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;例如, &amp;ldquo;脏读&amp;rdquo;可通过LockMode参数实现:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Employer employer = employerByName.get(null, "Gizmo Inc", LockMode.READ_UNCOMMITTED);
-&lt;/pre&gt;&lt;/div&gt;</content><category term="交易系统"></category></entry><entry><title>交易策略与规则引擎</title><link href="http://holbrook.github.io/2013/12/19/trading_strategy.html" rel="alternate"></link><published>2013-12-19T00:00:00+08:00</published><updated>2013-12-19T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-19:/2013/12/19/trading_strategy.html</id><summary type="html"></summary><content type="html">&lt;h1 id="jiao-yi-ce-lue-de-yao-dian"&gt;交易策略的要点&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;Employer employer = employerByName.get(null, "Gizmo Inc", LockMode.READ_UNCOMMITTED);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><category term="交易系统"></category></entry><entry><title>交易策略与规则引擎</title><link href="http://holbrook.github.io/2013/12/19/trading_strategy.html" rel="alternate"></link><published>2013-12-19T00:00:00+08:00</published><updated>2013-12-19T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-19:/2013/12/19/trading_strategy.html</id><summary type="html"></summary><content type="html">&lt;html&gt;&lt;body&gt;&lt;h1 id="jiao-yi-ce-lue-de-yao-dian"&gt;交易策略的要点&lt;/h1&gt;
 &lt;p&gt;&lt;a href="/2013/12/16/trade_system.html"&gt;前面&lt;/a&gt;提到，交易策略是系统化交易的核心。但是要注意的是，风险管理比交易策略要重要10倍。&lt;/p&gt;
 &lt;p&gt;交易策略的一些要点整理如下：&lt;/p&gt;
 &lt;ul&gt;
@@ -637,18 +651,18 @@ txn.commit();&lt;/p&gt;
 &lt;p&gt;定义一个&amp;ldquo;均线事件&amp;rdquo;(MAEvent):&lt;/p&gt;
 &lt;p&gt;```
   public class MAEvent {&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;public Date datetime;
-public long duration;
-
-public int length;
-public double average;
-public double price;
-
-
-
-public String toString(){
-  return ""+this.getDatetime().toLocaleString()+":MA"+this.length+"="+average+"\t("+price+")";
-}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;public Date datetime;&lt;/span&gt;
+&lt;span class="code-line"&gt;public long duration;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;public int length;&lt;/span&gt;
+&lt;span class="code-line"&gt;public double average;&lt;/span&gt;
+&lt;span class="code-line"&gt;public double price;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;public String toString(){&lt;/span&gt;
+&lt;span class="code-line"&gt;  return ""+this.getDatetime().toLocaleString()+":MA"+this.length+"="+average+"\t("+price+")";&lt;/span&gt;
+&lt;span class="code-line"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;}
   ```&lt;/p&gt;
@@ -666,14 +680,14 @@ public String toString(){
 &lt;p&gt;这里使用一个&amp;ldquo;操作信号事件&amp;rdquo;(SingalEvent)作为操作，符合条件时将该事件&lt;a href="/2012/12/06/rule_language.html#menuIndex4"&gt;insert&lt;/a&gt;到规则引擎：&lt;/p&gt;
 &lt;p&gt;```
   public class SignalEvent extends AbstractEvent{&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;public enum SignalType{LONG,SHORT}
-
-public Date datetime;
-public long duration;
-
-
-public SignalType type;
-public String strategyName;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;public enum SignalType{LONG,SHORT}&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;public Date datetime;&lt;/span&gt;
+&lt;span class="code-line"&gt;public long duration;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;public SignalType type;&lt;/span&gt;
+&lt;span class="code-line"&gt;public String strategyName;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;}
   ```&lt;/p&gt;
@@ -695,16 +709,16 @@ public String strategyName;
           $MA20_0:MAEvent(length==LONG_LENGTH,this meets[1d] $MA20_1,this coincides $MA5_0,
             average&amp;lt;=$MA5_0.average
           );&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;  then&lt;/span&gt;
-
-&lt;span class="x"&gt;    SignalEvent e = new SignalEvent();&lt;/span&gt;
-&lt;span class="x"&gt;    e.datetime = &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;MA5_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;datetime&lt;/span&gt;&lt;span class="x"&gt;;&lt;/span&gt;
-&lt;span class="x"&gt;    e.strategyName = "简单移动平均线策略";&lt;/span&gt;
-&lt;span class="x"&gt;    e.type = SignalEvent.SignalType.LONG;&lt;/span&gt;
-&lt;span class="x"&gt;    e.price = &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;MA5_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;price&lt;/span&gt;&lt;span class="x"&gt;;&lt;/span&gt;
-&lt;span class="x"&gt;      insert(e);&lt;/span&gt;
-
-&lt;span class="x"&gt;  System.out.println(e);&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;  then&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="x"&gt;    SignalEvent e = new SignalEvent();&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="x"&gt;    e.datetime = &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;MA5_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;datetime&lt;/span&gt;&lt;span class="x"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="x"&gt;    e.strategyName = "简单移动平均线策略";&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="x"&gt;    e.type = SignalEvent.SignalType.LONG;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="x"&gt;    e.price = &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;MA5_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;price&lt;/span&gt;&lt;span class="x"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="x"&gt;      insert(e);&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="x"&gt;  System.out.println(e);&lt;/span&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;end&lt;/p&gt;
 &lt;p&gt;rule "SHORT SIGNAL"
@@ -715,23 +729,23 @@ public String strategyName;
           $MA20_0:MAEvent(length==LONG_LENGTH,this meets[1d] $MA20_1, this coincides $MA5_0,
             average&amp;gt;=$MA5_0.average
           );&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;  then&lt;/span&gt;
-&lt;span class="x"&gt;      SignalEvent e = new SignalEvent();&lt;/span&gt;
-&lt;span class="x"&gt;    e.datetime = &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;MA5_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;datetime&lt;/span&gt;&lt;span class="x"&gt;;&lt;/span&gt;
-&lt;span class="x"&gt;    e.strategyName = "简单移动平均线策略";&lt;/span&gt;
-&lt;span class="x"&gt;    e.type = SignalEvent.SignalType.SHORT;&lt;/span&gt;
-&lt;span class="x"&gt;    e.price = &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;MA5_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;price&lt;/span&gt;&lt;span class="x"&gt;;&lt;/span&gt;
-&lt;span class="x"&gt;      insert(e);&lt;/span&gt;
-
-&lt;span class="x"&gt;      System.out.println(e);&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;  then&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="x"&gt;      SignalEvent e = new SignalEvent();&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="x"&gt;    e.datetime = &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;MA5_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;datetime&lt;/span&gt;&lt;span class="x"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="x"&gt;    e.strategyName = "简单移动平均线策略";&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="x"&gt;    e.type = SignalEvent.SignalType.SHORT;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="x"&gt;    e.price = &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;MA5_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;price&lt;/span&gt;&lt;span class="x"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="x"&gt;      insert(e);&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="x"&gt;      System.out.println(e);&lt;/span&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;end
-```&lt;/p&gt;</content><category term="交易系统"></category><category term="规则引擎"></category></entry><entry><title>证券行情数据模型</title><link href="http://holbrook.github.io/2013/12/18/quotation_model.html" rel="alternate"></link><published>2013-12-18T00:00:00+08:00</published><updated>2013-12-18T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-18:/2013/12/18/quotation_model.html</id><summary type="html"></summary><content type="html">&lt;h1 id="xing-qing-shu-ju-ju-li"&gt;行情数据举例&lt;/h1&gt;
+```&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</content><category term="交易系统"></category><category term="规则引擎"></category></entry><entry><title>证券行情数据模型</title><link href="http://holbrook.github.io/2013/12/18/quotation_model.html" rel="alternate"></link><published>2013-12-18T00:00:00+08:00</published><updated>2013-12-18T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-18:/2013/12/18/quotation_model.html</id><summary type="html"></summary><content type="html">&lt;html&gt;&lt;body&gt;&lt;h1 id="xing-qing-shu-ju-ju-li"&gt;行情数据举例&lt;/h1&gt;
 &lt;p&gt;交易系统离不开行情数据。比如，如果访问新浪的股票数据接口：&lt;/p&gt;
 &lt;p&gt;http://hq.sinajs.cn/list=sh600133,sh601005&lt;/p&gt;
 &lt;p&gt;可能会得到如下的数据：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;var&lt;/span&gt; &lt;span class="nt"&gt;hq_str_sh600133&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"东湖高新,6.01,6.01,5.91,6.07,5.80,5.92,5.93,8947052,52872049,2000,5.92,57704,5.91,191500,5.90,75000,5.89,142800,5.88,19700,5.93,43750,5.94,51600,5.95,17299,5.96,11445,5.97,2013-12-18,13:56:49,00"&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-&lt;span class="nt"&gt;var&lt;/span&gt; &lt;span class="nt"&gt;hq_str_sh601005&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"重庆钢铁,2.50,2.50,2.49,2.51,2.48,2.49,2.50,1505600,3764816,448800,2.49,110600,2.48,132500,2.47,206500,2.46,150300,2.45,95501,2.50,447100,2.51,110600,2.52,110800,2.53,136400,2.54,2013-12-18,13:56:49,00"&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;var&lt;/span&gt; &lt;span class="nt"&gt;hq_str_sh600133&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"东湖高新,6.01,6.01,5.91,6.07,5.80,5.92,5.93,8947052,52872049,2000,5.92,57704,5.91,191500,5.90,75000,5.89,142800,5.88,19700,5.93,43750,5.94,51600,5.95,17299,5.96,11445,5.97,2013-12-18,13:56:49,00"&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="nt"&gt;var&lt;/span&gt; &lt;span class="nt"&gt;hq_str_sh601005&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"重庆钢铁,2.50,2.50,2.49,2.51,2.48,2.49,2.50,1505600,3764816,448800,2.49,110600,2.48,132500,2.47,206500,2.46,150300,2.45,95501,2.50,447100,2.51,110600,2.52,110800,2.53,136400,2.54,2013-12-18,13:56:49,00"&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;每只股票返回一组数据。以第一组数据为例，各数据项的含义如下：&lt;/p&gt;
 &lt;ol&gt;
@@ -774,23 +788,23 @@ public String strategyName;
 &lt;p&gt;成交是阶段数据，记录了某一个时段（上面的例子中是一天）内的开盘价(open)，收盘价（close）,最高价（high），最低价（low）；
 以及该段时间内总的成交量（volume）和成交价格（amount）。由于(开盘价,收盘价,最高价,最低价）是很常用的一种结构，比如画蜡烛图时就会使用这种结构，所以将其封装为一个&lt;a href="/2013/01/01/money.html#menuIndex6"&gt;值对象&lt;/a&gt;： &lt;strong&gt;OHLC&lt;/strong&gt; 。&lt;/p&gt;
 &lt;p&gt;不管是价格信息还是成交信息，都关联到某一证券（Security）。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/analysis-pattern/price_and_transaction.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="img-responsive" src="images/analysis-pattern/price_and_transaction.png"/&gt;&lt;/p&gt;
 &lt;h1 id="chang-jing"&gt;场景&lt;/h1&gt;
 &lt;p&gt;在上面的模型中，价格和成交直接关联到时点。&lt;/p&gt;
 &lt;p&gt;实际应用中，经常会需要将一些价格或成交聚合在一起。比如，某个市场、某个板块的所有股票的价格。而这种聚合通常要指定到某个时间点才有意义。&lt;/p&gt;
 &lt;p&gt;可以把这种聚合叫做场景（Scenario），场景关联到某一时间点（TimePoint)。一个场景可以有多个场景元素（ScenarioElement），场景元素作为证券和其他因素之间的关联，聚合到与时点相关的场景中。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/analysis-pattern/scenario.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="img-responsive" src="images/analysis-pattern/scenario.png"/&gt;&lt;/p&gt;
 &lt;p&gt;场景提供了一个把所有因素综合在一起的基础，从而可以很方便的在不同的情况之间进行比较。这就有较高的实用性。&lt;/p&gt;
 &lt;p&gt;比如，在跨市场套利中，可以针对不同的市场定义不同的场景，并将场景关联到指定的市场，从而在不同市场之间进行比较。&lt;/p&gt;
 &lt;p&gt;在比如在交易系统的风险管理中，可以在多种可能的情况之间进行对比分析。&lt;/p&gt;
 &lt;p&gt;有了场景和场景元素的定义，则价格和成交都是场景元素的一种实现：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/analysis-pattern/quotation.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="img-responsive" src="images/analysis-pattern/quotation.png"/&gt;&lt;/p&gt;
 &lt;h1 id="duo-shu-ju-yuan"&gt;多数据源&lt;/h1&gt;
 &lt;p&gt;实际应用中，可能需要从多个数据源获取数据。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/analysis-pattern/multi_source.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="img-responsive" src="images/analysis-pattern/multi_source.png"/&gt;&lt;/p&gt;
 &lt;h1 id="jie-ge-zhi-biao"&gt;价格指标&lt;/h1&gt;
 &lt;p&gt;通过其他场景元素计算获取&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/analysis-pattern/indicator.png"/&gt;&lt;/p&gt;</content><category term="交易系统"></category></entry><entry><title>系统交易和交易系统</title><link href="http://holbrook.github.io/2013/12/16/trade_system.html" rel="alternate"></link><published>2013-12-16T00:00:00+08:00</published><updated>2013-12-16T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-16:/2013/12/16/trade_system.html</id><summary type="html"></summary><content type="html">&lt;h1 id="zheng-quan-jie-ge-de-sui-ji-xing"&gt;证券价格的随机性&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="" class="img-responsive" src="images/analysis-pattern/indicator.png"/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</content><category term="交易系统"></category></entry><entry><title>系统交易和交易系统</title><link href="http://holbrook.github.io/2013/12/16/trade_system.html" rel="alternate"></link><published>2013-12-16T00:00:00+08:00</published><updated>2013-12-16T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2013-12-16:/2013/12/16/trade_system.html</id><summary type="html"></summary><content type="html">&lt;html&gt;&lt;body&gt;&lt;h1 id="zheng-quan-jie-ge-de-sui-ji-xing"&gt;证券价格的随机性&lt;/h1&gt;
 &lt;p&gt;很多人都从股票投机中赚过钱，但是绝少人能够长期赚钱。甚至这些长期赚钱的人中，绝大部分人的成功次数少于50%。这意味着，证券价格的波动具有随机性。&lt;/p&gt;
 &lt;p&gt;投资理论界认为，价格的波动具备高度随机性；而投资实务界认为只是部分随机性。&lt;/p&gt;
 &lt;p&gt;如果价格的波动具备完全随机性，则意味着数据没有任何记忆性，完全无法通过过去的数据预测未来。就好像抛硬币，即使之前抛出了一千次正面，第一千零一次抛出正、反面的概率依然是各占50%。&lt;/p&gt;
@@ -822,7 +836,7 @@ public String strategyName;
 &lt;li&gt;对于每一笔交易，分析其成功或失败的原因是由于概率、心理因素还是模型的缺陷。在一定的时间后根据最新的统计结果修正模型参数。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;能够做到这些，就可以称之为&amp;ldquo;系统化交易&amp;rdquo;。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/trade-system/trade.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="img-responsive" src="images/trade-system/trade.png"/&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;选股：筛选交易对象&lt;/li&gt;
 &lt;li&gt;择时：对行情进行判断，选择合适的操作时机&lt;/li&gt;
@@ -850,7 +864,7 @@ public String strategyName;
 &lt;p&gt;除了心理控制的难关，系统化交易过程中需要进行信息收集、信息处理、交易决策、交易计划、交易执行等大量琐碎耗时的事情，这些事情很可能影响你的心态，甚至由于信息的干扰影响决策的正确性。&lt;/p&gt;
 &lt;p&gt;此外，系统化交易需要不断对交易策略和资金管理策略不断进行统计分析、优化和参数调整，对于大多数人来说这也是一个难以胜任的工作。&lt;/p&gt;
 &lt;p&gt;上述种种，需要某种工具来辅助，姑且称之为&amp;ldquo;交易系统&amp;rdquo;。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/trade-system/goal.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="img-responsive" src="images/trade-system/goal.png"/&gt;&lt;/p&gt;
 &lt;p&gt;如上图，交易的&amp;ldquo;铁三角&amp;rdquo;是交易者、交易资本和交易对象，而交易系统的主要作用是：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;管理交易策略的生命周期，按照交易策略实施交易&lt;/li&gt;
@@ -861,7 +875,7 @@ public String strategyName;
 &lt;h2 id="jiao-yi-ce-lue-de-sheng-ming-zhou-qi-guan-li"&gt;交易策略的生命周期管理&lt;/h2&gt;
 &lt;p&gt;交易系统最重要的功能应该是对交易策略的整个生命周期进行管理。&lt;/p&gt;
 &lt;p&gt;一个交易策略提出后，要经过一系列的阶段，直到最终被废弃。交易策略的生命周期如下图所示：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="images/trade-system/lifecycle.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="img-responsive" src="images/trade-system/lifecycle.png"/&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;公式化&lt;/li&gt;
 &lt;/ol&gt;
@@ -906,4 +920,4 @@ public String strategyName;
 &lt;p&gt;尽管我们希望在有限的条件下建立一个科学的模型，从而获得一个正的&amp;ldquo;预期收益率&amp;rdquo;（该死的银行理财产品？），但是，我们还是将命运交给了未知：那冥冥中的概率。&lt;/p&gt;
 &lt;p&gt;尽管根据&lt;a href="http://wiki.mbalib.com/wiki/%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B"&gt;大数定律&lt;/a&gt;，随着交易次数的增多，总体结果会越来越接近事先计算出的期望值，但是&lt;a href="http://wiki.mbalib.com/wiki/%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86"&gt;中心极限定理&lt;/a&gt;指出，大量独立随机变量的平均数近似正态分布。&lt;/p&gt;
 &lt;p&gt;就我们有限而短暂的生命来说，我们不可能让交易次数达到无穷，去逼近那个理论中的&amp;ldquo;期望值&amp;ldquo;，而只能进行有限次数的交易。如果说一套交易策略，由不同的交易者去实践，则每个交易者的最终结果可以看做中心极限定理中的一个样本。&lt;/p&gt;
-&lt;p&gt;很遗憾，中心极限定理告诉我们，最终结果是近似正态分布的，也就是说：有限次的策略交易，最终的统计结果仍然是一个概率分布&amp;mdash;&amp;mdash;正所谓谋事在人，成事在天。&lt;/p&gt;</content><category term="交易系统"></category></entry></feed>
+&lt;p&gt;很遗憾，中心极限定理告诉我们，最终结果是近似正态分布的，也就是说：有限次的策略交易，最终的统计结果仍然是一个概率分布&amp;mdash;&amp;mdash;正所谓谋事在人，成事在天。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</content><category term="交易系统"></category></entry></feed>

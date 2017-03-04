@@ -71,6 +71,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -85,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (5)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -122,6 +123,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -147,7 +149,7 @@
 
 
 
-	<h1 id="wei-shi-yao-xu-yao-osgizhong-jian-jian">为什么需要&ldquo;OSGi中间件&rdquo;</h1>
+	<html><body><h1 id="wei-shi-yao-xu-yao-osgizhong-jian-jian">为什么需要&ldquo;OSGi中间件&rdquo;</h1>
 <p>尽管在OSGi Runtime(Felix, Equinox等)的基础上，OSGi组织又规定了<a href="/2014/01/22/osgi_blueprint_container.html">Blueprint规范以实现OSGi环境下的依赖注入</a>，
 但这还不够&mdash;&mdash;没有提供类似Web开发框架那样的一些&ldquo;平台级&rdquo;的功能。比如日志，控制台，配置文件等。</p>
 <p>很难想象没有Tomcat这样的Web中间件，开发Java Web应用的工作量有多大。同样的，OSGi应用也需要一种&ldquo;中间件&rdquo;，来实现各应用共性的一些功能，并管理应用的部署。</p>
@@ -155,7 +157,7 @@
 目前，Apache Karaf已经用于Apache Geronimo, Apache ServiceMix, Fuse ESB等项目。</p>
 <p>Apache Karaf的主要竞争对手是<a href="http://www.eclipse.org/virgo/">Eclipse Virgo</a>。</p>
 <h1 id="apache-karafde-gong-neng">Apache Karaf的功能</h1>
-<p><img alt="" src="images/fuse/Karaf.jpg"/></p>
+<p><img alt="" class="img-responsive" src="images/fuse/Karaf.jpg"/></p>
 <p>Apache Karaf提供了如下&ldquo;开箱即用&rdquo;的功能：</p>
 <ul>
 <li>热部署</li>
@@ -192,10 +194,10 @@
 <p>类似于Eclipse的Feature，Karaf中也支持Feature，即bundle的集合。使用Feature可以简化OSGi应用的部署。</p>
 <h1 id="karafchu-ti-yan">Karaf初体验</h1>
 <p>安装好Java环境，加压缩Karaf，执行<code>$KARAF_HOME/bin/karaf</code>，可以看到Karaf的启动界面：</p>
-<p><img alt="" src="images/karaf/karaf1.png"/></p>
+<p><img alt="" class="img-responsive" src="images/karaf/karaf1.png"/></p>
 <p>如图的提示，使用<code>&lt;tab&gt;</code>可以列出所有可用的命令，所有的命令支持<code>--help</code>参数。</p>
 <p>如果执行<code>list</code>命令，可以列出所有的bundles:</p>
-<p><img alt="" src="images/karaf/karaf2.png"/></p>
+<p><img alt="" class="img-responsive" src="images/karaf/karaf2.png"/></p>
 <p>还有很多其他的命令，比如</p>
 <ul>
 <li><code>bundle:install</code> 安装bundle</li>
@@ -242,7 +244,7 @@ Karaf安装为系统服务。</p>
 <p>Karaf内置了一个SSHd server，可以通过ssh远程访问Karaf控制台。
 要启动远程控制台服务，需要在控制台中启动bundle: <code>bundle:restart -f org.apache.karaf.shell.ssh</code>。此时，远端可以使用ssh远程访问控制台，比如: <code>ssh -p 8101 karaf@localhost</code>。默认karaf用户的密码也是karaf。ssh的用户、密码、端口等都可以在<code>etc/org.apache.karaf.shell.cfg</code>中配置。</p>
 <p>Karaf的客户端'bin/client'即可以连接本地控制台，也可以通过ssh连接远程控制台，甚至可以执行单个的命令。比如：</p>
-<div class="highlight"><pre><span></span>bin/client -u karaf -p karaf -a 8101 hostname osgi:shutdown
+<div class="highlight"><pre><span class="code-line"><span></span>bin/client -u karaf -p karaf -a 8101 hostname osgi:shutdown</span>
 </pre></div>
 <p>Karaf还可以安装Web控制台(<code>feature:install webconsole</code>)。通过Web控制台能够管理
 Karaf的bundle、feature、实例、配置以及查看日志。启动web控制台后，默认可以通过<a href="http://localhost:8181/system/console">http://localhost:8181/system/console</a>
@@ -348,7 +350,7 @@ Karaf控制台中，可以打包(<code>kar:create</code>)、安装(<code>kar:ins
 <li>其他</li>
 </ul>
 <p>Karaf还支持<a href="http://karaf.apache.org/manual/latest/users-guide/ejb.html">EJB</a>、<a href="http://karaf.apache.org/manual/latest/users-guide/cdi.html">CDI</a>、<a href="http://karaf.apache.org/manual/latest/users-guide/monitoring.html">JMX</a>、<a href="http://karaf.apache.org/manual/latest/users-guide/jms.html">JMS</a>等企业级特性。</p>
-<p>Karaf内置支持主备方式的部署，以保证高可用。使用<a href="http://karaf.apache.org/index/subprojects/cellar.html">Apache Karaf Cellar</a>可以实现Karaf的集群部署。</p>
+<p>Karaf内置支持主备方式的部署，以保证高可用。使用<a href="http://karaf.apache.org/index/subprojects/cellar.html">Apache Karaf Cellar</a>可以实现Karaf的集群部署。</p></body></html>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2014-02-20.</h6>
 
 
@@ -425,41 +427,44 @@ Karaf控制台中，可以打包(<code>kar:create</code>)、安装(<code>kar:ins
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/suo-yin.html" class="tag-3">索引</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/ji-qi-xue-xi.html" class="tag-3">机器学习</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/jiao-yi-gui-ze.html" class="tag-4">交易规则</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (2)</a></li>
+											<li><a href="/2017/03/">2017-03  (5)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>

@@ -71,6 +71,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -85,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (5)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -122,6 +123,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -147,52 +149,52 @@
 
 
 
-	<p>前面的<a href="http://thinkinside.tk/weblayer_nginx_keepalived/">《统一web访问层方案》</a>中就目的、目标和整体方案进行了讨论，本文讨论具体的实施。简单来说就是在两台服务器上分别部署NginX，并通过keepalived实现高可用。</p>
+	<html><body><p>前面的<a href="http://thinkinside.tk/weblayer_nginx_keepalived/">《统一web访问层方案》</a>中就目的、目标和整体方案进行了讨论，本文讨论具体的实施。简单来说就是在两台服务器上分别部署NginX，并通过keepalived实现高可用。</p>
 <h1 id="1-gui-hua-he-zhun-bei">1 规划和准备</h1>
-<hr>
+<hr/>
 <p>需要统一访问的应用系统：
-<table>
+</p><table class="table table-striped table-hover">
 <tr><th>应用系统</th><th> 域名/虚拟目录</th><th>应用服务器及URL</th></tr>
 <tr><td>svn</td><td>  dev.mycompany.com/svn   </td><td>http://50.1.1.21/svn</td></tr>
 <tr><td>svn web管理</td><td>    dev.mycompany.com/submin    </td><td>http://50.1.1.21/submin</td></tr>
 <tr><td>网站    </td><td>www.mycompany.com  </td><td>http://50.1.1.10; http://50.1.1.11; http://50.1.1.12</td></tr>
 <tr><td>OA</td><td>   oa.mycompany.com    </td><td>http://50.1.1.13:8080; http://50.1.1.14:8080</td></tr>
-</table></p>
+</table>
 <p>web访问服务器</p>
 <p>用两台接入服务器50.1.1.3/4分别作为主、备(MASTER、BACKUP)服务器，使用RHEL5.6x64，配置了yum 私服。</p>
 <p>两台接入服务器公用一个虚拟IP（VIP）：50.1.1.2</p>
 <h1 id="2-an-zhuang">2 安装</h1>
-<hr>
+<hr/>
 <p>两台接入服务器分别安装NginX和keepalived:</p>
-<div class="highlight"><pre><span></span>    <span class="c1">#准备依赖包：</span>
-    yum -y install gcc pcre-devel zlib-devel openssl-devel
-
-    <span class="c1">#下载</span>
-    wget http://nginx.org/download/nginx-1.2.4.tar.gz
-    wget http://www.keepalived.org/software/keepalived-1.2.7.tar.gz
-
-    <span class="c1">#安装NginX</span>
-    tar zxvf nginx-1.2.4.tar.gz
-    <span class="nb">cd</span> nginx-1.2.4
-    ./configure
-    make <span class="o">&amp;&amp;</span> make install
-
-    <span class="c1">#安装keepalived</span>
-    tar zxvf keepalived-1.2.7.tar.gz
-    <span class="nb">cd</span> keepalived-1.2.7
-    ./configure
-    make
-    make install
-
-    cp /usr/local/etc/rc.d/init.d/keepalived /etc/rc.d/init.d/
-    cp /usr/local/etc/sysconfig/keepalived /etc/sysconfig/
-    mkdir /etc/keepalived
-    cp /usr/local/etc/keepalived/keepalived.conf /etc/keepalived/
-    cp /usr/local/sbin/keepalived /usr/sbin/
-
-    <span class="c1">#加入启动</span>
-    <span class="nb">echo</span> <span class="s2">"/usr/local/nginx/sbin/nginx"</span> &gt;&gt; /etc/rc.local
-    <span class="nb">echo</span> <span class="s2">"/etc/init.d/keepalived start"</span> &gt;&gt; /etc/rc.local
+<div class="highlight"><pre><span class="code-line"><span></span>    <span class="c1">#准备依赖包：</span></span>
+<span class="code-line">    yum -y install gcc pcre-devel zlib-devel openssl-devel</span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="c1">#下载</span></span>
+<span class="code-line">    wget http://nginx.org/download/nginx-1.2.4.tar.gz</span>
+<span class="code-line">    wget http://www.keepalived.org/software/keepalived-1.2.7.tar.gz</span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="c1">#安装NginX</span></span>
+<span class="code-line">    tar zxvf nginx-1.2.4.tar.gz</span>
+<span class="code-line">    <span class="nb">cd</span> nginx-1.2.4</span>
+<span class="code-line">    ./configure</span>
+<span class="code-line">    make <span class="o">&amp;&amp;</span> make install</span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="c1">#安装keepalived</span></span>
+<span class="code-line">    tar zxvf keepalived-1.2.7.tar.gz</span>
+<span class="code-line">    <span class="nb">cd</span> keepalived-1.2.7</span>
+<span class="code-line">    ./configure</span>
+<span class="code-line">    make</span>
+<span class="code-line">    make install</span>
+<span class="code-line"></span>
+<span class="code-line">    cp /usr/local/etc/rc.d/init.d/keepalived /etc/rc.d/init.d/</span>
+<span class="code-line">    cp /usr/local/etc/sysconfig/keepalived /etc/sysconfig/</span>
+<span class="code-line">    mkdir /etc/keepalived</span>
+<span class="code-line">    cp /usr/local/etc/keepalived/keepalived.conf /etc/keepalived/</span>
+<span class="code-line">    cp /usr/local/sbin/keepalived /usr/sbin/</span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="c1">#加入启动</span></span>
+<span class="code-line">    <span class="nb">echo</span> <span class="s2">"/usr/local/nginx/sbin/nginx"</span> &gt;&gt; /etc/rc.local</span>
+<span class="code-line">    <span class="nb">echo</span> <span class="s2">"/etc/init.d/keepalived start"</span> &gt;&gt; /etc/rc.local</span>
 </pre></div>
 <h1 id="3-pei-zhi">3 配置</h1>
 <h2 id="31-pei-zhi-nginx">3.1 配置NginX</h2>
@@ -201,51 +203,51 @@
     http {
         include       mime.types;
         default_type  application/octet-stream;</p>
-<div class="highlight"><pre><span></span>    <span class="nt">sendfile</span>        <span class="nt">on</span><span class="o">;</span>
-
-    <span class="nt">upstream</span> <span class="nt">dev</span><span class="nc">.hysec.com</span> <span class="p">{</span>
-        <span class="n">server</span> <span class="m">50</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">21</span><span class="o">:</span><span class="m">80</span><span class="p">;</span>
-    <span class="p">}</span>
-
-
-    <span class="nt">upstream</span> <span class="nt">www</span><span class="nc">.hysec.com</span> <span class="p">{</span>
-      <span class="n">ip_hash</span><span class="p">;</span>
-      <span class="n">server</span> <span class="m">50</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">10</span><span class="o">:</span><span class="m">80</span><span class="p">;</span>
-      <span class="n">server</span> <span class="m">50</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">11</span><span class="o">:</span><span class="m">80</span><span class="p">;</span>
-      <span class="n">server</span> <span class="m">50</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">12</span><span class="o">:</span><span class="m">80</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="nt">upstream</span> <span class="nt">oa</span><span class="nc">.hysec.com</span> <span class="p">{</span>
-      <span class="n">ip_hash</span><span class="p">;</span>
-      <span class="n">server</span> <span class="m">50</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">13</span><span class="o">:</span><span class="m">8080</span><span class="p">;</span>
-      <span class="n">server</span> <span class="m">50</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">14</span><span class="o">:</span><span class="m">8080</span><span class="p">;</span>
-
-
-    <span class="n">server</span> <span class="err">{</span>
-        <span class="n">listen</span>      <span class="m">80</span><span class="p">;</span>
-        <span class="n">server_name</span> <span class="n">dev</span><span class="o">.</span><span class="n">hysec</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
-        <span class="n">location</span> <span class="o">/</span><span class="n">svn</span> <span class="err">{</span>
-            <span class="n">proxy_pass</span> <span class="n">http</span><span class="o">://</span><span class="n">dev</span><span class="o">.</span><span class="n">hysec</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
-        <span class="p">}</span>
-
-        <span class="nt">location</span> <span class="o">/</span><span class="nt">submin</span> <span class="p">{</span>
-            <span class="n">proxy_pass</span> <span class="n">http</span><span class="o">://</span><span class="n">dev</span><span class="o">.</span><span class="n">hysec</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="err">}</span>
-
-    <span class="nt">server</span> <span class="p">{</span>
-        <span class="n">listen</span>       <span class="m">80</span><span class="p">;</span>
-        <span class="n">server_name</span>  <span class="n">www</span><span class="o">.</span><span class="n">hysec</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
-        <span class="n">location</span> <span class="o">/</span> <span class="err">{</span>
-            <span class="n">proxy_pass</span> <span class="n">http</span><span class="o">://</span><span class="n">www</span><span class="o">.</span><span class="n">hysec</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="nt">server</span> <span class="p">{</span>
-        <span class="n">listen</span>       <span class="m">80</span><span class="p">;</span>
-        <span class="n">server_name</span>  <span class="n">oa</span><span class="o">.</span><span class="n">hysec</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
-        <span class="n">location</span> <span class="o">/</span> <span class="err">{</span>
-            <span class="n">proxy_pass</span> <span class="n">http</span><span class="o">://</span><span class="n">oa</span><span class="o">.</span><span class="n">hysec</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
-        <span class="p">}</span>
-<span class="err">}</span>
+<div class="highlight"><pre><span class="code-line"><span></span>    <span class="nt">sendfile</span>        <span class="nt">on</span><span class="o">;</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nt">upstream</span> <span class="nt">dev</span><span class="nc">.hysec.com</span> <span class="p">{</span></span>
+<span class="code-line">        <span class="n">server</span> <span class="m">50</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">21</span><span class="o">:</span><span class="m">80</span><span class="p">;</span></span>
+<span class="code-line">    <span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nt">upstream</span> <span class="nt">www</span><span class="nc">.hysec.com</span> <span class="p">{</span></span>
+<span class="code-line">      <span class="n">ip_hash</span><span class="p">;</span></span>
+<span class="code-line">      <span class="n">server</span> <span class="m">50</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">10</span><span class="o">:</span><span class="m">80</span><span class="p">;</span></span>
+<span class="code-line">      <span class="n">server</span> <span class="m">50</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">11</span><span class="o">:</span><span class="m">80</span><span class="p">;</span></span>
+<span class="code-line">      <span class="n">server</span> <span class="m">50</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">12</span><span class="o">:</span><span class="m">80</span><span class="p">;</span></span>
+<span class="code-line">    <span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nt">upstream</span> <span class="nt">oa</span><span class="nc">.hysec.com</span> <span class="p">{</span></span>
+<span class="code-line">      <span class="n">ip_hash</span><span class="p">;</span></span>
+<span class="code-line">      <span class="n">server</span> <span class="m">50</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">13</span><span class="o">:</span><span class="m">8080</span><span class="p">;</span></span>
+<span class="code-line">      <span class="n">server</span> <span class="m">50</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">1</span><span class="o">.</span><span class="m">14</span><span class="o">:</span><span class="m">8080</span><span class="p">;</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="n">server</span> <span class="err">{</span></span>
+<span class="code-line">        <span class="n">listen</span>      <span class="m">80</span><span class="p">;</span></span>
+<span class="code-line">        <span class="n">server_name</span> <span class="n">dev</span><span class="o">.</span><span class="n">hysec</span><span class="o">.</span><span class="n">com</span><span class="p">;</span></span>
+<span class="code-line">        <span class="n">location</span> <span class="o">/</span><span class="n">svn</span> <span class="err">{</span></span>
+<span class="code-line">            <span class="n">proxy_pass</span> <span class="n">http</span><span class="o">://</span><span class="n">dev</span><span class="o">.</span><span class="n">hysec</span><span class="o">.</span><span class="n">com</span><span class="p">;</span></span>
+<span class="code-line">        <span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line">        <span class="nt">location</span> <span class="o">/</span><span class="nt">submin</span> <span class="p">{</span></span>
+<span class="code-line">            <span class="n">proxy_pass</span> <span class="n">http</span><span class="o">://</span><span class="n">dev</span><span class="o">.</span><span class="n">hysec</span><span class="o">.</span><span class="n">com</span><span class="p">;</span></span>
+<span class="code-line">        <span class="p">}</span></span>
+<span class="code-line">    <span class="err">}</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nt">server</span> <span class="p">{</span></span>
+<span class="code-line">        <span class="n">listen</span>       <span class="m">80</span><span class="p">;</span></span>
+<span class="code-line">        <span class="n">server_name</span>  <span class="n">www</span><span class="o">.</span><span class="n">hysec</span><span class="o">.</span><span class="n">com</span><span class="p">;</span></span>
+<span class="code-line">        <span class="n">location</span> <span class="o">/</span> <span class="err">{</span></span>
+<span class="code-line">            <span class="n">proxy_pass</span> <span class="n">http</span><span class="o">://</span><span class="n">www</span><span class="o">.</span><span class="n">hysec</span><span class="o">.</span><span class="n">com</span><span class="p">;</span></span>
+<span class="code-line">        <span class="p">}</span></span>
+<span class="code-line">    <span class="nt">server</span> <span class="p">{</span></span>
+<span class="code-line">        <span class="n">listen</span>       <span class="m">80</span><span class="p">;</span></span>
+<span class="code-line">        <span class="n">server_name</span>  <span class="n">oa</span><span class="o">.</span><span class="n">hysec</span><span class="o">.</span><span class="n">com</span><span class="p">;</span></span>
+<span class="code-line">        <span class="n">location</span> <span class="o">/</span> <span class="err">{</span></span>
+<span class="code-line">            <span class="n">proxy_pass</span> <span class="n">http</span><span class="o">://</span><span class="n">oa</span><span class="o">.</span><span class="n">hysec</span><span class="o">.</span><span class="n">com</span><span class="p">;</span></span>
+<span class="code-line">        <span class="p">}</span></span>
+<span class="code-line"><span class="err">}</span></span>
 </pre></div>
 <p>{% endhighlight %}</p>
 <p>验证方法：</p>
@@ -256,35 +258,35 @@
 <li>Master配置</li>
 </ul>
 <p>{% highlight c %}</p>
-<div class="highlight"><pre><span></span>! Configuration File for keepalived
-
-global_defs {
-notification_email {
-        wanghaikuo@hysec.com
-        wanghaikuo@gmail.com
-   }
-
-   notification_email_from wanghaikuo@hysec.com
-   smtp_server smtp.hysec.com
-   smtp_connect_timeout 30
-   router_id nginx_master
-
-}
-
-vrrp_instance VI_1 {
-    state MASTER
-    interface eth0
-    virtual_router_id 51
-    priority 101
-    advert_int 1
-    authentication {
-        auth_type PASS
-        auth_pass 1111
-    }
-    virtual_ipaddress {
-        50.1.1.2
-    }
-}
+<div class="highlight"><pre><span class="code-line"><span></span>! Configuration File for keepalived</span>
+<span class="code-line"></span>
+<span class="code-line">global_defs {</span>
+<span class="code-line">notification_email {</span>
+<span class="code-line">        wanghaikuo@hysec.com</span>
+<span class="code-line">        wanghaikuo@gmail.com</span>
+<span class="code-line">   }</span>
+<span class="code-line"></span>
+<span class="code-line">   notification_email_from wanghaikuo@hysec.com</span>
+<span class="code-line">   smtp_server smtp.hysec.com</span>
+<span class="code-line">   smtp_connect_timeout 30</span>
+<span class="code-line">   router_id nginx_master</span>
+<span class="code-line"></span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line">vrrp_instance VI_1 {</span>
+<span class="code-line">    state MASTER</span>
+<span class="code-line">    interface eth0</span>
+<span class="code-line">    virtual_router_id 51</span>
+<span class="code-line">    priority 101</span>
+<span class="code-line">    advert_int 1</span>
+<span class="code-line">    authentication {</span>
+<span class="code-line">        auth_type PASS</span>
+<span class="code-line">        auth_pass 1111</span>
+<span class="code-line">    }</span>
+<span class="code-line">    virtual_ipaddress {</span>
+<span class="code-line">        50.1.1.2</span>
+<span class="code-line">    }</span>
+<span class="code-line">}</span>
 </pre></div>
 <p>{% endhighlight %}</p>
 <ul>
@@ -292,33 +294,33 @@ vrrp_instance VI_1 {
 </ul>
 <p>{% highlight c %}
     ! Configuration File for keepalived</p>
-<div class="highlight"><pre><span></span>global_defs {
-notification_email {
-        wanghaikuo@hysec.com
-        wanghaikuo@gmail.com
-   }
-
-   notification_email_from wanghaikuo@hysec.com
-   smtp_server smtp.hysec.com
-   smtp_connect_timeout 30
-   router_id nginx_backup
-
-}
-
-vrrp_instance VI_1 {
-    state BACKUP
-    interface eth0
-    virtual_router_id 51
-    priority 99
-    advert_int 1
-    authentication {
-        auth_type PASS
-        auth_pass 1111
-    }
-    virtual_ipaddress {
-        50.1.1.2
-    }
-}
+<div class="highlight"><pre><span class="code-line"><span></span>global_defs {</span>
+<span class="code-line">notification_email {</span>
+<span class="code-line">        wanghaikuo@hysec.com</span>
+<span class="code-line">        wanghaikuo@gmail.com</span>
+<span class="code-line">   }</span>
+<span class="code-line"></span>
+<span class="code-line">   notification_email_from wanghaikuo@hysec.com</span>
+<span class="code-line">   smtp_server smtp.hysec.com</span>
+<span class="code-line">   smtp_connect_timeout 30</span>
+<span class="code-line">   router_id nginx_backup</span>
+<span class="code-line"></span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line">vrrp_instance VI_1 {</span>
+<span class="code-line">    state BACKUP</span>
+<span class="code-line">    interface eth0</span>
+<span class="code-line">    virtual_router_id 51</span>
+<span class="code-line">    priority 99</span>
+<span class="code-line">    advert_int 1</span>
+<span class="code-line">    authentication {</span>
+<span class="code-line">        auth_type PASS</span>
+<span class="code-line">        auth_pass 1111</span>
+<span class="code-line">    }</span>
+<span class="code-line">    virtual_ipaddress {</span>
+<span class="code-line">        50.1.1.2</span>
+<span class="code-line">    }</span>
+<span class="code-line">}</span>
 </pre></div>
 <p>{% endhighlight %}</p>
 <p>验证：</p>
@@ -351,82 +353,82 @@ vrrp_instance VI_1 {
 如果发现NginX不正常，重启之。等待3秒再次校验，仍然失败则不再尝试。</p>
 <p>根据上述策略很容易写出监控脚本。这里使用nmap检查nginx端口来判断nginx的状态，记得要首先安装nmap。监控脚本如下:</p>
 <p>{% highlight bash %}</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
-<span class="c1"># check nginx server status</span>
-<span class="nv">NGINX</span><span class="o">=</span>/usr/local/nginx/sbin/nginx
-<span class="nv">PORT</span><span class="o">=</span>80
-
-nmap localhost -p <span class="nv">$PORT</span> <span class="p">|</span> grep <span class="s2">"</span><span class="nv">$PORT</span><span class="s2">/tcp open"</span>
-<span class="c1">#echo $?</span>
-<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
-    <span class="nv">$NGINX</span> -s stop
-    <span class="nv">$NGINX</span>
-    sleep 3
-    nmap localhost -p <span class="nv">$PORT</span> <span class="p">|</span> grep <span class="s2">"</span><span class="nv">$PORT</span><span class="s2">/tcp open"</span>
-    <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> /etc/init.d/keepalived stop
-<span class="k">fi</span>
+<table class="highlighttable table table-striped table-hover"><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<span class="code-line"> 2</span>
+<span class="code-line"> 3</span>
+<span class="code-line"> 4</span>
+<span class="code-line"> 5</span>
+<span class="code-line"> 6</span>
+<span class="code-line"> 7</span>
+<span class="code-line"> 8</span>
+<span class="code-line"> 9</span>
+<span class="code-line">10</span>
+<span class="code-line">11</span>
+<span class="code-line">12</span>
+<span class="code-line">13</span>
+<span class="code-line">14</pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="ch">#!/bin/sh</span></span>
+<span class="code-line"><span class="c1"># check nginx server status</span></span>
+<span class="code-line"><span class="nv">NGINX</span><span class="o">=</span>/usr/local/nginx/sbin/nginx</span>
+<span class="code-line"><span class="nv">PORT</span><span class="o">=</span>80</span>
+<span class="code-line"></span>
+<span class="code-line">nmap localhost -p <span class="nv">$PORT</span> <span class="p">|</span> grep <span class="s2">"</span><span class="nv">$PORT</span><span class="s2">/tcp open"</span></span>
+<span class="code-line"><span class="c1">#echo $?</span></span>
+<span class="code-line"><span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span></span>
+<span class="code-line">    <span class="nv">$NGINX</span> -s stop</span>
+<span class="code-line">    <span class="nv">$NGINX</span></span>
+<span class="code-line">    sleep 3</span>
+<span class="code-line">    nmap localhost -p <span class="nv">$PORT</span> <span class="p">|</span> grep <span class="s2">"</span><span class="nv">$PORT</span><span class="s2">/tcp open"</span></span>
+<span class="code-line">    <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> /etc/init.d/keepalived stop</span>
+<span class="code-line"><span class="k">fi</span></span>
 </pre></div>
 </td></tr></table>
 <p>{% endhighlight %}</p>
 <p>不要忘了设置脚本的执行权限，否则不起作用。</p>
 <p _="%" c="" highlight="">假设上述脚本放在/opt/chk_nginx.sh，则keepalived.conf中增加如下配置：</p>
-<div class="highlight"><pre><span></span>vrrp_script chk_http_port {
-    script "/opt/chk_nginx.sh"
-    interval 2
-    weight 2
-}
-
-track_script {
-    chk_http_port
-}
+<div class="highlight"><pre><span class="code-line"><span></span>vrrp_script chk_http_port {</span>
+<span class="code-line">    script "/opt/chk_nginx.sh"</span>
+<span class="code-line">    interval 2</span>
+<span class="code-line">    weight 2</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line">track_script {</span>
+<span class="code-line">    chk_http_port</span>
+<span class="code-line">}</span>
 </pre></div>
 <p>{% endhighlight %}</p>
 <p _="%" c="" highlight="">更进一步，为了避免启动keepalived之前没有启动nginx , 可以在/etc/init.d/keepalived的start中首先启动nginx:</p>
-<div class="highlight"><pre><span></span>start() {
-    /usr/local/nginx/sbin/nginx
-    sleep 3
-    echo -n $"Starting <span class="nv">$prog</span>: "
-    daemon keepalived <span class="cp">${</span><span class="n">KEEPALIVED_OPTIONS</span><span class="cp">}</span>
-    RETVAL=$?
-    echo
-    [ <span class="nv">$RETVAL</span> -eq 0 ] <span class="err">&amp;&amp;</span> touch /var/lock/subsys/<span class="nv">$prog</span>
-}
+<div class="highlight"><pre><span class="code-line"><span></span>start() {</span>
+<span class="code-line">    /usr/local/nginx/sbin/nginx</span>
+<span class="code-line">    sleep 3</span>
+<span class="code-line">    echo -n $"Starting <span class="nv">$prog</span>: "</span>
+<span class="code-line">    daemon keepalived <span class="cp">${</span><span class="n">KEEPALIVED_OPTIONS</span><span class="cp">}</span></span>
+<span class="code-line">    RETVAL=$?</span>
+<span class="code-line">    echo</span>
+<span class="code-line">    [ <span class="nv">$RETVAL</span> -eq 0 ] <span class="err">&amp;&amp;</span> touch /var/lock/subsys/<span class="nv">$prog</span></span>
+<span class="code-line">}</span>
 </pre></div>
 <p>{% endhighlight %}</p>
 <h1 id="4-huan-ke-yi-zuo-shi-yao_1">4 还可以做什么</h1>
 <p>对于简单重复性劳动，人总是容易犯错，这种事情最好交给机器去做。 比如，在这个案例中，作为统一接入服务器，可能经常要修改nginx的配置、nginx下面的html文件等。而且，一定要保证集群中的每台服务器的配置相同。 最好的做法是由配置管理服务器来管理，如果没有，也可以使用简单的linux文件同步来解决。</p>
 <h1 id="5-zhi-chi-https">5 支持https</h1>
 <p>需要安装openSSL：</p>
-<div class="highlight"><pre><span></span>yum install openssl-devel
+<div class="highlight"><pre><span class="code-line"><span></span>yum install openssl-devel</span>
 </pre></div>
 <p>在nginx/conf下生成秘钥：</p>
 <p>{% highlight bash %}
     #生成RSA密钥
     openssl dsaparam -rand -genkey -out myRSA.key 1024</p>
-<div class="highlight"><pre><span></span>#生成CA密钥：(要输入一个自己记得的密码)
-openssl gendsa -des3 -out cert.key myRSA.key
-
-#用这个CA密钥来创建证书，需要上一步创建的密码
-openssl req -new -x509 -days 365 -key cert.key -out cert.pem
-
-#把证书设置为root专用
-chmod 700 cert.*
-
-#生成免密码文件
-openssl rsa -in cert.key -out cert.key.unsecure
+<div class="highlight"><pre><span class="code-line"><span></span>#生成CA密钥：(要输入一个自己记得的密码)</span>
+<span class="code-line">openssl gendsa -des3 -out cert.key myRSA.key</span>
+<span class="code-line"></span>
+<span class="code-line">#用这个CA密钥来创建证书，需要上一步创建的密码</span>
+<span class="code-line">openssl req -new -x509 -days 365 -key cert.key -out cert.pem</span>
+<span class="code-line"></span>
+<span class="code-line">#把证书设置为root专用</span>
+<span class="code-line">chmod 700 cert.*</span>
+<span class="code-line"></span>
+<span class="code-line">#生成免密码文件</span>
+<span class="code-line">openssl rsa -in cert.key -out cert.key.unsecure</span>
 </pre></div>
 <p>{% endhighlight %}</p>
 <p>如果要启用SSL，首先在安装nginx是要增加配置参数：--with-http_ssl_module ，
@@ -479,39 +481,39 @@ openssl rsa -in cert.key -out cert.key.unsecure
 <p>步骤：</p>
 <p>{% highlight bash %}
     git clone https://github.com/agentzh/chunkin-nginx-module.git</p>
-<div class="highlight"><pre><span></span>#重新编译nginx
-cd PATH/TO/NGINX/SOURCE
-./configure xxx --add-module=/PATH/TO/chunkin-nginx-module
-make &amp;&amp; make install
+<div class="highlight"><pre><span class="code-line"><span></span>#重新编译nginx</span>
+<span class="code-line">cd PATH/TO/NGINX/SOURCE</span>
+<span class="code-line">./configure xxx --add-module=/PATH/TO/chunkin-nginx-module</span>
+<span class="code-line">make &amp;&amp; make install</span>
 </pre></div>
 <p>{% endhighlight %}</p>
 <p _="%" c="" highlight="">在nginx的server{}节点中增加配置：</p>
-<div class="highlight"><pre><span></span>chunkin on;
-
-error_page 411 = @my_411_error;
-
-location @my_411_error {
-    chunkin_resume;
-}
+<div class="highlight"><pre><span class="code-line"><span></span>chunkin on;</span>
+<span class="code-line"></span>
+<span class="code-line">error_page 411 = @my_411_error;</span>
+<span class="code-line"></span>
+<span class="code-line">location @my_411_error {</span>
+<span class="code-line">    chunkin_resume;</span>
+<span class="code-line">}</span>
 </pre></div>
 <p>{% endhighlight %}</p>
 <h1 id="7-zhuang-tai-jian-kong">7 状态监控</h1>
 <p>编译时需要增加<code>--with-http_stub_status_module</code>参数。</p>
 <p>查看编译参数：使用命令<code>/usr/local/nginx/sbin/nginx -V</code></p>
 <p _="%" highlight="" nginx="">安装好之后增加配置：</p>
-<div class="highlight"><pre><span></span>location /nginx_status {
-    stub_status on;
-    access_log   off;
-    # deny all;
-    allow all;
-}
+<div class="highlight"><pre><span class="code-line"><span></span>location /nginx_status {</span>
+<span class="code-line">    stub_status on;</span>
+<span class="code-line">    access_log   off;</span>
+<span class="code-line">    # deny all;</span>
+<span class="code-line">    allow all;</span>
+<span class="code-line">}</span>
 </pre></div>
 <p>{% endhighlight %}</p>
 <p>重新加载配置后，会看到一些文本：</p>
 <p>Active connections: 1 （对后端发起的活动连接数）</p>
 <p>server accepts handled requests</p>
 <p>5 5 5  （处理连接个数，成功握手次数，处理请求数）</p>
-<p>Reading: 0 Writing: 1 Waiting: 0 （读取客户端header数，返回客户端header数，等待数即active-reading-writing）</p></hr></hr>
+<p>Reading: 0 Writing: 1 Waiting: 0 （读取客户端header数，返回客户端header数，等待数即active-reading-writing）</p></body></html>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-05-27.</h6>
 
 
@@ -586,41 +588,44 @@ location @my_411_error {
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/suo-yin.html" class="tag-3">索引</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/ji-qi-xue-xi.html" class="tag-3">机器学习</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/jiao-yi-gui-ze.html" class="tag-4">交易规则</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (2)</a></li>
+											<li><a href="/2017/03/">2017-03  (5)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>

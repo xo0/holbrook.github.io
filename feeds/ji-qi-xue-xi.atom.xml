@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>心内求法 - 机器学习</title><link href="http://holbrook.github.io/" rel="alternate"></link><link href="http://holbrook.github.io/feeds/ji-qi-xue-xi.atom.xml" rel="self"></link><id>http://holbrook.github.io/</id><updated>2017-03-04T00:00:00+08:00</updated><entry><title>《机器学习》</title><link href="http://holbrook.github.io/2017/03/04/index.html" rel="alternate"></link><published>2017-03-04T00:00:00+08:00</published><updated>2017-03-04T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2017-03-04:/2017/03/04/index.html</id><summary type="html">&lt;p&gt;&lt;a href="https://book.douban.com/subject/1102235/"&gt;《机器学习》&lt;/a&gt;,  作者: (美)Tom Mitchell ，译者: 曾华军 / 张银奎 / 等
+读书笔记目录。&lt;/p&gt;</summary><content type="html">&lt;html&gt;&lt;body&gt;&lt;p&gt;&lt;a href="https://book.douban.com/subject/1102235/"&gt;《机器学习》&lt;/a&gt;,  作者: (美)Tom Mitchell ，译者: 曾华军 / 张银奎 / 等
+读书笔记目录。&lt;/p&gt;
+&lt;p&gt;机器学习关注的问题是:计算机程序如何随着经验积累自动提高性能。&lt;/p&gt;
+&lt;p&gt;本书展现机器学习中核心的算法和理论。书中的一些算法的实现和数据可以在互联网上&lt;sup id="fnref-1"&gt;&lt;a class="footnote-ref" href="#fn-1"&gt;1&lt;/a&gt;&lt;/sup&gt;找到。&lt;/p&gt;
+&lt;h1 id="xue-xi-bi-ji-mu-lu"&gt;学习笔记目录&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;第1章 &lt;a href="http://holbrook.github.io/2017/03/04/machine-learning1.html"&gt;引言&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;第2章 概念学习和一般到特殊序&lt;/li&gt;
+&lt;li&gt;第3章 决策树学习&lt;/li&gt;
+&lt;li&gt;第4章 人工神经网络&lt;/li&gt;
+&lt;li&gt;第5章 评估假设&lt;/li&gt;
+&lt;li&gt;第6章 贝叶斯学习&lt;/li&gt;
+&lt;li&gt;第7章 计算学习理论&lt;/li&gt;
+&lt;li&gt;第8章 基于实例的学习&lt;/li&gt;
+&lt;li&gt;第9章 遗传算法&lt;/li&gt;
+&lt;li&gt;第10章 学习规则集合&lt;/li&gt;
+&lt;li&gt;第11章 分析学习&lt;/li&gt;
+&lt;li&gt;第12章 归纳和分析学习的结合&lt;/li&gt;
+&lt;li&gt;第13章 增强学习&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="xiang-guan-zi-liao"&gt;相关资料&lt;/h1&gt;
+&lt;div class="footnote"&gt;
+&lt;hr/&gt;
+&lt;ol&gt;
+&lt;li id="fn-1"&gt;
+&lt;p&gt;本书的网址：http://www.cs.cmu.edu/~tom/mlbook.html&amp;nbsp;&lt;a class="footnote-backref" href="#fnref-1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><category term="索引"></category><category term="读书笔记"></category><category term="python"></category><category term="机器学习"></category></entry><entry><title>机器学习-1: 绪论</title><link href="http://holbrook.github.io/2017/03/04/machine-learning1.html" rel="alternate"></link><published>2017-03-04T00:00:00+08:00</published><updated>2017-03-04T00:00:00+08:00</updated><author><name>Holbrook</name></author><id>tag:holbrook.github.io,2017-03-04:/2017/03/04/machine-learning1.html</id><summary type="html">&lt;html&gt;&lt;body&gt;&lt;p&gt;Summary:
+    &lt;a href="https://book.douban.com/subject/1102235/"&gt;《机器学习》&lt;/a&gt;,  作者: (美)Tom Mitchell ，译者: 曾华军 / 张银奎 / 等。
+    &lt;a href="http://holbrook.github.io/2017/03/04/index.html"&gt;读书笔记&lt;/a&gt;。
+    第 1 章：引言&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://book.douban.com/subject/1102235/"&gt;《机器学习》&lt;/a&gt;,  作者: (美)Tom Mitchell ，译者: 曾华军 / 张银奎 / 等。
+&lt;a href="http://holbrook.github.io/2017/03/04/index.html"&gt;读书笔记&lt;/a&gt;。第 1 章：引言。&lt;/p&gt;
+&lt;p&gt;本书针对机器学习这个领域,描述了多种学习范型、算法、理论以及应用。&lt;/p&gt;
+&lt;p&gt;机器学习从是一个多学科的领域，
+吸取了人工智能、概率统计、计算复杂性理论、控制论、信 息论、哲学、生理学、神经生物学等学科的成果。
+这些学科中影响机器学习的关键思想如下：&lt;/p&gt;
+&lt;p&gt;一些学科和它们对机器学习的影响&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;人工智能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;学习概念的符号表示。作为搜索问题的机器学习。作为提高问题求解能力途径的学习。使用先验的知识和训练数据一起引导学习 …&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</summary><content type="html">&lt;html&gt;&lt;body&gt;&lt;p&gt;Summary:
+    &lt;a href="https://book.douban.com/subject/1102235/"&gt;《机器学习》&lt;/a&gt;,  作者: (美)Tom Mitchell ，译者: 曾华军 / 张银奎 / 等。
+    &lt;a href="http://holbrook.github.io/2017/03/04/index.html"&gt;读书笔记&lt;/a&gt;。
+    第 1 章：引言&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://book.douban.com/subject/1102235/"&gt;《机器学习》&lt;/a&gt;,  作者: (美)Tom Mitchell ，译者: 曾华军 / 张银奎 / 等。
+&lt;a href="http://holbrook.github.io/2017/03/04/index.html"&gt;读书笔记&lt;/a&gt;。第 1 章：引言。&lt;/p&gt;
+&lt;p&gt;本书针对机器学习这个领域,描述了多种学习范型、算法、理论以及应用。&lt;/p&gt;
+&lt;p&gt;机器学习从是一个多学科的领域，
+吸取了人工智能、概率统计、计算复杂性理论、控制论、信 息论、哲学、生理学、神经生物学等学科的成果。
+这些学科中影响机器学习的关键思想如下：&lt;/p&gt;
+&lt;p&gt;一些学科和它们对机器学习的影响&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;人工智能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;学习概念的符号表示。作为搜索问题的机器学习。作为提高问题求解能力途径的学习。使用先验的知识和训练数据一起引导学习。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;贝叶斯方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;作为计算假设概率的基础的贝叶斯法则。朴素贝叶斯分类器。估计未观测到变量的值的算法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;计算复杂性理论&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不同学习任务中固有的复杂性的理论边界,以计算量、训练样例数量、出错数量等衡量。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;控制论&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;为了优化预定目标,学习对各种处理过程进行控制,学习预测被控制的过程的下一个状态。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;信息论&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;熵和信息内容的度量。学习的最小描述长度方法。编码假设时,它的最佳编码和与最佳训练序列的关系。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;哲学&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;ldquo;奥坎姆的剃刀&amp;rdquo;(Occam&amp;rsquo;s razor)1:最简单的假设是最好的。从观察到的数据泛化的理由分析。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;心理学和神经生物学&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;实践的幂定律(power law of practice),该定律指出对于很大范围内的学习问题,人们的反 应速度随着实践次数的幂级提高。激发人工神经网络的学习模式的神经生物学研究。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;统计学&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在估计有限数据样本上的假设精度时出现的误差(例如偏差和方差)的刻画。置信区间, 统计检验。&lt;/p&gt;
+&lt;h1 id="xue-xi-wen-ti-de-biao-zhun-miao-shu"&gt;学习问题的标准描述&lt;/h1&gt;
+&lt;h1 id="she-ji-yi-ge-xue-xi-xi-tong"&gt;设计一个学习系统&lt;/h1&gt;
+&lt;h1 id="ji-qi-xue-xi-de-yi-xie-guan-dian-he-wen-ti"&gt;机器学习的一些观点和问题&lt;/h1&gt;
+&lt;h1 id="ru-he-yue-du-ben-shu"&gt;如何阅读本书&lt;/h1&gt;
+&lt;h1 id="xiao-jie-he-bu-chong-du-wu"&gt;小结和补充读物&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;</content><category term="索引"></category><category term="读书笔记"></category><category term="机器学习"></category></entry></feed>

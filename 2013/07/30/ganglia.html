@@ -71,6 +71,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -85,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (5)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -122,6 +123,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -147,7 +149,7 @@
 
 
 
-	<h1 id="gangliajian-jie">Ganglia简介</h1>
+	<html><body><h1 id="gangliajian-jie">Ganglia简介</h1>
 <p>对基础设施的监控主要包括三个方面：状态，性能和可用性。通俗的讲就是：是否在干活，干了多少活，还能干多少。</p>
 <p>有很多开源的强大工具可以用于监控，比如
 <a href="http://www.cacti.net/">Cacti</a>，
@@ -162,7 +164,7 @@
 <p>gmond 带来的系统负载非常少，这使得它成为在集群中各台计算机上运行的一段代码，而不会影响用户性能。</p>
 <h1 id="gangliajia-gou">Ganglia架构</h1>
 <p>Ganglia的整体架构如下图所示：</p>
-<p><img alt="Ganglia-architecture" src="images/2013/ganglia/ganglia_architecture.gif"/></p>
+<p><img alt="Ganglia-architecture" class="img-responsive" src="images/2013/ganglia/ganglia_architecture.gif"/></p>
 <ol>
 <li>每个被检测的节点或集群运行一个gmond进程，进行监控数据的收集、汇总和发送。gmond即可以作为发送者（收集本机数据），也可以作为接收者（汇总多个节点的数据）。</li>
 <li>通常在整个监控体系中只有一个gmetad进程。该进程定期检查所有的gmonds，主动收集数据，并存储在RRD存储引擎中。</li>
@@ -210,8 +212,8 @@
 </ul>
 <h2 id="pei-zhi-zhong-xin-jie-dian-etcgangliagmetadconf">配置中心节点(/etc/ganglia/gmetad.conf)</h2>
 <p>最重要的是配置数据源。比如：</p>
-<div class="highlight"><pre><span></span>data_source "NginX" a.a.a.101:8661 a.a.a.102:8661
-data_source "LVS"   b.b.b.101 b.b.b.102
+<div class="highlight"><pre><span class="code-line"><span></span>data_source "NginX" a.a.a.101:8661 a.a.a.102:8661</span>
+<span class="code-line">data_source "LVS"   b.b.b.101 b.b.b.102</span>
 </pre></div>
 <h2 id="pei-zhi-web">配置web</h2>
 <p>默认启动httpd服务后，就可以通过<code>http://IP/ganglia</code>访问。如果提示权限问题，需要检查：</p>
@@ -225,7 +227,7 @@ data_source "LVS"   b.b.b.101 b.b.b.102
 <h2 id="cha-jian-ji-zhi">插件机制</h2>
 <p>从Ganglia 3.1开始，可以使用python开发的插件对Ganglia进行扩展。</p>
 <p><code>/etc/ganglia/gmond.conf</code>配置中通常会包含：</p>
-<div class="highlight"><pre><span></span>include ('/etc/ganglia/conf.d/*.conf')
+<div class="highlight"><pre><span class="code-line"><span></span>include ('/etc/ganglia/conf.d/*.conf')</span>
 </pre></div>
 <p>如果安装了<code>ganglia-gmond-python</code>软件包，会创建一个<code>/etc/ganglia/conf.d/modpython.conf</code>文件：</p>
 <p>{% highlight nginx %}
@@ -251,10 +253,10 @@ modules {
 <li>将graph.d/目录下的文件复制到gmetad节点的<code>/usr/share/ganglia/graph.d</code>目录。这些文件定义了如何绘制metric的图形</li>
 <li>重启gmetad，在对应的nginx节点详细信息中可以看到nginx metric对应的7个图表。</li>
 </ol>
-<p><img alt="Ganglia-nginx" src="images/2013/ganglia/ganglia_nginx.png"/></p>
+<p><img alt="Ganglia-nginx" class="img-responsive" src="images/2013/ganglia/ganglia_nginx.png"/></p>
 <p>理解了NginX插件，基本上能够自己开发Ganglia插件了。</p>
 <h1 id="todoyu-nagiosjie-he-shi-yong_1">TODO：与Nagios结合使用</h1>
-<p>Nagios提供了很好的报警机制，将Ganglia与Nagios结合使用是常见的方式。</p>
+<p>Nagios提供了很好的报警机制，将Ganglia与Nagios结合使用是常见的方式。</p></body></html>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2013-07-30.</h6>
 
 
@@ -334,41 +336,44 @@ modules {
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/suo-yin.html" class="tag-3">索引</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/ji-qi-xue-xi.html" class="tag-3">机器学习</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/jiao-yi-gui-ze.html" class="tag-4">交易规则</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (2)</a></li>
+											<li><a href="/2017/03/">2017-03  (5)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>

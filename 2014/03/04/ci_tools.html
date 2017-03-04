@@ -71,6 +71,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -85,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (5)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -122,6 +123,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -147,7 +149,7 @@
 
 
 
-	<h1 id="ge-ren-shi-dai-de-ruan-jian-kai-fa">个人时代的软件开发</h1>
+	<html><body><h1 id="ge-ren-shi-dai-de-ruan-jian-kai-fa">个人时代的软件开发</h1>
 <p>众所周知，软件开发一般需要编码、构建、测试、打包、发布等步骤，如下图：</p>
 <p>{% graphviz
     dot {
@@ -164,27 +166,27 @@
     dot {
         digraph G{
           rankdir=LR</p>
-<div class="highlight"><pre><span></span>      subgraph cluster_process {
-        label="开发过程"
-        graph [rankdir=LR]
-
-        Code -&gt; Build -&gt; Test -&gt; Package -&gt; Deploy
-      }
-
-      repo1 [shape="folder" label="代码库"]
-      repo2 [shape="folder" label="配置库"  style="dashed"]
-
-
-      Code -&gt; repo1
-      Build -&gt; repo2
-    }
+<div class="highlight"><pre><span class="code-line"><span></span>      subgraph cluster_process {</span>
+<span class="code-line">        label="开发过程"</span>
+<span class="code-line">        graph [rankdir=LR]</span>
+<span class="code-line"></span>
+<span class="code-line">        Code -&gt; Build -&gt; Test -&gt; Package -&gt; Deploy</span>
+<span class="code-line">      }</span>
+<span class="code-line"></span>
+<span class="code-line">      repo1 [shape="folder" label="代码库"]</span>
+<span class="code-line">      repo2 [shape="folder" label="配置库"  style="dashed"]</span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line">      Code -&gt; repo1</span>
+<span class="code-line">      Build -&gt; repo2</span>
+<span class="code-line">    }</span>
 </pre></div>
 <p>%}</p>
 <p>图中的&ldquo;代码库&rdquo;，通常由版本管理软件负责，比如git,svn。</p>
 <p>对于软件的配置信息，开发团队通常不会很十分在意&mdash;&mdash;要么随源代码一起放入版本库，要么由&ldquo;实施人员&rdquo;临时配置。</p>
 <h1 id="kai-fa-he-yun-wei">开发和运维</h1>
 <p>企业应用的环境中，通常开发团队和运维团队是分开的。这就形成了一堵墙:</p>
-<p><img alt="" src="./assets/images/WallOfConfusion_Release.png"/></p>
+<p><img alt="" class="img-responsive" src="./assets/images/WallOfConfusion_Release.png"/></p>
 <p>当软件系统从墙的一端(Dev)传递到另一端(Ops)时，会发生各种各样不可预知的情况发生。这些&ldquo;异常&rdquo;通常是由于交付了不正确的东西：</p>
 <ul>
 <li>开发人员不清楚生成环境，而运维人员又搞不定即没有规范又没有文档的配置</li>
@@ -196,22 +198,22 @@
     dot {
         digraph G{
           rankdir=LR</p>
-<div class="highlight"><pre><span></span>      subgraph cluster_process {
-        label="开发过程"
-        graph [rankdir=LR]
-
-        Code -&gt; Build -&gt; Test -&gt; Package -&gt; Deploy
-      }
-
-      repo1 [shape="folder" label="代码库"]
-      repo2 [shape="folder" label="配置库"]
-      repo3 [shape="folder" label="交付库"]
-
-      Code -&gt; repo1
-      Build -&gt; repo2
-      Package -&gt; repo3 -&gt; Deploy
-    }
-}
+<div class="highlight"><pre><span class="code-line"><span></span>      subgraph cluster_process {</span>
+<span class="code-line">        label="开发过程"</span>
+<span class="code-line">        graph [rankdir=LR]</span>
+<span class="code-line"></span>
+<span class="code-line">        Code -&gt; Build -&gt; Test -&gt; Package -&gt; Deploy</span>
+<span class="code-line">      }</span>
+<span class="code-line"></span>
+<span class="code-line">      repo1 [shape="folder" label="代码库"]</span>
+<span class="code-line">      repo2 [shape="folder" label="配置库"]</span>
+<span class="code-line">      repo3 [shape="folder" label="交付库"]</span>
+<span class="code-line"></span>
+<span class="code-line">      Code -&gt; repo1</span>
+<span class="code-line">      Build -&gt; repo2</span>
+<span class="code-line">      Package -&gt; repo3 -&gt; Deploy</span>
+<span class="code-line">    }</span>
+<span class="code-line">}</span>
 </pre></div>
 <p>%}</p>
 <ul>
@@ -232,32 +234,32 @@
     dot {
         digraph G{
           graph [layout="dot"]</p>
-<div class="highlight"><pre><span></span>      repo1 -&gt; {Code m1}
-      Code -&gt; Build -&gt; Test -&gt; Package -&gt; Deploy
-    //  Code -&gt; repo1 -&gt; m1
-
-      m2 -&gt; Build
-      m4 -&gt; {Build Test Package Deploy}
-      Package -&gt; m3
-      m5 -&gt; servers
-
-      repo1 [shape="folder" label="代码库"]
-      {rank=same; repo1; Code ; Build ; Test ; Package ; Deploy; servers}
-
-      subgraph cluster_ci {
-        label="持续集成"
-        {rank=same; m1; m2; m3; m4; m5}
-        m1 [label="工程管理" shape="rect"]
-        m2 [label="配置库" shape="folder"]
-        m3 [label="交付库" shape="folder"]
-        m4 [label="自动执行" shape="rect"]
-        m5 [label="发布管理" shape="rect"]
-      }
-
-      servers  [label="服务器" shape="box3d"]
-
-    }
-}
+<div class="highlight"><pre><span class="code-line"><span></span>      repo1 -&gt; {Code m1}</span>
+<span class="code-line">      Code -&gt; Build -&gt; Test -&gt; Package -&gt; Deploy</span>
+<span class="code-line">    //  Code -&gt; repo1 -&gt; m1</span>
+<span class="code-line"></span>
+<span class="code-line">      m2 -&gt; Build</span>
+<span class="code-line">      m4 -&gt; {Build Test Package Deploy}</span>
+<span class="code-line">      Package -&gt; m3</span>
+<span class="code-line">      m5 -&gt; servers</span>
+<span class="code-line"></span>
+<span class="code-line">      repo1 [shape="folder" label="代码库"]</span>
+<span class="code-line">      {rank=same; repo1; Code ; Build ; Test ; Package ; Deploy; servers}</span>
+<span class="code-line"></span>
+<span class="code-line">      subgraph cluster_ci {</span>
+<span class="code-line">        label="持续集成"</span>
+<span class="code-line">        {rank=same; m1; m2; m3; m4; m5}</span>
+<span class="code-line">        m1 [label="工程管理" shape="rect"]</span>
+<span class="code-line">        m2 [label="配置库" shape="folder"]</span>
+<span class="code-line">        m3 [label="交付库" shape="folder"]</span>
+<span class="code-line">        m4 [label="自动执行" shape="rect"]</span>
+<span class="code-line">        m5 [label="发布管理" shape="rect"]</span>
+<span class="code-line">      }</span>
+<span class="code-line"></span>
+<span class="code-line">      servers  [label="服务器" shape="box3d"]</span>
+<span class="code-line"></span>
+<span class="code-line">    }</span>
+<span class="code-line">}</span>
 </pre></div>
 <p>%}</p>
 <p>CI工具实现了与代码库关联的软件工程管理，能够自动执行构建、测试、打包、发布等操作。
@@ -268,18 +270,18 @@ CI工具通常内置了配置库和交付库，在自动构建时可以从配置
 <li><a href="http://hudson-ci.org/">Hudson</a></li>
 </ul>
 <p>这个大概是最流行的CI工具了，使用Java开发。</p>
-<p><img alt="" src="./assets/images/ci-hudson.jpg"/></p>
+<p><img alt="" class="img-responsive" src="./assets/images/ci-hudson.jpg"/></p>
 <ul>
 <li>
 <p><a href="http://buildbot.net/">BuildBot</a></p>
 <p>使用Python语言开发。好用，但是有点小众。</p>
-<p><img alt="" src="./assets/images/ci-buildbot.jpg"/></p>
+<p><img alt="" class="img-responsive" src="./assets/images/ci-buildbot.jpg"/></p>
 </li>
 <li>
 <p><a href="http://jenkins-ci.org/">Jenkins</a></p>
 </li>
 </ul>
-<p>也是使用Java开发。 <img alt="" src="./assets/images/12323PJW.png"/></p>
+<p>也是使用Java开发。 <img alt="" class="img-responsive" src="./assets/images/12323PJW.png"/></p></body></html>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2014-03-04.</h6>
 
 
@@ -348,41 +350,44 @@ CI工具通常内置了配置库和交付库，在自动构建时可以从配置
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/suo-yin.html" class="tag-3">索引</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/ji-qi-xue-xi.html" class="tag-3">机器学习</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/jiao-yi-gui-ze.html" class="tag-4">交易规则</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (2)</a></li>
+											<li><a href="/2017/03/">2017-03  (5)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>

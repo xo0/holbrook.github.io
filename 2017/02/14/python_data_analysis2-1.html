@@ -71,6 +71,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -85,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (5)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -122,6 +123,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -147,7 +149,7 @@
 
 
 
-	<style type="text/css">/*!
+	<html><head><style type="text/css">/*!
 *
 * IPython notebook
 *
@@ -1119,13 +1121,13 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing text_cell rendered">
+</head><body><div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>《<a href="https://book.douban.com/subject/25779298/">利用Python进行数据分析</a>》读书笔记。</p>
-<p><a href="/2017/02/14/python_data_analysis2.html">第2章</a>中的例子：分析网站的用户访问数据</p>
+<p><a href="http://holbrook.github.io/2017/02/14/python_data_analysis2.html">第2章</a>中的例子：分析网站的用户访问数据</p>
 <p>所有用到的数据可以从<a href="https://github.com/wesm/pydata-book">作者的 github</a>下载。</p>
 <h4 id="0.-准备工作">0. 准备工作<a class="anchor-link" href="#0.-准备工作">&para;</a></h4>
 </div>
@@ -1136,9 +1138,9 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">json</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="o">%</span><span class="k">pylab</span> inline</span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">json</span></span>
 </pre></div>
 </div>
 </div>
@@ -1147,7 +1149,7 @@ h6:hover .anchor-link {
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Populating the interactive namespace from numpy and matplotlib
+<pre><span class="code-line">Populating the interactive namespace from numpy and matplotlib</span>
 </pre>
 </div>
 </div>
@@ -1168,8 +1170,8 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">records</span> <span class="o">=</span> <span class="p">[</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'data/ch02/usagov_bitly_data2012-03-16-1331923249.txt'</span><span class="p">)]</span>
-<span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">records</span><span class="p">)</span>  <span class="c1"># 从列表创建 DataFrame</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">records</span> <span class="o">=</span> <span class="p">[</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'data/ch02/usagov_bitly_data2012-03-16-1331923249.txt'</span><span class="p">)]</span></span>
+<span class="code-line"><span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">records</span><span class="p">)</span>  <span class="c1"># 从列表创建 DataFrame</span></span>
 </pre></div>
 </div>
 </div>
@@ -1189,9 +1191,9 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 规整时区数据</span>
-<span class="n">frame</span><span class="p">[</span><span class="s1">'tz'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">'Missing'</span><span class="p">)</span>   <span class="c1">#  填充 缺失值 NA</span>
-<span class="n">frame</span><span class="p">[</span><span class="n">frame</span><span class="p">[</span><span class="s1">'tz'</span><span class="p">]</span><span class="o">==</span><span class="s1">''</span><span class="p">]</span><span class="o">=</span><span class="s1">'Unknown'</span> <span class="c1"># 填充空值</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1"># 规整时区数据</span></span>
+<span class="code-line"><span class="n">frame</span><span class="p">[</span><span class="s1">'tz'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">'Missing'</span><span class="p">)</span>   <span class="c1">#  填充 缺失值 NA</span></span>
+<span class="code-line"><span class="n">frame</span><span class="p">[</span><span class="n">frame</span><span class="p">[</span><span class="s1">'tz'</span><span class="p">]</span><span class="o">==</span><span class="s1">''</span><span class="p">]</span><span class="o">=</span><span class="s1">'Unknown'</span> <span class="c1"># 填充空值</span></span>
 </pre></div>
 </div>
 </div>
@@ -1211,26 +1213,26 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 按值统计个数</span>
-<span class="n">tz_counts</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="s1">'tz'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-
-<span class="c1"># 从USER_AGENT 数据中获取客户浏览器类型数据</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">frame</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">dropna</span><span class="p">()])</span>
-
-<span class="c1"># 从USER_AGENT 数据中获取客户操作系统数据</span>
-<span class="n">cframe</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="n">frame</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span>
-<span class="n">operating_system</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">cframe</span><span class="p">[</span><span class="s1">'a'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">'Windows'</span><span class="p">),</span><span class="s1">'Windows'</span><span class="p">,</span><span class="s1">'Not Windows'</span><span class="p">)</span>
-
-<span class="c1"># 将时区按照操作系统分组</span>
-<span class="n">by_tz_os</span> <span class="o">=</span> <span class="n">cframe</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'tz'</span><span class="p">,</span><span class="n">operating_system</span><span class="p">])</span>
-
-<span class="c1"># 按分组计数，然后用 unstack重塑 数据</span>
-<span class="n">agg_counts</span> <span class="o">=</span> <span class="n">by_tz_os</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="c1"># 以按行加和并排序的数据作为索引</span>
-<span class="n">indexer</span> <span class="o">=</span> <span class="n">agg_counts</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
-<span class="c1">#用  take 函数,  通过索引取出时区最多的值</span>
-<span class="n">count_subset</span> <span class="o">=</span> <span class="n">agg_counts</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">indexer</span><span class="p">)[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1"># 按值统计个数</span></span>
+<span class="code-line"><span class="n">tz_counts</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="s1">'tz'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c1"># 从USER_AGENT 数据中获取客户浏览器类型数据</span></span>
+<span class="code-line"><span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">frame</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">dropna</span><span class="p">()])</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c1"># 从USER_AGENT 数据中获取客户操作系统数据</span></span>
+<span class="code-line"><span class="n">cframe</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="n">frame</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span></span>
+<span class="code-line"><span class="n">operating_system</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">cframe</span><span class="p">[</span><span class="s1">'a'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">'Windows'</span><span class="p">),</span><span class="s1">'Windows'</span><span class="p">,</span><span class="s1">'Not Windows'</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c1"># 将时区按照操作系统分组</span></span>
+<span class="code-line"><span class="n">by_tz_os</span> <span class="o">=</span> <span class="n">cframe</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'tz'</span><span class="p">,</span><span class="n">operating_system</span><span class="p">])</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c1"># 按分组计数，然后用 unstack重塑 数据</span></span>
+<span class="code-line"><span class="n">agg_counts</span> <span class="o">=</span> <span class="n">by_tz_os</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c1"># 以按行加和并排序的数据作为索引</span></span>
+<span class="code-line"><span class="n">indexer</span> <span class="o">=</span> <span class="n">agg_counts</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span></span>
+<span class="code-line"><span class="c1">#用  take 函数,  通过索引取出时区最多的值</span></span>
+<span class="code-line"><span class="n">count_subset</span> <span class="o">=</span> <span class="n">agg_counts</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">indexer</span><span class="p">)[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span></span>
 </pre></div>
 </div>
 </div>
@@ -1259,8 +1261,8 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TOP10 时区</span>
-<span class="n">tz_counts</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'barh'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1"># TOP10 时区</span></span>
+<span class="code-line"><span class="n">tz_counts</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'barh'</span><span class="p">)</span></span>
 </pre></div>
 </div>
 </div>
@@ -1269,12 +1271,12 @@ h6:hover .anchor-link {
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><matplotlib.axes._subplots.axessubplot 0x115230a20="" at=""></matplotlib.axes._subplots.axessubplot></pre>
+<pre><span class="code-line"><matplotlib.axes._subplots.axessubplot at=""></matplotlib.axes._subplots.axessubplot></pre>
 </div>
 </div>
 <div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdIAAAD8CAYAAADDsSXEAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdIAAAD8CAYAAADDsSXEAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3XucXlV97/HPl+SYgJgQLqUpIoM2lFtCgAmiBOQSENRT
 8IBAikq8lOqLQj2+aBuLHqFHz8FSK1CQilGC8RKKAaGkhCDKVSFMrhMgoNxUDlXAGJWbknzPH3uN
 eRjm8kz2TGYm832/Xs9r9rP2Wmv/1hOY36y197O3bBMRERGbZqvBDiAiImI4SyKNiIioIYk0IiKi
@@ -1467,8 +1469,8 @@ LJv76qa8Nt8LeAfVla+PAOcOdjxNxDudallqFbCivN4B7ADcCvwI+C6wfUObc8v4HmIQrtZrYkyH
 s/Gq3eE8jqlAW/m3+Q4wYbiOBzgfWAOsBuZRXQk6LMYCfIvq3O7vqVYKPrQpsQOtZfyPAJdSbs4z
 BMbyY6pzoR3////bcBhL7mwUERFRQ5Z2IyIiakgijYiIqCGJNCIiooYk0oiIiBqSSCMiImpIIo2I
 iKghiTQiIqKGJNKIiIga/j8Ktskg8txdjwAAAABJRU5ErkJggg==
-">
-</img></div>
+"/>
+</div>
 </div>
 </div>
 </div>
@@ -1478,8 +1480,8 @@ iKghiTQiIqKGJNKIiIga/j8Ktskg8txdjwAAAABJRU5ErkJggg==
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TOP10 时区的操作系统数量（表）</span>
-<span class="n">count_subset</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1"># TOP10 时区的操作系统数量（表）</span></span>
+<span class="code-line"><span class="n">count_subset</span></span>
 </pre></div>
 </div>
 </div>
@@ -1489,7 +1491,7 @@ iKghiTQiIqKGJNKIiIga/j8Ktskg8txdjwAAAABJRU5ErkJggg==
 <div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<table border="1" class="dataframe">
+<table border="1" class="table dataframe table-striped table-hover">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -1566,8 +1568,8 @@ iKghiTQiIqKGJNKIiIga/j8Ktskg8txdjwAAAABJRU5ErkJggg==
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TOP10 时区的操作系统数量（图）</span>
-<span class="n">count_subset</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span> <span class="o">=</span> <span class="s1">'barh'</span><span class="p">,</span><span class="n">stacked</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1"># TOP10 时区的操作系统数量（图）</span></span>
+<span class="code-line"><span class="n">count_subset</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span> <span class="o">=</span> <span class="s1">'barh'</span><span class="p">,</span><span class="n">stacked</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></span>
 </pre></div>
 </div>
 </div>
@@ -1576,12 +1578,12 @@ iKghiTQiIqKGJNKIiIga/j8Ktskg8txdjwAAAABJRU5ErkJggg==
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><matplotlib.axes._subplots.axessubplot 0x1175f0f98="" at=""></matplotlib.axes._subplots.axessubplot></pre>
+<pre><span class="code-line"><matplotlib.axes._subplots.axessubplot at=""></matplotlib.axes._subplots.axessubplot></pre>
 </div>
 </div>
 <div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAD8CAYAAACvt3fBAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAD8CAYAAACvt3fBAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3XmYVdWZx/vvz0IpJxCU9uJYxMaBKSAFMgcVZztqNCri
 gNHQyTXaakyC0bSYm8G0dhyiMVEMJESDUZyikeAQGQSEYh5EjYCKsRNBwAmJwnv/2KvgUNZwCqo4
 VcXv8zznqX3WXmvtd51S3rPW3rW3IgIzMzPbvnYqdABmZmY7IidgMzOzAnACNjMzKwAnYDMzswJw
@@ -1816,8 +1818,8 @@ s/nA3PQ6GdgbeA54DXgWaJ3T5ro0vlcowNWPeYxpIJuvgm7M4+gKlKXfzWNAq8Y6HuBGYAmwEBhD
 dmVtoxgL8Aeyc9efkq1MXLI1sQOlafyvA3eSbubUAMbyN7JzveX///+qMYzFd8IyMzMrAC9Bm5mZ
 FYATsJmZWQE4AZuZmRWAE7CZmVkBOAGbmZkVgBOwmZlZATgBm5mZFYATsJmZWQH8/zZ7u+tHjmR1
 AAAAAElFTkSuQmCC
-">
-</img></div>
+"/>
+</div>
 </div>
 </div>
 </div>
@@ -1827,9 +1829,9 @@ AAAAAElFTkSuQmCC
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TOP10 时区的操作系统比例（图）</span>
-<span class="n">normed_subset</span> <span class="o">=</span> <span class="n">count_subset</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">count_subset</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">normed_subset</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span> <span class="o">=</span> <span class="s1">'barh'</span><span class="p">,</span><span class="n">stacked</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1"># TOP10 时区的操作系统比例（图）</span></span>
+<span class="code-line"><span class="n">normed_subset</span> <span class="o">=</span> <span class="n">count_subset</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">count_subset</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">normed_subset</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span> <span class="o">=</span> <span class="s1">'barh'</span><span class="p">,</span><span class="n">stacked</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></span>
 </pre></div>
 </div>
 </div>
@@ -1838,12 +1840,12 @@ AAAAAElFTkSuQmCC
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[10]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><matplotlib.axes._subplots.axessubplot 0x117866898="" at=""></matplotlib.axes._subplots.axessubplot></pre>
+<pre><span class="code-line"><matplotlib.axes._subplots.axessubplot at=""></matplotlib.axes._subplots.axessubplot></pre>
 </div>
 </div>
 <div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAD8CAYAAACvt3fBAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAD8CAYAAACvt3fBAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3XmUVdWZ/vHvAyg4gaDGxgnQQGSeCnAAFETFmMQJBzQq
 JoY2bbRN2k5Im7SYtn9tBtshGo1ixKAGozgQjQjOCCIUYwEaJ1AxpiOIiKJG4f39cXbJtazhFjXc
 Gp7PWrU4d5+993n3LVa9d+9z7jmKCMzMzKx+tSh0AGZmZs2RE7CZmVkBOAGbmZkVgBOwmZlZATgB
@@ -2081,8 +2083,8 @@ ZDN/JO0JfAV4tV6jLKw6/9vnGXAzFhGfSvoe8AjZVZG/i4gVks5L+28ku/L1q8DLwCayT8VNQp7j
 /09gN+A3aRb4aTSRm9TnOf4mK5/xR8TzkmYAy4AtwKSIKPdrK41Jnr/7/wImSyohuxL4RxHRZJ6Q
 JOkPwOHA7pLWAJcC20H9/e3znbDMzMwKwEvQZmZmBeAEbGZmVgBOwGZmZgXgBGxmZlYATsBmZmYF
 4ARsZmZWAE7AZmZmBeAEbGZmVgD/H/bdJDLVSYrIAAAAAElFTkSuQmCC
-">
-</img></div>
+"/>
+</div>
 </div>
 </div>
 </div>
@@ -2114,12 +2116,13 @@ JOkPwOHA7pLWAJcC20H9/e3znbDMzMwKwEvQZmZmBeAEbGZmVgBOwGZmZgXgBGxmZlYATsBmZmYF
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 </script>
-
+</body></html>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-02-14.</h6>
 
 
 	<h2>相关文章</h2>
     <ul>
+        <li><a href="http://holbrook.github.io/2017/03/04/index.html">《机器学习》</a></li>
         <li><a href="http://holbrook.github.io/2017/03/01/python_data_analysis5-5.html">利用Python进行数据分析(5.5)：多层次索引</a></li>
         <li><a href="http://holbrook.github.io/2017/03/01/python_data_analysis5-6.html">利用Python进行数据分析(5.6)：Pandas 其他</a></li>
         <li><a href="http://holbrook.github.io/2017/02/28/python_data_analysis5-4.html">利用Python进行数据分析(5.4)：处理缺失数据</a></li>
@@ -2129,7 +2132,6 @@ JOkPwOHA7pLWAJcC20H9/e3znbDMzMwKwEvQZmZmBeAEbGZmVgBOwGZmZgXgBGxmZlYATsBmZmYF
         <li><a href="http://holbrook.github.io/2017/02/23/python_data_analysis5.html">利用Python进行数据分析(5)：Pandas 入门</a></li>
         <li><a href="http://holbrook.github.io/2017/02/17/python_data_analysis4.html">利用Python进行数据分析(4)：NumPy</a></li>
         <li><a href="http://holbrook.github.io/2017/02/16/python_data_analysis2-3.html">利用Python进行数据分析(2.3)：全美婴儿姓名分析</a></li>
-        <li><a href="http://holbrook.github.io/2017/02/16/python_data_analysis3.html">利用Python进行数据分析(3)：IPython</a></li>
     </ul>
 </article>
 
@@ -2196,41 +2198,44 @@ JOkPwOHA7pLWAJcC20H9/e3znbDMzMwKwEvQZmZmBeAEbGZmVgBOwGZmZgXgBGxmZlYATsBmZmYF
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/suo-yin.html" class="tag-3">索引</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/ji-qi-xue-xi.html" class="tag-3">机器学习</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/jiao-yi-gui-ze.html" class="tag-4">交易规则</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (2)</a></li>
+											<li><a href="/2017/03/">2017-03  (5)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>

@@ -71,6 +71,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -85,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (5)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -122,6 +123,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li class="active"><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -147,7 +149,7 @@
 
 
 
-	<h1 id="tychoyu-maven-bundle-pluginde-dui-bi">Tycho与Maven-Bundle-Plugin的对比</h1>
+	<html><body><h1 id="tychoyu-maven-bundle-pluginde-dui-bi">Tycho与Maven-Bundle-Plugin的对比</h1>
 <p>Maven与OSGi天生就是冤家：Maven通过<code>pom.xml</code>描述一个产物的全部，而OSGi将这项工作交给了<code>MANIFEST.MF</code>。</p>
 <p>如果仅仅是一些定义信息还好说，但是Maven和OSGi都希望能够描述产物的依赖关系，在使用Maven开发OSGi bundle的时候，就导致了一个问题：</p>
 <p>依赖关系到底是在<code>pom.xml</code>中描述，还是在<code>MANIFEST.MF</code>中描述？</p>
@@ -160,61 +162,61 @@
 <p>而Felix Maven-Bundle-Plugin对于各种OSGi runtime的支持是相同的，由于完全基于maven，使用任何IDE开发bundle的效果都差不多。通常，Felix系的平台，如Karaf、Geronimo、Camel、ServiceMix、Fuse等，其例子都是使用Maven-Bundle-Plugin构建的。</p>
 <p>由于<a href="/2014/01/08/build_osgi_bundle_with_tycho_maven_plugin.html">前文已经说明了如何用Tycho开发OSGi</a>，下面只给出使用Maven-Bundle-Plugin的例子。</p>
 <h1 id="maven-bundle-pluginde-pomli-zi">Maven-Bundle-Plugin的pom例子</h1>
-<div class="highlight"><pre><span></span> <span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
-    <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>thinkinside.demo.osgi<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>simple-bundle<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
-
-
-    <span class="nt">&lt;build&gt;</span>
-        <span class="nt">&lt;plugins&gt;</span>
-            <span class="nt">&lt;plugin&gt;</span>
-                <span class="nt">&lt;groupId&gt;</span>org.apache.felix<span class="nt">&lt;/groupId&gt;</span>
-                <span class="nt">&lt;artifactId&gt;</span>maven-bundle-plugin<span class="nt">&lt;/artifactId&gt;</span>
-                <span class="nt">&lt;executions&gt;</span>
-                    <span class="nt">&lt;execution&gt;</span>
-                        <span class="nt">&lt;id&gt;</span>generate-resources<span class="nt">&lt;/id&gt;</span>
-                        <span class="nt">&lt;goals&gt;</span>
-                            <span class="nt">&lt;goal&gt;</span>manifest<span class="nt">&lt;/goal&gt;</span>
-                        <span class="nt">&lt;/goals&gt;</span>
-
-                        <span class="nt">&lt;configuration&gt;</span>
-                            <span class="nt">&lt;instructions&gt;</span>
-                                <span class="nt">&lt;Bundle</span><span class="err">-Name</span><span class="nt">&gt;</span><span class="cp">${</span><span class="n">project</span><span class="o">.</span><span class="n">name</span><span class="cp">}</span><span class="nt">&lt;/Bundle-Name&gt;</span>
-                                <span class="nt">&lt;Bundle</span><span class="err">-SymbolicName</span><span class="nt">&gt;</span><span class="cp">${</span><span class="n">project</span><span class="o">.</span><span class="n">artifactId</span><span class="cp">}</span><span class="nt">&lt;/Bundle-SymbolicName&gt;</span>
-                                <span class="nt">&lt;Bundle</span><span class="err">-Activator</span><span class="nt">&gt;</span>test.bundle.internal.Activator<span class="nt">&lt;/Bundle-Activator&gt;</span>
-                                <span class="nt">&lt;Export</span><span class="err">-Package</span><span class="nt">&gt;</span>***<span class="nt">&lt;/Export-Package&gt;</span>
-                                <span class="nt">&lt;Import</span><span class="err">-Package</span><span class="nt">&gt;</span>***<span class="nt">&lt;/Import-Package&gt;</span>
-                                <span class="nt">&lt;Private</span><span class="err">-Package</span><span class="nt">&gt;</span>***<span class="nt">&lt;/Private-Package&gt;</span>
-                            <span class="nt">&lt;/instructions&gt;</span>
-                        <span class="nt">&lt;/configuration&gt;</span>
-                    <span class="nt">&lt;/execution&gt;</span>
-                <span class="nt">&lt;/executions&gt;</span>
-            <span class="nt">&lt;/plugin&gt;</span>
-
-            <span class="nt">&lt;plugin&gt;</span>
-                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-                <span class="nt">&lt;artifactId&gt;</span>maven-jar-plugin<span class="nt">&lt;/artifactId&gt;</span>
-                <span class="nt">&lt;version&gt;</span>2.3.1<span class="nt">&lt;/version&gt;</span>
-                <span class="nt">&lt;configuration&gt;</span>
-                    <span class="nt">&lt;archive&gt;</span>
-                        <span class="nt">&lt;manifestFile&gt;</span><span class="cp">${</span><span class="n">project</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">outputDirectory</span><span class="cp">}</span>/META-INF/MANIFEST.MF<span class="nt">&lt;/manifestFile&gt;</span>
-                    <span class="nt">&lt;/archive&gt;</span>
-                <span class="nt">&lt;/configuration&gt;</span>
-            <span class="nt">&lt;/plugin&gt;</span>
-        <span class="nt">&lt;/plugins&gt;</span>
-    <span class="nt">&lt;/build&gt;</span>
-
-    <span class="nt">&lt;dependencies&gt;</span>
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>org.apache.felix<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>org.osgi.core<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>1.4.0<span class="nt">&lt;/version&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
-    <span class="nt">&lt;/dependencies&gt;</span>
- <span class="nt">&lt;/project&gt;</span>
+<div class="highlight"><pre><span class="code-line"><span></span> <span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span></span>
+<span class="code-line">    <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span class="nt">&gt;</span></span>
+<span class="code-line">    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span></span>
+<span class="code-line">    <span class="nt">&lt;groupId&gt;</span>thinkinside.demo.osgi<span class="nt">&lt;/groupId&gt;</span></span>
+<span class="code-line">    <span class="nt">&lt;artifactId&gt;</span>simple-bundle<span class="nt">&lt;/artifactId&gt;</span></span>
+<span class="code-line">    <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nt">&lt;build&gt;</span></span>
+<span class="code-line">        <span class="nt">&lt;plugins&gt;</span></span>
+<span class="code-line">            <span class="nt">&lt;plugin&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;groupId&gt;</span>org.apache.felix<span class="nt">&lt;/groupId&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;artifactId&gt;</span>maven-bundle-plugin<span class="nt">&lt;/artifactId&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;executions&gt;</span></span>
+<span class="code-line">                    <span class="nt">&lt;execution&gt;</span></span>
+<span class="code-line">                        <span class="nt">&lt;id&gt;</span>generate-resources<span class="nt">&lt;/id&gt;</span></span>
+<span class="code-line">                        <span class="nt">&lt;goals&gt;</span></span>
+<span class="code-line">                            <span class="nt">&lt;goal&gt;</span>manifest<span class="nt">&lt;/goal&gt;</span></span>
+<span class="code-line">                        <span class="nt">&lt;/goals&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line">                        <span class="nt">&lt;configuration&gt;</span></span>
+<span class="code-line">                            <span class="nt">&lt;instructions&gt;</span></span>
+<span class="code-line">                                <span class="nt">&lt;Bundle</span><span class="err">-Name</span><span class="nt">&gt;</span><span class="cp">${</span><span class="n">project</span><span class="o">.</span><span class="n">name</span><span class="cp">}</span><span class="nt">&lt;/Bundle-Name&gt;</span></span>
+<span class="code-line">                                <span class="nt">&lt;Bundle</span><span class="err">-SymbolicName</span><span class="nt">&gt;</span><span class="cp">${</span><span class="n">project</span><span class="o">.</span><span class="n">artifactId</span><span class="cp">}</span><span class="nt">&lt;/Bundle-SymbolicName&gt;</span></span>
+<span class="code-line">                                <span class="nt">&lt;Bundle</span><span class="err">-Activator</span><span class="nt">&gt;</span>test.bundle.internal.Activator<span class="nt">&lt;/Bundle-Activator&gt;</span></span>
+<span class="code-line">                                <span class="nt">&lt;Export</span><span class="err">-Package</span><span class="nt">&gt;</span>***<span class="nt">&lt;/Export-Package&gt;</span></span>
+<span class="code-line">                                <span class="nt">&lt;Import</span><span class="err">-Package</span><span class="nt">&gt;</span>***<span class="nt">&lt;/Import-Package&gt;</span></span>
+<span class="code-line">                                <span class="nt">&lt;Private</span><span class="err">-Package</span><span class="nt">&gt;</span>***<span class="nt">&lt;/Private-Package&gt;</span></span>
+<span class="code-line">                            <span class="nt">&lt;/instructions&gt;</span></span>
+<span class="code-line">                        <span class="nt">&lt;/configuration&gt;</span></span>
+<span class="code-line">                    <span class="nt">&lt;/execution&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;/executions&gt;</span></span>
+<span class="code-line">            <span class="nt">&lt;/plugin&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line">            <span class="nt">&lt;plugin&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;artifactId&gt;</span>maven-jar-plugin<span class="nt">&lt;/artifactId&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;version&gt;</span>2.3.1<span class="nt">&lt;/version&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;configuration&gt;</span></span>
+<span class="code-line">                    <span class="nt">&lt;archive&gt;</span></span>
+<span class="code-line">                        <span class="nt">&lt;manifestFile&gt;</span><span class="cp">${</span><span class="n">project</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">outputDirectory</span><span class="cp">}</span>/META-INF/MANIFEST.MF<span class="nt">&lt;/manifestFile&gt;</span></span>
+<span class="code-line">                    <span class="nt">&lt;/archive&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;/configuration&gt;</span></span>
+<span class="code-line">            <span class="nt">&lt;/plugin&gt;</span></span>
+<span class="code-line">        <span class="nt">&lt;/plugins&gt;</span></span>
+<span class="code-line">    <span class="nt">&lt;/build&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nt">&lt;dependencies&gt;</span></span>
+<span class="code-line">        <span class="nt">&lt;dependency&gt;</span></span>
+<span class="code-line">            <span class="nt">&lt;groupId&gt;</span>org.apache.felix<span class="nt">&lt;/groupId&gt;</span></span>
+<span class="code-line">            <span class="nt">&lt;artifactId&gt;</span>org.osgi.core<span class="nt">&lt;/artifactId&gt;</span></span>
+<span class="code-line">            <span class="nt">&lt;version&gt;</span>1.4.0<span class="nt">&lt;/version&gt;</span></span>
+<span class="code-line">        <span class="nt">&lt;/dependency&gt;</span></span>
+<span class="code-line">    <span class="nt">&lt;/dependencies&gt;</span></span>
+<span class="code-line"> <span class="nt">&lt;/project&gt;</span></span>
 </pre></div>
 <p>使用Maven-Bundle-Plugin构建bundle，就是构建一个简单的jar。不同之处在于：要通过pom.xml中的信息生成符合OSGi要求的<code>MANIFEST.MF</code>文件并打包到jar中。这通过两个插件来完成：</p>
 <ul>
@@ -235,7 +237,7 @@
 由于<a href="http://felix.apache.org/site/integrating-felix-with-eclipse.html">这里</a>有非常详细的说明，故不再赘述。</p>
 <p>其实，我们还可以基于maven构建，而不是使用Java Project的方式。使用maven的好处是这种方法可以用于任何支持maven的IDE。</p>
 <p>Felix runtime的主要内容包括：</p>
-<p><img alt="" src="images/fuse/felix-tree.png"/></p>
+<p><img alt="" class="img-responsive" src="images/fuse/felix-tree.png"/></p>
 <p>其中：</p>
 <ul>
 <li>bin/felix.jar  启动的jar, MainClass是<code>org.apache.felix.main.Main</code></li>
@@ -243,90 +245,90 @@
 <li>conf/conf.properties 启动配置。类似于Eclipse的<code>configuration/config.ini</code>。Felix配置项可以参考<a href="http://felix.apache.org/site/apache-felix-framework-configuration-properties.html">官方网站中的内容</a></li>
 </ul>
 <p>知道了Felix runtime的构成，就可以用maven构建出相同的结构，并插入到项目周期的适当位置。pom如下：</p>
-<div class="highlight"><pre><span></span> <span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
-    <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>thinkinside.demo.fuse<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>felix-launcher<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
-    <span class="nt">&lt;name&gt;</span>Felix Launcher<span class="nt">&lt;/name&gt;</span>
-    <span class="nt">&lt;properties&gt;</span>
-        <span class="nt">&lt;felix.bundlerepository.version&gt;</span>1.6.4<span class="nt">&lt;/felix.bundlerepository.version&gt;</span>
-        <span class="nt">&lt;felix.gogo.version&gt;</span>0.10.0<span class="nt">&lt;/felix.gogo.version&gt;</span>
-        <span class="nt">&lt;felix.framework.version&gt;</span>4.2.1<span class="nt">&lt;/felix.framework.version&gt;</span>
-    <span class="nt">&lt;/properties&gt;</span>
-
-    <span class="nt">&lt;build&gt;</span>
-        <span class="nt">&lt;plugins&gt;</span>
-            <span class="nt">&lt;plugin&gt;</span>
-                <span class="nt">&lt;artifactId&gt;</span>maven-clean-plugin<span class="nt">&lt;/artifactId&gt;</span>
-                <span class="nt">&lt;version&gt;</span>2.4.1<span class="nt">&lt;/version&gt;</span>
-                <span class="nt">&lt;configuration&gt;</span>
-                    <span class="nt">&lt;filesets&gt;</span>
-                        <span class="nt">&lt;fileset&gt;</span>
-                            <span class="nt">&lt;directory&gt;</span>bundle<span class="nt">&lt;/directory&gt;</span>
-                        <span class="nt">&lt;/fileset&gt;</span>
-                    <span class="nt">&lt;/filesets&gt;</span>
-                <span class="nt">&lt;/configuration&gt;</span>
-            <span class="nt">&lt;/plugin&gt;</span>
-
-            <span class="nt">&lt;plugin&gt;</span>
-                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-                <span class="nt">&lt;artifactId&gt;</span>maven-dependency-plugin<span class="nt">&lt;/artifactId&gt;</span>
-                <span class="nt">&lt;version&gt;</span>2.2<span class="nt">&lt;/version&gt;</span>
-                <span class="nt">&lt;executions&gt;</span>
-                    <span class="nt">&lt;execution&gt;</span>
-                        <span class="nt">&lt;id&gt;</span>copy<span class="nt">&lt;/id&gt;</span>
-                        <span class="nt">&lt;phase&gt;</span>generate-resources<span class="nt">&lt;/phase&gt;</span>
-                        <span class="nt">&lt;goals&gt;</span>
-                            <span class="nt">&lt;goal&gt;</span>copy<span class="nt">&lt;/goal&gt;</span>
-                        <span class="nt">&lt;/goals&gt;</span>
-                        <span class="nt">&lt;configuration&gt;</span>
-                            <span class="nt">&lt;artifactItems&gt;</span>
-                                <span class="nt">&lt;artifactItem&gt;</span>
-                                    <span class="nt">&lt;groupId&gt;</span>org.apache.felix<span class="nt">&lt;/groupId&gt;</span>
-                                    <span class="nt">&lt;artifactId&gt;</span>org.apache.felix.gogo.command<span class="nt">&lt;/artifactId&gt;</span>
-                                    <span class="nt">&lt;version&gt;</span><span class="cp">${</span><span class="n">felix</span><span class="o">.</span><span class="n">gogo</span><span class="o">.</span><span class="n">version</span><span class="cp">}</span><span class="nt">&lt;/version&gt;</span>
-                                <span class="nt">&lt;/artifactItem&gt;</span>
-                                <span class="nt">&lt;artifactItem&gt;</span>
-                                    <span class="nt">&lt;groupId&gt;</span>org.apache.felix<span class="nt">&lt;/groupId&gt;</span>
-                                    <span class="nt">&lt;artifactId&gt;</span>org.apache.felix.gogo.runtime<span class="nt">&lt;/artifactId&gt;</span>
-                                    <span class="nt">&lt;version&gt;</span><span class="cp">${</span><span class="n">felix</span><span class="o">.</span><span class="n">gogo</span><span class="o">.</span><span class="n">version</span><span class="cp">}</span><span class="nt">&lt;/version&gt;</span>
-                                <span class="nt">&lt;/artifactItem&gt;</span>
-                                <span class="nt">&lt;artifactItem&gt;</span>
-                                    <span class="nt">&lt;groupId&gt;</span>org.apache.felix<span class="nt">&lt;/groupId&gt;</span>
-                                    <span class="nt">&lt;artifactId&gt;</span>org.apache.felix.gogo.shell<span class="nt">&lt;/artifactId&gt;</span>
-                                    <span class="nt">&lt;version&gt;</span><span class="cp">${</span><span class="n">felix</span><span class="o">.</span><span class="n">gogo</span><span class="o">.</span><span class="n">version</span><span class="cp">}</span><span class="nt">&lt;/version&gt;</span>
-                                <span class="nt">&lt;/artifactItem&gt;</span>
-                                <span class="nt">&lt;artifactItem&gt;</span>
-                                    <span class="nt">&lt;groupId&gt;</span>org.osgi<span class="nt">&lt;/groupId&gt;</span>
-                                    <span class="nt">&lt;artifactId&gt;</span>org.osgi.compendium<span class="nt">&lt;/artifactId&gt;</span>
-                                    <span class="nt">&lt;version&gt;</span>4.2.0<span class="nt">&lt;/version&gt;</span>
-                                <span class="nt">&lt;/artifactItem&gt;</span>
-                            <span class="nt">&lt;/artifactItems&gt;</span>
-                            <span class="nt">&lt;outputDirectory&gt;</span>bundle<span class="nt">&lt;/outputDirectory&gt;</span>
-                        <span class="nt">&lt;/configuration&gt;</span>
-                    <span class="nt">&lt;/execution&gt;</span>
-                <span class="nt">&lt;/executions&gt;</span>
-            <span class="nt">&lt;/plugin&gt;</span>
-        <span class="nt">&lt;/plugins&gt;</span>
-
-    <span class="nt">&lt;/build&gt;</span>
-
-    <span class="nt">&lt;dependencies&gt;</span>
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>org.apache.felix<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>org.apache.felix.main<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span><span class="cp">${</span><span class="n">felix</span><span class="o">.</span><span class="n">framework</span><span class="o">.</span><span class="n">version</span><span class="cp">}</span><span class="nt">&lt;/version&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
-
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>org.ops4j.pax.url<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>pax-url-assembly<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>1.6.0<span class="nt">&lt;/version&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
-    <span class="nt">&lt;/dependencies&gt;</span>
- <span class="nt">&lt;/project&gt;</span>
+<div class="highlight"><pre><span class="code-line"><span></span> <span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span></span>
+<span class="code-line">    <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span class="nt">&gt;</span></span>
+<span class="code-line">    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span></span>
+<span class="code-line">    <span class="nt">&lt;groupId&gt;</span>thinkinside.demo.fuse<span class="nt">&lt;/groupId&gt;</span></span>
+<span class="code-line">    <span class="nt">&lt;artifactId&gt;</span>felix-launcher<span class="nt">&lt;/artifactId&gt;</span></span>
+<span class="code-line">    <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span></span>
+<span class="code-line">    <span class="nt">&lt;name&gt;</span>Felix Launcher<span class="nt">&lt;/name&gt;</span></span>
+<span class="code-line">    <span class="nt">&lt;properties&gt;</span></span>
+<span class="code-line">        <span class="nt">&lt;felix.bundlerepository.version&gt;</span>1.6.4<span class="nt">&lt;/felix.bundlerepository.version&gt;</span></span>
+<span class="code-line">        <span class="nt">&lt;felix.gogo.version&gt;</span>0.10.0<span class="nt">&lt;/felix.gogo.version&gt;</span></span>
+<span class="code-line">        <span class="nt">&lt;felix.framework.version&gt;</span>4.2.1<span class="nt">&lt;/felix.framework.version&gt;</span></span>
+<span class="code-line">    <span class="nt">&lt;/properties&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nt">&lt;build&gt;</span></span>
+<span class="code-line">        <span class="nt">&lt;plugins&gt;</span></span>
+<span class="code-line">            <span class="nt">&lt;plugin&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;artifactId&gt;</span>maven-clean-plugin<span class="nt">&lt;/artifactId&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;version&gt;</span>2.4.1<span class="nt">&lt;/version&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;configuration&gt;</span></span>
+<span class="code-line">                    <span class="nt">&lt;filesets&gt;</span></span>
+<span class="code-line">                        <span class="nt">&lt;fileset&gt;</span></span>
+<span class="code-line">                            <span class="nt">&lt;directory&gt;</span>bundle<span class="nt">&lt;/directory&gt;</span></span>
+<span class="code-line">                        <span class="nt">&lt;/fileset&gt;</span></span>
+<span class="code-line">                    <span class="nt">&lt;/filesets&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;/configuration&gt;</span></span>
+<span class="code-line">            <span class="nt">&lt;/plugin&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line">            <span class="nt">&lt;plugin&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;artifactId&gt;</span>maven-dependency-plugin<span class="nt">&lt;/artifactId&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;version&gt;</span>2.2<span class="nt">&lt;/version&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;executions&gt;</span></span>
+<span class="code-line">                    <span class="nt">&lt;execution&gt;</span></span>
+<span class="code-line">                        <span class="nt">&lt;id&gt;</span>copy<span class="nt">&lt;/id&gt;</span></span>
+<span class="code-line">                        <span class="nt">&lt;phase&gt;</span>generate-resources<span class="nt">&lt;/phase&gt;</span></span>
+<span class="code-line">                        <span class="nt">&lt;goals&gt;</span></span>
+<span class="code-line">                            <span class="nt">&lt;goal&gt;</span>copy<span class="nt">&lt;/goal&gt;</span></span>
+<span class="code-line">                        <span class="nt">&lt;/goals&gt;</span></span>
+<span class="code-line">                        <span class="nt">&lt;configuration&gt;</span></span>
+<span class="code-line">                            <span class="nt">&lt;artifactItems&gt;</span></span>
+<span class="code-line">                                <span class="nt">&lt;artifactItem&gt;</span></span>
+<span class="code-line">                                    <span class="nt">&lt;groupId&gt;</span>org.apache.felix<span class="nt">&lt;/groupId&gt;</span></span>
+<span class="code-line">                                    <span class="nt">&lt;artifactId&gt;</span>org.apache.felix.gogo.command<span class="nt">&lt;/artifactId&gt;</span></span>
+<span class="code-line">                                    <span class="nt">&lt;version&gt;</span><span class="cp">${</span><span class="n">felix</span><span class="o">.</span><span class="n">gogo</span><span class="o">.</span><span class="n">version</span><span class="cp">}</span><span class="nt">&lt;/version&gt;</span></span>
+<span class="code-line">                                <span class="nt">&lt;/artifactItem&gt;</span></span>
+<span class="code-line">                                <span class="nt">&lt;artifactItem&gt;</span></span>
+<span class="code-line">                                    <span class="nt">&lt;groupId&gt;</span>org.apache.felix<span class="nt">&lt;/groupId&gt;</span></span>
+<span class="code-line">                                    <span class="nt">&lt;artifactId&gt;</span>org.apache.felix.gogo.runtime<span class="nt">&lt;/artifactId&gt;</span></span>
+<span class="code-line">                                    <span class="nt">&lt;version&gt;</span><span class="cp">${</span><span class="n">felix</span><span class="o">.</span><span class="n">gogo</span><span class="o">.</span><span class="n">version</span><span class="cp">}</span><span class="nt">&lt;/version&gt;</span></span>
+<span class="code-line">                                <span class="nt">&lt;/artifactItem&gt;</span></span>
+<span class="code-line">                                <span class="nt">&lt;artifactItem&gt;</span></span>
+<span class="code-line">                                    <span class="nt">&lt;groupId&gt;</span>org.apache.felix<span class="nt">&lt;/groupId&gt;</span></span>
+<span class="code-line">                                    <span class="nt">&lt;artifactId&gt;</span>org.apache.felix.gogo.shell<span class="nt">&lt;/artifactId&gt;</span></span>
+<span class="code-line">                                    <span class="nt">&lt;version&gt;</span><span class="cp">${</span><span class="n">felix</span><span class="o">.</span><span class="n">gogo</span><span class="o">.</span><span class="n">version</span><span class="cp">}</span><span class="nt">&lt;/version&gt;</span></span>
+<span class="code-line">                                <span class="nt">&lt;/artifactItem&gt;</span></span>
+<span class="code-line">                                <span class="nt">&lt;artifactItem&gt;</span></span>
+<span class="code-line">                                    <span class="nt">&lt;groupId&gt;</span>org.osgi<span class="nt">&lt;/groupId&gt;</span></span>
+<span class="code-line">                                    <span class="nt">&lt;artifactId&gt;</span>org.osgi.compendium<span class="nt">&lt;/artifactId&gt;</span></span>
+<span class="code-line">                                    <span class="nt">&lt;version&gt;</span>4.2.0<span class="nt">&lt;/version&gt;</span></span>
+<span class="code-line">                                <span class="nt">&lt;/artifactItem&gt;</span></span>
+<span class="code-line">                            <span class="nt">&lt;/artifactItems&gt;</span></span>
+<span class="code-line">                            <span class="nt">&lt;outputDirectory&gt;</span>bundle<span class="nt">&lt;/outputDirectory&gt;</span></span>
+<span class="code-line">                        <span class="nt">&lt;/configuration&gt;</span></span>
+<span class="code-line">                    <span class="nt">&lt;/execution&gt;</span></span>
+<span class="code-line">                <span class="nt">&lt;/executions&gt;</span></span>
+<span class="code-line">            <span class="nt">&lt;/plugin&gt;</span></span>
+<span class="code-line">        <span class="nt">&lt;/plugins&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nt">&lt;/build&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nt">&lt;dependencies&gt;</span></span>
+<span class="code-line">        <span class="nt">&lt;dependency&gt;</span></span>
+<span class="code-line">            <span class="nt">&lt;groupId&gt;</span>org.apache.felix<span class="nt">&lt;/groupId&gt;</span></span>
+<span class="code-line">            <span class="nt">&lt;artifactId&gt;</span>org.apache.felix.main<span class="nt">&lt;/artifactId&gt;</span></span>
+<span class="code-line">            <span class="nt">&lt;version&gt;</span><span class="cp">${</span><span class="n">felix</span><span class="o">.</span><span class="n">framework</span><span class="o">.</span><span class="n">version</span><span class="cp">}</span><span class="nt">&lt;/version&gt;</span></span>
+<span class="code-line">        <span class="nt">&lt;/dependency&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line">        <span class="nt">&lt;dependency&gt;</span></span>
+<span class="code-line">            <span class="nt">&lt;groupId&gt;</span>org.ops4j.pax.url<span class="nt">&lt;/groupId&gt;</span></span>
+<span class="code-line">            <span class="nt">&lt;artifactId&gt;</span>pax-url-assembly<span class="nt">&lt;/artifactId&gt;</span></span>
+<span class="code-line">            <span class="nt">&lt;version&gt;</span>1.6.0<span class="nt">&lt;/version&gt;</span></span>
+<span class="code-line">        <span class="nt">&lt;/dependency&gt;</span></span>
+<span class="code-line">    <span class="nt">&lt;/dependencies&gt;</span></span>
+<span class="code-line"> <span class="nt">&lt;/project&gt;</span></span>
 </pre></div>
 <p>该pom在标准的生命周期中增加了两项工作：</p>
 <ul>
@@ -334,14 +336,14 @@
 <li>在<code>clean</code>阶段，清除bundle文件夹</li>
 </ul>
 <p>最后，还需要一个配置文件。在工程目录建立<code>/conf/config.properties</code>文件，并进行基本配置：</p>
-<div class="highlight"><pre><span></span>felix.auto.deploy.action=install,start
-felix.log.level=1
-
-org.osgi.framework.storage.clean=onFirstInit
+<div class="highlight"><pre><span class="code-line"><span></span>felix.auto.deploy.action=install,start</span>
+<span class="code-line">felix.log.level=1</span>
+<span class="code-line"></span>
+<span class="code-line">org.osgi.framework.storage.clean=onFirstInit</span>
 </pre></div>
 <p>配置完成了，先执行<code>mvn compile</code>生成需要的资源。此时使用命令<code>mvn exec:java -Dexec.mainClass="org.apache.felix.main.Main"</code>即可以启动Felix runtime：</p>
-<p><img alt="" src="images/fuse/felix_launch_from_maven.png"/></p>
-<p>在Eclipse中，将这个工程作为<code>Java Application</code>运行，选择<code>org.apache.felix.main.Main</code>作为Main Class，就可以进行运行和调试。</p>
+<p><img alt="" class="img-responsive" src="images/fuse/felix_launch_from_maven.png"/></p>
+<p>在Eclipse中，将这个工程作为<code>Java Application</code>运行，选择<code>org.apache.felix.main.Main</code>作为Main Class，就可以进行运行和调试。</p></body></html>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2014-01-21.</h6>
 
 
@@ -423,41 +425,44 @@ org.osgi.framework.storage.clean=onFirstInit
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/suo-yin.html" class="tag-3">索引</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/ji-qi-xue-xi.html" class="tag-3">机器学习</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/jiao-yi-gui-ze.html" class="tag-4">交易规则</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (2)</a></li>
+											<li><a href="/2017/03/">2017-03  (5)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>

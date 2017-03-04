@@ -70,6 +70,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -84,7 +85,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (5)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -121,6 +122,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -136,6 +138,73 @@
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
 
+<article>
+	<h3><a href="http://holbrook.github.io/2017/02/21/strategy_based_on_decision_table.html">基于决策表实现交易策略</a></h3>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a> on 2017-02-21. Tags: <a href="http://holbrook.github.io/tag/ce-lue-ping-tai.html">策略平台</a>, <a href="http://holbrook.github.io/tag/c.html">C#</a>, </h6>
+	<p>与编程语言级别的逻辑控制(<code>if-then-else</code>，<code>switch</code>) 相比，决策表能在一个平面中罗列出所有的可能情况，并清晰的指出相应的处理方式，不需要层层嵌套。用户不需要考虑其中的逻辑关系就能一眼看出其中什么样的动作对应什么样的情况，可读性大大提高，并且不容易因为疏忽产生不易察觉的错误。</p>
+		<p class="continue"><a href="http://holbrook.github.io/2017/02/21/strategy_based_on_decision_table.html">Continue reading &raquo;</a></p>
+</article>
+<hr />
+<article>
+	<h3><a href="http://holbrook.github.io/2017/02/17/python_data_analysis4.html">利用Python进行数据分析(4)：NumPy</a></h3>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a> on 2017-02-17. Tags: <a href="http://holbrook.github.io/tag/du-shu-bi-ji.html">读书笔记</a>, <a href="http://holbrook.github.io/tag/python.html">python</a>, </h6>
+	
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>NumPy(Numerical Python)，python 数值计算包。是所有 python 数据分析包的基础。
+NumPy提供了大量的数值编程工具，可以方便地处理向量、矩阵等运算，极大地便利了人们在科学计算方面的工作[^1]。</p>
+<p>NumPy 的主要功能包括：</p>
+<ul>
+<li>ndarray, 多维数组，支持快速的矢量运算和复杂广播能力（不同大小的数组之间的运算叫广播（broadcasting）)</li>
+<li>随机数生成</li>
+<li>标准数学函数，用于对这个数组的数据进行快速运算，无需自己编写循环</li>
+<li>磁盘及内存 IO 工具</li>
+<li>线性代数、傅里叶变换</li>
+<li>提供通用数据接口和工具，便于集成其他语言( 如 C/C++ 等）</li>
+</ul>
+<p>在数据分析时，很重要的功能包括：</p>
+<ul>
+<li>用于数据整理和清理、子集构造和过滤、转换等快速的矢量化运算</li>
+<li>常用的数组解法，如排序、唯一化、集合运算等</li>
+<li>高效的描述统计和数据聚合/摘要运算</li>
+<li>用于异构数据集的合并/连接运算的数据对齐和关系型数据运算</li>
+<li>将条件逻辑表述为数组表达式（而不是带有if-elif-else分支的循环）</li>
+<li>数据的分组运算（聚合、转换、函数应用等）。</li>
+</ul>
+<p>这些功能 NumPy 都有提供，但是更基础。一般我们不直接使用 Numpy，而是通过 pandas 等包间接调用。</p>
+<h2 id="准备工作">准备工作<a class="anchor-link" href="#准备工作">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+		<p class="continue"><a href="http://holbrook.github.io/2017/02/17/python_data_analysis4.html">Continue reading &raquo;</a></p>
+</article>
+<hr />
+<article>
+	<h3><a href="http://holbrook.github.io/2017/02/16/python_data_analysis2-3.html">利用Python进行数据分析(2.3)：全美婴儿姓名分析</a></h3>
+	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a> on 2017-02-16. Tags: <a href="http://holbrook.github.io/tag/du-shu-bi-ji.html">读书笔记</a>, <a href="http://holbrook.github.io/tag/python.html">python</a>, </h6>
+	
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>《<a href="https://book.douban.com/subject/25779298/">利用Python进行数据分析</a>》读书笔记。</p>
+<p><a href="http://holbrook.github.io/2017/02/14/python_data_analysis2.html">第2章</a>中的例子： 美国婴儿姓名统计。</p>
+<p>所有用到的数据可以从<a href="https://github.com/wesm/pydata-book">作者的 github</a>下载。</p>
+<h4 id="0.-准备工作">0. 准备工作<a class="anchor-link" href="#0.-准备工作">¶</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+		<p class="continue"><a href="http://holbrook.github.io/2017/02/16/python_data_analysis2-3.html">Continue reading &raquo;</a></p>
+</article>
+<hr />
 <article>
 	<h3><a href="http://holbrook.github.io/2017/02/16/python_data_analysis3.html">利用Python进行数据分析(3)：IPython</a></h3>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a> on 2017-02-16. Tags: <a href="http://holbrook.github.io/tag/du-shu-bi-ji.html">读书笔记</a>, <a href="http://holbrook.github.io/tag/python.html">python</a>, </h6>
@@ -155,7 +224,7 @@
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>《<a href="https://book.douban.com/subject/25779298/">利用Python进行数据分析</a>》读书笔记。</p>
-<p><a href="/2017/02/14/python_data_analysis2.html">第2章</a>中的例子：电影评分数据分析。</p>
+<p><a href="http://holbrook.github.io/2017/02/14/python_data_analysis2.html">第2章</a>中的例子：电影评分数据分析。</p>
 <p>所有用到的数据可以从<a href="https://github.com/wesm/pydata-book">作者的 github</a>下载。</p>
 <h4 id="0.-准备工作">0. 准备工作<a class="anchor-link" href="#0.-准备工作">¶</a></h4>
 </div>
@@ -219,7 +288,7 @@
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>《<a href="https://book.douban.com/subject/25779298/">利用Python进行数据分析</a>》读书笔记。</p>
-<p><a href="/2017/02/14/python_data_analysis2.html">第2章</a>中的例子：分析网站的用户访问数据</p>
+<p><a href="http://holbrook.github.io/2017/02/14/python_data_analysis2.html">第2章</a>中的例子：分析网站的用户访问数据</p>
 <p>所有用到的数据可以从<a href="https://github.com/wesm/pydata-book">作者的 github</a>下载。</p>
 <h4 id="0.-准备工作">0. 准备工作<a class="anchor-link" href="#0.-准备工作">¶</a></h4>
 </div>
@@ -248,28 +317,6 @@ Windows 下面可以使用 windows下面的包管理器：<a href="https://choco
 		<p class="continue"><a href="http://holbrook.github.io/2017/02/11/windows_pkg_manager_chocolatey.html">Continue reading &raquo;</a></p>
 </article>
 <hr />
-<article>
-	<h3><a href="http://holbrook.github.io/2017/02/05/index.html">数据科学的知识体系</a></h3>
-	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/shu-ju-ke-xue.html">数据科学</a> on 2017-02-05.</h6>
-	<p>数据科学是利用计算机的运算能力对数据进行处理，从数据中提取信息，进而形成“知识”。
-然而要实现这一点并不容易。Swami Chandrasekaran在他的<a href="http://nirvacana.com/thoughts/becoming-a-data-scientist/">《Becoming a Data Scientist》</a>中，规划了“数据科学家”之路，让我们共勉。</p>
-		<p class="continue"><a href="http://holbrook.github.io/2017/02/05/index.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
-<article>
-	<h3><a href="http://holbrook.github.io/2015/05/04/modern_web_dev_env.html">搭建一个“现代化”的web开发环境</a></h3>
-	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a> on 2015-05-04. Tags: <a href="http://holbrook.github.io/tag/web.html">web</a>, <a href="http://holbrook.github.io/tag/env.html">env</a>, </h6>
-	<p>使用yoeman, bower, grunt等工具开发web。</p>
-		<p class="continue"><a href="http://holbrook.github.io/2015/05/04/modern_web_dev_env.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
-<article>
-	<h3><a href="http://holbrook.github.io/2014/03/04/ci_tools.html">持续集成(CI)工具的作用</a></h3>
-	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> in <a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a> on 2014-03-04. Tags: <a href="http://holbrook.github.io/tag/ruan-jian-guo-cheng.html">软件过程</a>, </h6>
-	
-		<p class="continue"><a href="http://holbrook.github.io/2014/03/04/ci_tools.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
 
 <div class="row">
 	<div class="small-12 columns text-center">
@@ -284,6 +331,7 @@ Windows 下面可以使用 windows下面的包管理器：<a href="https://choco
 				<li class=""><a href="http://holbrook.github.io/index6.html">6</a></li>
 				<li class=""><a href="http://holbrook.github.io/index7.html">7</a></li>
 				<li class=""><a href="http://holbrook.github.io/index8.html">8</a></li>
+				<li class=""><a href="http://holbrook.github.io/index9.html">9</a></li>
 				<li class="arrow"><a href="http://holbrook.github.io/index3.html">Next &rarr;</a></li>
 			</ul>
 		</div>
@@ -307,41 +355,44 @@ Windows 下面可以使用 windows下面的包管理器：<a href="https://choco
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/suo-yin.html" class="tag-3">索引</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/ji-qi-xue-xi.html" class="tag-3">机器学习</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/jiao-yi-gui-ze.html" class="tag-4">交易规则</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (2)</a></li>
+											<li><a href="/2017/03/">2017-03  (5)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>

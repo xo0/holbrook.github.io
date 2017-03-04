@@ -71,6 +71,7 @@
 						<li><a href="http://holbrook.github.io">Home</a></li>
 						<li><label>Categories</label></li>
 							<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+							<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 							<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 							<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 							<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -85,7 +86,7 @@
 
 
 						<li><label>Monthly Archives</label></li>
-									<li><a href="/posts/2017/03/">三月 2017 (2)</a></li>
+									<li><a href="/posts/2017/03/">三月 2017 (5)</a></li>
 									<li><a href="/posts/2017/02/">二月 2017 (16)</a></li>
 									<li><a href="/posts/2015/05/">五月 2015 (1)</a></li>
 									<li><a href="/posts/2014/03/">三月 2014 (1)</a></li>
@@ -122,6 +123,7 @@
 					<section class="top-bar-section">
 						<ul class="left">
 								<li ><a href="http://holbrook.github.io/category/bing-fa-xi-tong.html">并发系统</a></li>
+								<li ><a href="http://holbrook.github.io/category/ji-qi-xue-xi.html">机器学习</a></li>
 								<li ><a href="http://holbrook.github.io/category/ji-xian-xie-zuo.html">极限写作</a></li>
 								<li ><a href="http://holbrook.github.io/category/liang-hua-jiao-yi.html">量化交易</a></li>
 								<li ><a href="http://holbrook.github.io/category/ruan-jian-kai-fa.html">软件开发</a></li>
@@ -147,7 +149,7 @@
 
 
 
-	<style type="text/css">/*!
+	<html><head><style type="text/css">/*!
 *
 * IPython notebook
 *
@@ -1119,14 +1121,14 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing code_cell rendered">
+</head><body><div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
-<span class="kn">from</span> <span class="nn">pandas</span> <span class="k">import</span> <span class="n">Series</span><span class="p">,</span> <span class="n">DataFrame</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="o">%</span><span class="k">pylab</span> inline</span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">pandas</span> <span class="k">import</span> <span class="n">Series</span><span class="p">,</span> <span class="n">DataFrame</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span></span>
 </pre></div>
 </div>
 </div>
@@ -1135,7 +1137,7 @@ h6:hover .anchor-link {
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Populating the interactive namespace from numpy and matplotlib
+<pre><span class="code-line">Populating the interactive namespace from numpy and matplotlib</span>
 </pre>
 </div>
 </div>
@@ -1168,8 +1170,8 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ser</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">3.</span><span class="p">))</span>
-<span class="n">ser</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">ser</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">3.</span><span class="p">))</span></span>
+<span class="code-line"><span class="n">ser</span></span>
 </pre></div>
 </div>
 </div>
@@ -1178,10 +1180,10 @@ h6:hover .anchor-link {
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>0    0.0
-1    1.0
-2    2.0
-dtype: float64</pre>
+<pre><span class="code-line">0    0.0</span>
+<span class="code-line">1    1.0</span>
+<span class="code-line">2    2.0</span>
+<span class="code-line">dtype: float64</pre>
 </div>
 </div>
 </div>
@@ -1192,7 +1194,7 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ser</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">ser</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></span>
 </pre></div>
 </div>
 </div>
@@ -1201,7 +1203,7 @@ dtype: float64</pre>
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>2.0</pre>
+<pre><span class="code-line">2.0</pre>
 </div>
 </div>
 </div>
@@ -1212,8 +1214,8 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ser2</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">3.</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">])</span>
-<span class="n">ser2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">ser2</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">3.</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">])</span></span>
+<span class="code-line"><span class="n">ser2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></span>
 </pre></div>
 </div>
 </div>
@@ -1222,7 +1224,7 @@ dtype: float64</pre>
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>2.0</pre>
+<pre><span class="code-line">2.0</pre>
 </div>
 </div>
 </div>
@@ -1233,8 +1235,8 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#ix函数总是面向标签的</span>
-<span class="n">ser</span><span class="o">.</span><span class="n">ix</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1">#ix函数总是面向标签的</span></span>
+<span class="code-line"><span class="n">ser</span><span class="o">.</span><span class="n">ix</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span></span>
 </pre></div>
 </div>
 </div>
@@ -1243,9 +1245,9 @@ dtype: float64</pre>
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>0    0.0
-1    1.0
-dtype: float64</pre>
+<pre><span class="code-line">0    0.0</span>
+<span class="code-line">1    1.0</span>
+<span class="code-line">dtype: float64</pre>
 </div>
 </div>
 </div>
@@ -1256,8 +1258,8 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ser3</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-<span class="n">ser3</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">ser3</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span></span>
+<span class="code-line"><span class="n">ser3</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span></span>
 </pre></div>
 </div>
 </div>
@@ -1268,9 +1270,9 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#如果需要可靠的、不考虑索引类型的、基于位置的索引，可以使用Series的iget_value方法，Dataframe的irow 和 icol方法</span>
-<span class="n">frame</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">frame</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1">#如果需要可靠的、不考虑索引类型的、基于位置的索引，可以使用Series的iget_value方法，Dataframe的irow 和 icol方法</span></span>
+<span class="code-line"><span class="n">frame</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span></span>
+<span class="code-line"><span class="n">frame</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></span>
 </pre></div>
 </div>
 </div>
@@ -1279,9 +1281,9 @@ dtype: float64</pre>
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>0    0
-1    1
-Name: 2, dtype: int64</pre>
+<pre><span class="code-line">0    0</span>
+<span class="code-line">1    1</span>
+<span class="code-line">Name: 2, dtype: int64</pre>
 </div>
 </div>
 </div>
@@ -1301,11 +1303,11 @@ Name: 2, dtype: int64</pre>
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#可以利用DataFrame对象组成的字典或者一个三维ndarray来创建Panel对象</span>
-<span class="kn">from</span> <span class="nn">pandas_datareader</span> <span class="k">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">wb</span>
-
-<span class="n">pdata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Panel</span><span class="p">(</span><span class="nb">dict</span><span class="p">((</span><span class="n">stk</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">get_data_yahoo</span><span class="p">(</span><span class="n">stk</span><span class="p">))</span>
-                       <span class="k">for</span> <span class="n">stk</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'AAPL'</span><span class="p">,</span> <span class="s1">'GOOG'</span><span class="p">,</span> <span class="s1">'MSFT'</span><span class="p">,</span> <span class="s1">'DELL'</span><span class="p">]))</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1">#可以利用DataFrame对象组成的字典或者一个三维ndarray来创建Panel对象</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">pandas_datareader</span> <span class="k">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">wb</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">pdata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Panel</span><span class="p">(</span><span class="nb">dict</span><span class="p">((</span><span class="n">stk</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">get_data_yahoo</span><span class="p">(</span><span class="n">stk</span><span class="p">))</span></span>
+<span class="code-line">                       <span class="k">for</span> <span class="n">stk</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'AAPL'</span><span class="p">,</span> <span class="s1">'GOOG'</span><span class="p">,</span> <span class="s1">'MSFT'</span><span class="p">,</span> <span class="s1">'DELL'</span><span class="p">]))</span></span>
 </pre></div>
 </div>
 </div>
@@ -1316,7 +1318,7 @@ Name: 2, dtype: int64</pre>
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pdata</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">pdata</span></span>
 </pre></div>
 </div>
 </div>
@@ -1325,11 +1327,11 @@ Name: 2, dtype: int64</pre>
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[12]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><class &#x27;pandas.core.panel.panel&#x27;="">
-Dimensions: 4 (items) x 1821 (major_axis) x 6 (minor_axis)
-Items axis: AAPL to MSFT
-Major_axis axis: 2010-01-04 00:00:00 to 2017-02-28 00:00:00
-Minor_axis axis: Open to Adj Close</class></pre>
+<pre><span class="code-line"><class></span>
+<span class="code-line">Dimensions: 4 (items) x 1821 (major_axis) x 6 (minor_axis)</span>
+<span class="code-line">Items axis: AAPL to MSFT</span>
+<span class="code-line">Major_axis axis: 2010-01-04 00:00:00 to 2017-02-28 00:00:00</span>
+<span class="code-line">Minor_axis axis: Open to Adj Close</class></pre>
 </div>
 </div>
 </div>
@@ -1340,8 +1342,8 @@ Minor_axis axis: Open to Adj Close</class></pre>
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pdata</span> <span class="o">=</span> <span class="n">pdata</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="s1">'items'</span><span class="p">,</span> <span class="s1">'minor'</span><span class="p">)</span>
-<span class="n">pdata</span><span class="p">[</span><span class="s1">'Adj Close'</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">pdata</span> <span class="o">=</span> <span class="n">pdata</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="s1">'items'</span><span class="p">,</span> <span class="s1">'minor'</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">pdata</span><span class="p">[</span><span class="s1">'Adj Close'</span><span class="p">]</span></span>
 </pre></div>
 </div>
 </div>
@@ -1351,7 +1353,7 @@ Minor_axis axis: Open to Adj Close</class></pre>
 <div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<table border="1" class="dataframe">
+<table border="1" class="table dataframe table-striped table-hover">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -1810,7 +1812,7 @@ Minor_axis axis: Open to Adj Close</class></pre>
 <div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pdata</span><span class="o">.</span><span class="n">ix</span><span class="p">[:,</span> <span class="s1">'6/1/2012'</span><span class="p">,</span> <span class="p">:]</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">pdata</span><span class="o">.</span><span class="n">ix</span><span class="p">[:,</span> <span class="s1">'6/1/2012'</span><span class="p">,</span> <span class="p">:]</span></span>
 </pre></div>
 </div>
 </div>
@@ -1820,7 +1822,7 @@ Minor_axis axis: Open to Adj Close</class></pre>
 <div class="output_area"><div class="prompt output_prompt">Out[14]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<table border="1" class="dataframe">
+<table border="1" class="table dataframe table-striped table-hover">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -1882,7 +1884,7 @@ Minor_axis axis: Open to Adj Close</class></pre>
 <div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pdata</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="s1">'Adj Close'</span><span class="p">,</span> <span class="s1">'5/22/2012'</span><span class="p">:,</span> <span class="p">:]</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">pdata</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="s1">'Adj Close'</span><span class="p">,</span> <span class="s1">'5/22/2012'</span><span class="p">:,</span> <span class="p">:]</span></span>
 </pre></div>
 </div>
 </div>
@@ -1892,7 +1894,7 @@ Minor_axis axis: Open to Adj Close</class></pre>
 <div class="output_area"><div class="prompt output_prompt">Out[15]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<table border="1" class="dataframe">
+<table border="1" class="table dataframe table-striped table-hover">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -2351,8 +2353,8 @@ Minor_axis axis: Open to Adj Close</class></pre>
 <div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stacked</span> <span class="o">=</span> <span class="n">pdata</span><span class="o">.</span><span class="n">ix</span><span class="p">[:,</span> <span class="s1">'5/30/2012'</span><span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
-<span class="n">stacked</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">stacked</span> <span class="o">=</span> <span class="n">pdata</span><span class="o">.</span><span class="n">ix</span><span class="p">[:,</span> <span class="s1">'5/30/2012'</span><span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">stacked</span></span>
 </pre></div>
 </div>
 </div>
@@ -2362,7 +2364,7 @@ Minor_axis axis: Open to Adj Close</class></pre>
 <div class="output_area"><div class="prompt output_prompt">Out[16]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<table border="1" class="dataframe">
+<table border="1" class="table dataframe table-striped table-hover">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -2968,7 +2970,7 @@ Minor_axis axis: Open to Adj Close</class></pre>
 <div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stacked</span><span class="o">.</span><span class="n">to_panel</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">stacked</span><span class="o">.</span><span class="n">to_panel</span><span class="p">()</span></span>
 </pre></div>
 </div>
 </div>
@@ -2977,11 +2979,11 @@ Minor_axis axis: Open to Adj Close</class></pre>
 <div class="output">
 <div class="output_area"><div class="prompt output_prompt">Out[17]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><class &#x27;pandas.core.panel.panel&#x27;="">
-Dimensions: 6 (items) x 1208 (major_axis) x 4 (minor_axis)
-Items axis: Open to Adj Close
-Major_axis axis: 2012-05-30 00:00:00 to 2017-02-28 00:00:00
-Minor_axis axis: AAPL to MSFT</class></pre>
+<pre><span class="code-line"><class></span>
+<span class="code-line">Dimensions: 6 (items) x 1208 (major_axis) x 4 (minor_axis)</span>
+<span class="code-line">Items axis: Open to Adj Close</span>
+<span class="code-line">Major_axis axis: 2012-05-30 00:00:00 to 2017-02-28 00:00:00</span>
+<span class="code-line">Minor_axis axis: AAPL to MSFT</class></pre>
 </div>
 </div>
 </div>
@@ -2992,7 +2994,7 @@ Minor_axis axis: AAPL to MSFT</class></pre>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span> </span>
 </pre></div>
 </div>
 </div>
@@ -3025,12 +3027,13 @@ Minor_axis axis: AAPL to MSFT</class></pre>
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 </script>
-
+</body></html>
 	<h6>Written by <a href="http://holbrook.github.io/author/holbrook.html">Holbrook</a> on 2017-03-01.</h6>
 
 
 	<h2>相关文章</h2>
     <ul>
+        <li><a href="http://holbrook.github.io/2017/03/04/index.html">《机器学习》</a></li>
         <li><a href="http://holbrook.github.io/2017/03/01/python_data_analysis5-5.html">利用Python进行数据分析(5.5)：多层次索引</a></li>
         <li><a href="http://holbrook.github.io/2017/02/28/python_data_analysis5-4.html">利用Python进行数据分析(5.4)：处理缺失数据</a></li>
         <li><a href="http://holbrook.github.io/2017/02/27/python_data_analysis5-3.html">利用Python进行数据分析(5.3)：Pandas 计算汇总和描述统计</a></li>
@@ -3040,7 +3043,6 @@ Minor_axis axis: AAPL to MSFT</class></pre>
         <li><a href="http://holbrook.github.io/2017/02/17/python_data_analysis4.html">利用Python进行数据分析(4)：NumPy</a></li>
         <li><a href="http://holbrook.github.io/2017/02/16/python_data_analysis2-3.html">利用Python进行数据分析(2.3)：全美婴儿姓名分析</a></li>
         <li><a href="http://holbrook.github.io/2017/02/16/python_data_analysis3.html">利用Python进行数据分析(3)：IPython</a></li>
-        <li><a href="http://holbrook.github.io/2017/02/15/python_data_analysis2-2.html">利用Python进行数据分析(2.2)：电影评分数据分析</a></li>
     </ul>
 </article>
 
@@ -3107,41 +3109,44 @@ Minor_axis axis: AAPL to MSFT</class></pre>
 							<div class="panel">
 								<h5>Tags</h5>
 								<ul class="tag-cloud">
-									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
-									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
-									<li><a href="/tag/java.html" class="tag-1">java</a></li>
-									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
-									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
-									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
-									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/env.html" class="tag-2">env</a></li>
-									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
-									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
-									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
-									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
-									<li><a href="/tag/python.html" class="tag-1">python</a></li>
-									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
-									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
-									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
-									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/ce-lue-ping-tai.html" class="tag-4">策略平台</a></li>
 									<li><a href="/tag/tong-ji-xue.html" class="tag-1">统计学</a></li>
-									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
-									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
-									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
-									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
-									<li><a href="/tag/web.html" class="tag-4">web</a></li>
-									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/cli.html" class="tag-4">CLI</a></li>
+									<li><a href="/tag/ling-yu-mo-xing.html" class="tag-4">领域模型</a></li>
+									<li><a href="/tag/ce-shi.html" class="tag-3">测试</a></li>
+									<li><a href="/tag/duo-xian-cheng.html" class="tag-4">多线程</a></li>
+									<li><a href="/tag/zhi-shi-guan-li.html" class="tag-4">知识管理</a></li>
 									<li><a href="/tag/ruan-jian-guo-cheng.html" class="tag-4">软件过程</a></li>
-									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
-									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
 									<li><a href="/tag/osgi.html" class="tag-2">OSGi</a></li>
+									<li><a href="/tag/gui.html" class="tag-2">GUI</a></li>
+									<li><a href="/tag/suo-yin.html" class="tag-3">索引</a></li>
+									<li><a href="/tag/c.html" class="tag-4">C#</a></li>
+									<li><a href="/tag/ji-qi-xue-xi.html" class="tag-3">机器学习</a></li>
+									<li><a href="/tag/graph.html" class="tag-3">graph</a></li>
+									<li><a href="/tag/cluster.html" class="tag-2">cluster</a></li>
+									<li><a href="/tag/vim.html" class="tag-4">vim</a></li>
+									<li><a href="/tag/markdown.html" class="tag-4">markdown</a></li>
+									<li><a href="/tag/nosql.html" class="tag-4">NoSQL</a></li>
+									<li><a href="/tag/java.html" class="tag-1">java</a></li>
+									<li><a href="/tag/jiao-yi-xi-tong.html" class="tag-2">交易系统</a></li>
+									<li><a href="/tag/jiao-yi-gui-ze.html" class="tag-4">交易规则</a></li>
+									<li><a href="/tag/tu-biao.html" class="tag-4">图表</a></li>
+									<li><a href="/tag/yun-wei.html" class="tag-2">运维</a></li>
+									<li><a href="/tag/xiao-xi-zhong-jian-jian.html" class="tag-4">消息中间件</a></li>
+									<li><a href="/tag/python.html" class="tag-1">python</a></li>
+									<li><a href="/tag/du-shu-bi-ji.html" class="tag-1">读书笔记</a></li>
+									<li><a href="/tag/cep.html" class="tag-2">CEP</a></li>
+									<li><a href="/tag/gui-ze-yin-qing.html" class="tag-2">规则引擎</a></li>
+									<li><a href="/tag/blog.html" class="tag-3">blog</a></li>
+									<li><a href="/tag/web.html" class="tag-4">web</a></li>
 								</ul>
 							</div>
 
 							<div class="panel">
 								<h5>Monthly Archives</h5>
 								<ul class="side-nav">
-											<li><a href="/2017/03/">2017-03  (2)</a></li>
+											<li><a href="/2017/03/">2017-03  (5)</a></li>
 											<li><a href="/2017/02/">2017-02  (16)</a></li>
 											<li><a href="/2015/05/">2015-05  (1)</a></li>
 											<li><a href="/2014/03/">2014-03  (1)</a></li>
