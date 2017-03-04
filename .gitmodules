@@ -1,20 +1,11 @@
-[submodule "themes/pelican-alchemy"]
-	path = themes/pelican-alchemy
-	url = https://github.com/nairobilug/pelican-alchemy
 [submodule "plugins/pelican-ipynb"]
 	path = plugins.custom/pelican-ipynb
 	url = http://github.com/danielfrg/pelican-ipynb.git
 [submodule "plugins/pelican-toc"]
 	path = plugins.custom/pelican-toc
 	url = http:///
-[submodule "themes/pelican-bootstrap3"]
-	path = themes/pelican-bootstrap3
-	url = git@github.com:holbrook/pelican-bootstrap3.git
 [submodule "themes/blueidea"]
 	path =  themes/blueidea
-	url = http:///
-[submodule "themes/niu-x2-sidebar"]
-	path =  themes/niu-x2-sidebar
 	url = http:///
 [submodule "data"]
     path = content/dataology/python-for-data-analysis/data
